@@ -1,0 +1,151 @@
+---
+/**
+ * Hero.astro - Sophisticated Split-Screen Hero Section (60:40)
+ * 
+ * Refined Visual Calibration:
+ * - Left Section: Moved up into true vertical middle, eliminating top dead space.
+ * - Flag Clarity: 100% fully visible, crisp, and un-erased. The fade occurs strictly
+ *   on the open sky to the left of the flag, with zero ghosting or fading of stars/stripes.
+ * - Dome Architecture: Restored crisp white marble brilliance and contrast with a subtle
+ *   12% navy harmonization tint (replacing the previous heavy/muddy 30% overlay).
+ * - Halo Elimination: Top atmospheric sky wash evens out the lighter specular patch
+ *   behind the statue and lantern.
+ * - Breathing Room: Adjusted scale and crop origin to provide generous sky margins
+ *   below the header and along the right viewport boundary.
+ * - Anti-Banding: OKLab color-space gradient interpolation eliminates vertical streaks.
+ */
+import { companyInfo } from '../data/company';
+---
+
+<section class="relative min-h-[640px] sm:min-h-[680px] lg:min-h-[720px] xl:min-h-[750px] flex items-center overflow-hidden bg-[#07192C]">
+  
+  <!-- Subtle Technical Grid Depth (Left to Right) -->
+  <div class="absolute inset-0 bg-fed-grid opacity-15 pointer-events-none z-0"></div>
+
+  <!-- RIGHT SECTION: Full-Bleed Capitol & American Flag Image (Edge-to-Edge on Right) -->
+  <div class="hero-split-image-pane pointer-events-none z-0" aria-hidden="true">
+    <img
+      src="/images/hero-image-scaled.png"
+      alt="United States Capitol Dome and American Flag - Unity Compass Federal Advisory"
+      class="w-full h-full object-cover object-[30%_25%] sm:object-[28%_25%] lg:object-[25%_35%] xl:object-[25%_35%] transform scale-[0.98] lg:scale-[0.96] origin-bottom-right motion-safe:transition-transform motion-safe:duration-1000 ease-out hero-toned-photo"
+      fetchpriority="high"
+    />
+    
+    <!-- Smooth Horizontal Sky Feather: Glides seamlessly from #07192C to transparent on the sky BEFORE the flag begins -->
+    <div class="hidden lg:block absolute inset-y-0 left-0 w-36 xl:w-48 bg-gradient-to-r from-[#07192C] via-[#07192C]/85 via-30% to-transparent z-10 pointer-events-none"></div>
+
+    <!-- Mobile / Tablet Vertical Feather (Top-to-bottom so text remains 100% legible) -->
+    <div class="lg:hidden absolute inset-0 bg-gradient-to-b from-[#07192C] via-[#07192C]/90 via-40% to-[#07192C]/50 z-10 pointer-events-none"></div>
+
+    <!-- Restrained 12% Navy Tonal Tint: Unifies sky with brand navy without dulling the crisp white dome -->
+    <div class="absolute inset-0 bg-[#0A2540]/12 mix-blend-multiply z-10 pointer-events-none"></div>
+
+    <!-- Top Atmospheric Vignette: Evens out the bright specular halo behind the statue & lantern -->
+    <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#07192C]/90 via-[#07192C]/35 to-transparent z-10 pointer-events-none"></div>
+
+    <!-- Bottom Atmospheric Vignette: Seamless integration with stats bar below -->
+    <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#07192C] via-[#07192C]/75 to-transparent z-10 pointer-events-none"></div>
+  </div>
+
+  <!-- LEFT SECTION & MAIN CONTAINER: Vertically Centered with Optical Balance -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14 lg:py-14 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      
+      <!-- Left Content Column (~55-60% width: 7 of 12 columns, optically centered) -->
+      <div class="lg:col-span-7 xl:col-span-7 max-w-2xl">
+        
+        <!-- Main Headline: Refined, Authoritative Federal Typography -->
+        <h1 class="reveal-on-scroll delay-100 text-2xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-medium text-slate-100/95 tracking-tight leading-snug">
+          Your Partner in Government
+          <span class="block text-3xl sm:text-5xl lg:text-[3.25rem] xl:text-[3.65rem] font-extrabold text-white tracking-tight leading-[1.12] drop-shadow-md mt-2">
+            Contracting Success!
+          </span>
+        </h1>
+
+        <!-- Supporting Description: Verbatim from Official Capability Statement & Live Site -->
+        <p class="mt-6 text-base sm:text-lg text-slate-200/90 font-normal leading-relaxed max-w-xl drop-shadow-xs reveal-on-scroll delay-200">
+          Strategic proposal development, cleared recruitment, and federal contracting solutions designed to help commercial firms and GovCon primes compete, win, and perform with confidence.
+        </p>
+
+        <!-- Calls to Action: Harmonious Dual-Button Pair -->
+        <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 reveal-on-scroll delay-300">
+          
+          <!-- Primary CTA: Solid Brand Red -> Transitions to Outlined on Hover -->
+          <a
+            href="#services"
+            class="btn-outline-transition-red-dark inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-lg text-xs font-bold uppercase tracking-wider group cursor-pointer active:scale-[0.98] shadow-sm"
+          >
+            <span>Explore Our Services</span>
+            <svg
+              class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+
+          <!-- Companion Action: Capability Statement (PDF) - Frosted Outlined -> Solid White on Hover -->
+          <a
+            href={companyInfo.capabilityPdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-outline-transition-white inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg text-xs font-bold uppercase tracking-wider group cursor-pointer active:scale-[0.98] border-2 border-white/80 bg-white/5 backdrop-blur-sm shadow-sm"
+          >
+            <svg class="w-4 h-4 text-[#FF3130] transition-transform duration-200 group-hover:scale-110 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>Capability Statement (PDF)</span>
+            <span class="text-xs text-slate-300 font-mono group-hover:text-[#07192C] transition-colors" aria-hidden="true">&nearr;</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right Column Spacer: Reserves space on desktop so text never crowds the Capitol architecture -->
+      <div class="hidden lg:block lg:col-span-5 xl:col-span-5 pointer-events-none" aria-hidden="true">
+        <!-- Visual breathing room for the edge-to-edge Capitol dome & flag presentation -->
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Photo Tonal Grading: Restores crisp white marble highlights and natural stone contrast */
+  .hero-toned-photo {
+    filter: brightness(0.96) contrast(1.06) saturate(1.02);
+  }
+
+  /* Edge-to-Edge Right Image Pane with Anti-Banding OKLab Mask */
+  .hero-split-image-pane {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-split-image-pane {
+      width: 58%; /* Generous width allowing full open-sky fade before the flag */
+      /* Smooth ease mask that reaches 100% solid opacity well before the flag begins */
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.12) 8%, rgba(0, 0, 0, 0.55) 18%, rgba(0, 0, 0, 0.92) 28%, #000 36%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.12) 8%, rgba(0, 0, 0, 0.55) 18%, rgba(0, 0, 0, 0.92) 28%, #000 36%);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-split-image-pane {
+      width: 56%;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .hero-split-image-pane {
+      width: 54%;
+    }
+  }
+</style>

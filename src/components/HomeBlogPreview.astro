@@ -1,0 +1,123 @@
+---
+/**
+ * HomeBlogPreview.astro - Latest Industry Insights Section
+ * 
+ * Harmonized Editorial Design System:
+ * - Section Heading: text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0C487A] with initial letter in #FF3130.
+ * - Subheading: mt-4 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto.
+ * - Responsive 3-Card Grid: Desktop 3 cols, Tablet 2 cols, Mobile 1 col.
+ * - Card Presentation: Clean rounded-card styling with subtle hover lift and image zoom.
+ * - Cohesive Color Palette: Slate-50 background creating a refreshing light break before the footer.
+ */
+
+import { blogPosts } from '../data/blogPosts';
+
+// Display the 3 most strategic recent blog posts
+const featuredPosts = blogPosts.slice(0, 3);
+---
+
+<section
+  id="insights"
+  class="py-16 sm:py-20 lg:py-24 bg-slate-50/70 relative overflow-hidden border-t border-slate-200/80 scroll-mt-20"
+  aria-labelledby="insights-heading"
+>
+  <!-- Subtle technical grid background accent -->
+  <div class="absolute inset-0 bg-fed-grid-light opacity-40 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header: Aligned with Site-Wide Standard Scale -->
+    <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-14 reveal-on-scroll">
+      <h2
+        id="insights-heading"
+        class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0C487A] tracking-tight leading-tight"
+      >
+        <span class="text-[#FF3130]">I</span>nsights, Strategies & Growth Hacks for Modern Businesses
+      </h2>
+
+      <!-- Subtitle Lead Statement: Exactly Harmonized with Site Scale -->
+      <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-3xl mx-auto">
+        Explore actionable tips, industry trends, and proven strategies to scale your brand, generate leads, and grow faster online.
+      </p>
+    </div>
+
+    <!-- 3-Column Responsive Card Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {featuredPosts.map((post, index) => (
+        <article
+          class="gov-card flex flex-col justify-between group bg-white border border-slate-200/90 rounded-card p-6 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 reveal-on-scroll"
+          style={`animation-delay: ${index * 100}ms;`}
+        >
+          <div>
+            <!-- Article Thumbnail -->
+            <a href={`/blog/${post.slug}`} class="block overflow-hidden rounded-lg aspect-[16/10] bg-slate-100 mb-5 border border-slate-200/70" tabindex="-1" aria-hidden="true">
+              <img
+                src={post.image}
+                alt={post.title}
+                class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105"
+                loading="lazy"
+                width="400"
+                height="250"
+              />
+            </a>
+
+            <!-- Metadata: Category & Read Time -->
+            <div class="flex items-center gap-2 text-xs mb-2.5">
+              <span class="font-bold text-[#FF3130] uppercase tracking-wider text-[11px] font-mono">
+                {post.category}
+              </span>
+              <span class="text-slate-300" aria-hidden="true">•</span>
+              <span class="text-slate-400 font-medium">
+                {post.readTime}
+              </span>
+            </div>
+
+            <!-- Article Title -->
+            <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#0C487A] transition-colors line-clamp-2 leading-snug tracking-tight">
+              <a href={`/blog/${post.slug}`} class="focus:outline-none focus:underline">
+                {post.title}
+              </a>
+            </h3>
+
+            <!-- Excerpt -->
+            <p class="text-xs sm:text-sm text-slate-600 mt-2.5 line-clamp-3 leading-relaxed font-normal">
+              {post.excerpt}
+            </p>
+          </div>
+
+          <!-- Bottom Footer: Date & Link -->
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="text-slate-400 font-medium">{post.date}</span>
+            <a
+              href={`/blog/${post.slug}`}
+              class="font-bold text-[#0C487A] group-hover:text-[#FF3130] inline-flex items-center gap-1.5 transition-colors link-hover-expand"
+            >
+              <span>Read Article</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Centered Bottom Action: View All Articles -->
+    <div class="mt-12 sm:mt-14 text-center reveal-on-scroll">
+      <a
+        href="/blog"
+        class="btn-outline-transition-navy group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-sm active:scale-[0.98] cursor-pointer"
+      >
+        <span>View All Articles</span>
+        <svg
+          class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+

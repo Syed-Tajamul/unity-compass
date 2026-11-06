@@ -1,0 +1,123 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Button from '../components/Button.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { servicesData } from '../data/services';
+import { companyInfo } from '../data/company';
+
+const service = servicesData.find((s) => s.id === 'information-technology-and-business-consulting')!;
+---
+
+<MainLayout
+  title={`${service.title} | Unity Compass Solutions`}
+  description="Unity Compass delivers innovative IT and business consulting solutions tailored to help organizations improve performance, navigate compliance, and modernize systems."
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-b from-slate-900 to-brand-dark text-white py-16 sm:py-24 border-b border-slate-800 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-7 space-y-5">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-brand-red/20 text-red-400 border border-brand-red/30">
+            Technology Modernization & Advisory
+          </span>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Innovative IT and Business Consulting Solutions
+          </h1>
+          <p class="text-lg text-slate-300 font-medium leading-relaxed">
+            {service.heroHeadline}
+          </p>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            {service.leadParagraph}
+          </p>
+          <div class="pt-3 flex flex-wrap items-center gap-4">
+            <Button href="/contact" variant="primary" size="md">
+              Schedule IT Advisory Session
+            </Button>
+            <a
+              href={companyInfo.capabilityPdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors"
+            >
+              <svg class="w-4 h-4 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span>Capability Document (PDF)</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-2xl bg-slate-800">
+            <img
+              src={service.image}
+              alt={service.title}
+              class="w-full h-auto object-cover"
+              width="600"
+              height="400"
+            />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Consulting Methodology Section -->
+  <section class="py-16 sm:py-24 bg-white" aria-labelledby="consulting-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        eyebrow="Advisory Framework"
+        title="Disciplined Technical & Program Advisory"
+        description="Our consulting practice focuses on delivering tailored, compliance-driven solutions to help commercial businesses and federal contractors navigate complex technological and operational environments."
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {service.processSteps?.map((step) => (
+          <div class="gov-card">
+            <div class="text-xs font-mono font-bold text-brand-navy bg-blue-50 px-2 py-0.5 rounded border border-blue-100 mb-3 inline-block">
+              PHASE {step.step}
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight">{step.title}</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Practice Areas -->
+  <section class="py-16 sm:py-24 bg-slate-50 border-t border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        eyebrow="Key Impact Areas"
+        title="Business & Technical Consulting Outcomes"
+        description="Measurable improvements designed to satisfy federal compliance audits and accelerate operational performance."
+      />
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {service.keyBenefits?.map((item) => (
+          <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-subtle">
+            <div class="w-10 h-10 rounded-lg bg-brand-red/10 text-brand-red flex items-center justify-center mb-4">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight">{item.title}</h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="py-16 sm:py-24 bg-white border-t border-slate-200/80">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ContactForm />
+    </div>
+  </section>
+</MainLayout>
+

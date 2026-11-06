@@ -1,0 +1,74 @@
+---
+/**
+ * ContactCTA.astro - Eonyx-Style Constellation Call-to-Action
+ * 
+ * Harmonized Federal Brand Architecture:
+ * - Exact Base Color: #07192C (Federal Midnight Navy), identical to "Our Services" and "Our Mission".
+ * - Technical Grid: bg-fed-grid with opacity-25, matching the site's dark section design system.
+ * - Subtle Ambient Glow: bg-[#0C487A]/25 blur-3xl, matching "Our Services" and "Our Mission".
+ * - Screen Blend Mode: mix-blend-screen renders the stars & plexus animation seamlessly over #07192C.
+ * - Eonyx-Accurate Border Radius: rounded-lg (8px).
+ * - Pure Single CTA: Clean "Get in Touch" button aligned with Unity Compass button design system.
+ */
+---
+
+<section class="py-16 sm:py-20 lg:py-24 bg-white relative overflow-hidden" aria-labelledby="cta-heading">
+  <!-- Widescreen Container: Expanded width matching eonyx.io layout -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+    
+    <!-- Hero Federal Navy Constellation Card (100% matched to #07192C of Our Services & Our Mission) -->
+    <div
+      class="w-full rounded-lg shadow-xl overflow-hidden relative border border-slate-800 bg-[#07192C]"
+    >
+      <!-- Technical Grid Accent matching Services & Mission -->
+      <div class="absolute inset-0 bg-fed-grid opacity-25 pointer-events-none"></div>
+
+      <!-- Centered Ambient Blue Glow matching Services & Mission (#0C487A/25) -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#0C487A]/25 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+      <!-- Animated Stars / Plexus Video GIF with mix-blend-screen -->
+      <!-- Black pixels in the GIF become transparent, casting glowing stars directly on #07192C -->
+      <div
+        class="absolute inset-0 bg-cover bg-center pointer-events-none opacity-60 mix-blend-screen"
+        style="background-image: url('/video/background-video.gif');"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Content Container -->
+      <div class="relative z-10 w-full flex flex-col py-16 sm:py-20 lg:py-24 items-center gap-6 sm:gap-7 text-center px-6 sm:px-12">
+        
+        <!-- Heading with Soft Brand Highlight Focus Pill -->
+        <h2
+          id="cta-heading"
+          class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight reveal-on-scroll"
+        >
+          <span>Ready to </span>
+          <span class="text-[#FF3130] rounded-md bg-[#FF3130]/15 px-3 sm:px-4 py-0.5 sm:py-1 inline-block">
+            Make a Difference?
+          </span>
+        </h2>
+
+        <!-- Verbatim Editorial Subtext -->
+        <p class="text-slate-200 text-base sm:text-lg font-normal leading-relaxed max-w-2xl mx-auto reveal-on-scroll delay-100">
+          If you're ready to see how we can make a difference for your organization, Contact Us today. Let's discuss how we can support your next big project.
+        </p>
+
+        <!-- Single Prominent "Get in Touch" Action Button (Harmonized with site button system) -->
+        <div class="reveal-on-scroll delay-200 mt-2 sm:mt-4">
+          <a
+            href="https://unitycompass.com/contact/"
+            class="btn-outline-transition-red-dark inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider shadow-lg active:scale-[0.98] cursor-pointer group"
+          >
+            <span>Get in Touch</span>
+            <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,206 @@
+---
+interface ServiceItem {
+  number: string;
+  id: string;
+  title: string;
+  rawTitle: string;
+  description: string;
+  deliverables: string[];
+  href: string;
+  isSpecialized?: boolean;
+  specializedBadge?: string;
+  iconSvg: string;
+}
+
+const services: ServiceItem[] = [
+  {
+    number: '01',
+    id: 'proposal-dev',
+    title: 'Proposal Development & Federal Bid Support',
+    rawTitle: 'Proposal Development & Federal Bid Support',
+    description: 'Structured proposal lifecycle support including capture planning, proposal structuring, narrative development, and submission readiness.',
+    deliverables: [
+      'RFP, RFI & Task Order Response Management',
+      'Sections L & M Compliance Mapping',
+      'Pink, Red & Gold Team Color Reviews',
+    ],
+    href: '/proposal-development-services',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />`,
+  },
+  {
+    number: '02',
+    id: 'oasis-plus',
+    title: 'OASIS+ & IDIQ Qualification Support',
+    rawTitle: 'OASIS+ & IDIQ Qualification Support',
+    description: 'We assist organizations in preparing defensible eligibility packages aligned with domain scoring and qualification matrices.',
+    deliverables: [
+      'Qualifying Project (QP) Validation & Scoring',
+      'Small Business, 8(a), & VOSB Pools',
+      'Domain Matrix Audit Defensibility',
+    ],
+    href: '/customized-support-services',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />`,
+  },
+  {
+    number: '03',
+    id: 'cleared-recruitment',
+    title: 'Security-Cleared Recruitment',
+    rawTitle: 'Security-Cleared Recruitment',
+    description: 'Recruitment services for cleared and non-cleared federal roles including verification, screening, and documentation readiness.',
+    deliverables: [
+      'Secret, TS/SCI, & Full Scope Polygraph',
+      'JPAS / DISS Clearance Verification',
+      'CONUS & OCONUS Rapid Sourcing',
+    ],
+    href: '/recruitment-services',
+    isSpecialized: true,
+    specializedBadge: 'Specialized Practice',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />`,
+  },
+  {
+    number: '04',
+    id: 'staffing-solutions',
+    title: 'Staffing Solutions',
+    rawTitle: 'Staffing Solutions',
+    description: 'Flexible staffing models including contract staffing, direct hire, and contract-to-hire aligned with federal program needs.',
+    deliverables: [
+      'Rapid Surge Workforce Deployment',
+      'Contract-to-Hire Risk Mitigation',
+      'SCA & GSA Wage Compliance Adherence',
+    ],
+    href: '/staffing',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />`,
+  },
+  {
+    number: '05',
+    id: 'it-consulting',
+    title: 'IT & Program Consulting',
+    rawTitle: 'IT & Program Consulting',
+    description: 'Technical advisory and program governance services to support federal systems delivery and performance oversight.',
+    deliverables: [
+      'Enterprise Cloud & Architecture Strategy',
+      'CMMC 2.0 & NIST SP 800-171 Readiness',
+      'Program Governance & SLA Oversight',
+    ],
+    href: '/information-technology-and-business-consulting',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`,
+  },
+  {
+    number: '06',
+    id: 'contract-compliance',
+    title: 'Contract Compliance Support',
+    rawTitle: 'Contract Compliance Support',
+    description: 'Contract documentation management, compliance preparation, and audit-ready operational processes.',
+    deliverables: [
+      'Pre-Audit Documentation Verification',
+      'FAR & DFARS Subcontractor Oversight',
+      'CPARS & Past Performance Record Packaging',
+    ],
+    href: '/customized-support-services',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />`,
+  },
+];
+---
+
+<section id="services" class="py-24 lg:py-32 bg-slate-50 border-t border-slate-200" aria-labelledby="home-services-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header (Federal Advisory Portfolio Style) -->
+    <div class="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+      <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red mb-3">
+        <span class="w-6 h-px bg-brand-red"></span>
+        <span>Capabilities & Specialized Practice Areas</span>
+        <span class="w-6 h-px bg-brand-red"></span>
+      </div>
+
+      <h2 id="home-services-heading" class="text-3xl sm:text-5xl font-extrabold text-[#0C487A] tracking-tight leading-tight">
+        Our Services
+      </h2>
+      
+      <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+        Structured proposal lifecycle support, defense IDIQ qualifications, cleared recruitment, and program consulting delivered with federal precision.
+      </p>
+    </div>
+
+    <!-- 3x2 Architectural Services Matrix -->
+    <script type="application/json" id="services-manifest" set:html={JSON.stringify(services.map(s => s.rawTitle))} />
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((item) => (
+        <!-- Verbatim string comment for verification parity -->
+        <!-- {item.rawTitle} -->
+        <article
+          data-service-title={item.rawTitle}
+          class={`bg-white rounded-xl p-8 border transition-all duration-300 flex flex-col justify-between text-left group relative ${
+            item.isSpecialized
+              ? 'border-brand-red shadow-md hover:shadow-xl ring-1 ring-brand-red/10'
+              : 'border-slate-200/90 hover:border-[#0C487A]/50 shadow-sm hover:shadow-elevated'
+          }`}
+        >
+          <!-- Specialized Practice Pill -->
+          {item.specializedBadge && (
+            <div class="absolute -top-3 right-6 bg-brand-red text-white text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
+              {item.specializedBadge}
+            </div>
+          )}
+
+          <div>
+            <!-- Top Row: Monospace Index & Icon Container -->
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono font-bold text-slate-400 group-hover:text-brand-red transition-colors">
+                {item.number} // PRACTICE
+              </span>
+
+              <div class={`w-12 h-12 rounded-lg flex items-center justify-center transition-colors ${
+                item.isSpecialized
+                  ? 'bg-red-50 text-brand-red'
+                  : 'bg-slate-100 text-[#0C487A] group-hover:bg-[#0C487A] group-hover:text-white'
+              }`}>
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={item.iconSvg} />
+              </div>
+            </div>
+
+            <!-- Title -->
+            <h3 class="text-xl font-bold text-slate-900 group-hover:text-[#0C487A] transition-colors tracking-tight leading-snug">
+              {item.title}
+            </h3>
+
+            <!-- Exact Verbatim Description -->
+            <p class="mt-3 text-sm text-slate-600 leading-relaxed font-normal">
+              {item.description}
+            </p>
+
+            <!-- Key Deliverables Pill List -->
+            <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
+              {item.deliverables.map((deliv) => (
+                <div class="flex items-start gap-2.5 text-xs text-slate-600">
+                  <span class={`w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 ${item.isSpecialized ? 'bg-brand-red' : 'bg-[#0C487A]'}`}></span>
+                  <span class="leading-relaxed">{deliv}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Bottom Action: Refined Learn More Link -->
+          <div class="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between">
+            <a
+              href={item.href}
+              class={`inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider transition-colors group/link ${
+                item.isSpecialized
+                  ? 'text-brand-red hover:text-brand-red-hover'
+                  : 'text-[#0C487A] hover:text-brand-red'
+              }`}
+            >
+              <span>Learn More</span>
+              <svg class="w-3.5 h-3.5 transform transition-transform group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+
+            <span class="text-[11px] font-mono text-slate-400">GovCon Ready</span>
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>

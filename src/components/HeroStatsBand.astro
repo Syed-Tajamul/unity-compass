@@ -1,0 +1,355 @@
+---
+/**
+ * HeroStatsBand.astro
+ * Performance Credentials Section positioned directly below the Hero Section.
+ * Restrained, authoritative federal contractor aesthetic.
+ * Features synchronized count-up counter animations and tabular typography.
+ */
+---
+
+<section
+  id="hero-stats-band"
+  class="relative bg-[#07192C] border-y border-white/10 text-white overflow-hidden"
+  aria-label="Federal Credentials & Track Record"
+>
+  <!-- Subtle Technical Grid Overlay -->
+  <div class="absolute inset-0 bg-fed-grid opacity-20 pointer-events-none"></div>
+
+  <!-- Container Aligned to Header (max-w-7xl mx-auto px-4 sm:px-6 lg:px-8) -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+    
+    <!-- Semantic List of 4 Columns -->
+    <ul class="stats-grid">
+      
+      <!-- Col 1: $35M+ | Awarded Contract Value -->
+      <li class="stat-col col-1">
+        <div class="stat-figure-wrap">
+          <!-- Accessible static text for assistive technology -->
+          <span class="sr-only">$35M+</span>
+          <!-- Visual animated count-up -->
+          <span class="stat-figure" aria-hidden="true">
+            <span class="stat-affix">$</span><span class="count-num" data-target="35">35</span><span class="stat-affix">M+</span>
+          </span>
+        </div>
+        <span class="stat-label">Awarded Contract Value</span>
+      </li>
+
+      <!-- Divider 1 -->
+      <li class="stat-divider" aria-hidden="true"></li>
+
+      <!-- Col 2: 12+ | Federal Proposals Won -->
+      <li class="stat-col col-2">
+        <div class="stat-figure-wrap">
+          <span class="sr-only">12+</span>
+          <span class="stat-figure" aria-hidden="true">
+            <span class="count-num" data-target="12">12</span><span class="stat-affix">+</span>
+          </span>
+        </div>
+        <span class="stat-label">Federal Proposals Won</span>
+      </li>
+
+      <!-- Divider 2 -->
+      <li class="stat-divider" aria-hidden="true"></li>
+
+      <!-- Col 3: 56 CLINs | GSA OASIS+ Readiness -->
+      <li class="stat-col col-3">
+        <div class="stat-figure-wrap">
+          <span class="sr-only">56 CLINs</span>
+          <span class="stat-figure" aria-hidden="true">
+            <span class="count-num" data-target="56">56</span>
+            <span class="stat-unit">CLINs</span>
+          </span>
+        </div>
+        <span class="stat-label">GSA OASIS+ Readiness</span>
+      </li>
+
+      <!-- Divider 3 -->
+      <li class="stat-divider" aria-hidden="true"></li>
+
+      <!-- Col 4: 8 Awards | Cooperative Purchasing -->
+      <li class="stat-col col-4">
+        <div class="stat-figure-wrap">
+          <span class="sr-only">8 Awards</span>
+          <span class="stat-figure" aria-hidden="true">
+            <span class="count-num" data-target="8">8</span>
+            <span class="stat-unit">Awards</span>
+          </span>
+        </div>
+        <span class="stat-label">Cooperative Purchasing</span>
+      </li>
+
+    </ul>
+
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     CSS CUSTOM PROPERTIES & GEOMETRY
+     ========================================================================== */
+  :root {
+    --stat-figure-size: 40px;
+    --stat-unit-size: 14px;
+    --stat-label-size: 14px;
+    --stat-border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  /* Grid Layout: 4 Equal Columns on Desktop */
+  .stats-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .stat-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  /* Vertical Hairline Dividers (48px tall, centered) */
+  .stat-divider {
+    width: 1px;
+    height: 48px;
+    background-color: var(--stat-border-color);
+    list-style: none;
+  }
+
+  /* Figures & Affixes Typography */
+  .stat-figure-wrap {
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .stat-figure {
+    display: inline-flex;
+    align-items: baseline;
+    font-size: var(--stat-figure-size);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #FFFFFF;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  .count-num {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-affix {
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  /* Baseline-aligned Units ("CLINs", "Awards") */
+  .stat-unit {
+    font-size: var(--stat-unit-size);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.80);
+    margin-left: 6px;
+    letter-spacing: 0;
+    line-height: 1;
+    align-self: baseline;
+  }
+
+  /* Labels Typography */
+  .stat-label {
+    margin-top: 8px;
+    font-size: var(--stat-label-size);
+    font-weight: 500;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+    letter-spacing: -0.005em;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE BREAKPOINTS
+     ========================================================================== */
+  @media (max-width: 1279px) and (min-width: 1024px) {
+    :root {
+      --stat-figure-size: 36px;
+      --stat-label-size: 13px;
+    }
+
+    .stat-label {
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 1023px) and (min-width: 768px) {
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 24px;
+      column-gap: 24px;
+    }
+
+    .stat-divider {
+      display: none;
+    }
+
+    .stat-col {
+      padding: 8px 12px;
+    }
+
+    /* Horizontal divider between row 1 and row 2 */
+    .col-3, .col-4 {
+      position: relative;
+    }
+
+    .col-3::before, .col-4::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background-color: var(--stat-border-color);
+    }
+
+    :root {
+      --stat-figure-size: 34px;
+      --stat-label-size: 13px;
+    }
+
+    .stat-label {
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 20px;
+      column-gap: 16px;
+    }
+
+    .stat-divider {
+      display: none;
+    }
+
+    .stat-col {
+      padding: 6px 4px;
+    }
+
+    .col-3, .col-4 {
+      position: relative;
+    }
+
+    .col-3::before, .col-4::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 8%;
+      right: 8%;
+      height: 1px;
+      background-color: var(--stat-border-color);
+    }
+
+    :root {
+      --stat-figure-size: 30px;
+      --stat-unit-size: 12px;
+      --stat-label-size: 12px;
+    }
+
+    .stat-label {
+      white-space: normal;
+      margin-top: 5px;
+      line-height: 1.25;
+    }
+  }
+
+  /* Accessibility: prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .stat-col {
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<!-- Lightweight Vanilla JS Counter Animation Script (< 1 KB) -->
+<script>
+  function initStatsCounters() {
+    const band = document.getElementById('hero-stats-band');
+    if (!band) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const countElements = band.querySelectorAll<HTMLElement>('.count-num');
+
+    function runAnimation() {
+      if (prefersReducedMotion) {
+        countElements.forEach((el) => {
+          const target = el.getAttribute('data-target') || '';
+          el.textContent = target;
+        });
+        return;
+      }
+
+      // Smooth count-up using requestAnimationFrame over 1200ms
+      const duration = 1200;
+
+      countElements.forEach((el) => {
+        const target = parseInt(el.getAttribute('data-target') || '0', 10);
+        el.textContent = '0';
+
+        let startTime: number | null = null;
+
+        function step(timestamp: number) {
+          if (!startTime) startTime = timestamp;
+          const elapsed = timestamp - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out cubic: 1 - (1 - progress)^3
+          const easeProgress = 1 - Math.pow(1 - progress, 3);
+          const currentVal = Math.floor(target * easeProgress);
+
+          el.textContent = currentVal.toString();
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target.toString(); // Exact snap to target
+          }
+        }
+
+        requestAnimationFrame(step);
+      });
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runAnimation();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(band);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStatsCounters);
+  } else {
+    initStatsCounters();
+  }
+  document.addEventListener('astro:page-load', initStatsCounters);
+</script>
+

@@ -1,0 +1,19 @@
+{
+  "name": "unity-compass",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/tailwind": "^5.1.5",
+    "astro": "^5.4.2",
+    "lucide-astro": "^0.556.0",
+    "tailwindcss": "^3.4.17"
+  }
+}

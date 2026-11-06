@@ -1,0 +1,30 @@
+---
+import { clientAgencies } from '../data/company';
+---
+
+<section class="py-12 bg-slate-50 border-y border-slate-200/80" aria-label="Federal Agencies and Industry Involvement">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-center text-xs font-bold uppercase tracking-wider text-slate-500 mb-8">
+      Select Federal Agencies & Industry Giants We Support & Collaborate With
+    </p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 items-center justify-items-center">
+      {clientAgencies.map((agency) => (
+        <div class="flex flex-col items-center justify-center p-4 rounded-xl bg-white border border-slate-200/60 shadow-subtle hover:shadow-md hover:border-slate-300 transition-all duration-200 w-full max-w-[200px] h-28 group">
+          <img
+            src={agency.logo}
+            alt={`${agency.name} Seal`}
+            class="max-h-12 max-w-[120px] object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+            loading="lazy"
+            width="120"
+            height="48"
+          />
+          <span class="text-[11px] font-semibold text-slate-600 mt-2 text-center line-clamp-1 group-hover:text-brand-navy transition-colors">
+            {agency.name}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,92 @@
+---
+const giants = [
+  { name: 'CACI', logo: '/images/4.webp' },
+  { name: 'Raytheon Technologies', logo: '/images/Raytheon_Technologies_logo.webp' },
+  { name: 'Texas Instruments', logo: '/images/16432276-fde1-4c95-8426-f328f40cb130.png' },
+  { name: 'Lockheed Martin', logo: '/images/2.webp' },
+  { name: 'Leidos', logo: '/images/1.webp' },
+  { name: 'Booz Allen Hamilton', logo: '/images/7ab5cabb-61c1-4f0e-8249-7b3730c86cd5-1.png' },
+  { name: 'Defense Partner', logo: '/images/9cf37bb2-ba0b-4f66-b3b0-09cef9123215.png' },
+];
+---
+
+<section class="py-20 lg:py-24 bg-[#07192C] text-center overflow-hidden border-y border-slate-800 relative" aria-label="Defense Industry Involvement">
+  <!-- Subtle background grid -->
+  <div class="absolute inset-0 bg-fed-grid opacity-40 pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 relative z-10">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider bg-white/5 text-slate-400 border border-white/10 mb-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+      <span>Defense & Aerospace Ecosystem</span>
+    </div>
+    
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-snug max-w-3xl mx-auto">
+      The defense industry giants we have had <br class="hidden sm:inline" />
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-sky-300 to-sky-400 font-extrabold">
+        peripheral involvement
+      </span> with
+    </h2>
+
+    <p class="mt-3 text-xs sm:text-sm text-slate-400 max-w-xl mx-auto">
+      Peripheral ecosystem familiarity and past program engagement across prominent defense organizations.
+    </p>
+  </div>
+
+  <!-- Infinite Marquee Track with CSS Animation -->
+  <div class="relative w-full overflow-hidden flex items-center">
+    <!-- Gradient Fade Edges -->
+    <div class="absolute left-0 inset-y-0 w-24 sm:w-40 bg-gradient-to-r from-[#07192C] to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 inset-y-0 w-24 sm:w-40 bg-gradient-to-l from-[#07192C] to-transparent z-10 pointer-events-none"></div>
+
+    <!-- First Track -->
+    <div class="flex shrink-0 animate-marquee items-center gap-14 sm:gap-20 py-4">
+      {giants.map((g) => (
+        <div class="shrink-0 flex items-center justify-center h-16 w-36 sm:w-44 px-3 filter brightness-0 invert opacity-70 hover:opacity-100 transition-opacity">
+          <img
+            src={g.logo}
+            alt={g.name}
+            class="max-h-11 max-w-full object-contain"
+            loading="lazy"
+            width="160"
+            height="44"
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Duplicate Track for Seamless Loop -->
+    <div class="flex shrink-0 animate-marquee items-center gap-14 sm:gap-20 py-4" aria-hidden="true">
+      {giants.map((g) => (
+        <div class="shrink-0 flex items-center justify-center h-16 w-36 sm:w-44 px-3 filter brightness-0 invert opacity-70 hover:opacity-100 transition-opacity">
+          <img
+            src={g.logo}
+            alt={g.name}
+            class="max-h-11 max-w-full object-contain"
+            loading="lazy"
+            width="160"
+            height="44"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 35s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+</style>

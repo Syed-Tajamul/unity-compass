@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 64" fill="none">
+  <!-- Lockheed Martin Star Emblem -->
+  <g transform="translate(6, 6) scale(0.24)">
+    <polygon fill="#003478" points="80,0 80,68 62,68 38,30 0,30 0,16 35,16 58,54 66,54 66,0" />
+    <polygon fill="#003478" points="80,200 80,132 62,132 38,170 0,170 0,184 35,184 58,146 66,146 66,200" />
+    <polygon fill="#003478" points="120,0 120,68 138,68 162,30 200,30 200,16 165,16 142,54 134,54 134,0" />
+    <polygon fill="#003478" points="120,200 120,132 138,132 162,170 200,170 200,184 165,184 142,146 134,146 134,200" />
+    <polygon fill="#003478" points="100,55 116,92 145,100 116,108 100,145 84,108 55,100 84,92" />
+  </g>
+  <!-- Lockheed Martin Wordmark -->
+  <text x="68" y="42" font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" font-size="25" font-weight="900" font-style="italic" letter-spacing="1px" fill="#003478">LOCKHEED MARTIN</text>
+</svg>
+

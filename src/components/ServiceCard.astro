@@ -1,0 +1,118 @@
+---
+interface Props {
+  number: string;
+  id: string;
+  title: string;
+  description: string;
+  deliverables?: string[];
+  href: string;
+  badge?: string;
+  iconSvg: string;
+  delayIndex?: number;
+}
+
+const {
+  number,
+  id,
+  title,
+  description,
+  deliverables = [],
+  href,
+  badge,
+  iconSvg,
+  delayIndex = 0,
+} = Astro.props;
+---
+
+<div
+  class="tilt-card-container group relative reveal-on-scroll"
+  data-service-card
+  style={`transition-delay: ${delayIndex * 80}ms`}
+>
+  <!-- Service Reference: {title} -->
+  <Fragment set:html={`<!-- ${title} -->`} />
+  <div
+    class="tilt-card relative h-full flex flex-col justify-between bg-white rounded-2xl p-7 lg:p-8 border border-[#E2E8F0] shadow-card hover:border-[#0C487A]/40 hover:shadow-card-hover overflow-hidden transition-all duration-300"
+  >
+    <!-- Dynamic Mouse Spotlight Gradient Overlay (Eonyx style) -->
+    <div
+      class="card-spotlight pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      style="background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(12, 72, 122, 0.08), transparent 60%);"
+    ></div>
+
+    <div class="relative z-10">
+      <!-- Card Top: Service Number, Badge & Icon -->
+      <div class="flex items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-2">
+          <!-- Monospace Index Badge -->
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 text-[#0C487A] font-mono font-bold text-xs border border-slate-200">
+            {number}
+          </span>
+          {badge && (
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-red-50 text-[#FF3130] border border-red-100">
+              {badge}
+            </span>
+          )}
+        </div>
+
+        <!-- Minimalist GovCon SVG Icon -->
+        <div class="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-[#0C487A] group-hover:bg-[#0C487A] group-hover:text-white group-hover:scale-105 transition-all duration-300 shadow-2xs">
+          <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={iconSvg} />
+        </div>
+      </div>
+
+      <!-- Service Title -->
+      <h3 class="text-xl sm:text-2xl font-extrabold text-[#0F172A] tracking-tight group-hover:text-[#0C487A] transition-colors leading-snug">
+        <a href={href} class="focus:outline-none">
+          {title}
+        </a>
+      </h3>
+
+      <!-- Service Description -->
+      <p class="text-sm text-slate-600 mt-3 leading-relaxed font-normal">
+        {description}
+      </p>
+
+      <!-- Key Capabilities / Deliverables Checklist -->
+      {deliverables && deliverables.length > 0 && (
+        <div class="mt-6 pt-5 border-t border-slate-100 space-y-2">
+          <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
+            Core Capabilities
+          </span>
+          <ul class="space-y-1.5 text-xs text-slate-700">
+            {deliverables.map((item) => (
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold mt-0.5 shrink-0">✓</span>
+                <span class="line-clamp-1">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+
+    <!-- Card Bottom: Individual Learn More Action with Directional Arrow Movement -->
+    <div class="relative z-10 mt-8 pt-5 border-t border-slate-100 flex items-center justify-between">
+      <a
+        href={href}
+        class="link-hover-expand inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0C487A] hover:text-[#FF3130] transition-colors group/btn cursor-pointer"
+        aria-label={`Learn more about ${title}`}
+      >
+        <span>Explore Practice</span>
+        <svg
+          class="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-1.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+
+      <span class="text-[11px] font-mono text-slate-400">
+        GovCon Vehicle
+      </span>
+    </div>
+
+  </div>
+</div>

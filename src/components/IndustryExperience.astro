@@ -1,0 +1,111 @@
+---
+// Government & Defense Agency Seals & Industry Logos
+const agencies = [
+  { name: 'Department of Defense', code: 'DoD', logo: '/images/dod.jpeg' },
+  { name: 'Department of Homeland Security', code: 'DHS', logo: '/images/Seal_of_the_United_States_Department_of_Homeland_Security.svg_.png' },
+  { name: 'National Aeronautics and Space Administration', code: 'NASA', logo: '/images/nasa.jpeg' },
+  { name: 'Department of Commerce', code: 'DOC', logo: '/images/DOC.png' },
+];
+
+const industryGiants = [
+  { name: 'Raytheon Technologies', logo: '/images/Raytheon_Technologies_logo.webp' },
+  { name: 'Lockheed Martin', logo: '/images/2.webp' },
+  { name: 'CACI', logo: '/images/4.webp' },
+  { name: 'Leidos', logo: '/images/1.webp' },
+  { name: 'Booz Allen Hamilton', logo: '/images/7ab5cabb-61c1-4f0e-8249-7b3730c86cd5-1.png' },
+  { name: 'Texas Instruments', logo: '/images/16432276-fde1-4c95-8426-f328f40cb130.png' },
+  { name: 'General Dynamics', logo: '/images/9cf37bb2-ba0b-4f66-b3b0-09cef9123215.png' },
+];
+---
+
+<section class="py-16 sm:py-20 lg:py-24 bg-[#07192C] text-center overflow-hidden border-y border-slate-800 relative" aria-labelledby="experience-heading">
+  <!-- Subtle technical grid background -->
+  <div class="absolute inset-0 bg-fed-grid opacity-50 pointer-events-none"></div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 lg:mb-16 relative z-10 reveal-on-scroll">
+    <!-- Eyebrow Pill -->
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider bg-white/5 text-slate-300 border border-white/10 mb-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+      <span>Defense & Federal Ecosystem</span>
+    </div>
+    
+    <h2 id="experience-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+      <span class="text-[#FF3130]">I</span>ndustry Experience & Engagement
+    </h2>
+
+    <!-- Explanatory note (Accurate Representation) -->
+    <p class="mt-4 text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
+      Prominent defense industry organizations and civilian agencies we have had peripheral involvement with across the federal contracting ecosystem.
+      <span class="block text-slate-400 text-[11px] mt-1 font-mono">(Ecosystem engagement reference only; no formal direct partnership or agency endorsement implied.)</span>
+    </p>
+  </div>
+
+  <!-- Federal Agency Trust Strip (Stationary Clean Grid) -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 relative z-10 reveal-on-scroll delay-100">
+    <div class="text-[11px] font-mono uppercase tracking-widest text-slate-400 mb-6">
+      Federal Agency Context & Acquisition Familiarity
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 items-center justify-center">
+      {agencies.map((agency) => (
+        <div class="flex flex-col items-center justify-center p-4 rounded-xl bg-white/5 border border-white/10 hover:border-sky-400/40 hover:bg-white/10 transition-all duration-300 group">
+          <div class="w-16 h-16 flex items-center justify-center mb-2.5">
+            <img
+              src={agency.logo}
+              alt={agency.name}
+              class="max-h-14 max-w-full object-contain filter group-hover:brightness-110 transition-all"
+              loading="lazy"
+              width="64"
+              height="64"
+            />
+          </div>
+          <span class="text-xs font-semibold text-slate-200 group-hover:text-white transition-colors">{agency.code}</span>
+          <span class="text-[10px] text-slate-400 text-center line-clamp-1">{agency.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Marquee Header -->
+  <div class="text-[11px] font-mono uppercase tracking-widest text-slate-400 mb-4 relative z-10">
+    Defense & Aerospace Industry Ecosystem
+  </div>
+
+  <!-- Infinite Marquee Track with CSS Animation & Hover Pause -->
+  <div class="relative w-full overflow-hidden flex items-center">
+    <!-- Gradient Fade Edges -->
+    <div class="absolute left-0 inset-y-0 w-24 sm:w-44 bg-gradient-to-r from-[#07192C] to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 inset-y-0 w-24 sm:w-44 bg-gradient-to-l from-[#07192C] to-transparent z-10 pointer-events-none"></div>
+
+    <!-- First Track -->
+    <div class="flex shrink-0 animate-marquee marquee-track items-center gap-12 sm:gap-16 py-4">
+      {industryGiants.map((g) => (
+        <div class="shrink-0 flex items-center justify-center h-16 w-36 sm:w-44 px-3 filter brightness-0 invert opacity-65 hover:opacity-100 transition-opacity">
+          <img
+            src={g.logo}
+            alt={g.name}
+            class="max-h-11 max-w-full object-contain"
+            loading="lazy"
+            width="160"
+            height="44"
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Duplicate Track for Seamless Loop -->
+    <div class="flex shrink-0 animate-marquee marquee-track items-center gap-12 sm:gap-16 py-4" aria-hidden="true">
+      {industryGiants.map((g) => (
+        <div class="shrink-0 flex items-center justify-center h-16 w-36 sm:w-44 px-3 filter brightness-0 invert opacity-65 hover:opacity-100 transition-opacity">
+          <img
+            src={g.logo}
+            alt={g.name}
+            class="max-h-11 max-w-full object-contain"
+            loading="lazy"
+            width="160"
+            height="44"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,141 @@
+---
+/**
+ * LogoCarousel.astro - Client & Partner Logo Trust Bar
+ * 
+ * Harmonized Brand Typography & Symmetrical Whitespace:
+ * - Exact typography match: font-extrabold Inter in Primary Navy (#0C487A) with tracking-tight.
+ * - Same font size and weight scale as "Who We Are" for 100% typographic consistency.
+ * - "peripheral involvement" accented in Brand Red (#FF3130).
+ * - Generous vertical whitespace above and below for an uncluttered, dignified presentation.
+ */
+
+export interface PartnerLogo {
+  name: string;
+  src: string;
+  alt: string;
+}
+
+const partnerLogos: PartnerLogo[] = [
+  {
+    name: 'Lockheed Martin',
+    src: '/images/logos/lockheed-martin.svg',
+    alt: 'Lockheed Martin',
+  },
+  {
+    name: 'Raytheon Technologies',
+    src: '/images/logos/raytheon.webp',
+    alt: 'Raytheon Technologies',
+  },
+  {
+    name: 'General Dynamics',
+    src: '/images/logos/general-dynamics.png',
+    alt: 'General Dynamics',
+  },
+  {
+    name: 'Booz Allen Hamilton',
+    src: '/images/logos/booz-allen.png',
+    alt: 'Booz Allen Hamilton',
+  },
+  {
+    name: 'CACI',
+    src: '/images/logos/caci.webp',
+    alt: 'CACI International',
+  },
+  {
+    name: 'Leidos',
+    src: '/images/logos/leidos.webp',
+    alt: 'Leidos Federal Systems',
+  },
+  {
+    name: 'Texas Instruments',
+    src: '/images/logos/texas-instruments.png',
+    alt: 'Texas Instruments',
+  },
+  {
+    name: 'L3Harris',
+    src: '/images/logos/defense-partner-1.png',
+    alt: 'L3Harris Technologies',
+  },
+];
+---
+
+<section
+  id="partner-trust-bar"
+  class="py-16 sm:py-20 lg:py-24 bg-white relative overflow-hidden"
+  aria-label="Defense Industry Involvement"
+>
+  <!-- Matching technical grid background accent to seamlessly integrate with Who We Are -->
+  <div class="absolute inset-0 bg-fed-grid-light opacity-50 pointer-events-none"></div>
+
+  <!-- Trust Heading Block: Identical font family, weight, and size scale as Who We Are -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-10 sm:mb-12 text-center">
+    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0C487A] max-w-4xl mx-auto tracking-tight leading-tight">
+      <span class="block"><span class="text-[#FF3130]">T</span>he defense industry giants we have had</span>
+      <span class="block mt-2 sm:mt-2.5">
+        <span class="text-[#FF3130]">peripheral involvement</span> with
+      </span>
+    </h2>
+  </div>
+
+  <!-- Marquee Container: CSS-Only Animation with Pause-on-Hover and White Edge Fades -->
+  <div
+    class="group relative w-full overflow-hidden select-none py-2"
+    aria-roledescription="carousel"
+  >
+    <!-- Left Gradient Edge Fade (Seamless White Bleed) -->
+    <div
+      class="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 sm:w-28 lg:w-40 bg-gradient-to-r from-white via-white/80 to-transparent"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Right Gradient Edge Fade (Seamless White Bleed) -->
+    <div
+      class="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 sm:w-28 lg:w-40 bg-gradient-to-l from-white via-white/80 to-transparent"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Horizontal Continuous Flex Track -->
+    <div class="flex gap-10 sm:gap-14 lg:gap-16 items-center">
+      
+      <!-- Track 1: Primary Animation Stream -->
+      <div class="flex shrink-0 animate-marquee items-center justify-around gap-10 sm:gap-14 lg:gap-16 min-w-full group-hover:[animation-play-state:paused]">
+        {partnerLogos.map((logo) => (
+          <div class="shrink-0 flex items-center justify-center h-12 w-36 sm:w-44 px-2">
+            <img
+              src={logo.src}
+              alt={logo.alt}
+              class="max-h-8 sm:max-h-9 w-auto max-w-[140px] sm:max-w-[160px] object-contain opacity-85 hover:opacity-100 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- Track 2: Duplicate Stream for Infinite Seamless Loop -->
+      <div
+        class="flex shrink-0 animate-marquee items-center justify-around gap-10 sm:gap-14 lg:gap-16 min-w-full group-hover:[animation-play-state:paused]"
+        aria-hidden="true"
+      >
+        {partnerLogos.map((logo) => (
+          <div class="shrink-0 flex items-center justify-center h-12 w-36 sm:w-44 px-2">
+            <img
+              src={logo.src}
+              alt={logo.alt}
+              class="max-h-8 sm:max-h-9 w-auto max-w-[140px] sm:max-w-[160px] object-contain opacity-85 hover:opacity-100 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none !important;
+    }
+  }
+</style>

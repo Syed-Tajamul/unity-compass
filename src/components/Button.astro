@@ -1,0 +1,56 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'white' | 'outline-transition-red' | 'outline-transition-navy' | 'outline-transition-white';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  id?: string;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  class: className = '',
+  id,
+  target,
+  rel,
+} = Astro.props;
+
+const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none cursor-pointer';
+
+const variantStyles = {
+  primary: 'bg-[#FF3130] text-white hover:bg-transparent hover:text-white border-2 border-[#FF3130] focus:ring-[#FF3130] shadow-sm active:scale-[0.98]',
+  secondary: 'bg-[#0A2540] text-white hover:bg-transparent hover:text-[#0A2540] border-2 border-[#0A2540] focus:ring-[#0A2540] shadow-sm active:scale-[0.98]',
+  outline: 'border-2 border-slate-300 text-slate-800 bg-white hover:bg-slate-50 hover:border-slate-400 focus:ring-[#0C487A] active:scale-[0.98]',
+  ghost: 'text-slate-700 hover:text-[#0C487A] hover:bg-slate-100 focus:ring-[#0C487A]',
+  white: 'bg-white text-[#0C487A] hover:bg-slate-100 focus:ring-white shadow-sm active:scale-[0.98]',
+  'outline-transition-red': 'btn-outline-transition-red',
+  'outline-transition-navy': 'btn-outline-transition-navy',
+  'outline-transition-white': 'btn-outline-transition-white',
+};
+
+const sizeStyles = {
+  sm: 'text-xs px-3.5 py-1.5 rounded-md gap-1.5 font-semibold',
+  md: 'text-xs sm:text-sm px-5 py-2.5 rounded-lg gap-2 font-bold uppercase tracking-wider',
+  lg: 'text-sm sm:text-base px-7 py-3.5 rounded-lg gap-2.5 font-bold uppercase tracking-wider',
+};
+
+const classes = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} class={classes} id={id} target={target} rel={rel}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} id={id}>
+      <slot />
+    </button>
+  )
+}

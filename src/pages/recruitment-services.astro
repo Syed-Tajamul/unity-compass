@@ -1,0 +1,219 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Button from '../components/Button.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import AgencyLogos from '../components/AgencyLogos.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { servicesData } from '../data/services';
+import { companyInfo } from '../data/company';
+
+const service = servicesData.find((s) => s.id === 'recruitment-services')!;
+
+const clearances = [
+  'Public Trust',
+  'Confidential & Secret',
+  'Top Secret (TS)',
+  'TS / Sensitive Compartmented Information (TS/SCI)',
+  'Counterintelligence (CI) Polygraph',
+  'Full Scope / Lifestyle Polygraph',
+  'Department of Energy (DOE) Q & L Clearances',
+];
+---
+
+<MainLayout
+  title={`${service.title} - Unity Compass`}
+  description="Unity Compass provides end-to-end federal recruitment services focused on permanent and long-term hiring for cleared and clearance-eligible professionals."
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-b from-slate-900 to-brand-dark text-white py-16 sm:py-24 border-b border-slate-800 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-7 space-y-5">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-brand-red/20 text-red-400 border border-brand-red/30">
+            Defense & Intelligence Talent Acquisition
+          </span>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            {service.title}
+          </h1>
+          <p class="text-lg text-slate-300 font-medium leading-relaxed">
+            {service.heroHeadline}
+          </p>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            {service.leadParagraph}
+          </p>
+          <div class="pt-3 flex flex-wrap items-center gap-4">
+            <Button href="/contact" variant="primary" size="md">
+              Request Cleared Talent
+            </Button>
+            <Button href="/career" variant="outline" size="md">
+              View Active Job Openings
+            </Button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-2xl bg-slate-800">
+            <img
+              src={service.image}
+              alt={service.title}
+              class="w-full h-auto object-cover"
+              width="600"
+              height="400"
+            />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Clearance Matrix Ribbon -->
+  <div class="bg-slate-900 text-slate-300 py-6 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-xs font-bold text-center uppercase tracking-widest text-slate-400 mb-3">
+        Active Clearance Capabilities Sourced & Vetted
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+        {clearances.map((lvl) => (
+          <span class="px-3 py-1 rounded-md text-xs font-semibold bg-slate-800 text-white border border-slate-700">
+            {lvl}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Recruitment Capabilities Detail -->
+  <section class="py-16 sm:py-24 bg-white" aria-labelledby="capabilities-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        eyebrow="Capabilities"
+        title="Recruitment Capabilities Include"
+        description="Our recruiters understand federal hiring requirements, labor categories, and contract mandates across defense, civilian, and OCONUS missions."
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="gov-card">
+          <div class="w-12 h-12 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center mb-5">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 tracking-tight">Security-Cleared Recruitment</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            A trusted partner for sourcing candidates with active clearances (Secret, Top Secret, TS/SCI, and CI/Full Scope Polygraph), thoroughly verifying status via JPAS/DISS.
+          </p>
+        </div>
+
+        <div class="gov-card">
+          <div class="w-12 h-12 rounded-xl bg-brand-navy/10 text-brand-navy flex items-center justify-center mb-5">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 tracking-tight">Technical Disciplines</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            Federal IT, cloud engineering, zero-trust cybersecurity, intelligence analysis, software engineering, and systems administration positions.
+          </p>
+        </div>
+
+        <div class="gov-card">
+          <div class="w-12 h-12 rounded-xl bg-brand-navy/10 text-brand-navy flex items-center justify-center mb-5">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 tracking-tight">Contractual Compliance</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            Full compliance with federal labor categories, DoD 8570/8140 requirements, and agency-specific security standards before deployment.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who We Serve Section (SMBs vs Gov Contractors) -->
+  <section class="py-16 sm:py-24 bg-slate-50 border-t border-slate-200/80" aria-labelledby="serve-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        eyebrow="Market Segments"
+        title="Who We Serve"
+        description="Whether you are an emerging contractor scaling your first federal bid or an established prime managing mission surge, we adapt to your workforce needs."
+      />
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- SMBs Column -->
+        <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-subtle space-y-4">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-red">Emerging Primes & Subs</span>
+            <span class="text-xs font-semibold px-2.5 py-0.5 rounded bg-red-50 text-brand-red">Save Up to 70%</span>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 tracking-tight">
+            Small & Medium Businesses (SMBs)
+          </h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start gap-2.5">
+              <span class="text-brand-red font-bold">&bull;</span>
+              <span><strong>Looking to Expand in Government Contracting:</strong> SMBs that are either new to government contracting or looking to scale their federal opportunities.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-brand-red font-bold">&bull;</span>
+              <span><strong>Cost-Conscious Operations:</strong> Manage recruiting costs effectively without compromising quality, saving up to 70% on overhead.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-brand-red font-bold">&bull;</span>
+              <span><strong>External Sourcing Infrastructure:</strong> Gain instant access to security-cleared candidate pipelines without maintaining an expensive in-house recruiting department.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-brand-red font-bold">&bull;</span>
+              <span><strong>Speed and Agility:</strong> Fast, effective recruitment for specialized roles and rapid ramp-ups to stay competitive against large primes.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Government Contractors Column -->
+        <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-subtle space-y-4">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-navy">Established Primes</span>
+            <span class="text-xs font-semibold px-2.5 py-0.5 rounded bg-brand-navy/10 text-brand-navy">Mission Continuity</span>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 tracking-tight">
+            Government Contractors (GC)
+          </h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start gap-2.5">
+              <span class="text-brand-navy font-bold">&bull;</span>
+              <span><strong>Specialized Niche Sourcing:</strong> Established contractors requiring hard-to-find, niche, high-caliber security-cleared talent (TS/SCI Polygraph).</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-brand-navy font-bold">&bull;</span>
+              <span><strong>Overcoming Talent Shortages:</strong> Fast, reliable access to cleared professionals to prevent SLA penalties and protect project milestones.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-brand-navy font-bold">&bull;</span>
+              <span><strong>OCONUS Contract Support:</strong> Specialized recruitment for overseas defense and intelligence contracts with rigorous clearance and travel mandates.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-brand-navy font-bold">&bull;</span>
+              <span><strong>Reduced Hiring Latency:</strong> Accelerate time-to-fill by leveraging our pre-vetted, actively cleared talent networks.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Agency Seals -->
+  <AgencyLogos />
+
+  <!-- Contact Form Section -->
+  <section class="py-16 sm:py-24 bg-white border-t border-slate-200/80">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ContactForm />
+    </div>
+  </section>
+</MainLayout>
+

@@ -1,0 +1,216 @@
+---
+import { testimonials } from '../data/testimonials';
+---
+
+<section id="testimonials" class="py-24 lg:py-32 bg-white text-center relative overflow-hidden" aria-labelledby="testimonials-heading">
+  <!-- Subtle decorative ambient glow -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-slate-50 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Eyebrow & Title -->
+    <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red mb-3">
+      <span class="w-6 h-px bg-brand-red"></span>
+      <span>Client Endorsements & Past Performance</span>
+      <span class="w-6 h-px bg-brand-red"></span>
+    </div>
+
+    <h2 id="testimonials-heading" class="text-3xl sm:text-5xl font-extrabold text-[#0C487A] tracking-tight leading-tight">
+      Testimonials
+    </h2>
+
+    <!-- Animated Glowing Gradient Bar (Refined GovCon Signature) -->
+    <div class="testimonial-glow-bar my-5 mx-auto"></div>
+
+    <!-- Explanatory text verbatim from live site -->
+    <p class="text-xs sm:text-sm text-slate-500 max-w-2xl mx-auto leading-relaxed mt-4 font-normal">
+      We believe in the power of strong relationships and transparent communication. For detailed references or client testimonials, please feel free to reach out to us directly.
+    </p>
+
+    <!-- Carousel Slider Container with Framing -->
+    <div class="relative mt-12 sm:mt-16 px-4 sm:px-14" id="testimonial-slider-container">
+      
+      <!-- Previous Arrow -->
+      <button
+        type="button"
+        id="testimonial-prev-btn"
+        class="absolute left-0 top-1/2 -translate-y-1/2 p-2.5 rounded-full text-slate-400 hover:text-[#0C487A] hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0C487A] z-10 border border-slate-200 shadow-sm"
+        aria-label="Previous testimonial"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <!-- Slides Container -->
+      <div class="min-h-[260px] sm:min-h-[220px] flex items-center justify-center relative p-6 sm:p-8 rounded-2xl bg-slate-50/70 border border-slate-200/90 shadow-sm">
+        
+        <!-- Giant Decorative Quote Mark -->
+        <div class="absolute top-2 left-6 text-6xl font-serif text-slate-200 select-none pointer-events-none -z-0">
+          “
+        </div>
+
+        {testimonials.map((t, index) => (
+          <div
+            class={`testimonial-slide transition-all duration-500 relative z-10 w-full ${
+              index === 0 ? 'block opacity-100 translate-y-0' : 'hidden opacity-0 translate-y-2'
+            }`}
+            data-index={index}
+          >
+            <blockquote class="text-base sm:text-lg lg:text-xl text-slate-800 leading-relaxed font-medium max-w-3xl mx-auto italic">
+              "{t.quote}"
+            </blockquote>
+
+            <div class="mt-8 flex flex-col items-center gap-2">
+              <span class="text-sm font-extrabold text-[#0C487A] tracking-tight">{t.authorRole}</span>
+              <div class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500 font-medium">
+                <span class="px-2.5 py-1 rounded bg-white text-[#0C487A] font-semibold border border-slate-200 shadow-2xs">
+                  {t.organizationType}
+                </span>
+                <span>•</span>
+                <span class="text-slate-600">{t.impactArea}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Next Arrow -->
+      <button
+        type="button"
+        id="testimonial-next-btn"
+        class="absolute right-0 top-1/2 -translate-y-1/2 p-2.5 rounded-full text-slate-400 hover:text-[#0C487A] hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0C487A] z-10 border border-slate-200 shadow-sm"
+        aria-label="Next testimonial"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- Pagination Dots -->
+      <div class="flex items-center justify-center gap-2.5 mt-8">
+        {testimonials.map((_, index) => (
+          <button
+            type="button"
+            class={`testimonial-dot h-2 rounded-full transition-all duration-300 ${
+              index === 0 ? 'bg-[#0C487A] w-8' : 'bg-slate-300 hover:bg-slate-400 w-2.5'
+            }`}
+            data-dot-index={index}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+
+    </div>
+
+    <!-- Contact Closing Call to Action (Verbatim from live site) -->
+    <div class="mt-14 pt-10 border-t border-slate-200 max-w-2xl mx-auto">
+      <p class="text-sm text-slate-600 leading-relaxed font-normal">
+        If you're ready to see how we can make a difference for your organization, <a href="/contact" class="font-bold text-[#0C487A] hover:text-brand-red underline decoration-[#0C487A]/30 hover:decoration-brand-red transition-colors">Contact Us</a> today. Let's discuss how we can support your next big project.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .testimonial-glow-bar {
+    width: 100%;
+    max-width: 140px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff3130, #0ea5e9, #0c487a, #ff3130);
+    background-size: 300% 100%;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(255, 49, 48, 0.4), 0 0 15px rgba(12, 72, 122, 0.2);
+    animation: glowLine 6s linear infinite;
+  }
+
+  @keyframes glowLine {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 300% 50%;
+    }
+  }
+</style>
+
+<script>
+  let currentIndex = 0;
+  const slides = document.querySelectorAll('.testimonial-slide');
+  const dots = document.querySelectorAll('.testimonial-dot');
+  const total = slides.length;
+  let autoplayTimer: any = null;
+
+  function showSlide(index: number) {
+    slides.forEach((s, i) => {
+      if (i === index) {
+        s.classList.remove('hidden');
+        setTimeout(() => {
+          s.classList.remove('opacity-0', 'translate-y-2');
+          s.classList.add('opacity-100', 'translate-y-0');
+        }, 20);
+      } else {
+        s.classList.remove('opacity-100', 'translate-y-0');
+        s.classList.add('opacity-0', 'translate-y-2', 'hidden');
+      }
+    });
+
+    dots.forEach((d, i) => {
+      if (i === index) {
+        d.classList.remove('bg-slate-300', 'w-2.5');
+        d.classList.add('bg-[#0C487A]', 'w-8');
+      } else {
+        d.classList.remove('bg-[#0C487A]', 'w-8');
+        d.classList.add('bg-slate-300', 'w-2.5');
+      }
+    });
+
+    currentIndex = index;
+  }
+
+  function nextSlide() {
+    showSlide((currentIndex + 1) % total);
+  }
+
+  function prevSlide() {
+    showSlide((currentIndex - 1 + total) % total);
+  }
+
+  document.getElementById('testimonial-next-btn')?.addEventListener('click', () => {
+    nextSlide();
+    resetAutoplay();
+  });
+
+  document.getElementById('testimonial-prev-btn')?.addEventListener('click', () => {
+    prevSlide();
+    resetAutoplay();
+  });
+
+  dots.forEach((dot) => {
+    dot.addEventListener('click', (e) => {
+      const idx = Number((e.currentTarget as HTMLElement).getAttribute('data-dot-index'));
+      showSlide(idx);
+      resetAutoplay();
+    });
+  });
+
+  function startAutoplay() {
+    autoplayTimer = setInterval(nextSlide, 7000);
+  }
+
+  function resetAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    startAutoplay();
+  }
+
+  startAutoplay();
+
+  const container = document.getElementById('testimonial-slider-container');
+  container?.addEventListener('mouseenter', () => {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+  });
+  container?.addEventListener('mouseleave', () => {
+    startAutoplay();
+  });
+</script>

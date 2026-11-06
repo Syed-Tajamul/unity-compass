@@ -1,0 +1,385 @@
+---
+import { navigationLinks } from '../data/navigation';
+import { companyInfo } from '../data/company';
+
+const currentPath = Astro.url.pathname;
+
+// Enhanced Services list for the dropdown matching GovCon practice areas
+const servicesDropdown = [
+  {
+    name: 'Proposal Development & Federal Bid Support',
+    href: '/proposal-development-services',
+    tag: 'Core Practice',
+  },
+  {
+    name: 'OASIS+ & IDIQ Qualification Support',
+    href: '/customized-support-services',
+    tag: 'High Demand',
+  },
+  {
+    name: 'Security-Cleared Recruitment',
+    href: '/recruitment-services',
+    tag: 'TS/SCI & Poly',
+  },
+  {
+    name: 'Staffing Solutions',
+    href: '/staffing',
+    tag: 'Surge Models',
+  },
+  {
+    name: 'IT & Program Consulting',
+    href: '/information-technology-and-business-consulting',
+    tag: 'Tech Advisory',
+  },
+  {
+    name: 'Contract Compliance Support',
+    href: '/customized-support-services',
+    tag: 'FAR / DFARS',
+  },
+];
+
+const aboutDropdown = [
+  {
+    name: 'About Unity Compass',
+    href: '/about-us',
+    tag: 'Overview',
+  },
+  {
+    name: 'Capability Statement (PDF)',
+    href: '/documents/capability-statement.pdf',
+    tag: 'Official PDF',
+    isPdf: true,
+  },
+];
+---
+
+<header
+  id="main-header"
+  class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] transition-all duration-300"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20 transition-all duration-300" id="header-inner">
+      
+      <!-- Brand Logo -->
+      <a
+        href="/"
+        class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#0C487A] rounded-lg p-1 transition-transform"
+        aria-label="Unity Compass - Home"
+      >
+        <img
+          src="/images/Green-Minimal-Travel-Business-Logo.png"
+          alt="Unity Compass - Your Partner In Government Contracting Success"
+          class="h-10 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+          width="207"
+          height="60"
+        />
+      </a>
+
+      <!-- Desktop Right-Aligned Navigation & Action Cluster (Clean, Eye-Pleasing & Uncluttered) -->
+      <div class="hidden lg:flex items-center space-x-3 xl:space-x-5">
+        <nav class="flex items-center space-x-2 xl:space-x-4" aria-label="Main Navigation">
+          
+          <!-- Home Link with Signature Red Underline -->
+          <a
+            href="/"
+            class={`nav-link px-2 py-2 text-sm font-semibold transition-colors ${
+              currentPath === '/' ? 'text-[#FF3130] active' : 'text-slate-800 hover:text-[#FF3130]'
+            }`}
+          >
+            <span>Home</span>
+          </a>
+
+          <!-- Services Dropdown (Smooth Desktop Hover Menu) -->
+          <div class="relative group/nav py-6">
+            <button
+              type="button"
+              class={`nav-link inline-flex items-center gap-1.5 px-2 py-2 text-sm font-semibold transition-colors cursor-pointer ${
+                currentPath.includes('proposal') || currentPath.includes('recruitment') || currentPath.includes('staffing') || currentPath.includes('consulting') || currentPath.includes('customized')
+                  ? 'text-[#FF3130] active'
+                  : 'text-slate-800 hover:text-[#FF3130]'
+              }`}
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              <span>Services</span>
+              <svg
+                class="w-3.5 h-3.5 text-current transition-transform duration-200 group-hover/nav:rotate-180"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <!-- Dropdown Panel (Clean, Vertical White Card inspired by Screenshot 3) -->
+            <div class="absolute left-0 top-full -mt-1 w-80 rounded-xl bg-white py-1.5 shadow-xl border border-[#E2E8F0] opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-200 ease-out z-50 overflow-hidden">
+              <div class="divide-y divide-slate-50">
+                {servicesDropdown.map((service) => (
+                  <a
+                    href={service.href}
+                    class="dropdown-item px-4 py-2.5 text-xs sm:text-[13px] font-medium text-slate-800 block transition-colors"
+                  >
+                    <span class="font-semibold">{service.name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- About Us Dropdown -->
+          <div class="relative group/nav py-6">
+            <button
+              type="button"
+              class={`nav-link inline-flex items-center gap-1.5 px-2 py-2 text-sm font-semibold transition-colors cursor-pointer ${
+                currentPath.startsWith('/about-us') ? 'text-[#FF3130] active' : 'text-slate-800 hover:text-[#FF3130]'
+              }`}
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              <span>About Us</span>
+              <svg
+                class="w-3.5 h-3.5 text-current transition-transform duration-200 group-hover/nav:rotate-180"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <!-- Dropdown Panel -->
+            <div class="absolute left-0 top-full -mt-1 w-72 rounded-xl bg-white py-1.5 shadow-xl border border-[#E2E8F0] opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-200 ease-out z-50 overflow-hidden">
+              <div class="divide-y divide-slate-50">
+                {aboutDropdown.map((item) => (
+                  <a
+                    href={item.href}
+                    target={item.isPdf ? '_blank' : undefined}
+                    rel={item.isPdf ? 'noopener noreferrer' : undefined}
+                    class="dropdown-item px-4 py-2.5 text-xs sm:text-[13px] font-medium text-slate-800 block transition-colors"
+                  >
+                    <span class="font-semibold">{item.name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Careers -->
+          <a
+            href="/career"
+            class={`nav-link px-2 py-2 text-sm font-semibold transition-colors ${
+              currentPath.startsWith('/career') ? 'text-[#FF3130] active' : 'text-slate-800 hover:text-[#FF3130]'
+            }`}
+          >
+            <span>Careers</span>
+          </a>
+
+          <!-- Blog -->
+          <a
+            href="/blog"
+            class={`nav-link px-2 py-2 text-sm font-semibold transition-colors ${
+              currentPath.startsWith('/blog') ? 'text-[#FF3130] active' : 'text-slate-800 hover:text-[#FF3130]'
+            }`}
+          >
+            <span>Blog</span>
+          </a>
+
+          <!-- Contact Us -->
+          <a
+            href="/contact"
+            class={`nav-link px-2 py-2 text-sm font-semibold transition-colors ${
+              currentPath.startsWith('/contact') ? 'text-[#FF3130] active' : 'text-slate-800 hover:text-[#FF3130]'
+            }`}
+          >
+            <span>Contact Us</span>
+          </a>
+
+        </nav>
+
+        <!-- Subtle Vertical Divider -->
+        <div class="h-5 w-px bg-slate-200 shrink-0" aria-hidden="true"></div>
+
+        <!-- Eye-Pleasing Direct Federal Advisory Line -->
+        <a
+          href={`tel:${companyInfo.phoneRaw}`}
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 bg-slate-50/90 hover:bg-[#0C487A]/10 hover:text-[#0C487A] border border-slate-200/90 transition-all duration-200 group shrink-0 shadow-xs active:scale-[0.98]"
+          aria-label={`Call Unity Compass direct line at ${companyInfo.phone}`}
+        >
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
+          <svg class="w-3.5 h-3.5 text-[#0C487A] transition-transform duration-200 group-hover:scale-110 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <span class="font-semibold text-xs sm:text-[13px] tracking-tight text-slate-800 group-hover:text-[#0C487A] transition-colors">{companyInfo.phone}</span>
+        </a>
+
+        <!-- Reference-Inspired Outlined Hover Button ("Book a Meeting") -->
+        <!-- Default: Solid Deep Navy -> Hover: Outlined with Deep Navy border and text! -->
+        <a
+          href="/contact"
+          class="btn-outline-transition-navy btn-pulse px-4 sm:px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-sm active:scale-[0.98] inline-flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+        >
+          <span>Book a Meeting</span>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Trigger -->
+      <div class="flex lg:hidden items-center gap-2">
+        <a
+          href={`tel:${companyInfo.phoneRaw}`}
+          class="p-2 rounded-lg text-slate-700 hover:text-[#0C487A] hover:bg-slate-100 transition-colors"
+          aria-label="Call Unity Compass"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+        </a>
+
+        <a
+          href="/contact"
+          class="btn-outline-transition-navy btn-pulse px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-md"
+        >
+          Book a Meeting
+        </a>
+
+        <button
+          type="button"
+          id="mobile-menu-btn"
+          class="p-2 rounded-lg text-slate-700 hover:text-[#0C487A] hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0C487A] transition-colors cursor-pointer"
+          aria-label="Toggle Navigation Menu"
+          aria-expanded="false"
+        >
+          <svg class="w-6 h-6 open-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg class="w-6 h-6 close-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-[#E2E8F0] bg-white shadow-xl transition-all">
+    <div class="max-w-7xl mx-auto px-4 pt-3 pb-6 space-y-1">
+      <a
+        href="/"
+        class={`block px-3 py-2.5 rounded-lg text-base font-semibold border-b border-slate-50 transition-colors ${
+          currentPath === '/' ? 'text-[#FF3130] bg-red-50/50' : 'text-slate-800 hover:text-[#0C487A]'
+        }`}
+      >
+        Home
+      </a>
+
+      <!-- Mobile Services List -->
+      <div class="py-2 border-b border-slate-100">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block px-3 py-1 font-mono">
+          Services
+        </span>
+        <div class="mt-1 space-y-1 pl-2">
+          {servicesDropdown.map((sub) => (
+            <a
+              href={sub.href}
+              class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-[#0C487A] hover:bg-slate-50 transition-colors"
+            >
+              {sub.name}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Mobile About List -->
+      <div class="py-2 border-b border-slate-100">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block px-3 py-1 font-mono">
+          About Us
+        </span>
+        <div class="mt-1 space-y-1 pl-2">
+          {aboutDropdown.map((sub) => (
+            <a
+              href={sub.href}
+              target={sub.isPdf ? '_blank' : undefined}
+              rel={sub.isPdf ? 'noopener noreferrer' : undefined}
+              class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-[#0C487A] hover:bg-slate-50 transition-colors"
+            >
+              {sub.name}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <a
+        href="/career"
+        class={`block px-3 py-2.5 rounded-lg text-base font-semibold border-b border-slate-50 transition-colors ${
+          currentPath.startsWith('/career') ? 'text-[#FF3130] bg-red-50/50' : 'text-slate-800 hover:text-[#0C487A]'
+        }`}
+      >
+        Careers
+      </a>
+
+      <a
+        href="/blog"
+        class={`block px-3 py-2.5 rounded-lg text-base font-semibold border-b border-slate-50 transition-colors ${
+          currentPath.startsWith('/blog') ? 'text-[#FF3130] bg-red-50/50' : 'text-slate-800 hover:text-[#0C487A]'
+        }`}
+      >
+        Blog
+      </a>
+
+      <a
+        href="/contact"
+        class={`block px-3 py-2.5 rounded-lg text-base font-semibold border-b border-slate-50 transition-colors ${
+          currentPath.startsWith('/contact') ? 'text-[#FF3130] bg-red-50/50' : 'text-slate-800 hover:text-[#0C487A]'
+        }`}
+      >
+        Contact Us
+      </a>
+
+      <!-- Mobile Drawer Footer -->
+      <div class="pt-4 space-y-3">
+        <a
+          href={companyInfo.capabilityPdf}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-2 w-full py-2.5 text-sm font-semibold rounded-lg border border-slate-200 text-slate-700 bg-slate-50 hover:bg-slate-100 transition-colors"
+        >
+          <svg class="w-4 h-4 text-[#FF3130]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span>Download Capability Statement (PDF)</span>
+        </a>
+
+        <div class="text-center pt-2 text-xs text-slate-500">
+          <p>Direct GovCon Advisory: <a href={`tel:${companyInfo.phoneRaw}`} class="font-bold text-[#0C487A]">{companyInfo.phone}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const openIcon = btn?.querySelector('.open-icon');
+  const closeIcon = btn?.querySelector('.close-icon');
+
+  btn?.addEventListener('click', () => {
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!isExpanded));
+    menu?.classList.toggle('hidden');
+    openIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+
+  // Sticky header scroll behavior
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('shadow-md');
+    } else {
+      header?.classList.remove('shadow-md');
+    }
+  }, { passive: true });
+</script>

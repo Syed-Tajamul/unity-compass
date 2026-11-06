@@ -1,0 +1,149 @@
+---
+/**
+ * ServicesGrid.astro - "Our Services" Card Grid Section
+ * 
+ * Architectural & Brand Specifications:
+ * - Structural Layout: Clean, icon-topped 3-column card grid.
+ * - Federal GovCon Brand Discipline: Signature Federal Navy (#07192C) with technical grid overlay,
+ *   crisp white titles, slate-300 body copy, and brand red (#FF3130) interactive accents.
+ * - Responsive Grid: 1 column mobile, 2 columns tablet, 3 columns desktop (gap-8).
+ * - Interactive Micro-interactions: Cards gently elevate on hover (-translate-y-1, shadow-2xl).
+ * - Service Title: Stays solid crisp white (text-white) at all times (does not change color on hover).
+ * - Hover State: Top icon and bottom "Learn More →" both transition to the exact brand red (#FF3130).
+ * - Initial Letter Accent: "O" in brand red (<span class="text-[#FF3130]">O</span>ur Services).
+ */
+
+export interface ServiceItem {
+  id: string;
+  title: string;
+  text: string;
+  href: string;
+  iconSvg: string;
+}
+
+const services: ServiceItem[] = [
+  {
+    id: 'proposal-development',
+    title: 'Proposal Development & Federal Bid Support',
+    text: 'Structured proposal lifecycle support including capture planning, proposal structuring, narrative development, and submission readiness.',
+    href: '/proposal-development-services',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />`,
+  },
+  {
+    id: 'oasis-plus',
+    title: 'OASIS+ & IDIQ Qualification Support',
+    text: 'We assist organizations in preparing defensible eligibility packages aligned with domain scoring and qualification matrices.',
+    href: '/customized-support-services',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />`,
+  },
+  {
+    id: 'cleared-recruitment',
+    title: 'Security-Cleared Recruitment',
+    text: 'Recruitment services for cleared and non-cleared federal roles including verification, screening, and documentation readiness.',
+    href: '/recruitment-services',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />`,
+  },
+  {
+    id: 'staffing-solutions',
+    title: 'Staffing Solutions',
+    text: 'Flexible staffing models including contract staffing, direct hire, and contract-to-hire aligned with federal program needs.',
+    href: '/staffing',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />`,
+  },
+  {
+    id: 'it-program-consulting',
+    title: 'IT & Program Consulting',
+    text: 'Technical advisory and program governance services to support federal systems delivery and performance oversight.',
+    href: '/information-technology-and-business-consulting',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`,
+  },
+  {
+    id: 'contract-compliance',
+    title: 'Contract Compliance Support',
+    text: 'Contract documentation management, compliance preparation, and audit-ready operational processes.',
+    href: '/customized-support-services',
+    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />`,
+  },
+];
+---
+
+<section
+  id="services"
+  class="py-16 sm:py-20 lg:py-24 bg-[#07192C] text-white relative overflow-hidden border-t border-slate-800 scroll-mt-20"
+  aria-labelledby="services-heading"
+>
+  <!-- Subtle technical grid background accent -->
+  <div class="absolute inset-0 bg-fed-grid opacity-50 pointer-events-none"></div>
+
+  <!-- Ambient blue radial glow -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#0C487A]/25 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header Group -->
+    <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-14 reveal-on-scroll">
+      <!-- Main Section Heading with 1st letter in Brand Red -->
+      <h2
+        id="services-heading"
+        class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight"
+      >
+        <span class="text-[#FF3130]">O</span>ur Services
+      </h2>
+    </div>
+
+    <!-- 6 Services Responsive Grid: 1 col (mobile), 2 cols (tablet), 3 cols (desktop) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((service, index) => (
+        <div
+          class="flex flex-col items-center text-center justify-between p-8 sm:p-9 rounded-2xl bg-[#0A2540]/85 backdrop-blur-sm border border-slate-700/70 shadow-lg hover:-translate-y-1 hover:shadow-2xl hover:border-sky-500/50 hover:bg-[#0D2D4D] transition-all duration-300 ease-in-out group reveal-on-scroll"
+          style={`animation-delay: ${index * 75}ms;`}
+        >
+          <!-- Top Cluster: Centered Icon & Titles -->
+          <div class="flex flex-col items-center w-full">
+            
+            <!-- Sleek Line Icon Container: On hover shifts to exact same brand red color as Learn More -->
+            <div class="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sky-400 group-hover:bg-[#FF3130]/15 group-hover:border-[#FF3130]/40 group-hover:text-[#FF3130] group-hover:scale-105 transition-all duration-300 mb-6 shadow-xs">
+              <svg
+                class="w-7 h-7 transition-colors duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                set:html={service.iconSvg}
+              />
+            </div>
+
+            <!-- Service Title (Inter Semibold/Bold, Crisp White - remains constant on hover) -->
+            <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug mb-3.5">
+              {service.title}
+            </h3>
+
+            <!-- Descriptive Body Text (Readable Slate 300) -->
+            <p class="text-sm sm:text-[15px] text-slate-300 leading-relaxed font-normal mb-6">
+              {service.text}
+            </p>
+          </div>
+
+          <!-- Bottom Action: Simple, Elegant "Learn More →" Link -->
+          <div class="pt-2 w-full flex justify-center border-t border-slate-700/60">
+            <a
+              href={service.href}
+              class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-sky-400 group-hover:text-[#FF3130] transition-colors duration-200 group/link pt-3"
+            >
+              <span>Learn More</span>
+              <svg
+                class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
