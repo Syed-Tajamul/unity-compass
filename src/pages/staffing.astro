@@ -3,13 +3,30 @@
  * staffing.astro
  * 
  * Executive Staffing Solutions Practice Page
- * Architectural Blueprint:
- * 1. Hero: Pure White, Centered Shimmer Title (2 Lines), 45:55 Content:Image ratio.
- *    Unclipped artwork frame with object-contain and aspect-[2752/1536].
- * 2. Deep Dive: Light Blue Blueprint Canvas, 67% Left Overview / 33% Right Other Practice Areas.
- * 3. How We Deliver: Pure White Canvas, Centered Header, Navigation Controls, Infinite Continuous Carousel.
- * 4. What You Get: Light Blue Blueprint Canvas, Shuttle Bottom-to-Top Color Fill Hover.
- * 5. Why UC?: Pure White Canvas, 3 Symmetrical Cards with Bring-to-Front Hover Elevation.
+ * Bespoke Implementation per User Design System:
+ * 1. Page Header (Top Center before Image):
+ *    - Title: "Agile Staffing Solutions" with radiant color shimmer and soft initial reveal.
+ *    - Subtle gradient accent line.
+ * 2. Hero Image & Practice Areas Menu:
+ *    - Unclipped showcase frame with object-contain and aspect-[2752/1536].
+ *    - 5 Other Practice Areas (current practice excluded).
+ *    - "Federal Practices" and "Active Practice" headers removed.
+ *    - Hover state inherits the selected bluish pill style: deep blue gradient with white text.
+ * 3. Narrative & 4 Square Value Cards (Below Section):
+ *    - Headline placed directly BEFORE the narrative paragraph in the lower section!
+ *    - Narrative paragraph on the left with 10+ YOE and higher delivery rate highlights.
+ *    - 4 Center-aligned square cards in 2x2 grid (icon, title, desc centered, corner labels removed).
+ * 4. Section 2 ("How We Deliver"):
+ *    - Highly animated top-to-bottom vertical milestone timeline on Light Blue Blueprint canvas.
+ *    - Connected by a radiant gradient spine line with opening aperture nodes (01-05) as you scroll into view.
+ * 5. Section 3 ("What you get?"):
+ *    - Pure White canvas with 4 shuttle cards (bottom-to-top color fill on hover) and scroll reveal animations.
+ * 6. Section 4 ("Why UC?"):
+ *    - Light Blue Blueprint canvas with 3 symmetrical cards, bring-to-front hover elevation and scroll reveal animations.
+ * 7. Section 5 ("Ready to Win Your Next Government Contract?"):
+ *    - Pure White canvas CTA section matching user screenshot with deep blue pill button and watermark.
+ * 8. Initial Load & Scroll Animations matching Homepage throughout.
+ * 9. Alternating backgrounds: White -> Blue -> White -> Blue -> White.
  */
 import MainLayout from '../layouts/MainLayout.astro';
 
@@ -42,52 +59,118 @@ const otherFederalServices = [
   },
 ];
 
-// 5-Stage Staffing Delivery Process (Contragenix-inspired infinite carousel)
+// 4 Animated Square Cards (Centered icon, title, desc - corner labels removed)
+const keySquareCards = [
+  {
+    title: 'Rapid Resource Deployment',
+    desc: 'Pre-vetted talent pools compressing time-to-fill for critical billable roles.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+    themeColor: 'text-[#0C487A]',
+    iconBg: 'bg-blue-100/90 text-[#0C487A]',
+    borderColor: 'border-blue-200/80',
+    cardBg: 'from-blue-50/70 via-white to-blue-50/30',
+    topBar: 'from-[#0C487A] to-[#1E40AF]',
+    hoverShadow: 'hover:shadow-[0_16px_36px_rgba(12,72,122,0.16)]',
+    hoverTitle: 'group-hover:text-[#0C487A]',
+    floatClass: 'animate-float-subtle-1',
+  },
+  {
+    title: 'Flexible Engagement Models',
+    desc: 'Contract, temp-to-hire, and direct-hire mapped to agency task order terms.',
+    icon: 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z',
+    themeColor: 'text-[#0B2553]',
+    iconBg: 'bg-slate-100 text-[#0B2553]',
+    borderColor: 'border-slate-200/90',
+    cardBg: 'from-slate-50/80 via-white to-slate-100/40',
+    topBar: 'from-[#0B2553] to-[#0C487A]',
+    hoverShadow: 'hover:shadow-[0_16px_36px_rgba(11,37,83,0.16)]',
+    hoverTitle: 'group-hover:text-[#0B2553]',
+    floatClass: 'animate-float-subtle-2',
+  },
+  {
+    title: 'SCA & Wage Compliance',
+    desc: 'Strict adherence to Service Contract Act wage determinations and FAR rules.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    themeColor: 'text-[#FF3130]',
+    iconBg: 'bg-red-100/90 text-[#FF3130]',
+    borderColor: 'border-red-200/80',
+    cardBg: 'from-rose-50/70 via-white to-rose-50/30',
+    topBar: 'from-[#FF3130] to-[#DC2626]',
+    hoverShadow: 'hover:shadow-[0_16px_36px_rgba(255,49,48,0.16)]',
+    hoverTitle: 'group-hover:text-[#FF3130]',
+    floatClass: 'animate-float-subtle-2',
+  },
+  {
+    title: 'Scalable Surge Capacity',
+    desc: 'Effortless team expansion for RFP surge requirements and option renewals.',
+    icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+    themeColor: 'text-[#1E40AF]',
+    iconBg: 'bg-indigo-100/90 text-[#1E40AF]',
+    borderColor: 'border-blue-200/80',
+    cardBg: 'from-indigo-50/70 via-white to-blue-50/30',
+    topBar: 'from-[#1E40AF] to-[#2563EB]',
+    hoverShadow: 'hover:shadow-[0_16px_36px_rgba(30,64,175,0.16)]',
+    hoverTitle: 'group-hover:text-[#1E40AF]',
+    floatClass: 'animate-float-subtle-1',
+  },
+];
+
+// 5-Stage Staffing Delivery Process (Animated Top-to-Bottom Vertical Timeline)
 const deliverySteps = [
   {
-    step: '1',
-    title: '1. Program Needs Assessment',
-    desc: 'Analyzing task order requirements, labor categories, security thresholds, and billable rate constraints',
+    step: '01',
+    num: 1,
+    title: 'Program Needs Assessment',
+    desc: 'Analyzing task order requirements, labor categories, security thresholds, and billable rate constraints.',
     icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2',
-    glowColor: 'from-[#0C487A] to-[#1E40AF]',
+    color: 'from-[#0C487A] to-[#1E40AF]',
     iconColor: 'text-[#0C487A]',
-    bgTint: 'bg-blue-50/80',
+    bgTint: 'bg-blue-50',
+    badgeText: 'Milestone 01',
   },
   {
-    step: '2',
-    title: '2. Rapid Talent Sourcing',
-    desc: 'Activating proprietary candidate databases to identify pre-screened professionals ready for surge mobilization',
+    step: '02',
+    num: 2,
+    title: 'Rapid Talent Sourcing',
+    desc: 'Activating proprietary candidate databases to identify pre-screened professionals ready for surge mobilization.',
     icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
-    glowColor: 'from-[#FF3130] to-[#DC2626]',
+    color: 'from-[#FF3130] to-[#DC2626]',
     iconColor: 'text-[#FF3130]',
-    bgTint: 'bg-red-50/80',
+    bgTint: 'bg-red-50',
+    badgeText: 'Milestone 02',
   },
   {
-    step: '3',
-    title: '3. Compliance & Wage Audit',
-    desc: 'Rigorous validation of SCA prevailing wage rates, FAR labor categories, and mandatory technical credentials',
+    step: '03',
+    num: 3,
+    title: 'Compliance & Wage Audit',
+    desc: 'Rigorous validation of SCA prevailing wage rates, FAR labor categories, and mandatory technical credentials.',
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-    glowColor: 'from-[#1E40AF] to-[#2563EB]',
+    color: 'from-[#1E40AF] to-[#2563EB]',
     iconColor: 'text-[#1E40AF]',
-    bgTint: 'bg-indigo-50/80',
+    bgTint: 'bg-indigo-50',
+    badgeText: 'Milestone 03',
   },
   {
-    step: '4',
-    title: '4. Day-One Onboarding',
-    desc: 'Complete administrative, NDA, and badging logistics coordination to ensure seamless first-day contract arrival',
+    step: '04',
+    num: 4,
+    title: 'Day-One Onboarding',
+    desc: 'Complete administrative, NDA, and badging logistics coordination to ensure seamless first-day contract arrival.',
     icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
-    glowColor: 'from-[#0C487A] to-[#2563EB]',
+    color: 'from-[#0C487A] to-[#2563EB]',
     iconColor: 'text-[#0C487A]',
-    bgTint: 'bg-sky-50/80',
+    bgTint: 'bg-sky-50',
+    badgeText: 'Milestone 04',
   },
   {
-    step: '5',
-    title: '5. Ongoing Retention Care',
-    desc: 'Continuous performance check-ins and contractor support protecting multi-year task order execution',
+    step: '05',
+    num: 5,
+    title: 'Ongoing Retention Care',
+    desc: 'Continuous performance check-ins and contractor support protecting multi-year task order execution.',
     icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
-    glowColor: 'from-[#FF3130] to-[#0C487A]',
+    color: 'from-[#FF3130] to-[#0C487A]',
     iconColor: 'text-[#FF3130]',
-    bgTint: 'bg-rose-50/80',
+    bgTint: 'bg-rose-50',
+    badgeText: 'Milestone 05',
   },
 ];
 
@@ -118,53 +201,47 @@ const deliverables = [
 
 <MainLayout
   title="Staffing Solutions - Unity Compass"
-  description="Find top-tier staffing solutions for federal and commercial contractors. Contract, long-term, and temp-to-hire staffing models engineered for mission success."
+  description="Scalable cleared and commercial workforce solutions tailored to federal program execution. Flexible contract, temp-to-hire, and direct placement staffing."
 >
   <div class="text-slate-800 overflow-hidden" id="staffing-page-root">
 
     <!-- ===================================================================== -->
-    <!-- SECTION 1: HERO (Content 45% | Image 55% with Unclipped Text Badge)  -->
-    <!-- Background: PURE WHITE (Order: White -> Blue -> White -> Blue -> White)-->
+    <!-- SECTION 1: HERO & PRACTICE OVERVIEW                                   -->
+    <!-- Top: Centered Shimmer Heading (Page Top Before Image)                 -->
+    <!-- Middle Row: Image (~68%) | Practice Areas Menu (~32%)                 -->
+    <!-- Bottom Row: Headline + Narrative (~56%) | 4 Centered Squares (~44%)   -->
+    <!-- Background: PURE WHITE                                                -->
     <!-- ===================================================================== -->
-    <section class="relative pt-16 sm:pt-20 lg:pt-24 pb-16 sm:pb-24 bg-white border-b border-slate-200/80 overflow-hidden" aria-labelledby="service-hero-heading">
+    <section class="relative pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-24 bg-white border-b border-slate-200/80 overflow-hidden" aria-labelledby="service-hero-heading">
       
       <!-- Subtle Radial Ambient Glows -->
       <div class="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(40,121,182,0.08)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
       <div class="absolute -top-20 -right-32 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(255,49,48,0.06)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
-      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12 sm:space-y-16">
         
-        <!-- 1. Centered Service Title at Top with Continuous Shimmer (Two Lines) -->
-        <div class="text-center max-w-4xl mx-auto space-y-4 mb-14 sm:mb-16 reveal-on-load">
+        <!-- ================================================================= -->
+        <!-- PART 1: PAGE TOP CENTERED HEADER (Before Image)                   -->
+        <!-- Has initial soft reveal blur dissipation matching Homepage Hero  -->
+        <!-- ================================================================= -->
+        <div class="text-center max-w-4xl mx-auto space-y-4">
           <h1
             id="service-hero-heading"
-            class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] text-center"
+            class="hero-heading-reveal text-3xl sm:text-4xl lg:text-[2.85rem] font-extrabold tracking-tight leading-tight text-[#0B2553]"
           >
-            <span class="service-shimmer-center service-shimmer-line-1 block pb-1">Staffing</span>
-            <span class="service-shimmer-center service-shimmer-line-1 block pb-1">Solutions</span>
+            <span class="service-shimmer-center service-shimmer-line-1 inline-block pb-1">Agile Staffing Solutions</span>
           </h1>
-          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
+          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto hero-subheading-reveal"></div>
         </div>
 
-        <!-- 2. Balanced Proportions: Content 45% | Image 55% Ratio -->
-        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-12 xl:gap-16">
+        <!-- ================================================================= -->
+        <!-- PART 2: SHOWCASE FRAME (Image ~68%) + PRACTICE MENU (~32%)        -->
+        <!-- ================================================================= -->
+        <div class="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-8 xl:gap-10">
           
-          <!-- Content Column (45% Width) -->
-          <div class="w-full lg:w-[45%] space-y-6 text-left reveal-on-load" data-delay="100">
-            <h2 class="text-xl sm:text-2xl lg:text-[1.65rem] font-bold text-[#0B2553] leading-normal sm:leading-[1.5]">
-              Flexible, High-Performance Staffing Models Tailored to Program Needs
-            </h2>
-            <div class="w-16 h-1 rounded-full bg-gradient-to-r from-[#0C487A] to-[#FF3130]"></div>
-            
-            <!-- Paragraph with Logo-Colored Highlights: UC's in Red & 10+ Years in Blue (Line-Height: 2.05) -->
-            <p class="text-base sm:text-lg text-slate-600 leading-[2] sm:leading-[2.05] font-normal">
-              <strong class="font-extrabold text-[#FF3130]">UC’s</strong> elastic staffing solutions provide defense contractors, civilian agencies, and commercial enterprises with agile workforce delivery. We deliver vetted technical and operational professionals across contract, temp-to-hire, and permanent staffing engagements designed to scale with government task orders. With <strong class="font-bold text-[#0C487A]">10+ years of workforce surge experience,</strong> we eliminate talent bottlenecks and ensure seamless program continuity.
-            </p>
-          </div>
-
-          <!-- Image Column (55% Width: Unclipped Graphic Artwork with Corner Badge 100% Visible) -->
-          <div class="w-full lg:w-[55%] relative flex justify-center items-center reveal-on-load" data-delay="200">
-            <div class="relative w-full max-w-2xl group">
+          <!-- Image Column (~68% Width: Unclipped Graphic Artwork with Corner Badge 100% Visible) -->
+          <div class="w-full lg:w-[68%] relative flex justify-center items-center hero-image-reveal">
+            <div class="relative w-full group h-full flex flex-col justify-center">
               
               <!-- Soft Dynamic Ambient Glow Aura -->
               <div class="absolute -inset-4 bg-gradient-to-tr from-[#0C487A]/20 via-[#1E40AF]/15 to-[#FF3130]/15 rounded-3xl blur-2xl pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
@@ -192,16 +269,95 @@ const deliverables = [
             </div>
           </div>
 
+          <!-- Practice Areas Menu Column (~32% Width: Current Page Excluded, Active Blue Hover) -->
+          <div class="w-full lg:w-[32%] flex flex-col justify-center hero-menu-reveal">
+            <div class="rounded-3xl border border-slate-200/90 bg-white/95 backdrop-blur-md p-4 sm:p-5 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.08)] flex flex-col justify-center space-y-2.5 h-full">
+              
+              <div class="space-y-2 flex-1 flex flex-col justify-center py-2">
+                {otherFederalServices.map((service, idx) => (
+                  <a
+                    href={service.href}
+                    class="group relative flex items-center justify-between px-4 sm:px-5 py-3.5 sm:py-4 rounded-2xl text-slate-700 font-semibold text-sm transition-all duration-300 border border-slate-200/60 hover:border-[#0C487A]/30 hover:bg-gradient-to-r hover:from-[#0C487A] hover:via-[#103E6B] hover:to-[#1E40AF] hover:text-white hover:shadow-[0_10px_25px_-5px_rgba(12,72,122,0.45)] hover:scale-[1.02] cursor-pointer"
+                    style={`--stagger-delay: ${idx * 40}ms;`}
+                  >
+                    <div class="flex items-center gap-3 min-w-0 pr-2">
+                      <span class="w-2.5 h-2.5 rounded-full bg-slate-300 group-hover:bg-[#FF3130] group-hover:shadow-[0_0_8px_#FF3130] transition-all duration-300 shrink-0"></span>
+                      <span class="leading-snug transition-colors duration-300">{service.name}</span>
+                    </div>
+                    <svg class="w-4 h-4 text-slate-400 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- PART 3: HEADLINE + NARRATIVE (56%) + 4 SQUARES (44%) IN BELOW ROW -->
+        <!-- Headline placed directly before narrative!                        -->
+        <!-- ================================================================= -->
+        <div class="pt-8 sm:pt-10 border-t border-slate-100 flex flex-col lg:flex-row items-center gap-10 lg:gap-12 xl:gap-14">
+          
+          <!-- Narrative Column (~56% Width: Headline before narrative with exact highlights) -->
+          <div class="w-full lg:w-[56%] space-y-4 text-left reveal-on-scroll reveal-left">
+            
+            <h2 class="text-xl sm:text-2xl lg:text-[1.65rem] font-bold text-[#0B2553] leading-snug sm:leading-[1.42]">
+              Scalable cleared and commercial workforce solutions tailored to federal program execution
+            </h2>
+            <div class="w-16 h-1 rounded-full bg-gradient-to-r from-[#0C487A] to-[#FF3130] mb-3"></div>
+
+            <p class="text-base sm:text-lg text-slate-600 leading-[2] sm:leading-[2.05] font-normal pt-1">
+              Modern federal contracting demands workforce elasticity to handle task order surges, option year transitions, and unforeseen technical requirements. We deliver flexible contract, contract-to-hire, and direct placement staffing with <strong class="font-bold text-[#0C487A]">10+ years of federal staffing experience.</strong> Our rapid-response models ensure complete Service Contract Act (SCA) compliance, FAR rate alignment, and immediate day-one badging logistics, ensuring project continuity, minimal downtime, and a <strong class="font-bold text-[#FF3130]">higher mission delivery rate.</strong>
+            </p>
+
+          </div>
+
+          <!-- 4 Square Animated Cards Column (~44% Width: 2x2 Grid, Center Aligned, No Corner Badges) -->
+          <div class="w-full lg:w-[44%] reveal-on-scroll reveal-right delay-150">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 w-full max-w-lg mx-auto lg:mx-0">
+              {keySquareCards.map((card, idx) => (
+                <div
+                  class={`group relative p-6 rounded-3xl border ${card.borderColor} bg-gradient-to-br ${card.cardBg} shadow-[0_8px_24px_rgba(11,37,83,0.06)] ${card.hoverShadow} hover:-translate-y-2 transition-all duration-300 flex flex-col items-center justify-center text-center overflow-hidden cursor-default ${card.floatClass}`}
+                  style={`transition-delay: ${idx * 60}ms;`}
+                >
+                  <!-- Glowing Top Accent Line on Hover -->
+                  <div class={`absolute inset-x-0 top-0 h-1 rounded-t-3xl bg-gradient-to-r ${card.topBar} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                  
+                  <!-- Center Aligned Icon -->
+                  <div class={`w-12 h-12 rounded-2xl ${card.iconBg} flex items-center justify-center mx-auto mb-3 shadow-2xs group-hover:scale-110 transition-transform duration-300`}>
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d={card.icon} />
+                    </svg>
+                  </div>
+
+                  <!-- Center Aligned Title & Description -->
+                  <div class="space-y-1.5">
+                    <h3 class={`text-base sm:text-lg font-extrabold text-[#0B2553] ${card.hoverTitle} transition-colors leading-snug`}>
+                      {card.title}
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
+                      {card.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
 
       </div>
     </section>
 
     <!-- ===================================================================== -->
-    <!-- SECTION 2: MORE CONTENT (67%) + OTHER SERVICES (33%)                  -->
+    <!-- SECTION 2: "HOW WE DELIVER" (Interactive Opening Node Timeline)       -->
     <!-- Background: LIGHT BLUE BLUEPRINT CANVAS                               -->
     <!-- ===================================================================== -->
-    <section class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="deep-dive-heading">
+    <section id="how-we-deliver" class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="delivery-heading">
       
       <!-- 16px Technical Blueprint Checks Pattern Overlay -->
       <div
@@ -216,170 +372,74 @@ const deliverables = [
 
       <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          
-          <!-- Column 1 (Most Space: 8 of 12 cols ~ 67% space) -->
-          <div class="lg:col-span-8 space-y-6 reveal-on-load" data-delay="150">
-            
-            <div class="space-y-3">
-              <h2 id="deep-dive-heading" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#0B2553] leading-tight">
-                Mastering Workforce Agility Across Program Lifecycles
-              </h2>
-              <div class="w-20 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]"></div>
-            </div>
-
-            <!-- Distinct Executive Pull-Quote with Glass Aesthetic -->
-            <div class="p-6 sm:p-7 rounded-2xl bg-white/95 backdrop-blur-md border-l-4 border-l-[#FF3130] border border-slate-200/90 shadow-[0_8px_30px_rgba(15,39,74,0.06)]">
-              <p class="text-base sm:text-lg font-semibold text-[#0B2553] leading-[1.9] sm:leading-[2] italic">
-                “In federal contracting, workforce demands fluctuate rapidly with task order awards, surge modifications, and unexpected personnel vacancies.”
-              </p>
-            </div>
-
-            <!-- Narrative Paragraphs: From in Red, UNITY COMPASS in Logo Colors (Line-Height: 2.05) -->
-            <div class="space-y-6 text-base sm:text-lg text-slate-600 leading-[2] sm:leading-[2.05] font-normal">
-              <p>
-                <strong class="font-extrabold text-[#FF3130]">From</strong> immediate surge staffing to multi-year program delivery, <span class="font-extrabold tracking-tight"><span class="text-[#FF3130]">UNITY</span> <span class="text-[#0C487A]">COMPASS</span></span> ensures that your contract staffing demands are met with precision and speed. We supply pre-qualified talent across IT, engineering, logistics, administration, and executive management.
-              </p>
-              <p>
-                We manage candidate vetting, payroll compliance, labor rate audits, and security documentation, ensuring full adherence to Service Contract Act (SCA) and Davis-Bacon requirements, eliminating compliance risks across contract lifecycles.
-              </p>
-            </div>
-
-          </div>
-
-          <!-- Column 2 (Less Space: 4 of 12 cols ~ 33% space - Clean Practice Directory) -->
-          <div class="lg:col-span-4 lg:sticky lg:top-28 space-y-3 reveal-on-load" data-delay="250">
-            
-            <div class="rounded-3xl bg-white/95 backdrop-blur-md border border-slate-200/90 p-6 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.10)] space-y-4">
-              <div class="pb-3 border-b border-slate-200/80">
-                <h3 class="text-base sm:text-lg font-bold text-[#0B2553] tracking-tight">
-                  Other Practice Areas
-                </h3>
-              </div>
-
-              <div class="space-y-2.5">
-                {otherFederalServices.map((item, idx) => (
-                  <a
-                    href={item.href}
-                    class="other-service-card group relative flex items-center justify-between p-3.5 rounded-2xl border border-slate-200/80 bg-white hover:bg-slate-50 hover:border-[#0C487A]/40 text-slate-700 hover:text-[#FF3130] text-sm font-bold shadow-2xs hover:shadow-md transition-all duration-300 overflow-hidden"
-                    style={`--stagger-delay: ${idx * 50}ms;`}
-                  >
-                    <!-- Left Accent Line on Hover -->
-                    <div class="absolute left-0 inset-y-0 w-1 rounded-l-2xl bg-gradient-to-b from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    <div class="flex items-center gap-3 min-w-0 pr-2 relative z-10">
-                      <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-[#0C487A] group-hover:text-white flex items-center justify-center shrink-0 transition-colors duration-200 shadow-2xs">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
-                        </svg>
-                      </span>
-                      <span class="whitespace-normal leading-snug text-xs sm:text-sm">{item.name}</span>
-                    </div>
-
-                    <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1.5 group-hover:text-[#FF3130] transition-all duration-200 shrink-0 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ===================================================================== -->
-    <!-- SECTION 3: "HOW WE DELIVER" (Contragenix-Inspired Process Carousel)    -->
-    <!-- Background: PURE WHITE CANVAS                                         -->
-    <!-- ===================================================================== -->
-    <section id="how-we-deliver" class="py-16 sm:py-24 bg-white border-b border-slate-200/80 relative z-10 scroll-mt-28" aria-labelledby="delivery-heading">
-      
-      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <!-- Header: Heading, Accent Line & Subtitle in Center as usual -->
-        <div class="text-center max-w-3xl mx-auto space-y-3 mb-10 reveal-on-load">
+        <!-- Header: Heading, Accent Line & Subtitle with Scroll Reveal -->
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-16 sm:mb-20 reveal-on-scroll">
           <h2 id="delivery-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-normal">
             <span class="service-shimmer-center service-shimmer-line-1 block pb-1.5 pt-0.5">How We Deliver</span>
           </h2>
           <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
           <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
-            An elastic, SLA-driven staffing model designed to deploy vetted contract professionals rapidly without administrative friction.
+            A responsive, SCA-compliant workforce mobilization lifecycle designed to satisfy immediate task order staffing requirements.
           </p>
         </div>
 
-        <!-- Carousel Navigation Controls Bar (Right aligned above cards) -->
-        <div class="flex items-center justify-end gap-3 mb-6 reveal-on-load">
-          <button
-            id="delivery-carousel-prev"
-            class="w-11 h-11 rounded-full border border-slate-200/90 bg-white hover:bg-slate-50 text-slate-700 hover:text-[#0C487A] shadow-xs hover:shadow-md flex items-center justify-center transition-all duration-200 cursor-pointer group active:scale-95"
-            aria-label="Previous Delivery Stage"
-          >
-            <svg class="w-5 h-5 transform group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <button
-            id="delivery-carousel-next"
-            class="w-11 h-11 rounded-full border border-slate-200/90 bg-white hover:bg-slate-50 text-slate-700 hover:text-[#FF3130] shadow-xs hover:shadow-md flex items-center justify-center transition-all duration-200 cursor-pointer group active:scale-95"
-            aria-label="Next Delivery Stage"
-          >
-            <svg class="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-
-        <!-- Automatic Infinite Looping Carousel Viewport & Sliding Track -->
-        <div class="relative overflow-hidden reveal-on-load" data-delay="120" id="delivery-carousel-viewport">
+        <!-- Animated Top-to-Bottom Vertical Timeline with Aperture Opening Nodes -->
+        <div class="relative max-w-5xl mx-auto">
           
-          <div
-            id="delivery-carousel-track"
-            class="flex gap-6 py-3 px-1 will-change-transform"
-          >
-            {/* 3 continuous sets (15 cards) for infinite seamless looping */}
-            {[...deliverySteps, ...deliverySteps, ...deliverySteps].map((step, idx) => (
-              <div
-                class="carousel-stage-card group relative rounded-3xl p-8 bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_20px_45px_-10px_rgba(12,72,122,0.18)] flex flex-col justify-between shrink-0 transition-shadow duration-300 w-[290px] sm:w-[340px] md:w-[370px] min-h-[280px] cursor-pointer"
-                data-card-idx={idx}
-              >
-                <!-- Glowing Top Accent Line on Hover -->
-                <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <!-- Central Spine Line Track -->
+          <div class="absolute left-6 md:left-1/2 top-4 bottom-4 w-1 -translate-x-1/2 bg-blue-200/60 rounded-full pointer-events-none" aria-hidden="true">
+            <div class="w-full h-full bg-gradient-to-b from-[#0C487A] via-[#1E40AF] to-[#FF3130] rounded-full shadow-[0_0_10px_rgba(30,64,175,0.35)]"></div>
+          </div>
 
-                <div>
-                  <!-- Glowing Circular Icon Badge with Soft Colored Radial Glow -->
-                  <div class="relative w-16 h-16 flex items-center justify-center mb-6">
-                    <div class={`absolute inset-0 rounded-full blur-xl opacity-35 group-hover:opacity-60 transition-opacity bg-gradient-to-br ${step.glowColor}`}></div>
-                    
-                    <div class={`relative w-14 h-14 rounded-full ${step.bgTint} ${step.iconColor} border border-slate-200/70 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform duration-300`}>
-                      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon} />
-                      </svg>
+          <!-- Timeline Milestone Rows -->
+          <div class="space-y-12 sm:space-y-16">
+            {deliverySteps.map((step, idx) => {
+              const isEven = idx % 2 === 1;
+              return (
+                <div
+                  class="timeline-step-row relative flex flex-col md:flex-row items-center"
+                  data-step-index={idx}
+                >
+                  
+                  <!-- Content Side -->
+                  <div class={`w-full md:w-1/2 pl-14 md:pl-0 ${isEven ? 'md:order-2 md:pl-12' : 'md:order-1 md:pr-12 md:text-right'}`}>
+                    <div class={`timeline-card-box group relative rounded-3xl p-6 sm:p-7 bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-default reveal-on-scroll ${isEven ? 'reveal-right' : 'reveal-left'}`}>
+                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                      <div class={`flex items-center gap-3 mb-3.5 ${isEven ? '' : 'md:justify-end'}`}>
+                        <span class={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold ${step.bgTint} ${step.iconColor} border border-slate-200/70 shadow-2xs`}>
+                          <span class="w-1.5 h-1.5 rounded-full bg-current animate-pulse"></span>
+                          {step.badgeText}
+                        </span>
+                      </div>
+
+                      <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors duration-200 tracking-tight leading-snug mb-2.5">
+                        {step.num}. {step.title}
+                      </h3>
+
+                      <p class="text-sm text-slate-600 leading-relaxed font-normal">
+                        {step.desc}
+                      </p>
                     </div>
                   </div>
 
-                  <!-- Numbered Title (E.g. "1. Program Needs Assessment") -->
-                  <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors duration-200 tracking-tight leading-snug mb-3">
-                    {step.title}
-                  </h3>
+                  <!-- Central Milestone Node -->
+                  <div class="absolute left-6 md:left-1/2 top-6 md:top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                    <div class="timeline-node-core relative flex items-center justify-center cursor-pointer">
+                      <div class="sonar-ring absolute -inset-2 rounded-full border-2 border-[#0C487A]/30 pointer-events-none"></div>
+                      <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-[#0C487A]/15 to-[#FF3130]/15 blur-xs"></div>
 
-                  <!-- Description -->
-                  <p class="text-sm text-slate-600 leading-relaxed font-normal">
-                    {step.desc}
-                  </p>
+                      <div class="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white border-4 border-[#0C487A] text-[#0C487A] font-black text-sm sm:text-base flex items-center justify-center shadow-[0_8px_20px_rgba(12,72,122,0.25)] hover:border-[#FF3130] hover:text-[#FF3130] hover:scale-110 transition-all duration-300">
+                        <span>{step.step}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class={`hidden md:block md:w-1/2 ${isEven ? 'md:order-1' : 'md:order-2'}`}></div>
+
                 </div>
-
-                <!-- Subtle Bottom Dot Indicator -->
-                <div class="pt-5 mt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span class="text-xs font-bold text-[#0C487A] group-hover:text-[#FF3130] transition-colors">Phase {step.step} of 5</span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-slate-300 group-hover:bg-[#FF3130] group-hover:scale-125 transition-all duration-200"></span>
-                </div>
-
-              </div>
-            ))}
+              );
+            })}
           </div>
 
         </div>
@@ -388,52 +448,39 @@ const deliverables = [
     </section>
 
     <!-- ===================================================================== -->
-    <!-- SECTION 4: "WHAT YOU GET?" (Shuttle Bottom-to-Top Color Fill Hover)   -->
-    <!-- Background: LIGHT BLUE BLUEPRINT CANVAS                               -->
+    <!-- SECTION 3: "WHAT YOU GET?" (Shuttle Bottom-to-Top Color Fill Hover)   -->
+    <!-- Background: PURE WHITE CANVAS                                         -->
     <!-- ===================================================================== -->
-    <section class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="what-you-get-heading">
+    <section class="py-16 sm:py-24 bg-white border-b border-slate-200/80 relative z-10 scroll-mt-28" aria-labelledby="what-you-get-heading">
       
-      <!-- Minute 16px Technical Checks Overlay -->
-      <div
-        class="absolute inset-0 pointer-events-none opacity-25 mix-blend-multiply"
-        style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.06) 1px, transparent 1px);"
-        aria-hidden="true"
-      ></div>
-
       <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <!-- Section Header with Shimmer & On-Load Reveal (Unclipped Descender on 'g') -->
-        <div class="text-center max-w-3xl mx-auto space-y-3 mb-14 sm:mb-16 reveal-on-load">
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-14 sm:mb-16 reveal-on-scroll">
           <h2 id="what-you-get-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-normal">
             <span class="service-shimmer-center service-shimmer-line-1 block pb-2 pt-0.5">What you get?</span>
           </h2>
           <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-3 mb-4"></div>
           <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Turnkey workforce agility, SCA-compliant payroll structures, and seamless task order scaling for prime contractors.
+            Zero-delay personnel placement, certified wage compliance, and scalable staffing models configured for government contracts.
           </p>
         </div>
 
-        <!-- 4 Deliverable Cards: Shuttle Bottom-to-Top Color Fill Animation (From Screenshots 3 & 4) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal-on-load" data-delay="100">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {deliverables.map((item, idx) => (
             <div
-              class="shuttle-card group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.28)] transition-all duration-400 flex flex-col justify-between min-h-[300px] p-7 sm:p-8 overflow-hidden cursor-pointer"
+              class="shuttle-card group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.28)] transition-all duration-400 flex flex-col justify-between min-h-[300px] p-7 sm:p-8 overflow-hidden cursor-pointer reveal-on-scroll"
+              style={`transition-delay: ${idx * 80}ms;`}
               data-card-index={idx}
             >
-              <!-- Shuttle Bottom-to-Top Color Fill with Organic Curved Top Crest (Screenshots 3 & 4 Inspiration) -->
               <div
                 class="shuttle-fill-layer absolute inset-0 bg-gradient-to-t from-[#0C487A] via-[#103E6B] to-[#1E40AF] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none rounded-3xl overflow-hidden"
                 aria-hidden="true"
               >
-                <!-- Organic Curved Soft Light Wave at the Leading Edge -->
                 <div class="absolute -top-5 left-0 right-0 h-10 bg-white/20 rounded-[100%] blur-sm pointer-events-none"></div>
                 <div class="absolute top-0 inset-x-0 h-1 bg-[#FF3130]/80"></div>
               </div>
 
-              <!-- Top Content (Text & Icons transition smoothly to crisp white on hover) -->
               <div class="relative z-10">
-                
-                <!-- Icon Badge with Soft Brand Tint & Glow -->
                 <div class="relative w-14 h-14 flex items-center justify-center mb-6">
                   <div class="absolute inset-0 rounded-2xl bg-[#0C487A]/15 blur-lg opacity-40 group-hover:opacity-0 transition-opacity"></div>
                   
@@ -444,18 +491,15 @@ const deliverables = [
                   </div>
                 </div>
 
-                <!-- Title -->
                 <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-white transition-colors duration-400 tracking-tight leading-snug mb-3">
                   {item.title}
                 </h3>
 
-                <!-- Primary Description -->
                 <p class="text-sm text-slate-600 group-hover:text-white/95 transition-colors duration-400 leading-relaxed font-normal">
                   {item.desc}
                 </p>
               </div>
 
-              <!-- Bottom Indicator -->
               <div class="pt-5 mt-4 border-t border-slate-100 group-hover:border-white/20 flex items-center justify-between relative z-10 transition-colors">
                 <span class="text-xs font-bold text-[#0C487A] group-hover:text-white transition-colors">
                   Key Deliverable
@@ -471,36 +515,37 @@ const deliverables = [
     </section>
 
     <!-- ===================================================================== -->
-    <!-- SECTION 5: "WHY UC?" (3 Visible Cards with Smooth Bring-to-Front)     -->
-    <!-- Background: PURE WHITE CANVAS                                         -->
+    <!-- SECTION 4: "WHY UC?" (3 Symmetrical Cards with Bring-to-Front)        -->
+    <!-- Background: LIGHT BLUE BLUEPRINT CANVAS                               -->
     <!-- ===================================================================== -->
-    <section class="py-16 sm:py-24 bg-white relative z-10 scroll-mt-28" aria-labelledby="why-uc-heading">
+    <section class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] relative z-10 overflow-hidden scroll-mt-28 border-b border-slate-200/80" aria-labelledby="why-uc-heading">
       
+      <div
+        class="absolute inset-0 pointer-events-none opacity-25 mix-blend-multiply"
+        style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.06) 1px, transparent 1px);"
+        aria-hidden="true"
+      ></div>
+
+      <div class="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(40,121,182,0.12)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
       <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <!-- Section Header with Shimmer & On-Load Reveal -->
-        <div class="text-center max-w-3xl mx-auto space-y-3 mb-10 reveal-on-load">
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-10 reveal-on-scroll">
           <h2 id="why-uc-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
             <span class="service-shimmer-center service-shimmer-line-1 block">Why UC?</span>
           </h2>
           <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-3 mb-4"></div>
         </div>
 
-        <!-- Value Proposition Quote Card with Glassmorphic Highlight -->
-        <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-slate-50/80 border border-slate-200/90 shadow-sm text-center mb-14 reveal-on-load">
+        <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-slate-50/80 border border-slate-200/90 shadow-sm text-center mb-14 reveal-on-scroll delay-100">
           <p class="text-base sm:text-lg lg:text-xl font-bold text-[#0B2553] leading-relaxed">
-            At Unity Compass, we provide unmatched staffing solutions through: rapid surge deployment, flexible engagement models, and strict labor compliance without compromise
+            At Unity Compass, we deliver agile staffing solutions through: deep government contracting knowledge, rapid talent mobilization, and an unwavering commitment to compliance quality
           </p>
         </div>
 
-        <!-- Symmetrical 3-Card Stage: ALL 3 Cards are ALWAYS Visible Side-by-Side, Hovering Brings to Front -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch reveal-on-load" id="why-uc-cards-grid">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch" id="why-uc-cards-grid">
           
-          <!-- Card 1 (Left Card) -->
-          <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30"
-          >
-            <!-- Top Line on Card Hover -->
+          <div class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30 reveal-on-scroll delay-100">
             <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
 
             <div>
@@ -509,9 +554,9 @@ const deliverables = [
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">Rapid Surge Readiness</h3>
+              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">GovCon Staffing Expertise</h3>
               <p class="text-sm text-slate-600 mt-3 leading-relaxed">
-                Turnkey workforce mobilization capable of deploying specialized technical and operational teams within days of contract award.
+                Proven mastery across FAR wage regulations, SCA classifications, and prime contractor teaming arrangements.
               </p>
             </div>
 
@@ -521,11 +566,7 @@ const deliverables = [
             </div>
           </div>
 
-          <!-- Card 2 (Center Card: Featured Elevation in Resting State) -->
-          <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_16px_36px_-8px_rgba(11,37,83,0.16)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(255,49,48,0.24)] hover:border-[#FF3130]/50 hover:z-30 md:-translate-y-1"
-          >
-            <!-- Top Line on Card Hover -->
+          <div class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_16px_36px_-8px_rgba(11,37,83,0.16)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(255,49,48,0.24)] hover:border-[#FF3130]/50 hover:z-30 md:-translate-y-1 reveal-on-scroll delay-200">
             <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#FF3130] to-[#DC2626]"></div>
 
             <div>
@@ -534,9 +575,9 @@ const deliverables = [
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#FF3130] transition-colors">Risk-Free Evaluation</h3>
+              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#FF3130] transition-colors">Immediate Surge Readiness</h3>
               <p class="text-sm text-slate-600 mt-3 leading-relaxed">
-                Temp-to-hire frameworks allowing government contractors to evaluate performance and mission fit before permanent conversion.
+                Scalable talent pipelines deployed within days to prevent project delays during urgent contract milestones.
               </p>
             </div>
 
@@ -546,11 +587,7 @@ const deliverables = [
             </div>
           </div>
 
-          <!-- Card 3 (Right Card) -->
-          <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30"
-          >
-            <!-- Top Line on Card Hover -->
+          <div class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30 reveal-on-scroll delay-300">
             <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
 
             <div>
@@ -559,9 +596,9 @@ const deliverables = [
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">Quality Without Compromise</h3>
+              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">Audit-Defensible Quality</h3>
               <p class="text-sm text-slate-600 mt-3 leading-relaxed">
-                Full compliance with federal labor categories, SCA prevailing wage regulations, and audit-ready operational standards.
+                Full documentation governance verifying insurance, certifications, and compliance standards before placement.
               </p>
             </div>
 
@@ -576,161 +613,128 @@ const deliverables = [
       </div>
     </section>
 
+    <!-- ===================================================================== -->
+    <!-- SECTION 5: "READY TO WIN YOUR NEXT GOVERNMENT CONTRACT?" (CTA BANNER) -->
+    <!-- Background: PURE WHITE CANVAS                                         -->
+    <!-- ===================================================================== -->
+    <section class="py-16 sm:py-24 bg-white relative z-10 overflow-hidden" aria-labelledby="cta-heading">
+      
+      <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 w-[420px] h-[420px] pointer-events-none opacity-[0.06] text-[#0C487A]" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="currentColor">
+          <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="2" />
+          <polygon points="100,10 115,85 190,100 115,115 100,190 85,115 10,100 85,85" />
+        </svg>
+      </div>
+
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6 reveal-on-scroll">
+        
+        <h2 id="cta-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0B2553] leading-tight">
+          <span class="service-shimmer-center service-shimmer-line-1 block">Ready to Win Your Next Government Contract?</span>
+        </h2>
+        <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto"></div>
+
+        <p class="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto pt-2">
+          If you're ready to see how we can make a difference for your organization, Contact Us today. Let's discuss how we can support your next big project.
+        </p>
+
+        <div class="pt-4 flex justify-center">
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 rounded-2xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
+          >
+            <span>Book a Strategic Call</span>
+            <svg class="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
   </div>
 </MainLayout>
 
-<!-- Client Script: Automatic Infinite Carousel Engine & On-Load Reveals -->
+<!-- Client Script: Timeline Opening Nodes Observer -->
 <script is:inline>
-  function initStaffingPage() {
-    // 1. On-Load Staggered Reveals
-    const revealElements = document.querySelectorAll('.reveal-on-load');
-    revealElements.forEach((el) => {
-      const delay = el.getAttribute('data-delay') || '0';
-      setTimeout(() => {
-        el.classList.add('is-revealed');
-      }, parseInt(delay, 10));
-    });
+  function initStaffingTimelineAnimations() {
+    const timelineRows = document.querySelectorAll('.timeline-step-row');
+    if (!timelineRows.length) return;
 
-    // 2. Section 3: "How We Deliver" Infinite Seamless Carousel Engine (Contragenix Inspiration)
-    const track = document.getElementById('delivery-carousel-track');
-    const viewport = document.getElementById('delivery-carousel-viewport');
-    const prevBtn = document.getElementById('delivery-carousel-prev');
-    const nextBtn = document.getElementById('delivery-carousel-next');
-
-    if (track && viewport) {
-      const stepCount = 5; // 5 unique stages in deliverySteps
-      let currentIndex = stepCount; // Start at middle set (index 5 = Stage 1)
-      let isAnimating = false;
-      let autoplayTimer = null;
-
-      function getStepOffset() {
-        const card = track.querySelector('.carousel-stage-card');
-        if (!card) return 394;
-        const cardWidth = card.getBoundingClientRect().width;
-        const gap = 24; // 24px gap-6
-        return cardWidth + gap;
-      }
-
-      function setPosition(index, withTransition = true) {
-        const stepOffset = getStepOffset();
-        if (withTransition) {
-          track.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-        } else {
-          track.style.transition = 'none';
-        }
-        track.style.transform = `translateX(-${index * stepOffset}px)`;
-        currentIndex = index;
-      }
-
-      function nextSlide() {
-        if (isAnimating) return;
-        isAnimating = true;
-        setPosition(currentIndex + 1, true);
-      }
-
-      function prevSlide() {
-        if (isAnimating) return;
-        isAnimating = true;
-        setPosition(currentIndex - 1, true);
-      }
-
-      track.addEventListener('transitionend', () => {
-        isAnimating = false;
-        // Seamless wraparound: If moved into 3rd set (>= 10), instantly snap back to 2nd set (- 5)
-        if (currentIndex >= stepCount * 2) {
-          setPosition(currentIndex - stepCount, false);
-        }
-        // If moved into 1st set (< 5), instantly snap forward to 2nd set (+ 5)
-        else if (currentIndex < stepCount) {
-          setPosition(currentIndex + stepCount, false);
-        }
+    if (!('IntersectionObserver' in window)) {
+      timelineRows.forEach((row) => {
+        row.classList.add('is-node-active');
+        const node = row.querySelector('.timeline-node-core');
+        if (node) node.classList.add('node-opened');
       });
-
-      function startAutoplay() {
-        stopAutoplay();
-        autoplayTimer = setInterval(nextSlide, 3500);
-      }
-
-      function stopAutoplay() {
-        if (autoplayTimer) {
-          clearInterval(autoplayTimer);
-          autoplayTimer = null;
-        }
-      }
-
-      if (nextBtn) nextBtn.addEventListener('click', () => {
-        nextSlide();
-        startAutoplay();
-      });
-
-      if (prevBtn) prevBtn.addEventListener('click', () => {
-        prevSlide();
-        startAutoplay();
-      });
-
-      viewport.addEventListener('mouseenter', stopAutoplay);
-      viewport.addEventListener('mouseleave', startAutoplay);
-      viewport.addEventListener('touchstart', stopAutoplay, { passive: true });
-      viewport.addEventListener('touchend', startAutoplay, { passive: true });
-
-      window.addEventListener('resize', () => {
-        setPosition(currentIndex, false);
-      });
-
-      // Position at Stage 1 of the middle set immediately
-      setPosition(stepCount, false);
-      startAutoplay();
+      return;
     }
+
+    const nodeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-node-active');
+            const node = entry.target.querySelector('.timeline-node-core');
+            if (node) node.classList.add('node-opened');
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    timelineRows.forEach((row) => nodeObserver.observe(row));
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initStaffingPage);
+    document.addEventListener('DOMContentLoaded', initStaffingTimelineAnimations);
   } else {
-    initStaffingPage();
+    initStaffingTimelineAnimations();
   }
-  document.addEventListener('astro:page-load', initStaffingPage);
+  document.addEventListener('astro:page-load', initStaffingTimelineAnimations);
 </script>
 
 <style>
-  /* ========================================================================= */
-  /* On-Load Dynamic Reveal Animation (Matches Homepage Motion)                */
-  /* ========================================================================= */
-  .reveal-on-load {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
+  /* Initial Page Load Soft-Reveal */
+  @keyframes heroSoftReveal {
+    0% { opacity: 0; transform: translateY(16px); filter: blur(8px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
+  .hero-heading-reveal { animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; will-change: opacity, transform, filter; }
+  .hero-subheading-reveal { animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; will-change: opacity, transform, filter; }
+  .hero-image-reveal { animation: heroSoftReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; will-change: opacity, transform, filter; }
+  .hero-menu-reveal { animation: heroSoftReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; will-change: opacity, transform, filter; }
 
-  .reveal-on-load.is-revealed {
-    opacity: 1;
-    transform: translateY(0);
+  /* Timeline Aperture Opening & Radiant Pulse */
+  @keyframes nodeApertureOpen {
+    0% { transform: scale(0.2) rotate(-35deg); opacity: 0; filter: blur(8px); }
+    60% { transform: scale(1.18) rotate(5deg); opacity: 1; filter: blur(0); }
+    85% { transform: scale(0.96) rotate(-2deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0); }
   }
-
-  /* ========================================================================= */
-  /* Section 4: Shuttle Bottom-to-Top Color Fill Animation                      */
-  /* ========================================================================= */
-  .shuttle-card {
-    will-change: transform, box-shadow;
+  @keyframes nodeSonarRing {
+    0% { transform: scale(0.75); opacity: 0.85; }
+    50% { transform: scale(1.7); opacity: 0.3; }
+    100% { transform: scale(2.4); opacity: 0; }
   }
+  .timeline-node-core { opacity: 0; transform: scale(0.25) rotate(-35deg); transition: opacity 0.3s ease; will-change: transform, opacity; }
+  .timeline-node-core.node-opened { animation: nodeApertureOpen 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+  .timeline-node-core.node-opened .sonar-ring { animation: nodeSonarRing 2.5s ease-out infinite 0.45s; }
 
-  .shuttle-fill-layer {
-    will-change: transform;
-  }
+  /* Floating Squares */
+  @keyframes floatSubtle1 { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
+  @keyframes floatSubtle2 { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(5px); } }
+  .animate-float-subtle-1 { animation: floatSubtle1 5s ease-in-out infinite; }
+  .animate-float-subtle-2 { animation: floatSubtle2 6s ease-in-out infinite 0.6s; }
+  .animate-float-subtle-1:hover, .animate-float-subtle-2:hover { animation-play-state: paused; }
 
-  /* ========================================================================= */
-  /* Center-Aligned Continuous Radiant Color Shimmer Sweep (From Homepage)     */
-  /* ========================================================================= */
+  /* Shuttle Card Animation */
+  .shuttle-card { will-change: transform, box-shadow; }
+  .shuttle-fill-layer { will-change: transform; }
+
+  /* Continuous Shimmer */
   .service-shimmer-center {
-    background: linear-gradient(
-      90deg,
-      #0F274A 0%,
-      #1E40AF 22%,
-      #2563EB 42%,
-      #DC2626 58%,
-      #EF4444 72%,
-      #0F274A 100%
-    );
+    background: linear-gradient(90deg, #0F274A 0%, #1E40AF 22%, #2563EB 42%, #DC2626 58%, #EF4444 72%, #0F274A 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -746,11 +750,7 @@ const deliverables = [
     padding-top: 0.05em;
     overflow: visible;
   }
-
-  .service-shimmer-line-1 {
-    animation: servicePageShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
-
+  .service-shimmer-line-1 { animation: servicePageShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
   @keyframes servicePageShimmer1 {
     0% { background-position: 0% 50%; }
     48% { background-position: 100% 50%; }
@@ -758,28 +758,11 @@ const deliverables = [
     100% { background-position: 200% 50%; }
   }
 
-  /* Accessibility: Reduced Motion */
   @media (prefers-reduced-motion: reduce) {
-    .service-shimmer-center {
-      animation: none !important;
-      background: none !important;
-      -webkit-text-fill-color: #0F274A !important;
-      color: #0F274A !important;
-    }
-    .reveal-on-load {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
-    }
-    .shuttle-card,
-    .why-card,
-    .carousel-stage-card {
-      transition: none !important;
-      transform: none !important;
-    }
-    .shuttle-fill-layer {
-      transition: none !important;
-      display: none !important;
-    }
+    .service-shimmer-center { animation: none !important; background: none !important; -webkit-text-fill-color: #0F274A !important; color: #0F274A !important; }
+    .hero-heading-reveal, .hero-subheading-reveal, .hero-image-reveal, .hero-menu-reveal { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+    .timeline-node-core { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .shuttle-card, .why-card { transition: none !important; transform: none !important; }
+    .shuttle-fill-layer { transition: none !important; display: none !important; }
   }
 </style>
