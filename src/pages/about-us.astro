@@ -1,51 +1,87 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import { companyInfo } from '../data/company';
+import { companyInfo, verifiedMetrics } from '../data/company';
 
 const canonicalUrl = 'https://unitycompass.com/about-us';
 const meetingUrl = 'https://meetings.hubspot.com/unity-compass/gov-con-expert';
 
-const expertise = [
+const differentiators = [
   {
     number: '01',
-    title: 'Technical',
-    description: 'System analysis, implementation support, and program delivery.',
-    detail: 'Practical expertise for IT programs and mission-critical delivery environments.',
-    icon: 'M14.7 6.3a1 1 0 00-1.4-1.4l-1.6 1.6-2.2-2.2 1.6-1.6a1 1 0 00-1.4-1.4 6 6 0 00-7.4 7.4l8.3 8.3a2 2 0 002.8 0l3.6-3.6a2 2 0 000-2.8L8.7 2.3a6 6 0 007.4 7.4zM5.5 8.5l-3 3',
+    title: 'GovCon Experience',
+    description: 'More than a decade of Government Business Development Capture experience informs every pursuit and delivery decision.',
+    icon: 'M12 3l7 3v5c0 4.8-2.9 8-7 10-4.1-2-7-5.2-7-10V6l7-3zm-3 9 2 2 4-4',
   },
   {
     number: '02',
-    title: 'Advisory',
-    description: 'Proposal strategy, operating models, and federal growth support.',
-    detail: 'Structured guidance that turns complex requirements into clear next steps.',
-    icon: 'M9 6V4a3 3 0 016 0v2m4 0H5a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2zM3 11h18M9 11v2h6v-2',
+    title: 'Solutions Built Around You',
+    description: 'We align strategy, talent, and technical support to each client’s goals instead of forcing a generic delivery model.',
+    icon: 'M12 2a10 10 0 100 20 10 10 0 000-20zm0 6v4l3 2',
   },
   {
     number: '03',
-    title: 'Workforce',
-    description: 'Cleared recruitment and flexible staffing for critical roles.',
-    detail: 'Talent solutions aligned to program demands, team culture, and delivery timelines.',
-    icon: 'M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2m7-10a4 4 0 100-8 4 4 0 000 8zm13 10v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75',
+    title: 'Reliable, Measurable Delivery',
+    description: 'Clear ownership, rigorous compliance, and disciplined review keep deliverables credible, timely, and ready for scrutiny.',
+    icon: 'M4 12l5 5L20 6',
   },
 ] as const;
 
-const operatingModel = [
+const proposalOutcomes = [
+  {
+    title: 'Tailored content',
+    description: 'Persuasive responses aligned to the RFP, your value proposition, and evaluator priorities.',
+  },
+  {
+    title: 'Compliance',
+    description: 'Documentation and formatting checked against agency instructions and evaluation standards.',
+  },
+  {
+    title: 'Collaboration',
+    description: 'Structured coordination with subject-matter experts and stakeholders for accuracy and cohesion.',
+  },
+  {
+    title: 'Higher win potential',
+    description: 'Meticulous planning and review designed to reduce rework and strengthen proposal quality.',
+  },
+] as const;
+
+const deliverySteps = [
   {
     number: '01',
-    title: 'Listen first',
-    description: 'We start with your operating environment, immediate priorities, and definition of success.',
+    title: 'Opportunity Search',
+    description: 'Discover and pursue opportunities that align with your capabilities, goals, and growth strategy.',
   },
   {
     number: '02',
-    title: 'Define the work',
-    description: 'We align scope, ownership, and measurable outcomes before execution begins.',
+    title: 'Go/No-Go Analysis',
+    description: 'Evaluate fit, competitiveness, resources, and risk so your team can make an informed pursuit decision.',
   },
   {
     number: '03',
-    title: 'Deliver it well',
-    description: 'We keep communication direct, ownership clear, and delivery focused on results.',
+    title: 'Proposal Development',
+    description: 'Build the executive summary, technical approach, management plan, and pricing narrative around one clear strategy.',
+  },
+  {
+    number: '04',
+    title: 'Response and Review',
+    description: 'Validate compliance, strengthen the story, and review every volume against the highest evaluation standards.',
+  },
+  {
+    number: '05',
+    title: 'Submission',
+    description: 'Package and deliver a complete, credible response on time and in the required format.',
   },
 ] as const;
+
+const companyValues = [
+  'Client First',
+  'Integrity & Transparency',
+  'Innovation',
+  'Quality Excellence',
+  'Long-Term Partnerships',
+] as const;
+
+const performanceMetrics = verifiedMetrics.slice(0, 5);
 
 const aboutPageSchema = {
   '@context': 'https://schema.org',
@@ -86,31 +122,6 @@ const aboutPageSchema = {
           We help contractors compete, hire, and deliver in regulated environments.
         </p>
 
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a
-            href={meetingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl bg-[#FF3130] px-6 py-3 text-sm font-bold text-white shadow-[0_10px_28px_-10px_rgba(255,49,48,0.7)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#E02827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0C487A]"
-          >
-            Start a conversation
-            <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M5 12h14m-6-6 6 6-6 6" />
-            </svg>
-          </a>
-          <a
-            href={companyInfo.capabilityPdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl border border-[#0C487A]/20 bg-white/75 px-6 py-3 text-sm font-bold text-[#0C487A] shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#0C487A]/40 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0C487A]"
-          >
-            Capability statement
-            <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" />
-            </svg>
-          </a>
-        </div>
-
         <dl class="mt-10 grid max-w-xl grid-cols-2 gap-x-6 gap-y-4 border-t border-[#0C487A]/15 pt-6 sm:grid-cols-3">
           <div>
             <dt class="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Focus</dt>
@@ -144,91 +155,161 @@ const aboutPageSchema = {
     </div>
   </header>
 
-  <section class="bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="useful-heading">
-    <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:px-8">
+  <section class="bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="company-heading">
+    <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16 lg:px-8">
       <div class="about-reveal">
         <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Who we are</p>
-        <h2 id="useful-heading" class="mt-3 max-w-md text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#0F274A] sm:text-4xl">
-          What makes us useful
+        <h2 id="company-heading" class="mt-3 max-w-2xl text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#0F274A] sm:text-4xl">
+          Strategy, talent, and delivery under one roof
         </h2>
         <div class="mt-5 h-1.5 w-20 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]" aria-hidden="true"></div>
+
+        <div class="mt-8 max-w-3xl space-y-5 text-base leading-8 text-slate-600 sm:text-lg">
+          <p>
+            Unity Compass specializes in IT and business consulting, staffing, recruitment, proposal development, and digital solutions for commercial and federal clients. We combine deep government contracting expertise with a client-first approach to deliver measurable results and lasting partnerships.
+          </p>
+          <p>
+            We work with primes, subcontractors, and growth-stage firms that need to strengthen their federal footprint, secure critical talent, and perform with confidence in regulated environments.
+          </p>
+          <p>
+            Proposal development is one of our core strengths. With more than 10 years of Government Business Development Capture experience, our team can manage the RFP lifecycle from opportunity and pricing strategy through compliant submission.
+          </p>
+        </div>
       </div>
 
-      <div class="about-reveal about-delay-1 max-w-3xl space-y-6 text-lg leading-8 text-slate-600 sm:text-xl sm:leading-9">
-        <p>
-          Unity Compass works with primes, subcontractors, and growth-stage firms across proposal development, OASIS+ readiness, staffing, recruitment, and IT programs.
-        </p>
-        <p>
-          Our specialists work as one team, so strategy, delivery, and hiring decisions stay aligned.
-        </p>
-        <aside class="mt-8 border-l-2 border-[#FF3130] pl-5 text-base leading-7 text-slate-500 sm:pl-6">
-          One partner connecting the decisions that shape a pursuit with the people and systems that deliver it.
-        </aside>
-      </div>
+      <aside class="about-reveal about-delay-1 rounded-3xl border border-slate-200 bg-[#F4F8FC] p-6 shadow-[0_20px_50px_-28px_rgba(15,39,74,0.35)] sm:p-8" aria-labelledby="proposal-outcomes-heading">
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#0C487A]">Proposal advantage</p>
+        <h3 id="proposal-outcomes-heading" class="mt-3 text-2xl font-extrabold tracking-tight text-[#0F274A]">
+          Credible responses, built to withstand scrutiny
+        </h3>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-1" role="list">
+          {proposalOutcomes.map((outcome) => (
+            <li class="rounded-xl border border-white bg-white/90 p-4 shadow-sm">
+              <div class="flex gap-3">
+                <span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FF3130] text-white" aria-hidden="true">
+                  <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12l4 4L19 6" /></svg>
+                </span>
+                <div>
+                  <h4 class="font-bold text-[#0F274A]">{outcome.title}</h4>
+                  <p class="mt-1 text-sm leading-6 text-slate-600">{outcome.description}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </aside>
     </div>
   </section>
 
-  <section class="relative overflow-hidden border-y border-slate-200/80 bg-[#F4F8FC] py-20 sm:py-24 lg:py-28" aria-labelledby="expertise-heading">
+  <section class="relative overflow-hidden border-y border-slate-200/80 bg-[#F4F8FC] py-20 sm:py-24 lg:py-28" aria-labelledby="why-heading">
     <div class="absolute inset-0 about-grid opacity-35" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="about-reveal mx-auto mb-12 max-w-3xl text-center sm:mb-16">
-        <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Connected capabilities</p>
-        <h2 id="expertise-heading" class="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#0F274A] sm:text-4xl">
-          Expertise that moves together
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Why Unity Compass</p>
+        <h2 id="why-heading" class="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#0F274A] sm:text-4xl">
+          Built for complex, competitive environments
         </h2>
         <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-          Technical, advisory, and workforce specialists collaborate around the same mission and measurable outcome.
+          The depth to understand the requirement, the flexibility to fit your organization, and the discipline to deliver.
         </p>
       </div>
 
       <ul class="grid gap-5 md:grid-cols-3" role="list">
-        {expertise.map((item, index) => (
+        {differentiators.map((item, index) => (
           <li class={`about-reveal about-delay-${index + 1} group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-300 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.35)] sm:p-8`}>
-            <span class="absolute right-6 top-5 text-sm font-extrabold tracking-[0.12em] text-slate-200 transition-colors duration-300 group-hover:text-[#FF3130]/25" aria-hidden="true">
-              {item.number}
-            </span>
+            <span class="absolute right-6 top-5 text-sm font-extrabold tracking-[0.12em] text-slate-200 transition-colors duration-300 group-hover:text-[#FF3130]/25" aria-hidden="true">{item.number}</span>
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0C487A] text-white shadow-[0_8px_22px_-8px_rgba(12,72,122,0.7)] transition duration-300 group-hover:scale-105 group-hover:bg-[#FF3130]">
-              <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={item.icon} />
-              </svg>
+              <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={item.icon} /></svg>
             </div>
-            <h3 class="mt-7 text-2xl font-extrabold tracking-tight text-[#0F274A]">{item.title}</h3>
-            <p class="mt-3 text-base font-semibold leading-7 text-slate-700">{item.description}</p>
-            <p class="mt-3 text-sm leading-6 text-slate-500">{item.detail}</p>
+            <h3 class="mt-7 text-xl font-extrabold tracking-tight text-[#0F274A] sm:text-2xl">{item.title}</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.description}</p>
           </li>
         ))}
       </ul>
     </div>
   </section>
 
-  <section class="relative overflow-hidden bg-[#07192C] py-20 text-white sm:py-24 lg:py-28" aria-labelledby="model-heading">
-    <div class="absolute inset-0 bg-fed-dots opacity-40" aria-hidden="true"></div>
-    <div class="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-blue-500/15 blur-3xl" aria-hidden="true"></div>
-    <div class="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-red-500/10 blur-3xl" aria-hidden="true"></div>
-
+  <section class="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] py-14 sm:py-16" aria-label="Unity Compass performance highlights">
+    <div class="absolute inset-0 about-grid opacity-35" aria-hidden="true"></div>
+    <div class="absolute left-1/2 top-1/2 h-48 w-4/5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(40,121,182,0.12)_0%,transparent_70%)] blur-3xl" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="about-reveal grid gap-8 border-b border-white/10 pb-12 lg:grid-cols-[1fr_0.8fr] lg:items-end">
-        <div>
-          <p class="text-xs font-bold uppercase tracking-[0.16em] text-red-300">Our operating model</p>
-          <h2 id="model-heading" class="mt-3 max-w-3xl text-3xl font-extrabold leading-tight tracking-[-0.035em] text-white sm:text-4xl lg:text-5xl">
-            Listen first. Define the work. Deliver it well.
-          </h2>
-        </div>
-        <p class="max-w-xl text-base leading-7 text-slate-300 lg:justify-self-end">
-          That is the operating model. It keeps communication direct, ownership clear, and deliverables measurable.
+      <div class="about-reveal rounded-3xl border border-slate-200/90 bg-white/90 px-5 py-7 shadow-[0_18px_45px_-20px_rgba(15,39,74,0.22),0_0_0_1px_rgba(255,255,255,0.9)_inset] backdrop-blur-xl sm:px-8 sm:py-9 lg:px-10">
+        <dl class="grid grid-cols-2 gap-x-4 gap-y-7 md:grid-cols-5 md:gap-0">
+          {performanceMetrics.map((metric, index) => (
+            <div class={`about-reveal about-delay-${Math.min(index + 1, 5)} relative px-2 py-2 text-center sm:px-4 ${index > 0 ? 'md:border-l md:border-slate-200' : ''} ${index === performanceMetrics.length - 1 ? 'col-span-2 md:col-span-1' : ''}`}>
+              <dd class="text-3xl font-extrabold tracking-tight text-[#0F274A] sm:text-4xl">
+                {metric.value}
+              </dd>
+              <span class="mx-auto mt-3 block h-1 w-8 rounded-full bg-[#FF3130]" aria-hidden="true"></span>
+              <dt class="mt-3 text-xs font-bold uppercase leading-5 tracking-[0.1em] text-slate-600">{metric.label}</dt>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="process-heading">
+    <div class="absolute inset-0 about-grid opacity-25" aria-hidden="true"></div>
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="about-reveal mx-auto max-w-3xl text-center">
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">How we deliver</p>
+        <h2 id="process-heading" class="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#0F274A] sm:text-4xl lg:text-5xl">
+          From the right opportunity to a ready submission
+        </h2>
+        <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          A disciplined proposal process keeps decisions clear, contributors aligned, and every response focused on what evaluators need to see.
         </p>
       </div>
 
-      <ol class="mt-12 grid gap-8 md:grid-cols-3 md:gap-0" role="list">
-        {operatingModel.map((step, index) => (
-          <li class={`about-reveal about-delay-${index + 1} relative md:px-8 ${index === 0 ? 'md:pl-0' : ''} ${index === operatingModel.length - 1 ? 'md:pr-0' : ''}`}>
-            {index > 0 && <span class="absolute -left-px top-0 hidden h-full w-px bg-white/10 md:block" aria-hidden="true"></span>}
-            <span class="font-mono text-xs font-bold tracking-[0.18em] text-red-300">{step.number}</span>
-            <h3 class="mt-5 text-xl font-bold text-white sm:text-2xl">{step.title}</h3>
-            <p class="mt-3 max-w-sm text-sm leading-7 text-slate-300 sm:text-base">{step.description}</p>
+      <ol class="process-timeline about-reveal mt-16" role="list">
+        {deliverySteps.map((step, index) => (
+          <li class={`timeline-step about-reveal about-delay-${Math.min(index + 1, 5)}`}>
+            <span class="timeline-node" aria-hidden="true">{step.number}</span>
+            <article class="timeline-card">
+              <p class="text-xs font-bold uppercase tracking-[0.15em] text-[#FF3130]">Step {step.number}</p>
+              <h3 class="mt-2 text-xl font-extrabold text-[#0F274A] sm:text-2xl">{step.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{step.description}</p>
+            </article>
           </li>
         ))}
       </ol>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden border-y border-slate-200/80 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] py-20 sm:py-24 lg:py-28" aria-labelledby="purpose-heading">
+    <div class="absolute inset-0 about-grid opacity-35" aria-hidden="true"></div>
+    <div class="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-blue-400/15 blur-3xl" aria-hidden="true"></div>
+    <div class="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-red-300/10 blur-3xl" aria-hidden="true"></div>
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="about-reveal max-w-3xl">
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Mission, vision, and values</p>
+        <h2 id="purpose-heading" class="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#0F274A] sm:text-4xl">What guides the work</h2>
+        <div class="mt-5 h-1.5 w-20 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]" aria-hidden="true"></div>
+      </div>
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+        <article class="about-reveal group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-7 shadow-[0_18px_45px_-24px_rgba(15,39,74,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.34)] sm:p-8">
+          <span class="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-[#0C487A] to-[#1E40AF]" aria-hidden="true"></span>
+          <p class="text-xs font-bold uppercase tracking-[0.14em] text-[#FF3130]">Our mission</p>
+          <h3 class="mt-3 text-xl font-bold text-[#0F274A] sm:text-2xl">Empower organizations to compete and perform</h3>
+          <p class="mt-4 leading-7 text-slate-600">To empower businesses with innovative solutions, exceptional talent, and strategic support to achieve their goals in the government marketplace.</p>
+        </article>
+        <article class="about-reveal about-delay-1 group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-7 shadow-[0_18px_45px_-24px_rgba(15,39,74,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.34)] sm:p-8">
+          <span class="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-[#FF3130] to-[#DC2626]" aria-hidden="true"></span>
+          <p class="text-xs font-bold uppercase tracking-[0.14em] text-[#FF3130]">Our vision</p>
+          <h3 class="mt-3 text-xl font-bold text-[#0F274A] sm:text-2xl">Be the partner trusted for meaningful impact</h3>
+          <p class="mt-4 leading-7 text-slate-600">To be a trusted partner for organizations seeking to make a meaningful impact across federal, state, and local markets.</p>
+        </article>
+      </div>
+
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5" aria-label="Unity Compass values" role="list">
+        {companyValues.map((value, index) => (
+          <li class={`about-reveal about-delay-${Math.min(index + 1, 5)} flex min-h-20 items-center rounded-xl border border-slate-200/90 bg-white/90 px-4 py-4 text-sm font-bold leading-6 text-[#0F274A] shadow-[0_10px_28px_-22px_rgba(15,39,74,0.3)] backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:bg-white`}>
+            <span class="mr-3 h-2 w-2 shrink-0 rounded-full bg-[#FF3130]" aria-hidden="true"></span>{value}
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -312,6 +393,123 @@ const aboutPageSchema = {
   .about-delay-1 { transition-delay: 80ms; }
   .about-delay-2 { transition-delay: 160ms; }
   .about-delay-3 { transition-delay: 240ms; }
+  .about-delay-4 { transition-delay: 320ms; }
+  .about-delay-5 { transition-delay: 400ms; }
+
+  .process-timeline {
+    position: relative;
+    list-style: none;
+    padding: 0;
+  }
+
+  .process-timeline::before {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    width: 2px;
+    background: linear-gradient(to bottom, #0C487A, #1E40AF 55%, #FF3130);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 180ms;
+  }
+
+  .process-timeline.is-visible::before {
+    transform: scaleY(1);
+  }
+
+  .timeline-step {
+    position: relative;
+    min-height: 8rem;
+    padding-left: 4.75rem;
+  }
+
+  .timeline-step:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+  .timeline-node {
+    position: absolute;
+    top: 1.25rem;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid white;
+    border-radius: 9999px;
+    background: #0C487A;
+    box-shadow: 0 8px 24px -8px rgba(12, 72, 122, 0.55);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition: background-color 250ms ease, transform 250ms ease;
+  }
+
+  .timeline-card {
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 1.5rem;
+    box-shadow: 0 18px 45px -28px rgba(15, 39, 74, 0.38);
+    transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+  }
+
+  .timeline-step:hover .timeline-node {
+    background: #FF3130;
+    transform: scale(1.06);
+  }
+
+  .timeline-step:hover .timeline-card {
+    border-color: rgba(12, 72, 122, 0.28);
+    box-shadow: 0 24px 50px -25px rgba(15, 39, 74, 0.42);
+    transform: translateY(-3px);
+  }
+
+  @media (min-width: 1024px) {
+    .process-timeline::before {
+      left: 50%;
+      transform: translateX(-50%) scaleY(0);
+    }
+
+    .process-timeline.is-visible::before {
+      transform: translateX(-50%) scaleY(1);
+    }
+
+    .timeline-step {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 6rem;
+      min-height: 10rem;
+      padding-left: 0;
+    }
+
+    .timeline-step:not(:last-child) {
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-step:nth-child(odd) .timeline-card {
+      grid-column: 1;
+      text-align: right;
+    }
+
+    .timeline-step:nth-child(even) .timeline-card {
+      grid-column: 2;
+    }
+
+    .timeline-node {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .timeline-step:hover .timeline-node {
+      transform: translateX(-50%) scale(1.06);
+    }
+  }
 
   @keyframes aboutHeroIn {
     from {
@@ -333,11 +531,18 @@ const aboutPageSchema = {
     .about-hero-copy,
     .about-hero-art,
     .about-float,
-    .about-reveal {
+    .about-reveal,
+    .process-timeline::before,
+    .timeline-node,
+    .timeline-card {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
       transition: none !important;
+    }
+
+    .process-timeline::before {
+      transform: scaleY(1) !important;
     }
   }
 </style>
