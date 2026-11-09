@@ -1,212 +1,785 @@
 ---
+/**
+ * staffing.astro
+ * 
+ * Executive Staffing Solutions Practice Page
+ * Architectural Blueprint:
+ * 1. Hero: Pure White, Centered Shimmer Title (2 Lines), 45:55 Content:Image ratio.
+ *    Unclipped artwork frame with object-contain and aspect-[2752/1536].
+ * 2. Deep Dive: Light Blue Blueprint Canvas, 67% Left Overview / 33% Right Other Practice Areas.
+ * 3. How We Deliver: Pure White Canvas, Centered Header, Navigation Controls, Infinite Continuous Carousel.
+ * 4. What You Get: Light Blue Blueprint Canvas, Shuttle Bottom-to-Top Color Fill Hover.
+ * 5. Why UC?: Pure White Canvas, 3 Symmetrical Cards with Bring-to-Front Hover Elevation.
+ */
 import MainLayout from '../layouts/MainLayout.astro';
-import Button from '../components/Button.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-import ContactForm from '../components/ContactForm.astro';
-import { servicesData } from '../data/services';
-import { companyInfo } from '../data/company';
 
-const service = servicesData.find((s) => s.id === 'staffing')!;
+// Remaining 5 Federal Practice Areas (Excluding current practice: Staffing Solutions)
+const otherFederalServices = [
+  {
+    name: 'Proposal Development & Federal Bid Support',
+    href: '/proposal-development-services',
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+  {
+    name: 'OASIS+ & IDIQ Qualification Support',
+    href: '/customized-support-services',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    name: 'Security-Cleared Recruitment',
+    href: '/recruitment-services',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+  },
+  {
+    name: 'IT & Program Consulting',
+    href: '/information-technology-and-business-consulting',
+    icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  },
+  {
+    name: 'Contract Compliance Support',
+    href: '/customized-support-services',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
+  },
+];
+
+// 5-Stage Staffing Delivery Process (Contragenix-inspired infinite carousel)
+const deliverySteps = [
+  {
+    step: '1',
+    title: '1. Program Needs Assessment',
+    desc: 'Analyzing task order requirements, labor categories, security thresholds, and billable rate constraints',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2',
+    glowColor: 'from-[#0C487A] to-[#1E40AF]',
+    iconColor: 'text-[#0C487A]',
+    bgTint: 'bg-blue-50/80',
+  },
+  {
+    step: '2',
+    title: '2. Rapid Talent Sourcing',
+    desc: 'Activating proprietary candidate databases to identify pre-screened professionals ready for surge mobilization',
+    icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
+    glowColor: 'from-[#FF3130] to-[#DC2626]',
+    iconColor: 'text-[#FF3130]',
+    bgTint: 'bg-red-50/80',
+  },
+  {
+    step: '3',
+    title: '3. Compliance & Wage Audit',
+    desc: 'Rigorous validation of SCA prevailing wage rates, FAR labor categories, and mandatory technical credentials',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    glowColor: 'from-[#1E40AF] to-[#2563EB]',
+    iconColor: 'text-[#1E40AF]',
+    bgTint: 'bg-indigo-50/80',
+  },
+  {
+    step: '4',
+    title: '4. Day-One Onboarding',
+    desc: 'Complete administrative, NDA, and badging logistics coordination to ensure seamless first-day contract arrival',
+    icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+    glowColor: 'from-[#0C487A] to-[#2563EB]',
+    iconColor: 'text-[#0C487A]',
+    bgTint: 'bg-sky-50/80',
+  },
+  {
+    step: '5',
+    title: '5. Ongoing Retention Care',
+    desc: 'Continuous performance check-ins and contractor support protecting multi-year task order execution',
+    icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+    glowColor: 'from-[#FF3130] to-[#0C487A]',
+    iconColor: 'text-[#FF3130]',
+    bgTint: 'bg-rose-50/80',
+  },
+];
+
+// What You Get (4 Deliverables with Shuttle Bottom-to-Top Animation)
+const deliverables = [
+  {
+    title: 'Rapid Resource Deployment',
+    desc: 'Compress time-to-fill for critical program roles by drawing on pre-vetted, highly qualified talent pools.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+  },
+  {
+    title: 'Flexible Engagement Models',
+    desc: 'Contract, temp-to-hire, and direct-placement structures customized to project duration and agency billing cycles.',
+    icon: 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z',
+  },
+  {
+    title: 'SCA & Wage Compliance',
+    desc: 'Strict adherence to federal labor rates, Service Contract Act wage determinations, and audit standards.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    title: 'Scalable Surge Capacity',
+    desc: 'Effortlessly scale teams up or down in sync with government task order lifecycles and milestone surges.',
+    icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+  },
+];
 ---
 
 <MainLayout
-  title={`${service.title} - Unity Compass`}
+  title="Staffing Solutions - Unity Compass"
   description="Find top-tier staffing solutions for federal and commercial contractors. Contract, long-term, and temp-to-hire staffing models engineered for mission success."
 >
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-b from-slate-900 to-brand-dark text-white py-16 sm:py-24 border-b border-slate-800 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+  <div class="text-slate-800 overflow-hidden" id="staffing-page-root">
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 1: HERO (Content 45% | Image 55% with Unclipped Text Badge)  -->
+    <!-- Background: PURE WHITE (Order: White -> Blue -> White -> Blue -> White)-->
+    <!-- ===================================================================== -->
+    <section class="relative pt-16 sm:pt-20 lg:pt-24 pb-16 sm:pb-24 bg-white border-b border-slate-200/80 overflow-hidden" aria-labelledby="service-hero-heading">
+      
+      <!-- Subtle Radial Ambient Glows -->
+      <div class="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(40,121,182,0.08)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute -top-20 -right-32 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(255,49,48,0.06)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div class="lg:col-span-7 space-y-5">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-brand-red/20 text-red-400 border border-brand-red/30">
-            Workforce Agility
-          </span>
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Staffing Solutions Tailored to Your Business Needs
+        <!-- 1. Centered Service Title at Top with Continuous Shimmer (Two Lines) -->
+        <div class="text-center max-w-4xl mx-auto space-y-4 mb-14 sm:mb-16 reveal-on-load">
+          <h1
+            id="service-hero-heading"
+            class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] text-center"
+          >
+            <span class="service-shimmer-center service-shimmer-line-1 block pb-1">Staffing</span>
+            <span class="service-shimmer-center service-shimmer-line-1 block pb-1">Solutions</span>
           </h1>
-          <p class="text-lg text-slate-300 font-medium leading-relaxed">
-            {service.heroHeadline}
-          </p>
-          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
-            {service.leadParagraph}
-          </p>
-          <div class="pt-3 flex flex-wrap items-center gap-4">
-            <Button href="/contact" variant="primary" size="md">
-              Request Staffing Support
-            </Button>
-            <Button href="/career" variant="outline" size="md">
-              Browse Open Positions
-            </Button>
-          </div>
+          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
         </div>
 
-        <div class="lg:col-span-5">
-          <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-2xl bg-slate-800">
-            <img
-              src={service.image}
-              alt={service.title}
-              class="w-full h-auto object-cover"
-              width="600"
-              height="400"
-            />
+        <!-- 2. Balanced Proportions: Content 45% | Image 55% Ratio -->
+        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-12 xl:gap-16">
+          
+          <!-- Content Column (45% Width) -->
+          <div class="w-full lg:w-[45%] space-y-6 text-left reveal-on-load" data-delay="100">
+            <h2 class="text-xl sm:text-2xl lg:text-[1.65rem] font-bold text-[#0B2553] leading-normal sm:leading-[1.5]">
+              Flexible, High-Performance Staffing Models Tailored to Program Needs
+            </h2>
+            <div class="w-16 h-1 rounded-full bg-gradient-to-r from-[#0C487A] to-[#FF3130]"></div>
+            
+            <!-- Paragraph with Logo-Colored Highlights: UC's in Red & 10+ Years in Blue (Line-Height: 2.05) -->
+            <p class="text-base sm:text-lg text-slate-600 leading-[2] sm:leading-[2.05] font-normal">
+              <strong class="font-extrabold text-[#FF3130]">UC’s</strong> elastic staffing solutions provide defense contractors, civilian agencies, and commercial enterprises with agile workforce delivery. We deliver vetted technical and operational professionals across contract, temp-to-hire, and permanent staffing engagements designed to scale with government task orders. With <strong class="font-bold text-[#0C487A]">10+ years of workforce surge experience,</strong> we eliminate talent bottlenecks and ensure seamless program continuity.
+            </p>
           </div>
+
+          <!-- Image Column (55% Width: Unclipped Graphic Artwork with Corner Badge 100% Visible) -->
+          <div class="w-full lg:w-[55%] relative flex justify-center items-center reveal-on-load" data-delay="200">
+            <div class="relative w-full max-w-2xl group">
+              
+              <!-- Soft Dynamic Ambient Glow Aura -->
+              <div class="absolute -inset-4 bg-gradient-to-tr from-[#0C487A]/20 via-[#1E40AF]/15 to-[#FF3130]/15 rounded-3xl blur-2xl pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+              
+              <!-- Refined Image Window Frame (object-contain with natural aspect ratio to eliminate clipping) -->
+              <div class="relative rounded-3xl overflow-hidden border border-slate-200/90 bg-white shadow-[0_20px_50px_-12px_rgba(11,37,83,0.16)] w-full">
+                
+                <img
+                  src="/images/service4.png"
+                  alt="Staffing Solutions"
+                  class="w-full h-auto aspect-[2752/1536] object-contain object-center group-hover:scale-[1.015] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] select-none block"
+                  width="2752"
+                  height="1536"
+                  loading="eager"
+                />
+
+                <!-- High-End Specular Glass Sheen Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-black/5 via-transparent to-white/10 pointer-events-none"></div>
+
+                <!-- Glowing Top Accent Line on Hover -->
+                <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+              </div>
+
+            </div>
+          </div>
+
         </div>
 
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Staffing Models Section -->
-  <section class="py-16 sm:py-24 bg-white" aria-labelledby="models-heading">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <SectionHeading
-        eyebrow="Engagement Models"
-        title="Three Flexible Staffing Models"
-        description="Whether you need immediate project reinforcement or strategic multi-year program staffing, we provide flexible structures designed around government contracting requirements."
-      />
+    <!-- ===================================================================== -->
+    <!-- SECTION 2: MORE CONTENT (67%) + OTHER SERVICES (33%)                  -->
+    <!-- Background: LIGHT BLUE BLUEPRINT CANVAS                               -->
+    <!-- ===================================================================== -->
+    <section class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="deep-dive-heading">
+      
+      <!-- 16px Technical Blueprint Checks Pattern Overlay -->
+      <div
+        class="absolute inset-0 pointer-events-none opacity-25 mix-blend-multiply"
+        style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.06) 1px, transparent 1px);"
+        aria-hidden="true"
+      ></div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Ambient Glow Accents -->
+      <div class="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(40,121,182,0.12)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute -bottom-24 right-10 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(255,49,48,0.06)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <!-- Contract / Short-Term -->
-        <div class="gov-card flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono font-bold text-brand-red bg-red-50 px-2 py-0.5 rounded border border-red-100">
-                MODEL 01
-              </span>
-              <span class="text-xs font-semibold text-slate-400 uppercase">Surge Support</span>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          
+          <!-- Column 1 (Most Space: 8 of 12 cols ~ 67% space) -->
+          <div class="lg:col-span-8 space-y-6 reveal-on-load" data-delay="150">
+            
+            <div class="space-y-3">
+              <h2 id="deep-dive-heading" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#0B2553] leading-tight">
+                Mastering Workforce Agility Across Program Lifecycles
+              </h2>
+              <div class="w-20 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]"></div>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 tracking-tight">Contract / Short-Term Staffing</h3>
-            <p class="mt-3 text-sm text-slate-600 leading-relaxed">
-              Fast, specialized talent for short-term projects, unexpected surges, and immediate skill gaps, ensuring quick deployment without long-term commitments.
-            </p>
-            <ul class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-500">
-              <li class="flex items-center gap-2">
-                <span class="text-brand-red font-bold">&bull;</span>
-                <span>Immediate deployment for proposal surges</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-brand-red font-bold">&bull;</span>
-                <span>Task-order specific technical support</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-brand-red font-bold">&bull;</span>
-                <span>Fixed-duration project delivery</span>
-              </li>
-            </ul>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-100">
-            <a href="/contact" class="text-xs font-bold text-brand-navy hover:text-brand-red transition-colors inline-flex items-center gap-1">
-              <span>Inquire about contract staffing</span> &rarr;
-            </a>
-          </div>
-        </div>
 
-        <!-- Long-Term Staffing -->
-        <div class="gov-card flex flex-col justify-between border-brand-navy/30">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono font-bold text-brand-navy bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
-                MODEL 02
-              </span>
-              <span class="text-xs font-semibold text-brand-navy uppercase">Program Continuity</span>
+            <!-- Distinct Executive Pull-Quote with Glass Aesthetic -->
+            <div class="p-6 sm:p-7 rounded-2xl bg-white/95 backdrop-blur-md border-l-4 border-l-[#FF3130] border border-slate-200/90 shadow-[0_8px_30px_rgba(15,39,74,0.06)]">
+              <p class="text-base sm:text-lg font-semibold text-[#0B2553] leading-[1.9] sm:leading-[2] italic">
+                “In federal contracting, workforce demands fluctuate rapidly with task order awards, surge modifications, and unexpected personnel vacancies.”
+              </p>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 tracking-tight">Long-Term Staffing</h3>
-            <p class="mt-3 text-sm text-slate-600 leading-relaxed">
-              A proactive staffing approach aligned with business growth plans, including new office setups, core personnel backfills, retirements, maternity leave coverage, and sabbaticals.
-            </p>
-            <ul class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-500">
-              <li class="flex items-center gap-2">
-                <span class="text-brand-navy font-bold">&bull;</span>
-                <span>Multi-year contract vehicle execution</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-brand-navy font-bold">&bull;</span>
-                <span>Dedicated cleared engineering squads</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-brand-navy font-bold">&bull;</span>
-                <span>Long-term knowledge retention</span>
-              </li>
-            </ul>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-100">
-            <a href="/contact" class="text-xs font-bold text-brand-navy hover:text-brand-red transition-colors inline-flex items-center gap-1">
-              <span>Inquire about long-term staffing</span> &rarr;
-            </a>
-          </div>
-        </div>
 
-        <!-- Temp-to-Hire -->
-        <div class="gov-card flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
-                MODEL 03
-              </span>
-              <span class="text-xs font-semibold text-slate-400 uppercase">Trial-to-Permanent</span>
+            <!-- Narrative Paragraphs: From in Red, UNITY COMPASS in Logo Colors (Line-Height: 2.05) -->
+            <div class="space-y-6 text-base sm:text-lg text-slate-600 leading-[2] sm:leading-[2.05] font-normal">
+              <p>
+                <strong class="font-extrabold text-[#FF3130]">From</strong> immediate surge staffing to multi-year program delivery, <span class="font-extrabold tracking-tight"><span class="text-[#FF3130]">UNITY</span> <span class="text-[#0C487A]">COMPASS</span></span> ensures that your contract staffing demands are met with precision and speed. We supply pre-qualified talent across IT, engineering, logistics, administration, and executive management.
+              </p>
+              <p>
+                We manage candidate vetting, payroll compliance, labor rate audits, and security documentation, ensuring full adherence to Service Contract Act (SCA) and Davis-Bacon requirements, eliminating compliance risks across contract lifecycles.
+              </p>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 tracking-tight">Temp-to-Hire</h3>
-            <p class="mt-3 text-sm text-slate-600 leading-relaxed">
-              A flexible trial-based model that allows organizations to evaluate performance and cultural fit before transitioning professionals into permanent roles.
-            </p>
-            <ul class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-500">
-              <li class="flex items-center gap-2">
-                <span class="text-emerald-600 font-bold">&bull;</span>
-                <span>Hands-on evaluation on live client SOWs</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-emerald-600 font-bold">&bull;</span>
-                <span>Zero bad-hire conversion risk</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-emerald-600 font-bold">&bull;</span>
-                <span>Smooth permanent transition process</span>
-              </li>
-            </ul>
+
           </div>
-          <div class="mt-6 pt-4 border-t border-slate-100">
-            <a href="/contact" class="text-xs font-bold text-brand-navy hover:text-brand-red transition-colors inline-flex items-center gap-1">
-              <span>Inquire about temp-to-hire</span> &rarr;
-            </a>
+
+          <!-- Column 2 (Less Space: 4 of 12 cols ~ 33% space - Clean Practice Directory) -->
+          <div class="lg:col-span-4 lg:sticky lg:top-28 space-y-3 reveal-on-load" data-delay="250">
+            
+            <div class="rounded-3xl bg-white/95 backdrop-blur-md border border-slate-200/90 p-6 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.10)] space-y-4">
+              <div class="pb-3 border-b border-slate-200/80">
+                <h3 class="text-base sm:text-lg font-bold text-[#0B2553] tracking-tight">
+                  Other Practice Areas
+                </h3>
+              </div>
+
+              <div class="space-y-2.5">
+                {otherFederalServices.map((item, idx) => (
+                  <a
+                    href={item.href}
+                    class="other-service-card group relative flex items-center justify-between p-3.5 rounded-2xl border border-slate-200/80 bg-white hover:bg-slate-50 hover:border-[#0C487A]/40 text-slate-700 hover:text-[#FF3130] text-sm font-bold shadow-2xs hover:shadow-md transition-all duration-300 overflow-hidden"
+                    style={`--stagger-delay: ${idx * 50}ms;`}
+                  >
+                    <!-- Left Accent Line on Hover -->
+                    <div class="absolute left-0 inset-y-0 w-1 rounded-l-2xl bg-gradient-to-b from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                    <div class="flex items-center gap-3 min-w-0 pr-2 relative z-10">
+                      <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-[#0C487A] group-hover:text-white flex items-center justify-center shrink-0 transition-colors duration-200 shadow-2xs">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
+                        </svg>
+                      </span>
+                      <span class="whitespace-normal leading-snug text-xs sm:text-sm">{item.name}</span>
+                    </div>
+
+                    <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1.5 group-hover:text-[#FF3130] transition-all duration-200 shrink-0 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </div>
+
           </div>
+
         </div>
 
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Key Benefits Grid -->
-  <section class="py-16 sm:py-24 bg-slate-50 border-t border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <SectionHeading
-        eyebrow="Operational Advantages"
-        title="Why Contractors Choose Unity Compass Staffing"
-        description="We eliminate staffing bottlenecks so your program managers can deliver on contract milestones with full confidence."
-      />
+    <!-- ===================================================================== -->
+    <!-- SECTION 3: "HOW WE DELIVER" (Contragenix-Inspired Process Carousel)    -->
+    <!-- Background: PURE WHITE CANVAS                                         -->
+    <!-- ===================================================================== -->
+    <section id="how-we-deliver" class="py-16 sm:py-24 bg-white border-b border-slate-200/80 relative z-10 scroll-mt-28" aria-labelledby="delivery-heading">
+      
+      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Header: Heading, Accent Line & Subtitle in Center as usual -->
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-10 reveal-on-load">
+          <h2 id="delivery-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-normal">
+            <span class="service-shimmer-center service-shimmer-line-1 block pb-1.5 pt-0.5">How We Deliver</span>
+          </h2>
+          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+            An elastic, SLA-driven staffing model designed to deploy vetted contract professionals rapidly without administrative friction.
+          </p>
+        </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {service.keyBenefits?.map((item) => (
-          <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-subtle">
-            <div class="w-10 h-10 rounded-lg bg-brand-navy/10 text-brand-navy flex items-center justify-center mb-4">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 tracking-tight">{item.title}</h3>
-            <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">{item.desc}</p>
+        <!-- Carousel Navigation Controls Bar (Right aligned above cards) -->
+        <div class="flex items-center justify-end gap-3 mb-6 reveal-on-load">
+          <button
+            id="delivery-carousel-prev"
+            class="w-11 h-11 rounded-full border border-slate-200/90 bg-white hover:bg-slate-50 text-slate-700 hover:text-[#0C487A] shadow-xs hover:shadow-md flex items-center justify-center transition-all duration-200 cursor-pointer group active:scale-95"
+            aria-label="Previous Delivery Stage"
+          >
+            <svg class="w-5 h-5 transform group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <button
+            id="delivery-carousel-next"
+            class="w-11 h-11 rounded-full border border-slate-200/90 bg-white hover:bg-slate-50 text-slate-700 hover:text-[#FF3130] shadow-xs hover:shadow-md flex items-center justify-center transition-all duration-200 cursor-pointer group active:scale-95"
+            aria-label="Next Delivery Stage"
+          >
+            <svg class="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Automatic Infinite Looping Carousel Viewport & Sliding Track -->
+        <div class="relative overflow-hidden reveal-on-load" data-delay="120" id="delivery-carousel-viewport">
+          
+          <div
+            id="delivery-carousel-track"
+            class="flex gap-6 py-3 px-1 will-change-transform"
+          >
+            {/* 3 continuous sets (15 cards) for infinite seamless looping */}
+            {[...deliverySteps, ...deliverySteps, ...deliverySteps].map((step, idx) => (
+              <div
+                class="carousel-stage-card group relative rounded-3xl p-8 bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_20px_45px_-10px_rgba(12,72,122,0.18)] flex flex-col justify-between shrink-0 transition-shadow duration-300 w-[290px] sm:w-[340px] md:w-[370px] min-h-[280px] cursor-pointer"
+                data-card-idx={idx}
+              >
+                <!-- Glowing Top Accent Line on Hover -->
+                <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                <div>
+                  <!-- Glowing Circular Icon Badge with Soft Colored Radial Glow -->
+                  <div class="relative w-16 h-16 flex items-center justify-center mb-6">
+                    <div class={`absolute inset-0 rounded-full blur-xl opacity-35 group-hover:opacity-60 transition-opacity bg-gradient-to-br ${step.glowColor}`}></div>
+                    
+                    <div class={`relative w-14 h-14 rounded-full ${step.bgTint} ${step.iconColor} border border-slate-200/70 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform duration-300`}>
+                      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon} />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <!-- Numbered Title (E.g. "1. Program Needs Assessment") -->
+                  <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors duration-200 tracking-tight leading-snug mb-3">
+                    {step.title}
+                  </h3>
+
+                  <!-- Description -->
+                  <p class="text-sm text-slate-600 leading-relaxed font-normal">
+                    {step.desc}
+                  </p>
+                </div>
+
+                <!-- Subtle Bottom Dot Indicator -->
+                <div class="pt-5 mt-4 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-xs font-bold text-[#0C487A] group-hover:text-[#FF3130] transition-colors">Phase {step.step} of 5</span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-slate-300 group-hover:bg-[#FF3130] group-hover:scale-125 transition-all duration-200"></span>
+                </div>
+
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
 
-  <!-- Contact Form Section -->
-  <section class="py-16 sm:py-24 bg-white border-t border-slate-200/80">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <ContactForm />
-    </div>
-  </section>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 4: "WHAT YOU GET?" (Shuttle Bottom-to-Top Color Fill Hover)   -->
+    <!-- Background: LIGHT BLUE BLUEPRINT CANVAS                               -->
+    <!-- ===================================================================== -->
+    <section class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="what-you-get-heading">
+      
+      <!-- Minute 16px Technical Checks Overlay -->
+      <div
+        class="absolute inset-0 pointer-events-none opacity-25 mix-blend-multiply"
+        style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.06) 1px, transparent 1px);"
+        aria-hidden="true"
+      ></div>
+
+      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Section Header with Shimmer & On-Load Reveal (Unclipped Descender on 'g') -->
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-14 sm:mb-16 reveal-on-load">
+          <h2 id="what-you-get-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-normal">
+            <span class="service-shimmer-center service-shimmer-line-1 block pb-2 pt-0.5">What you get?</span>
+          </h2>
+          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-3 mb-4"></div>
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+            Turnkey workforce agility, SCA-compliant payroll structures, and seamless task order scaling for prime contractors.
+          </p>
+        </div>
+
+        <!-- 4 Deliverable Cards: Shuttle Bottom-to-Top Color Fill Animation (From Screenshots 3 & 4) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal-on-load" data-delay="100">
+          {deliverables.map((item, idx) => (
+            <div
+              class="shuttle-card group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.28)] transition-all duration-400 flex flex-col justify-between min-h-[300px] p-7 sm:p-8 overflow-hidden cursor-pointer"
+              data-card-index={idx}
+            >
+              <!-- Shuttle Bottom-to-Top Color Fill with Organic Curved Top Crest (Screenshots 3 & 4 Inspiration) -->
+              <div
+                class="shuttle-fill-layer absolute inset-0 bg-gradient-to-t from-[#0C487A] via-[#103E6B] to-[#1E40AF] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none rounded-3xl overflow-hidden"
+                aria-hidden="true"
+              >
+                <!-- Organic Curved Soft Light Wave at the Leading Edge -->
+                <div class="absolute -top-5 left-0 right-0 h-10 bg-white/20 rounded-[100%] blur-sm pointer-events-none"></div>
+                <div class="absolute top-0 inset-x-0 h-1 bg-[#FF3130]/80"></div>
+              </div>
+
+              <!-- Top Content (Text & Icons transition smoothly to crisp white on hover) -->
+              <div class="relative z-10">
+                
+                <!-- Icon Badge with Soft Brand Tint & Glow -->
+                <div class="relative w-14 h-14 flex items-center justify-center mb-6">
+                  <div class="absolute inset-0 rounded-2xl bg-[#0C487A]/15 blur-lg opacity-40 group-hover:opacity-0 transition-opacity"></div>
+                  
+                  <div class="relative w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-white group-hover:text-[#FF3130] border border-blue-100/80 group-hover:border-white/30 flex items-center justify-center transition-all duration-400 shadow-2xs group-hover:scale-105">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Title -->
+                <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-white transition-colors duration-400 tracking-tight leading-snug mb-3">
+                  {item.title}
+                </h3>
+
+                <!-- Primary Description -->
+                <p class="text-sm text-slate-600 group-hover:text-white/95 transition-colors duration-400 leading-relaxed font-normal">
+                  {item.desc}
+                </p>
+              </div>
+
+              <!-- Bottom Indicator -->
+              <div class="pt-5 mt-4 border-t border-slate-100 group-hover:border-white/20 flex items-center justify-between relative z-10 transition-colors">
+                <span class="text-xs font-bold text-[#0C487A] group-hover:text-white transition-colors">
+                  Key Deliverable
+                </span>
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-300 group-hover:bg-[#FF3130] group-hover:scale-125 transition-all duration-300"></span>
+              </div>
+
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 5: "WHY UC?" (3 Visible Cards with Smooth Bring-to-Front)     -->
+    <!-- Background: PURE WHITE CANVAS                                         -->
+    <!-- ===================================================================== -->
+    <section class="py-16 sm:py-24 bg-white relative z-10 scroll-mt-28" aria-labelledby="why-uc-heading">
+      
+      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Section Header with Shimmer & On-Load Reveal -->
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-10 reveal-on-load">
+          <h2 id="why-uc-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+            <span class="service-shimmer-center service-shimmer-line-1 block">Why UC?</span>
+          </h2>
+          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-3 mb-4"></div>
+        </div>
+
+        <!-- Value Proposition Quote Card with Glassmorphic Highlight -->
+        <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-slate-50/80 border border-slate-200/90 shadow-sm text-center mb-14 reveal-on-load">
+          <p class="text-base sm:text-lg lg:text-xl font-bold text-[#0B2553] leading-relaxed">
+            At Unity Compass, we provide unmatched staffing solutions through: rapid surge deployment, flexible engagement models, and strict labor compliance without compromise
+          </p>
+        </div>
+
+        <!-- Symmetrical 3-Card Stage: ALL 3 Cards are ALWAYS Visible Side-by-Side, Hovering Brings to Front -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch reveal-on-load" id="why-uc-cards-grid">
+          
+          <!-- Card 1 (Left Card) -->
+          <div
+            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30"
+          >
+            <!-- Top Line on Card Hover -->
+            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
+
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center font-bold mb-5 border border-blue-100/80 group-hover:bg-[#0C487A] group-hover:text-white transition-colors duration-300 shadow-2xs">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">Rapid Surge Readiness</h3>
+              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                Turnkey workforce mobilization capable of deploying specialized technical and operational teams within days of contract award.
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A]">
+              <span>Pillar 01</span>
+              <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 2 (Center Card: Featured Elevation in Resting State) -->
+          <div
+            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_16px_36px_-8px_rgba(11,37,83,0.16)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(255,49,48,0.24)] hover:border-[#FF3130]/50 hover:z-30 md:-translate-y-1"
+          >
+            <!-- Top Line on Card Hover -->
+            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#FF3130] to-[#DC2626]"></div>
+
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-red-50 text-[#FF3130] flex items-center justify-center font-bold mb-5 border border-red-100/80 group-hover:bg-[#FF3130] group-hover:text-white transition-colors duration-300 shadow-2xs">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#FF3130] transition-colors">Risk-Free Evaluation</h3>
+              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                Temp-to-hire frameworks allowing government contractors to evaluate performance and mission fit before permanent conversion.
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#FF3130]">
+              <span>Pillar 02</span>
+              <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 3 (Right Card) -->
+          <div
+            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30"
+          >
+            <!-- Top Line on Card Hover -->
+            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
+
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center font-bold mb-5 border border-blue-100/80 group-hover:bg-[#0C487A] group-hover:text-white transition-colors duration-300 shadow-2xs">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">Quality Without Compromise</h3>
+              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                Full compliance with federal labor categories, SCA prevailing wage regulations, and audit-ready operational standards.
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A]">
+              <span>Pillar 03</span>
+              <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </div>
 </MainLayout>
 
+<!-- Client Script: Automatic Infinite Carousel Engine & On-Load Reveals -->
+<script is:inline>
+  function initStaffingPage() {
+    // 1. On-Load Staggered Reveals
+    const revealElements = document.querySelectorAll('.reveal-on-load');
+    revealElements.forEach((el) => {
+      const delay = el.getAttribute('data-delay') || '0';
+      setTimeout(() => {
+        el.classList.add('is-revealed');
+      }, parseInt(delay, 10));
+    });
+
+    // 2. Section 3: "How We Deliver" Infinite Seamless Carousel Engine (Contragenix Inspiration)
+    const track = document.getElementById('delivery-carousel-track');
+    const viewport = document.getElementById('delivery-carousel-viewport');
+    const prevBtn = document.getElementById('delivery-carousel-prev');
+    const nextBtn = document.getElementById('delivery-carousel-next');
+
+    if (track && viewport) {
+      const stepCount = 5; // 5 unique stages in deliverySteps
+      let currentIndex = stepCount; // Start at middle set (index 5 = Stage 1)
+      let isAnimating = false;
+      let autoplayTimer = null;
+
+      function getStepOffset() {
+        const card = track.querySelector('.carousel-stage-card');
+        if (!card) return 394;
+        const cardWidth = card.getBoundingClientRect().width;
+        const gap = 24; // 24px gap-6
+        return cardWidth + gap;
+      }
+
+      function setPosition(index, withTransition = true) {
+        const stepOffset = getStepOffset();
+        if (withTransition) {
+          track.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        } else {
+          track.style.transition = 'none';
+        }
+        track.style.transform = `translateX(-${index * stepOffset}px)`;
+        currentIndex = index;
+      }
+
+      function nextSlide() {
+        if (isAnimating) return;
+        isAnimating = true;
+        setPosition(currentIndex + 1, true);
+      }
+
+      function prevSlide() {
+        if (isAnimating) return;
+        isAnimating = true;
+        setPosition(currentIndex - 1, true);
+      }
+
+      track.addEventListener('transitionend', () => {
+        isAnimating = false;
+        // Seamless wraparound: If moved into 3rd set (>= 10), instantly snap back to 2nd set (- 5)
+        if (currentIndex >= stepCount * 2) {
+          setPosition(currentIndex - stepCount, false);
+        }
+        // If moved into 1st set (< 5), instantly snap forward to 2nd set (+ 5)
+        else if (currentIndex < stepCount) {
+          setPosition(currentIndex + stepCount, false);
+        }
+      });
+
+      function startAutoplay() {
+        stopAutoplay();
+        autoplayTimer = setInterval(nextSlide, 3500);
+      }
+
+      function stopAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      }
+
+      if (nextBtn) nextBtn.addEventListener('click', () => {
+        nextSlide();
+        startAutoplay();
+      });
+
+      if (prevBtn) prevBtn.addEventListener('click', () => {
+        prevSlide();
+        startAutoplay();
+      });
+
+      viewport.addEventListener('mouseenter', stopAutoplay);
+      viewport.addEventListener('mouseleave', startAutoplay);
+      viewport.addEventListener('touchstart', stopAutoplay, { passive: true });
+      viewport.addEventListener('touchend', startAutoplay, { passive: true });
+
+      window.addEventListener('resize', () => {
+        setPosition(currentIndex, false);
+      });
+
+      // Position at Stage 1 of the middle set immediately
+      setPosition(stepCount, false);
+      startAutoplay();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStaffingPage);
+  } else {
+    initStaffingPage();
+  }
+  document.addEventListener('astro:page-load', initStaffingPage);
+</script>
+
+<style>
+  /* ========================================================================= */
+  /* On-Load Dynamic Reveal Animation (Matches Homepage Motion)                */
+  /* ========================================================================= */
+  .reveal-on-load {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-on-load.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ========================================================================= */
+  /* Section 4: Shuttle Bottom-to-Top Color Fill Animation                      */
+  /* ========================================================================= */
+  .shuttle-card {
+    will-change: transform, box-shadow;
+  }
+
+  .shuttle-fill-layer {
+    will-change: transform;
+  }
+
+  /* ========================================================================= */
+  /* Center-Aligned Continuous Radiant Color Shimmer Sweep (From Homepage)     */
+  /* ========================================================================= */
+  .service-shimmer-center {
+    background: linear-gradient(
+      90deg,
+      #0F274A 0%,
+      #1E40AF 22%,
+      #2563EB 42%,
+      #DC2626 58%,
+      #EF4444 72%,
+      #0F274A 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    will-change: background-position;
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-bottom: 0.16em;
+    padding-top: 0.05em;
+    overflow: visible;
+  }
+
+  .service-shimmer-line-1 {
+    animation: servicePageShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes servicePageShimmer1 {
+    0% { background-position: 0% 50%; }
+    48% { background-position: 100% 50%; }
+    52% { background-position: 100% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  /* Accessibility: Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .service-shimmer-center {
+      animation: none !important;
+      background: none !important;
+      -webkit-text-fill-color: #0F274A !important;
+      color: #0F274A !important;
+    }
+    .reveal-on-load {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    .shuttle-card,
+    .why-card,
+    .carousel-stage-card {
+      transition: none !important;
+      transform: none !important;
+    }
+    .shuttle-fill-layer {
+      transition: none !important;
+      display: none !important;
+    }
+  }
+</style>

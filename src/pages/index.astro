@@ -1,67 +1,44 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
-import HeroStatsBand from '../components/HeroStatsBand.astro';
-import LogoCarousel from '../components/LogoCarousel.astro';
-import About from '../components/About.astro';
+import HomeIntroBanner from '../components/HomeIntroBanner.astro';
+import OurMission from '../components/OurMission.astro';
 import ServicesGrid from '../components/ServicesGrid.astro';
-import MissionApproach from '../components/MissionApproach.astro';
+import HeroStatsBand from '../components/HeroStatsBand.astro';
 import Testimonials from '../components/Testimonials.astro';
+import LogoCarousel from '../components/LogoCarousel.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import HomeBlogPreview from '../components/HomeBlogPreview.astro';
-import { contractVehicles } from '../data/company';
-import { blogPosts } from '../data/blogPosts';
 ---
 
 <MainLayout
   title="Unity Compass | Government Contracting Consulting & Staffing"
   description="Unity Compass delivers strategic proposal development, OASIS+ readiness support, security-cleared recruitment, staffing solutions, and IT consulting to help federal contractors and commercial firms win and perform."
 >
-  <!-- 1. Executive Hero Section & Performance Stats -->
+  <!-- 1. Executive Hero Section -->
   <Hero />
+
+  <!-- 2. Performance Credentials & Key Metrics Section (Directly Below Hero) -->
   <HeroStatsBand />
 
-  <!-- 2. Trusted By – Establish credibility (Defense Giants Trust Bar) -->
+  <!-- 3. Defense Industry Giants & Prime Partner Ecosystem (Directly Below Metrics) -->
   <LogoCarousel />
 
-  <!-- 3. Our Services – Explain how you help clients -->
+  <!-- 4. Our Services — Bold & Highly Animated Carousel (Directly After Brand Section) -->
   <ServicesGrid />
 
-  <!-- 4. Who We Are – Introduce Unity Compass -->
-  <About />
+  <!-- 5. Value Proposition & Core Purpose Banner (Contragenix Section 3) -->
+  <HomeIntroBanner />
 
-  <!-- 5. Our Mission – Purpose, vision, and 4-point delivery framework -->
-  <MissionApproach />
+  <!-- 6. Our Mission — The Four Bearings Interactive Compass Navigation -->
+  <OurMission />
 
-  <!-- 6. Testimonials – Build trust through client experiences -->
+  <!-- 7. What Our Clients Say — Testimonials Section -->
   <Testimonials />
 
-  <!-- 7. Call-to-Action – Starry Constellation Network -->
+  <!-- 9. Final High-Conversion Constellation Call-to-Action (Contragenix CTA) -->
   <ContactCTA />
 
-  <!-- 8. Industry Insights & Blog Articles -->
+  <!-- 10. Industry Insights & Publications -->
   <HomeBlogPreview />
-
-  <!-- Additional Optional Ecosystem & Publication Modules (Preserved for Reference) -->
-  {false && (
-    <>
-      <IndustryExperience />
-      <section class="py-16 sm:py-20 lg:py-24 bg-[#07192C] text-white border-t border-slate-800 relative overflow-hidden" aria-labelledby="vehicles-heading">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 id="vehicles-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-              <span class="text-[#FF3130]">C</span>ontract Vehicles & Program Experience
-            </h2>
-          </div>
-        </div>
-      </section>
-      <section class="py-16 sm:py-20 lg:py-24 bg-white border-t border-slate-200" aria-labelledby="insights-heading">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 id="insights-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0C487A] tracking-tight">
-            <span class="text-[#FF3130]">G</span>ovCon Insights & Strategies
-          </h2>
-        </div>
-      </section>
-    </>
-  )}
 </MainLayout>

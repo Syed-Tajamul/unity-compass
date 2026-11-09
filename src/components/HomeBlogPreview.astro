@@ -2,12 +2,15 @@
 /**
  * HomeBlogPreview.astro - Latest Industry Insights Section
  * 
- * Harmonized Editorial Design System:
- * - Section Heading: text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0C487A] with initial letter in #FF3130.
- * - Subheading: mt-4 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto.
- * - Responsive 3-Card Grid: Desktop 3 cols, Tablet 2 cols, Mobile 1 col.
- * - Card Presentation: Clean rounded-card styling with subtle hover lift and image zoom.
- * - Cohesive Color Palette: Slate-50 background creating a refreshing light break before the footer.
+ * Harmonized Theme & Visual Continuity:
+ * - Crisp white canvas matching Defense Industry Giants & Testimonials
+ * - Minute 16px × 16px technical blueprint checks overlay
+ * - Soft ambient radial blue glow
+ * - Continuous radiant multi-line color shimmer animation across headline
+ * - Signature animated tri-color blended accent bar (Navy to Royal to Red)
+ * - Removed generic eyebrow pill badge
+ * - 3-column responsive card grid with interactive hover micro-lift and image zoom
+ * - Verbatim Unity Compass editorial headlines and metadata
  */
 
 import { blogPosts } from '../data/blogPosts';
@@ -18,106 +21,237 @@ const featuredPosts = blogPosts.slice(0, 3);
 
 <section
   id="insights"
-  class="py-16 sm:py-20 lg:py-24 bg-slate-50/70 relative overflow-hidden border-t border-slate-200/80 scroll-mt-20"
+  class="relative py-20 sm:py-24 lg:py-28 bg-white overflow-hidden scroll-mt-16 border-t border-slate-200/80"
   aria-labelledby="insights-heading"
 >
-  <!-- Subtle technical grid background accent -->
-  <div class="absolute inset-0 bg-fed-grid-light opacity-40 pointer-events-none" aria-hidden="true"></div>
+  <!-- Minute Checks Pattern Overlay (Identical 16px × 16px grid as Defense Primes & Testimonials) -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-30 mix-blend-multiply"
+    style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.08) 1px, transparent 1px);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Soft Ambient Radial Blue Glow centered on section -->
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-64 bg-[radial-gradient(ellipse,rgba(40,121,182,0.07)_0%,transparent_70%)] pointer-events-none blur-3xl"
+    aria-hidden="true"
+  ></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     
-    <!-- Section Header: Aligned with Site-Wide Standard Scale -->
-    <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-14 reveal-on-scroll">
+    <!-- Section Header (Verbatim Unity Compass) -->
+    <div class="text-center max-w-4xl mx-auto mb-14 lg:mb-16 insights-header-wrap">
+      
+      <!-- Main Headline with Tight Cohesive Line-Height & Continuous Blended Color Shimmer Animation -->
       <h2
         id="insights-heading"
-        class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0C487A] tracking-tight leading-tight"
+        class="insights-heading-reveal text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] lg:leading-[1.24] max-w-4xl mx-auto text-center"
       >
-        <span class="text-[#FF3130]">I</span>nsights, Strategies & Growth Hacks for Modern Businesses
+        <span class="insights-shimmer-line insights-shimmer-line-1">Insights, Strategies &amp; Growth Hacks</span>
+        <span class="insights-shimmer-line insights-shimmer-line-2">for Modern Businesses</span>
       </h2>
 
-      <!-- Subtitle Lead Statement: Exactly Harmonized with Site Scale -->
-      <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-3xl mx-auto">
+      <!-- Accessible Exact Heading Anchor -->
+      <span class="sr-only">Insights, Strategies &amp; Growth Hacks for Modern Businesses</span>
+
+      <!-- Animated Brand Accent Bar (Navy-to-Red Dynamic Pulse) -->
+      <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] section-accent-line mx-auto mt-4 mb-5"></div>
+
+      <!-- Subtitle: Verbatim Unity Compass -->
+      <p class="insights-subheading-reveal text-sm sm:text-base lg:text-[1.05rem] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-center">
         Explore actionable tips, industry trends, and proven strategies to scale your brand, generate leads, and grow faster online.
       </p>
     </div>
 
-    <!-- 3-Column Responsive Card Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- 3-Column Responsive Card Grid with Interactive Hover Micro-Lift -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-8 insights-grid-wrap">
       {featuredPosts.map((post, index) => (
         <article
-          class="gov-card flex flex-col justify-between group bg-white border border-slate-200/90 rounded-card p-6 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 reveal-on-scroll"
-          style={`animation-delay: ${index * 100}ms;`}
+          class="insights-card flex flex-col justify-between group bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-[0_10px_35px_-5px_rgba(11,37,83,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(11,37,83,0.14)] hover:border-[#FF3130]/40 transition-all duration-300 hover:-translate-y-2 relative"
         >
           <div>
-            <!-- Article Thumbnail -->
-            <a href={`/blog/${post.slug}`} class="block overflow-hidden rounded-lg aspect-[16/10] bg-slate-100 mb-5 border border-slate-200/70" tabindex="-1" aria-hidden="true">
+            <!-- Article Thumbnail with Subtle Zoom on Hover & Floating Category Badge -->
+            <a href={`/blog/${post.slug}`} class="block overflow-hidden rounded-2xl aspect-[16/10] bg-slate-100 mb-6 border border-slate-100 relative group/thumb" tabindex="-1" aria-hidden="true">
               <img
                 src={post.image}
                 alt={post.title}
-                class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105"
+                class="w-full h-full object-cover transform transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy"
                 width="400"
                 height="250"
               />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/35 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+              <!-- Floating Category Pill on Image -->
+              <div class="absolute top-3.5 left-3.5 z-10">
+                <span class="inline-flex items-center px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/80 text-[#0C487A] font-bold text-[11px] tracking-wide shadow-sm">
+                  {post.category}
+                </span>
+              </div>
             </a>
 
-            <!-- Metadata: Category & Read Time -->
-            <div class="flex items-center gap-2 text-xs mb-2.5">
-              <span class="font-bold text-[#FF3130] uppercase tracking-wider text-[11px] font-mono">
-                {post.category}
-              </span>
-              <span class="text-slate-300" aria-hidden="true">•</span>
-              <span class="text-slate-400 font-medium">
-                {post.readTime}
-              </span>
+            <!-- Metadata: Date -->
+            <div class="flex items-center gap-2 text-xs text-slate-500 font-medium mb-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FF3130]"></span>
+              <time datetime={post.date} class="font-mono text-slate-500">{post.date}</time>
             </div>
 
-            <!-- Article Title -->
-            <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#0C487A] transition-colors line-clamp-2 leading-snug tracking-tight">
+            <!-- Post Title -->
+            <h3 class="text-xl font-extrabold text-[#0B2553] group-hover:text-[#FF3130] transition-colors duration-200 line-clamp-2 leading-snug mb-3">
               <a href={`/blog/${post.slug}`} class="focus:outline-none focus:underline">
                 {post.title}
               </a>
             </h3>
 
             <!-- Excerpt -->
-            <p class="text-xs sm:text-sm text-slate-600 mt-2.5 line-clamp-3 leading-relaxed font-normal">
+            <p class="text-slate-600 text-sm leading-relaxed line-clamp-3 mb-6 font-normal">
               {post.excerpt}
             </p>
           </div>
 
-          <!-- Bottom Footer: Date & Link -->
-          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-400 font-medium">{post.date}</span>
+          <!-- Card Footer: Read More Link -->
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between mt-auto">
             <a
               href={`/blog/${post.slug}`}
-              class="font-bold text-[#0C487A] group-hover:text-[#FF3130] inline-flex items-center gap-1.5 transition-colors link-hover-expand"
+              class="inline-flex items-center gap-2 text-sm font-bold text-[#0C487A] group-hover:text-[#FF3130] transition-colors duration-200"
             >
-              <span>Read Article</span>
-              <span aria-hidden="true">&rarr;</span>
+              <span>Read Full Article</span>
+              <svg class="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-200 text-[#FF3130]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
             </a>
           </div>
         </article>
       ))}
     </div>
 
-    <!-- Centered Bottom Action: View All Articles -->
-    <div class="mt-12 sm:mt-14 text-center reveal-on-scroll">
-      <a
-        href="/blog"
-        class="btn-outline-transition-navy group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-sm active:scale-[0.98] cursor-pointer"
-      >
-        <span>View All Articles</span>
-        <svg
-          class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
-    </div>
-
   </div>
 </section>
 
+<style>
+  /* ========================================================================= */
+  /* Scroll-Triggered Soft-Reveal Animation (Matching Hero & ServicesGrid)     */
+  /* ========================================================================= */
+  .insights-heading-reveal,
+  .insights-subheading-reveal,
+  .insights-grid-wrap {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+    transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  :global(#insights.is-revealed) .insights-heading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.05s;
+  }
+
+  :global(#insights.is-revealed) .insights-subheading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.15s;
+  }
+
+  :global(#insights.is-revealed) .insights-grid-wrap {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.25s;
+  }
+
+  /* ========================================================================= */
+  /* Continuous Radiant Color Shimmer Sweep across Headline Lines              */
+  /* ========================================================================= */
+  .insights-shimmer-line {
+    display: block;
+    background: linear-gradient(
+      90deg,
+      #0F274A 0%,
+      #1E40AF 22%,
+      #2563EB 42%,
+      #DC2626 58%,
+      #EF4444 72%,
+      #0F274A 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    will-change: background-position;
+  }
+
+  .insights-shimmer-line-1 {
+    animation: insightsShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .insights-shimmer-line-2 {
+    animation: insightsShimmer2 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes insightsShimmer1 {
+    0% { background-position: 0% 50%; }
+    48% { background-position: 100% 50%; }
+    52% { background-position: 100% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  @keyframes insightsShimmer2 {
+    0% { background-position: -50% 50%; }
+    48% { background-position: 50% 50%; }
+    52% { background-position: 50% 50%; }
+    100% { background-position: 150% 50%; }
+  }
+
+  /* Reduced Motion Override */
+  @media (prefers-reduced-motion: reduce) {
+    .insights-heading-reveal,
+    .insights-subheading-reveal,
+    .insights-grid-wrap {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      transition: none !important;
+    }
+    .insights-shimmer-line {
+      animation: none !important;
+      background: none !important;
+      -webkit-text-fill-color: #0F274A !important;
+      color: #0F274A !important;
+    }
+  }
+</style>
+
+<script>
+  function initInsightsSection() {
+    const section = document.getElementById('insights');
+    if (!section) return;
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            section.classList.add('is-revealed');
+            observer.unobserve(section);
+          }
+        });
+      }, { threshold: 0.20 });
+      observer.observe(section);
+    } else {
+      section.classList.add('is-revealed');
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initInsightsSection);
+  } else {
+    initInsightsSection();
+  }
+  document.addEventListener('astro:page-load', initInsightsSection);
+</script>

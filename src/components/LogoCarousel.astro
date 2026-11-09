@@ -1,129 +1,203 @@
 ---
 /**
- * LogoCarousel.astro - Client & Partner Logo Trust Bar
+ * LogoCarousel.astro - Defense Industry Giants Brand Section
  * 
- * Harmonized Brand Typography & Symmetrical Whitespace:
- * - Exact typography match: font-extrabold Inter in Primary Navy (#0C487A) with tracking-tight.
- * - Same font size and weight scale as "Who We Are" for 100% typographic consistency.
- * - "peripheral involvement" accented in Brand Red (#FF3130).
- * - Generous vertical whitespace above and below for an uncluttered, dignified presentation.
+ * Harmonized Theme & Visual Continuity:
+ * - Line Height: Expansive and elegant (leading-[1.4] to leading-[1.5]) with ample vertical breathing room.
+ * - Subheading Separation: mt-8 to mt-11 for generous optical distinction from the heading.
+ * - Scroll-Triggered Reveal: Exact same blur dissipation & upward glide as Hero initial load.
+ * - Blended Color Shimmer Animation: Unbroken consecutive radiant light wave sweeping from Line 1 to Line 2,
+ *   blending Deep Navy (#0F274A), Royal Blue (#1E40AF), Electric Blue (#2563EB), and Needle Red (#DC2626/#EF4444).
+ * - Continuous Marquee: Smooth infinite loop with interactive pause-on-hover and frosted glass cards.
  */
 
-export interface PartnerLogo {
+export interface PrimePartner {
   name: string;
   src: string;
+  domain: string;
   alt: string;
+  scale?: string;
 }
 
-const partnerLogos: PartnerLogo[] = [
-  {
-    name: 'Lockheed Martin',
-    src: '/images/logos/lockheed-martin.svg',
-    alt: 'Lockheed Martin',
-  },
+const primePartners: PrimePartner[] = [
   {
     name: 'Raytheon Technologies',
     src: '/images/logos/raytheon.webp',
-    alt: 'Raytheon Technologies',
-  },
-  {
-    name: 'General Dynamics',
-    src: '/images/logos/general-dynamics.png',
-    alt: 'General Dynamics',
-  },
-  {
-    name: 'Booz Allen Hamilton',
-    src: '/images/logos/booz-allen.png',
-    alt: 'Booz Allen Hamilton',
-  },
-  {
-    name: 'CACI',
-    src: '/images/logos/caci.webp',
-    alt: 'CACI International',
+    domain: 'Missiles & Defense Systems',
+    alt: 'Raytheon Technologies Defense Prime',
+    scale: 'max-h-8 sm:max-h-9',
   },
   {
     name: 'Leidos',
     src: '/images/logos/leidos.webp',
+    domain: 'Civil & Defense IT',
     alt: 'Leidos Federal Systems',
+    scale: 'max-h-8 sm:max-h-9',
+  },
+  {
+    name: 'Booz Allen Hamilton',
+    src: '/images/logos/booz-allen.png',
+    domain: 'Strategy & Cyber Missions',
+    alt: 'Booz Allen Hamilton Consulting',
+    scale: 'max-h-7 sm:max-h-8',
+  },
+  {
+    name: 'L3Harris',
+    src: '/images/logos/l3harris.svg',
+    domain: 'Tactical Communications',
+    alt: 'L3Harris Technologies Defense',
+    scale: 'max-h-8 sm:max-h-9',
+  },
+  {
+    name: 'CACI',
+    src: '/images/logos/caci.webp',
+    domain: 'Intelligence & Security',
+    alt: 'CACI International Defense Solutions',
+    scale: 'max-h-8 sm:max-h-9',
   },
   {
     name: 'Texas Instruments',
     src: '/images/logos/texas-instruments.png',
-    alt: 'Texas Instruments',
+    domain: 'Semiconductor Hardware',
+    alt: 'Texas Instruments Defense Tech',
+    scale: 'max-h-8 sm:max-h-9',
   },
   {
-    name: 'L3Harris',
-    src: '/images/logos/defense-partner-1.png',
-    alt: 'L3Harris Technologies',
+    name: 'Lockheed Martin',
+    src: '/images/logos/lockheed-martin.svg',
+    domain: 'Aerospace & Mission Systems',
+    alt: 'Lockheed Martin Defense Prime',
+    scale: 'max-h-8 sm:max-h-9',
+  },
+  {
+    name: 'General Dynamics',
+    src: '/images/logos/general-dynamics.png',
+    domain: 'Combat & Land Systems',
+    alt: 'General Dynamics Land Systems',
+    scale: 'max-h-7 sm:max-h-8',
   },
 ];
 ---
 
 <section
-  id="partner-trust-bar"
-  class="py-16 sm:py-20 lg:py-24 bg-white relative overflow-hidden"
+  id="defense-primes-ecosystem"
+  class="relative py-16 sm:py-20 lg:py-24 bg-white overflow-hidden border-t border-slate-200/80"
   aria-label="Defense Industry Involvement"
 >
-  <!-- Matching technical grid background accent to seamlessly integrate with Who We Are -->
-  <div class="absolute inset-0 bg-fed-grid-light opacity-50 pointer-events-none"></div>
+  <!-- Minute Checks Pattern Overlay (Identical 16px × 16px grid as Hero & Stats) -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-30 mix-blend-multiply"
+    style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.08) 1px, transparent 1px);"
+    aria-hidden="true"
+  ></div>
 
-  <!-- Trust Heading Block: Identical font family, weight, and size scale as Who We Are -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-10 sm:mb-12 text-center">
-    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0C487A] max-w-4xl mx-auto tracking-tight leading-tight">
-      <span class="block"><span class="text-[#FF3130]">T</span>he defense industry giants we have had</span>
-      <span class="block mt-2 sm:mt-2.5">
-        <span class="text-[#FF3130]">peripheral involvement</span> with
+  <!-- Soft Ambient Radial Blue Glow centered on section -->
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-64 bg-[radial-gradient(ellipse,rgba(40,121,182,0.07)_0%,transparent_70%)] pointer-events-none"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Trust Heading Block with Scroll-Triggered Reveal -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center mb-12 sm:mb-14 prime-content-wrap">
+    
+    <!-- Main Headline with Tight Cohesive Line-Height & Blended Color Sweep Animation -->
+    <h2 class="prime-heading-reveal prime-heading text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] lg:leading-[1.24] max-w-4xl mx-auto text-center">
+      <span class="prime-shimmer-line prime-shimmer-line-1">The defense industry giants we have had</span>
+      <span class="prime-shimmer-line prime-shimmer-line-2">
+        <span class="font-extrabold">peripheral involvement</span> with
       </span>
     </h2>
+
+    <!-- Animated Brand Accent Bar (Navy-to-Red Dynamic Pulse) -->
+    <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] section-accent-line mx-auto mt-4 mb-4"></div>
+
+    <!-- Subheading Paragraph: Balanced Spacing from Heading -->
+    <p class="prime-subheading-reveal prime-subheading mt-2 text-sm sm:text-base lg:text-[1.05rem] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+      Proven familiarity, subcontract alignment, and teaming agility across premier aerospace and defense organizations.
+    </p>
   </div>
 
-  <!-- Marquee Container: CSS-Only Animation with Pause-on-Hover and White Edge Fades -->
+  <!-- Marquee Container with Frosted Glass Cards, Scroll Reveal & Pause-on-Hover -->
   <div
-    class="group relative w-full overflow-hidden select-none py-2"
+    class="prime-carousel-reveal group/track relative w-full overflow-hidden select-none py-4"
     aria-roledescription="carousel"
   >
     <!-- Left Gradient Edge Fade (Seamless White Bleed) -->
     <div
-      class="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 sm:w-28 lg:w-40 bg-gradient-to-r from-white via-white/80 to-transparent"
+      class="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 sm:w-28 lg:w-44 bg-gradient-to-r from-white via-white/85 to-transparent"
       aria-hidden="true"
     ></div>
 
     <!-- Right Gradient Edge Fade (Seamless White Bleed) -->
     <div
-      class="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 sm:w-28 lg:w-40 bg-gradient-to-l from-white via-white/80 to-transparent"
+      class="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 sm:w-28 lg:w-44 bg-gradient-to-l from-white via-white/85 to-transparent"
       aria-hidden="true"
     ></div>
 
-    <!-- Horizontal Continuous Flex Track -->
-    <div class="flex gap-10 sm:gap-14 lg:gap-16 items-center">
+    <!-- Infinite Carousel Marquee Track -->
+    <div class="flex items-center marquee-slider">
       
-      <!-- Track 1: Primary Animation Stream -->
-      <div class="flex shrink-0 animate-marquee items-center justify-around gap-10 sm:gap-14 lg:gap-16 min-w-full group-hover:[animation-play-state:paused]">
-        {partnerLogos.map((logo) => (
-          <div class="shrink-0 flex items-center justify-center h-12 w-36 sm:w-44 px-2">
-            <img
-              src={logo.src}
-              alt={logo.alt}
-              class="max-h-8 sm:max-h-9 w-auto max-w-[140px] sm:max-w-[160px] object-contain opacity-85 hover:opacity-100 transition-all duration-300 transform hover:scale-105 cursor-pointer"
-              loading="lazy"
-            />
+      <!-- Track 1: First Stream -->
+      <div class="flex shrink-0 animate-marquee items-center gap-6 sm:gap-8 group-hover/track:[animation-play-state:paused] pl-6 sm:pl-8">
+        {primePartners.map((partner) => (
+          <div class="prime-card group/card relative shrink-0 flex flex-col items-center justify-center h-24 sm:h-26 w-44 sm:w-56 px-5 py-3 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/90 shadow-[0_4px_16px_rgba(15,39,74,0.04)] hover:shadow-[0_16px_32px_rgba(15,39,74,0.12)] hover:border-[#1E40AF]/30 transform hover:-translate-y-2 hover:scale-[1.03] transition-all duration-300 cursor-pointer overflow-hidden">
+            
+            <!-- Card subtle ambient hover glow -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(40,121,182,0.10)_0%,transparent_70%)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+
+            <!-- Top Accent Highlight Line on Hover -->
+            <div class="absolute top-0 inset-x-6 h-0.5 bg-gradient-to-r from-transparent via-[#FF3130] to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
+
+            <!-- Logo Image Container -->
+            <div class="relative z-10 flex items-center justify-center h-12 w-full">
+              <img
+                src={partner.src}
+                alt={partner.alt}
+                class={`${partner.scale || 'max-h-8 sm:max-h-9'} max-w-[130px] sm:max-w-[160px] w-auto object-contain filter grayscale contrast-110 opacity-75 group-hover/card:grayscale-0 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-300`}
+                loading="lazy"
+                width="160"
+                height="44"
+              />
+            </div>
+
+            <!-- Domain Tag -->
+            <span class="relative z-10 text-[10px] font-mono uppercase tracking-wider text-slate-400 group-hover/card:text-[#0C487A] font-semibold mt-1 transition-colors duration-200 truncate max-w-full">
+              {partner.domain}
+            </span>
           </div>
         ))}
       </div>
 
       <!-- Track 2: Duplicate Stream for Infinite Seamless Loop -->
       <div
-        class="flex shrink-0 animate-marquee items-center justify-around gap-10 sm:gap-14 lg:gap-16 min-w-full group-hover:[animation-play-state:paused]"
+        class="flex shrink-0 animate-marquee items-center gap-6 sm:gap-8 group-hover/track:[animation-play-state:paused] pl-6 sm:pl-8"
         aria-hidden="true"
       >
-        {partnerLogos.map((logo) => (
-          <div class="shrink-0 flex items-center justify-center h-12 w-36 sm:w-44 px-2">
-            <img
-              src={logo.src}
-              alt={logo.alt}
-              class="max-h-8 sm:max-h-9 w-auto max-w-[140px] sm:max-w-[160px] object-contain opacity-85 hover:opacity-100 transition-all duration-300 transform hover:scale-105 cursor-pointer"
-              loading="lazy"
-            />
+        {primePartners.map((partner) => (
+          <div class="prime-card group/card relative shrink-0 flex flex-col items-center justify-center h-24 sm:h-26 w-44 sm:w-56 px-5 py-3 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/90 shadow-[0_4px_16px_rgba(15,39,74,0.04)] hover:shadow-[0_16px_32px_rgba(15,39,74,0.12)] hover:border-[#1E40AF]/30 transform hover:-translate-y-2 hover:scale-[1.03] transition-all duration-300 cursor-pointer overflow-hidden">
+            
+            <!-- Card subtle ambient hover glow -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(40,121,182,0.10)_0%,transparent_70%)] opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+
+            <!-- Top Accent Highlight Line on Hover -->
+            <div class="absolute top-0 inset-x-6 h-0.5 bg-gradient-to-r from-transparent via-[#FF3130] to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
+
+            <!-- Logo Image Container -->
+            <div class="relative z-10 flex items-center justify-center h-12 w-full">
+              <img
+                src={partner.src}
+                alt={partner.alt}
+                class={`${partner.scale || 'max-h-8 sm:max-h-9'} max-w-[130px] sm:max-w-[160px] w-auto object-contain filter grayscale contrast-110 opacity-75 group-hover/card:grayscale-0 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-300`}
+                loading="lazy"
+                width="160"
+                height="44"
+              />
+            </div>
+
+            <!-- Domain Tag -->
+            <span class="relative z-10 text-[10px] font-mono uppercase tracking-wider text-slate-400 group-hover/card:text-[#0C487A] font-semibold mt-1 transition-colors duration-200 truncate max-w-full">
+              {partner.domain}
+            </span>
           </div>
         ))}
       </div>
@@ -132,10 +206,171 @@ const partnerLogos: PartnerLogo[] = [
   </div>
 </section>
 
+<script>
+  function setupPrimeSectionReveal() {
+    const section = document.getElementById('defense-primes-ecosystem');
+    if (!section) return;
+
+    // Respect reduced-motion preferences
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      section.classList.add('is-revealed');
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            section.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    observer.observe(section);
+  }
+
+  // Support initial load and Astro View Transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupPrimeSectionReveal);
+  } else {
+    setupPrimeSectionReveal();
+  }
+  document.addEventListener('astro:page-load', setupPrimeSectionReveal);
+</script>
+
 <style>
+  /* ========================================================================= */
+  /* Scroll-Triggered Soft-Reveal Animation (Identical to Hero Initial Load)   */
+  /* ========================================================================= */
+  .prime-heading-reveal,
+  .prime-subheading-reveal,
+  .prime-carousel-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+    transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  /* Staggered entry timing for natural executive flow */
+  :global(#defense-primes-ecosystem.is-revealed) .prime-heading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.05s;
+  }
+
+  :global(#defense-primes-ecosystem.is-revealed) .prime-subheading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.32s;
+  }
+
+  :global(#defense-primes-ecosystem.is-revealed) .prime-carousel-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.58s;
+  }
+
+  /* ========================================================================= */
+  /* Continuous Radiant Blended Color Shimmer Animation                        */
+  /* Sweeps unbroken through Navy (#0F274A), Royal Blue (#1E40AF),             */
+  /* Electric Blue (#2563EB), and Needle Red (#DC2626/#EF4444) across 2 lines  */
+  /* ========================================================================= */
+  @keyframes primeShimmer1 {
+    0% { background-position: 0% 50%; }
+    48% { background-position: 100% 50%; }
+    52% { background-position: 100% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  @keyframes primeShimmer2 {
+    0% { background-position: -50% 50%; }
+    48% { background-position: 50% 50%; }
+    52% { background-position: 50% 50%; }
+    100% { background-position: 150% 50%; }
+  }
+
+  .prime-shimmer-line {
+    background: linear-gradient(
+      90deg,
+      #0F274A 0%,
+      #1E40AF 22%,
+      #2563EB 42%,
+      #DC2626 58%,
+      #EF4444 72%,
+      #0F274A 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    will-change: background-position;
+  }
+
+  .prime-shimmer-line-1 {
+    animation: primeShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .prime-shimmer-line-2 {
+    animation: primeShimmer2 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  /* ========================================================================= */
+  /* Continuous Marquee Ticker Loop                                            */
+  /* ========================================================================= */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 34s linear infinite;
+    will-change: transform;
+  }
+
+  /* Reduced Motion Accommodations */
   @media (prefers-reduced-motion: reduce) {
-    .animate-marquee {
+    .prime-heading-reveal,
+    .prime-subheading-reveal,
+    .prime-carousel-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      transition: none !important;
+    }
+    .prime-shimmer-line {
+      background: none !important;
+      -webkit-text-fill-color: #0F274A !important;
+      color: #0F274A !important;
       animation: none !important;
+    }
+    .animate-marquee {
+      animation: none;
+    }
+    .marquee-slider {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
     }
   }
 </style>

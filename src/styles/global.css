@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,12 +6,30 @@
 
 @layer base {
   html {
-    font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     scroll-behavior: smooth;
     color: #0F172A;
     background-color: #FFFFFF;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+    letter-spacing: -0.022em;
+  }
+
+  p, li, blockquote {
+    letter-spacing: -0.011em;
+  }
+
+  button, a, input, select {
+    font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
   }
 
   ::selection {
@@ -47,6 +65,34 @@
 
   .badge-red {
     @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-red-50 text-[#FF3130] border border-red-200/60;
+  }
+
+  /* Contragenix Reference Pill */
+  .badge-cg-orange {
+    @apply inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-[#FDF0E6] text-[#EE8522];
+  }
+
+  /* Contragenix Signature Buttons */
+  .btn-cg-orange {
+    background-color: #EE8522;
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-cg-orange:hover {
+    background-color: #D97312;
+    transform: translateY(-1.5px);
+    box-shadow: 0 8px 20px -4px rgba(238, 133, 34, 0.4);
+  }
+  .btn-cg-orange:active {
+    transform: translateY(0);
+  }
+
+  /* Contragenix Blue Vertical Dotted Lines */
+  .bg-cg-dotted {
+    background-image: 
+      repeating-linear-gradient(to right, transparent, transparent 24.8%, rgba(255, 255, 255, 0.14) 24.8%, rgba(255, 255, 255, 0.14) 25%, transparent 25%);
   }
 
   .gov-card {
@@ -215,6 +261,498 @@
   }
 }
 
+/* ========================================================================= */
+/* Contragenix Signature Warm Orange CTA Button (#EE8522)                    */
+/* ========================================================================= */
+.btn-cg-orange {
+  background-color: #EE8522;
+  color: #FFFFFF !important;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(238, 133, 34, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-cg-orange:hover {
+  background-color: #D97312;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px rgba(238, 133, 34, 0.38);
+}
+.btn-cg-orange:active {
+  transform: translateY(0);
+}
+
+/* ========================================================================= */
+/* Continuous Unbroken 3-Line Radiant Shimmer Animation                      */
+/* Slowly starts at Line 1 and sweeps continuously across Line 1, Line 2, and */
+/* Line 3 with Navy (#0F274A), Royal Blue (#1E40AF), Electric Blue (#2563EB)  */
+/* and Needle Red (#DC2626 / #EF4444) with unbroken fluidity                 */
+/* ========================================================================= */
+@keyframes line1ContinuousSweep {
+  0% { background-position: 0% 50%; }
+  48% { background-position: 100% 50%; }
+  52% { background-position: 100% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes line2ContinuousSweep {
+  0% { background-position: -40% 50%; }
+  48% { background-position: 60% 50%; }
+  52% { background-position: 60% 50%; }
+  100% { background-position: 160% 50%; }
+}
+
+@keyframes line3ContinuousSweep {
+  0% { background-position: -80% 50%; }
+  48% { background-position: 20% 50%; }
+  52% { background-position: 20% 50%; }
+  100% { background-position: 120% 50%; }
+}
+
+.hero-shimmer-line {
+  background: linear-gradient(
+    90deg,
+    #0F274A 0%,
+    #1E40AF 22%,
+    #2563EB 42%,
+    #DC2626 58%,
+    #EF4444 72%,
+    #0F274A 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  will-change: background-position;
+}
+
+.hero-shimmer-line-1 {
+  animation: line1ContinuousSweep 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.hero-shimmer-line-2 {
+  animation: line2ContinuousSweep 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.hero-shimmer-line-3 {
+  animation: line3ContinuousSweep 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* ========================================================================= */
+/* Cinematic Initial Load Soft-Reveal (Blur Dissipation & Upward Glide)      */
+/* Applied gracefully across Heading, Subheading, and Dual CTA Buttons       */
+/* ========================================================================= */
+@keyframes heroSoftReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.hero-heading-reveal {
+  animation: heroSoftReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  will-change: opacity, transform, filter;
+}
+
+.hero-subheading-reveal {
+  animation: heroSoftReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+  will-change: opacity, transform, filter;
+}
+
+.hero-cta-reveal {
+  animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+  will-change: opacity, transform, filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-shimmer-line {
+    background: none !important;
+    -webkit-text-fill-color: #0F274A !important;
+    color: #0F274A !important;
+    animation: none !important;
+  }
+  .hero-heading-reveal,
+  .hero-subheading-reveal,
+  .hero-cta-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* ========================================================================= */
+/* Gentle 3D Levitating Floating Artwork & Synchronized Ground Shadow        */
+/* ========================================================================= */
+@keyframes heroArtFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes heroShadowBreathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+}
+
+.hero-floating-artwork {
+  animation: heroArtFloat 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero-floating-shadow {
+  animation: heroShadowBreathe 6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-floating-artwork,
+  .hero-floating-shadow {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ========================================================================= */
+/* Solid, High-Contrast Navigation Dropdown & Crisp, Readable Interactions   */
+/* ========================================================================= */
+.nav-dropdown-panel {
+  opacity: 0;
+  transform: translateY(8px) scale(0.985);
+  pointer-events: none;
+  background-color: #FFFFFF !important;
+  box-shadow: 0 24px 50px -10px rgba(15, 39, 74, 0.22), 0 0 0 1px rgba(15, 39, 74, 0.08) !important;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.group\/nav:hover .nav-dropdown-panel,
+.group\/nav:focus-within .nav-dropdown-panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Eye-Pleasing Text Motion & Crisp Contrast on Hover */
+.dropdown-link-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0.95rem;
+  border-radius: 0.75rem;
+  background-color: transparent;
+  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown-link-row:hover {
+  background-color: #F0F6FD;
+}
+
+.dropdown-link-text {
+  color: #0F274A;
+  font-weight: 600;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, color;
+}
+
+.dropdown-link-row:hover .dropdown-link-text {
+  transform: translateX(4px);
+  color: #1E40AF;
+}
+
+/* Subtle Glowing Left Needle Indicator that smoothly expands on hover */
+.dropdown-pip {
+  width: 3px;
+  height: 0px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #DC2626 0%, #EF4444 100%);
+  opacity: 0;
+  transform: scaleY(0);
+  transition: height 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown-link-row:hover .dropdown-pip {
+  height: 14px;
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/* Elegant Sliding Arrow */
+.dropdown-arrow {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #DC2626;
+}
+
+.dropdown-link-row:hover .dropdown-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown-panel {
+    transform: none !important;
+    transition: opacity 0.2s ease !important;
+  }
+  .dropdown-link-text {
+    transform: none !important;
+  }
+  .dropdown-arrow {
+    transform: none !important;
+  }
+}
+
+/* ========================================================================= */
+/* Elegant Animated CTA Button Interactions (Light Sheen & Ambient Breathing) */
+/* ========================================================================= */
+@keyframes ctaGlowPulse {
+  0%, 100% {
+    box-shadow: 0 4px 14px -2px rgba(220, 55, 62, 0.30);
+  }
+  50% {
+    box-shadow: 0 6px 20px 2px rgba(220, 55, 62, 0.48);
+  }
+}
+
+@keyframes btnSheenSweep {
+  0%, 65% {
+    left: -70%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-sheen::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -70%;
+  width: 45%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 80%
+  );
+  transform: rotate(25deg);
+  animation: btnSheenSweep 8.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+.btn-needle-red {
+  background: linear-gradient(135deg, #DC373E 0%, #C62828 100%);
+  color: #FFFFFF !important;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  animation: ctaGlowPulse 7s ease-in-out infinite;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-needle-red:hover {
+  background: linear-gradient(135deg, #C62828 0%, #B7161B 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px 2px rgba(220, 55, 62, 0.6);
+  animation: none;
+}
+.btn-needle-red:active {
+  transform: translateY(0);
+}
+
+.hero-unified-paragraph {
+  background: linear-gradient(
+    90deg,
+    #2C3E5A 0%,
+    #1E3150 25%,
+    #2879B6 50%,
+    #1E3150 75%,
+    #2C3E5A 100%
+  );
+  background-size: 240% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroUnifiedShimmer 8s ease-in-out infinite;
+  display: block;
+  will-change: background-position;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-unified-headline {
+    background: none !important;
+    -webkit-text-fill-color: #1B2B5E !important;
+    color: #1B2B5E !important;
+    animation: none !important;
+  }
+  .hero-unified-paragraph {
+    background: none !important;
+    -webkit-text-fill-color: #2C3E5A !important;
+    color: #2C3E5A !important;
+    animation: none !important;
+  }
+}
+
+@keyframes flowGradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.headline-blue-flow {
+  background: linear-gradient(
+    90deg,
+    #1B2B5E 0%,
+    #233876 18%,
+    #2A4177 35%,
+    #3B5998 48%,
+    #DC373E 62%,
+    #2A4177 78%,
+    #1B2B5E 100%
+  );
+  background-size: 260% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: flowGradientText 7s ease-in-out infinite;
+  display: inline-block;
+  will-change: background-position;
+}
+
+
+
+/* Warm Amber Accent Button (Alternative) */
+.btn-warm-amber {
+  background: linear-gradient(135deg, #E67A18 0%, #D96509 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 14px -2px rgba(217, 101, 9, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-warm-amber:hover {
+  background: linear-gradient(135deg, #D96509 0%, #C25405 100%);
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 22px -3px rgba(217, 101, 9, 0.45);
+}
+.btn-warm-amber:active {
+  transform: translateY(0);
+}
+
+/* Soft Blue Outlined Action */
+.btn-soft-blue-outline {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #1B2B5E;
+  border: 1.5px solid rgba(42, 65, 119, 0.3);
+  font-weight: 600;
+  border-radius: 0.625rem;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-soft-blue-outline:hover {
+  background-color: #FFFFFF;
+  color: #132254;
+  border-color: #1B2B5E;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px -2px rgba(27, 43, 94, 0.15);
+}
+
+@keyframes heroShimmerSweep {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.hero-shimmer-text {
+  background: linear-gradient(
+    115deg,
+    #FF3130 0%,
+    #FF3130 32%,
+    #FFA8A7 48%,
+    #FFFFFF 52%,
+    #FFA8A7 56%,
+    #FF3130 68%,
+    #FF3130 100%
+  );
+  background-size: 260% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroShimmerSweep 4.5s ease-in-out infinite;
+  display: inline-block;
+  will-change: background-position;
+}
+
+@keyframes heroGlowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 1px rgba(255, 49, 48, 0.15));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(255, 49, 48, 0.45));
+  }
+}
+
+.hero-glow-accent {
+  animation: heroGlowPulse 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .headline-blue-flow {
+    animation: none !important;
+    background: none !important;
+    -webkit-text-fill-color: #0A2540 !important;
+    color: #0A2540 !important;
+  }
+  .hero-shimmer-text {
+    animation: none !important;
+    background: none !important;
+    -webkit-text-fill-color: #FF3130 !important;
+    color: #FF3130 !important;
+  }
+  .hero-glow-accent {
+    animation: none !important;
+    filter: none !important;
+  }
+}
+
 .btn-outline-transition-white {
   background-color: transparent;
   color: #FFFFFF;
@@ -304,6 +842,23 @@
 /* Pause marquee on hover */
 .marquee-track:hover {
   animation-play-state: paused;
+}
+
+/* ========================================================================= */
+/* Animated Tri-Color Blended Brand Accent Line for Section Headings         */
+/* ========================================================================= */
+.section-accent-line {
+  background-size: 200% 100% !important;
+  animation: sectionAccentShift 6s ease-in-out infinite alternate !important;
+}
+
+@keyframes sectionAccentShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Reduced Motion Override */

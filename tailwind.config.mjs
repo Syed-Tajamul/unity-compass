@@ -16,6 +16,16 @@ export default {
         'light-bg': '#F8FAFC',
         'subtle-surface': '#F1F5F9',
         'brand-border': '#E2E8F0',
+
+        // Contragenix-Style Reference Palette
+        'cg-blue': '#0B2553',
+        'cg-royal': '#3355A5',
+        'cg-orange': '#EE8522',
+        'cg-orange-hover': '#D97312',
+        'cg-peach': '#FDF0E6',
+        'cg-light-blue': '#F0F6FD',
+        'cg-soft-surface': '#F8FAFD',
+        'cg-border': '#E8EEF5',
         
         // Backward-compatibility token mapping
         brand: {
@@ -32,7 +42,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'Plus Jakarta Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'Outfit', 'Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        heading: ['"Plus Jakarta Sans"', 'Outfit', 'system-ui', 'sans-serif'],
+        display: ['Outfit', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         'subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',

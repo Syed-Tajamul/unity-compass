@@ -10,11 +10,11 @@ export const navigationLinks: NavItem[] = [
   { name: 'Home', href: '/' },
   {
     name: 'About Us',
-    href: '/about-us',
+    href: 'javascript:void(0)',
     children: [
       {
         name: 'About Unity Compass',
-        href: '/about-us',
+        href: 'javascript:void(0)',
         description: 'Our mission, federal contracting standards, leadership, and operational methodology.',
       },
       {
@@ -58,9 +58,9 @@ export const navigationLinks: NavItem[] = [
       },
     ],
   },
-  { name: 'Careers', href: '/career' },
+  { name: 'Careers', href: 'javascript:void(0)' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Contact Us', href: '/contact' },
+  { name: 'Contact Us', href: 'javascript:void(0)' },
 ];
 
 export const footerLinks = {
@@ -72,11 +72,11 @@ export const footerLinks = {
     { name: 'Customized Support Services', href: '/customized-support-services' },
   ],
   company: [
-    { name: 'About Us', href: '/about-us' },
+    { name: 'About Us', href: 'javascript:void(0)' },
     { name: 'Capability Statement (PDF)', href: '/documents/capability-statement.pdf' },
-    { name: 'Careers & Job Board', href: '/career' },
+    { name: 'Careers & Job Board', href: 'javascript:void(0)' },
     { name: 'Insights & Blog', href: '/blog' },
-    { name: 'Contact Us', href: '/contact' },
+    { name: 'Contact Us', href: 'javascript:void(0)' },
     { name: 'Privacy Policy', href: '/privacy-policy' },
   ],
   legal: [

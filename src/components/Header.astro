@@ -9,32 +9,26 @@ const servicesDropdown = [
   {
     name: 'Proposal Development & Federal Bid Support',
     href: '/proposal-development-services',
-    tag: 'Core Practice',
   },
   {
     name: 'OASIS+ & IDIQ Qualification Support',
     href: '/customized-support-services',
-    tag: 'High Demand',
   },
   {
     name: 'Security-Cleared Recruitment',
     href: '/recruitment-services',
-    tag: 'TS/SCI & Poly',
   },
   {
     name: 'Staffing Solutions',
     href: '/staffing',
-    tag: 'Surge Models',
   },
   {
     name: 'IT & Program Consulting',
     href: '/information-technology-and-business-consulting',
-    tag: 'Tech Advisory',
   },
   {
     name: 'Contract Compliance Support',
     href: '/customized-support-services',
-    tag: 'FAR / DFARS',
   },
 ];
 
@@ -42,12 +36,10 @@ const aboutDropdown = [
   {
     name: 'About Unity Compass',
     href: '/about-us',
-    tag: 'Overview',
   },
   {
     name: 'Capability Statement (PDF)',
     href: '/documents/capability-statement.pdf',
-    tag: 'Official PDF',
     isPdf: true,
   },
 ];
@@ -55,55 +47,61 @@ const aboutDropdown = [
 
 <header
   id="main-header"
-  class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] transition-all duration-300"
+  class="sticky top-0 z-40 bg-gradient-to-r from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-transparent transition-all duration-300 relative"
 >
+  <!-- Subtle Minute Check Pattern Overlay -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-30 -z-10"
+    style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.06) 1px, transparent 1px);"
+    aria-hidden="true"
+  ></div>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20 transition-all duration-300" id="header-inner">
       
       <!-- Brand Logo -->
       <a
         href="/"
-        class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#0C487A] rounded-lg p-1 transition-transform"
+        class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#0C487A] rounded-lg p-1 transition-transform shrink-0"
         aria-label="Unity Compass - Home"
       >
         <img
           src="/images/Green-Minimal-Travel-Business-Logo.png"
           alt="Unity Compass - Your Partner In Government Contracting Success"
-          class="h-10 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+          class="h-10 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
           width="207"
-          height="60"
+          height="55"
         />
       </a>
 
       <!-- Desktop Right-Aligned Navigation & Action Cluster (Clean, Eye-Pleasing & Uncluttered) -->
-      <div class="hidden lg:flex items-center space-x-3 xl:space-x-5">
-        <nav class="flex items-center space-x-2 xl:space-x-4" aria-label="Main Navigation">
+      <div class="hidden lg:flex items-center gap-3 xl:gap-5 shrink-0">
+        <nav class="flex items-center gap-1.5 xl:gap-4 shrink-0 whitespace-nowrap" aria-label="Main Navigation">
           
-          <!-- Home Link with Signature Red Underline -->
+          <!-- Home Link with Signature Red Active Indicator -->
           <a
             href="/"
-            class={`nav-link px-2 py-2 text-sm font-semibold transition-colors ${
-              currentPath === '/' ? 'text-[#FF3130] active' : 'text-slate-800 hover:text-[#FF3130]'
+            class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors ${
+              currentPath === '/' ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
             }`}
           >
             <span>Home</span>
           </a>
 
-          <!-- Services Dropdown (Smooth Desktop Hover Menu) -->
+          <!-- Services Dropdown (Contragenix Solid Blue Dropdown matching Screenshot 2) -->
           <div class="relative group/nav py-6">
             <button
               type="button"
-              class={`nav-link inline-flex items-center gap-1.5 px-2 py-2 text-sm font-semibold transition-colors cursor-pointer ${
+              class={`nav-link whitespace-nowrap inline-flex items-center gap-1 px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
                 currentPath.includes('proposal') || currentPath.includes('recruitment') || currentPath.includes('staffing') || currentPath.includes('consulting') || currentPath.includes('customized')
-                  ? 'text-[#FF3130] active'
-                  : 'text-slate-800 hover:text-[#FF3130]'
+                  ? 'text-[#FF3130] active font-bold'
+                  : 'text-slate-800 hover:text-[#0C487A]'
               }`}
               aria-expanded="false"
               aria-haspopup="true"
             >
-              <span>Services</span>
+              <span>Our Services</span>
               <svg
-                class="w-3.5 h-3.5 text-current transition-transform duration-200 group-hover/nav:rotate-180"
+                class="w-3.5 h-3.5 text-current transition-transform duration-200 group-hover/nav:rotate-180 shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -112,15 +110,23 @@ const aboutDropdown = [
               </svg>
             </button>
 
-            <!-- Dropdown Panel (Clean, Vertical White Card inspired by Screenshot 3) -->
-            <div class="absolute left-0 top-full -mt-1 w-80 rounded-xl bg-white py-1.5 shadow-xl border border-[#E2E8F0] opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-200 ease-out z-50 overflow-hidden">
-              <div class="divide-y divide-slate-50">
+            <!-- Dropdown Panel: Solid White Card (Zero Transparency Bleed, 100% Readable) -->
+            <div class="nav-dropdown-panel absolute left-0 top-full -mt-1 w-[380px] sm:w-[420px] rounded-2xl bg-white p-2.5 shadow-[0_24px_50px_-10px_rgba(15,39,74,0.22),0_0_0_1px_rgba(15,39,74,0.08)] border border-slate-200 z-50">
+              <div class="space-y-0.5">
                 {servicesDropdown.map((service) => (
                   <a
                     href={service.href}
-                    class="dropdown-item px-4 py-2.5 text-xs sm:text-[13px] font-medium text-slate-800 block transition-colors"
+                    class="dropdown-link-row group/item"
                   >
-                    <span class="font-semibold">{service.name}</span>
+                    <div class="flex items-center gap-2.5 min-w-0 pr-1">
+                      <span class="dropdown-pip shrink-0" aria-hidden="true"></span>
+                      <span class="dropdown-link-text text-[13px] sm:text-[13.5px] font-semibold whitespace-nowrap">
+                        {service.name}
+                      </span>
+                    </div>
+                    <svg class="dropdown-arrow w-3.5 h-3.5 shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                    </svg>
                   </a>
                 ))}
               </div>
@@ -131,15 +137,15 @@ const aboutDropdown = [
           <div class="relative group/nav py-6">
             <button
               type="button"
-              class={`nav-link inline-flex items-center gap-1.5 px-2 py-2 text-sm font-semibold transition-colors cursor-pointer ${
-                currentPath.startsWith('/about-us') ? 'text-[#FF3130] active' : 'text-slate-800 hover:text-[#FF3130]'
+              class={`nav-link whitespace-nowrap inline-flex items-center gap-1 px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
+                currentPath.startsWith('/about-us') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
               }`}
               aria-expanded="false"
               aria-haspopup="true"
             >
               <span>About Us</span>
               <svg
-                class="w-3.5 h-3.5 text-current transition-transform duration-200 group-hover/nav:rotate-180"
+                class="w-3.5 h-3.5 text-current transition-transform duration-200 group-hover/nav:rotate-180 shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -148,28 +154,36 @@ const aboutDropdown = [
               </svg>
             </button>
 
-            <!-- Dropdown Panel -->
-            <div class="absolute left-0 top-full -mt-1 w-72 rounded-xl bg-white py-1.5 shadow-xl border border-[#E2E8F0] opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-200 ease-out z-50 overflow-hidden">
-              <div class="divide-y divide-slate-50">
+            <!-- Dropdown Panel: Solid White Card (Zero Transparency Bleed, 100% Readable) -->
+            <div class="nav-dropdown-panel absolute left-0 top-full -mt-1 w-[290px] sm:w-[320px] rounded-2xl bg-white p-2.5 shadow-[0_24px_50px_-10px_rgba(15,39,74,0.22),0_0_0_1px_rgba(15,39,74,0.08)] border border-slate-200 z-50">
+              <div class="space-y-0.5">
                 {aboutDropdown.map((item) => (
                   <a
                     href={item.href}
                     target={item.isPdf ? '_blank' : undefined}
                     rel={item.isPdf ? 'noopener noreferrer' : undefined}
-                    class="dropdown-item px-4 py-2.5 text-xs sm:text-[13px] font-medium text-slate-800 block transition-colors"
+                    class="dropdown-link-row group/item"
                   >
-                    <span class="font-semibold">{item.name}</span>
+                    <div class="flex items-center gap-2.5 min-w-0 pr-1">
+                      <span class="dropdown-pip shrink-0" aria-hidden="true"></span>
+                      <span class="dropdown-link-text text-[13px] sm:text-[13.5px] font-semibold whitespace-nowrap">
+                        {item.name}
+                      </span>
+                    </div>
+                    <svg class="dropdown-arrow w-3.5 h-3.5 shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                    </svg>
                   </a>
                 ))}
               </div>
             </div>
           </div>
 
-          <!-- Careers -->
+          <!-- Careers (Disabled for meeting) -->
           <a
-            href="/career"
-            class={`nav-link px-2 py-2 text-sm font-semibold transition-colors ${
-              currentPath.startsWith('/career') ? 'text-[#FF3130] active' : 'text-slate-800 hover:text-[#FF3130]'
+            href="javascript:void(0)"
+            class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
+              currentPath.startsWith('/career') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
             }`}
           >
             <span>Careers</span>
@@ -178,18 +192,18 @@ const aboutDropdown = [
           <!-- Blog -->
           <a
             href="/blog"
-            class={`nav-link px-2 py-2 text-sm font-semibold transition-colors ${
-              currentPath.startsWith('/blog') ? 'text-[#FF3130] active' : 'text-slate-800 hover:text-[#FF3130]'
+            class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors ${
+              currentPath.startsWith('/blog') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
             }`}
           >
             <span>Blog</span>
           </a>
 
-          <!-- Contact Us -->
+          <!-- Contact Us (Disabled for meeting) -->
           <a
-            href="/contact"
-            class={`nav-link px-2 py-2 text-sm font-semibold transition-colors ${
-              currentPath.startsWith('/contact') ? 'text-[#FF3130] active' : 'text-slate-800 hover:text-[#FF3130]'
+            href="javascript:void(0)"
+            class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
+              currentPath.startsWith('/contact') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
             }`}
           >
             <span>Contact Us</span>
@@ -198,12 +212,12 @@ const aboutDropdown = [
         </nav>
 
         <!-- Subtle Vertical Divider -->
-        <div class="h-5 w-px bg-slate-200 shrink-0" aria-hidden="true"></div>
+        <div class="h-5 w-px bg-slate-300/70 shrink-0" aria-hidden="true"></div>
 
-        <!-- Eye-Pleasing Direct Federal Advisory Line -->
+        <!-- Direct Federal Advisory Line -->
         <a
           href={`tel:${companyInfo.phoneRaw}`}
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 bg-slate-50/90 hover:bg-[#0C487A]/10 hover:text-[#0C487A] border border-slate-200/90 transition-all duration-200 group shrink-0 shadow-xs active:scale-[0.98]"
+          class="whitespace-nowrap inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-800 bg-white/80 hover:bg-white hover:text-[#0C487A] border border-slate-300/80 transition-all duration-200 group shrink-0 shadow-xs active:scale-[0.98]"
           aria-label={`Call Unity Compass direct line at ${companyInfo.phone}`}
         >
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
@@ -213,13 +227,12 @@ const aboutDropdown = [
           <span class="font-semibold text-xs sm:text-[13px] tracking-tight text-slate-800 group-hover:text-[#0C487A] transition-colors">{companyInfo.phone}</span>
         </a>
 
-        <!-- Reference-Inspired Outlined Hover Button ("Book a Meeting") -->
-        <!-- Default: Solid Deep Navy -> Hover: Outlined with Deep Navy border and text! -->
+        <!-- Signature Image-Matched Needle Red Action Button: "Book a Strategy Call" (Matching Logo Height) -->
         <a
           href="/contact"
-          class="btn-outline-transition-navy btn-pulse px-4 sm:px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-sm active:scale-[0.98] inline-flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+          class="btn-needle-red whitespace-nowrap inline-flex items-center justify-center h-10 sm:h-11 px-5 sm:px-6 rounded-lg text-white text-xs sm:text-sm font-semibold tracking-normal shadow-xs transition-all duration-200 cursor-pointer shrink-0"
         >
-          <span>Book a Meeting</span>
+          <span>Book a Strategy Call</span>
         </a>
       </div>
 
@@ -227,7 +240,7 @@ const aboutDropdown = [
       <div class="flex lg:hidden items-center gap-2">
         <a
           href={`tel:${companyInfo.phoneRaw}`}
-          class="p-2 rounded-lg text-slate-700 hover:text-[#0C487A] hover:bg-slate-100 transition-colors"
+          class="p-2 rounded-lg text-slate-700 hover:text-[#2879B6] hover:bg-slate-100 transition-colors"
           aria-label="Call Unity Compass"
         >
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -237,9 +250,9 @@ const aboutDropdown = [
 
         <a
           href="/contact"
-          class="btn-outline-transition-navy btn-pulse px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-md"
+          class="btn-needle-red px-3.5 py-1.5 text-xs font-semibold rounded-md cursor-pointer"
         >
-          Book a Meeting
+          Book Call
         </a>
 
         <button
@@ -310,8 +323,8 @@ const aboutDropdown = [
       </div>
 
       <a
-        href="/career"
-        class={`block px-3 py-2.5 rounded-lg text-base font-semibold border-b border-slate-50 transition-colors ${
+        href="javascript:void(0)"
+        class={`block px-3 py-2.5 rounded-lg text-base font-semibold border-b border-slate-50 transition-colors cursor-pointer ${
           currentPath.startsWith('/career') ? 'text-[#FF3130] bg-red-50/50' : 'text-slate-800 hover:text-[#0C487A]'
         }`}
       >
@@ -328,8 +341,8 @@ const aboutDropdown = [
       </a>
 
       <a
-        href="/contact"
-        class={`block px-3 py-2.5 rounded-lg text-base font-semibold border-b border-slate-50 transition-colors ${
+        href="javascript:void(0)"
+        class={`block px-3 py-2.5 rounded-lg text-base font-semibold border-b border-slate-50 transition-colors cursor-pointer ${
           currentPath.startsWith('/contact') ? 'text-[#FF3130] bg-red-50/50' : 'text-slate-800 hover:text-[#0C487A]'
         }`}
       >
@@ -373,13 +386,15 @@ const aboutDropdown = [
     closeIcon?.classList.toggle('hidden');
   });
 
-  // Sticky header scroll behavior
+  // Sticky header scroll behavior: blends seamlessly with Hero at top, adds subtle frosted glass on scroll
   const header = document.getElementById('main-header');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {
-      header?.classList.add('shadow-md');
+      header?.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'border-[#E2E8F0]');
+      header?.classList.remove('bg-gradient-to-r', 'from-[#F4F8FC]', 'via-[#EBF3FA]', 'to-[#DFEDF8]', 'border-transparent');
     } else {
-      header?.classList.remove('shadow-md');
+      header?.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'border-[#E2E8F0]');
+      header?.classList.add('bg-gradient-to-r', 'from-[#F4F8FC]', 'via-[#EBF3FA]', 'to-[#DFEDF8]', 'border-transparent');
     }
   }, { passive: true });
 </script>

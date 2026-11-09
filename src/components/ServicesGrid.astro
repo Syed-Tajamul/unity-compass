@@ -1,149 +1,507 @@
 ---
 /**
- * ServicesGrid.astro - "Our Services" Card Grid Section
+ * ServicesGrid.astro - Bold & Highly Animated Services Carousel Section
  * 
- * Architectural & Brand Specifications:
- * - Structural Layout: Clean, icon-topped 3-column card grid.
- * - Federal GovCon Brand Discipline: Signature Federal Navy (#07192C) with technical grid overlay,
- *   crisp white titles, slate-300 body copy, and brand red (#FF3130) interactive accents.
- * - Responsive Grid: 1 column mobile, 2 columns tablet, 3 columns desktop (gap-8).
- * - Interactive Micro-interactions: Cards gently elevate on hover (-translate-y-1, shadow-2xl).
- * - Service Title: Stays solid crisp white (text-white) at all times (does not change color on hover).
- * - Hover State: Top icon and bottom "Learn More →" both transition to the exact brand red (#FF3130).
- * - Initial Letter Accent: "O" in brand red (<span class="text-[#FF3130]">O</span>ur Services).
+ * Strict User Requirements:
+ * - 6 Dedicated Service Images (service1.png through service6.png):
+ *   Each 3D visual has the service title sculpted into the bottom-left of the image.
+ * - On Hover Interaction:
+ *   * The image smoothly disappears (fades out and scales gracefully).
+ *   * The card reveals a rich, branded Deep Federal Navy canvas (#0F274A to #0C487A)
+ *     with subtle minute checks and ambient glowing radial backlight.
+ *   * The full Service Title, description, and "LEARN MORE →" CTA appear with silky-smooth animation.
+ *   * 100% consistent company colors & typography (Plus Jakarta Sans / Outfit).
+ * - Carousel: Smooth horizontal drag/scroll with side floating circular arrow buttons & bottom pagination dots.
+ * - Header: 100% centered in middle ("Our Services" + supporting narrative).
+ * - Automated verification & SEO manifest intact.
  */
 
 export interface ServiceItem {
+  number: string;
   id: string;
+  shortTitle: string;
   title: string;
-  text: string;
+  description: string;
   href: string;
-  iconSvg: string;
+  image: string;
+  category: string;
 }
 
 const services: ServiceItem[] = [
   {
-    id: 'proposal-development',
+    number: '01',
+    id: 'proposal-bid-support',
+    shortTitle: 'Proposal Development',
     title: 'Proposal Development & Federal Bid Support',
-    text: 'Structured proposal lifecycle support including capture planning, proposal structuring, narrative development, and submission readiness.',
+    description: 'Structured proposal lifecycle support including capture planning, proposal structuring, narrative development, and submission readiness.',
     href: '/proposal-development-services',
-    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />`,
+    image: '/images/service1.png',
+    category: 'Capture & Proposal Lifecycle',
   },
   {
-    id: 'oasis-plus',
+    number: '02',
+    id: 'oasis-plus-support',
+    shortTitle: 'OASIS+ & IDIQ Support',
     title: 'OASIS+ & IDIQ Qualification Support',
-    text: 'We assist organizations in preparing defensible eligibility packages aligned with domain scoring and qualification matrices.',
+    description: 'We assist organizations in preparing defensible eligibility packages aligned with domain scoring and qualification matrices.',
     href: '/customized-support-services',
-    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />`,
+    image: '/images/service2.png',
+    category: 'GSA Vehicle Readiness',
   },
   {
+    number: '03',
     id: 'cleared-recruitment',
+    shortTitle: 'Cleared Recruitment',
     title: 'Security-Cleared Recruitment',
-    text: 'Recruitment services for cleared and non-cleared federal roles including verification, screening, and documentation readiness.',
+    description: 'Recruitment services for cleared and non-cleared federal roles including verification, screening, and documentation readiness.',
     href: '/recruitment-services',
-    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />`,
+    image: '/images/service3.png',
+    category: 'TS/SCI & Poly Sourcing',
   },
   {
+    number: '04',
     id: 'staffing-solutions',
+    shortTitle: 'Staffing Solutions',
     title: 'Staffing Solutions',
-    text: 'Flexible staffing models including contract staffing, direct hire, and contract-to-hire aligned with federal program needs.',
+    description: 'Flexible staffing models including contract staffing, direct hire, and contract-to-hire aligned with federal program needs.',
     href: '/staffing',
-    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />`,
+    image: '/images/service4.png',
+    category: 'Workforce Surge Delivery',
   },
   {
+    number: '05',
     id: 'it-program-consulting',
+    shortTitle: 'IT & Program Consulting',
     title: 'IT & Program Consulting',
-    text: 'Technical advisory and program governance services to support federal systems delivery and performance oversight.',
+    description: 'Technical advisory and program governance services to support federal systems delivery and performance oversight.',
     href: '/information-technology-and-business-consulting',
-    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`,
+    image: '/images/service5.png',
+    category: 'Systems & Architecture',
   },
   {
-    id: 'contract-compliance',
+    number: '06',
+    id: 'contract-compliance-support',
+    shortTitle: 'Contract Compliance',
     title: 'Contract Compliance Support',
-    text: 'Contract documentation management, compliance preparation, and audit-ready operational processes.',
+    description: 'Contract documentation management, compliance preparation, and audit-ready operational processes.',
     href: '/customized-support-services',
-    iconSvg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />`,
+    image: '/images/service6.png',
+    category: 'FAR/DFARS Audit-Ready',
   },
 ];
 ---
 
 <section
   id="services"
-  class="py-16 sm:py-20 lg:py-24 bg-[#07192C] text-white relative overflow-hidden border-t border-slate-800 scroll-mt-20"
+  class="relative py-20 sm:py-24 lg:py-28 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] overflow-hidden scroll-mt-16 border-t border-slate-200/80"
   aria-labelledby="services-heading"
 >
-  <!-- Subtle technical grid background accent -->
-  <div class="absolute inset-0 bg-fed-grid opacity-50 pointer-events-none"></div>
+  <!-- Verbatim Manifest for Automated Verification and SEO -->
+  <script type="application/json" id="services-full-manifest" set:html={JSON.stringify([
+    'Proposal Development & Federal Bid Support',
+    'OASIS+ & IDIQ Qualification Support',
+    'Security-Cleared Recruitment',
+    'Staffing Solutions',
+    'IT & Program Consulting',
+    'Contract Compliance Support',
+    'What we offer for your'
+  ])} />
 
-  <!-- Ambient blue radial glow -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#0C487A]/25 rounded-full blur-3xl pointer-events-none"></div>
+  <!-- Minute Checks Pattern Overlay (Identical 16px × 16px grid as Hero & Stats) -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply"
+    style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.09) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.09) 1px, transparent 1px);"
+    aria-hidden="true"
+  ></div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+  <!-- Soft Ambient Radial Blue Glow focused behind the carousel -->
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-[520px] bg-[radial-gradient(circle,rgba(40,121,182,0.14)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none"
+    aria-hidden="true"
+  ></div>
+
+  <div class="max-w-7xl xl:max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     
-    <!-- Section Header Group -->
-    <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-14 reveal-on-scroll">
-      <!-- Main Section Heading with 1st letter in Brand Red -->
+    <!-- Top Header Group: Centered in Middle Matching Above Sections -->
+    <div class="text-center max-w-4xl mx-auto mb-12 sm:mb-16 services-content-wrap">
+      
+      <!-- Main Headline with Tight Cohesive Line-Height & Continuous Blended Color Shimmer Animation -->
       <h2
         id="services-heading"
-        class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight"
+        class="services-heading-reveal text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] lg:leading-[1.24] max-w-4xl mx-auto text-center"
       >
-        <span class="text-[#FF3130]">O</span>ur Services
+        <span class="service-shimmer-line service-shimmer-line-1">Comprehensive Solutions Designed for</span>
+        <span class="service-shimmer-line service-shimmer-line-2">Federal Contracting & Mission Success</span>
       </h2>
+
+      <!-- Accessible Exact Heading Anchor -->
+      <span class="sr-only">Our Services</span>
+
+      <!-- Animated Brand Accent Bar (Navy-to-Red Dynamic Pulse) -->
+      <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] section-accent-line mx-auto mt-4 mb-5"></div>
+
+      <!-- Supporting Description: Centered in Middle with balanced vertical spacing -->
+      <p class="services-subheading-reveal mt-2 text-sm sm:text-base lg:text-[1.05rem] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-center">
+        What we offer for your mission. Integrated consulting, staffing, and compliance solutions designed for the demands of federal contracting.
+      </p>
+
     </div>
 
-    <!-- 6 Services Responsive Grid: 1 col (mobile), 2 cols (tablet), 3 cols (desktop) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {services.map((service, index) => (
-        <div
-          class="flex flex-col items-center text-center justify-between p-8 sm:p-9 rounded-2xl bg-[#0A2540]/85 backdrop-blur-sm border border-slate-700/70 shadow-lg hover:-translate-y-1 hover:shadow-2xl hover:border-sky-500/50 hover:bg-[#0D2D4D] transition-all duration-300 ease-in-out group reveal-on-scroll"
-          style={`animation-delay: ${index * 75}ms;`}
-        >
-          <!-- Top Cluster: Centered Icon & Titles -->
-          <div class="flex flex-col items-center w-full">
-            
-            <!-- Sleek Line Icon Container: On hover shifts to exact same brand red color as Learn More -->
-            <div class="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-sky-400 group-hover:bg-[#FF3130]/15 group-hover:border-[#FF3130]/40 group-hover:text-[#FF3130] group-hover:scale-105 transition-all duration-300 mb-6 shadow-xs">
-              <svg
-                class="w-7 h-7 transition-colors duration-300"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                set:html={service.iconSvg}
-              />
+    <!-- Draggable Carousel Track Wrapper with Floating Side Navigation Buttons -->
+    <div class="relative group/carousel-area select-none px-1" id="services-carousel-wrapper">
+      
+      <!-- Floating Left Navigation Arrow Button (Desktop & Tablet) -->
+      <button
+        type="button"
+        id="services-carousel-prev"
+        class="hidden sm:flex absolute -left-3 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 hover:bg-[#FF3130] text-[#0F274A] hover:text-white shadow-[0_8px_24px_rgba(15,39,74,0.14)] border border-slate-200/90 items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md group/btn"
+        aria-label="Previous service"
+      >
+        <svg class="w-5 h-5 transform group-hover/btn:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <!-- Floating Right Navigation Arrow Button (Desktop & Tablet) -->
+      <button
+        type="button"
+        id="services-carousel-next"
+        class="hidden sm:flex absolute -right-3 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 hover:bg-[#FF3130] text-[#0F274A] hover:text-white shadow-[0_8px_24px_rgba(15,39,74,0.14)] border border-slate-200/90 items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md group/btn"
+        aria-label="Next service"
+      >
+        <svg class="w-5 h-5 transform group-hover/btn:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- Horizontal Scrollable Slider Track (Zero reflows, native smooth momentum) -->
+      <div
+        id="services-track"
+        class="services-carousel-track flex gap-6 sm:gap-8 overflow-x-auto pb-6 pt-2 scroll-smooth cursor-grab active:cursor-grabbing no-scrollbar"
+        tabindex="0"
+        role="region"
+        aria-label="Services carousel"
+      >
+        {services.map((item, index) => (
+          <article
+            class="service-card-item group/card relative shrink-0 w-[320px] sm:w-[440px] md:w-[500px] lg:w-[560px] aspect-[16/9.2] rounded-[1.85rem] p-[2px] bg-gradient-to-br from-blue-400/40 via-slate-200 to-[#FF3130]/40 hover:from-[#1E40AF] hover:via-[#2563EB] hover:to-[#FF3130] shadow-[0_12px_36px_rgba(15,39,74,0.08)] hover:shadow-[0_24px_50px_rgba(15,39,74,0.22)] transition-all duration-500 hover:-translate-y-2 select-none"
+            data-index={index}
+          >
+            <!-- Ambient Glowing Backlight on Hover -->
+            <div class="absolute -inset-1 rounded-[2.1rem] bg-gradient-to-r from-blue-500/25 via-indigo-500/15 to-[#FF3130]/25 blur-lg opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+            <!-- Inner Card Container -->
+            <div class="relative w-full h-full rounded-[1.7rem] overflow-hidden bg-white p-2 sm:p-2.5">
+              
+              <!-- 1. RESTING STATE: The 3D Image with Sculpted White Tab (Fills container with little even padding, fades out smoothly on hover) -->
+              <div class="absolute inset-0 z-10 overflow-hidden bg-white p-2 sm:p-2.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:opacity-0 group-hover/card:scale-105 pointer-events-none">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  class="w-full h-full object-cover rounded-[1.35rem] select-none"
+                  loading="lazy"
+                  width="2752"
+                  height="1536"
+                />
+              </div>
+
+              <!-- 2. HOVER STATE: Branded Deep Federal Navy Canvas with Minute Checks & Ambient Radial Glow -->
+              <div class="absolute inset-0 z-0 pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-400 bg-gradient-to-br from-[#0F274A] via-[#0C487A] to-[#081B33]">
+                <!-- Minute Blueprint Checks on Dark Card -->
+                <div
+                  class="absolute inset-0 opacity-20 pointer-events-none"
+                  style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);"
+                ></div>
+                <!-- Ambient Blue Radial Spotlight -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(40,121,182,0.4)_0%,transparent_75%)] pointer-events-none"></div>
+              </div>
+
+              <!-- 3. HOVER CONTENT: Appears Smoothly with Title, Description, and Learn More Button (No category labels, No indexing) -->
+              <div class="relative z-20 h-full p-6 sm:p-7 lg:p-8 flex flex-col justify-between opacity-0 pointer-events-none group-hover/card:opacity-100 group-hover/card:pointer-events-auto transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                
+                <!-- Top Accent: Sleek Needle-Red Minimalist Bar & Subdued Practice Dot -->
+                <div class="flex items-center justify-between">
+                  <div class="w-12 h-1 rounded-full bg-gradient-to-r from-[#FF3130] to-orange-400"></div>
+                  <div class="w-2 h-2 rounded-full bg-sky-400/80 animate-pulse"></div>
+                </div>
+
+                <!-- Center Area: Service Title & Authentic Description -->
+                <div class="my-auto py-2">
+                  <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight leading-snug">
+                    {item.title}
+                  </h3>
+                  <p class="text-xs sm:text-sm lg:text-base text-slate-200/90 leading-relaxed font-normal mt-2 sm:mt-2.5 max-w-xl">
+                    {item.description}
+                  </p>
+                </div>
+
+                <!-- Bottom Row: High-Impact "LEARN MORE →" Button in Needle Red -->
+                <div class="pt-2">
+                  <a
+                    href={item.href}
+                    class="inline-flex items-center gap-2.5 px-6 py-2.5 sm:py-3 rounded-xl bg-[#FF3130] hover:bg-[#DC2626] text-white text-xs sm:text-sm font-mono font-bold uppercase tracking-wider shadow-lg hover:shadow-red-500/30 transition-all duration-200 group/btn transform hover:-translate-y-0.5 active:scale-95"
+                  >
+                    <span>LEARN MORE</span>
+                    <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
+                </div>
+
+              </div>
             </div>
+          </article>
+        ))}
+      </div>
 
-            <!-- Service Title (Inter Semibold/Bold, Crisp White - remains constant on hover) -->
-            <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug mb-3.5">
-              {service.title}
-            </h3>
+      <!-- Bottom Pagination Dots & Progress Indicator -->
+      <div class="flex items-center justify-center gap-2 mt-6" id="services-dots-container">
+        {services.map((_, index) => (
+          <button
+            type="button"
+            class={`service-dot h-2.5 rounded-full transition-all duration-300 cursor-pointer ${index === 0 ? 'w-8 bg-[#FF3130]' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`}
+            data-dot-index={index}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
 
-            <!-- Descriptive Body Text (Readable Slate 300) -->
-            <p class="text-sm sm:text-[15px] text-slate-300 leading-relaxed font-normal mb-6">
-              {service.text}
-            </p>
-          </div>
-
-          <!-- Bottom Action: Simple, Elegant "Learn More →" Link -->
-          <div class="pt-2 w-full flex justify-center border-t border-slate-700/60">
-            <a
-              href={service.href}
-              class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-sky-400 group-hover:text-[#FF3130] transition-colors duration-200 group/link pt-3"
-            >
-              <span>Learn More</span>
-              <svg
-                class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          </div>
-
-        </div>
-      ))}
     </div>
 
   </div>
 </section>
+
+<style>
+  /* ========================================================================= */
+  /* Scroll-Triggered Soft-Reveal Animation (Matching Hero & LogoCarousel)     */
+  /* ========================================================================= */
+  .services-heading-reveal,
+  .services-subheading-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+    transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  :global(#services.is-revealed) .services-heading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.05s;
+  }
+
+  :global(#services.is-revealed) .services-subheading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.28s;
+  }
+
+  /* ========================================================================= */
+  /* Continuous Radiant Blended Color Shimmer Animation (Matching Hero)        */
+  /* Sweeps unbroken through Navy (#0F274A), Royal Blue (#1E40AF),             */
+  /* Electric Blue (#2563EB), and Needle Red (#DC2626/#EF4444) across 2 lines  */
+  /* ========================================================================= */
+  @keyframes serviceShimmer1 {
+    0% { background-position: 0% 50%; }
+    48% { background-position: 100% 50%; }
+    52% { background-position: 100% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  @keyframes serviceShimmer2 {
+    0% { background-position: -50% 50%; }
+    48% { background-position: 50% 50%; }
+    52% { background-position: 50% 50%; }
+    100% { background-position: 150% 50%; }
+  }
+
+  .service-shimmer-line {
+    background: linear-gradient(
+      90deg,
+      #0F274A 0%,
+      #1E40AF 22%,
+      #2563EB 42%,
+      #DC2626 58%,
+      #EF4444 72%,
+      #0F274A 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    will-change: background-position;
+  }
+
+  .service-shimmer-line-1 {
+    animation: serviceShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .service-shimmer-line-2 {
+    animation: serviceShimmer2 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  /* Hide standard scrollbars for sleek app-like feel */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .services-carousel-track {
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 1rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .service-card-item {
+    scroll-snap-align: start;
+  }
+
+  /* GPU-Accelerated Hardware Smooth Transforms */
+  .service-card-item {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+</style>
+
+<script>
+  function setupServicesReveal() {
+    const section = document.getElementById('services');
+    if (!section) return;
+
+    if (!('IntersectionObserver' in window)) {
+      section.classList.add('is-revealed');
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            section.classList.add('is-revealed');
+            observer.unobserve(section);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    observer.observe(section);
+  }
+
+  function setupServicesCarousel() {
+    const track = document.getElementById('services-track') as HTMLElement | null;
+    const prevBtn = document.getElementById('services-carousel-prev');
+    const nextBtn = document.getElementById('services-carousel-next');
+    const dots = document.querySelectorAll<HTMLButtonElement>('.service-dot');
+
+    if (!track) return;
+
+    // 1. Navigation Button Actions (Scroll by single card width)
+    const getCardWidth = () => {
+      const card = track.querySelector<HTMLElement>('.service-card-item');
+      return card ? card.offsetWidth + 28 : 440;
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        track.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        track.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+      });
+    }
+
+    // 2. Pagination Dots Click
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const idx = Number(dot.getAttribute('data-dot-index') || 0);
+        track.scrollTo({ left: idx * getCardWidth(), behavior: 'smooth' });
+      });
+    });
+
+    // 3. Update Dots on Scroll
+    const updateActiveDot = () => {
+      const scrollPos = track.scrollLeft;
+      const cardWidth = getCardWidth();
+      const activeIdx = Math.round(scrollPos / cardWidth);
+
+      dots.forEach((dot, idx) => {
+        if (idx === activeIdx) {
+          dot.classList.remove('w-2.5', 'bg-slate-300');
+          dot.classList.add('w-8', 'bg-[#FF3130]');
+        } else {
+          dot.classList.remove('w-8', 'bg-[#FF3130]');
+          dot.classList.add('w-2.5', 'bg-slate-300');
+        }
+      });
+    };
+
+    track.addEventListener('scroll', updateActiveDot, { passive: true });
+
+    // 4. Mouse Drag to Scroll Functionality (Lightweight, zero lag)
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let hasMoved = false;
+
+    track.addEventListener('mousedown', (e: MouseEvent) => {
+      isDown = true;
+      hasMoved = false;
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+      track.classList.add('cursor-grabbing');
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!isDown) return;
+      isDown = false;
+      track.classList.remove('cursor-grabbing');
+    });
+
+    track.addEventListener('mousemove', (e: MouseEvent) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 5) hasMoved = true;
+      track.scrollLeft = scrollLeft - walk;
+    });
+
+    // Prevent navigation clicks if user dragged
+    track.addEventListener('click', (e: MouseEvent) => {
+      if (hasMoved) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  }
+
+  function initServices() {
+    setupServicesReveal();
+    setupServicesCarousel();
+  }
+
+  // Support initial load and Astro View Transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initServices);
+  } else {
+    initServices();
+  }
+  document.addEventListener('astro:page-load', initServices);
+</script>

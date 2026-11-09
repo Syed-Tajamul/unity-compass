@@ -1,97 +1,112 @@
 ---
 /**
- * HeroStatsBand.astro
- * Performance Credentials Section positioned directly below the Hero Section.
- * Restrained, authoritative federal contractor aesthetic.
- * Features synchronized count-up counter animations and tabular typography.
+ * HeroStatsBand.astro - Performance Credentials & Key Metrics Section
+ * 
+ * Positioned directly below the Hero Section, adhering to the Unified Theme:
+ * - Light sky-to-slate gradient matching the Hero canvas (#F4F8FC via #EBF3FA to #DFEDF8)
+ * - Minute checks pattern (16px × 16px) overlay for high-tech GovCon texture
+ * - Floating glassmorphic metrics card with frosted blur and subtle shadow
+ * - Deep Federal Navy figures (#0F274A) with signature needle red accents (#FF3130)
+ * - Interactive hover micro-lift and animated count-up counters
  */
 ---
 
 <section
   id="hero-stats-band"
-  class="relative bg-[#07192C] border-y border-white/10 text-white overflow-hidden"
+  class="relative bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] pt-2 pb-14 sm:pb-16 lg:pb-20 overflow-hidden"
   aria-label="Federal Credentials & Track Record"
 >
-  <!-- Subtle Technical Grid Overlay -->
-  <div class="absolute inset-0 bg-fed-grid opacity-20 pointer-events-none"></div>
+  <!-- Minute Checks Pattern Overlay (Matching Hero Section Canvas) -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply"
+    style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.09) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.09) 1px, transparent 1px);"
+    aria-hidden="true"
+  ></div>
 
-  <!-- Container Aligned to Header (max-w-7xl mx-auto px-4 sm:px-6 lg:px-8) -->
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-    
-    <!-- Semantic List of 4 Columns -->
-    <ul class="stats-grid">
+  <!-- Soft Ambient Radial Blue Glow focused behind the metrics -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-36 bg-[radial-gradient(circle,rgba(40,121,182,0.12)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+  <!-- Container with Floating Glassmorphic Credentials Card -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="stats-glass-card bg-white/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-[0_16px_40px_-12px_rgba(15,39,74,0.1),0_0_0_1px_rgba(255,255,255,0.9)_inset] py-7 sm:py-9 px-5 sm:px-8 lg:px-12">
       
-      <!-- Col 1: $35M+ | Awarded Contract Value -->
-      <li class="stat-col col-1">
-        <div class="stat-figure-wrap">
-          <!-- Accessible static text for assistive technology -->
-          <span class="sr-only">$35M+</span>
-          <!-- Visual animated count-up -->
-          <span class="stat-figure" aria-hidden="true">
-            <span class="stat-affix">$</span><span class="count-num" data-target="35">35</span><span class="stat-affix">M+</span>
-          </span>
-        </div>
-        <span class="stat-label">Awarded Contract Value</span>
-      </li>
+      <!-- Semantic List of 4 Metrics -->
+      <ul class="stats-grid">
+        
+        <!-- Col 1: $35M+ | Awarded Contract Value -->
+        <li class="stat-col col-1 group/stat">
+          <div class="stat-figure-wrap">
+            <span class="sr-only">$35M+</span>
+            <span class="stat-figure text-[#0F274A]" aria-hidden="true">
+              <span class="stat-affix text-[#FF3130] transition-transform duration-300 group-hover/stat:scale-110 inline-block">$</span><span class="count-num font-extrabold tracking-tight" data-target="35">35</span><span class="stat-affix text-[#FF3130] transition-transform duration-300 group-hover/stat:scale-110 inline-block">M+</span>
+            </span>
+          </div>
+          <span class="stat-label text-slate-600 font-semibold group-hover/stat:text-[#0C487A] transition-colors duration-200">Awarded Contract Value</span>
+        </li>
 
-      <!-- Divider 1 -->
-      <li class="stat-divider" aria-hidden="true"></li>
+        <!-- Divider 1 -->
+        <li class="stat-divider" aria-hidden="true"></li>
 
-      <!-- Col 2: 12+ | Federal Proposals Won -->
-      <li class="stat-col col-2">
-        <div class="stat-figure-wrap">
-          <span class="sr-only">12+</span>
-          <span class="stat-figure" aria-hidden="true">
-            <span class="count-num" data-target="12">12</span><span class="stat-affix">+</span>
-          </span>
-        </div>
-        <span class="stat-label">Federal Proposals Won</span>
-      </li>
+        <!-- Col 2: 12+ | Federal Proposals Won -->
+        <li class="stat-col col-2 group/stat">
+          <div class="stat-figure-wrap">
+            <span class="sr-only">12+</span>
+            <span class="stat-figure text-[#0F274A]" aria-hidden="true">
+              <span class="count-num font-extrabold tracking-tight" data-target="12">12</span><span class="stat-affix text-[#FF3130] transition-transform duration-300 group-hover/stat:scale-110 inline-block">+</span>
+            </span>
+          </div>
+          <span class="stat-label text-slate-600 font-semibold group-hover/stat:text-[#0C487A] transition-colors duration-200">Federal Proposals Won</span>
+        </li>
 
-      <!-- Divider 2 -->
-      <li class="stat-divider" aria-hidden="true"></li>
+        <!-- Divider 2 -->
+        <li class="stat-divider" aria-hidden="true"></li>
 
-      <!-- Col 3: 56 CLINs | GSA OASIS+ Readiness -->
-      <li class="stat-col col-3">
-        <div class="stat-figure-wrap">
-          <span class="sr-only">56 CLINs</span>
-          <span class="stat-figure" aria-hidden="true">
-            <span class="count-num" data-target="56">56</span>
-            <span class="stat-unit">CLINs</span>
-          </span>
-        </div>
-        <span class="stat-label">GSA OASIS+ Readiness</span>
-      </li>
+        <!-- Col 3: 56 CLINs | GSA OASIS+ Readiness -->
+        <li class="stat-col col-3 group/stat">
+          <div class="stat-figure-wrap">
+            <span class="sr-only">56 CLINs</span>
+            <span class="stat-figure text-[#0F274A]" aria-hidden="true">
+              <span class="count-num font-extrabold tracking-tight" data-target="56">56</span>
+              <span class="stat-unit text-[#0C487A] uppercase text-xs sm:text-sm font-bold tracking-wider px-2 py-0.5 rounded-md bg-blue-50/90 border border-blue-200/70 ml-2 group-hover/stat:bg-blue-100/80 group-hover/stat:text-[#0B2553] transition-colors duration-200">CLINs</span>
+            </span>
+          </div>
+          <span class="stat-label text-slate-600 font-semibold group-hover/stat:text-[#0C487A] transition-colors duration-200">GSA OASIS+ Readiness</span>
+        </li>
 
-      <!-- Divider 3 -->
-      <li class="stat-divider" aria-hidden="true"></li>
+        <!-- Divider 3 -->
+        <li class="stat-divider" aria-hidden="true"></li>
 
-      <!-- Col 4: 8 Awards | Cooperative Purchasing -->
-      <li class="stat-col col-4">
-        <div class="stat-figure-wrap">
-          <span class="sr-only">8 Awards</span>
-          <span class="stat-figure" aria-hidden="true">
-            <span class="count-num" data-target="8">8</span>
-            <span class="stat-unit">Awards</span>
-          </span>
-        </div>
-        <span class="stat-label">Cooperative Purchasing</span>
-      </li>
+        <!-- Col 4: 8 Awards | Cooperative Purchasing -->
+        <li class="stat-col col-4 group/stat">
+          <div class="stat-figure-wrap">
+            <span class="sr-only">8 Awards</span>
+            <span class="stat-figure text-[#0F274A]" aria-hidden="true">
+              <span class="count-num font-extrabold tracking-tight" data-target="8">8</span>
+              <span class="stat-unit text-[#0C487A] uppercase text-xs sm:text-sm font-bold tracking-wider px-2 py-0.5 rounded-md bg-blue-50/90 border border-blue-200/70 ml-2 group-hover/stat:bg-blue-100/80 group-hover/stat:text-[#0B2553] transition-colors duration-200">Awards</span>
+            </span>
+          </div>
+          <span class="stat-label text-slate-600 font-semibold group-hover/stat:text-[#0C487A] transition-colors duration-200">Cooperative Purchasing</span>
+        </li>
 
-    </ul>
+      </ul>
 
+    </div>
+  </div>
+
+  <!-- Smooth Transitional Divider Leading gracefully into Section 3 (LogoCarousel white canvas) -->
+  <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none z-10 -translate-y-[1px]">
+    <svg viewBox="0 0 1440 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-6 sm:h-9 text-white preserve-3d">
+      <path d="M0,20 C360,40 1080,0 1440,20 L1440,40 L0,40 Z" fill="currentColor"></path>
+    </svg>
   </div>
 </section>
 
 <style>
-  /* ==========================================================================
-     CSS CUSTOM PROPERTIES & GEOMETRY
-     ========================================================================== */
   :root {
-    --stat-figure-size: 40px;
+    --stat-figure-size: 42px;
     --stat-unit-size: 14px;
     --stat-label-size: 14px;
-    --stat-border-color: rgba(255, 255, 255, 0.14);
+    --stat-border-color: rgba(15, 39, 74, 0.12);
   }
 
   /* Grid Layout: 4 Equal Columns on Desktop */
@@ -112,15 +127,27 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 0 16px;
+    padding: 10px 14px;
     box-sizing: border-box;
+    border-radius: 1rem;
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.32s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Vertical Hairline Dividers (48px tall, centered) */
+  .stat-col:hover {
+    transform: translateY(-3px);
+    background-color: rgba(240, 246, 253, 0.7);
+  }
+
+  .stat-col:hover .stat-figure {
+    color: #1E40AF;
+  }
+
+  /* Vertical Hairline Dividers */
   .stat-divider {
     width: 1px;
-    height: 48px;
-    background-color: var(--stat-border-color);
+    height: 52px;
+    background: linear-gradient(180deg, transparent 0%, rgba(15, 39, 74, 0.14) 20%, rgba(15, 39, 74, 0.14) 80%, transparent 100%);
     list-style: none;
   }
 
@@ -136,12 +163,12 @@
     display: inline-flex;
     align-items: baseline;
     font-size: var(--stat-figure-size);
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    font-weight: 800;
+    letter-spacing: -0.03em;
     line-height: 1;
-    color: #FFFFFF;
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1;
+    transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .count-num {
@@ -150,41 +177,27 @@
   }
 
   .stat-affix {
-    color: #FFFFFF;
-    font-weight: 600;
+    font-weight: 800;
   }
 
-  /* Baseline-aligned Units ("CLINs", "Awards") */
   .stat-unit {
-    font-size: var(--stat-unit-size);
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.80);
-    margin-left: 6px;
-    letter-spacing: 0;
-    line-height: 1;
-    align-self: baseline;
+    align-self: center;
   }
 
   /* Labels Typography */
   .stat-label {
-    margin-top: 8px;
+    margin-top: 10px;
     font-size: var(--stat-label-size);
-    font-weight: 500;
     line-height: 1.35;
-    color: rgba(255, 255, 255, 0.85);
     white-space: nowrap;
-    letter-spacing: -0.005em;
+    letter-spacing: -0.01em;
   }
 
-  /* ==========================================================================
-     RESPONSIVE BREAKPOINTS
-     ========================================================================== */
   @media (max-width: 1279px) and (min-width: 1024px) {
     :root {
       --stat-figure-size: 36px;
       --stat-label-size: 13px;
     }
-
     .stat-label {
       white-space: normal;
     }
@@ -194,22 +207,17 @@
     .stats-grid {
       grid-template-columns: 1fr 1fr;
       row-gap: 24px;
-      column-gap: 24px;
+      column-gap: 20px;
     }
-
     .stat-divider {
       display: none;
     }
-
     .stat-col {
-      padding: 8px 12px;
+      padding: 10px 12px;
     }
-
-    /* Horizontal divider between row 1 and row 2 */
     .col-3, .col-4 {
       position: relative;
     }
-
     .col-3::before, .col-4::before {
       content: '';
       position: absolute;
@@ -219,12 +227,10 @@
       height: 1px;
       background-color: var(--stat-border-color);
     }
-
     :root {
       --stat-figure-size: 34px;
       --stat-label-size: 13px;
     }
-
     .stat-label {
       white-space: normal;
     }
@@ -234,21 +240,17 @@
     .stats-grid {
       grid-template-columns: 1fr 1fr;
       row-gap: 20px;
-      column-gap: 16px;
+      column-gap: 12px;
     }
-
     .stat-divider {
       display: none;
     }
-
     .stat-col {
-      padding: 6px 4px;
+      padding: 8px 6px;
     }
-
     .col-3, .col-4 {
       position: relative;
     }
-
     .col-3::before, .col-4::before {
       content: '';
       position: absolute;
@@ -258,31 +260,27 @@
       height: 1px;
       background-color: var(--stat-border-color);
     }
-
     :root {
       --stat-figure-size: 30px;
       --stat-unit-size: 12px;
       --stat-label-size: 12px;
     }
-
     .stat-label {
       white-space: normal;
-      margin-top: 5px;
+      margin-top: 6px;
       line-height: 1.25;
     }
   }
 
-  /* Accessibility: prefers-reduced-motion */
   @media (prefers-reduced-motion: reduce) {
     .stat-col {
       transition: none !important;
-      opacity: 1 !important;
       transform: none !important;
     }
   }
 </style>
 
-<!-- Lightweight Vanilla JS Counter Animation Script (< 1 KB) -->
+<!-- Synchronized Smooth Count-Up Animation Script -->
 <script>
   function initStatsCounters() {
     const band = document.getElementById('hero-stats-band');
@@ -300,8 +298,8 @@
         return;
       }
 
-      // Smooth count-up using requestAnimationFrame over 1200ms
-      const duration = 1200;
+      // Smooth count-up using requestAnimationFrame over 1400ms
+      const duration = 1400;
 
       countElements.forEach((el) => {
         const target = parseInt(el.getAttribute('data-target') || '0', 10);
@@ -322,7 +320,7 @@
           if (progress < 1) {
             requestAnimationFrame(step);
           } else {
-            el.textContent = target.toString(); // Exact snap to target
+            el.textContent = target.toString();
           }
         }
 
@@ -339,7 +337,7 @@
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.2 }
     );
 
     observer.observe(band);
@@ -352,4 +350,3 @@
   }
   document.addEventListener('astro:page-load', initStatsCounters);
 </script>
-

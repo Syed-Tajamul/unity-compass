@@ -1,0 +1,1185 @@
+---
+/**
+ * OurMission.astro - "The Four Bearings" Interactive Mission Section for Unity Compass
+ * 
+ * 100% Homepage Harmony & Consistency:
+ * - Substantive multi-line animated headline with continuous radiant color shimmer (matching Hero & ServicesGrid)
+ * - Upper eyebrow pill badge with red pulse indicator (matching WhyChooseUs & CompanyValues)
+ * - Animated tri-color brand accent bar (Navy to Red, matching HomeIntroBanner)
+ * - Executive White-and-Navy Marine Compass Instrument Centerpiece with 4s auto-play circular countdown arc
+ * - The Four Cardinal Bearings (01 North, 02 East, 03 South, 04 West)
+ * - 4 Premium White Cards (rounded-3xl, shadow, bold #0B2553 typography & #0C487A/#FF3130 badges)
+ * - Smooth spring-like needle easing (~700ms) with shortest continuous angular rotation
+ * - 100% WCAG AA contrast, semantic HTML, and full keyboard/screen-reader accessibility
+ */
+---
+
+<section
+  id="our-mission"
+  class="relative py-20 sm:py-24 lg:py-28 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] overflow-hidden scroll-mt-16 border-t border-slate-200/80"
+  aria-labelledby="mission-heading"
+>
+  <!-- Very Minute Technical Blueprint Check Grid Pattern (16px x 16px, Identical to Hero & ServicesGrid) -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply"
+    style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.09) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.09) 1px, transparent 1px);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Soft Ambient Radial Blue Glow focused behind the center stage (Identical to ServicesGrid) -->
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-[560px] bg-[radial-gradient(circle,rgba(40,121,182,0.14)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Ambient Four-Point Star Sparkles (Unity Compass Logo Mark) -->
+  <div class="mission-sparkles" aria-hidden="true">
+    <svg class="sparkle-star sparkle-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
+    <svg class="sparkle-star sparkle-2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
+    <svg class="sparkle-star sparkle-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
+    <svg class="sparkle-star sparkle-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
+    <svg class="sparkle-star sparkle-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
+    <svg class="sparkle-star sparkle-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
+  </div>
+
+  <div class="max-w-7xl xl:max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Top Header Group: Centered in Middle Matching Above Sections -->
+    <div class="text-center max-w-4xl mx-auto mb-12 sm:mb-16 mission-header-wrap">
+      
+      <!-- Main Substantive Headline with Continuous Blended Color Shimmer Animation (Matching ServicesGrid & Hero) -->
+      <h2
+        id="mission-heading"
+        class="mission-heading-reveal text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] lg:leading-[1.24] max-w-4xl mx-auto text-center"
+      >
+        <span class="mission-shimmer-line mission-shimmer-line-1">Our Mission: Navigating Federal Complexity</span>
+        <span class="mission-shimmer-line mission-shimmer-line-2">with Clarity, Compliance, and Confidence</span>
+      </h2>
+
+      <!-- Accessible Exact Heading Anchor -->
+      <span class="sr-only">Our Mission</span>
+
+      <!-- Animated Brand Accent Bar (Navy-to-Red Dynamic Pulse, Matching HomeIntroBanner) -->
+      <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mission-accent-line section-accent-line mx-auto mt-4 mb-5"></div>
+
+      <!-- Supporting Narrative Description (Matching ServicesGrid & HomeIntroBanner) -->
+      <p class="mission-subheading-reveal text-sm sm:text-base lg:text-[1.05rem] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-center">
+        To help organizations navigate federal contracting requirements with clarity, compliance, and confidence, while reducing risk and improving competitive positioning.
+      </p>
+
+    </div>
+
+    <!-- Cardinal Compass Navigation Stage -->
+    <div id="mission-stage" class="mission-cardinal-stage">
+      
+      <!-- Hairline Connector Lines (Desktop) -->
+      <div id="connector-top" class="connector-line connector-v connector-top is-active" aria-hidden="true"></div>
+      <div id="connector-right" class="connector-line connector-h connector-right" aria-hidden="true"></div>
+      <div id="connector-bottom" class="connector-line connector-v connector-bottom" aria-hidden="true"></div>
+      <div id="connector-left" class="connector-line connector-h connector-left" aria-hidden="true"></div>
+
+      <!-- Pillar 01: Top (North / Bearing 0°) -->
+      <button
+        type="button"
+        id="pillar-card-01"
+        class="mission-pillar-card pillar-card-top is-active"
+        data-index="0"
+        data-angle="0"
+        role="tab"
+        aria-selected="true"
+        aria-controls="compass-announcement"
+      >
+        <div class="pillar-card-inner floating-01">
+          <div class="pillar-card-topbar">
+            <div class="pillar-badge-wrap">
+              <div class="pillar-badge-glow"></div>
+              <div class="pillar-badge-icon" aria-hidden="true">
+                <!-- Shield-Check Icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+              </div>
+            </div>
+            <span class="pillar-num">01</span>
+          </div>
+          <h3 class="pillar-title">Compliance-Centered Approach</h3>
+          <p class="pillar-desc">
+            Every proposal, staffing action, and documentation package is built to withstand evaluation and audit scrutiny.
+          </p>
+        </div>
+      </button>
+
+      <!-- Pillar 02: Right (East / Bearing 90°) -->
+      <button
+        type="button"
+        id="pillar-card-02"
+        class="mission-pillar-card pillar-card-right"
+        data-index="1"
+        data-angle="90"
+        role="tab"
+        aria-selected="false"
+        aria-controls="compass-announcement"
+      >
+        <div class="pillar-card-inner floating-02">
+          <div class="pillar-card-topbar">
+            <div class="pillar-badge-wrap">
+              <div class="pillar-badge-glow"></div>
+              <div class="pillar-badge-icon" aria-hidden="true">
+                <!-- Grid Icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="7"/>
+                  <rect x="14" y="3" width="7" height="7"/>
+                  <rect x="14" y="14" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/>
+                </svg>
+              </div>
+            </div>
+            <span class="pillar-num">02</span>
+          </div>
+          <h3 class="pillar-title">Structured Methodology</h3>
+          <p class="pillar-desc">
+            From Qualifying Project (QP) structuring to clearance verification, our processes are systematic and repeatable.
+          </p>
+        </div>
+      </button>
+
+      <!-- Centerpiece: Compass (420px Desktop / 170px Mobile) -->
+      <div
+        class="compass-centerpiece"
+        role="img"
+        aria-label="Interactive Navigation Compass with Four Bearings"
+      >
+        <svg
+          class="compass-svg"
+          viewBox="0 0 420 420"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <!-- Lustrous Compass Dial Radial Gradient (Matching Site Ice Palette) -->
+            <radialGradient id="compass-dial-face" cx="210" cy="210" r="160" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="60%" stop-color="#F8FAFC"/>
+              <stop offset="90%" stop-color="#EDF3FB"/>
+              <stop offset="100%" stop-color="#E2E8F0"/>
+            </radialGradient>
+            <!-- Soft Depth Shadow -->
+            <filter id="compass-shadow" x="30" y="30" width="360" height="360" filterUnits="userSpaceOnUse">
+              <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0B2553" flood-opacity="0.14"/>
+            </filter>
+          </defs>
+
+          <!-- 1. Ambient Rotating Concentric Rings & Fine Ticks (120s per rotation) -->
+          <g class="compass-ambient-rings">
+            <!-- Outer Blueprint Ring -->
+            <circle cx="210" cy="210" r="198" stroke="rgba(12, 72, 122, 0.16)" stroke-width="1.2" stroke-dasharray="3 6"/>
+            <!-- Intermediate Sky Accent Ring -->
+            <circle cx="210" cy="210" r="182" stroke="rgba(56, 189, 248, 0.45)" stroke-width="1.2"/>
+            <!-- Perimeter Fine Degree Marks -->
+            <circle cx="210" cy="210" r="172" stroke="rgba(12, 72, 122, 0.14)" stroke-width="1"/>
+            <!-- 8 Sub-Degree Micro Rays -->
+            <g stroke="rgba(12, 72, 122, 0.22)" stroke-width="1.2">
+              <line x1="210" y1="10" x2="210" y2="18"/>
+              <line x1="210" y1="402" x2="210" y2="410"/>
+              <line x1="10" y1="210" x2="18" y2="210"/>
+              <line x1="402" y1="210" x2="410" y2="210"/>
+              <line x1="68" y1="68" x2="74" y2="74"/>
+              <line x1="352" y1="68" x2="346" y2="74"/>
+              <line x1="68" y1="352" x2="74" y2="346"/>
+              <line x1="352" y1="352" x2="346" y2="346"/>
+            </g>
+          </g>
+
+          <!-- 2. Static Precision Compass Housing & Dial Face -->
+          <!-- Main Pearl White Dial Face with Double Bezel -->
+          <circle cx="210" cy="210" r="162" fill="url(#compass-dial-face)" stroke="#0C487A" stroke-width="2.5" filter="url(#compass-shadow)"/>
+          <!-- Secondary Inner Bezel Track -->
+          <circle cx="210" cy="210" r="150" stroke="rgba(12, 72, 122, 0.35)" stroke-width="1.5" stroke-dasharray="2 3"/>
+
+          <!-- Circular Progress Countdown Arc (Auto-Play Indicator) -->
+          <circle
+            id="compass-progress-ring"
+            class="compass-progress-arc"
+            cx="210"
+            cy="210"
+            r="162"
+            stroke="#FF3130"
+            stroke-width="3"
+            fill="none"
+            stroke-linecap="round"
+          />
+
+          <!-- Main Navy Outer Ring Path with Dashoffset Reveal -->
+          <circle
+            class="compass-ring-path"
+            cx="210"
+            cy="210"
+            r="162"
+            stroke="rgba(12, 72, 122, 0.2)"
+            stroke-width="1.5"
+            fill="none"
+          />
+
+          <!-- Precision Tick Marks & Cardinal Indicators -->
+          <g class="compass-ticks-group">
+            <!-- Cardinal Marks N, E, S, W in Brand Navy -->
+            <text x="210" y="78" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" fill="#0C487A" text-anchor="middle" letter-spacing="1">N</text>
+            <text x="342" y="214" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" fill="#0C487A" text-anchor="middle" dominant-baseline="central" letter-spacing="1">E</text>
+            <text x="210" y="350" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" fill="#0C487A" text-anchor="middle" letter-spacing="1">S</text>
+            <text x="78" y="214" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" fill="#0C487A" text-anchor="middle" dominant-baseline="central" letter-spacing="1">W</text>
+
+            <!-- 36 Dial Degree Ticks -->
+            <g stroke="#0C487A" stroke-width="1.5">
+              <!-- Primary Cardinals -->
+              <line x1="210" y1="52" x2="210" y2="64" stroke="#FF3130" stroke-width="2.5"/>
+              <line x1="368" y1="210" x2="356" y2="210" stroke="#0C487A" stroke-width="2.5"/>
+              <line x1="210" y1="368" x2="210" y2="356" stroke="#0C487A" stroke-width="2.5"/>
+              <line x1="52" y1="210" x2="64" y2="210" stroke="#0C487A" stroke-width="2.5"/>
+
+              <!-- Diagonals -->
+              <g stroke="rgba(12, 72, 122, 0.45)" stroke-width="1.2">
+                <line x1="285" y1="80" x2="279" y2="89"/>
+                <line x1="340" y1="135" x2="331" y2="141"/>
+                <line x1="340" y1="285" x2="331" y2="279"/>
+                <line x1="285" y1="340" x2="279" y2="331"/>
+                <line x1="135" y1="340" x2="141" y2="331"/>
+                <line x1="80" y1="285" x2="89" y2="279"/>
+                <line x1="80" y1="135" x2="89" y2="141"/>
+                <line x1="135" y1="80" x2="141" y2="89"/>
+              </g>
+            </g>
+
+            <!-- Four-Point Compass-Rose Star Geometry -->
+            <g opacity="0.8">
+              <!-- North-South Star Facets -->
+              <polygon points="210,95 218,210 210,210" fill="#0C487A"/>
+              <polygon points="210,95 202,210 210,210" fill="rgba(56, 189, 248, 0.5)"/>
+              <polygon points="210,325 218,210 210,210" fill="rgba(56, 189, 248, 0.35)"/>
+              <polygon points="210,325 202,210 210,210" fill="#0C487A"/>
+              <!-- East-West Star Facets -->
+              <polygon points="325,210 210,202 210,210" fill="#0C487A"/>
+              <polygon points="325,210 210,218 210,210" fill="rgba(56, 189, 248, 0.5)"/>
+              <polygon points="95,210 210,202 210,210" fill="rgba(56, 189, 248, 0.35)"/>
+              <polygon points="95,210 210,218 210,210" fill="#0C487A"/>
+            </g>
+          </g>
+
+          <!-- 3. Dynamic Magnetic Needle Layer (Controlled by JS) -->
+          <g id="compass-needle" class="compass-needle-layer">
+            <!-- North Needle (Official Brand Red #FF3130) with Shaded 3D Facets -->
+            <polygon points="210,54 203,210 210,210" fill="#FF3130"/>
+            <polygon points="210,54 217,210 210,210" fill="#FF5252"/>
+
+            <!-- South Counter-Needle (Deep Navy / Sky Accent) -->
+            <polygon points="210,272 205,210 210,210" fill="#0C487A"/>
+            <polygon points="210,272 215,210 210,210" fill="rgba(56, 189, 248, 0.7)"/>
+          </g>
+
+          <!-- 4. Center Disc Housing & Active Bearing Number -->
+          <circle cx="210" cy="210" r="46" fill="#0C487A" stroke="#FFFFFF" stroke-width="2.5" filter="drop-shadow(0 4px 10px rgba(12,72,122,0.35))"/>
+          <!-- Center Mini Bearing Caption -->
+          <text x="210" y="191" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="700" fill="#38BDF8" text-anchor="middle" letter-spacing="2">BEARING</text>
+          <!-- Large Active Pillar Indicator Number (01, 02, 03, 04) -->
+          <text id="compass-bearing-num" class="compass-center-number" x="210" y="217" text-anchor="middle" dominant-baseline="central">01</text>
+          <!-- Center Pivot Cap -->
+          <circle cx="210" cy="210" r="5.5" fill="#07192C" stroke="#FFFFFF" stroke-width="1.2"/>
+          <circle cx="210" cy="210" r="2.2" fill="#FF3130"/>
+        </svg>
+      </div>
+
+      <!-- Pillar 03: Bottom (South / Bearing 180°) -->
+      <button
+        type="button"
+        id="pillar-card-03"
+        class="mission-pillar-card pillar-card-bottom"
+        data-index="2"
+        data-angle="180"
+        role="tab"
+        aria-selected="false"
+        aria-controls="compass-announcement"
+      >
+        <div class="pillar-card-inner floating-03">
+          <div class="pillar-card-topbar">
+            <div class="pillar-badge-wrap">
+              <div class="pillar-badge-glow"></div>
+              <div class="pillar-badge-icon" aria-hidden="true">
+                <!-- Layers Icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                  <polyline points="2 17 12 22 22 17"/>
+                  <polyline points="2 12 12 17 22 12"/>
+                </svg>
+              </div>
+            </div>
+            <span class="pillar-num">03</span>
+          </div>
+          <h3 class="pillar-title">Integrated Support Model</h3>
+          <p class="pillar-desc">
+            We bridge proposal strategy, staffing execution, and technical advisory, reducing fragmentation common in federal projects.
+          </p>
+        </div>
+      </button>
+
+      <!-- Pillar 04: Left (West / Bearing 270°) -->
+      <button
+        type="button"
+        id="pillar-card-04"
+        class="mission-pillar-card pillar-card-left"
+        data-index="3"
+        data-angle="270"
+        role="tab"
+        aria-selected="false"
+        aria-controls="compass-announcement"
+      >
+        <div class="pillar-card-inner floating-04">
+          <div class="pillar-card-topbar">
+            <div class="pillar-badge-wrap">
+              <div class="pillar-badge-glow"></div>
+              <div class="pillar-badge-icon" aria-hidden="true">
+                <!-- Trending-Up Icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                  <polyline points="17 6 23 6 23 12"/>
+                </svg>
+              </div>
+            </div>
+            <span class="pillar-num">04</span>
+          </div>
+          <h3 class="pillar-title">Performance-Focused Delivery</h3>
+          <p class="pillar-desc">
+            We align services to measurable outcomes such as submission readiness, staffing cycle reduction, and defensible past performance records.
+          </p>
+        </div>
+      </button>
+
+    </div>
+
+    <!-- Live Region for Accessibility Announcements -->
+    <div id="compass-announcement" class="sr-only" aria-live="polite">
+      Pillar 01: Compliance-Centered Approach active. Bearing: North.
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* -------------------------------------------------- */
+  /* BRAND SYSTEM & CONFIGURATION TOKENS                */
+  /* Official Unity Compass Palette                     */
+  /* -------------------------------------------------- */
+  :root {
+    --navy: #0C487A;
+    --deep-navy: #0B2553;
+    --royal-navy: #1B3A8F;
+    --red: #FF3130;
+    --red-hover: #E02827;
+    --ice: #F8FAFC;
+    --sky: #38BDF8;
+    --white: #FFFFFF;
+    --slate-heading: #0B2553;
+    --slate-subtext: #475569;
+
+    /* Typography */
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Animation Timing & Easings */
+    --needle-duration: 700ms;
+    --needle-ease: cubic-bezier(0.34, 1.56, 0.64, 1); /* Spring-like overshoot */
+    --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+    --auto-interval: 4000ms;
+    --ring-spin-duration: 120s;
+  }
+
+  /* -------------------------------------------------- */
+  /* SCROLL-TRIGGERED REVEAL (Matching ServicesGrid)     */
+  /* -------------------------------------------------- */
+  .mission-heading-reveal,
+  .mission-subheading-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(#our-mission.is-revealed) .mission-heading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.05s;
+  }
+
+  :global(#our-mission.is-revealed) .mission-subheading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.25s;
+  }
+
+  /* -------------------------------------------------- */
+  /* CONTINUOUS RADIANT COLOR SHIMMER                   */
+  /* -------------------------------------------------- */
+  @keyframes missionShimmer1 {
+    0% { background-position: 0% 50%; }
+    48% { background-position: 100% 50%; }
+    52% { background-position: 100% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  @keyframes missionShimmer2 {
+    0% { background-position: -50% 50%; }
+    48% { background-position: 50% 50%; }
+    52% { background-position: 50% 50%; }
+    100% { background-position: 150% 50%; }
+  }
+
+  .mission-shimmer-line {
+    background: linear-gradient(
+      90deg,
+      #0F274A 0%,
+      #1E40AF 22%,
+      #2563EB 42%,
+      #DC2626 58%,
+      #EF4444 72%,
+      #0F274A 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    will-change: background-position;
+  }
+
+  .mission-shimmer-line-1 {
+    animation: missionShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .mission-shimmer-line-2 {
+    animation: missionShimmer2 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  /* Animated Tri-Color Accent Line (Matching HomeIntroBanner) */
+  .mission-accent-line {
+    background-size: 200% 100%;
+    animation: missionAccentShift 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes missionAccentShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+  /* Ambient Twinkling 4-Point Stars (Unity Compass Mark) */
+  .mission-sparkles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .sparkle-star {
+    position: absolute;
+    color: var(--navy);
+    opacity: 0.16;
+    animation: starTwinkle 7s ease-in-out infinite alternate;
+  }
+
+  .sparkle-1 { top: 16%; left: 12%; width: 14px; height: 14px; animation-delay: 0s; }
+  .sparkle-2 { top: 26%; right: 14%; width: 18px; height: 18px; animation-delay: 2.2s; }
+  .sparkle-3 { bottom: 22%; left: 15%; width: 12px; height: 12px; animation-delay: 4.1s; }
+  .sparkle-4 { bottom: 15%; right: 18%; width: 16px; height: 16px; animation-delay: 1.5s; }
+  .sparkle-5 { top: 48%; left: 7%; width: 10px; height: 10px; animation-delay: 5.3s; }
+  .sparkle-6 { top: 52%; right: 8%; width: 14px; height: 14px; animation-delay: 3.4s; }
+
+  @keyframes starTwinkle {
+    0%, 100% { opacity: 0.12; transform: scale(0.85); }
+    50% { opacity: 0.45; transform: scale(1.15); }
+  }
+
+  /* -------------------------------------------------- */
+  /* CARDINAL STAGE & DESKTOP GRID LAYOUT               */
+  /* -------------------------------------------------- */
+  .mission-cardinal-stage {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 740px;
+    display: grid;
+    grid-template-columns: 330px 1fr 330px;
+    grid-template-rows: auto 420px auto;
+    align-items: center;
+    justify-items: center;
+    margin: 0 auto;
+  }
+
+  /* Desktop Cardinal Positions */
+  .pillar-card-top {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    margin-bottom: 28px;
+  }
+
+  .pillar-card-right {
+    grid-column: 3;
+    grid-row: 2;
+    justify-self: start;
+    margin-left: 16px;
+  }
+
+  .pillar-card-bottom {
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: center;
+    margin-top: 28px;
+  }
+
+  .pillar-card-left {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: end;
+    margin-right: 16px;
+  }
+
+  /* -------------------------------------------------- */
+  /* COMPASS CENTER CONTAINER                           */
+  /* -------------------------------------------------- */
+  .compass-centerpiece {
+    grid-column: 2;
+    grid-row: 2;
+    position: relative;
+    width: 420px;
+    height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    user-select: none;
+  }
+
+  .compass-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* Ambient Concentric Rings (120s per rotation) */
+  .compass-ambient-rings {
+    transform-box: view-box;
+    transform-origin: 210px 210px;
+    animation: compassSpinAmbient var(--ring-spin-duration) linear infinite;
+  }
+
+  @keyframes compassSpinAmbient {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Compass Main Ring SVG Stroke Reveal */
+  .compass-ring-path {
+    stroke-dasharray: 1017.9;
+    stroke-dashoffset: 1017.9;
+    transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+  }
+
+  .compass-ticks-group {
+    opacity: 0;
+    transition: opacity 0.8s ease 0.6s;
+  }
+
+  /* Auto-Play Circular Progress Countdown Arc */
+  .compass-progress-arc {
+    stroke-dasharray: 1017.9;
+    stroke-dashoffset: 1017.9;
+    transform: rotate(-90deg);
+    transform-box: view-box;
+    transform-origin: 210px 210px;
+    transition: stroke-dashoffset 100ms linear;
+    pointer-events: none;
+  }
+
+  /* Needle Layer with Fluid Spring Overshoot Easing */
+  .compass-needle-layer {
+    transform-box: view-box;
+    transform-origin: 210px 210px;
+    transition: transform var(--needle-duration) var(--needle-ease);
+    will-change: transform;
+  }
+
+  /* Active Bearing Number in Center Disc */
+  .compass-center-number {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 32px;
+    fill: var(--white);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  /* -------------------------------------------------- */
+  /* CONNECTORS (Desktop Cardinal Hairline Guides)       */
+  /* -------------------------------------------------- */
+  .connector-line {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
+    opacity: 0.45;
+  }
+
+  .connector-v {
+    width: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, rgba(12, 72, 122, 0.15), rgba(56, 189, 248, 0.5), rgba(12, 72, 122, 0.15));
+  }
+
+  .connector-h {
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(to right, rgba(12, 72, 122, 0.15), rgba(56, 189, 248, 0.5), rgba(12, 72, 122, 0.15));
+  }
+
+  .connector-top { top: 140px; height: 48px; }
+  .connector-bottom { bottom: 140px; height: 48px; }
+  .connector-left { left: 330px; width: 48px; }
+  .connector-right { right: 330px; width: 48px; }
+
+  .connector-line.is-active {
+    opacity: 1;
+    background: var(--red);
+    box-shadow: 0 0 10px rgba(255, 49, 48, 0.5);
+  }
+
+  /* -------------------------------------------------- */
+  /* PILLAR CARDS (Homepage Harmonized Style)           */
+  /* Matching WhyChooseUs (rounded-3xl, shadow, #0B2553)*/
+  /* -------------------------------------------------- */
+  .mission-pillar-card {
+    width: 100%;
+    max-width: 330px;
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 24px 26px;
+    text-align: left;
+    color: var(--slate-heading);
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    outline: none;
+    border: 2px solid #F1F5F9;
+    box-shadow: 0 10px 35px -5px rgba(11, 37, 83, 0.08);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.2s ease,
+                box-shadow 0.25s ease,
+                opacity 0.2s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    transition-delay: 0s !important;
+    will-change: transform, box-shadow;
+  }
+
+  .mission-pillar-card:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 4px;
+  }
+
+  /* Ambient Vertical Float on Inner Content (4-6px) */
+  .pillar-card-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .floating-01 { animation: floatCard1 7s ease-in-out infinite alternate; }
+  .floating-02 { animation: floatCard2 8.5s ease-in-out 1.2s infinite alternate; }
+  .floating-03 { animation: floatCard3 6.5s ease-in-out 2.5s infinite alternate; }
+  .floating-04 { animation: floatCard4 9s ease-in-out 0.8s infinite alternate; }
+
+  @keyframes floatCard1 { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+  @keyframes floatCard2 { from { transform: translateY(0); } to { transform: translateY(-6px); } }
+  @keyframes floatCard3 { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+  @keyframes floatCard4 { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+
+  /* Inactive Card Dimming (70% Opacity on Light Canvas) - never dim when hovered or focused */
+  .mission-cardinal-stage.has-interaction .mission-pillar-card:not(.is-active):not(:hover):not(:focus-visible) {
+    opacity: 0.70;
+    transform: scale(0.985);
+  }
+
+  /* Active & Hover Card Styling: Immediate Butter-Smooth Elevation, Red Border, Shadow Bloom */
+  .mission-pillar-card:hover,
+  .mission-pillar-card:focus-visible,
+  .mission-pillar-card.is-active {
+    opacity: 1 !important;
+    transform: translateY(-6px) scale(1.02) !important;
+    border-color: var(--red) !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 20px 45px -10px rgba(11, 37, 83, 0.16), 0 0 25px rgba(255, 49, 48, 0.2) !important;
+    transition-delay: 0s !important;
+    z-index: 25 !important;
+  }
+
+  /* Pause floating oscillation immediately while hovered or active so elevation is rock-steady */
+  .mission-pillar-card:hover .pillar-card-inner,
+  .mission-pillar-card:focus-visible .pillar-card-inner,
+  .mission-pillar-card.is-active .pillar-card-inner {
+    animation-play-state: paused;
+  }
+
+  .pillar-card-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .pillar-badge-wrap {
+    position: relative;
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Soft Pulsing Ambient Glow Behind Active Badge */
+  .pillar-badge-glow {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 49, 48, 0.35) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .mission-pillar-card:hover .pillar-badge-glow,
+  .mission-pillar-card:focus-visible .pillar-badge-glow,
+  .mission-pillar-card.is-active .pillar-badge-glow {
+    opacity: 1 !important;
+    animation: badgePulse 2.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes badgePulse {
+    from { transform: scale(0.95); opacity: 0.45; }
+    to { transform: scale(1.15); opacity: 0.85; }
+  }
+
+  .pillar-badge-icon {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 1px solid rgba(12, 72, 122, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    box-shadow: 0 6px 18px rgba(12, 72, 122, 0.25);
+    transition: all 0.25s ease;
+  }
+
+  .mission-pillar-card:hover .pillar-badge-icon,
+  .mission-pillar-card:focus-visible .pillar-badge-icon,
+  .mission-pillar-card.is-active .pillar-badge-icon {
+    background: var(--red) !important;
+    border-color: var(--red) !important;
+    box-shadow: 0 8px 25px rgba(255, 49, 48, 0.38) !important;
+    color: var(--white) !important;
+  }
+
+  .pillar-num {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+    transition: color 0.25s ease, opacity 0.25s ease;
+  }
+
+  .mission-pillar-card:hover .pillar-num,
+  .mission-pillar-card:focus-visible .pillar-num,
+  .mission-pillar-card.is-active .pillar-num {
+    color: var(--red) !important;
+    opacity: 1 !important;
+  }
+
+  .pillar-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.35;
+    color: var(--slate-heading);
+    margin: 0 0 8px 0;
+    transition: color 0.25s ease;
+  }
+
+  .mission-pillar-card:hover .pillar-title,
+  .mission-pillar-card:focus-visible .pillar-title,
+  .mission-pillar-card.is-active .pillar-title {
+    color: var(--navy) !important;
+  }
+
+  .pillar-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--slate-subtext);
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .mission-pillar-card:hover .pillar-desc,
+  .mission-pillar-card:focus-visible .pillar-desc,
+  .mission-pillar-card.is-active .pillar-desc {
+    color: #1E293B;
+  }
+
+  /* -------------------------------------------------- */
+  /* ENTRANCE ANIMATION (30% Visibility)                */
+  /* -------------------------------------------------- */
+  :global(#our-mission.is-revealed) .compass-ring-path {
+    stroke-dashoffset: 0;
+  }
+
+  :global(#our-mission.is-revealed) .compass-ticks-group {
+    opacity: 1;
+  }
+
+  :global(#our-mission.is-revealed) .mission-pillar-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Screen Reader Live Region */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* -------------------------------------------------- */
+  /* TABLET ADAPTATION (768px - 1120px)                 */
+  /* -------------------------------------------------- */
+  @media (min-width: 768px) and (max-width: 1120px) {
+    .mission-cardinal-stage {
+      grid-template-columns: 280px 1fr 280px;
+    }
+    .compass-centerpiece {
+      width: 340px;
+      height: 340px;
+    }
+    .mission-pillar-card {
+      max-width: 280px;
+      padding: 20px 22px;
+    }
+    .connector-left { left: 280px; width: 30px; }
+    .connector-right { right: 280px; width: 30px; }
+  }
+
+  /* -------------------------------------------------- */
+  /* MOBILE RESPONSIVE ADAPTATION (< 768px)             */
+  /* -------------------------------------------------- */
+  @media (max-width: 767px) {
+    .mission-cardinal-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      min-height: auto;
+    }
+
+    .compass-centerpiece {
+      order: 1;
+      width: 170px;
+      height: 170px;
+      margin-bottom: 16px;
+    }
+
+    .connector-line {
+      display: none;
+    }
+
+    .pillar-card-top,
+    .pillar-card-right,
+    .pillar-card-bottom,
+    .pillar-card-left {
+      grid-column: auto;
+      grid-row: auto;
+      order: 2;
+      margin: 0;
+      max-width: 100%;
+    }
+
+    .floating-01, .floating-02, .floating-03, .floating-04 {
+      animation: none;
+    }
+
+    .compass-center-number {
+      font-size: 26px;
+    }
+  }
+
+  /* -------------------------------------------------- */
+  /* PREFERS-REDUCED-MOTION                             */
+  /* -------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .mission-heading-reveal,
+    .mission-subheading-reveal,
+    .mission-shimmer-line,
+    .mission-accent-line,
+    .mission-pillar-card,
+    .compass-ring-path,
+    .compass-ticks-group,
+    .compass-needle-layer {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      stroke-dashoffset: 0 !important;
+      transition: none !important;
+      animation: none !important;
+    }
+
+    .compass-ambient-rings,
+    .sparkle-star,
+    .floating-01,
+    .floating-02,
+    .floating-03,
+    .floating-04 {
+      animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  function initOurMissionSection() {
+    const section = document.getElementById('our-mission');
+    const stage = document.getElementById('mission-stage');
+    const needle = document.getElementById('compass-needle');
+    const bearingNum = document.getElementById('compass-bearing-num');
+    const progressRing = document.getElementById('compass-progress-ring');
+    const announcement = document.getElementById('compass-announcement');
+    const cards = Array.from(document.querySelectorAll('.mission-pillar-card'));
+    const connectors = {
+      0: document.getElementById('connector-top'),
+      1: document.getElementById('connector-right'),
+      2: document.getElementById('connector-bottom'),
+      3: document.getElementById('connector-left')
+    };
+
+    if (!section || !needle || cards.length === 0) return;
+
+    // Four Bearings Configuration
+    const bearings = [
+      { index: 0, angle: 0, num: '01', title: 'Compliance-Centered Approach', cardinal: 'North' },
+      { index: 1, angle: 90, num: '02', title: 'Structured Methodology', cardinal: 'East' },
+      { index: 2, angle: 180, num: '03', title: 'Integrated Support Model', cardinal: 'South' },
+      { index: 3, angle: 270, num: '04', title: 'Performance-Focused Delivery', cardinal: 'West' }
+    ];
+
+    let currentIndex = 0;
+    let currentAngle = 0;
+    let isPaused = false;
+    let autoTimer = null;
+    let progressStart = null;
+    let progressAnimId = null;
+    const AUTO_INTERVAL = 4000;
+    const CIRCUMFERENCE = 1017.9;
+
+    // Reduced motion check
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 1. Entrance Observer (Triggers at 30% visibility)
+    if ('IntersectionObserver' in window) {
+      const entranceObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            section.classList.add('is-revealed');
+            entranceObserver.unobserve(section);
+            if (!prefersReducedMotion) {
+              setTimeout(startAutoPlay, 1000);
+            }
+          }
+        });
+      }, { threshold: 0.25 });
+      entranceObserver.observe(section);
+    } else {
+      section.classList.add('is-revealed');
+      if (!prefersReducedMotion) startAutoPlay();
+    }
+
+    // 2. Shortest Continuous Angular Rotation
+    function getShortestAngle(current, target) {
+      let diff = (target - (current % 360) + 540) % 360 - 180;
+      return current + diff;
+    }
+
+    // 3. Set Active Pillar Bearing
+    function setActiveBearing(index, isUserInteraction = false) {
+      if (index < 0 || index >= bearings.length) return;
+      currentIndex = index;
+      const bearing = bearings[index];
+
+      if (stage) stage.classList.add('has-interaction');
+
+      currentAngle = getShortestAngle(currentAngle, bearing.angle);
+      needle.style.transform = `rotate(${currentAngle}deg)`;
+
+      if (bearingNum) {
+        bearingNum.textContent = bearing.num;
+      }
+
+      cards.forEach((card, idx) => {
+        const isActive = (idx === index);
+        card.classList.toggle('is-active', isActive);
+        card.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        card.setAttribute('tabindex', isActive ? '0' : '-1');
+      });
+
+      Object.keys(connectors).forEach(key => {
+        if (connectors[key]) {
+          connectors[key].classList.toggle('is-active', Number(key) === index);
+        }
+      });
+
+      if (announcement) {
+        announcement.textContent = `Pillar ${bearing.num}: ${bearing.title} active. Bearing: ${bearing.cardinal}.`;
+      }
+
+      if (!isPaused && !prefersReducedMotion) {
+        restartProgressBar();
+      }
+    }
+
+    // 4. Circular Progress Arc Animation
+    function restartProgressBar() {
+      if (!progressRing || prefersReducedMotion) return;
+      cancelAnimationFrame(progressAnimId);
+      progressRing.style.strokeDashoffset = CIRCUMFERENCE;
+      progressStart = performance.now();
+
+      function stepProgress(now) {
+        if (isPaused) {
+          progressStart = now;
+          progressAnimId = requestAnimationFrame(stepProgress);
+          return;
+        }
+        const elapsed = now - progressStart;
+        const progress = Math.min(1, elapsed / AUTO_INTERVAL);
+        const offset = CIRCUMFERENCE * (1 - progress);
+        progressRing.style.strokeDashoffset = offset.toFixed(1);
+
+        if (progress < 1) {
+          progressAnimId = requestAnimationFrame(stepProgress);
+        }
+      }
+      progressAnimId = requestAnimationFrame(stepProgress);
+    }
+
+    // 5. Auto-Play System (4s Interval)
+    function nextBearing() {
+      if (isPaused || prefersReducedMotion) return;
+      const nextIdx = (currentIndex + 1) % bearings.length;
+      setActiveBearing(nextIdx, false);
+    }
+
+    function startAutoPlay() {
+      if (prefersReducedMotion) return;
+      clearInterval(autoTimer);
+      autoTimer = setInterval(nextBearing, AUTO_INTERVAL);
+      restartProgressBar();
+    }
+
+    function pauseAutoPlay() {
+      isPaused = true;
+    }
+
+    function resumeAutoPlay() {
+      isPaused = false;
+      progressStart = performance.now();
+    }
+
+    // 6. User Event Listeners (Hover, Focus, Click)
+    cards.forEach((card, idx) => {
+      card.addEventListener('mouseenter', () => {
+        pauseAutoPlay();
+        setActiveBearing(idx, true);
+      });
+
+      card.addEventListener('focus', () => {
+        pauseAutoPlay();
+        setActiveBearing(idx, true);
+      });
+
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        pauseAutoPlay();
+        setActiveBearing(idx, true);
+      });
+    });
+
+    // Pause on section hover/focus; resume on leave
+    section.addEventListener('mouseenter', pauseAutoPlay);
+    section.addEventListener('mouseleave', resumeAutoPlay);
+    section.addEventListener('focusin', pauseAutoPlay);
+    section.addEventListener('focusout', resumeAutoPlay);
+
+    // 7. Keyboard Navigation (Arrow Keys & Home/End)
+    stage.addEventListener('keydown', (e) => {
+      let targetIdx = currentIndex;
+
+      switch (e.key) {
+        case 'ArrowUp':
+          targetIdx = 0; // North
+          break;
+        case 'ArrowRight':
+          targetIdx = (e.shiftKey) ? 1 : (currentIndex + 1) % 4; // East / Next
+          break;
+        case 'ArrowDown':
+          targetIdx = 2; // South
+          break;
+        case 'ArrowLeft':
+          targetIdx = (e.shiftKey) ? 3 : (currentIndex - 1 + 4) % 4; // West / Prev
+          break;
+        case 'Home':
+          targetIdx = 0;
+          break;
+        case 'End':
+          targetIdx = 3;
+          break;
+        default:
+          return;
+      }
+
+      e.preventDefault();
+      setActiveBearing(targetIdx, true);
+      if (cards[targetIdx]) {
+        cards[targetIdx].focus();
+      }
+    });
+
+    // Initialize initial active bearing (01 North)
+    setActiveBearing(0, false);
+  }
+
+  // Astro page-load and DOMContentLoaded lifecycle
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initOurMissionSection);
+  } else {
+    initOurMissionSection();
+  }
+  document.addEventListener('astro:page-load', initOurMissionSection);
+</script>

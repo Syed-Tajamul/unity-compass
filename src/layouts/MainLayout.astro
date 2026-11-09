@@ -1,7 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import FloatingContactWidget from '../components/FloatingContactWidget.astro';
+import AnimatedCursor from '../components/AnimatedCursor.astro';
 import { companyInfo } from '../data/company';
 import '../styles/global.css';
 
@@ -75,10 +75,10 @@ const schemaOrg = {
     <link rel="apple-touch-icon" href="/favicon.png" />
     <meta name="theme-color" content="#0C487A" />
 
-    <!-- Fonts: Inter & Plus Jakarta Sans -->
+    <!-- Premium Typography: Plus Jakarta Sans, Outfit & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -114,11 +114,11 @@ const schemaOrg = {
       <slot />
     </main>
 
-    <!-- Floating Contact Us Button -->
-    <FloatingContactWidget />
-
     <!-- Global Enterprise Footer -->
     <Footer />
+
+    <!-- Executive Compass Navigational Reticle Cursor Follower -->
+    <AnimatedCursor />
 
     <!-- Global Scroll Reveal Observer Script -->
     <script>
@@ -156,6 +156,30 @@ const schemaOrg = {
       } else {
         setupScrollReveal();
       }
+
+      // Client Demo Mode: Safely disable navigation for Careers, Contact Us, and About Us
+      document.addEventListener('click', (e) => {
+        const target = (e.target as HTMLElement)?.closest('a');
+        if (!target) return;
+        const href = target.getAttribute('href');
+        if (!href) return;
+        const cleanHref = href.trim().toLowerCase();
+        if (
+          cleanHref === '/career' ||
+          cleanHref === '/career/' ||
+          cleanHref.startsWith('/career?') ||
+          cleanHref === '/contact' ||
+          cleanHref === '/contact/' ||
+          cleanHref.startsWith('/contact?') ||
+          cleanHref === '/about-us' ||
+          cleanHref === '/about-us/' ||
+          cleanHref.startsWith('/about-us?') ||
+          cleanHref.includes('unitycompass.com/contact') ||
+          cleanHref.startsWith('javascript:void')
+        ) {
+          e.preventDefault();
+        }
+      });
     </script>
   </body>
 </html>
