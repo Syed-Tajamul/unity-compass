@@ -115,7 +115,6 @@ const servicePillars = [
   {
     id: 'pillar-product-engineering',
     number: '01',
-    badge: 'Pillar 01 • Digital Engineering',
     title: 'Intelligent Product Development and Digital Experiences',
     desc: 'We architect modern, mission-ready digital products that combine blazing performance, intuitive user experience, and embedded artificial intelligence to elevate stakeholder engagement and enable seamless organizational scale.',
     services: [
@@ -154,7 +153,6 @@ const servicePillars = [
   {
     id: 'pillar-cognitive-automation',
     number: '02',
-    badge: 'Pillar 02 • Applied AI',
     title: 'Cognitive Automation and AI Engineering',
     desc: 'We leverage advanced automation, predictive algorithms, cognitive decision-making, and deep data engineering to streamline complex operational bottlenecks and generate measurable organizational value.',
     services: [
@@ -193,7 +191,6 @@ const servicePillars = [
   {
     id: 'pillar-cloud-native-operations',
     number: '03',
-    badge: 'Pillar 03 • Cloud & Operations',
     title: 'Cloud-Native Operations and Infrastructure Intelligence',
     desc: 'We modernize, orchestrate, and safeguard enterprise IT environments with AI-driven capabilities to achieve institutional reliability, dynamic scalability, and uncompromising defense.',
     services: [
@@ -340,11 +337,11 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
         <div class="text-center max-w-4xl mx-auto space-y-4">
           <h1
             id="service-hero-heading"
-            class="hero-heading-reveal text-3xl sm:text-4xl lg:text-[2.85rem] font-extrabold tracking-tight leading-tight text-[#0B2553]"
+            class="hero-heading-reveal text-3xl sm:text-4xl lg:text-[2.85rem] font-extrabold tracking-tight leading-[1.34] sm:leading-[1.36] lg:leading-[1.38] text-[#0B2553]"
           >
-            <span class="service-shimmer-center service-shimmer-line-1 inline-block pb-1">Information Technology and Business Consulting</span>
+            <span class="service-shimmer-center service-shimmer-line-1 inline-block pb-2 pt-1">Information Technology and Business Consulting</span>
           </h1>
-          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto hero-subheading-reveal"></div>
+          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto hero-subheading-reveal mt-2"></div>
         </div>
 
         <!-- PART 2: SHOWCASE FRAME (Image ~68%) + PRACTICE MENU (~32%) -->
@@ -512,25 +509,27 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
           {servicePillars.map((pillar) => (
             <div class="space-y-8" id={pillar.id}>
               
-              <!-- Pillar Header Banner with Watermark -->
+              <!-- Pillar Header Banner with Clear Number & Removed Pillar Label -->
               <div class="pillar-header-banner relative rounded-3xl bg-white border border-slate-200/90 p-7 sm:p-9 lg:p-10 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.08)] overflow-hidden reveal-on-scroll">
-                <!-- Large Decorative Watermark Number -->
-                <div class="absolute -right-4 -bottom-10 text-8xl sm:text-9xl font-black text-slate-100/90 pointer-events-none select-none tracking-tighter" aria-hidden="true">
+                <!-- Large Architectural Number Watermark (High contrast & clearly visible) -->
+                <div class="absolute -right-3 -bottom-6 sm:-bottom-10 text-8xl sm:text-9xl lg:text-[11rem] font-black text-[#0C487A]/12 pointer-events-none select-none tracking-tighter leading-none" aria-hidden="true">
                   {pillar.number}
                 </div>
 
                 <!-- Top Brand Accent Line -->
                 <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF]"></div>
 
-                <div class="relative z-10 max-w-3xl space-y-3">
-                  <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-[#0C487A] animate-pulse"></span>
-                    <span class="inline-block px-3 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-[#0C487A] border border-blue-200/70">
-                      {pillar.badge}
+                <div class="relative z-10 max-w-3xl space-y-3.5">
+                  <!-- Prominent Number Badge (100% visible, pillar labels removed) -->
+                  <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center justify-center w-12 h-9 sm:w-14 sm:h-10 rounded-xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-extrabold text-sm sm:text-base shadow-sm tracking-wide">
+                      {pillar.number}
                     </span>
+                    <span class="h-1.5 w-1.5 rounded-full bg-[#0C487A]/40"></span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#0C487A]">Unity Compass Practice</span>
                   </div>
 
-                  <h3 class="text-2xl sm:text-3xl lg:text-[1.85rem] font-extrabold text-[#0B2553] tracking-tight leading-snug">
+                  <h3 class="text-2xl sm:text-3xl lg:text-[1.85rem] font-extrabold text-[#0B2553] tracking-tight leading-[1.32] sm:leading-[1.35]">
                     {pillar.title}
                   </h3>
 
@@ -540,14 +539,15 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 </div>
               </div>
 
-              <!-- 5 Service Offerings Grid with Staggered Cascading Viewport Entrance -->
+              <!-- 5 Service Offerings Grid with Smooth Wobbly Physics & Staggered Viewport Entrance -->
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                 {pillar.services.map((service, sIdx) => {
                   const isWide = sIdx >= 3;
                   return (
                     <div
-                      class={`consulting-card cascade-item group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_8px_24px_rgba(11,37,83,0.06)] hover:shadow-[0_22px_45px_-8px_rgba(12,72,122,0.20)] hover:-translate-y-2 hover:border-[#0C487A]/50 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between overflow-hidden cursor-default ${isWide ? 'lg:col-span-1 xl:col-span-1' : ''}`}
+                      class={`consulting-card cascade-item group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_8px_24px_rgba(11,37,83,0.06)] hover:shadow-[0_22px_45px_-8px_rgba(12,72,122,0.22)] hover:border-[#0C487A]/50 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between overflow-hidden cursor-default ${isWide ? 'lg:col-span-1 xl:col-span-1' : ''}`}
                       data-cascade-index={sIdx}
+                      style={`--card-idx: ${sIdx};`}
                     >
                       <!-- Top Accent Line on Hover -->
                       <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -642,18 +642,25 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 <div
                   class="timeline-step-row relative flex flex-col md:flex-row items-center"
                   data-step-index={idx}
+                  style={`--step-idx: ${idx};`}
                 >
                   
                   <!-- Left Side Content (Desktop: Odd items on Left, Even items empty) -->
                   <div class={`w-full md:w-1/2 pl-14 md:pl-0 ${isEven ? 'md:order-2 md:pl-12' : 'md:order-1 md:pr-12 md:text-right'}`}>
                     
-                    <!-- Milestone Card with smooth glide-in on scroll -->
-                    <div class={`timeline-card-box group relative rounded-3xl p-6 sm:p-7 bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-default reveal-on-scroll ${isEven ? 'reveal-right' : 'reveal-left'}`}>
+                    <!-- Milestone Card with smooth leafy flowy floating animation & ample line-height -->
+                    <div
+                      class="timeline-card-box group relative rounded-3xl p-6 sm:p-7 bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] transition-all duration-300 overflow-hidden cursor-default reveal-on-scroll"
+                      style={`--step-idx: ${idx};`}
+                    >
                       
                       <!-- Glowing Top Accent Line on Hover -->
                       <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                      <!-- Milestone Pill Tag & Icon -->
+                      <!-- Subtle Leafy Flow Ambient Radial Glow -->
+                      <div class="absolute -right-8 -bottom-8 w-36 h-36 bg-blue-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-[#0C487A]/10 transition-colors duration-500" aria-hidden="true"></div>
+
+                      <!-- Milestone Pill Tag with subtle pulse indicator -->
                       <div class={`flex items-center gap-3 mb-3.5 ${isEven ? '' : 'md:justify-end'}`}>
                         <span class={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold ${step.bgTint} ${step.iconColor} border border-slate-200/70 shadow-2xs`}>
                           <span class="w-1.5 h-1.5 rounded-full bg-current animate-pulse"></span>
@@ -661,7 +668,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                         </span>
                       </div>
 
-                      <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors duration-200 tracking-tight leading-snug mb-2.5">
+                      <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors duration-200 tracking-tight leading-[1.32] sm:leading-[1.35] mb-2.5">
                         {step.num}. {step.title}
                       </h3>
 
@@ -779,8 +786,8 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6 reveal-on-scroll">
         
         <!-- Section Title with Shimmer -->
-        <h2 id="cta-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0B2553] leading-tight">
-          <span class="service-shimmer-center service-shimmer-line-1 block">Ready to Empower Your Organization with Innovative IT Solutions?</span>
+        <h2 id="cta-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0B2553] leading-[1.32] sm:leading-[1.35] lg:leading-[1.38]">
+          <span class="service-shimmer-center service-shimmer-line-1 block pb-1">Ready to Empower Your Organization with Innovative IT Solutions?</span>
         </h2>
         <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto"></div>
 
@@ -947,8 +954,41 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
   }
 
   /* ========================================================================= */
-  /* Cascading Card Reveal Animation inside "What We Provide" Pillars          */
+  /* Cascading Card Reveal & Smooth Wobbly Animation (User Request)            */
   /* ========================================================================= */
+  @keyframes cardFloatWobble {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-4px) rotate(0.4deg);
+    }
+    50% {
+      transform: translateY(-1.5px) rotate(-0.35deg);
+    }
+    75% {
+      transform: translateY(-5px) rotate(0.25deg);
+    }
+  }
+
+  @keyframes cardHoverWobble {
+    0% {
+      transform: translateY(0) scale(1) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-9px) scale(1.018) rotate(-1.2deg);
+    }
+    50% {
+      transform: translateY(-6px) scale(1.015) rotate(0.8deg);
+    }
+    75% {
+      transform: translateY(-8px) scale(1.016) rotate(-0.3deg);
+    }
+    100% {
+      transform: translateY(-7px) scale(1.015) rotate(0deg);
+    }
+  }
+
   .consulting-card.cascade-item {
     opacity: 0;
     transform: translateY(24px) scale(0.98);
@@ -965,6 +1005,45 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     opacity: 1;
     transform: translateY(0) scale(1);
     filter: blur(0);
+    animation: cardFloatWobble 7s ease-in-out infinite;
+    animation-delay: calc(var(--card-idx, 0) * 0.45s);
+  }
+
+  .consulting-card:hover {
+    animation: cardHoverWobble 0.75s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+    z-index: 20;
+  }
+
+  /* ========================================================================= */
+  /* Smooth Leafy Flowy Animation on Section 3 Milestone Cards (User Request)  */
+  /* ========================================================================= */
+  @keyframes leafyFlowSmooth {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg) skewX(0deg);
+    }
+    20% {
+      transform: translateY(-5px) rotate(0.65deg) skewX(0.35deg);
+    }
+    45% {
+      transform: translateY(-2px) rotate(-0.5deg) skewX(-0.25deg);
+    }
+    70% {
+      transform: translateY(-6px) rotate(0.4deg) skewX(0.2deg);
+    }
+    85% {
+      transform: translateY(-2.5px) rotate(-0.2deg) skewX(-0.1deg);
+    }
+  }
+
+  .timeline-card-box.is-revealed {
+    animation: leafyFlowSmooth 8.5s ease-in-out infinite;
+    animation-delay: calc(var(--step-idx, 0) * 1.35s);
+    will-change: transform;
+  }
+
+  .timeline-card-box:hover {
+    animation-play-state: paused;
+    transform: translateY(-8px) scale(1.015) rotate(0deg) !important;
   }
 
   /* Ambient Cursor Light Spotlight on Service Cards */
@@ -1066,8 +1145,9 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    padding-bottom: 0.16em;
-    padding-top: 0.05em;
+    line-height: 1.36;
+    padding-bottom: 0.22em;
+    padding-top: 0.08em;
     overflow: visible;
   }
 
@@ -1084,7 +1164,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     .service-shimmer-center { animation: none !important; background: none !important; -webkit-text-fill-color: #0F274A !important; color: #0F274A !important; }
     .hero-heading-reveal, .hero-subheading-reveal, .hero-image-reveal, .hero-menu-reveal { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
     .timeline-node-core { opacity: 1 !important; transform: none !important; animation: none !important; }
-    .why-card, .consulting-card { transition: none !important; transform: none !important; }
+    .why-card, .consulting-card, .timeline-card-box { transition: none !important; transform: none !important; animation: none !important; }
     .reveal-on-scroll, .reveal-left, .reveal-right, .consulting-card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
     .consulting-card .checkmark-badge { opacity: 1 !important; transform: none !important; }
   }
