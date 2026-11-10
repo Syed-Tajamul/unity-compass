@@ -472,7 +472,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     <!-- All 3 Pillars visible with expansive executive bento cards            -->
     <!-- Background: LIGHT BLUE BLUEPRINT CANVAS                               -->
     <!-- ===================================================================== -->
-    <section id="our-services-provide" class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="services-provide-heading">
+    <section id="our-services-provide" class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-label="Our Consulting Services">
       
       <!-- 16px Technical Blueprint Checks Pattern Overlay -->
       <div
@@ -485,19 +485,8 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
       <div class="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(40,121,182,0.12)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
       <div class="absolute -bottom-24 right-10 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(30,64,175,0.06)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
-      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16 sm:space-y-20">
+      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <!-- Section Header with Shimmer & Centered Alignment -->
-        <div class="text-center max-w-3xl mx-auto space-y-3 reveal-on-scroll">
-          <h2 id="services-provide-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.32] sm:leading-[1.35]">
-            <span class="service-shimmer-center service-shimmer-line-1 block pb-2 pt-0.5">Our Services: What We Provide</span>
-          </h2>
-          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-3 mb-4"></div>
-          <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
-            End-to-end technology and management consulting solutions engineered to accelerate digital maturity, unlock intelligent automation, and optimize enterprise operations.
-          </p>
-        </div>
-
         <!-- 3 Dedicated Service Pillars Container -->
         <div class="space-y-20 sm:space-y-24">
           {servicePillars.map((pillar) => (
@@ -505,9 +494,9 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
               
               <!-- Clean Centered Category Header (No bulky container banner, line-height optimized) -->
               <div class="text-center max-w-3xl mx-auto space-y-3 reveal-on-scroll">
-                <h3 class="text-2xl sm:text-3xl lg:text-[2.1rem] font-extrabold text-[#0B2553] tracking-tight leading-[1.32] sm:leading-[1.35]">
+                <h2 class="text-2xl sm:text-3xl lg:text-[2.2rem] font-extrabold text-[#0B2553] tracking-tight leading-[1.32] sm:leading-[1.35]">
                   {pillar.title}
-                </h3>
+                </h2>
                 <div class="w-20 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-2 mb-3"></div>
                 <p class="text-sm sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                   {pillar.desc}
