@@ -1,0 +1,133 @@
+---
+/**
+ * AnimatedWaveDivider.astro - Continuous 3-Layer Liquid Parallax Wave Section Divider
+ * 
+ * Features:
+ * - Pure transform-only GPU-accelerated motion (0 layout, 0 paint, 0 CLS, 0 JavaScript)
+ * - 3 Stacked seamless tracks drifting at different speeds (22s, 15s reverse, 9s) for true parallax liquid depth
+ * - Unity Compass Brand Colors:
+ *   - Back Wave: Deep Federal Navy (#0C487A) & Royal Blue (#1E40AF) with signature Needle Red (#FF3130) warmth
+ *   - Mid Wave: Luminous Sky Blue (#38BDF8) & Ice Blue (#93C5FD)
+ *   - Front Wave: Pure Crisp White (#FFFFFF) matching the incoming section with 0 seam
+ * - Respects prefers-reduced-motion for full accessibility
+ */
+
+interface Props {
+  fillColor?: string;
+  class?: string;
+}
+
+const { fillColor = '#ffffff', class: className = '' } = Astro.props;
+---
+
+<div class={`animated-liquid-waves ${className}`} aria-hidden="true">
+  <!-- Hidden SVG Defs for Brand Color Gradients -->
+  <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Back Wave: Deep Navy, Cobalt Blue & Needle Red Warmth -->
+      <linearGradient id="wave-brand-back" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#0C487A" stop-opacity="0.24" />
+        <stop offset="35%" stop-color="#1E40AF" stop-opacity="0.20" />
+        <stop offset="70%" stop-color="#FF3130" stop-opacity="0.14" />
+        <stop offset="100%" stop-color="#0C487A" stop-opacity="0.24" />
+      </linearGradient>
+
+      <!-- Mid Wave: Luminous Sky Blue & Electric Blue Tint -->
+      <linearGradient id="wave-brand-mid" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.5" />
+        <stop offset="50%" stop-color="#93C5FD" stop-opacity="0.65" />
+        <stop offset="100%" stop-color="#60A5FA" stop-opacity="0.5" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Track 1: Back Wave (22s drift, deepest layer) -->
+  <div class="liquid-wave-track liquid-wave-track--back">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
+      <path d="M0,70 C240,110 480,30 720,70 C960,110 1200,30 1440,70 L1440,120 L0,120 Z" fill="url(#wave-brand-back)"></path>
+    </svg>
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
+      <path d="M0,70 C240,110 480,30 720,70 C960,110 1200,30 1440,70 L1440,120 L0,120 Z" fill="url(#wave-brand-back)"></path>
+    </svg>
+  </div>
+
+  <!-- Track 2: Mid Wave (15s reverse drift for counter-current parallax) -->
+  <div class="liquid-wave-track liquid-wave-track--mid">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
+      <path d="M0,84 C200,44 420,120 720,84 C1020,48 1240,120 1440,84 L1440,120 L0,120 Z" fill="url(#wave-brand-mid)"></path>
+    </svg>
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
+      <path d="M0,84 C200,44 420,120 720,84 C1020,48 1240,120 1440,84 L1440,120 L0,120 Z" fill="url(#wave-brand-mid)"></path>
+    </svg>
+  </div>
+
+  <!-- Track 3: Front Wave (9s fast drift, solid fill seamlessly merging into next section) -->
+  <div class="liquid-wave-track liquid-wave-track--front">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
+      <path d="M0,96 C260,120 460,64 720,96 C980,124 1180,64 1440,96 L1440,120 L0,120 Z" fill={fillColor}></path>
+    </svg>
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
+      <path d="M0,96 C260,120 460,64 720,96 C980,124 1180,64 1440,96 L1440,120 L0,120 Z" fill={fillColor}></path>
+    </svg>
+  </div>
+</div>
+
+<style>
+  .animated-liquid-waves {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: clamp(66px, 10vw, 120px);
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 20;
+  }
+
+  .liquid-wave-track {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    width: 200%;
+    height: 100%;
+    will-change: transform;
+  }
+
+  .liquid-wave-track svg {
+    display: block;
+    width: 50%;
+    height: 100%;
+    flex-shrink: 0;
+  }
+
+  .liquid-wave-track--back {
+    animation: liquidWaveDrift 22s linear infinite;
+    z-index: 1;
+  }
+
+  .liquid-wave-track--mid {
+    animation: liquidWaveDrift 15s linear infinite reverse;
+    z-index: 2;
+  }
+
+  .liquid-wave-track--front {
+    animation: liquidWaveDrift 9s linear infinite;
+    z-index: 3;
+  }
+
+  @keyframes liquidWaveDrift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .liquid-wave-track {
+      animation: none !important;
+    }
+  }
+</style>
+
