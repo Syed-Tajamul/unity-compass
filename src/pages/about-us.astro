@@ -928,28 +928,36 @@ const aboutPageSchema = {
   }
 
   /* Parent Blur / Sibling De-emphasis (Focus States) for Timeline */
-  .timeline-step:hover .timeline-node,
-  .timeline-step.is-focused .timeline-node {
-    background: #FF3130;
-    transform: scale(1.15) !important;
-    z-index: 20;
-  }
-
-  .timeline-step:hover .timeline-card,
-  .timeline-step.is-focused .timeline-card {
+  /* ONLY triggers when mouse enters .timeline-card; cleared on mouse out */
+  .timeline-card:hover,
+  .timeline-card.is-card-focused {
     border-color: rgba(12, 72, 122, 0.45);
     box-shadow: 0 28px 55px -18px rgba(12, 72, 122, 0.32), 0 0 0 1px rgba(12, 72, 122, 0.25);
     transform: translateY(-6px) scale(1.025) !important;
     z-index: 15;
   }
 
-  .process-timeline:has(.timeline-step:hover) .timeline-step:not(:hover) .timeline-card,
-  .process-timeline:has(.timeline-step:hover) .timeline-step:not(:hover) .timeline-node,
-  .process-timeline.has-focus .timeline-step:not(.is-focused) .timeline-card,
-  .process-timeline.has-focus .timeline-step:not(.is-focused) .timeline-node {
+  .timeline-step:has(.timeline-card:hover) .timeline-node,
+  .timeline-step.is-active-step .timeline-node {
+    background: #FF3130;
+    transform: scale(1.15) !important;
+    filter: none !important;
+    opacity: 1 !important;
+    z-index: 20;
+  }
+
+  /* ONLY non-hovered sibling timeline cards blur while a card is hovered */
+  .process-timeline:has(.timeline-card:hover) .timeline-card:not(:hover),
+  .process-timeline.has-card-hover .timeline-card:not(.is-card-focused) {
     filter: blur(3.5px) saturate(0.6);
     opacity: 0.42;
     transform: scale(0.96);
+  }
+
+  .process-timeline:has(.timeline-card:hover) .timeline-step:not(:has(.timeline-card:hover)) .timeline-node,
+  .process-timeline.has-card-hover .timeline-step:not(.is-active-step) .timeline-node {
+    filter: blur(3px) saturate(0.6);
+    opacity: 0.45;
   }
 
   @media (min-width: 1024px) {
@@ -1159,15 +1167,17 @@ const aboutPageSchema = {
   function initTimelineFocusStates() {
     const processTimelines = document.querySelectorAll<HTMLElement>('.process-timeline');
     processTimelines.forEach((timeline) => {
-      const steps = timeline.querySelectorAll<HTMLElement>('.timeline-step');
-      steps.forEach((step) => {
-        step.addEventListener('mouseenter', () => {
-          timeline.classList.add('has-focus');
-          step.classList.add('is-focused');
+      const cards = timeline.querySelectorAll<HTMLElement>('.timeline-card');
+      cards.forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+          timeline.classList.add('has-card-hover');
+          card.classList.add('is-card-focused');
+          card.closest('.timeline-step')?.classList.add('is-active-step');
         });
-        step.addEventListener('mouseleave', () => {
-          timeline.classList.remove('has-focus');
-          step.classList.remove('is-focused');
+        card.addEventListener('mouseleave', () => {
+          timeline.classList.remove('has-card-hover');
+          card.classList.remove('is-card-focused');
+          timeline.querySelectorAll('.timeline-step').forEach((s) => s.classList.remove('is-active-step'));
         });
       });
     });

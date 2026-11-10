@@ -732,18 +732,20 @@ const deliverables = [
 
     timelineRows.forEach((row) => nodeObserver.observe(row));
 
-    // Timeline Parent Blur / Sibling De-emphasis Focus Interaction
+    // Timeline Parent Blur / Sibling De-emphasis Focus Interaction (Strictly on Timeline Card Box)
     const timelineContainers = document.querySelectorAll('.timeline-step-container');
     timelineContainers.forEach((container) => {
-      const rows = container.querySelectorAll('.timeline-step-row');
-      rows.forEach((row) => {
-        row.addEventListener('mouseenter', () => {
-          container.classList.add('has-focus');
-          row.classList.add('is-focused');
+      const cards = container.querySelectorAll('.timeline-card-box');
+      cards.forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+          container.classList.add('has-card-hover');
+          card.classList.add('is-card-focused');
+          card.closest('.timeline-step-row')?.classList.add('is-active-row');
         });
-        row.addEventListener('mouseleave', () => {
-          container.classList.remove('has-focus');
-          row.classList.remove('is-focused');
+        card.addEventListener('mouseleave', () => {
+          container.classList.remove('has-card-hover');
+          card.classList.remove('is-card-focused');
+          container.querySelectorAll('.timeline-step-row').forEach((r) => r.classList.remove('is-active-row'));
         });
       });
     });
@@ -837,46 +839,53 @@ const deliverables = [
 
   /* ========================================================================= */
   /* Parent Blur / Sibling De-emphasis (Focus States) for Timeline             */
+  /* ONLY triggers when mouse enters .timeline-card-box; cleared on mouse out  */
   /* ========================================================================= */
   .timeline-card-box {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.4s ease,
-                opacity 0.4s ease,
-                box-shadow 0.4s ease,
-                border-color 0.4s ease;
+                filter 0.35s ease,
+                opacity 0.35s ease,
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
     will-change: transform, filter, opacity;
   }
 
   .timeline-node-core {
     opacity: 0;
     transform: scale(0.25) rotate(-35deg);
-    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
     will-change: transform, opacity, filter;
   }
 
-  /* When any timeline step row is hovered: */
-  .timeline-step-row:hover .timeline-card-box,
-  .timeline-step-row.is-focused .timeline-card-box {
+  /* When cursor is directly hovering over a timeline card: */
+  .timeline-card-box:hover,
+  .timeline-card-box.is-card-focused {
     transform: translateY(-8px) scale(1.025) !important;
     box-shadow: 0 24px 55px -10px rgba(12, 72, 122, 0.28), 0 0 0 1px rgba(12, 72, 122, 0.35);
     border-color: rgba(12, 72, 122, 0.55);
     z-index: 25;
   }
 
-  .timeline-step-row:hover .timeline-node-core,
-  .timeline-step-row.is-focused .timeline-node-core {
+  .timeline-step-row:has(.timeline-card-box:hover) .timeline-node-core,
+  .timeline-step-row.is-active-row .timeline-node-core {
     transform: scale(1.15) !important;
+    filter: none !important;
+    opacity: 1 !important;
     z-index: 30;
   }
 
-  /* All non-hovered sibling timeline rows are dimmed and blurred */
-  .timeline-step-container:has(.timeline-step-row:hover) .timeline-step-row:not(:hover) .timeline-card-box,
-  .timeline-step-container:has(.timeline-step-row:hover) .timeline-step-row:not(:hover) .timeline-node-core,
-  .timeline-step-container.has-focus .timeline-step-row:not(.is-focused) .timeline-card-box,
-  .timeline-step-container.has-focus .timeline-step-row:not(.is-focused) .timeline-node-core {
+  /* ONLY non-hovered sibling timeline cards blur while a card is hovered */
+  .timeline-step-container:has(.timeline-card-box:hover) .timeline-card-box:not(:hover),
+  .timeline-step-container.has-card-hover .timeline-card-box:not(.is-card-focused) {
     filter: blur(3.5px) saturate(0.6);
     opacity: 0.42;
     transform: scale(0.96);
+  }
+
+  .timeline-step-container:has(.timeline-card-box:hover) .timeline-step-row:not(:has(.timeline-card-box:hover)) .timeline-node-core,
+  .timeline-step-container.has-card-hover .timeline-step-row:not(.is-active-row) .timeline-node-core {
+    filter: blur(3px) saturate(0.6);
+    opacity: 0.45;
   }
 
   .timeline-node-core.node-opened {

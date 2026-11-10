@@ -514,23 +514,14 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 </p>
               </div>
 
-              <!-- 5 Service Offerings Grid with Website Brand Colors & Radiant Embers Animation -->
+              <!-- 5 Service Offerings Grid with Gradient Border Draw Animation (card-08 Architecture) -->
               <div class="services-cards-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                 {pillar.services.map((service, sIdx) => {
                   return (
                     <article
-                      class="consulting-service-card cascade-item group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_8px_24px_rgba(11,37,83,0.06)] p-6 sm:p-7 flex flex-col justify-start overflow-hidden cursor-pointer"
+                      class="gradient-border-card cascade-item group relative rounded-3xl bg-white p-6 sm:p-7 flex flex-col justify-start overflow-hidden cursor-pointer shadow-[0_8px_24px_rgba(11,37,83,0.06)]"
                       data-cascade-index={sIdx}
                     >
-                      <!-- Top Accent Line with Brand Gradient on Hover -->
-                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
-
-                      <!-- Radiant Brand Color Bloom Layer (Rising from bottom on hover) -->
-                      <div class="card-brand-bloom absolute inset-0 pointer-events-none rounded-3xl"></div>
-
-                      <!-- Subtle Floating Brand Embers Layer -->
-                      <div class="card-brand-embers absolute inset-0 pointer-events-none rounded-3xl"></div>
-
                       <!-- Card Content Container -->
                       <div class="relative z-10 space-y-3.5 flex flex-col justify-start h-full">
                         <!-- Icon Container in Brand Colors -->
@@ -804,10 +795,10 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
       },
       { rootMargin: '0px 0px -30px 0px', threshold: 0.1 }
     );
-    document.querySelectorAll('.consulting-service-card.cascade-item').forEach((card) => cascadeItemObserver.observe(card));
+    document.querySelectorAll('.gradient-border-card.cascade-item').forEach((card) => cascadeItemObserver.observe(card));
 
     // 3. Ambient Cursor Spotlight Physics for Service Offering Cards
-    const consultingCards = document.querySelectorAll('.consulting-service-card');
+    const consultingCards = document.querySelectorAll('.gradient-border-card');
     consultingCards.forEach((card) => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -836,18 +827,20 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
       timelineRows.forEach((row) => nodeObserver.observe(row));
     }
 
-    // 5. Timeline Parent Blur / Sibling De-emphasis Focus Interaction
+    // 5. Timeline Parent Blur / Sibling De-emphasis Focus Interaction (Strictly on Timeline Card Box)
     const timelineContainers = document.querySelectorAll('.timeline-step-container');
     timelineContainers.forEach((container) => {
-      const rows = container.querySelectorAll('.timeline-step-row');
-      rows.forEach((row) => {
-        row.addEventListener('mouseenter', () => {
-          container.classList.add('has-focus');
-          row.classList.add('is-focused');
+      const cards = container.querySelectorAll('.timeline-card-box');
+      cards.forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+          container.classList.add('has-card-hover');
+          card.classList.add('is-card-focused');
+          card.closest('.timeline-step-row')?.classList.add('is-active-row');
         });
-        row.addEventListener('mouseleave', () => {
-          container.classList.remove('has-focus');
-          row.classList.remove('is-focused');
+        card.addEventListener('mouseleave', () => {
+          container.classList.remove('has-card-hover');
+          card.classList.remove('is-card-focused');
+          container.querySelectorAll('.timeline-step-row').forEach((r) => r.classList.remove('is-active-row'));
         });
       });
     });
@@ -914,135 +907,159 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
   }
 
   /* ========================================================================= */
-  /* CONSULTING SERVICE CARDS ANIMATION (Website Brand Colors Palette)         */
+  /* GRADIENT BORDER DRAW ANIMATION (card-08 Architecture in Brand Colors)     */
+  /* Multi-color conic gradient traces a live circuit around border on hover   */
   /* ========================================================================= */
-  .consulting-service-card {
+  @property --card-border-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes gradientBorderSpin {
+    to {
+      --card-border-angle: 360deg;
+    }
+  }
+
+  .gradient-border-card {
+    --card-border-width: 2.5px;
     position: relative;
+    border-radius: 1.5rem;
     background: #ffffff;
+    cursor: pointer;
+    isolation: isolate;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, box-shadow;
+  }
+
+  /* Static Clean Base Border */
+  .gradient-border-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
     border: 1px solid rgba(226, 232, 240, 0.95);
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.35s ease,
-                filter 0.5s ease,
-                opacity 0.5s ease;
-    will-change: transform, box-shadow, filter;
-  }
-
-  .consulting-service-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(12, 72, 122, 0.45);
-    box-shadow: 0 20px 45px -10px rgba(12, 72, 122, 0.18), 0 0 30px rgba(30, 64, 175, 0.12);
-  }
-
-  /* Radiant Brand Color Bloom Layer (Rising on hover) */
-  .card-brand-bloom {
-    position: absolute;
-    inset: 0;
+    pointer-events: none;
     z-index: 1;
-    background: radial-gradient(
-      circle at 50% 100%,
-      rgba(30, 64, 175, 0.12) 0%,
-      rgba(12, 72, 122, 0.08) 45%,
-      rgba(255, 49, 48, 0.05) 75%,
-      transparent 92%
-    );
-    opacity: 0;
-    transform: translateY(18%);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.35s ease;
   }
 
-  .consulting-service-card:hover .card-brand-bloom {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Brand Embers Layer (Sparkles in #0C487A, #1E40AF, #FF3130) */
-  .card-brand-embers {
+  /* Animated Conic Gradient Border Circuit in Website Colors */
+  .gradient-border-card::before {
+    content: "";
     position: absolute;
     inset: 0;
-    z-index: 2;
-    background-image:
-      radial-gradient(#0C487A 1.2px, transparent 1.6px),
-      radial-gradient(#1E40AF 1.4px, transparent 1.8px),
-      radial-gradient(#FF3130 1.2px, transparent 1.8px);
-    background-size: 55px 55px, 85px 85px, 115px 115px;
-    background-position: 0 0, 25px 35px, 50px 15px;
+    border-radius: inherit;
+    padding: var(--card-border-width);
+    background: conic-gradient(
+      from var(--card-border-angle, 0deg),
+      transparent 0deg,
+      transparent 60deg,
+      #38BDF8 120deg,
+      #2563EB 175deg,
+      #0C487A 220deg,
+      #FF3130 270deg,
+      transparent 330deg,
+      transparent 360deg
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.5s ease 0.1s;
-    mix-blend-mode: multiply;
+    transition: opacity 0.4s ease;
+    animation: gradientBorderSpin 3.5s linear infinite paused;
+    pointer-events: none;
+    z-index: 2;
   }
 
-  .consulting-service-card:hover .card-brand-embers {
-    opacity: 0.7;
+  /* Hover State: Traces the live circuit beam around the card perimeter */
+  .gradient-border-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px -10px rgba(12, 72, 122, 0.22), 0 0 35px rgba(37, 99, 235, 0.16);
+  }
+
+  .gradient-border-card:hover::before {
+    opacity: 1;
+    animation-play-state: running;
+  }
+
+  .gradient-border-card:hover::after {
+    opacity: 0;
   }
 
   /* Cascading Entrance */
-  .consulting-service-card.cascade-item {
+  .gradient-border-card.cascade-item {
     opacity: 0;
     transform: translateY(24px);
     filter: blur(4px);
     transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
                 filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.45s ease,
-                border-color 0.35s ease;
+                box-shadow 0.4s ease;
   }
 
-  .consulting-service-card.cascade-item.is-revealed {
+  .gradient-border-card.cascade-item.is-revealed {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
   }
 
-  .consulting-service-card.cascade-item.is-revealed:hover {
+  .gradient-border-card.cascade-item.is-revealed:hover {
     transform: translateY(-8px);
-    border-color: rgba(12, 72, 122, 0.45);
-    box-shadow: 0 20px 45px -10px rgba(12, 72, 122, 0.18), 0 0 30px rgba(30, 64, 175, 0.12);
+    box-shadow: 0 20px 45px -10px rgba(12, 72, 122, 0.22), 0 0 35px rgba(37, 99, 235, 0.16);
   }
 
   /* ========================================================================= */
   /* PARENT BLUR / SIBLING DE-EMPHASIS (FOCUS STATES) FOR TIMELINES            */
+  /* ONLY triggers when mouse enters .timeline-card-box; cleared on mouse out  */
   /* ========================================================================= */
   .timeline-card-box {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.4s ease,
-                opacity 0.4s ease,
-                box-shadow 0.4s ease,
-                border-color 0.4s ease;
+                filter 0.35s ease,
+                opacity 0.35s ease,
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
     will-change: transform, filter, opacity;
   }
 
   .timeline-node-core {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.4s ease,
-                opacity 0.4s ease;
+                filter 0.35s ease,
+                opacity 0.35s ease;
     will-change: transform, filter, opacity;
   }
 
-  /* When any timeline step row is hovered: */
-  /* Hovered row's card and node gain focus and elevation */
-  .timeline-step-row:hover .timeline-card-box,
-  .timeline-step-row.is-focused .timeline-card-box {
+  /* When cursor is directly hovering over a timeline card: */
+  .timeline-card-box:hover,
+  .timeline-card-box.is-card-focused {
     transform: translateY(-8px) scale(1.025) rotate(0deg) !important;
     box-shadow: 0 24px 55px -10px rgba(12, 72, 122, 0.28), 0 0 0 1px rgba(12, 72, 122, 0.35);
     border-color: rgba(12, 72, 122, 0.55);
     z-index: 25;
   }
 
-  .timeline-step-row:hover .timeline-node-core,
-  .timeline-step-row.is-focused .timeline-node-core {
+  .timeline-step-row:has(.timeline-card-box:hover) .timeline-node-core,
+  .timeline-step-row.is-active-row .timeline-node-core {
     transform: scale(1.15) rotate(0deg) !important;
+    filter: none !important;
+    opacity: 1 !important;
     z-index: 30;
   }
 
-  /* All non-hovered sibling timeline rows are dimmed and blurred */
-  .timeline-step-container:has(.timeline-step-row:hover) .timeline-step-row:not(:hover) .timeline-card-box,
-  .timeline-step-container:has(.timeline-step-row:hover) .timeline-step-row:not(:hover) .timeline-node-core,
-  .timeline-step-container.has-focus .timeline-step-row:not(.is-focused) .timeline-card-box,
-  .timeline-step-container.has-focus .timeline-step-row:not(.is-focused) .timeline-node-core {
+  /* ONLY non-hovered sibling timeline cards blur while a card is hovered */
+  .timeline-step-container:has(.timeline-card-box:hover) .timeline-card-box:not(:hover),
+  .timeline-step-container.has-card-hover .timeline-card-box:not(.is-card-focused) {
     filter: blur(3.5px) saturate(0.6);
     opacity: 0.42;
     transform: scale(0.96);
+  }
+
+  .timeline-step-container:has(.timeline-card-box:hover) .timeline-step-row:not(:has(.timeline-card-box:hover)) .timeline-node-core,
+  .timeline-step-container.has-card-hover .timeline-step-row:not(.is-active-row) .timeline-node-core {
+    filter: blur(3px) saturate(0.6);
+    opacity: 0.45;
   }
 
   /* ========================================================================= */
@@ -1181,8 +1198,8 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     .service-shimmer-center { animation: none !important; background: none !important; -webkit-text-fill-color: #0F274A !important; color: #0F274A !important; }
     .hero-heading-reveal, .hero-subheading-reveal, .hero-image-reveal, .hero-menu-reveal { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
     .timeline-node-core { opacity: 1 !important; transform: none !important; animation: none !important; }
-    .why-card, .consulting-service-card, .timeline-card-box { transition: none !important; transform: none !important; animation: none !important; filter: none !important; }
-    .card-brand-bloom, .card-brand-embers { display: none !important; }
-    .reveal-on-scroll, .reveal-left, .reveal-right, .consulting-service-card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
+    .why-card, .gradient-border-card, .timeline-card-box { transition: none !important; transform: none !important; animation: none !important; filter: none !important; }
+    .gradient-border-card::before { animation: none !important; }
+    .reveal-on-scroll, .reveal-left, .reveal-right, .gradient-border-card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   }
 </style>
