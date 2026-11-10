@@ -26,25 +26,6 @@ const differentiators = [
   },
 ] as const;
 
-const proposalOutcomes = [
-  {
-    title: 'Tailored content',
-    description: 'Persuasive responses aligned to the RFP, your value proposition, and evaluator priorities.',
-  },
-  {
-    title: 'Compliance',
-    description: 'Documentation and formatting checked against agency instructions and evaluation standards.',
-  },
-  {
-    title: 'Collaboration',
-    description: 'Structured coordination with subject-matter experts and stakeholders for accuracy and cohesion.',
-  },
-  {
-    title: 'Higher win potential',
-    description: 'Meticulous planning and review designed to reduce rework and strengthen proposal quality.',
-  },
-] as const;
-
 const coreServices = [
   {
     number: '01',
@@ -87,6 +68,24 @@ const coreServices = [
     description: 'Compelling, well-researched grant proposals developed to help organizations pursue and secure non-dilutive funding.',
     href: `mailto:${companyInfo.email}?subject=Grant%20Writing%20Services`,
     icon: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 0v6h6M8 13h8M8 17h5',
+  },
+] as const;
+
+const capabilityGroups = [
+  {
+    label: 'Pursuit & Funding',
+    title: 'Build credible paths to opportunity',
+    services: [coreServices[0], coreServices[5]],
+  },
+  {
+    label: 'Talent',
+    title: 'Put the right people behind the mission',
+    services: [coreServices[1], coreServices[2]],
+  },
+  {
+    label: 'Technology & Growth',
+    title: 'Modernize operations and digital presence',
+    services: [coreServices[3], coreServices[4]],
   },
 ] as const;
 
@@ -196,48 +195,135 @@ const aboutPageSchema = {
   </header>
 
   <section class="about-scroll-region bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="company-heading">
-    <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16 lg:px-8">
-      <div class="about-reveal">
+    <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16 lg:px-8">
+      <div class="about-reveal max-w-3xl">
         <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Who we are</p>
         <h2 id="company-heading" class="about-section-heading mt-3 max-w-2xl text-2xl font-extrabold leading-[1.18] tracking-tight sm:text-3xl sm:leading-[1.22] md:text-4xl lg:text-[2.65rem] lg:leading-[1.24]">
-          Strategy, talent, and delivery under one roof
+          One partner across strategy, talent, technology, and growth
         </h2>
         <div class="mt-5 h-1.5 w-20 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]" aria-hidden="true"></div>
 
         <div class="mt-8 max-w-3xl space-y-5 text-base leading-8 text-slate-600 sm:text-lg">
           <p>
-            Unity Compass specializes in IT and business consulting, staffing, recruitment, proposal development, and digital solutions for commercial and federal clients. We combine deep government contracting expertise with a client-first approach to deliver measurable results and lasting partnerships.
+            Unity Compass provides proposal development, cleared recruitment, staffing solutions, IT and business consulting, website design, and grant writing for commercial organizations and government contractors.
           </p>
           <p>
             We work with primes, subcontractors, and growth-stage firms that need to strengthen their federal footprint, secure critical talent, and perform with confidence in regulated environments.
           </p>
           <p>
-            Proposal development is one of our core strengths. With more than 10 years of Government Business Development Capture experience, our team can manage the RFP lifecycle from opportunity and pricing strategy through compliant submission.
+            Our integrated model connects strategy, people, technology, and communications so clients can move from opportunity to execution with one accountable partner.
           </p>
         </div>
+
+        <dl class="mt-8 grid grid-cols-2 gap-4 border-t border-slate-200 pt-6 sm:grid-cols-3">
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Experience</dt>
+            <dd class="mt-1 text-sm font-extrabold text-[#0B2553]">10+ years</dd>
+          </div>
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Markets</dt>
+            <dd class="mt-1 text-sm font-extrabold text-[#0B2553]">Federal & commercial</dd>
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <dt class="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Approach</dt>
+            <dd class="mt-1 text-sm font-extrabold text-[#0B2553]">Client first</dd>
+          </div>
+        </dl>
       </div>
 
-      <aside class="about-reveal about-delay-1 rounded-3xl border border-slate-200 bg-[#F4F8FC] p-6 shadow-[0_20px_50px_-28px_rgba(15,39,74,0.35)] sm:p-8" aria-labelledby="proposal-outcomes-heading">
-        <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#0C487A]">Proposal advantage</p>
-        <h3 id="proposal-outcomes-heading" class="mt-3 text-2xl font-extrabold tracking-tight text-[#0F274A]">
-          Credible responses, built to withstand scrutiny
-        </h3>
-        <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-1" role="list">
-          {proposalOutcomes.map((outcome) => (
-            <li class="rounded-xl border border-white bg-white/90 p-4 shadow-sm">
-              <div class="flex gap-3">
-                <span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FF3130] text-white" aria-hidden="true">
-                  <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12l4 4L19 6" /></svg>
-                </span>
-                <div>
-                  <h4 class="font-bold text-[#0F274A]">{outcome.title}</h4>
-                  <p class="mt-1 text-sm leading-6 text-slate-600">{outcome.description}</p>
+      <aside
+        class="capabilities-carousel about-reveal about-delay-1 overflow-hidden rounded-3xl border border-slate-200 bg-[#F4F8FC] shadow-[0_24px_60px_-30px_rgba(15,39,74,0.38)]"
+        aria-label="Unity Compass service capabilities"
+        aria-roledescription="carousel"
+        role="region"
+        data-capabilities-carousel
+      >
+        <div class="flex items-center justify-between border-b border-slate-200/90 px-5 py-5 sm:px-7">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">What we do</p>
+            <p class="mt-1 text-sm font-semibold text-slate-600">Six connected capabilities</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" class="capability-control" aria-label="Previous capability group" data-capability-prev>
+              <svg class="h-4 w-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button type="button" class="capability-control" aria-label="Next capability group" data-capability-next>
+              <svg class="h-4 w-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="capabilities-viewport" data-capabilities-viewport>
+          <div class="capabilities-track" data-capabilities-track>
+            {capabilityGroups.map((group, groupIndex) => (
+              <section
+                class="capability-slide p-5 sm:p-7"
+                aria-label={`${groupIndex + 1} of ${capabilityGroups.length}: ${group.label}`}
+                aria-roledescription="slide"
+                aria-hidden={groupIndex === 0 ? 'false' : 'true'}
+                inert={groupIndex !== 0}
+                data-capability-slide
+              >
+                <p class="text-xs font-bold uppercase tracking-[0.14em] text-[#0C487A]">{group.label}</p>
+                <h3 class="mt-2 text-xl font-extrabold leading-snug tracking-tight text-[#0B2553] sm:text-2xl">{group.title}</h3>
+
+                <div class="mt-5 grid gap-3">
+                  {group.services.map((service) => (
+                    <a href={service.href} class="group/service rounded-2xl border border-white bg-white/95 p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#0C487A]/20 hover:shadow-md sm:p-5">
+                      <div class="flex items-start gap-4">
+                        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0C487A] text-white transition-colors duration-300 group-hover/service:bg-[#FF3130]" aria-hidden="true">
+                          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={service.icon} /></svg>
+                        </span>
+                        <span class="min-w-0">
+                          <span class="block font-extrabold leading-6 text-[#0B2553]">{service.title}</span>
+                          <span class="mt-1 block text-sm leading-6 text-slate-600">{service.description}</span>
+                        </span>
+                      </div>
+                    </a>
+                  ))}
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </section>
+            ))}
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between border-t border-slate-200/90 px-5 py-4 sm:px-7">
+          <div class="flex items-center gap-2" aria-label="Choose a capability group">
+            {capabilityGroups.map((group, index) => (
+              <button
+                type="button"
+                class={`capability-dot ${index === 0 ? 'is-active' : ''}`}
+                aria-label={`Show ${group.label}`}
+                aria-current={index === 0 ? 'true' : undefined}
+                data-capability-dot={index}
+              ></button>
+            ))}
+          </div>
+          <p class="text-xs font-bold uppercase tracking-[0.1em] text-slate-500" aria-live="polite" data-capability-status>
+            1 / {capabilityGroups.length}
+          </p>
+        </div>
       </aside>
+    </div>
+  </section>
+
+  <section class="about-scroll-region relative overflow-hidden border-y border-slate-200/80 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] py-14 sm:py-16" aria-label="Unity Compass performance highlights">
+    <div class="absolute inset-0 about-grid opacity-35" aria-hidden="true"></div>
+    <div class="absolute left-1/2 top-1/2 h-48 w-4/5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(40,121,182,0.12)_0%,transparent_70%)] blur-3xl" aria-hidden="true"></div>
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="about-reveal rounded-3xl border border-slate-200/90 bg-white/90 px-5 py-7 shadow-[0_18px_45px_-20px_rgba(15,39,74,0.22),0_0_0_1px_rgba(255,255,255,0.9)_inset] backdrop-blur-xl sm:px-8 sm:py-9 lg:px-10">
+        <dl class="grid grid-cols-2 gap-x-4 gap-y-7 md:grid-cols-5 md:gap-0">
+          {performanceMetrics.map((metric, index) => (
+            <div class={`about-reveal about-delay-${Math.min(index + 1, 5)} relative px-2 py-2 text-center sm:px-4 ${index > 0 ? 'md:border-l md:border-slate-200' : ''} ${index === performanceMetrics.length - 1 ? 'col-span-2 md:col-span-1' : ''}`}>
+              <dd class="about-count text-3xl font-extrabold tracking-tight text-[#0F274A] sm:text-4xl" data-metric-value={metric.value}>
+                {metric.value}
+              </dd>
+              <span class="mx-auto mt-3 block h-1 w-8 rounded-full bg-[#FF3130]" aria-hidden="true"></span>
+              <dt class="mt-3 text-xs font-bold uppercase leading-5 tracking-[0.1em] text-slate-600">{metric.label}</dt>
+            </div>
+          ))}
+        </dl>
+      </div>
     </div>
   </section>
 
@@ -305,26 +391,6 @@ const aboutPageSchema = {
           </li>
         ))}
       </ul>
-    </div>
-  </section>
-
-  <section class="about-scroll-region relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] py-14 sm:py-16" aria-label="Unity Compass performance highlights">
-    <div class="absolute inset-0 about-grid opacity-35" aria-hidden="true"></div>
-    <div class="absolute left-1/2 top-1/2 h-48 w-4/5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(40,121,182,0.12)_0%,transparent_70%)] blur-3xl" aria-hidden="true"></div>
-    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="about-reveal rounded-3xl border border-slate-200/90 bg-white/90 px-5 py-7 shadow-[0_18px_45px_-20px_rgba(15,39,74,0.22),0_0_0_1px_rgba(255,255,255,0.9)_inset] backdrop-blur-xl sm:px-8 sm:py-9 lg:px-10">
-        <dl class="grid grid-cols-2 gap-x-4 gap-y-7 md:grid-cols-5 md:gap-0">
-          {performanceMetrics.map((metric, index) => (
-            <div class={`about-reveal about-delay-${Math.min(index + 1, 5)} relative px-2 py-2 text-center sm:px-4 ${index > 0 ? 'md:border-l md:border-slate-200' : ''} ${index === performanceMetrics.length - 1 ? 'col-span-2 md:col-span-1' : ''}`}>
-              <dd class="about-count text-3xl font-extrabold tracking-tight text-[#0F274A] sm:text-4xl" data-metric-value={metric.value}>
-                {metric.value}
-              </dd>
-              <span class="mx-auto mt-3 block h-1 w-8 rounded-full bg-[#FF3130]" aria-hidden="true"></span>
-              <dt class="mt-3 text-xs font-bold uppercase leading-5 tracking-[0.1em] text-slate-600">{metric.label}</dt>
-            </div>
-          ))}
-        </dl>
-      </div>
     </div>
   </section>
 
@@ -450,6 +516,63 @@ const aboutPageSchema = {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+  }
+
+  .capabilities-viewport {
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+  .capabilities-track {
+    display: flex;
+    align-items: stretch;
+    transition: transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  .capability-slide {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+
+  .capability-control {
+    display: inline-flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(12, 72, 122, 0.16);
+    border-radius: 9999px;
+    background: white;
+    color: #0C487A;
+    box-shadow: 0 4px 14px -8px rgba(15, 39, 74, 0.45);
+    transition: color 250ms ease, background-color 250ms ease, border-color 250ms ease, transform 250ms ease;
+  }
+
+  .capability-control:hover {
+    border-color: #FF3130;
+    background: #FF3130;
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  .capability-control:focus-visible,
+  .capability-dot:focus-visible {
+    outline: 2px solid #FF3130;
+    outline-offset: 3px;
+  }
+
+  .capability-dot {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 9999px;
+    background: #CBD5E1;
+    transition: width 300ms cubic-bezier(0.16, 1, 0.3, 1), background-color 300ms ease;
+  }
+
+  .capability-dot.is-active {
+    width: 2rem;
+    background: #FF3130;
   }
 
   .about-hero-art {
@@ -636,6 +759,8 @@ const aboutPageSchema = {
     .about-float,
     .about-reveal,
     .about-scroll-region :is(h2, h3, h4, p, dt, dd),
+    .capability-control,
+    .capability-dot,
     .process-timeline::before,
     .timeline-node,
     .timeline-card {
@@ -646,6 +771,10 @@ const aboutPageSchema = {
       transition: none !important;
     }
 
+    .capabilities-track {
+      transition: none !important;
+    }
+
     .process-timeline::before {
       transform: scaleY(1) !important;
     }
@@ -653,7 +782,92 @@ const aboutPageSchema = {
 </style>
 
 <script>
+  function initCapabilitiesCarousel() {
+    const carousel = document.querySelector<HTMLElement>('[data-capabilities-carousel]');
+    if (!carousel || carousel.dataset.initialized === 'true') return;
+
+    const track = carousel.querySelector<HTMLElement>('[data-capabilities-track]');
+    const viewport = carousel.querySelector<HTMLElement>('[data-capabilities-viewport]');
+    const slides = Array.from(carousel.querySelectorAll<HTMLElement>('[data-capability-slide]'));
+    const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('[data-capability-dot]'));
+    const previousButton = carousel.querySelector<HTMLButtonElement>('[data-capability-prev]');
+    const nextButton = carousel.querySelector<HTMLButtonElement>('[data-capability-next]');
+    const status = carousel.querySelector<HTMLElement>('[data-capability-status]');
+
+    if (!track || !viewport || slides.length === 0) return;
+
+    carousel.dataset.initialized = 'true';
+    let currentIndex = 0;
+    let touchStartX: number | undefined;
+    let suppressClick = false;
+
+    function showSlide(nextIndex: number) {
+      currentIndex = (nextIndex + slides.length) % slides.length;
+      track.style.transform = `translate3d(-${currentIndex * 100}%, 0, 0)`;
+
+      slides.forEach((slide, index) => {
+        const isCurrent = index === currentIndex;
+        slide.setAttribute('aria-hidden', String(!isCurrent));
+        slide.toggleAttribute('inert', !isCurrent);
+      });
+
+      dots.forEach((dot, index) => {
+        const isCurrent = index === currentIndex;
+        dot.classList.toggle('is-active', isCurrent);
+        if (isCurrent) {
+          dot.setAttribute('aria-current', 'true');
+        } else {
+          dot.removeAttribute('aria-current');
+        }
+      });
+
+      if (status) status.textContent = `${currentIndex + 1} / ${slides.length}`;
+    }
+
+    previousButton?.addEventListener('click', () => showSlide(currentIndex - 1));
+    nextButton?.addEventListener('click', () => showSlide(currentIndex + 1));
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = Number.parseInt(dot.dataset.capabilityDot ?? '0', 10);
+        showSlide(index);
+      });
+    });
+
+    carousel.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      showSlide(currentIndex + (event.key === 'ArrowRight' ? 1 : -1));
+    });
+
+    viewport.addEventListener('touchstart', (event) => {
+      touchStartX = event.touches[0]?.clientX;
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', (event) => {
+      if (touchStartX === undefined) return;
+      const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
+      const distance = touchEndX - touchStartX;
+      touchStartX = undefined;
+
+      if (Math.abs(distance) < 50) return;
+      suppressClick = true;
+      showSlide(currentIndex + (distance < 0 ? 1 : -1));
+      window.setTimeout(() => { suppressClick = false; }, 250);
+    }, { passive: true });
+
+    viewport.addEventListener('click', (event) => {
+      if (!suppressClick) return;
+      event.preventDefault();
+      event.stopPropagation();
+    }, true);
+
+    showSlide(0);
+  }
+
   function initAboutPage() {
+    initCapabilitiesCarousel();
+
     const elements = document.querySelectorAll<HTMLElement>(
       '.about-reveal, .about-scroll-region :is(h2, h3, h4, p, dt, dd)'
     );
