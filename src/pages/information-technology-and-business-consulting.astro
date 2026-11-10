@@ -514,42 +514,39 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 </p>
               </div>
 
-              <!-- 5 Service Offerings Grid with Color Burn & Radiant Embers Animation (card-30 architecture) -->
+              <!-- 5 Service Offerings Grid with Website Brand Colors & Radiant Embers Animation -->
               <div class="services-cards-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                 {pillar.services.map((service, sIdx) => {
                   return (
                     <article
-                      class="card-30__card consulting-card cascade-item group relative rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between"
+                      class="consulting-service-card cascade-item group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_8px_24px_rgba(11,37,83,0.06)] p-6 sm:p-7 flex flex-col justify-start overflow-hidden cursor-pointer"
                       data-cascade-index={sIdx}
                     >
-                      <!-- Base Metallic Dark Slate Layer -->
-                      <div class="card-30__base absolute inset-0"></div>
+                      <!-- Top Accent Line with Brand Gradient on Hover -->
+                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
 
-                      <!-- Color Burn Ignition Layer (Rising on Hover) -->
-                      <div class="card-30__layer absolute inset-0 pointer-events-none"></div>
+                      <!-- Radiant Brand Color Bloom Layer (Rising from bottom on hover) -->
+                      <div class="card-brand-bloom absolute inset-0 pointer-events-none rounded-3xl"></div>
 
-                      <!-- Radiant Blue Ambient Bloom Layer -->
-                      <div class="card-30__glow absolute inset-0 pointer-events-none"></div>
-
-                      <!-- Glowing Screen Embers / Sparkles Layer -->
-                      <div class="card-30__embers absolute inset-0 pointer-events-none"></div>
+                      <!-- Subtle Floating Brand Embers Layer -->
+                      <div class="card-brand-embers absolute inset-0 pointer-events-none rounded-3xl"></div>
 
                       <!-- Card Content Container -->
-                      <div class="card-30__inner relative z-10 p-6 sm:p-7 flex flex-col justify-start h-full space-y-3.5">
-                        <!-- Icon Container with Glow -->
-                        <div class="w-12 h-12 rounded-2xl bg-white/10 text-[#60A5FA] group-hover:text-white group-hover:bg-[#1E40AF] group-hover:scale-110 flex items-center justify-center transition-all duration-300 border border-white/15 shadow-sm">
+                      <div class="relative z-10 space-y-3.5 flex flex-col justify-start h-full">
+                        <!-- Icon Container in Brand Colors -->
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-[#0C487A] group-hover:text-white group-hover:scale-110 flex items-center justify-center transition-all duration-300 border border-blue-100/80 shadow-2xs">
                           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
                           </svg>
                         </div>
 
-                        <!-- Card Title with generous line-height -->
-                        <h4 class="text-lg sm:text-[1.18rem] font-bold text-white group-hover:text-[#93C5FD] transition-colors leading-[1.32] sm:leading-[1.35]">
+                        <!-- Card Title with generous line-height in Brand Navy -->
+                        <h4 class="text-lg sm:text-[1.18rem] font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors leading-[1.32] sm:leading-[1.35]">
                           {service.title}
                         </h4>
 
-                        <!-- Card Description -->
-                        <p class="text-xs sm:text-sm text-slate-300 group-hover:text-slate-200 leading-relaxed font-normal pt-0.5">
+                        <!-- Card Description in clean slate -->
+                        <p class="text-xs sm:text-sm text-slate-600 group-hover:text-slate-700 leading-relaxed font-normal pt-0.5">
                           {service.desc}
                         </p>
                       </div>
@@ -594,8 +591,8 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
             <div class="w-full h-full bg-gradient-to-b from-[#0C487A] via-[#1E40AF] to-[#FF3130] rounded-full shadow-[0_0_10px_rgba(30,64,175,0.35)]"></div>
           </div>
 
-          <!-- Timeline Milestone Rows -->
-          <div class="space-y-12 sm:space-y-16">
+          <!-- Timeline Milestone Rows (Parent Blur Focus Container) -->
+          <div class="timeline-step-container space-y-12 sm:space-y-16">
             {deliverySteps.map((step, idx) => {
               const isEven = idx % 2 === 1;
               return (
@@ -807,10 +804,10 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
       },
       { rootMargin: '0px 0px -30px 0px', threshold: 0.1 }
     );
-    document.querySelectorAll('.consulting-card.cascade-item').forEach((card) => cascadeItemObserver.observe(card));
+    document.querySelectorAll('.consulting-service-card.cascade-item').forEach((card) => cascadeItemObserver.observe(card));
 
     // 3. Ambient Cursor Spotlight Physics for Service Offering Cards
-    const consultingCards = document.querySelectorAll('.consulting-card');
+    const consultingCards = document.querySelectorAll('.consulting-service-card');
     consultingCards.forEach((card) => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -838,6 +835,22 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
       );
       timelineRows.forEach((row) => nodeObserver.observe(row));
     }
+
+    // 5. Timeline Parent Blur / Sibling De-emphasis Focus Interaction
+    const timelineContainers = document.querySelectorAll('.timeline-step-container');
+    timelineContainers.forEach((container) => {
+      const rows = container.querySelectorAll('.timeline-step-row');
+      rows.forEach((row) => {
+        row.addEventListener('mouseenter', () => {
+          container.classList.add('has-focus');
+          row.classList.add('is-focused');
+        });
+        row.addEventListener('mouseleave', () => {
+          container.classList.remove('has-focus');
+          row.classList.remove('is-focused');
+        });
+      });
+    });
   }
 
   if (document.readyState === 'loading') {
@@ -901,122 +914,135 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
   }
 
   /* ========================================================================= */
-  /* COLOR BURN & RADIANT EMBERS ANIMATION (card-30 Architecture)              */
-  /* Unity Compass Brand Colors: Deep Navy, Cobalt Blue & Red Accent Particles */
+  /* CONSULTING SERVICE CARDS ANIMATION (Website Brand Colors Palette)         */
   /* ========================================================================= */
-  .card-30__card {
+  .consulting-service-card {
     position: relative;
-    border-radius: 20px;
-    cursor: pointer;
-    overflow: hidden;
-    background: #0f1c2e;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 10px 30px rgba(11, 37, 83, 0.12);
-    min-height: 250px;
-    will-change: filter, box-shadow, transform;
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s ease,
+                filter 0.5s ease,
+                opacity 0.5s ease;
+    will-change: transform, box-shadow, filter;
   }
 
-  .card-30__base {
+  .consulting-service-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(12, 72, 122, 0.45);
+    box-shadow: 0 20px 45px -10px rgba(12, 72, 122, 0.18), 0 0 30px rgba(30, 64, 175, 0.12);
+  }
+
+  /* Radiant Brand Color Bloom Layer (Rising on hover) */
+  .card-brand-bloom {
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, #22354e, #0c1829);
     z-index: 1;
-  }
-
-  .card-30__layer {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
     background: radial-gradient(
       circle at 50% 100%,
-      #3b82f6 0%,
-      #1d4ed8 35%,
-      #0c487a 65%,
-      #ff3130 85%,
-      transparent 96%
-    );
-    mix-blend-mode: color-burn;
-    opacity: 0;
-    transform: translateY(22%);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    pointer-events: none;
-  }
-
-  .card-30__card:hover .card-30__layer {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .card-30__glow {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    background: radial-gradient(
-      circle at 50% 100%,
-      rgba(59, 130, 246, 0.35) 0%,
-      rgba(29, 78, 216, 0.2) 45%,
-      rgba(255, 49, 48, 0.12) 75%,
-      transparent 90%
+      rgba(30, 64, 175, 0.12) 0%,
+      rgba(12, 72, 122, 0.08) 45%,
+      rgba(255, 49, 48, 0.05) 75%,
+      transparent 92%
     );
     opacity: 0;
     transform: translateY(18%);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
   }
 
-  .card-30__card:hover .card-30__glow {
+  .consulting-service-card:hover .card-brand-bloom {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .card-30__embers {
+  /* Brand Embers Layer (Sparkles in #0C487A, #1E40AF, #FF3130) */
+  .card-brand-embers {
     position: absolute;
     inset: 0;
-    z-index: 4;
+    z-index: 2;
     background-image:
-      radial-gradient(#93c5fd 1.2px, transparent 1.6px),
-      radial-gradient(#60a5fa 1.4px, transparent 1.8px),
-      radial-gradient(#ff3130 1.2px, transparent 1.8px);
+      radial-gradient(#0C487A 1.2px, transparent 1.6px),
+      radial-gradient(#1E40AF 1.4px, transparent 1.8px),
+      radial-gradient(#FF3130 1.2px, transparent 1.8px);
     background-size: 55px 55px, 85px 85px, 115px 115px;
     background-position: 0 0, 25px 35px, 50px 15px;
     opacity: 0;
-    transition: opacity 0.6s ease 0.1s;
-    mix-blend-mode: screen;
-    pointer-events: none;
+    transition: opacity 0.5s ease 0.1s;
+    mix-blend-mode: multiply;
   }
 
-  .card-30__card:hover .card-30__embers {
-    opacity: 0.85;
+  .consulting-service-card:hover .card-brand-embers {
+    opacity: 0.7;
   }
 
-  .card-30__inner {
-    position: relative;
-    z-index: 10;
-  }
-
-  /* Cascading entrance with dim/desaturated initial state -> Ignites on hover */
-  .card-30__card.cascade-item {
+  /* Cascading Entrance */
+  .consulting-service-card.cascade-item {
     opacity: 0;
     transform: translateY(24px);
-    filter: grayscale(0.8) brightness(0.72) blur(4px);
+    filter: blur(4px);
     transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.6s ease,
-                box-shadow 0.6s ease,
-                border-color 0.4s ease;
+                filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.45s ease,
+                border-color 0.35s ease;
   }
 
-  .card-30__card.cascade-item.is-revealed {
+  .consulting-service-card.cascade-item.is-revealed {
     opacity: 1;
     transform: translateY(0);
-    filter: grayscale(0.8) brightness(0.75) blur(0);
+    filter: blur(0);
   }
 
-  .card-30__card.cascade-item.is-revealed:hover {
+  .consulting-service-card.cascade-item.is-revealed:hover {
     transform: translateY(-8px);
-    filter: grayscale(0) brightness(1.05) blur(0);
-    border-color: rgba(96, 165, 250, 0.55);
-    box-shadow: 0 0 50px rgba(37, 99, 235, 0.38), 0 20px 45px -10px rgba(11, 37, 83, 0.55);
+    border-color: rgba(12, 72, 122, 0.45);
+    box-shadow: 0 20px 45px -10px rgba(12, 72, 122, 0.18), 0 0 30px rgba(30, 64, 175, 0.12);
+  }
+
+  /* ========================================================================= */
+  /* PARENT BLUR / SIBLING DE-EMPHASIS (FOCUS STATES) FOR TIMELINES            */
+  /* ========================================================================= */
+  .timeline-card-box {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.4s ease,
+                opacity 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+    will-change: transform, filter, opacity;
+  }
+
+  .timeline-node-core {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.4s ease,
+                opacity 0.4s ease;
+    will-change: transform, filter, opacity;
+  }
+
+  /* When any timeline step row is hovered: */
+  /* Hovered row's card and node gain focus and elevation */
+  .timeline-step-row:hover .timeline-card-box,
+  .timeline-step-row.is-focused .timeline-card-box {
+    transform: translateY(-8px) scale(1.025) rotate(0deg) !important;
+    box-shadow: 0 24px 55px -10px rgba(12, 72, 122, 0.28), 0 0 0 1px rgba(12, 72, 122, 0.35);
+    border-color: rgba(12, 72, 122, 0.55);
+    z-index: 25;
+  }
+
+  .timeline-step-row:hover .timeline-node-core,
+  .timeline-step-row.is-focused .timeline-node-core {
+    transform: scale(1.15) rotate(0deg) !important;
+    z-index: 30;
+  }
+
+  /* All non-hovered sibling timeline rows are dimmed and blurred */
+  .timeline-step-container:has(.timeline-step-row:hover) .timeline-step-row:not(:hover) .timeline-card-box,
+  .timeline-step-container:has(.timeline-step-row:hover) .timeline-step-row:not(:hover) .timeline-node-core,
+  .timeline-step-container.has-focus .timeline-step-row:not(.is-focused) .timeline-card-box,
+  .timeline-step-container.has-focus .timeline-step-row:not(.is-focused) .timeline-node-core {
+    filter: blur(3.5px) saturate(0.6);
+    opacity: 0.42;
+    transform: scale(0.96);
   }
 
   /* ========================================================================= */
@@ -1155,8 +1181,8 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     .service-shimmer-center { animation: none !important; background: none !important; -webkit-text-fill-color: #0F274A !important; color: #0F274A !important; }
     .hero-heading-reveal, .hero-subheading-reveal, .hero-image-reveal, .hero-menu-reveal { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
     .timeline-node-core { opacity: 1 !important; transform: none !important; animation: none !important; }
-    .why-card, .consulting-card, .timeline-card-box, .card-30__card { transition: none !important; transform: none !important; animation: none !important; filter: none !important; }
-    .card-30__layer, .card-30__glow, .card-30__embers { display: none !important; }
-    .reveal-on-scroll, .reveal-left, .reveal-right, .consulting-card.cascade-item, .card-30__card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
+    .why-card, .consulting-service-card, .timeline-card-box { transition: none !important; transform: none !important; animation: none !important; filter: none !important; }
+    .card-brand-bloom, .card-brand-embers { display: none !important; }
+    .reveal-on-scroll, .reveal-left, .reveal-right, .consulting-service-card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   }
 </style>

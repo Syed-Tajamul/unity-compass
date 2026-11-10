@@ -913,7 +913,8 @@ const aboutPageSchema = {
     font-size: 0.7rem;
     font-weight: 800;
     letter-spacing: 0.08em;
-    transition: background-color 250ms ease, transform 250ms ease;
+    transition: background-color 250ms ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease, opacity 0.4s ease;
+    will-change: transform, filter, opacity;
   }
 
   .timeline-card {
@@ -922,18 +923,33 @@ const aboutPageSchema = {
     background: rgba(255, 255, 255, 0.96);
     padding: 1.5rem;
     box-shadow: 0 18px 45px -28px rgba(15, 39, 74, 0.38);
-    transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease, opacity 0.4s ease;
+    will-change: transform, filter, opacity;
   }
 
-  .timeline-step:hover .timeline-node {
+  /* Parent Blur / Sibling De-emphasis (Focus States) for Timeline */
+  .timeline-step:hover .timeline-node,
+  .timeline-step.is-focused .timeline-node {
     background: #FF3130;
-    transform: scale(1.06);
+    transform: scale(1.15) !important;
+    z-index: 20;
   }
 
-  .timeline-step:hover .timeline-card {
-    border-color: rgba(12, 72, 122, 0.28);
-    box-shadow: 0 24px 50px -25px rgba(15, 39, 74, 0.42);
-    transform: translateY(-3px);
+  .timeline-step:hover .timeline-card,
+  .timeline-step.is-focused .timeline-card {
+    border-color: rgba(12, 72, 122, 0.45);
+    box-shadow: 0 28px 55px -18px rgba(12, 72, 122, 0.32), 0 0 0 1px rgba(12, 72, 122, 0.25);
+    transform: translateY(-6px) scale(1.025) !important;
+    z-index: 15;
+  }
+
+  .process-timeline:has(.timeline-step:hover) .timeline-step:not(:hover) .timeline-card,
+  .process-timeline:has(.timeline-step:hover) .timeline-step:not(:hover) .timeline-node,
+  .process-timeline.has-focus .timeline-step:not(.is-focused) .timeline-card,
+  .process-timeline.has-focus .timeline-step:not(.is-focused) .timeline-node {
+    filter: blur(3.5px) saturate(0.6);
+    opacity: 0.42;
+    transform: scale(0.96);
   }
 
   @media (min-width: 1024px) {
@@ -1140,9 +1156,27 @@ const aboutPageSchema = {
     showSlide(0);
   }
 
+  function initTimelineFocusStates() {
+    const processTimelines = document.querySelectorAll<HTMLElement>('.process-timeline');
+    processTimelines.forEach((timeline) => {
+      const steps = timeline.querySelectorAll<HTMLElement>('.timeline-step');
+      steps.forEach((step) => {
+        step.addEventListener('mouseenter', () => {
+          timeline.classList.add('has-focus');
+          step.classList.add('is-focused');
+        });
+        step.addEventListener('mouseleave', () => {
+          timeline.classList.remove('has-focus');
+          step.classList.remove('is-focused');
+        });
+      });
+    });
+  }
+
   function initAboutPage() {
     initServiceRadarCards();
     initCapabilitiesCarousel();
+    initTimelineFocusStates();
 
     const elements = document.querySelectorAll<HTMLElement>(
       '.about-reveal, .about-scroll-region :is(h2, h3, h4, p, dt, dd)'

@@ -397,8 +397,8 @@ const deliverables = [
             <div class="w-full h-full bg-gradient-to-b from-[#0C487A] via-[#1E40AF] to-[#FF3130] rounded-full shadow-[0_0_10px_rgba(30,64,175,0.35)]"></div>
           </div>
 
-          <!-- Timeline Milestone Rows -->
-          <div class="space-y-12 sm:space-y-16">
+          <!-- Timeline Milestone Rows (Parent Blur Focus Container) -->
+          <div class="timeline-step-container space-y-12 sm:space-y-16">
             {deliverySteps.map((step, idx) => {
               const isEven = idx % 2 === 1;
               return (
@@ -737,6 +737,22 @@ const deliverables = [
     );
 
     timelineRows.forEach((row) => nodeObserver.observe(row));
+
+    // Timeline Parent Blur / Sibling De-emphasis Focus Interaction
+    const timelineContainers = document.querySelectorAll('.timeline-step-container');
+    timelineContainers.forEach((container) => {
+      const rows = container.querySelectorAll('.timeline-step-row');
+      rows.forEach((row) => {
+        row.addEventListener('mouseenter', () => {
+          container.classList.add('has-focus');
+          row.classList.add('is-focused');
+        });
+        row.addEventListener('mouseleave', () => {
+          container.classList.remove('has-focus');
+          row.classList.remove('is-focused');
+        });
+      });
+    });
   }
 
   if (document.readyState === 'loading') {
@@ -825,11 +841,48 @@ const deliverables = [
     }
   }
 
+  /* ========================================================================= */
+  /* Parent Blur / Sibling De-emphasis (Focus States) for Timeline             */
+  /* ========================================================================= */
+  .timeline-card-box {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.4s ease,
+                opacity 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+    will-change: transform, filter, opacity;
+  }
+
   .timeline-node-core {
     opacity: 0;
     transform: scale(0.25) rotate(-35deg);
-    transition: opacity 0.3s ease;
-    will-change: transform, opacity;
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    will-change: transform, opacity, filter;
+  }
+
+  /* When any timeline step row is hovered: */
+  .timeline-step-row:hover .timeline-card-box,
+  .timeline-step-row.is-focused .timeline-card-box {
+    transform: translateY(-8px) scale(1.025) !important;
+    box-shadow: 0 24px 55px -10px rgba(12, 72, 122, 0.28), 0 0 0 1px rgba(12, 72, 122, 0.35);
+    border-color: rgba(12, 72, 122, 0.55);
+    z-index: 25;
+  }
+
+  .timeline-step-row:hover .timeline-node-core,
+  .timeline-step-row.is-focused .timeline-node-core {
+    transform: scale(1.15) !important;
+    z-index: 30;
+  }
+
+  /* All non-hovered sibling timeline rows are dimmed and blurred */
+  .timeline-step-container:has(.timeline-step-row:hover) .timeline-step-row:not(:hover) .timeline-card-box,
+  .timeline-step-container:has(.timeline-step-row:hover) .timeline-step-row:not(:hover) .timeline-node-core,
+  .timeline-step-container.has-focus .timeline-step-row:not(.is-focused) .timeline-card-box,
+  .timeline-step-container.has-focus .timeline-step-row:not(.is-focused) .timeline-node-core {
+    filter: blur(3.5px) saturate(0.6);
+    opacity: 0.42;
+    transform: scale(0.96);
   }
 
   .timeline-node-core.node-opened {
