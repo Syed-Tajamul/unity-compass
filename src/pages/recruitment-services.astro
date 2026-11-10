@@ -497,11 +497,14 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 </h3>
               </div>
 
-              <!-- 6 Exact User Points for SMBs with Brand Red Checkmarks -->
+              <!-- 6 Exact User Points for SMBs with Staggered Viewport Cascade & Brand Red Checkmarks -->
               <div class="space-y-3.5">
-                {smbPoints.map((item) => (
-                  <div class="group/point flex items-start gap-3.5 p-2.5 rounded-xl hover:bg-slate-50/90 transition-all duration-200">
-                    <div class="w-6 h-6 rounded-lg bg-red-50 text-[#FF3130] flex items-center justify-center shrink-0 mt-0.5 border border-red-200/80 shadow-2xs group-hover/point:bg-[#FF3130] group-hover/point:text-white group-hover/point:scale-110 group-hover/point:shadow-[0_0_12px_rgba(255,49,48,0.4)] transition-all duration-300">
+                {smbPoints.map((item, idx) => (
+                  <div
+                    class="cascade-item group/point flex items-start gap-3.5 p-2.5 rounded-xl hover:bg-slate-50/90 transition-all duration-200"
+                    data-cascade-index={idx}
+                  >
+                    <div class="checkmark-badge w-6 h-6 rounded-lg bg-red-50 text-[#FF3130] flex items-center justify-center shrink-0 mt-0.5 border border-red-200/80 shadow-2xs group-hover/point:bg-[#FF3130] group-hover/point:text-white group-hover/point:scale-110 group-hover/point:shadow-[0_0_12px_rgba(255,49,48,0.4)] transition-all duration-300">
                       <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8" d="M5 13l4 4L19 7" />
                       </svg>
@@ -547,11 +550,14 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 </h3>
               </div>
 
-              <!-- 5 Exact User Points for Government Contractors with Brand Red Checkmarks -->
+              <!-- 5 Exact User Points for Government Contractors with Staggered Viewport Cascade & Brand Red Checkmarks -->
               <div class="space-y-3.5">
-                {gcPoints.map((item) => (
-                  <div class="group/point flex items-start gap-3.5 p-2.5 rounded-xl hover:bg-slate-50/90 transition-all duration-200">
-                    <div class="w-6 h-6 rounded-lg bg-red-50 text-[#FF3130] flex items-center justify-center shrink-0 mt-0.5 border border-red-200/80 shadow-2xs group-hover/point:bg-[#FF3130] group-hover/point:text-white group-hover/point:scale-110 group-hover/point:shadow-[0_0_12px_rgba(255,49,48,0.4)] transition-all duration-300">
+                {gcPoints.map((item, idx) => (
+                  <div
+                    class="cascade-item group/point flex items-start gap-3.5 p-2.5 rounded-xl hover:bg-slate-50/90 transition-all duration-200"
+                    data-cascade-index={idx}
+                  >
+                    <div class="checkmark-badge w-6 h-6 rounded-lg bg-red-50 text-[#FF3130] flex items-center justify-center shrink-0 mt-0.5 border border-red-200/80 shadow-2xs group-hover/point:bg-[#FF3130] group-hover/point:text-white group-hover/point:scale-110 group-hover/point:shadow-[0_0_12px_rgba(255,49,48,0.4)] transition-all duration-300">
                       <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8" d="M5 13l4 4L19 7" />
                       </svg>
@@ -884,6 +890,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
 
       if (!('IntersectionObserver' in window)) {
         revealElements.forEach((el) => el.classList.add('is-revealed'));
+        document.querySelectorAll('.cascade-item').forEach((item) => item.classList.add('is-revealed'));
         return;
       }
 
@@ -900,6 +907,25 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
       );
 
       revealElements.forEach((el) => observer.observe(el));
+
+      // Cascading Bullet Items Observer inside "Who We Serve" Boxes
+      const cascadeItemObserver = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const target = entry.target;
+              const idx = parseInt(target.getAttribute('data-cascade-index') || '0', 10);
+              setTimeout(() => {
+                target.classList.add('is-revealed');
+              }, idx * 85 + 100);
+              obs.unobserve(target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -40px 0px', threshold: 0.12 }
+      );
+
+      document.querySelectorAll('.cascade-item').forEach((item) => cascadeItemObserver.observe(item));
     }
     initScrollReveals();
 
@@ -1169,6 +1195,41 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 0 0 0 1.5px rgba(12, 72, 122, 0.22);
   }
 
+  /* ========================================================================= */
+  /* Cascading Item Reveal Animation inside "Who We Serve" Boxes               */
+  /* ========================================================================= */
+  .cascade-item {
+    opacity: 0;
+    transform: translateX(-24px) translateY(8px);
+    filter: blur(5px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.2s ease;
+    will-change: opacity, transform, filter;
+  }
+
+  .cascade-item.is-revealed {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+    filter: blur(0);
+  }
+
+  .cascade-item .checkmark-badge {
+    transform: scale(0.35) rotate(-15deg);
+    opacity: 0;
+    transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+    will-change: transform, opacity;
+  }
+
+  .cascade-item.is-revealed .checkmark-badge {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+
   /* Unique "Prism Spotlight Stage" Animation for "Our Expertise" */
   .why-card-spotlight {
     position: relative;
@@ -1293,5 +1354,6 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     .shuttle-fill-layer { transition: none !important; display: none !important; }
     #expertise-cards-grid.has-active-card .why-card-spotlight:not(.is-active-card) { opacity: 1 !important; filter: none !important; transform: none !important; }
     .reveal-on-scroll, .reveal-from-left, .reveal-from-right { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
+    .cascade-item, .cascade-item .checkmark-badge { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   }
 </style>
