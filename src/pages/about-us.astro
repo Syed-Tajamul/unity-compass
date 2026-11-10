@@ -45,31 +45,71 @@ const proposalOutcomes = [
   },
 ] as const;
 
-const deliverySteps = [
+const coreServices = [
   {
     number: '01',
-    title: 'Opportunity Search',
-    description: 'Discover and pursue opportunities that align with your capabilities, goals, and growth strategy.',
+    title: 'Proposal Development Services',
+    description: 'End-to-end support from opportunity identification and capture strategy through compliant writing, review, and submission.',
+    href: '/proposal-development-services',
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
   },
   {
     number: '02',
-    title: 'Go/No-Go Analysis',
-    description: 'Evaluate fit, competitiveness, resources, and risk so your team can make an informed pursuit decision.',
+    title: 'Cleared Recruitment Services',
+    description: 'Access to qualified cleared and non-cleared talent for federal, defense, and mission-critical programs.',
+    href: '/recruitment-services',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z',
   },
   {
     number: '03',
-    title: 'Proposal Development',
-    description: 'Build the executive summary, technical approach, management plan, and pricing narrative around one clear strategy.',
+    title: 'Staffing Solutions',
+    description: 'Contract, contract-to-hire, and direct-hire staffing models for commercial and government clients.',
+    href: '/staffing',
+    icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
   },
   {
     number: '04',
-    title: 'Response and Review',
-    description: 'Validate compliance, strengthen the story, and review every volume against the highest evaluation standards.',
+    title: 'IT & Business Consulting',
+    description: 'Strategic technology and business solutions that improve efficiency, modernize operations, and support sustainable growth.',
+    href: '/information-technology-and-business-consulting',
+    icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
   },
   {
     number: '05',
-    title: 'Submission',
-    description: 'Package and deliver a complete, credible response on time and in the required format.',
+    title: 'Website Designing Services',
+    description: 'Modern, secure, and high-performing websites designed to strengthen your brand presence and digital experience.',
+    href: `mailto:${companyInfo.email}?subject=Website%20Designing%20Services`,
+    icon: 'M3 5h18v14H3V5zm0 4h18M7 7h.01M10 7h.01',
+  },
+  {
+    number: '06',
+    title: 'Grant Writing',
+    description: 'Compelling, well-researched grant proposals developed to help organizations pursue and secure non-dilutive funding.',
+    href: `mailto:${companyInfo.email}?subject=Grant%20Writing%20Services`,
+    icon: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 0v6h6M8 13h8M8 17h5',
+  },
+] as const;
+
+const deliverySteps = [
+  {
+    number: '01',
+    title: 'Connect and Discover',
+    description: 'Meet with our experts to define your goals, constraints, priorities, and the outcomes that matter most.',
+  },
+  {
+    number: '02',
+    title: 'Strategize and Plan',
+    description: 'Assess the requirement, align the right expertise, and build a practical roadmap with clear ownership and milestones.',
+  },
+  {
+    number: '03',
+    title: 'Execute and Deliver',
+    description: 'Carry out the work with disciplined coordination, transparent communication, and rigorous quality control.',
+  },
+  {
+    number: '04',
+    title: 'Measure and Grow',
+    description: 'Review results, refine the approach, and position your organization for stronger performance and sustained growth.',
   },
 ] as const;
 
@@ -106,7 +146,7 @@ const aboutPageSchema = {
   ogImage="/images/about-hero-1600.webp"
 >
   <script type="application/ld+json" set:html={JSON.stringify(aboutPageSchema)} />
-  <noscript><style>.about-reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+  <noscript><style>.about-reveal, .about-scroll-region :is(h2, h3, h4, p, dt, dd) { opacity: 1 !important; transform: none !important; filter: none !important; }</style></noscript>
 
   <header class="about-hero relative isolate overflow-hidden bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8]">
     <div class="absolute inset-0 about-grid opacity-50" aria-hidden="true"></div>
@@ -114,15 +154,15 @@ const aboutPageSchema = {
     <div class="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-red-300/10 blur-3xl" aria-hidden="true"></div>
 
     <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:px-8 lg:py-20">
-      <div class="about-hero-copy max-w-3xl">
-        <h1 class="max-w-2xl text-4xl font-extrabold leading-[1.08] tracking-[-0.04em] text-[#0F274A] sm:text-5xl lg:text-[3.8rem]">
+      <div class="max-w-3xl">
+        <h1 class="hero-heading-reveal max-w-2xl text-3xl font-extrabold leading-[1.16] tracking-tight text-[#0F274A] sm:text-4xl sm:leading-[1.18] lg:text-[2.75rem] xl:text-[3.15rem]">
           A practical partner for <span class="about-gradient-text">federal work.</span>
         </h1>
-        <p class="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
+        <p class="hero-subheading-reveal mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
           We help contractors compete, hire, and deliver in regulated environments.
         </p>
 
-        <dl class="mt-10 grid max-w-xl grid-cols-2 gap-x-6 gap-y-4 border-t border-[#0C487A]/15 pt-6 sm:grid-cols-3">
+        <dl class="hero-cta-reveal mt-10 grid max-w-xl grid-cols-2 gap-x-6 gap-y-4 border-t border-[#0C487A]/15 pt-6 sm:grid-cols-3">
           <div>
             <dt class="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Focus</dt>
             <dd class="mt-1 text-sm font-semibold text-[#0F274A]">Federal delivery</dd>
@@ -155,11 +195,11 @@ const aboutPageSchema = {
     </div>
   </header>
 
-  <section class="bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="company-heading">
+  <section class="about-scroll-region bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="company-heading">
     <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16 lg:px-8">
       <div class="about-reveal">
         <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Who we are</p>
-        <h2 id="company-heading" class="mt-3 max-w-2xl text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#0F274A] sm:text-4xl">
+        <h2 id="company-heading" class="about-section-heading mt-3 max-w-2xl text-2xl font-extrabold leading-[1.18] tracking-tight sm:text-3xl sm:leading-[1.22] md:text-4xl lg:text-[2.65rem] lg:leading-[1.24]">
           Strategy, talent, and delivery under one roof
         </h2>
         <div class="mt-5 h-1.5 w-20 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]" aria-hidden="true"></div>
@@ -201,12 +241,12 @@ const aboutPageSchema = {
     </div>
   </section>
 
-  <section class="relative overflow-hidden border-y border-slate-200/80 bg-[#F4F8FC] py-20 sm:py-24 lg:py-28" aria-labelledby="why-heading">
+  <section class="about-scroll-region relative overflow-hidden border-y border-slate-200/80 bg-[#F4F8FC] py-20 sm:py-24 lg:py-28" aria-labelledby="why-heading">
     <div class="absolute inset-0 about-grid opacity-35" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="about-reveal mx-auto mb-12 max-w-3xl text-center sm:mb-16">
         <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Why Unity Compass</p>
-        <h2 id="why-heading" class="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#0F274A] sm:text-4xl">
+        <h2 id="why-heading" class="about-section-heading mt-3 text-2xl font-extrabold leading-[1.18] tracking-tight sm:text-3xl sm:leading-[1.22] md:text-4xl lg:text-[2.65rem] lg:leading-[1.24]">
           Built for complex, competitive environments
         </h2>
         <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
@@ -229,7 +269,46 @@ const aboutPageSchema = {
     </div>
   </section>
 
-  <section class="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] py-14 sm:py-16" aria-label="Unity Compass performance highlights">
+  <section class="about-scroll-region relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="services-heading">
+    <div class="absolute inset-0 about-grid opacity-25" aria-hidden="true"></div>
+    <div class="absolute left-1/2 top-1/2 h-[28rem] w-4/5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(40,121,182,0.1)_0%,transparent_70%)] blur-3xl" aria-hidden="true"></div>
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="about-reveal mx-auto mb-12 max-w-4xl text-center sm:mb-16">
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Our core services</p>
+        <h2 id="services-heading" class="about-section-heading mx-auto mt-3 max-w-4xl text-2xl font-extrabold leading-[1.18] tracking-tight sm:text-3xl sm:leading-[1.22] md:text-4xl lg:text-[2.65rem] lg:leading-[1.24]">
+          Integrated expertise to help you compete, hire, modernize, and grow
+        </h2>
+        <div class="mx-auto mt-4 h-1.5 w-24 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]" aria-hidden="true"></div>
+        <p class="mx-auto mt-5 max-w-2xl text-sm font-normal leading-relaxed text-slate-600 sm:text-base lg:text-[1.05rem]">
+          Six connected service areas give organizations the strategy, talent, technical capacity, and communications support required to move important work forward.
+        </p>
+      </div>
+
+      <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3" role="list">
+        {coreServices.map((service, index) => (
+          <li class={`about-reveal about-delay-${Math.min(index + 1, 5)}`}>
+            <a
+              href={service.href}
+              class="group relative flex h-full min-h-72 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-300 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.35)] sm:p-8"
+            >
+              <span class="absolute right-6 top-5 text-sm font-extrabold tracking-[0.12em] text-slate-200 transition-colors duration-300 group-hover:text-[#FF3130]/30" aria-hidden="true">{service.number}</span>
+              <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0C487A] text-white shadow-[0_8px_22px_-8px_rgba(12,72,122,0.7)] transition duration-300 group-hover:scale-105 group-hover:bg-[#FF3130]" aria-hidden="true">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={service.icon} /></svg>
+              </span>
+              <h3 class="mt-7 text-xl font-extrabold leading-snug tracking-tight text-[#0B2553] sm:text-2xl">{service.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{service.description}</p>
+              <span class="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold text-[#0C487A] transition-colors duration-300 group-hover:text-[#FF3130]">
+                Explore this service
+                <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="about-scroll-region relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] py-14 sm:py-16" aria-label="Unity Compass performance highlights">
     <div class="absolute inset-0 about-grid opacity-35" aria-hidden="true"></div>
     <div class="absolute left-1/2 top-1/2 h-48 w-4/5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(40,121,182,0.12)_0%,transparent_70%)] blur-3xl" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -237,7 +316,7 @@ const aboutPageSchema = {
         <dl class="grid grid-cols-2 gap-x-4 gap-y-7 md:grid-cols-5 md:gap-0">
           {performanceMetrics.map((metric, index) => (
             <div class={`about-reveal about-delay-${Math.min(index + 1, 5)} relative px-2 py-2 text-center sm:px-4 ${index > 0 ? 'md:border-l md:border-slate-200' : ''} ${index === performanceMetrics.length - 1 ? 'col-span-2 md:col-span-1' : ''}`}>
-              <dd class="text-3xl font-extrabold tracking-tight text-[#0F274A] sm:text-4xl">
+              <dd class="about-count text-3xl font-extrabold tracking-tight text-[#0F274A] sm:text-4xl" data-metric-value={metric.value}>
                 {metric.value}
               </dd>
               <span class="mx-auto mt-3 block h-1 w-8 rounded-full bg-[#FF3130]" aria-hidden="true"></span>
@@ -249,16 +328,16 @@ const aboutPageSchema = {
     </div>
   </section>
 
-  <section class="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="process-heading">
+  <section class="about-scroll-region relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="process-heading">
     <div class="absolute inset-0 about-grid opacity-25" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="about-reveal mx-auto max-w-3xl text-center">
-        <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">How we deliver</p>
-        <h2 id="process-heading" class="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#0F274A] sm:text-4xl lg:text-5xl">
-          From the right opportunity to a ready submission
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">How we work</p>
+        <h2 id="process-heading" class="about-section-heading mt-3 text-2xl font-extrabold leading-[1.18] tracking-tight sm:text-3xl sm:leading-[1.22] md:text-4xl lg:text-[2.65rem] lg:leading-[1.24]">
+          A clear path from challenge to measurable progress
         </h2>
         <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-          A disciplined proposal process keeps decisions clear, contributors aligned, and every response focused on what evaluators need to see.
+          A practical engagement model keeps decisions clear, contributors aligned, and every deliverable focused on your goals.
         </p>
       </div>
 
@@ -277,14 +356,14 @@ const aboutPageSchema = {
     </div>
   </section>
 
-  <section class="relative overflow-hidden border-y border-slate-200/80 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] py-20 sm:py-24 lg:py-28" aria-labelledby="purpose-heading">
+  <section class="about-scroll-region relative overflow-hidden border-y border-slate-200/80 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] py-20 sm:py-24 lg:py-28" aria-labelledby="purpose-heading">
     <div class="absolute inset-0 about-grid opacity-35" aria-hidden="true"></div>
     <div class="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-blue-400/15 blur-3xl" aria-hidden="true"></div>
     <div class="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-red-300/10 blur-3xl" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="about-reveal max-w-3xl">
         <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Mission, vision, and values</p>
-        <h2 id="purpose-heading" class="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#0F274A] sm:text-4xl">What guides the work</h2>
+        <h2 id="purpose-heading" class="about-section-heading mt-3 text-2xl font-extrabold leading-[1.18] tracking-tight sm:text-3xl sm:leading-[1.22] md:text-4xl lg:text-[2.65rem] lg:leading-[1.24]">What guides the work</h2>
         <div class="mt-5 h-1.5 w-20 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]" aria-hidden="true"></div>
       </div>
 
@@ -313,13 +392,13 @@ const aboutPageSchema = {
     </div>
   </section>
 
-  <section class="relative overflow-hidden bg-white py-20 sm:py-24" aria-labelledby="conversation-heading">
+  <section class="about-scroll-region relative overflow-hidden bg-white py-20 sm:py-24" aria-labelledby="conversation-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="about-reveal relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-[#F4F8FC] via-white to-[#EBF3FA] px-6 py-12 shadow-[0_24px_60px_-30px_rgba(15,39,74,0.35)] sm:px-10 sm:py-14 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:px-14">
         <div class="absolute -right-20 -top-28 h-72 w-72 rounded-full border-[48px] border-[#0C487A]/5" aria-hidden="true"></div>
         <div class="relative max-w-2xl">
           <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Your next move</p>
-          <h2 id="conversation-heading" class="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#0F274A] sm:text-4xl">
+          <h2 id="conversation-heading" class="about-section-heading mt-3 text-2xl font-extrabold leading-[1.18] tracking-tight sm:text-3xl sm:leading-[1.22] md:text-4xl lg:text-[2.65rem] lg:leading-[1.24]">
             Bring the challenge. We’ll help define the path forward.
           </h2>
           <p class="mt-4 text-base leading-7 text-slate-600">
@@ -365,8 +444,12 @@ const aboutPageSchema = {
     color: transparent;
   }
 
-  .about-hero-copy {
-    animation: aboutHeroIn 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  .about-section-heading {
+    background: linear-gradient(100deg, #0F274A 0%, #1E40AF 62%, #DC2626 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
   .about-hero-art {
@@ -380,14 +463,35 @@ const aboutPageSchema = {
   .about-reveal {
     opacity: 0;
     transform: translateY(24px);
+    filter: blur(8px);
+    will-change: opacity, transform, filter;
     transition:
       opacity 750ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
+      transform 750ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 750ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .about-reveal.is-visible {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
+  }
+
+  .about-scroll-region :is(h2, h3, h4, p, dt, dd) {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+    will-change: opacity, transform, filter;
+    transition:
+      opacity 750ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 750ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 750ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .about-scroll-region :is(h2, h3, h4, p, dt, dd).is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
   }
 
   .about-delay-1 { transition-delay: 80ms; }
@@ -528,16 +632,17 @@ const aboutPageSchema = {
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .about-hero-copy,
     .about-hero-art,
     .about-float,
     .about-reveal,
+    .about-scroll-region :is(h2, h3, h4, p, dt, dd),
     .process-timeline::before,
     .timeline-node,
     .timeline-card {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
+      filter: none !important;
       transition: none !important;
     }
 
@@ -549,11 +654,52 @@ const aboutPageSchema = {
 
 <script>
   function initAboutPage() {
-    const elements = document.querySelectorAll<HTMLElement>('.about-reveal');
+    const elements = document.querySelectorAll<HTMLElement>(
+      '.about-reveal, .about-scroll-region :is(h2, h3, h4, p, dt, dd)'
+    );
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    function animateMetric(element: HTMLElement) {
+      const value = element.dataset.metricValue;
+      const match = value?.match(/\d+/);
+      if (!value || !match || element.dataset.counted === 'true') return;
+
+      element.dataset.counted = 'true';
+
+      if (reducedMotion) {
+        element.textContent = value;
+        return;
+      }
+
+      const target = Number.parseInt(match[0], 10);
+      const prefix = value.slice(0, match.index);
+      const suffix = value.slice((match.index ?? 0) + match[0].length);
+      const duration = 1400;
+      let startTime: number | undefined;
+
+      element.textContent = `${prefix}0${suffix}`;
+
+      function step(timestamp: number) {
+        startTime ??= timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        element.textContent = `${prefix}${Math.floor(target * easedProgress)}${suffix}`;
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          element.textContent = value;
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
     if (reducedMotion || !('IntersectionObserver' in window)) {
-      elements.forEach((element) => element.classList.add('is-visible'));
+      elements.forEach((element) => {
+        element.classList.add('is-visible');
+        if (element.classList.contains('about-count')) animateMetric(element);
+      });
       return;
     }
 
@@ -561,6 +707,9 @@ const aboutPageSchema = {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('is-visible');
+        if (entry.target.classList.contains('about-count')) {
+          animateMetric(entry.target as HTMLElement);
+        }
         currentObserver.unobserve(entry.target);
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
