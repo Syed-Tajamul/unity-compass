@@ -2,34 +2,30 @@
 /**
  * information-technology-and-business-consulting.astro
  * 
- * Executive IT & Program Consulting Practice Page
- * Bespoke Implementation per User Design System:
- * 1. Page Header (Top Center before Image):
- *    - Title: "IT & Program Consulting Services" with radiant color shimmer.
- *    - Initial soft reveal blur dissipation matching Homepage Hero.
- * 2. Hero Image & Practice Areas Menu:
- *    - Unclipped showcase frame with object-contain and aspect-[2752/1536].
- *    - 5 Other Practice Areas (current practice excluded).
- *    - "Federal Practices" and "Active Practice" headers removed.
- *    - Hover state inherits the selected bluish pill style: deep blue gradient with white text.
- * 3. Headline + Narrative & 4 Square Value Cards (Below Row):
- *    - Headline positioned directly before narrative text with accent line.
- *    - Narrative paragraph on the left with 10+ YOE and higher mission success rate highlights.
- *    - 4 Center-aligned square cards in 2x2 grid (icon, title, desc centered, corner labels removed).
- * 4. Section 2 ("How We Deliver"):
- *    - Interactive vertical milestone timeline on Light Blue Blueprint canvas.
- *    - Radiating opening aperture milestone nodes (01-05) triggered smoothly on scroll.
- * 5. Section 3 ("What you get?"):
- *    - Pure White canvas with 4 shuttle cards (bottom-to-top color fill on hover).
- * 6. Section 4 ("Why UC?"):
- *    - Light Blue Blueprint canvas with 3 symmetrical cards, hover brings to front.
- * 7. Section 5 ("Ready to Win Your Next Government Contract?"):
- *    - Pure White canvas CTA section matching user screenshot with deep blue pill button and watermark.
- * 8. Alternating backgrounds: White -> Blue -> White -> Blue -> White.
+ * Executive Information Technology and Business Consulting Practice Page
+ * Bespoke Implementation per User Specification & Brand Design System:
+ * 
+ * 1. Palette: Strictly Unity Compass Blue (#0C487A, #0B2553, #1E40AF), Brand Red (#FF3130) accents, clean white and soft slate.
+ * 2. Header: Centered "Information Technology and Business Consulting" with radiant color shimmer sweep.
+ * 3. Hero Image: Unclipped showcase frame with aspect-[2752/1536] + Practice Areas Menu.
+ * 4. Narrative: "Innovative IT and Business Consulting Solutions" + verbatim Unity Compass commitment narrative.
+ * 5. Section 2 ("Our Services: What We Provide"):
+ *    - 3 Comprehensive Service Pillars rewritten with non-copied executive consulting language:
+ *      • Pillar 01: Intelligent Product Development and Digital Experiences (5 offerings)
+ *      • Pillar 02: Cognitive Automation and AI Engineering (5 offerings)
+ *      • Pillar 03: Cloud-Native Operations and Infrastructure Intelligence (5 offerings)
+ *    - Viewport cascading staggered entrance animations, ambient cursor light tracking, and brand-red accent badges.
+ * 6. Section 3 ("How We Deliver"):
+ *    - Vertical 5-stage milestone timeline with opening aperture nodes (01-05).
+ * 7. Section 4 ("Why UC?"):
+ *    - 3 Symmetrical stage cards with bring-to-front physics.
+ * 8. Section 5 (CTA Banner):
+ *    - High-conversion consultation banner with single prominent "Book a Strategic Consultation" button.
+ * 9. Alternating backgrounds: White -> Blue -> White -> Blue -> White.
  */
 import MainLayout from '../layouts/MainLayout.astro';
 
-// Remaining 5 Federal Practice Areas (Excluding current practice: IT & Program Consulting)
+// Remaining 5 Federal Practice Areas (Excluding current practice: IT & Business Consulting)
 const otherFederalServices = [
   {
     name: 'Proposal Development & Federal Bid Support',
@@ -58,12 +54,12 @@ const otherFederalServices = [
   },
 ];
 
-// 4 Animated Square Cards (Centered icon, title, desc - corner labels removed)
+// 4 Animated Square Capability Cards (Center aligned, brand blue styling)
 const keySquareCards = [
   {
-    title: 'Audit-Defensible Architecture',
-    desc: 'Enterprise IT infrastructure engineered to satisfy rigorous federal evaluations.',
-    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    title: 'Enterprise Digital Engineering',
+    desc: 'Scalable web and mobile platforms engineered for mission agility, intuitive design, and AI integration.',
+    icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
     themeColor: 'text-[#0C487A]',
     iconBg: 'bg-blue-100/90 text-[#0C487A]',
     borderColor: 'border-blue-200/80',
@@ -74,9 +70,9 @@ const keySquareCards = [
     floatClass: 'animate-float-subtle-1',
   },
   {
-    title: 'CMMC & NIST Compliance',
-    desc: 'System Security Plans (SSPs) and POA&Ms aligned with defense contracting mandates.',
-    icon: 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z',
+    title: 'Cognitive Automation & AI',
+    desc: 'Custom machine learning models, intelligent RPA, and private GenAI architectures streamlining core workflows.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
     themeColor: 'text-[#0B2553]',
     iconBg: 'bg-slate-100 text-[#0B2553]',
     borderColor: 'border-slate-200/90',
@@ -87,22 +83,9 @@ const keySquareCards = [
     floatClass: 'animate-float-subtle-2',
   },
   {
-    title: 'Operational Efficiency',
-    desc: 'Streamlined workflows and optimized cloud infrastructure reducing operational overhead.',
-    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-    themeColor: 'text-[#FF3130]',
-    iconBg: 'bg-red-100/90 text-[#FF3130]',
-    borderColor: 'border-red-200/80',
-    cardBg: 'from-rose-50/70 via-white to-rose-50/30',
-    topBar: 'from-[#FF3130] to-[#DC2626]',
-    hoverShadow: 'hover:shadow-[0_16px_36px_rgba(255,49,48,0.16)]',
-    hoverTitle: 'group-hover:text-[#FF3130]',
-    floatClass: 'animate-float-subtle-2',
-  },
-  {
-    title: 'Executive Advisory Support',
-    desc: 'High-level strategic counsel from seasoned practitioners guiding procurement decisions.',
-    icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+    title: 'CloudOps & ERP Modernization',
+    desc: 'Resilient multi-cloud management and full lifecycle support for SAP, Oracle, Microsoft Dynamics & Zoho.',
+    icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4',
     themeColor: 'text-[#1E40AF]',
     iconBg: 'bg-indigo-100/90 text-[#1E40AF]',
     borderColor: 'border-blue-200/80',
@@ -112,15 +95,149 @@ const keySquareCards = [
     hoverTitle: 'group-hover:text-[#1E40AF]',
     floatClass: 'animate-float-subtle-1',
   },
+  {
+    title: 'AI Cybersecurity & Governance',
+    desc: 'Autonomous threat defense, zero-trust architectures, and strict NIST SP 800-171 & CMMC compliance.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    themeColor: 'text-[#0C487A]',
+    iconBg: 'bg-sky-100/90 text-[#0C487A]',
+    borderColor: 'border-sky-200/80',
+    cardBg: 'from-sky-50/70 via-white to-sky-50/30',
+    topBar: 'from-[#0C487A] to-[#1E40AF]',
+    hoverShadow: 'hover:shadow-[0_16px_36px_rgba(12,72,122,0.16)]',
+    hoverTitle: 'group-hover:text-[#0C487A]',
+    floatClass: 'animate-float-subtle-2',
+  },
 ];
 
-// 5-Stage Delivery Process (Animated Top-to-Bottom Vertical Timeline)
+// SECTION 2: 3 CORE SERVICE PILLARS (Rewritten, Original & Executive Phrasing)
+const servicePillars = [
+  {
+    id: 'pillar-product-engineering',
+    number: '01',
+    badge: 'Pillar 01 • Digital Engineering',
+    title: 'Intelligent Product Development and Digital Experiences',
+    desc: 'We architect modern, mission-ready digital products that combine blazing performance, intuitive user experience, and embedded artificial intelligence to elevate stakeholder engagement and enable seamless organizational scale.',
+    services: [
+      {
+        title: 'Web & Mobile Application Engineering',
+        subtitle: 'Scalable platforms & custom portals',
+        desc: 'Architecting high-performance web applications, enterprise client portals, and responsive iOS & Android mobile platforms powered by modern cloud architectures and AI-accelerated development frameworks.',
+        icon: 'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
+      },
+      {
+        title: 'UI/UX Strategy & Human-Centric Design',
+        subtitle: 'Data-driven interaction design',
+        desc: 'Crafting seamless, frictionless user journeys and interface systems validated through empirical user research, behavioral metrics, interaction prototyping, and digital accessibility standards.',
+        icon: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z',
+      },
+      {
+        title: 'Brand Architecture & Visual Identity',
+        subtitle: 'Adaptive enterprise design systems',
+        desc: 'Building enduring, adaptable visual identity systems, brand standards, and modular design tokens that maintain executive prestige and brand consistency across diverse digital touchpoints.',
+        icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
+      },
+      {
+        title: 'AI-Driven Digital Marketing & Growth',
+        subtitle: 'Intelligent search and content ecosystems',
+        desc: 'Employing machine-learning search optimization, automated content intelligence, and precision data analytics to optimize multi-channel outreach, amplify brand visibility, and generate high-intent conversions.',
+        icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+      },
+      {
+        title: 'Conversational Experiences & AI Agents',
+        subtitle: 'Automated 24/7 stakeholder engagement',
+        desc: 'Deploying cognitive virtual assistants, natural-language chatbots, and smart interactive agents that automate tier-1 inquiries, elevate support speed, and enrich stakeholder interactions.',
+        icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
+      },
+    ],
+  },
+  {
+    id: 'pillar-cognitive-automation',
+    number: '02',
+    badge: 'Pillar 02 • Applied AI',
+    title: 'Cognitive Automation and AI Engineering',
+    desc: 'We leverage advanced automation, predictive algorithms, cognitive decision-making, and deep data engineering to streamline complex operational bottlenecks and generate measurable organizational value.',
+    services: [
+      {
+        title: 'Custom AI and Machine Learning Solutions',
+        subtitle: 'Predictive models & decision logic',
+        desc: 'Architecting and training bespoke machine learning models for accurate forecasting, intelligent anomaly detection, and automated operational decision-making tailored to your enterprise workflows.',
+        icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+      },
+      {
+        title: 'Data & Predictive Analytics Intelligence',
+        subtitle: 'Real-time telemetry & executive dashboards',
+        desc: 'Transforming fragmented enterprise data into centralized, real-time analytics hubs and predictive dashboards that empower leadership to anticipate trends, evaluate risks, and optimize enterprise performance.',
+        icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+      },
+      {
+        title: 'Intelligent Robotic Process Automation (RPA)',
+        subtitle: 'Zero-error software bot orchestration',
+        desc: 'Deploying AI-powered robotic bots to handle high-frequency, rule-governed back-office tasks, eliminating manual processing delays while ensuring full audit traceability and operational rigor.',
+        icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+      },
+      {
+        title: 'Rapid AI Prototyping and MVP Incubation',
+        subtitle: 'De-risked fast experimentation',
+        desc: 'Accelerating artificial intelligence concepts through rapid prototyping, algorithmic sandboxing, and functional minimum viable products (MVPs), validating business impact before capital-intensive deployment.',
+        icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
+      },
+      {
+        title: 'Enterprise Generative AI Solutions',
+        subtitle: 'Private, secure domain intelligence',
+        desc: 'Engineering private, fine-tuned GenAI systems and Retrieval-Augmented Generation (RAG) pipelines customized to proprietary enterprise data, ensuring airtight data governance and zero data leakage.',
+        icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
+      },
+    ],
+  },
+  {
+    id: 'pillar-cloud-native-operations',
+    number: '03',
+    badge: 'Pillar 03 • Cloud & Operations',
+    title: 'Cloud-Native Operations and Infrastructure Intelligence',
+    desc: 'We modernize, orchestrate, and safeguard enterprise IT environments with AI-driven capabilities to achieve institutional reliability, dynamic scalability, and uncompromising defense.',
+    services: [
+      {
+        title: 'ERP Implementation & Modernization',
+        subtitle: 'SAP, Oracle, Dynamics 365, Odoo, ERPNext & Zoho',
+        desc: 'End-to-end design, implementation, customization, and continuous support across leading ERP suites. Leveraging AI reporting, workflow automation, and predictive intelligence across accounting, HR, and supply chain.',
+        icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4',
+      },
+      {
+        title: 'AI-Optimized CloudOps & Managed Services',
+        subtitle: 'Self-healing, auto-scaling cloud environments',
+        desc: 'Managing multi-cloud and hybrid environments through automated AI telemetry, continuous infrastructure cost governance, intelligent load balancing, and self-healing system recovery.',
+        icon: 'M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z',
+      },
+      {
+        title: 'AI-Powered Cybersecurity & Risk Defense',
+        subtitle: 'Adaptive threat hunting & compliance',
+        desc: 'Deploying intelligent security solutions that detect anomalies in real time, enforce zero-trust identity architectures, safeguard federal data assets, and maintain continuous NIST & CMMC compliance.',
+        icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+      },
+      {
+        title: 'Predictive Infrastructure Planning',
+        subtitle: 'Hybrid and on-premise performance optimization',
+        desc: 'Applying predictive machine-learning analytics to model compute demand, prevent hardware bottlenecks, and ensure uninterrupted operations across hybrid cloud and mission-critical on-premise systems.',
+        icon: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z',
+      },
+      {
+        title: 'Talent as a Service (TaaS) & Agile Surge Teams',
+        subtitle: 'Instant access to pre-vetted elite technologists',
+        desc: 'Providing immediate access to senior developers, cloud architects, UI/UX designers, and data engineers. AI-accelerated skill matching ensures seamless team integration and accelerated project velocity.',
+        icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+      },
+    ],
+  },
+];
+
+// SECTION 3: 5-Stage Strategic Consulting Methodology (Vertical Timeline with Opening Aperture Nodes)
 const deliverySteps = [
   {
     step: '01',
     num: 1,
-    title: 'Systems Architecture Audit',
-    desc: 'Deep-dive assessment of enterprise cloud infrastructure, cybersecurity controls, and digital workflows.',
+    title: 'Systems & Architecture Audit',
+    desc: 'Comprehensive diagnostic evaluation of enterprise software, data pipelines, infrastructure health, and cybersecurity posture.',
     icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
     color: 'from-[#0C487A] to-[#1E40AF]',
     iconColor: 'text-[#0C487A]',
@@ -130,19 +247,19 @@ const deliverySteps = [
   {
     step: '02',
     num: 2,
-    title: 'Compliance Gap Analysis',
-    desc: 'Benchmarking security posture against NIST SP 800-171, CMMC 2.0, FedRAMP, and agency mandates.',
+    title: 'Technology & Governance Gap Analysis',
+    desc: 'Benchmarking enterprise workflows and cyber controls against modern engineering standards, NIST guidelines, and operational KPIs.',
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-    color: 'from-[#FF3130] to-[#DC2626]',
-    iconColor: 'text-[#FF3130]',
-    bgTint: 'bg-red-50',
+    color: 'from-[#0C487A] to-[#103E6B]',
+    iconColor: 'text-[#0C487A]',
+    bgTint: 'bg-sky-50',
     badgeText: 'Milestone 02',
   },
   {
     step: '03',
     num: 3,
-    title: 'Strategic Roadmap Design',
-    desc: 'Developing phased, cost-effective digital modernization roadmaps to transition legacy federal applications.',
+    title: 'Strategic Modernization Roadmap',
+    desc: 'Formulating prioritized, phased architectural roadmaps to modernize legacy applications, embed AI capabilities, and streamline operations.',
     icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
     color: 'from-[#1E40AF] to-[#2563EB]',
     iconColor: 'text-[#1E40AF]',
@@ -152,55 +269,55 @@ const deliverySteps = [
   {
     step: '04',
     num: 4,
-    title: 'Engineering Implementation',
-    desc: 'Direct technical execution covering cloud migrations, zero-trust deployments, and automated testing.',
+    title: 'Engineering Implementation & Integration',
+    desc: 'Executing end-to-end cloud deployments, custom algorithmic modeling, ERP integrations, and automated RPA workflow rollouts.',
     icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
     color: 'from-[#0C487A] to-[#2563EB]',
     iconColor: 'text-[#0C487A]',
-    bgTint: 'bg-sky-50',
+    bgTint: 'bg-blue-50',
     badgeText: 'Milestone 04',
   },
   {
     step: '05',
     num: 5,
-    title: 'Governance & Audit Readiness',
-    desc: 'Establishing recurring monitoring, SSP maintenance, and audit documentation packages for agency evaluation.',
+    title: 'Continuous Governance & Performance Optimization',
+    desc: 'Establishing automated monitoring telemetry, proactive security audits, and continuous cloud right-sizing for lasting enterprise ROI.',
     icon: 'M12 19l9 2-9-18-9 18 9-2zm0 0v-8',
-    color: 'from-[#FF3130] to-[#0C487A]',
-    iconColor: 'text-[#FF3130]',
-    bgTint: 'bg-rose-50',
+    color: 'from-[#0C487A] to-[#1E40AF]',
+    iconColor: 'text-[#0C487A]',
+    bgTint: 'bg-sky-50',
     badgeText: 'Milestone 05',
   },
 ];
 
-// What You Get (4 Deliverables with Shuttle Bottom-to-Top Animation)
-const deliverables = [
+// SECTION 4: Strategic Differentiation Pillars ("Why UC?")
+const whyUcPillars = [
   {
-    title: 'Audit-Defensible Architecture',
-    desc: 'Enterprise IT infrastructure engineered to satisfy rigorous federal cybersecurity evaluations and audits.',
-    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    title: 'Proven Enterprise Experience',
+    desc: 'Deep technical acumen architecting resilient cloud systems, mission-critical portals, and multi-tier enterprise integrations.',
+    badge: 'Pillar 01',
+    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
   },
   {
-    title: 'CMMC & NIST Compliance',
-    desc: 'Comprehensive System Security Plans (SSPs) and POA&Ms aligned with defense contracting cybersecurity mandates.',
-    icon: 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z',
-  },
-  {
-    title: 'Operational Efficiency Gains',
-    desc: 'Streamlined workflows, automated data pipelines, and optimized cloud infrastructure reducing operational drag.',
+    title: 'Applied AI & Automation Leadership',
+    desc: 'Pragmatic artificial intelligence implementation that solves concrete operational bottlenecks and produces measurable ROI.',
+    badge: 'Pillar 02',
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
   },
   {
-    title: 'Executive Advisory Support',
-    desc: 'High-level strategic counsel from seasoned consultants guiding high-stakes procurement and technical choices.',
-    icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+    title: 'Rigorous Cybersecurity & Standards',
+    desc: 'Uncompromising adherence to enterprise security governance, zero-trust architectures, and institutional compliance standards.',
+    badge: 'Pillar 03',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
   },
 ];
+
+const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7db-4a82-94e9-c023536d3178';
 ---
 
 <MainLayout
-  title="IT & Program Consulting - Unity Compass"
-  description="Modernizing enterprise architecture, hardening cybersecurity postures, and optimizing federal program execution. NIST SP 800-171, CMMC 2.0, and FedRAMP alignment."
+  title="Information Technology and Business Consulting - Unity Compass"
+  description="Innovative IT and Business Consulting Solutions to empower organizations and drive success with tailored, cutting-edge services."
 >
   <div class="text-slate-800 overflow-hidden" id="it-consulting-page-root">
 
@@ -215,27 +332,22 @@ const deliverables = [
       
       <!-- Subtle Radial Ambient Glows -->
       <div class="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(40,121,182,0.08)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-      <div class="absolute -top-20 -right-32 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(255,49,48,0.06)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute -top-20 -right-32 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(30,64,175,0.05)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
       <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12 sm:space-y-16">
         
-        <!-- ================================================================= -->
-        <!-- PART 1: PAGE TOP CENTERED HEADER (Before Image)                   -->
-        <!-- Has initial soft reveal blur dissipation matching Homepage Hero  -->
-        <!-- ================================================================= -->
+        <!-- PART 1: PAGE TOP CENTERED HEADER (Before Image) -->
         <div class="text-center max-w-4xl mx-auto space-y-4">
           <h1
             id="service-hero-heading"
             class="hero-heading-reveal text-3xl sm:text-4xl lg:text-[2.85rem] font-extrabold tracking-tight leading-tight text-[#0B2553]"
           >
-            <span class="service-shimmer-center service-shimmer-line-1 inline-block pb-1">IT & Program Consulting Services</span>
+            <span class="service-shimmer-center service-shimmer-line-1 inline-block pb-1">Information Technology and Business Consulting</span>
           </h1>
           <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto hero-subheading-reveal"></div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- PART 2: SHOWCASE FRAME (Image ~68%) + PRACTICE MENU (~32%)        -->
-        <!-- ================================================================= -->
+        <!-- PART 2: SHOWCASE FRAME (Image ~68%) + PRACTICE MENU (~32%) -->
         <div class="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-8 xl:gap-10">
           
           <!-- Image Column (~68% Width: Unclipped Graphic Artwork with Corner Badge 100% Visible) -->
@@ -243,14 +355,13 @@ const deliverables = [
             <div class="relative w-full group h-full flex flex-col justify-center">
               
               <!-- Soft Dynamic Ambient Glow Aura -->
-              <div class="absolute -inset-4 bg-gradient-to-tr from-[#0C487A]/20 via-[#1E40AF]/15 to-[#FF3130]/15 rounded-3xl blur-2xl pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+              <div class="absolute -inset-4 bg-gradient-to-tr from-[#0C487A]/20 via-[#1E40AF]/15 to-[#0C487A]/10 rounded-3xl blur-2xl pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
               
-              <!-- Refined Image Window Frame (object-contain with natural aspect ratio to eliminate clipping) -->
+              <!-- Refined Image Window Frame -->
               <div class="relative rounded-3xl overflow-hidden border border-slate-200/90 bg-white shadow-[0_20px_50px_-12px_rgba(11,37,83,0.16)] w-full">
-                
                 <img
                   src="/images/service5.png"
-                  alt="IT & Program Consulting"
+                  alt="Information Technology and Business Consulting"
                   class="w-full h-auto aspect-[2752/1536] object-contain object-center group-hover:scale-[1.015] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] select-none block"
                   width="2752"
                   height="1536"
@@ -261,8 +372,7 @@ const deliverables = [
                 <div class="absolute inset-0 bg-gradient-to-tr from-black/5 via-transparent to-white/10 pointer-events-none"></div>
 
                 <!-- Glowing Top Accent Line on Hover -->
-                <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
+                <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
 
             </div>
@@ -280,7 +390,7 @@ const deliverables = [
                     style={`--stagger-delay: ${idx * 40}ms;`}
                   >
                     <div class="flex items-center gap-3 min-w-0 pr-2">
-                      <span class="w-2.5 h-2.5 rounded-full bg-slate-300 group-hover:bg-[#FF3130] group-hover:shadow-[0_0_8px_#FF3130] transition-all duration-300 shrink-0"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-slate-300 group-hover:bg-[#0C487A] group-hover:shadow-[0_0_8px_rgba(12,72,122,0.4)] transition-all duration-300 shrink-0"></span>
                       <span class="leading-snug transition-colors duration-300">{service.name}</span>
                     </div>
                     <svg class="w-4 h-4 text-slate-400 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -295,27 +405,38 @@ const deliverables = [
 
         </div>
 
-        <!-- ================================================================= -->
-        <!-- PART 3: HEADLINE + NARRATIVE (56%) + 4 SQUARES (44%) IN BELOW ROW -->
-        <!-- Headline placed directly before narrative!                        -->
-        <!-- ================================================================= -->
+        <!-- PART 3: HEADLINE + NARRATIVE (~56%) + 4 SQUARES (~44%) IN BELOW ROW -->
         <div class="pt-8 sm:pt-10 border-t border-slate-100 flex flex-col lg:flex-row items-center gap-10 lg:gap-12 xl:gap-14">
           
-          <!-- Narrative Column (~56% Width: Headline before narrative with exact highlights) -->
+          <!-- Narrative Column (~56% Width: Headline before narrative with verbatim text) -->
           <div class="w-full lg:w-[56%] space-y-4 text-left reveal-on-scroll reveal-left">
             
-            <h2 class="text-xl sm:text-2xl lg:text-[1.65rem] font-bold text-[#0B2553] leading-snug sm:leading-[1.42]">
-              Modernizing enterprise architecture, hardening cybersecurity postures, and optimizing federal program execution
+            <h2 class="text-xl sm:text-2xl lg:text-[1.75rem] font-extrabold text-[#0B2553] leading-snug sm:leading-[1.38] tracking-tight">
+              Innovative IT and Business Consulting Solutions
             </h2>
             <div class="w-16 h-1 rounded-full bg-gradient-to-r from-[#0C487A] to-[#FF3130] mb-3"></div>
 
-            <p class="text-base sm:text-lg text-slate-600 leading-[2] sm:leading-[2.05] font-normal pt-1">
-              Federal enterprise environments demand robust architecture and uncompromising cybersecurity standards. We provide end-to-end IT modernization, cloud architecture optimization, and NIST/CMMC compliance advisory with <strong class="font-bold text-[#0C487A]">10+ years of federal technology and systems engineering experience.</strong> Our certified enterprise architects and cybersecurity advisors build audit-defensible documentation, accelerate ATO authorizations, and deliver a <strong class="font-bold text-[#FF3130]">higher mission success rate.</strong>
+            <p class="text-base sm:text-lg text-slate-600 leading-[1.9] sm:leading-[1.95] font-normal pt-1">
+              At <strong class="font-bold text-[#0B2553]">Unity Compass (UC)</strong>, we specialize in delivering cutting-edge Information Technology and Business Consulting services designed to empower organizations and drive success. With a commitment to innovation and excellence, we provide tailored solutions that address the unique challenges and goals of each client.
             </p>
+
+            <div class="pt-2">
+              <a
+                href={hubspotMeetingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-sm shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group"
+              >
+                <span>Book a Consultation</span>
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
 
           </div>
 
-          <!-- 4 Square Animated Cards Column (~44% Width: 2x2 Grid, Center Aligned, No Corner Badges) -->
+          <!-- 4 Square Animated Cards Column (~44% Width: 2x2 Grid) -->
           <div class="w-full lg:w-[44%] reveal-on-scroll reveal-right delay-150">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 w-full max-w-lg mx-auto lg:mx-0">
               {keySquareCards.map((card, idx) => (
@@ -353,11 +474,11 @@ const deliverables = [
     </section>
 
     <!-- ===================================================================== -->
-    <!-- SECTION 2: "HOW WE DELIVER" (Interactive Opening Node Timeline)       -->
-    <!-- As user scrolls, nodes open with expanding elastic aperture animations-->
+    <!-- SECTION 2: "OUR SERVICES: WHAT WE PROVIDE" (3 CORE SERVICE PILLARS)   -->
+    <!-- All 3 Pillars visible with expansive executive bento cards            -->
     <!-- Background: LIGHT BLUE BLUEPRINT CANVAS                               -->
     <!-- ===================================================================== -->
-    <section id="how-we-deliver" class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="delivery-heading">
+    <section id="our-services-provide" class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="services-provide-heading">
       
       <!-- 16px Technical Blueprint Checks Pattern Overlay -->
       <div
@@ -368,18 +489,139 @@ const deliverables = [
 
       <!-- Ambient Glow Accents -->
       <div class="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(40,121,182,0.12)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-      <div class="absolute -bottom-24 right-10 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(255,49,48,0.06)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute -bottom-24 right-10 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(30,64,175,0.06)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
+      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16 sm:space-y-20">
+        
+        <!-- Section Header with Shimmer & Centered Alignment -->
+        <div class="text-center max-w-3xl mx-auto space-y-3 reveal-on-scroll">
+          <span class="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#0C487A] border border-blue-200/80 uppercase tracking-wider">
+            Comprehensive Capabilities
+          </span>
+          <h2 id="services-provide-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-normal">
+            <span class="service-shimmer-center service-shimmer-line-1 block pb-2 pt-0.5">Our Services: What We Provide</span>
+          </h2>
+          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-3 mb-4"></div>
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+            End-to-end technology and management consulting solutions engineered to accelerate digital maturity, unlock intelligent automation, and optimize enterprise operations.
+          </p>
+        </div>
+
+        <!-- 3 Dedicated Service Pillars Container -->
+        <div class="space-y-16 sm:space-y-20">
+          {servicePillars.map((pillar) => (
+            <div class="space-y-8" id={pillar.id}>
+              
+              <!-- Pillar Header Banner with Watermark -->
+              <div class="pillar-header-banner relative rounded-3xl bg-white border border-slate-200/90 p-7 sm:p-9 lg:p-10 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.08)] overflow-hidden reveal-on-scroll">
+                <!-- Large Decorative Watermark Number -->
+                <div class="absolute -right-4 -bottom-10 text-8xl sm:text-9xl font-black text-slate-100/90 pointer-events-none select-none tracking-tighter" aria-hidden="true">
+                  {pillar.number}
+                </div>
+
+                <!-- Top Brand Accent Line -->
+                <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF]"></div>
+
+                <div class="relative z-10 max-w-3xl space-y-3">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#0C487A] animate-pulse"></span>
+                    <span class="inline-block px-3 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-[#0C487A] border border-blue-200/70">
+                      {pillar.badge}
+                    </span>
+                  </div>
+
+                  <h3 class="text-2xl sm:text-3xl lg:text-[1.85rem] font-extrabold text-[#0B2553] tracking-tight leading-snug">
+                    {pillar.title}
+                  </h3>
+
+                  <p class="text-sm sm:text-base text-slate-600 leading-relaxed font-normal pt-1">
+                    {pillar.desc}
+                  </p>
+                </div>
+              </div>
+
+              <!-- 5 Service Offerings Grid with Staggered Cascading Viewport Entrance -->
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+                {pillar.services.map((service, sIdx) => {
+                  const isWide = sIdx >= 3;
+                  return (
+                    <div
+                      class={`consulting-card cascade-item group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_8px_24px_rgba(11,37,83,0.06)] hover:shadow-[0_22px_45px_-8px_rgba(12,72,122,0.20)] hover:-translate-y-2 hover:border-[#0C487A]/50 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between overflow-hidden cursor-default ${isWide ? 'lg:col-span-1 xl:col-span-1' : ''}`}
+                      data-cascade-index={sIdx}
+                    >
+                      <!-- Top Accent Line on Hover -->
+                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                      <div class="space-y-4">
+                        <!-- Card Top Bar: Icon + Brand-Red Accent Badge -->
+                        <div class="flex items-center justify-between gap-3">
+                          <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-[#0C487A] group-hover:text-white flex items-center justify-center transition-all duration-300 border border-blue-100/80 shadow-2xs group-hover:scale-105">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
+                            </svg>
+                          </div>
+
+                          <!-- Brand Red Accent Badge -->
+                          <div class="checkmark-badge w-7 h-7 rounded-lg bg-red-50 text-[#FF3130] flex items-center justify-center shrink-0 border border-red-200/80 shadow-2xs group-hover:bg-[#FF3130] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_0_12px_rgba(255,49,48,0.4)] transition-all duration-300">
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8" d="M5 13l4 4L19 7" />
+                            </svg>
+                          </div>
+                        </div>
+
+                        <!-- Title & Subtitle -->
+                        <div class="space-y-1">
+                          <h4 class="text-lg sm:text-[1.18rem] font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors leading-snug">
+                            {service.title}
+                          </h4>
+                          <span class="inline-block text-xs font-semibold text-[#0C487A]/80 tracking-wide uppercase">
+                            {service.subtitle}
+                          </span>
+                        </div>
+
+                        <!-- Description -->
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal pt-1">
+                          {service.desc}
+                        </p>
+                      </div>
+
+                      <!-- Bottom Accent Footer -->
+                      <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A] group-hover:text-[#1E40AF]">
+                        <span>Consulting Capability</span>
+                        <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 3: "HOW WE DELIVER" (Interactive Opening Node Timeline)       -->
+    <!-- As user scrolls, nodes open with expanding elastic aperture animations-->
+    <!-- Background: PURE WHITE CANVAS                                         -->
+    <!-- ===================================================================== -->
+    <section id="how-we-deliver" class="py-16 sm:py-24 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="delivery-heading">
+      
       <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <!-- Header: Heading, Accent Line & Subtitle with Scroll Reveal -->
         <div class="text-center max-w-3xl mx-auto space-y-3 mb-16 sm:mb-20 reveal-on-scroll">
+          <span class="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#0C487A] border border-blue-200/80 uppercase tracking-wider">
+            Proven Delivery Framework
+          </span>
           <h2 id="delivery-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-normal">
             <span class="service-shimmer-center service-shimmer-line-1 block pb-1.5 pt-0.5">How We Deliver</span>
           </h2>
           <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
           <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
-            A structured, audit-defensible consulting methodology transforming enterprise architectures into hardened federal assets.
+            A structured, audit-defensible consulting methodology transforming enterprise architectures into hardened organizational assets.
           </p>
         </div>
 
@@ -409,7 +651,7 @@ const deliverables = [
                     <div class={`timeline-card-box group relative rounded-3xl p-6 sm:p-7 bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-default reveal-on-scroll ${isEven ? 'reveal-right' : 'reveal-left'}`}>
                       
                       <!-- Glowing Top Accent Line on Hover -->
-                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                       <!-- Milestone Pill Tag & Icon -->
                       <div class={`flex items-center gap-3 mb-3.5 ${isEven ? '' : 'md:justify-end'}`}>
@@ -438,7 +680,7 @@ const deliverables = [
                       <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-[#0C487A]/15 to-[#FF3130]/15 blur-xs"></div>
 
                       <!-- Main Node Circular Aperture -->
-                      <div class="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white border-4 border-[#0C487A] text-[#0C487A] font-black text-sm sm:text-base flex items-center justify-center shadow-[0_8px_20px_rgba(12,72,122,0.25)] hover:border-[#FF3130] hover:text-[#FF3130] hover:scale-110 transition-all duration-300">
+                      <div class="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white border-4 border-[#0C487A] text-[#0C487A] font-black text-sm sm:text-base flex items-center justify-center shadow-[0_8px_20px_rgba(12,72,122,0.25)] hover:border-[#1E40AF] hover:text-[#1E40AF] hover:scale-110 transition-all duration-300">
                         <span>{step.step}</span>
                       </div>
 
@@ -459,83 +701,6 @@ const deliverables = [
     </section>
 
     <!-- ===================================================================== -->
-    <!-- SECTION 3: "WHAT YOU GET?" (Shuttle Bottom-to-Top Color Fill Hover)   -->
-    <!-- Background: PURE WHITE CANVAS                                         -->
-    <!-- ===================================================================== -->
-    <section class="py-16 sm:py-24 bg-white border-b border-slate-200/80 relative z-10 scroll-mt-28" aria-labelledby="what-you-get-heading">
-      
-      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <!-- Section Header with Shimmer & Scroll Reveal (Unclipped Descender on 'g') -->
-        <div class="text-center max-w-3xl mx-auto space-y-3 mb-14 sm:mb-16 reveal-on-scroll">
-          <h2 id="what-you-get-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-normal">
-            <span class="service-shimmer-center service-shimmer-line-1 block pb-2 pt-0.5">What you get?</span>
-          </h2>
-          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-3 mb-4"></div>
-          <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Hardened cybersecurity posture, complete CMMC and NIST alignment, and optimized federal cloud architectures.
-          </p>
-        </div>
-
-        <!-- 4 Deliverable Cards: Shuttle Bottom-to-Top Color Fill Animation with Staggered Scroll Reveal -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {deliverables.map((item, idx) => (
-            <div
-              class="shuttle-card group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.28)] transition-all duration-400 flex flex-col justify-between min-h-[300px] p-7 sm:p-8 overflow-hidden cursor-pointer reveal-on-scroll"
-              style={`transition-delay: ${idx * 80}ms;`}
-              data-card-index={idx}
-            >
-              <!-- Shuttle Bottom-to-Top Color Fill with Organic Curved Top Crest -->
-              <div
-                class="shuttle-fill-layer absolute inset-0 bg-gradient-to-t from-[#0C487A] via-[#103E6B] to-[#1E40AF] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none rounded-3xl overflow-hidden"
-                aria-hidden="true"
-              >
-                <!-- Organic Curved Soft Light Wave at the Leading Edge -->
-                <div class="absolute -top-5 left-0 right-0 h-10 bg-white/20 rounded-[100%] blur-sm pointer-events-none"></div>
-                <div class="absolute top-0 inset-x-0 h-1 bg-[#FF3130]/80"></div>
-              </div>
-
-              <!-- Top Content (Text & Icons transition smoothly to crisp white on hover) -->
-              <div class="relative z-10">
-                
-                <!-- Icon Badge with Soft Brand Tint & Glow -->
-                <div class="relative w-14 h-14 flex items-center justify-center mb-6">
-                  <div class="absolute inset-0 rounded-2xl bg-[#0C487A]/15 blur-lg opacity-40 group-hover:opacity-0 transition-opacity"></div>
-                  
-                  <div class="relative w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-white group-hover:text-[#FF3130] border border-blue-100/80 group-hover:border-white/30 flex items-center justify-center transition-all duration-400 shadow-2xs group-hover:scale-105">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
-                    </svg>
-                  </div>
-                </div>
-
-                <!-- Title -->
-                <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-white transition-colors duration-400 tracking-tight leading-snug mb-3">
-                  {item.title}
-                </h3>
-
-                <!-- Primary Description -->
-                <p class="text-sm text-slate-600 group-hover:text-white/95 transition-colors duration-400 leading-relaxed font-normal">
-                  {item.desc}
-                </p>
-              </div>
-
-              <!-- Bottom Indicator -->
-              <div class="pt-5 mt-4 border-t border-slate-100 group-hover:border-white/20 flex items-center justify-between relative z-10 transition-colors">
-                <span class="text-xs font-bold text-[#0C487A] group-hover:text-white transition-colors">
-                  Key Deliverable
-                </span>
-                <span class="w-2.5 h-2.5 rounded-full bg-slate-300 group-hover:bg-[#FF3130] group-hover:scale-125 transition-all duration-300"></span>
-              </div>
-
-            </div>
-          ))}
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ===================================================================== -->
     <!-- SECTION 4: "WHY UC?" (3 Symmetrical Cards with Bring-to-Front)        -->
     <!-- Background: LIGHT BLUE BLUEPRINT CANVAS                               -->
     <!-- ===================================================================== -->
@@ -548,9 +713,6 @@ const deliverables = [
         aria-hidden="true"
       ></div>
 
-      <!-- Ambient Glow Accents -->
-      <div class="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(40,121,182,0.12)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-
       <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <!-- Section Header with Shimmer & Scroll Reveal -->
@@ -562,97 +724,46 @@ const deliverables = [
         </div>
 
         <!-- Value Proposition Quote Card with Glassmorphic Highlight -->
-        <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-slate-50/80 border border-slate-200/90 shadow-sm text-center mb-14 reveal-on-scroll">
+        <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-white/90 border border-slate-200/90 shadow-sm text-center mb-14 reveal-on-scroll">
           <p class="text-base sm:text-lg lg:text-xl font-bold text-[#0B2553] leading-relaxed">
-            At Unity Compass, we deliver unmatched IT consulting services through: deep government contracting knowledge, agile technical execution, and an uncompromising commitment to cybersecurity standards
+            At Unity Compass, we deliver unmatched IT & business consulting through: deep enterprise architecture experience, pragmatic artificial intelligence execution, and an uncompromising commitment to cybersecurity standards.
           </p>
         </div>
 
-        <!-- Symmetrical 3-Card Stage: ALL 3 Cards are ALWAYS Visible Side-by-Side, Hovering Brings to Front -->
+        <!-- Symmetrical 3-Card Stage: ALL 3 Cards are ALWAYS Visible Side-by-Side -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch reveal-on-scroll" id="why-uc-cards-grid">
-          
-          <!-- Card 1 (Left Card) -->
-          <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30"
-          >
-            <!-- Top Line on Card Hover -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
+          {whyUcPillars.map((card) => (
+            <div
+              class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30"
+            >
+              <!-- Top Line on Card Hover -->
+              <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF]"></div>
 
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center font-bold mb-5 border border-blue-100/80 group-hover:bg-[#0C487A] group-hover:text-white transition-colors duration-300 shadow-2xs">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
+              <div>
+                <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center font-bold mb-5 border border-blue-100/80 group-hover:bg-[#0C487A] group-hover:text-white transition-colors duration-300 shadow-2xs">
+                  <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={card.icon} />
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">{card.title}</h3>
+                <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                  {card.desc}
+                </p>
               </div>
-              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">Federal Enterprise Experience</h3>
-              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
-                Direct advisory delivering cloud migrations, system refactoring, and zero-trust security for defense and civilian programs.
-              </p>
-            </div>
 
-            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A]">
-              <span>Pillar 01</span>
-              <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </div>
-          </div>
-
-          <!-- Card 2 (Center Card) -->
-          <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_16px_36px_-8px_rgba(11,37,83,0.16)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(255,49,48,0.24)] hover:border-[#FF3130]/50 hover:z-30 md:-translate-y-1"
-          >
-            <!-- Top Line on Card Hover -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#FF3130] to-[#DC2626]"></div>
-
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-red-50 text-[#FF3130] flex items-center justify-center font-bold mb-5 border border-red-100/80 group-hover:bg-[#FF3130] group-hover:text-white transition-colors duration-300 shadow-2xs">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+              <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A]">
+                <span>{card.badge}</span>
+                <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
               </div>
-              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#FF3130] transition-colors">Agile Modernization</h3>
-              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
-                Pragmatic, phased roadmaps that minimize operational disruption while rapidly elevating technical maturity.
-              </p>
             </div>
-
-            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#FF3130]">
-              <span>Pillar 02</span>
-              <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </div>
-          </div>
-
-          <!-- Card 3 (Right Card) -->
-          <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30"
-          >
-            <!-- Top Line on Card Hover -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
-
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center font-bold mb-5 border border-blue-100/80 group-hover:bg-[#0C487A] group-hover:text-white transition-colors duration-300 shadow-2xs">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">NIST & CMMC Governance</h3>
-              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
-                Exhaustive compliance auditing, POA&M drafting, and continuous monitoring to maintain ATO and contractor status.
-              </p>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A]">
-              <span>Pillar 03</span>
-              <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </div>
-          </div>
-
+          ))}
         </div>
 
       </div>
     </section>
 
     <!-- ===================================================================== -->
-    <!-- SECTION 5: "READY TO WIN YOUR NEXT GOVERNMENT CONTRACT?" (CTA BANNER) -->
+    <!-- SECTION 5: "READY TO EMPOWER YOUR ORGANIZATION?" (CTA BANNER)         -->
     <!-- Background: PURE WHITE CANVAS                                         -->
     <!-- ===================================================================== -->
     <section class="py-16 sm:py-24 bg-white relative z-10 overflow-hidden" aria-labelledby="cta-heading">
@@ -669,22 +780,24 @@ const deliverables = [
         
         <!-- Section Title with Shimmer -->
         <h2 id="cta-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0B2553] leading-tight">
-          <span class="service-shimmer-center service-shimmer-line-1 block">Ready to Win Your Next Government Contract?</span>
+          <span class="service-shimmer-center service-shimmer-line-1 block">Ready to Empower Your Organization with Innovative IT Solutions?</span>
         </h2>
         <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto"></div>
 
         <!-- Narrative Subtext -->
         <p class="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto pt-2">
-          If you're ready to see how we can make a difference for your organization, Contact Us today. Let's discuss how we can support your next big project.
+          If you're ready to see how our tailored IT and business consulting solutions can make a measurable difference, let's discuss how we can support your next big project.
         </p>
 
-        <!-- Deep Blue Strategic Call Button -->
+        <!-- Primary Action Button: Single Centered High-Conversion Call -->
         <div class="pt-4 flex justify-center">
           <a
-            href="/contact"
-            class="inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 rounded-2xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
+            href={hubspotMeetingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-3 px-9 sm:px-11 py-4 rounded-2xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
           >
-            <span>Book a Strategic Call</span>
+            <span>Book a Strategic Consultation</span>
             <svg class="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
@@ -697,126 +810,224 @@ const deliverables = [
   </div>
 </MainLayout>
 
-<!-- Client Script: Timeline Opening Nodes Observer & Scroll Sync -->
+<!-- Client Script: Scroll Reveals, Cursor Physics & Timeline Opening Nodes -->
 <script is:inline>
-  function initITConsultingTimelineAnimations() {
-    const timelineRows = document.querySelectorAll('.timeline-step-row');
-    if (!timelineRows.length) return;
+  function initITConsultingInteractions() {
+    // 1. General Viewport Scroll Reveals
+    const revealElements = document.querySelectorAll(
+      '.reveal-on-scroll, .reveal-left, .reveal-right'
+    );
 
     if (!('IntersectionObserver' in window)) {
-      timelineRows.forEach((row) => {
-        row.classList.add('is-node-active');
-        const node = row.querySelector('.timeline-node-core');
-        if (node) node.classList.add('node-opened');
-      });
+      revealElements.forEach((el) => el.classList.add('is-revealed'));
+      document.querySelectorAll('.cascade-item').forEach((item) => item.classList.add('is-revealed'));
       return;
     }
 
-    const nodeObserver = new IntersectionObserver(
-      (entries) => {
+    const scrollObserver = new IntersectionObserver(
+      (entries, obs) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-node-active');
-            const node = entry.target.querySelector('.timeline-node-core');
-            if (node) {
-              node.classList.add('node-opened');
-            }
+            entry.target.classList.add('is-revealed');
+            obs.unobserve(entry.target);
           }
         });
       },
-      {
-        threshold: 0.2,
-        rootMargin: '0px 0px -50px 0px',
-      }
+      { rootMargin: '0px 0px -40px 0px', threshold: 0.1 }
     );
+    revealElements.forEach((el) => scrollObserver.observe(el));
 
-    timelineRows.forEach((row) => nodeObserver.observe(row));
+    // 2. Cascading Service Offering Cards Observer (Section 2)
+    const cascadeItemObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            const idx = parseInt(target.getAttribute('data-cascade-index') || '0', 10);
+            setTimeout(() => {
+              target.classList.add('is-revealed');
+            }, idx * 85 + 100);
+            obs.unobserve(target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -30px 0px', threshold: 0.1 }
+    );
+    document.querySelectorAll('.consulting-card.cascade-item').forEach((card) => cascadeItemObserver.observe(card));
+
+    // 3. Ambient Cursor Spotlight Physics for Service Offering Cards
+    const consultingCards = document.querySelectorAll('.consulting-card');
+    consultingCards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    // 4. Timeline Opening Nodes Observer
+    const timelineRows = document.querySelectorAll('.timeline-step-row');
+    if (timelineRows.length) {
+      const nodeObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-node-active');
+              const node = entry.target.querySelector('.timeline-node-core');
+              if (node) {
+                node.classList.add('node-opened');
+              }
+            }
+          });
+        },
+        { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }
+      );
+      timelineRows.forEach((row) => nodeObserver.observe(row));
+    }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initITConsultingTimelineAnimations);
+    document.addEventListener('DOMContentLoaded', initITConsultingInteractions);
   } else {
-    initITConsultingTimelineAnimations();
+    initITConsultingInteractions();
   }
-  document.addEventListener('astro:page-load', initITConsultingTimelineAnimations);
+  document.addEventListener('astro:page-load', initITConsultingInteractions);
 </script>
 
 <style>
   /* ========================================================================= */
-  /* Initial Page Load Animations (Blur Dissipation & Upward Glide)            */
-  /* Matches Homepage Hero Animation Exact Physics & Easing                   */
+  /* Scroll-Triggered Soft-Reveal & Dissolve Animation                         */
   /* ========================================================================= */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(5px);
+    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal-on-scroll.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-35px) translateY(10px);
+    filter: blur(5px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal-left.is-revealed {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+    filter: blur(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(35px) translateY(10px);
+    filter: blur(5px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal-right.is-revealed {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+    filter: blur(0);
+  }
+
+  /* ========================================================================= */
+  /* Cascading Card Reveal Animation inside "What We Provide" Pillars          */
+  /* ========================================================================= */
+  .consulting-card.cascade-item {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+    filter: blur(5px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s ease;
+    will-change: opacity, transform, filter;
+  }
+
+  .consulting-card.cascade-item.is-revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  /* Ambient Cursor Light Spotlight on Service Cards */
+  .consulting-card {
+    position: relative;
+  }
+
+  .consulting-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(12, 72, 122, 0.08),
+      transparent 68%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .consulting-card:hover::before {
+    opacity: 1;
+  }
+
+  .consulting-card .checkmark-badge {
+    transform: scale(0.65) rotate(-10deg);
+    opacity: 0;
+    transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+  }
+
+  .consulting-card.cascade-item.is-revealed .checkmark-badge {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+
+  /* Initial Page Load Animations */
   @keyframes heroSoftReveal {
-    0% {
-      opacity: 0;
-      transform: translateY(16px);
-      filter: blur(8px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
+    0% { opacity: 0; transform: translateY(16px); filter: blur(8px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
+  .hero-heading-reveal { animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; will-change: opacity, transform, filter; }
+  .hero-subheading-reveal { animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; will-change: opacity, transform, filter; }
+  .hero-image-reveal { animation: heroSoftReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; will-change: opacity, transform, filter; }
+  .hero-menu-reveal { animation: heroSoftReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; will-change: opacity, transform, filter; }
 
-  .hero-heading-reveal {
-    animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-    will-change: opacity, transform, filter;
-  }
-
-  .hero-subheading-reveal {
-    animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
-    will-change: opacity, transform, filter;
-  }
-
-  .hero-image-reveal {
-    animation: heroSoftReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
-    will-change: opacity, transform, filter;
-  }
-
-  .hero-menu-reveal {
-    animation: heroSoftReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
-    will-change: opacity, transform, filter;
-  }
-
-  /* ========================================================================= */
-  /* Timeline Aperture Opening & Radiant Pulse Keyframes                      */
-  /* As user scrolls, nodes open with expanding elastic spring motion         */
-  /* ========================================================================= */
+  /* Timeline Aperture Opening & Radiant Pulse Keyframes */
   @keyframes nodeApertureOpen {
-    0% {
-      transform: scale(0.2) rotate(-35deg);
-      opacity: 0;
-      filter: blur(8px);
-    }
-    60% {
-      transform: scale(1.18) rotate(5deg);
-      opacity: 1;
-      filter: blur(0);
-    }
-    85% {
-      transform: scale(0.96) rotate(-2deg);
-    }
-    100% {
-      transform: scale(1) rotate(0deg);
-      opacity: 1;
-      filter: blur(0);
-    }
+    0% { transform: scale(0.2) rotate(-35deg); opacity: 0; filter: blur(8px); }
+    60% { transform: scale(1.18) rotate(5deg); opacity: 1; filter: blur(0); }
+    85% { transform: scale(0.96) rotate(-2deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0); }
   }
 
   @keyframes nodeSonarRing {
-    0% {
-      transform: scale(0.75);
-      opacity: 0.85;
-    }
-    50% {
-      transform: scale(1.7);
-      opacity: 0.3;
-    }
-    100% {
-      transform: scale(2.4);
-      opacity: 0;
-    }
+    0% { transform: scale(0.75); opacity: 0.85; }
+    50% { transform: scale(1.7); opacity: 0.3; }
+    100% { transform: scale(2.4); opacity: 0; }
   }
 
   .timeline-node-core {
@@ -834,64 +1045,16 @@ const deliverables = [
     animation: nodeSonarRing 2.5s ease-out infinite 0.45s;
   }
 
-  /* ========================================================================= */
-  /* Animated Square Feature Tiles (Keyframe Float & Fluid Motion)             */
-  /* ========================================================================= */
-  @keyframes floatSubtle1 {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
-  }
+  /* Animated Square Feature Tiles */
+  @keyframes floatSubtle1 { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
+  @keyframes floatSubtle2 { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(5px); } }
+  .animate-float-subtle-1 { animation: floatSubtle1 5s ease-in-out infinite; }
+  .animate-float-subtle-2 { animation: floatSubtle2 6s ease-in-out infinite 0.6s; }
+  .animate-float-subtle-1:hover, .animate-float-subtle-2:hover { animation-play-state: paused; }
 
-  @keyframes floatSubtle2 {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(5px);
-    }
-  }
-
-  .animate-float-subtle-1 {
-    animation: floatSubtle1 5s ease-in-out infinite;
-  }
-
-  .animate-float-subtle-2 {
-    animation: floatSubtle2 6s ease-in-out infinite 0.6s;
-  }
-
-  .animate-float-subtle-1:hover,
-  .animate-float-subtle-2:hover {
-    animation-play-state: paused;
-  }
-
-  /* ========================================================================= */
-  /* Shuttle Bottom-to-Top Color Fill Animation                                */
-  /* ========================================================================= */
-  .shuttle-card {
-    will-change: transform, box-shadow;
-  }
-
-  .shuttle-fill-layer {
-    will-change: transform;
-  }
-
-  /* ========================================================================= */
-  /* Center-Aligned Continuous Radiant Color Shimmer Sweep                     */
-  /* ========================================================================= */
+  /* Center-Aligned Continuous Radiant Color Shimmer Sweep */
   .service-shimmer-center {
-    background: linear-gradient(
-      90deg,
-      #0F274A 0%,
-      #1E40AF 22%,
-      #2563EB 42%,
-      #DC2626 58%,
-      #EF4444 72%,
-      #0F274A 100%
-    );
+    background: linear-gradient(90deg, #0F274A 0%, #1E40AF 22%, #2563EB 42%, #DC2626 58%, #EF4444 72%, #0F274A 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -908,10 +1071,7 @@ const deliverables = [
     overflow: visible;
   }
 
-  .service-shimmer-line-1 {
-    animation: servicePageShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
-
+  .service-shimmer-line-1 { animation: servicePageShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
   @keyframes servicePageShimmer1 {
     0% { background-position: 0% 50%; }
     48% { background-position: 100% 50%; }
@@ -921,34 +1081,11 @@ const deliverables = [
 
   /* Accessibility: Reduced Motion */
   @media (prefers-reduced-motion: reduce) {
-    .service-shimmer-center {
-      animation: none !important;
-      background: none !important;
-      -webkit-text-fill-color: #0F274A !important;
-      color: #0F274A !important;
-    }
-    .hero-heading-reveal,
-    .hero-subheading-reveal,
-    .hero-image-reveal,
-    .hero-menu-reveal {
-      animation: none !important;
-      opacity: 1 !important;
-      transform: none !important;
-      filter: none !important;
-    }
-    .timeline-node-core {
-      opacity: 1 !important;
-      transform: none !important;
-      animation: none !important;
-    }
-    .shuttle-card,
-    .why-card {
-      transition: none !important;
-      transform: none !important;
-    }
-    .shuttle-fill-layer {
-      transition: none !important;
-      display: none !important;
-    }
+    .service-shimmer-center { animation: none !important; background: none !important; -webkit-text-fill-color: #0F274A !important; color: #0F274A !important; }
+    .hero-heading-reveal, .hero-subheading-reveal, .hero-image-reveal, .hero-menu-reveal { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+    .timeline-node-core { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .why-card, .consulting-card { transition: none !important; transform: none !important; }
+    .reveal-on-scroll, .reveal-left, .reveal-right, .consulting-card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
+    .consulting-card .checkmark-badge { opacity: 1 !important; transform: none !important; }
   }
 </style>
