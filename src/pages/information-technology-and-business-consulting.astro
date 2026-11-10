@@ -519,34 +519,29 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 </div>
               </div>
 
-              <!-- 5 Service Offerings Grid with Smooth Bubbly Ripple Animation -->
+              <!-- 5 Service Offerings Grid with Circular Blueprint Reveal Animation (User Code Specification) -->
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                 {pillar.services.map((service, sIdx) => {
                   const isWide = sIdx >= 3;
                   return (
                     <div
-                      class={`consulting-card cascade-item group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_8px_24px_rgba(11,37,83,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.18)] hover:border-[#0C487A]/40 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-start overflow-hidden cursor-default ${isWide ? 'lg:col-span-1 xl:col-span-1' : ''}`}
+                      class={`consulting-card cascade-item group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_8px_24px_rgba(11,37,83,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.25)] hover:border-[#0C487A]/50 transition-all duration-300 overflow-hidden cursor-pointer ${isWide ? 'lg:col-span-1 xl:col-span-1' : ''}`}
                       data-cascade-index={sIdx}
                     >
                       <!-- Top Accent Line on Hover -->
-                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
 
-                      <!-- Smooth Expanding Bubbly Ripple Surface -->
-                      <div class="bubble-ripple-surface pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-                        <span class="bubble-wave bubble-wave-1"></span>
-                        <span class="bubble-wave bubble-wave-2"></span>
-                      </div>
-
-                      <div class="relative z-10 space-y-3.5">
-                        <!-- Card Top Bar: Icon Only (Checkmark removed) -->
-                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-[#0C487A] group-hover:text-white flex items-center justify-center transition-all duration-300 border border-blue-100/80 shadow-2xs group-hover:scale-105">
+                      <!-- Face 1: Default Product Face (Crisp White Institutional Aesthetic) -->
+                      <div class="card-face-product relative z-1 p-6 sm:p-7 space-y-3.5 transition-opacity duration-500 flex flex-col justify-start h-full">
+                        <!-- Icon Container -->
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center transition-transform duration-300 border border-blue-100/80 shadow-2xs group-hover:scale-105">
                           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
                           </svg>
                         </div>
 
-                        <!-- Title Only (Subtitle label removed, generous line-height) -->
-                        <h4 class="text-lg sm:text-[1.18rem] font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors leading-[1.32] sm:leading-[1.35]">
+                        <!-- Title (Generous line-height) -->
+                        <h4 class="text-lg sm:text-[1.18rem] font-bold text-[#0B2553] leading-[1.32] sm:leading-[1.35]">
                           {service.title}
                         </h4>
 
@@ -555,6 +550,35 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                           {service.desc}
                         </p>
                       </div>
+
+                      <!-- Face 2: Circular Expanding Blueprint Reveal Face (Exact User Animation Spec) -->
+                      <div class="card-face-blueprint absolute inset-0 z-2 p-6 sm:p-7 space-y-3.5 flex flex-col justify-start overflow-hidden pointer-events-none" aria-hidden="true">
+                        <!-- Blueprint Stylized Icon Container -->
+                        <div class="w-12 h-12 rounded-2xl bg-white/15 text-white flex items-center justify-center border border-white/25 shadow-sm">
+                          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
+                          </svg>
+                        </div>
+
+                        <!-- Luminous White Title -->
+                        <h4 class="text-lg sm:text-[1.18rem] font-bold text-white leading-[1.32] sm:leading-[1.35]">
+                          {service.title}
+                        </h4>
+
+                        <!-- Technical Blueprint Ice-Blue Description -->
+                        <p class="text-xs sm:text-sm text-[#CFE0FF] leading-relaxed font-normal pt-0.5">
+                          {service.desc}
+                        </p>
+
+                        <!-- Subtle Brand Accent Spark in Bottom Corner -->
+                        <div class="mt-auto pt-3 flex items-center justify-end">
+                          <span class="inline-flex items-center gap-1.5 text-[0.7rem] font-bold tracking-wider text-[#FF6B6A] uppercase">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#FF3130] animate-pulse"></span>
+                            Unity Compass
+                          </span>
+                        </div>
+                      </div>
+
                     </div>
                   );
                 })}
@@ -923,84 +947,48 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     filter: blur(0);
   }
 
+  /* ========================================================================= */
+  /* Circular Blueprint Reveal Card Animation (User Code Specification)         */
+  /* ========================================================================= */
   .consulting-card {
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s ease;
   }
 
   .consulting-card:hover {
     transform: translateY(-6px);
   }
 
-  /* Smooth Bubbly Ripple Wave Effect */
-  .bubble-ripple-surface {
+  /* Default Product Face (Smoothly fades out on hover) */
+  .consulting-card .card-face-product {
+    transition: opacity 0.45s ease;
+  }
+
+  .consulting-card:hover .card-face-product {
+    opacity: 0;
+  }
+
+  /* Expanding Blueprint Reveal Face (Exact Clip-Path Iris Wave from User Spec) */
+  .consulting-card .card-face-blueprint {
     position: absolute;
     inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    border-radius: inherit;
-    z-index: 1;
+    z-index: 2;
+    background: #0C487A;
+    background: linear-gradient(145deg, #0C487A 0%, #0B2553 100%);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+    background-size: 22px 22px;
+    color: #CFE0FF;
+    clip-path: circle(0% at 100% 0%);
+    transition: clip-path 0.65s cubic-bezier(0.65, 0, 0.35, 1);
   }
 
-  .bubble-wave {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.75s ease;
-    left: var(--mouse-x, 50%);
-    top: var(--mouse-y, 50%);
-  }
-
-  .bubble-wave-1 {
-    width: 260px;
-    height: 260px;
-    background: radial-gradient(circle, rgba(12, 72, 122, 0.12) 0%, rgba(30, 64, 175, 0.04) 55%, transparent 75%);
-  }
-
-  .bubble-wave-2 {
-    width: 190px;
-    height: 190px;
-    border: 1.5px solid rgba(12, 72, 122, 0.18);
-    transition-duration: 1.1s;
-    transition-delay: 0.06s;
-  }
-
-  .consulting-card:hover .bubble-wave-1 {
-    transform: translate(-50%, -50%) scale(2.8);
-    opacity: 1;
-  }
-
-  .consulting-card:hover .bubble-wave-2 {
-    transform: translate(-50%, -50%) scale(3.2);
-    opacity: 0;
-  }
-
-  /* Subtle Ambient Bubble Glow */
-  @keyframes gentleBubblePulse {
-    0%, 100% {
-      transform: scale(1) translateY(0px);
-      opacity: 0.35;
-    }
-    50% {
-      transform: scale(1.15) translateY(-5px);
-      opacity: 0.65;
-    }
-  }
-
-  .consulting-card::after {
-    content: '';
-    position: absolute;
-    top: -24px;
-    right: -24px;
-    width: 95px;
-    height: 95px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(12, 72, 122, 0.08) 0%, transparent 70%);
-    pointer-events: none;
-    animation: gentleBubblePulse 5s ease-in-out infinite;
-    z-index: 1;
+  .consulting-card:hover .card-face-blueprint {
+    clip-path: circle(150% at 100% 0%);
   }
 
   /* ========================================================================= */
@@ -1035,30 +1023,6 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     transform: translateY(-8px) scale(1.015) rotate(0deg) !important;
   }
 
-  /* Ambient Cursor Light Spotlight on Service Cards */
-  .consulting-card {
-    position: relative;
-  }
-
-  .consulting-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(
-      450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(12, 72, 122, 0.08),
-      transparent 68%
-    );
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .consulting-card:hover::before {
-    opacity: 1;
-  }
 
   /* Initial Page Load Animations */
   @keyframes heroSoftReveal {
@@ -1140,6 +1104,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     .hero-heading-reveal, .hero-subheading-reveal, .hero-image-reveal, .hero-menu-reveal { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
     .timeline-node-core { opacity: 1 !important; transform: none !important; animation: none !important; }
     .why-card, .consulting-card, .timeline-card-box { transition: none !important; transform: none !important; animation: none !important; }
+    .consulting-card .card-face-product, .consulting-card .card-face-blueprint { transition: none !important; }
     .reveal-on-scroll, .reveal-left, .reveal-right, .consulting-card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   }
 </style>
