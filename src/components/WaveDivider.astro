@@ -1,0 +1,110 @@
+---
+/**
+ * WaveDivider.astro - Pure CSS + Inline SVG Section Divider (wsd-01)
+ *
+ * Features:
+ * - One inline SVG path, one CSS rule, zero dependencies, zero JavaScript, zero layout shift (CLS: 0)
+ * - The drop-in replacement for a page-builder shape divider to break the boxy grid between two sections
+ * - Supports variants:
+ *   - 'wave' / 'dynamic' (wsd-01a): Organic wave breaking the straight boxy grid
+ *   - 'gentle' / 'editorial' (wsd-01c): Subtle, low-amplitude editorial curve that reads as premium
+ * - Supports custom target fill color (defaults to next section background: #ffffff)
+ * - Supports 'bottom' or 'top' positioning, plus 'flip' horizontal mirroring
+ */
+
+interface Props {
+  variant?: 'wave' | 'dynamic' | 'gentle' | 'editorial';
+  fillColor?: string;
+  position?: 'bottom' | 'top';
+  flip?: boolean;
+  class?: string;
+}
+
+const {
+  variant = 'wave',
+  fillColor = '#ffffff',
+  position = 'bottom',
+  flip = false,
+  class: className = '',
+} = Astro.props;
+
+const isGentle = variant === 'gentle' || variant === 'editorial';
+---
+
+{isGentle ? (
+  <svg
+    class:list={[
+      'wsd-wave',
+      'wsd-wave--gentle',
+      position === 'top' ? 'wsd-wave--top' : 'wsd-wave--bottom',
+      flip && 'wsd-wave--flipped',
+      className
+    ]}
+    style={{ color: fillColor }}
+    viewBox="0 0 1440 90"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M0,52 C180,4 360,4 540,44 C740,88 900,88 1080,50 C1220,20 1330,20 1440,42 L1440,90 L0,90 Z" fill="currentColor"></path>
+  </svg>
+) : (
+  <svg
+    class:list={[
+      'wsd-wave',
+      'wsd-wave--dynamic',
+      position === 'top' ? 'wsd-wave--top' : 'wsd-wave--bottom',
+      flip && 'wsd-wave--flipped',
+      className
+    ]}
+    style={{ color: fillColor }}
+    viewBox="0 0 1440 120"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M0,64 C240,120 480,8 720,40 C960,72 1200,120 1440,72 L1440,120 L0,120 Z" fill="currentColor"></path>
+  </svg>
+)}
+
+<style>
+  .wsd-wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: block;
+    width: 100%;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .wsd-wave--bottom {
+    bottom: -1px;
+  }
+
+  .wsd-wave--top {
+    top: -1px;
+    transform: rotate(180deg);
+  }
+
+  .wsd-wave--bottom.wsd-wave--flipped {
+    transform: scaleX(-1);
+  }
+
+  .wsd-wave--top.wsd-wave--flipped {
+    transform: rotate(180deg) scaleX(-1);
+  }
+
+  .wsd-wave--dynamic {
+    height: clamp(56px, 9vw, 110px);
+  }
+
+  .wsd-wave--gentle {
+    height: clamp(44px, 6vw, 80px);
+  }
+
+  .wsd-wave path {
+    fill: currentColor;
+  }
+</style>
+
