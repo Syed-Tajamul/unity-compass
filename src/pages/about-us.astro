@@ -32,6 +32,7 @@ import {
   UsersRound,
 } from 'lucide-astro';
 import MainLayout from '../layouts/MainLayout.astro';
+import WaveDivider from '../components/WaveDivider.astro';
 import { companyInfo, verifiedMetrics } from '../data/company';
 
 const canonicalUrl = 'https://unitycompass.com/about-us';
@@ -192,7 +193,7 @@ const aboutPageSchema = {
     <div class="absolute -left-32 top-16 h-80 w-80 rounded-full bg-blue-300/20 blur-3xl" aria-hidden="true"></div>
     <div class="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-red-300/10 blur-3xl" aria-hidden="true"></div>
 
-    <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:px-8 lg:py-20">
+    <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:px-8 lg:pt-20 pb-24 sm:pb-28 lg:pb-32">
       <div class="max-w-3xl">
         <h1 class="hero-heading-reveal max-w-2xl text-3xl font-extrabold leading-[1.16] tracking-tight text-[#0F274A] sm:text-4xl sm:leading-[1.18] lg:text-[2.75rem] xl:text-[3.15rem]">
           A practical partner for <span class="about-gradient-text">federal work.</span>
@@ -241,6 +242,9 @@ const aboutPageSchema = {
         />
       </div>
     </div>
+
+    <!-- Pure CSS SVG Wave Section Divider (wsd-01) Leading into About Us Narrative Canvas -->
+    <WaveDivider variant="wave" fillColor="#ffffff" />
   </header>
 
   <section class="about-scroll-region bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="company-heading">
