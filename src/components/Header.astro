@@ -47,7 +47,7 @@ const aboutDropdown = [
 
 <header
   id="main-header"
-  class="sticky top-0 z-40 bg-gradient-to-r from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-transparent transition-all duration-300 relative"
+  class="sticky top-0 z-40 translate-y-0 border-b border-transparent bg-gradient-to-r from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] transition-[transform,background-color,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform"
 >
   <!-- Subtle Minute Check Pattern Overlay -->
   <div
@@ -259,14 +259,12 @@ const aboutDropdown = [
           type="button"
           id="mobile-menu-btn"
           class="p-2 rounded-lg text-slate-700 hover:text-[#0C487A] hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0C487A] transition-colors cursor-pointer"
-          aria-label="Toggle Navigation Menu"
+          aria-label="Open navigation menu"
           aria-expanded="false"
+          aria-controls="mobile-menu"
         >
-          <svg class="w-6 h-6 open-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <svg class="w-6 h-6 close-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
@@ -274,9 +272,47 @@ const aboutDropdown = [
     </div>
   </div>
 
-  <!-- Mobile Drawer Menu -->
-  <div id="mobile-menu" class="hidden lg:hidden border-t border-[#E2E8F0] bg-white shadow-xl transition-all">
-    <div class="max-w-7xl mx-auto px-4 pt-3 pb-6 space-y-1">
+</header>
+
+<div
+  id="mobile-menu-backdrop"
+  class="fixed inset-0 z-40 bg-slate-950/30 opacity-0 backdrop-blur-sm pointer-events-none lg:hidden"
+  aria-hidden="true"
+></div>
+
+<aside
+  id="mobile-menu"
+  class="fixed inset-y-0 left-0 z-50 w-4/5 -translate-x-full overflow-hidden border-r border-slate-200 bg-white shadow-[20px_0_55px_-18px_rgba(15,39,74,0.35)] lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Mobile navigation"
+  aria-hidden="true"
+  inert
+>
+  <div class="flex h-20 items-center justify-between border-b border-slate-200 bg-gradient-to-r from-[#F4F8FC] to-[#EBF3FA] px-4 sm:px-5">
+    <a href="/" class="rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0C487A]" aria-label="Unity Compass - Home">
+      <img
+        src="/images/Green-Minimal-Travel-Business-Logo.png"
+        alt="Unity Compass"
+        class="h-10 w-auto object-contain"
+        width="207"
+        height="55"
+      />
+    </a>
+    <button
+      type="button"
+      id="mobile-menu-close"
+      class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-[#0C487A]/30 hover:text-[#FF3130] focus:outline-none focus:ring-2 focus:ring-[#0C487A]"
+      aria-label="Close navigation menu"
+    >
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <nav class="h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain px-4 pb-8 pt-4 sm:px-5" aria-label="Mobile navigation">
+    <div class="space-y-1">
       <a
         href="/"
         class={`block px-3 py-2.5 rounded-lg text-base font-semibold border-b border-slate-50 transition-colors ${
@@ -368,33 +404,186 @@ const aboutDropdown = [
         </div>
       </div>
     </div>
-  </div>
-</header>
+  </nav>
+</aside>
+
+<style>
+  #main-header {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+                background 220ms ease,
+                border-color 220ms ease,
+                box-shadow 220ms ease;
+    will-change: transform;
+  }
+
+  #main-header.header-hidden {
+    transform: translate3d(0, -105%, 0);
+    transition-duration: 560ms, 220ms, 220ms, 220ms;
+  }
+
+  #main-header.is-scrolled {
+    border-color: #E2E8F0;
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 4px 16px -10px rgba(15, 39, 74, 0.3);
+  }
+
+  #mobile-menu-backdrop {
+    transform: translateZ(0);
+    transition: opacity 420ms ease-out;
+    will-change: opacity;
+  }
+
+  #mobile-menu-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transition-duration: 260ms;
+  }
+
+  #mobile-menu {
+    background-color: #FFFFFF;
+    transform: translate3d(-102%, 0, 0);
+    backface-visibility: hidden;
+    contain: layout paint style;
+    transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  #mobile-menu.is-open {
+    transform: translate3d(0, 0, 0);
+    transition-duration: 420ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #main-header,
+    #mobile-menu,
+    #mobile-menu-backdrop {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
 
 <script>
-  // Mobile menu toggle
-  const btn = document.getElementById('mobile-menu-btn');
+  const header = document.getElementById('main-header');
+  const menuButton = document.getElementById('mobile-menu-btn');
+  const menuCloseButton = document.getElementById('mobile-menu-close');
   const menu = document.getElementById('mobile-menu');
-  const openIcon = btn?.querySelector('.open-icon');
-  const closeIcon = btn?.querySelector('.close-icon');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+  const desktopMedia = window.matchMedia('(min-width: 1024px)');
 
-  btn?.addEventListener('click', () => {
-    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!isExpanded));
-    menu?.classList.toggle('hidden');
-    openIcon?.classList.toggle('hidden');
-    closeIcon?.classList.toggle('hidden');
+  let menuOpen = false;
+  let lastFocusedElement: HTMLElement | null = null;
+
+  function setMenuState(open: boolean, restoreFocus = true) {
+    if (!menu || !menuButton || !backdrop) return;
+
+    menuOpen = open;
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    menu.setAttribute('aria-hidden', String(!open));
+    menu.classList.toggle('is-open', open);
+    backdrop.classList.toggle('is-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+
+    if (open) {
+      lastFocusedElement = document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : menuButton;
+      menu.removeAttribute('inert');
+      header?.classList.remove('header-hidden');
+      requestAnimationFrame(() => menuCloseButton?.focus());
+      return;
+    }
+
+    if (restoreFocus && lastFocusedElement) {
+      lastFocusedElement.focus();
+    }
+    menu.setAttribute('inert', '');
+  }
+
+  menuButton?.addEventListener('click', () => setMenuState(!menuOpen));
+  menuCloseButton?.addEventListener('click', () => setMenuState(false));
+  backdrop?.addEventListener('click', () => setMenuState(false));
+
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setMenuState(false, false));
   });
 
-  // Sticky header scroll behavior: blends seamlessly with Hero at top, adds subtle frosted glass on scroll
-  const header = document.getElementById('main-header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      header?.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'border-[#E2E8F0]');
-      header?.classList.remove('bg-gradient-to-r', 'from-[#F4F8FC]', 'via-[#EBF3FA]', 'to-[#DFEDF8]', 'border-transparent');
-    } else {
-      header?.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'border-[#E2E8F0]');
-      header?.classList.add('bg-gradient-to-r', 'from-[#F4F8FC]', 'via-[#EBF3FA]', 'to-[#DFEDF8]', 'border-transparent');
+  document.addEventListener('keydown', (event) => {
+    if (!menuOpen || !menu) return;
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setMenuState(false);
+      return;
     }
+
+    if (event.key !== 'Tab') return;
+    const focusableElements = Array.from(
+      menu.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    if (!firstElement || !lastElement) return;
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  });
+
+  desktopMedia.addEventListener('change', (event) => {
+    if (event.matches && menuOpen) setMenuState(false, false);
+  });
+
+  let previousScroll = window.scrollY;
+  let accumulatedScroll = 0;
+  let scrollDirection = 0;
+  let scrollTicking = false;
+  const HIDE_THRESHOLD = 32;
+  const SHOW_THRESHOLD = 14;
+
+  function updateHeaderOnScroll() {
+    if (!header) return;
+
+    const currentScroll = Math.max(window.scrollY, 0);
+    const delta = currentScroll - previousScroll;
+    const currentDirection = Math.sign(delta);
+    header.classList.toggle('is-scrolled', currentScroll > 20);
+
+    if (menuOpen || currentScroll <= 80) {
+      header.classList.remove('header-hidden');
+      accumulatedScroll = 0;
+    } else if (currentDirection !== 0) {
+      if (currentDirection !== scrollDirection) {
+        accumulatedScroll = 0;
+        scrollDirection = currentDirection;
+      }
+
+      accumulatedScroll += delta;
+
+      if (accumulatedScroll >= HIDE_THRESHOLD) {
+        header.classList.add('header-hidden');
+        accumulatedScroll = 0;
+      } else if (accumulatedScroll <= -SHOW_THRESHOLD) {
+        header.classList.remove('header-hidden');
+        accumulatedScroll = 0;
+      }
+    }
+
+    previousScroll = currentScroll;
+    scrollTicking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(updateHeaderOnScroll);
   }, { passive: true });
+
+  updateHeaderOnScroll();
 </script>
