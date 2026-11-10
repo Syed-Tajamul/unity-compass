@@ -89,7 +89,7 @@ export const servicesData: ServiceDetail[] = [
   {
     id: 'recruitment-services',
     slug: 'recruitment-services',
-    title: 'Security-Cleared & Non-Cleared Recruitment Services',
+    title: 'Security-Cleared Recruitment',
     shortDesc: 'End-to-end federal recruitment lifecycle for mission-critical programs requiring active clearances from Secret to Full Scope Polygraph.',
     heroHeadline: 'Your Strategic Partner in Federal Cleared & Non-Cleared Talent Acquisition',
     leadParagraph: 'Unity Compass provides end-to-end federal recruitment services focused on permanent and long-term hiring for government programs requiring cleared and clearance-eligible professionals. We manage the complete recruitment lifecycle from clearance-aware sourcing and vetting to interviews, selection, and onboarding.',
