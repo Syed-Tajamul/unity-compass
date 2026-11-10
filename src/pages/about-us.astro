@@ -342,12 +342,13 @@ const aboutPageSchema = {
 
       <ul class="grid gap-5 md:grid-cols-3" role="list">
         {differentiators.map((item, index) => (
-          <li class={`about-reveal about-delay-${index + 1} group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-300 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.35)] sm:p-8`}>
-            <span class="absolute right-6 top-5 text-sm font-extrabold tracking-[0.12em] text-slate-200 transition-colors duration-300 group-hover:text-[#FF3130]/25" aria-hidden="true">{item.number}</span>
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0C487A] text-white shadow-[0_8px_22px_-8px_rgba(12,72,122,0.7)] transition duration-300 group-hover:scale-105 group-hover:bg-[#FF3130]">
+          <li class={`service-radar-card about-reveal about-delay-${index + 1} group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-500 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_26px_55px_-20px_rgba(15,39,74,0.42)] sm:p-8`} data-service-radar>
+            <span class="service-radar-scan" aria-hidden="true"></span>
+            <span class="service-radar-number absolute right-6 top-5 text-sm font-extrabold tracking-[0.12em] text-slate-200" aria-hidden="true">{item.number}</span>
+            <div class="service-radar-icon flex h-12 w-12 items-center justify-center rounded-xl bg-[#0C487A] text-white shadow-[0_8px_22px_-8px_rgba(12,72,122,0.7)]">
               <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={item.icon} /></svg>
             </div>
-            <h3 class="mt-7 text-xl font-extrabold tracking-tight text-[#0F274A] sm:text-2xl">{item.title}</h3>
+            <h3 class="service-radar-title mt-7 text-xl font-extrabold tracking-tight text-[#0F274A] sm:text-2xl">{item.title}</h3>
             <p class="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{item.description}</p>
           </li>
         ))}
@@ -375,17 +376,19 @@ const aboutPageSchema = {
           <li class={`about-reveal about-delay-${Math.min(index + 1, 5)}`}>
             <a
               href={service.href}
-              class="group relative flex h-full min-h-72 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-300 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.35)] sm:p-8"
+              class="service-radar-card group relative flex h-full min-h-72 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-500 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_26px_55px_-20px_rgba(15,39,74,0.42)] focus-visible:-translate-y-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF3130] focus-visible:ring-offset-4 sm:p-8"
+              data-service-radar
             >
-              <span class="absolute right-6 top-5 text-sm font-extrabold tracking-[0.12em] text-slate-200 transition-colors duration-300 group-hover:text-[#FF3130]/30" aria-hidden="true">{service.number}</span>
-              <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0C487A] text-white shadow-[0_8px_22px_-8px_rgba(12,72,122,0.7)] transition duration-300 group-hover:scale-105 group-hover:bg-[#FF3130]" aria-hidden="true">
+              <span class="service-radar-scan" aria-hidden="true"></span>
+              <span class="service-radar-number absolute right-6 top-5 text-sm font-extrabold tracking-[0.12em] text-slate-200" aria-hidden="true">{service.number}</span>
+              <span class="service-radar-icon flex h-12 w-12 items-center justify-center rounded-xl bg-[#0C487A] text-white shadow-[0_8px_22px_-8px_rgba(12,72,122,0.7)]" aria-hidden="true">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={service.icon} /></svg>
               </span>
-              <h3 class="mt-7 text-xl font-extrabold leading-snug tracking-tight text-[#0B2553] sm:text-2xl">{service.title}</h3>
+              <h3 class="service-radar-title mt-7 text-xl font-extrabold leading-snug tracking-tight text-[#0B2553] sm:text-2xl">{service.title}</h3>
               <p class="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{service.description}</p>
-              <span class="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold text-[#0C487A] transition-colors duration-300 group-hover:text-[#FF3130]">
+              <span class="service-radar-link mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold text-[#0C487A]">
                 Explore this service
-                <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+                <svg class="h-4 w-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M5 12h14m-6-6 6 6-6 6" /></svg>
               </span>
             </a>
           </li>
@@ -575,6 +578,158 @@ const aboutPageSchema = {
     background: #FF3130;
   }
 
+  .service-radar-card {
+    --spot-x: 50%;
+    --spot-y: 50%;
+    isolation: isolate;
+  }
+
+  .service-radar-card::before,
+  .service-radar-card::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .service-radar-card::before {
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(circle 11rem at var(--spot-x) var(--spot-y), rgba(37, 99, 235, 0.16), transparent 68%),
+      linear-gradient(135deg, rgba(244, 248, 252, 0.88), rgba(255, 255, 255, 0.2) 48%, rgba(255, 49, 48, 0.05));
+    opacity: 0;
+    transition: opacity 400ms ease;
+  }
+
+  .service-radar-card::after {
+    top: var(--spot-y);
+    left: var(--spot-x);
+    z-index: 1;
+    width: 25rem;
+    height: 25rem;
+    border-radius: 9999px;
+    background: conic-gradient(from 0deg, transparent 0deg 294deg, rgba(12, 72, 122, 0.1) 310deg, rgba(37, 99, 235, 0.3) 330deg, rgba(255, 49, 48, 0.32) 346deg, transparent 360deg);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+    -webkit-mask-image: radial-gradient(circle, transparent 0 37%, #000 38% 39%, transparent 40% 54%, #000 55% 56%, transparent 57%);
+    mask-image: radial-gradient(circle, transparent 0 37%, #000 38% 39%, transparent 40% 54%, #000 55% 56%, transparent 57%);
+  }
+
+  .service-radar-card > :not(.service-radar-number, .service-radar-scan) {
+    position: relative;
+    z-index: 2;
+  }
+
+  .service-radar-scan {
+    position: absolute;
+    top: 0;
+    left: -45%;
+    z-index: 4;
+    width: 42%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #2563EB 35%, #FF3130 70%, transparent);
+    opacity: 0;
+    filter: drop-shadow(0 0 7px rgba(255, 49, 48, 0.65));
+    transform: skewX(-28deg);
+  }
+
+  .service-radar-number {
+    z-index: 1;
+    transform-origin: center;
+    transition: color 450ms ease, opacity 450ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .service-radar-icon {
+    position: relative;
+    transition: background-color 350ms ease, box-shadow 350ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .service-radar-icon::before {
+    content: '';
+    position: absolute;
+    inset: -0.55rem;
+    border: 1px dashed rgba(12, 72, 122, 0.45);
+    border-radius: 1rem;
+    opacity: 0;
+    transform: rotate(-45deg) scale(0.55);
+    transition: opacity 350ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .service-radar-title,
+  .service-radar-link,
+  .service-radar-link svg {
+    transition: color 350ms ease, transform 450ms cubic-bezier(0.16, 1, 0.3, 1), letter-spacing 450ms ease;
+  }
+
+  .service-radar-card:is(:hover, :focus-visible)::before,
+  .service-radar-card:is(:hover, :focus-visible)::after {
+    opacity: 1;
+  }
+
+  .service-radar-card:is(:hover, :focus-visible)::after {
+    animation: serviceRadarSweep 4.5s linear infinite;
+  }
+
+  .service-radar-card:is(:hover, :focus-visible) .service-radar-scan {
+    animation: serviceEdgeScan 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  .service-radar-card:is(:hover, :focus-visible) .service-radar-number {
+    color: rgba(255, 49, 48, 0.12);
+    opacity: 0.9;
+    transform: translate(-0.5rem, 1.5rem) rotate(-12deg) scale(5.5);
+  }
+
+  .service-radar-card:is(:hover, :focus-visible) .service-radar-icon {
+    background: #FF3130;
+    box-shadow: 0 14px 30px -10px rgba(255, 49, 48, 0.68);
+    transform: translateY(-3px) rotate(-5deg) scale(1.08);
+  }
+
+  .service-radar-card:is(:hover, :focus-visible) .service-radar-icon::before {
+    opacity: 1;
+    animation: serviceIconOrbit 5s linear infinite;
+  }
+
+  .service-radar-card:is(:hover, :focus-visible) .service-radar-icon svg {
+    animation: serviceGlyphSignal 1.6s ease-in-out infinite;
+  }
+
+  .service-radar-card:is(:hover, :focus-visible) .service-radar-title {
+    color: #0C487A;
+    letter-spacing: -0.01em;
+    transform: translateX(0.25rem);
+  }
+
+  .service-radar-card:is(:hover, :focus-visible) .service-radar-link {
+    color: #FF3130;
+  }
+
+  .service-radar-card:is(:hover, :focus-visible) .service-radar-link svg {
+    transform: translateX(0.45rem) scale(1.08);
+  }
+
+  @keyframes serviceRadarSweep {
+    from { transform: translate(-50%, -50%) rotate(0deg) scale(0.72); }
+    to { transform: translate(-50%, -50%) rotate(360deg) scale(0.72); }
+  }
+
+  @keyframes serviceEdgeScan {
+    0% { left: -45%; opacity: 0; }
+    18%, 72% { opacity: 1; }
+    100% { left: 108%; opacity: 0; }
+  }
+
+  @keyframes serviceIconOrbit {
+    from { transform: rotate(0deg) scale(1); }
+    to { transform: rotate(360deg) scale(1); }
+  }
+
+  @keyframes serviceGlyphSignal {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.14); }
+  }
+
   .about-hero-art {
     animation: aboutHeroIn 1000ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
   }
@@ -761,6 +916,13 @@ const aboutPageSchema = {
     .about-scroll-region :is(h2, h3, h4, p, dt, dd),
     .capability-control,
     .capability-dot,
+    .service-radar-card,
+    .service-radar-icon,
+    .service-radar-icon svg,
+    .service-radar-number,
+    .service-radar-title,
+    .service-radar-link,
+    .service-radar-link svg,
     .process-timeline::before,
     .timeline-node,
     .timeline-card {
@@ -769,6 +931,13 @@ const aboutPageSchema = {
       transform: none !important;
       filter: none !important;
       transition: none !important;
+    }
+
+    .service-radar-card::before,
+    .service-radar-card::after,
+    .service-radar-icon::before,
+    .service-radar-scan {
+      display: none !important;
     }
 
     .capabilities-track {
@@ -782,6 +951,28 @@ const aboutPageSchema = {
 </style>
 
 <script>
+  function initServiceRadarCards() {
+    const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!supportsHover || reducedMotion) return;
+
+    document.querySelectorAll<HTMLElement>('[data-service-radar]').forEach((card) => {
+      if (card.dataset.radarInitialized === 'true') return;
+      card.dataset.radarInitialized = 'true';
+
+      card.addEventListener('pointermove', (event) => {
+        const bounds = card.getBoundingClientRect();
+        card.style.setProperty('--spot-x', `${event.clientX - bounds.left}px`);
+        card.style.setProperty('--spot-y', `${event.clientY - bounds.top}px`);
+      });
+
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--spot-x', '50%');
+        card.style.setProperty('--spot-y', '50%');
+      });
+    });
+  }
+
   function initCapabilitiesCarousel() {
     const carousel = document.querySelector<HTMLElement>('[data-capabilities-carousel]');
     if (!carousel || carousel.dataset.initialized === 'true') return;
@@ -866,6 +1057,7 @@ const aboutPageSchema = {
   }
 
   function initAboutPage() {
+    initServiceRadarCards();
     initCapabilitiesCarousel();
 
     const elements = document.querySelectorAll<HTMLElement>(
