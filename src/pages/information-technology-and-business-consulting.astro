@@ -519,29 +519,28 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 </div>
               </div>
 
-              <!-- 5 Service Offerings Grid with Circular Blueprint Reveal Animation (User Code Specification) -->
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+              <!-- 5 Service Offerings Grid with Parent Blur / Sibling De-emphasis (Focus State) -->
+              <div class="services-focus-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                 {pillar.services.map((service, sIdx) => {
                   const isWide = sIdx >= 3;
                   return (
                     <div
-                      class={`consulting-card cascade-item group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_8px_24px_rgba(11,37,83,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.25)] hover:border-[#0C487A]/50 transition-all duration-300 overflow-hidden cursor-pointer ${isWide ? 'lg:col-span-1 xl:col-span-1' : ''}`}
+                      class={`consulting-card cascade-item group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_8px_24px_rgba(11,37,83,0.06)] p-6 sm:p-7 flex flex-col justify-start overflow-hidden cursor-pointer ${isWide ? 'lg:col-span-1 xl:col-span-1' : ''}`}
                       data-cascade-index={sIdx}
                     >
-                      <!-- Top Accent Line on Hover -->
-                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+                      <!-- Top Accent Line on Hover / Focus -->
+                      <div class="card-accent-line absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                      <!-- Face 1: Default Product Face (Crisp White Institutional Aesthetic) -->
-                      <div class="card-face-product relative z-1 p-6 sm:p-7 space-y-3.5 transition-opacity duration-500 flex flex-col justify-start h-full">
-                        <!-- Icon Container -->
-                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center transition-transform duration-300 border border-blue-100/80 shadow-2xs group-hover:scale-105">
+                      <div class="relative z-10 space-y-3.5">
+                        <!-- Card Top Bar: Icon Only -->
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-[#0C487A] group-hover:text-white flex items-center justify-center transition-all duration-300 border border-blue-100/80 shadow-2xs group-hover:scale-105">
                           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
                           </svg>
                         </div>
 
                         <!-- Title (Generous line-height) -->
-                        <h4 class="text-lg sm:text-[1.18rem] font-bold text-[#0B2553] leading-[1.32] sm:leading-[1.35]">
+                        <h4 class="text-lg sm:text-[1.18rem] font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors leading-[1.32] sm:leading-[1.35]">
                           {service.title}
                         </h4>
 
@@ -550,35 +549,6 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                           {service.desc}
                         </p>
                       </div>
-
-                      <!-- Face 2: Circular Expanding Blueprint Reveal Face (Exact User Animation Spec) -->
-                      <div class="card-face-blueprint absolute inset-0 z-2 p-6 sm:p-7 space-y-3.5 flex flex-col justify-start overflow-hidden pointer-events-none" aria-hidden="true">
-                        <!-- Blueprint Stylized Icon Container -->
-                        <div class="w-12 h-12 rounded-2xl bg-white/15 text-white flex items-center justify-center border border-white/25 shadow-sm">
-                          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
-                          </svg>
-                        </div>
-
-                        <!-- Luminous White Title -->
-                        <h4 class="text-lg sm:text-[1.18rem] font-bold text-white leading-[1.32] sm:leading-[1.35]">
-                          {service.title}
-                        </h4>
-
-                        <!-- Technical Blueprint Ice-Blue Description -->
-                        <p class="text-xs sm:text-sm text-[#CFE0FF] leading-relaxed font-normal pt-0.5">
-                          {service.desc}
-                        </p>
-
-                        <!-- Subtle Brand Accent Spark in Bottom Corner -->
-                        <div class="mt-auto pt-3 flex items-center justify-end">
-                          <span class="inline-flex items-center gap-1.5 text-[0.7rem] font-bold tracking-wider text-[#FF6B6A] uppercase">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#FF3130] animate-pulse"></span>
-                            Unity Compass
-                          </span>
-                        </div>
-                      </div>
-
                     </div>
                   );
                 })}
@@ -864,6 +834,22 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
       );
       timelineRows.forEach((row) => nodeObserver.observe(row));
     }
+
+    // 5. Parent Blur / Sibling De-emphasis (Focus States) Universal Fallback
+    const focusGrids = document.querySelectorAll('.services-focus-grid');
+    focusGrids.forEach((grid) => {
+      const cards = grid.querySelectorAll('.consulting-card');
+      cards.forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+          grid.classList.add('has-focus');
+          card.classList.add('is-focused');
+        });
+        card.addEventListener('mouseleave', () => {
+          grid.classList.remove('has-focus');
+          card.classList.remove('is-focused');
+        });
+      });
+    });
   }
 
   if (document.readyState === 'loading') {
@@ -948,47 +934,36 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
   }
 
   /* ========================================================================= */
-  /* Circular Blueprint Reveal Card Animation (User Code Specification)         */
+  /* Parent Blur / Sibling De-emphasis (Focus States) Animation                */
+  /* Exact Implementation per User Request & Reference Code                   */
   /* ========================================================================= */
   .consulting-card {
     position: relative;
-    overflow: hidden;
     cursor: pointer;
+    background: #ffffff;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.35s ease;
+                filter 0.4s ease,
+                opacity 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+    will-change: transform, filter, opacity;
   }
 
-  .consulting-card:hover {
-    transform: translateY(-6px);
+  /* When any card in the grid is hovered: Hovered card pops forward with rich elevation */
+  .services-focus-grid:has(.consulting-card:hover) .consulting-card:hover,
+  .consulting-card.is-focused {
+    transform: translateY(-12px) scale(1.045);
+    box-shadow: 0 30px 60px -12px rgba(12, 72, 122, 0.28), 0 0 0 1px rgba(12, 72, 122, 0.35);
+    border-color: rgba(12, 72, 122, 0.55);
+    z-index: 20;
   }
 
-  /* Default Product Face (Smoothly fades out on hover) */
-  .consulting-card .card-face-product {
-    transition: opacity 0.45s ease;
-  }
-
-  .consulting-card:hover .card-face-product {
-    opacity: 0;
-  }
-
-  /* Expanding Blueprint Reveal Face (Exact Clip-Path Iris Wave from User Spec) */
-  .consulting-card .card-face-blueprint {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background: #0C487A;
-    background: linear-gradient(145deg, #0C487A 0%, #0B2553 100%);
-    background-image: linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
-    background-size: 22px 22px;
-    color: #CFE0FF;
-    clip-path: circle(0% at 100% 0%);
-    transition: clip-path 0.65s cubic-bezier(0.65, 0, 0.35, 1);
-  }
-
-  .consulting-card:hover .card-face-blueprint {
-    clip-path: circle(150% at 100% 0%);
+  /* When any card in the grid is hovered: Every non-hovered sibling dims + blurs */
+  .services-focus-grid:has(.consulting-card:hover) .consulting-card:not(:hover),
+  .services-focus-grid.has-focus .consulting-card:not(.is-focused) {
+    filter: blur(3.5px) saturate(0.6);
+    opacity: 0.45;
+    transform: scale(0.97);
   }
 
   /* ========================================================================= */
@@ -1023,6 +998,30 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     transform: translateY(-8px) scale(1.015) rotate(0deg) !important;
   }
 
+  /* Ambient Cursor Light Spotlight on Service Cards */
+  .consulting-card {
+    position: relative;
+  }
+
+  .consulting-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(12, 72, 122, 0.08),
+      transparent 68%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .consulting-card:hover::before {
+    opacity: 1;
+  }
 
   /* Initial Page Load Animations */
   @keyframes heroSoftReveal {
@@ -1104,7 +1103,10 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     .hero-heading-reveal, .hero-subheading-reveal, .hero-image-reveal, .hero-menu-reveal { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
     .timeline-node-core { opacity: 1 !important; transform: none !important; animation: none !important; }
     .why-card, .consulting-card, .timeline-card-box { transition: none !important; transform: none !important; animation: none !important; }
-    .consulting-card .card-face-product, .consulting-card .card-face-blueprint { transition: none !important; }
+    .services-focus-grid:has(.consulting-card:hover) .consulting-card:not(:hover),
+    .services-focus-grid.has-focus .consulting-card:not(.is-focused) { filter: none !important; opacity: 1 !important; transform: none !important; }
+    .services-focus-grid:has(.consulting-card:hover) .consulting-card:hover,
+    .consulting-card.is-focused { transform: none !important; }
     .reveal-on-scroll, .reveal-left, .reveal-right, .consulting-card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   }
 </style>
