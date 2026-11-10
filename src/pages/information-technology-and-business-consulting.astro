@@ -292,19 +292,16 @@ const whyUcPillars = [
   {
     title: 'Proven Enterprise Experience',
     desc: 'Deep technical acumen architecting resilient cloud systems, mission-critical portals, and multi-tier enterprise integrations.',
-    badge: 'Pillar 01',
     icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
   },
   {
     title: 'Applied AI & Automation Leadership',
     desc: 'Pragmatic artificial intelligence implementation that solves concrete operational bottlenecks and produces measurable ROI.',
-    badge: 'Pillar 02',
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
   },
   {
     title: 'Rigorous Cybersecurity & Standards',
     desc: 'Uncompromising adherence to enterprise security governance, zero-trust architectures, and institutional compliance standards.',
-    badge: 'Pillar 03',
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
   },
 ];
@@ -492,10 +489,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
         
         <!-- Section Header with Shimmer & Centered Alignment -->
         <div class="text-center max-w-3xl mx-auto space-y-3 reveal-on-scroll">
-          <span class="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#0C487A] border border-blue-200/80 uppercase tracking-wider">
-            Comprehensive Capabilities
-          </span>
-          <h2 id="services-provide-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-normal">
+          <h2 id="services-provide-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.32] sm:leading-[1.35]">
             <span class="service-shimmer-center service-shimmer-line-1 block pb-2 pt-0.5">Our Services: What We Provide</span>
           </h2>
           <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-3 mb-4"></div>
@@ -509,26 +503,12 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
           {servicePillars.map((pillar) => (
             <div class="space-y-8" id={pillar.id}>
               
-              <!-- Pillar Header Banner with Clear Number & Removed Pillar Label -->
+              <!-- Category Header Banner (Clean, elegant, no numbers, no pillar labels, no watermarks) -->
               <div class="pillar-header-banner relative rounded-3xl bg-white border border-slate-200/90 p-7 sm:p-9 lg:p-10 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.08)] overflow-hidden reveal-on-scroll">
-                <!-- Large Architectural Number Watermark (High contrast & clearly visible) -->
-                <div class="absolute -right-3 -bottom-6 sm:-bottom-10 text-8xl sm:text-9xl lg:text-[11rem] font-black text-[#0C487A]/12 pointer-events-none select-none tracking-tighter leading-none" aria-hidden="true">
-                  {pillar.number}
-                </div>
-
                 <!-- Top Brand Accent Line -->
                 <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF]"></div>
 
-                <div class="relative z-10 max-w-3xl space-y-3.5">
-                  <!-- Prominent Number Badge (100% visible, pillar labels removed) -->
-                  <div class="flex items-center gap-3">
-                    <span class="inline-flex items-center justify-center w-12 h-9 sm:w-14 sm:h-10 rounded-xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-extrabold text-sm sm:text-base shadow-sm tracking-wide">
-                      {pillar.number}
-                    </span>
-                    <span class="h-1.5 w-1.5 rounded-full bg-[#0C487A]/40"></span>
-                    <span class="text-xs font-bold uppercase tracking-wider text-[#0C487A]">Unity Compass Practice</span>
-                  </div>
-
+                <div class="relative z-10 max-w-3xl space-y-3">
                   <h3 class="text-2xl sm:text-3xl lg:text-[1.85rem] font-extrabold text-[#0B2553] tracking-tight leading-[1.32] sm:leading-[1.35]">
                     {pillar.title}
                   </h3>
@@ -539,56 +519,41 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 </div>
               </div>
 
-              <!-- 5 Service Offerings Grid with Smooth Wobbly Physics & Staggered Viewport Entrance -->
+              <!-- 5 Service Offerings Grid with Smooth Bubbly Ripple Animation -->
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                 {pillar.services.map((service, sIdx) => {
                   const isWide = sIdx >= 3;
                   return (
                     <div
-                      class={`consulting-card cascade-item group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_8px_24px_rgba(11,37,83,0.06)] hover:shadow-[0_22px_45px_-8px_rgba(12,72,122,0.22)] hover:border-[#0C487A]/50 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between overflow-hidden cursor-default ${isWide ? 'lg:col-span-1 xl:col-span-1' : ''}`}
+                      class={`consulting-card cascade-item group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_8px_24px_rgba(11,37,83,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.18)] hover:border-[#0C487A]/40 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-start overflow-hidden cursor-default ${isWide ? 'lg:col-span-1 xl:col-span-1' : ''}`}
                       data-cascade-index={sIdx}
-                      style={`--card-idx: ${sIdx};`}
                     >
                       <!-- Top Accent Line on Hover -->
                       <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                      <div class="space-y-4">
-                        <!-- Card Top Bar: Icon + Brand-Red Accent Badge -->
-                        <div class="flex items-center justify-between gap-3">
-                          <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-[#0C487A] group-hover:text-white flex items-center justify-center transition-all duration-300 border border-blue-100/80 shadow-2xs group-hover:scale-105">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
-                            </svg>
-                          </div>
-
-                          <!-- Brand Red Accent Badge -->
-                          <div class="checkmark-badge w-7 h-7 rounded-lg bg-red-50 text-[#FF3130] flex items-center justify-center shrink-0 border border-red-200/80 shadow-2xs group-hover:bg-[#FF3130] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_0_12px_rgba(255,49,48,0.4)] transition-all duration-300">
-                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8" d="M5 13l4 4L19 7" />
-                            </svg>
-                          </div>
-                        </div>
-
-                        <!-- Title & Subtitle -->
-                        <div class="space-y-1">
-                          <h4 class="text-lg sm:text-[1.18rem] font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors leading-snug">
-                            {service.title}
-                          </h4>
-                          <span class="inline-block text-xs font-semibold text-[#0C487A]/80 tracking-wide uppercase">
-                            {service.subtitle}
-                          </span>
-                        </div>
-
-                        <!-- Description -->
-                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal pt-1">
-                          {service.desc}
-                        </p>
+                      <!-- Smooth Expanding Bubbly Ripple Surface -->
+                      <div class="bubble-ripple-surface pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+                        <span class="bubble-wave bubble-wave-1"></span>
+                        <span class="bubble-wave bubble-wave-2"></span>
                       </div>
 
-                      <!-- Bottom Accent Footer -->
-                      <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A] group-hover:text-[#1E40AF]">
-                        <span>Consulting Capability</span>
-                        <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                      <div class="relative z-10 space-y-3.5">
+                        <!-- Card Top Bar: Icon Only (Checkmark removed) -->
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-[#0C487A] group-hover:text-white flex items-center justify-center transition-all duration-300 border border-blue-100/80 shadow-2xs group-hover:scale-105">
+                          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
+                          </svg>
+                        </div>
+
+                        <!-- Title Only (Subtitle label removed, generous line-height) -->
+                        <h4 class="text-lg sm:text-[1.18rem] font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors leading-[1.32] sm:leading-[1.35]">
+                          {service.title}
+                        </h4>
+
+                        <!-- Description -->
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal pt-0.5">
+                          {service.desc}
+                        </p>
                       </div>
                     </div>
                   );
@@ -613,10 +578,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
         
         <!-- Header: Heading, Accent Line & Subtitle with Scroll Reveal -->
         <div class="text-center max-w-3xl mx-auto space-y-3 mb-16 sm:mb-20 reveal-on-scroll">
-          <span class="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#0C487A] border border-blue-200/80 uppercase tracking-wider">
-            Proven Delivery Framework
-          </span>
-          <h2 id="delivery-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-normal">
+          <h2 id="delivery-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.32] sm:leading-[1.35]">
             <span class="service-shimmer-center service-shimmer-line-1 block pb-1.5 pt-0.5">How We Deliver</span>
           </h2>
           <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
@@ -659,14 +621,6 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
 
                       <!-- Subtle Leafy Flow Ambient Radial Glow -->
                       <div class="absolute -right-8 -bottom-8 w-36 h-36 bg-blue-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-[#0C487A]/10 transition-colors duration-500" aria-hidden="true"></div>
-
-                      <!-- Milestone Pill Tag with subtle pulse indicator -->
-                      <div class={`flex items-center gap-3 mb-3.5 ${isEven ? '' : 'md:justify-end'}`}>
-                        <span class={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold ${step.bgTint} ${step.iconColor} border border-slate-200/70 shadow-2xs`}>
-                          <span class="w-1.5 h-1.5 rounded-full bg-current animate-pulse"></span>
-                          {step.badgeText}
-                        </span>
-                      </div>
 
                       <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors duration-200 tracking-tight leading-[1.32] sm:leading-[1.35] mb-2.5">
                         {step.num}. {step.title}
@@ -752,15 +706,10 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={card.icon} />
                   </svg>
                 </div>
-                <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">{card.title}</h3>
+                <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors leading-[1.32]">{card.title}</h3>
                 <p class="text-sm text-slate-600 mt-3 leading-relaxed">
                   {card.desc}
                 </p>
-              </div>
-
-              <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A]">
-                <span>{card.badge}</span>
-                <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
               </div>
             </div>
           ))}
@@ -954,44 +903,11 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
   }
 
   /* ========================================================================= */
-  /* Cascading Card Reveal & Smooth Wobbly Animation (User Request)            */
+  /* Cascading Card Reveal & Smooth Bubbly Ripple Animation                    */
   /* ========================================================================= */
-  @keyframes cardFloatWobble {
-    0%, 100% {
-      transform: translateY(0px) rotate(0deg);
-    }
-    25% {
-      transform: translateY(-4px) rotate(0.4deg);
-    }
-    50% {
-      transform: translateY(-1.5px) rotate(-0.35deg);
-    }
-    75% {
-      transform: translateY(-5px) rotate(0.25deg);
-    }
-  }
-
-  @keyframes cardHoverWobble {
-    0% {
-      transform: translateY(0) scale(1) rotate(0deg);
-    }
-    25% {
-      transform: translateY(-9px) scale(1.018) rotate(-1.2deg);
-    }
-    50% {
-      transform: translateY(-6px) scale(1.015) rotate(0.8deg);
-    }
-    75% {
-      transform: translateY(-8px) scale(1.016) rotate(-0.3deg);
-    }
-    100% {
-      transform: translateY(-7px) scale(1.015) rotate(0deg);
-    }
-  }
-
   .consulting-card.cascade-item {
     opacity: 0;
-    transform: translateY(24px) scale(0.98);
+    transform: translateY(22px);
     filter: blur(5px);
     transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
@@ -1003,15 +919,88 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
 
   .consulting-card.cascade-item.is-revealed {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
     filter: blur(0);
-    animation: cardFloatWobble 7s ease-in-out infinite;
-    animation-delay: calc(var(--card-idx, 0) * 0.45s);
+  }
+
+  .consulting-card {
+    position: relative;
+    overflow: hidden;
   }
 
   .consulting-card:hover {
-    animation: cardHoverWobble 0.75s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-    z-index: 20;
+    transform: translateY(-6px);
+  }
+
+  /* Smooth Bubbly Ripple Wave Effect */
+  .bubble-ripple-surface {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: inherit;
+    z-index: 1;
+  }
+
+  .bubble-wave {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.75s ease;
+    left: var(--mouse-x, 50%);
+    top: var(--mouse-y, 50%);
+  }
+
+  .bubble-wave-1 {
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(12, 72, 122, 0.12) 0%, rgba(30, 64, 175, 0.04) 55%, transparent 75%);
+  }
+
+  .bubble-wave-2 {
+    width: 190px;
+    height: 190px;
+    border: 1.5px solid rgba(12, 72, 122, 0.18);
+    transition-duration: 1.1s;
+    transition-delay: 0.06s;
+  }
+
+  .consulting-card:hover .bubble-wave-1 {
+    transform: translate(-50%, -50%) scale(2.8);
+    opacity: 1;
+  }
+
+  .consulting-card:hover .bubble-wave-2 {
+    transform: translate(-50%, -50%) scale(3.2);
+    opacity: 0;
+  }
+
+  /* Subtle Ambient Bubble Glow */
+  @keyframes gentleBubblePulse {
+    0%, 100% {
+      transform: scale(1) translateY(0px);
+      opacity: 0.35;
+    }
+    50% {
+      transform: scale(1.15) translateY(-5px);
+      opacity: 0.65;
+    }
+  }
+
+  .consulting-card::after {
+    content: '';
+    position: absolute;
+    top: -24px;
+    right: -24px;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(12, 72, 122, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    animation: gentleBubblePulse 5s ease-in-out infinite;
+    z-index: 1;
   }
 
   /* ========================================================================= */
@@ -1068,20 +1057,6 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
   }
 
   .consulting-card:hover::before {
-    opacity: 1;
-  }
-
-  .consulting-card .checkmark-badge {
-    transform: scale(0.65) rotate(-10deg);
-    opacity: 0;
-    transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
-                opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-                background-color 0.3s ease,
-                box-shadow 0.3s ease;
-  }
-
-  .consulting-card.cascade-item.is-revealed .checkmark-badge {
-    transform: scale(1) rotate(0deg);
     opacity: 1;
   }
 
@@ -1166,6 +1141,5 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     .timeline-node-core { opacity: 1 !important; transform: none !important; animation: none !important; }
     .why-card, .consulting-card, .timeline-card-box { transition: none !important; transform: none !important; animation: none !important; }
     .reveal-on-scroll, .reveal-left, .reveal-right, .consulting-card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
-    .consulting-card .checkmark-badge { opacity: 1 !important; transform: none !important; }
   }
 </style>
