@@ -370,7 +370,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                   style={`transition-delay: ${idx * 60}ms;`}
                 >
                   <!-- Slide 1: Top Slide (Icon + Title, glides UP on hover) -->
-                  <div class="square-slide square-slide-top absolute inset-0 rounded-3xl bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] p-4 text-center text-white border border-white/15 shadow-[0_8px_20px_rgba(12,72,122,0.18)] flex flex-col items-center justify-center">
+                  <div class="square-slide square-slide-top absolute inset-x-0 top-0 rounded-3xl bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] p-4 text-center text-white border border-white/15 shadow-[0_8px_20px_rgba(12,72,122,0.18)] flex flex-col items-center justify-center">
                     <!-- Ambient Glow -->
                     <div class="absolute inset-0 rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
@@ -396,7 +396,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                   </div>
 
                   <!-- Slide 2: Bottom Slide (Description, glides DOWN on hover) -->
-                  <div class="square-slide square-slide-bottom absolute left-0 right-0 top-0 rounded-3xl bg-white border border-slate-200/90 p-4 sm:p-5 flex flex-col justify-center items-center shadow-[0_8px_20px_rgba(15,39,74,0.06)]">
+                  <div class="square-slide square-slide-bottom absolute inset-x-0 top-0 rounded-3xl bg-white border border-slate-200/90 p-4 sm:p-5 flex flex-col justify-center items-center shadow-[0_8px_20px_rgba(15,39,74,0.06)]">
                     <p class="square-desc text-sm text-slate-700 leading-relaxed font-normal text-center">
                       {card.desc}
                     </p>
@@ -1346,37 +1346,44 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
 
   .square-slide {
     width: 100%;
-    will-change: transform, opacity;
+    will-change: transform, opacity, height;
   }
 
   /* Slide 1: Top Slide (Icon + Title, solid gradient background, sits on top at rest) */
   .square-slide-top {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    height: 155px;
     z-index: 2;
+    overflow: hidden;
     transform: translateY(0);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.5s ease,
+    transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s ease,
                 border-radius 0.3s ease;
   }
 
   .square-slide-card:hover .square-slide-top {
-    transform: translateY(-44px);
+    height: 88px;
+    transform: translateY(-26px);
     box-shadow: 0 10px 24px -4px rgba(12, 72, 122, 0.35);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
   }
 
-  /* Scale down Icon & Title when revealed */
+  /* Scale down Icon & Title when revealed to fit the 88px header perfectly */
   .square-slide-card:hover .square-icon-wrap {
-    width: 2.25rem;
-    height: 2.25rem;
-    margin-bottom: 0.25rem;
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: 0.2rem;
   }
 
   .square-slide-card:hover .square-icon-svg {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.1rem;
+    height: 1.1rem;
   }
 
   .square-slide-card:hover .square-title {
@@ -1396,10 +1403,10 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     visibility: hidden;
     pointer-events: none;
     transform: translateY(0);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                visibility 0.4s ease,
-                box-shadow 0.6s ease,
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.35s ease,
+                box-shadow 0.4s ease,
                 border-radius 0.3s ease;
   }
 
@@ -1407,11 +1414,11 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateY(68px);
+    transform: translateY(66px);
     box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.22);
     border-color: #cbd5e1;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
 
   /* Bottom Red/Blue Accent Line on Slide 2 */
