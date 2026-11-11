@@ -3,12 +3,13 @@ import { companyInfo } from '../data/company';
 ---
 
 <!-- Global Floating Contact & Support Widget (Bottom-Right FAB) -->
-<div id="floating-support-hub" class="fixed bottom-6 right-6 z-50 select-none">
+<!-- pointer-events-none on parent ensures ZERO phantom hitboxes over page content -->
+<div id="floating-support-hub" class="fixed bottom-6 right-6 z-50 select-none pointer-events-none">
 
-  <!-- Popup Quick-Connect Modal Card -->
+  <!-- Popup Quick-Connect Modal Card (Docked absolute bottom-full above trigger) -->
   <div
     id="support-hub-popover"
-    class="opacity-0 pointer-events-none translate-y-3 scale-95 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] mb-3 w-[290px] sm:w-[310px] rounded-2xl bg-white/98 backdrop-blur-md border border-slate-200/90 shadow-[0_24px_55px_-12px_rgba(15,39,74,0.28),0_0_0_1px_rgba(15,39,74,0.06)] overflow-hidden"
+    class="invisible opacity-0 pointer-events-none translate-y-3 scale-95 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] absolute bottom-full right-0 mb-3 w-[290px] sm:w-[310px] rounded-2xl bg-white/98 backdrop-blur-md border border-slate-200/90 shadow-[0_24px_55px_-12px_rgba(15,39,74,0.28),0_0_0_1px_rgba(15,39,74,0.06)] overflow-hidden"
     role="dialog"
     aria-label="Contact options"
     aria-hidden="true"
@@ -96,10 +97,11 @@ import { companyInfo } from '../data/company';
   </div>
 
   <!-- Main Floating Action Button (FAB Trigger) -->
+  <!-- pointer-events-auto ensures ONLY the button circle intercepts pointer clicks -->
   <button
     type="button"
     id="support-hub-trigger"
-    class="relative flex items-center justify-center w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white shadow-[0_12px_32px_rgba(12,72,122,0.38),0_4px_12px_rgba(255,49,48,0.22)] border-2 border-white/30 hover:scale-105 active:scale-95 transition-all duration-300 group cursor-pointer ml-auto"
+    class="relative flex items-center justify-center w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white shadow-[0_12px_32px_rgba(12,72,122,0.38),0_4px_12px_rgba(255,49,48,0.22)] border-2 border-white/30 hover:scale-105 active:scale-95 transition-all duration-300 group cursor-pointer ml-auto pointer-events-auto"
     aria-label="Open contact options"
     aria-expanded="false"
   >
@@ -148,8 +150,8 @@ import { companyInfo } from '../data/company';
 
     function openHub() {
       isOpen = true;
-      popover.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3', 'scale-95');
-      popover.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0', 'scale-100');
+      popover.classList.remove('invisible', 'opacity-0', 'pointer-events-none', 'translate-y-3', 'scale-95');
+      popover.classList.add('visible', 'opacity-100', 'pointer-events-auto', 'translate-y-0', 'scale-100');
       trigger.setAttribute('aria-expanded', 'true');
       popover.setAttribute('aria-hidden', 'false');
       defaultIcon?.classList.add('hidden');
@@ -158,8 +160,8 @@ import { companyInfo } from '../data/company';
 
     function closeHub() {
       isOpen = false;
-      popover.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3', 'scale-95');
-      popover.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0', 'scale-100');
+      popover.classList.add('invisible', 'opacity-0', 'pointer-events-none', 'translate-y-3', 'scale-95');
+      popover.classList.remove('visible', 'opacity-100', 'pointer-events-auto', 'translate-y-0', 'scale-100');
       trigger.setAttribute('aria-expanded', 'false');
       popover.setAttribute('aria-hidden', 'true');
       defaultIcon?.classList.remove('hidden');
@@ -200,109 +202,5 @@ import { companyInfo } from '../data/company';
   } else {
     setupFloatingSupportHub();
   }
-</script>
-  <button
-    type="button"
-    id="support-hub-trigger"
-    class="relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white shadow-[0_12px_32px_rgba(12,72,122,0.38),0_4px_12px_rgba(255,49,48,0.22)] border-2 border-white/30 hover:scale-105 active:scale-95 transition-all duration-300 group cursor-pointer ml-auto"
-    aria-label="Open contact and advisory options"
-    aria-expanded="false"
-  >
-    <!-- Subtle Red/Blue Radar Ping -->
-    <span class="absolute -inset-1 rounded-full border border-[#FF3130]/50 opacity-75 animate-ping-slow pointer-events-none"></span>
-
-    <!-- Status Green Pulse Dot -->
-    <span class="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
-
-    <!-- Default Icon: Headset / Phone Support -->
-    <svg
-      id="support-hub-icon-default"
-      class="w-6 h-6 text-white transition-transform duration-300 group-hover:scale-110"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-    </svg>
-
-    <!-- Close Icon (shown when popover is open) -->
-    <svg
-      id="support-hub-icon-close"
-      class="w-6 h-6 text-white hidden"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  </button>
-
-</div>
-
-<script>
-  function setupFloatingSupportHub() {
-    const trigger = document.getElementById('support-hub-trigger');
-    const popover = document.getElementById('support-hub-popover');
-    const closeBtn = document.getElementById('support-hub-close');
-    const defaultIcon = document.getElementById('support-hub-icon-default');
-    const closeIcon = document.getElementById('support-hub-icon-close');
-
-    if (!trigger || !popover) return;
-
-    let isOpen = false;
-
-    function openHub() {
-      isOpen = true;
-      popover.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3', 'scale-95');
-      popover.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0', 'scale-100');
-      trigger.setAttribute('aria-expanded', 'true');
-      popover.setAttribute('aria-hidden', 'false');
-      defaultIcon?.classList.add('hidden');
-      closeIcon?.classList.remove('hidden');
-    }
-
-    function closeHub() {
-      isOpen = false;
-      popover.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3', 'scale-95');
-      popover.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0', 'scale-100');
-      trigger.setAttribute('aria-expanded', 'false');
-      popover.setAttribute('aria-hidden', 'true');
-      defaultIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
-    }
-
-    trigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (isOpen) {
-        closeHub();
-      } else {
-        openHub();
-      }
-    });
-
-    closeBtn?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      closeHub();
-    });
-
-    // Close when clicking outside
-    document.addEventListener('click', (e) => {
-      if (isOpen && !popover.contains(e.target as Node) && !trigger.contains(e.target as Node)) {
-        closeHub();
-      }
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isOpen) {
-        closeHub();
-      }
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupFloatingSupportHub);
-  } else {
-    setupFloatingSupportHub();
-  }
+  document.addEventListener('astro:page-load', setupFloatingSupportHub);
 </script>
