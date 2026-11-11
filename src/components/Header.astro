@@ -54,7 +54,7 @@ const resourcesDropdown = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20 transition-all duration-300" id="header-inner">
       
-      <!-- Brand Logo -->
+      <!-- Zone 1 (Left): Brand Logo -->
       <a
         href="/"
         class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#0C487A] rounded-lg p-1 transition-transform shrink-0"
@@ -69,145 +69,145 @@ const resourcesDropdown = [
         />
       </a>
 
-      <!-- Desktop Right-Aligned Navigation & Action Cluster (Clean, Eye-Pleasing & Uncluttered) -->
-      <div class="hidden lg:flex items-center gap-3 xl:gap-5 shrink-0">
-        <nav class="flex items-center gap-1.5 xl:gap-4 shrink-0 whitespace-nowrap" aria-label="Main Navigation">
-          
-          <!-- Home Link with Signature Red Active Indicator -->
-          <a
-            href="/"
-            class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors ${
-              currentPath === '/' ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
+      <!-- Zone 2 (Center): Horizontally Centered Desktop Navigation -->
+      <nav class="hidden lg:flex flex-1 items-center justify-center gap-1 sm:gap-2 xl:gap-3.5 mx-4 whitespace-nowrap" aria-label="Main Navigation">
+        
+        <!-- Home Link with Signature Red Active Indicator -->
+        <a
+          href="/"
+          class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors ${
+            currentPath === '/' ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
+          }`}
+        >
+          <span>Home</span>
+        </a>
+
+        <!-- Services Dropdown -->
+        <div class="relative group/nav py-6">
+          <button
+            type="button"
+            class={`nav-link whitespace-nowrap inline-flex items-center gap-1 px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
+              currentPath.includes('proposal') || currentPath.includes('recruitment') || currentPath.includes('staffing') || currentPath.includes('consulting') || currentPath.includes('customized')
+                ? 'text-[#FF3130] active font-bold'
+                : 'text-slate-800 hover:text-[#0C487A]'
             }`}
+            aria-expanded="false"
+            aria-haspopup="true"
           >
-            <span>Home</span>
-          </a>
-
-          <!-- Services Dropdown (Contragenix Solid Blue Dropdown matching Screenshot 2) -->
-          <div class="relative group/nav py-6">
-            <button
-              type="button"
-              class={`nav-link whitespace-nowrap inline-flex items-center gap-1 px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
-                currentPath.includes('proposal') || currentPath.includes('recruitment') || currentPath.includes('staffing') || currentPath.includes('consulting') || currentPath.includes('customized')
-                  ? 'text-[#FF3130] active font-bold'
-                  : 'text-slate-800 hover:text-[#0C487A]'
-              }`}
-              aria-expanded="false"
-              aria-haspopup="true"
+            <span>Our Services</span>
+            <svg
+              class="w-3.5 h-3.5 text-current transition-transform duration-200 group-hover/nav:rotate-180 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <span>Our Services</span>
-              <svg
-                class="w-3.5 h-3.5 text-current transition-transform duration-200 group-hover/nav:rotate-180 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
 
-            <!-- Dropdown Panel: Solid White Card (Zero Transparency Bleed, 100% Readable) -->
-            <div class="nav-dropdown-panel absolute left-0 top-full -mt-1 w-[380px] sm:w-[420px] rounded-2xl bg-white p-2.5 shadow-[0_24px_50px_-10px_rgba(15,39,74,0.22),0_0_0_1px_rgba(15,39,74,0.08)] border border-slate-200 z-50">
-              <div class="space-y-0.5">
-                {servicesDropdown.map((service) => (
-                  <a
-                    href={service.href}
-                    class="dropdown-link-row group/item"
-                  >
-                    <div class="flex items-center gap-2.5 min-w-0 pr-1">
-                      <span class="dropdown-pip shrink-0" aria-hidden="true"></span>
-                      <span class="dropdown-link-text text-[13px] sm:text-[13.5px] font-semibold whitespace-nowrap">
-                        {service.name}
-                      </span>
-                    </div>
-                    <svg class="dropdown-arrow w-3.5 h-3.5 shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                ))}
-              </div>
+          <!-- Dropdown Panel: Solid White Card (Zero Transparency Bleed, 100% Readable) -->
+          <div class="nav-dropdown-panel absolute left-0 top-full -mt-1 w-[380px] sm:w-[420px] rounded-2xl bg-white p-2.5 shadow-[0_24px_50px_-10px_rgba(15,39,74,0.22),0_0_0_1px_rgba(15,39,74,0.08)] border border-slate-200 z-50">
+            <div class="space-y-0.5">
+              {servicesDropdown.map((service) => (
+                <a
+                  href={service.href}
+                  class="dropdown-link-row group/item"
+                >
+                  <div class="flex items-center gap-2.5 min-w-0 pr-1">
+                    <span class="dropdown-pip shrink-0" aria-hidden="true"></span>
+                    <span class="dropdown-link-text text-[13px] sm:text-[13.5px] font-semibold whitespace-nowrap">
+                      {service.name}
+                    </span>
+                  </div>
+                  <svg class="dropdown-arrow w-3.5 h-3.5 shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              ))}
             </div>
           </div>
+        </div>
 
-          <!-- About Us Direct Link (Dropdown removed per user request) -->
-          <a
-            href="/about-us"
-            class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors ${
-              currentPath.startsWith('/about-us') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
+        <!-- About Us Direct Link (Dropdown removed per user request) -->
+        <a
+          href="/about-us"
+          class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors ${
+            currentPath.startsWith('/about-us') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
+          }`}
+        >
+          <span>About Us</span>
+        </a>
+
+        <!-- Resources Dropdown (Insights & Blog + Capability Statement) -->
+        <div class="relative group/nav py-6">
+          <button
+            type="button"
+            class={`nav-link whitespace-nowrap inline-flex items-center gap-1 px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
+              currentPath.startsWith('/blog') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
             }`}
+            aria-expanded="false"
+            aria-haspopup="true"
           >
-            <span>About Us</span>
-          </a>
-
-          <!-- Resources Dropdown (Insights & Blog + Capability Statement) -->
-          <div class="relative group/nav py-6">
-            <button
-              type="button"
-              class={`nav-link whitespace-nowrap inline-flex items-center gap-1 px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
-                currentPath.startsWith('/blog') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
-              }`}
-              aria-expanded="false"
-              aria-haspopup="true"
+            <span>Resources</span>
+            <svg
+              class="w-3.5 h-3.5 text-current transition-transform duration-200 group-hover/nav:rotate-180 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <span>Resources</span>
-              <svg
-                class="w-3.5 h-3.5 text-current transition-transform duration-200 group-hover/nav:rotate-180 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
 
-            <!-- Dropdown Panel: Solid White Card (Zero Transparency Bleed, 100% Readable) -->
-            <div class="nav-dropdown-panel absolute left-0 top-full -mt-1 w-[290px] sm:w-[320px] rounded-2xl bg-white p-2.5 shadow-[0_24px_50px_-10px_rgba(15,39,74,0.22),0_0_0_1px_rgba(15,39,74,0.08)] border border-slate-200 z-50">
-              <div class="space-y-0.5">
-                {resourcesDropdown.map((item) => (
-                  <a
-                    href={item.href}
-                    target={item.isPdf ? '_blank' : undefined}
-                    rel={item.isPdf ? 'noopener noreferrer' : undefined}
-                    class="dropdown-link-row group/item"
-                  >
-                    <div class="flex items-center gap-2.5 min-w-0 pr-1">
-                      <span class="dropdown-pip shrink-0" aria-hidden="true"></span>
-                      <span class="dropdown-link-text text-[13px] sm:text-[13.5px] font-semibold whitespace-nowrap">
-                        {item.name}
-                      </span>
-                    </div>
-                    <svg class="dropdown-arrow w-3.5 h-3.5 shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                ))}
-              </div>
+          <!-- Dropdown Panel: Solid White Card (Zero Transparency Bleed, 100% Readable) -->
+          <div class="nav-dropdown-panel absolute left-0 top-full -mt-1 w-[290px] sm:w-[320px] rounded-2xl bg-white p-2.5 shadow-[0_24px_50px_-10px_rgba(15,39,74,0.22),0_0_0_1px_rgba(15,39,74,0.08)] border border-slate-200 z-50">
+            <div class="space-y-0.5">
+              {resourcesDropdown.map((item) => (
+                <a
+                  href={item.href}
+                  target={item.isPdf ? '_blank' : undefined}
+                  rel={item.isPdf ? 'noopener noreferrer' : undefined}
+                  class="dropdown-link-row group/item"
+                >
+                  <div class="flex items-center gap-2.5 min-w-0 pr-1">
+                    <span class="dropdown-pip shrink-0" aria-hidden="true"></span>
+                    <span class="dropdown-link-text text-[13px] sm:text-[13.5px] font-semibold whitespace-nowrap">
+                      {item.name}
+                    </span>
+                  </div>
+                  <svg class="dropdown-arrow w-3.5 h-3.5 shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              ))}
             </div>
           </div>
+        </div>
 
-          <!-- Careers (Disabled for meeting) -->
-          <a
-            href="javascript:void(0)"
-            class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
-              currentPath.startsWith('/career') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
-            }`}
-          >
-            <span>Careers</span>
-          </a>
+        <!-- Careers (Disabled for meeting) -->
+        <a
+          href="javascript:void(0)"
+          class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
+            currentPath.startsWith('/career') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
+          }`}
+        >
+          <span>Careers</span>
+        </a>
 
-          <!-- Contact Us (Disabled for meeting) -->
-          <a
-            href="javascript:void(0)"
-            class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
-              currentPath.startsWith('/contact') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
-            }`}
-          >
-            <span>Contact Us</span>
-          </a>
+        <!-- Contact Us (Disabled for meeting) -->
+        <a
+          href="javascript:void(0)"
+          class={`nav-link whitespace-nowrap px-2.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
+            currentPath.startsWith('/contact') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
+          }`}
+        >
+          <span>Contact Us</span>
+        </a>
 
-        </nav>
+      </nav>
 
-        <!-- Signature Image-Matched Needle Red Action Button: "Book a Strategy Call" (Matching Logo Height) -->
+      <!-- Zone 3 (Right): Pinned Action CTA Button -->
+      <div class="hidden lg:flex items-center shrink-0">
         <a
           href="/contact"
           class="btn-needle-red whitespace-nowrap inline-flex items-center justify-center h-10 sm:h-11 px-5 sm:px-6 rounded-lg text-white text-xs sm:text-sm font-semibold tracking-normal shadow-xs transition-all duration-200 cursor-pointer shrink-0"
