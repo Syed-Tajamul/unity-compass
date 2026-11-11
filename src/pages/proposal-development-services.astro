@@ -329,37 +329,39 @@ const deliverables = [
                   class="square-slide-card group relative cursor-pointer"
                   style={`transition-delay: ${idx * 60}ms;`}
                 >
-                  <!-- Slide 1: Top Slide (Icon + Title, glides UP on hover) -->
-                  <div class="square-slide square-slide-top absolute inset-x-0 top-0 rounded-3xl bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] p-4 text-center text-white border border-white/15 shadow-[0_8px_20px_rgba(12,72,122,0.18)] flex flex-col items-center justify-center">
-                    <!-- Ambient Glow -->
-                    <div class="absolute inset-0 rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                  <div class="square-slide-inner">
+                    <!-- Slide 1: Top Deck (Icon + Title, smooth header transition, zero clipping) -->
+                    <div class="square-slide-top rounded-3xl bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-center text-white border border-white/15 shadow-[0_8px_20px_rgba(12,72,122,0.18)] flex flex-col items-center justify-center">
+                      <!-- Ambient Glow -->
+                      <div class="absolute inset-0 rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
-                    <!-- Icon Wrap with Subtle Pulse Ring Affordance -->
-                    <div class="square-icon-wrap relative w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-2 shadow-inner transition-all duration-500">
-                      <div class="absolute -inset-1 rounded-2xl border border-white/30 opacity-70 animate-ping-slow pointer-events-none"></div>
-                      <svg class="square-icon-svg w-6 h-6 transition-all duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d={card.icon} />
-                      </svg>
+                      <!-- Icon Wrap with Subtle Pulse Ring Affordance -->
+                      <div class="square-icon-wrap relative w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-2 shadow-inner transition-all duration-400">
+                        <div class="absolute -inset-1 rounded-2xl border border-white/30 opacity-70 animate-ping-slow pointer-events-none"></div>
+                        <svg class="square-icon-svg w-6 h-6 transition-all duration-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d={card.icon} />
+                        </svg>
+                      </div>
+
+                      <!-- Title -->
+                      <h3 class="square-title text-sm sm:text-base font-bold text-white tracking-tight leading-snug px-1 transition-all duration-400 line-clamp-2">
+                        {card.title}
+                      </h3>
+
+                      <!-- Subtle Federal Visual Affordance Pill -->
+                      <div class="square-affordance-pill flex items-center gap-1.5 mt-2 transition-all duration-300 group-hover:opacity-0 group-hover:h-0 group-hover:mt-0 overflow-hidden">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#FF3130] animate-pulse"></span>
+                        <span class="w-6 h-0.5 rounded-full bg-white/40"></span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-300/80"></span>
+                      </div>
                     </div>
 
-                    <!-- Title -->
-                    <h3 class="square-title text-sm sm:text-base font-bold text-white tracking-tight leading-snug px-1 transition-all duration-500 line-clamp-2">
-                      {card.title}
-                    </h3>
-
-                    <!-- Subtle Federal Visual Affordance Pill (No 'hover me' text!) -->
-                    <div class="square-affordance-pill flex items-center gap-1.5 mt-2 transition-opacity duration-300 group-hover:opacity-0">
-                      <span class="w-1.5 h-1.5 rounded-full bg-[#FF3130] animate-pulse"></span>
-                      <span class="w-6 h-0.5 rounded-full bg-white/40"></span>
-                      <span class="w-1.5 h-1.5 rounded-full bg-blue-300/80"></span>
+                    <!-- Slide 2: Bottom Deck (Description docked in flow, zero overlap, zero clipping) -->
+                    <div class="square-slide-bottom bg-white border border-slate-200/90 shadow-[0_20px_40px_-10px_rgba(15,23,42,0.22)]">
+                      <p class="square-desc text-xs sm:text-[0.84rem] text-slate-700 leading-relaxed font-normal text-center">
+                        {card.desc}
+                      </p>
                     </div>
-                  </div>
-
-                  <!-- Slide 2: Bottom Slide (Description, glides DOWN on hover) -->
-                  <div class="square-slide square-slide-bottom absolute inset-x-0 top-0 rounded-3xl bg-white border border-slate-200/90 px-4 py-3.5 pb-4 sm:px-4 sm:py-3.5 sm:pb-4 flex flex-col justify-center items-center shadow-[0_8px_20px_rgba(15,39,74,0.06)]">
-                    <p class="square-desc text-xs sm:text-[0.84rem] text-slate-700 leading-relaxed font-normal text-center">
-                      {card.desc}
-                    </p>
                   </div>
                 </div>
               ))}
@@ -965,8 +967,8 @@ const deliverables = [
 
   /* ========================================================================= */
   /* ========================================================================= */
-  /* Square Two-Layer Sliding Profile Card Animation (Hero 2x2 Grid)           */
-  /* Slide 1 (Icon+Title) shifts up, Slide 2 (Description) shifts down         */
+  /* Flow-Docked Two-Deck Card Animation (Hero 2x2 Grid)                       */
+  /* Zero title clipping, zero description clipping, zero leaking at rest      */
   /* ========================================================================= */
   .square-slide-card {
     position: relative;
@@ -976,44 +978,51 @@ const deliverables = [
   }
 
   .square-slide-card:hover {
-    z-index: 50;
+    z-index: 60;
   }
 
-  .square-slide {
-    width: 100%;
-    will-change: transform, opacity, height;
-  }
-
-  /* Slide 1: Top Slide (Icon + Title, solid gradient background, sits on top at rest) */
-  .square-slide-top {
+  /* Floating container that lifts up on hover without affecting grid flow */
+  .square-slide-inner {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: auto;
+    transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  .square-slide-card:hover .square-slide-inner {
+    transform: translateY(-22px);
+  }
+
+  /* Deck 1: Top Header (Icon + Title, solid gradient background, sits on top) */
+  .square-slide-top {
+    position: relative;
+    width: 100%;
     height: 155px;
+    padding: 1.25rem 1rem;
     z-index: 2;
-    overflow: hidden;
-    transform: translateY(0);
-    transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.4s ease,
-                border-radius 0.3s ease;
+    transition: height 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+                min-height 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+                padding 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+                border-radius 0.35s ease,
+                box-shadow 0.4s ease;
   }
 
   .square-slide-card:hover .square-slide-top {
-    height: 80px;
-    transform: translateY(-44px);
-    box-shadow: 0 10px 24px -4px rgba(12, 72, 122, 0.35);
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    height: auto;
+    min-height: 82px;
+    padding: 0.75rem 0.85rem 0.65rem 0.85rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    box-shadow: 0 10px 25px -4px rgba(12, 72, 122, 0.35);
   }
 
-  /* Scale down Icon & Title when revealed to fit the 80px header perfectly */
+  /* Smoothly scale down Icon & Title on hover to fit comfortably */
   .square-slide-card:hover .square-icon-wrap {
     width: 1.85rem;
     height: 1.85rem;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.2rem;
   }
 
   .square-slide-card:hover .square-icon-svg {
@@ -1022,38 +1031,40 @@ const deliverables = [
   }
 
   .square-slide-card:hover .square-title {
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
     line-height: 1.25;
   }
 
-  /* Slide 2: Bottom Slide (Description, completely hidden at rest to prevent ANY leaking) */
+  /* Deck 2: Bottom Description (Docked in natural flow under Deck 1, zero overlap) */
   .square-slide-bottom {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    min-height: 135px;
-    z-index: 1;
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-top: none;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    max-height: 0;
     opacity: 0;
-    visibility: hidden;
+    transform: translateY(-8px);
+    overflow: hidden;
     pointer-events: none;
-    transform: translateY(0);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    padding: 0 1rem;
+    transition: max-height 0.42s cubic-bezier(0.16, 1, 0.3, 1),
                 opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                visibility 0.35s ease,
-                box-shadow 0.4s ease,
-                border-radius 0.3s ease;
+                transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                padding 0.35s ease,
+                box-shadow 0.4s ease;
+    z-index: 1;
   }
 
   .square-slide-card:hover .square-slide-bottom {
+    max-height: 280px;
     opacity: 1;
-    visibility: visible;
+    transform: translateY(0);
     pointer-events: auto;
-    transform: translateY(40px);
+    padding: 0.85rem 1rem 1.15rem 1rem;
     box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.22);
-    border-color: #cbd5e1;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
   }
 
   /* Bottom Red/Blue Accent Line on Slide 2 */
