@@ -323,10 +323,10 @@ const deliverables = [
 
           <!-- 4 Square Animated Cards Column (~44% Width: 2x2 Grid with Two-Layer Sliding Profile Card Animation) -->
           <div class="w-full lg:w-[44%] reveal-on-scroll reveal-right delay-150">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 w-full max-w-lg mx-auto lg:mx-0">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 w-full max-w-lg lg:max-w-xl mx-auto lg:mx-0">
               {keySquareCards.map((card, idx) => (
                 <div
-                  class="square-slide-card group relative cursor-pointer"
+                  class="square-slide-card self-contained-card group relative cursor-pointer"
                   style={`transition-delay: ${idx * 60}ms;`}
                 >
                   <div class="square-slide-inner">
@@ -970,10 +970,14 @@ const deliverables = [
   /* Flow-Docked Two-Deck Card Animation (Hero 2x2 Grid)                       */
   /* Zero title clipping, zero description clipping, zero leaking at rest      */
   /* ========================================================================= */
+  /* ========================================================================= */
+  /* Spacious Self-Contained Zero-Overlap Hero Cards (200px Height)            */
+  /* Generous breathing space, zero collision with neighbor cards               */
+  /* ========================================================================= */
   .square-slide-card {
     position: relative;
     width: 100%;
-    height: 155px;
+    height: 200px;
     perspective: 1000px;
     z-index: 10;
     pointer-events: auto;
@@ -983,109 +987,145 @@ const deliverables = [
     z-index: 60;
   }
 
-  /* Floating container that lifts up gently and smoothly on hover without affecting grid flow */
-  .square-slide-inner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
-    will-change: transform;
+  .self-contained-card {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px -4px rgba(12, 72, 122, 0.18);
+    transition: box-shadow 0.5s ease;
   }
 
-  .square-slide-card:hover .square-slide-inner {
-    transform: translateY(-24px);
+  .self-contained-card:hover {
+    box-shadow: 0 20px 40px -8px rgba(12, 72, 122, 0.32);
   }
 
-  /* Deck 1: Top Header (Icon + Title, smooth gradual height shrink, zero clipping) */
-  .square-slide-top {
+  /* Keep inner container strictly in place - ZERO upward translation! */
+  .self-contained-card .square-slide-inner,
+  .self-contained-card:hover .square-slide-inner {
     position: relative;
-    width: 100%;
-    height: 155px;
-    padding: 1.25rem 1rem;
-    z-index: 2;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Deck 1: Top Header at Rest (200px full height, generous vertical breathing space) */
+  .self-contained-card .square-slide-top {
+    height: 200px;
+    padding: 1.75rem 1.25rem 1.5rem 1.25rem;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     transition: height 0.65s cubic-bezier(0.25, 1, 0.5, 1),
                 padding 0.65s cubic-bezier(0.25, 1, 0.5, 1),
-                border-radius 0.45s ease,
-                box-shadow 0.6s ease;
+                border-radius 0.45s ease;
   }
 
-  .square-slide-card:hover .square-slide-top {
-    height: 84px;
-    padding: 0.65rem 0.85rem 0.55rem 0.85rem;
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-    box-shadow: 0 10px 25px -4px rgba(12, 72, 122, 0.35);
+  /* Deck 1: Top Header on Hover (Shrinks gracefully to 76px with ample breathing room) */
+  .self-contained-card:hover .square-slide-top {
+    height: 76px;
+    padding: 0.75rem 1rem 0.65rem 1rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 4px 16px rgba(12, 72, 122, 0.22);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* Smoothly scale down Icon & Title on hover at a measured, luxurious pace */
-  .square-icon-wrap {
+  /* Icon Wrap at Rest */
+  .self-contained-card .square-icon-wrap {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.75rem;
+    border-radius: 1rem;
     transition: all 0.65s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
-  .square-slide-card:hover .square-icon-wrap {
-    width: 1.85rem;
-    height: 1.85rem;
-    margin-bottom: 0.15rem;
-  }
-
-  .square-icon-svg {
+  .self-contained-card .square-icon-svg {
+    width: 1.65rem;
+    height: 1.65rem;
     transition: all 0.65s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
-  .square-slide-card:hover .square-icon-svg {
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .square-title {
+  /* Title at Rest */
+  .self-contained-card .square-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+    padding: 0 0.25rem;
     transition: all 0.65s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
-  .square-slide-card:hover .square-title {
+  /* Icon Wrap on Hover: Smoothly scales down to compact 28px badge */
+  .self-contained-card:hover .square-icon-wrap {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-bottom: 0.25rem;
+    border-radius: 0.55rem;
+  }
+
+  .self-contained-card:hover .square-icon-svg {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+
+  /* Title on Hover: Crisp, clear, with plenty of margin */
+  .self-contained-card:hover .square-title {
     font-size: 0.8125rem;
     line-height: 1.25;
   }
 
-  /* Deck 2: Bottom Description (Docked in natural flow under Deck 1, opens gradually and smoothly) */
-  .square-slide-bottom {
-    position: relative;
-    width: 100%;
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-top: none;
-    border-bottom-left-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
+  /* Deck 2: Bottom Description Drawer at Rest */
+  .self-contained-card .square-slide-bottom {
+    flex: 1;
     max-height: 0;
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(14px);
+    border: none;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.25rem;
     overflow: hidden;
-    pointer-events: none;
-    padding: 0 0.95rem;
+    position: relative;
     transition: max-height 0.65s cubic-bezier(0.25, 1, 0.5, 1),
-                opacity 0.55s ease,
+                opacity 0.5s ease 0.06s,
                 transform 0.65s cubic-bezier(0.25, 1, 0.5, 1),
-                padding 0.5s ease,
-                box-shadow 0.6s ease;
-    z-index: 1;
+                padding 0.5s ease;
   }
 
-  .square-slide-card:hover .square-slide-bottom {
-    max-height: 125px;
+  /* Deck 2: Bottom Description Drawer on Hover (Fills the remaining 124px with generous breathing room) */
+  .self-contained-card:hover .square-slide-bottom {
+    max-height: 124px;
     opacity: 1;
     transform: translateY(0);
-    pointer-events: auto;
-    padding: 0.75rem 0.95rem 1rem 0.95rem;
-    box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.22);
+    padding: 0.85rem 1.25rem 1.15rem 1.25rem;
+  }
+
+  /* Description text typography: elegant, readable, relaxed line-height */
+  .self-contained-card .square-desc {
+    font-size: 0.825rem;
+    line-height: 1.55;
+    color: #334155;
+    text-align: center;
+    font-weight: 400;
   }
 
   /* Bottom Red/Blue Accent Line on Slide 2 */
-  .square-slide-bottom::after {
+  .self-contained-card .square-slide-bottom::after {
     content: '';
     position: absolute;
     width: 36px;
-    height: 3.5px;
-    bottom: -1px;
+    height: 3px;
+    bottom: 6px;
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(90deg, #0C487A, #1E40AF, #FF3130);
@@ -1093,8 +1133,8 @@ const deliverables = [
     transition: width 0.35s ease;
   }
 
-  .square-slide-card:hover .square-slide-bottom::after {
-    width: 64px;
+  .self-contained-card:hover .square-slide-bottom::after {
+    width: 56px;
   }
 
   /* Subtle Radar Ping Animation for Federal Visual Affordance */
