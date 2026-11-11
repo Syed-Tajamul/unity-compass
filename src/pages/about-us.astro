@@ -32,6 +32,7 @@ import {
   UsersRound,
 } from 'lucide-astro';
 import MainLayout from '../layouts/MainLayout.astro';
+import WaveDivider from '../components/WaveDivider.astro';
 import { companyInfo, verifiedMetrics } from '../data/company';
 
 const canonicalUrl = 'https://unitycompass.com/about-us';
@@ -192,7 +193,7 @@ const aboutPageSchema = {
     <div class="absolute -left-32 top-16 h-80 w-80 rounded-full bg-blue-300/20 blur-3xl" aria-hidden="true"></div>
     <div class="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-red-300/10 blur-3xl" aria-hidden="true"></div>
 
-    <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:px-8 lg:py-20">
+    <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:px-8 lg:pt-20 pb-24 sm:pb-28 lg:pb-32">
       <div class="max-w-3xl">
         <h1 class="hero-heading-reveal max-w-2xl text-3xl font-extrabold leading-[1.16] tracking-tight text-[#0F274A] sm:text-4xl sm:leading-[1.18] lg:text-[2.75rem] xl:text-[3.15rem]">
           A practical partner for <span class="about-gradient-text">federal work.</span>
@@ -241,6 +242,9 @@ const aboutPageSchema = {
         />
       </div>
     </div>
+
+    <!-- Pure CSS SVG Wave Section Divider (wsd-01) Leading into About Us Narrative Canvas -->
+    <WaveDivider variant="wave" fillColor="#ffffff" />
   </header>
 
   <section class="about-scroll-region bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="company-heading">
@@ -928,7 +932,8 @@ const aboutPageSchema = {
     font-size: 0.7rem;
     font-weight: 800;
     letter-spacing: 0.08em;
-    transition: background-color 250ms ease, transform 250ms ease;
+    transition: background-color 250ms ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease, opacity 0.4s ease;
+    will-change: transform, filter, opacity;
   }
 
   .timeline-card {
@@ -937,18 +942,41 @@ const aboutPageSchema = {
     background: rgba(255, 255, 255, 0.96);
     padding: 1.5rem;
     box-shadow: 0 18px 45px -28px rgba(15, 39, 74, 0.38);
-    transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease, opacity 0.4s ease;
+    will-change: transform, filter, opacity;
   }
 
-  .timeline-step:hover .timeline-node {
+  /* Parent Blur / Sibling De-emphasis (Focus States) for Timeline */
+  /* ONLY triggers when mouse enters .timeline-card; cleared on mouse out */
+  .timeline-card:hover,
+  .timeline-card.is-card-focused {
+    border-color: rgba(12, 72, 122, 0.45);
+    box-shadow: 0 28px 55px -18px rgba(12, 72, 122, 0.32), 0 0 0 1px rgba(12, 72, 122, 0.25);
+    transform: translateY(-6px) scale(1.025) !important;
+    z-index: 15;
+  }
+
+  .timeline-step:has(.timeline-card:hover) .timeline-node,
+  .timeline-step.is-active-step .timeline-node {
     background: #FF3130;
-    transform: scale(1.06);
+    transform: scale(1.15) !important;
+    filter: none !important;
+    opacity: 1 !important;
+    z-index: 20;
   }
 
-  .timeline-step:hover .timeline-card {
-    border-color: rgba(12, 72, 122, 0.28);
-    box-shadow: 0 24px 50px -25px rgba(15, 39, 74, 0.42);
-    transform: translateY(-3px);
+  /* ONLY non-hovered sibling timeline cards blur while a card is hovered */
+  .process-timeline:has(.timeline-card:hover) .timeline-card:not(:hover),
+  .process-timeline.has-card-hover .timeline-card:not(.is-card-focused) {
+    filter: blur(3.5px) saturate(0.6);
+    opacity: 0.42;
+    transform: scale(0.96);
+  }
+
+  .process-timeline:has(.timeline-card:hover) .timeline-step:not(:has(.timeline-card:hover)) .timeline-node,
+  .process-timeline.has-card-hover .timeline-step:not(.is-active-step) .timeline-node {
+    filter: blur(3px) saturate(0.6);
+    opacity: 0.45;
   }
 
   @media (min-width: 1024px) {
@@ -1155,9 +1183,29 @@ const aboutPageSchema = {
     showSlide(0);
   }
 
+  function initTimelineFocusStates() {
+    const processTimelines = document.querySelectorAll<HTMLElement>('.process-timeline');
+    processTimelines.forEach((timeline) => {
+      const cards = timeline.querySelectorAll<HTMLElement>('.timeline-card');
+      cards.forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+          timeline.classList.add('has-card-hover');
+          card.classList.add('is-card-focused');
+          card.closest('.timeline-step')?.classList.add('is-active-step');
+        });
+        card.addEventListener('mouseleave', () => {
+          timeline.classList.remove('has-card-hover');
+          card.classList.remove('is-card-focused');
+          timeline.querySelectorAll('.timeline-step').forEach((s) => s.classList.remove('is-active-step'));
+        });
+      });
+    });
+  }
+
   function initAboutPage() {
     initServiceRadarCards();
     initCapabilitiesCarousel();
+    initTimelineFocusStates();
 
     const elements = document.querySelectorAll<HTMLElement>(
       '.about-reveal, .about-scroll-region :is(h2, h3, h4, p, dt, dd)'

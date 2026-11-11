@@ -2,18 +2,31 @@
 /**
  * information-technology-and-business-consulting.astro
  * 
- * Executive IT & Program Consulting Practice Page
- * Architectural Blueprint:
- * 1. Hero: Pure White, Centered Shimmer Title (2 Lines), 45:55 Content:Image ratio.
- *    Unclipped artwork frame with object-contain and aspect-[2752/1536].
- * 2. Deep Dive: Light Blue Blueprint Canvas, 67% Left Overview / 33% Right Other Practice Areas.
- * 3. How We Deliver: Pure White Canvas, Centered Header, Navigation Controls, Infinite Continuous Carousel.
- * 4. What You Get: Light Blue Blueprint Canvas, Shuttle Bottom-to-Top Color Fill Hover.
- * 5. Why UC?: Pure White Canvas, 3 Symmetrical Cards with Bring-to-Front Hover Elevation.
+ * Executive Information Technology and Business Consulting Practice Page
+ * Bespoke Implementation per User Specification & Brand Design System:
+ * 
+ * 1. Palette: Strictly Unity Compass Blue (#0C487A, #0B2553, #1E40AF), Brand Red (#FF3130) accents, clean white and soft slate.
+ * 2. Header: Centered "Information Technology and Business Consulting" with radiant color shimmer sweep.
+ * 3. Hero Image: Unclipped showcase frame with aspect-[2752/1536] + Practice Areas Menu.
+ * 4. Narrative: "Innovative IT and Business Consulting Solutions" + verbatim Unity Compass commitment narrative.
+ * 5. Section 2 ("Our Services: What We Provide"):
+ *    - 3 Comprehensive Service Pillars rewritten with non-copied executive consulting language:
+ *      • Pillar 01: Intelligent Product Development and Digital Experiences (5 offerings)
+ *      • Pillar 02: Cognitive Automation and AI Engineering (5 offerings)
+ *      • Pillar 03: Cloud-Native Operations and Infrastructure Intelligence (5 offerings)
+ *    - Viewport cascading staggered entrance animations, ambient cursor light tracking, and brand-red accent badges.
+ * 6. Section 3 ("How We Deliver"):
+ *    - Vertical 5-stage milestone timeline with opening aperture nodes (01-05).
+ * 7. Section 4 ("Why UC?"):
+ *    - 3 Symmetrical stage cards with bring-to-front physics.
+ * 8. Section 5 (CTA Banner):
+ *    - High-conversion consultation banner with single prominent "Book a Strategic Consultation" button.
+ * 9. Alternating backgrounds: White -> Blue -> White -> Blue -> White.
  */
 import MainLayout from '../layouts/MainLayout.astro';
+import WaveDivider from '../components/WaveDivider.astro';
 
-// Remaining 5 Federal Practice Areas (Excluding current practice: IT & Program Consulting)
+// Remaining 5 Federal Practice Areas (Excluding current practice: IT & Business Consulting)
 const otherFederalServices = [
   {
     name: 'Proposal Development & Federal Bid Support',
@@ -42,139 +55,308 @@ const otherFederalServices = [
   },
 ];
 
-// 5-Stage IT Consulting Delivery Process (Contragenix-inspired infinite carousel)
-const deliverySteps = [
+// 4 Animated Square Capability Cards (Center aligned, brand blue styling)
+const keySquareCards = [
   {
-    step: '1',
-    title: '1. Systems Architecture Audit',
-    desc: 'Deep-dive assessment of enterprise cloud infrastructure, cybersecurity controls, and digital workflows',
+    title: 'Enterprise Digital Engineering',
+    desc: 'Scalable web and mobile platforms engineered for mission agility, intuitive design, and AI integration.',
     icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-    glowColor: 'from-[#0C487A] to-[#1E40AF]',
-    iconColor: 'text-[#0C487A]',
-    bgTint: 'bg-blue-50/80',
+    themeColor: 'text-[#0C487A]',
+    iconBg: 'bg-blue-100/90 text-[#0C487A]',
+    borderColor: 'border-blue-200/80',
+    cardBg: 'from-blue-50/70 via-white to-blue-50/30',
+    topBar: 'from-[#0C487A] to-[#1E40AF]',
+    hoverShadow: 'hover:shadow-[0_16px_36px_rgba(12,72,122,0.16)]',
+    hoverTitle: 'group-hover:text-[#0C487A]',
+    floatClass: 'animate-float-subtle-1',
   },
   {
-    step: '2',
-    title: '2. Compliance Gap Analysis',
-    desc: 'Benchmarking security posture against NIST SP 800-171, CMMC 2.0, FedRAMP, and agency mandates',
+    title: 'Cognitive Automation & AI',
+    desc: 'Custom machine learning models, intelligent RPA, and private GenAI architectures streamlining core workflows.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+    themeColor: 'text-[#0B2553]',
+    iconBg: 'bg-slate-100 text-[#0B2553]',
+    borderColor: 'border-slate-200/90',
+    cardBg: 'from-slate-50/80 via-white to-slate-100/40',
+    topBar: 'from-[#0B2553] to-[#0C487A]',
+    hoverShadow: 'hover:shadow-[0_16px_36px_rgba(11,37,83,0.16)]',
+    hoverTitle: 'group-hover:text-[#0B2553]',
+    floatClass: 'animate-float-subtle-2',
+  },
+  {
+    title: 'CloudOps & ERP Modernization',
+    desc: 'Resilient multi-cloud management and full lifecycle support for SAP, Oracle, Microsoft Dynamics & Zoho.',
+    icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4',
+    themeColor: 'text-[#1E40AF]',
+    iconBg: 'bg-indigo-100/90 text-[#1E40AF]',
+    borderColor: 'border-blue-200/80',
+    cardBg: 'from-indigo-50/70 via-white to-blue-50/30',
+    topBar: 'from-[#1E40AF] to-[#2563EB]',
+    hoverShadow: 'hover:shadow-[0_16px_36px_rgba(30,64,175,0.16)]',
+    hoverTitle: 'group-hover:text-[#1E40AF]',
+    floatClass: 'animate-float-subtle-1',
+  },
+  {
+    title: 'AI Cybersecurity & Governance',
+    desc: 'Autonomous threat defense, zero-trust architectures, and strict NIST SP 800-171 & CMMC compliance.',
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-    glowColor: 'from-[#FF3130] to-[#DC2626]',
-    iconColor: 'text-[#FF3130]',
-    bgTint: 'bg-red-50/80',
-  },
-  {
-    step: '3',
-    title: '3. Strategic Roadmap Design',
-    desc: 'Developing phased, cost-effective digital modernization roadmaps to transition legacy federal applications',
-    icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
-    glowColor: 'from-[#1E40AF] to-[#2563EB]',
-    iconColor: 'text-[#1E40AF]',
-    bgTint: 'bg-indigo-50/80',
-  },
-  {
-    step: '4',
-    title: '4. Engineering Implementation',
-    desc: 'Direct technical execution covering cloud migrations, zero-trust deployments, and automated testing',
-    icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
-    glowColor: 'from-[#0C487A] to-[#2563EB]',
-    iconColor: 'text-[#0C487A]',
-    bgTint: 'bg-sky-50/80',
-  },
-  {
-    step: '5',
-    title: '5. Governance & Audit Readiness',
-    desc: 'Establishing recurring monitoring, SSP maintenance, and audit documentation packages for agency evaluation',
-    icon: 'M12 19l9 2-9-18-9 18 9-2zm0 0v-8',
-    glowColor: 'from-[#FF3130] to-[#0C487A]',
-    iconColor: 'text-[#FF3130]',
-    bgTint: 'bg-rose-50/80',
+    themeColor: 'text-[#0C487A]',
+    iconBg: 'bg-sky-100/90 text-[#0C487A]',
+    borderColor: 'border-sky-200/80',
+    cardBg: 'from-sky-50/70 via-white to-sky-50/30',
+    topBar: 'from-[#0C487A] to-[#1E40AF]',
+    hoverShadow: 'hover:shadow-[0_16px_36px_rgba(12,72,122,0.16)]',
+    hoverTitle: 'group-hover:text-[#0C487A]',
+    floatClass: 'animate-float-subtle-2',
   },
 ];
 
-// What You Get (4 Deliverables with Shuttle Bottom-to-Top Animation)
-const deliverables = [
+// SECTION 2: 3 CORE SERVICE PILLARS (Rewritten, Original & Executive Phrasing)
+const servicePillars = [
   {
-    title: 'Audit-Defensible Architecture',
-    desc: 'Enterprise IT infrastructure engineered to satisfy rigorous federal cybersecurity evaluations and audits.',
+    id: 'pillar-product-engineering',
+    number: '01',
+    title: 'Intelligent Product Development and Digital Experiences',
+    desc: 'We architect modern, mission-ready digital products that combine blazing performance, intuitive user experience, and embedded artificial intelligence to elevate stakeholder engagement and enable seamless organizational scale.',
+    services: [
+      {
+        title: 'Web & Mobile Application Engineering',
+        subtitle: 'Scalable platforms & custom portals',
+        desc: 'Architecting high-performance web applications, enterprise client portals, and responsive iOS & Android mobile platforms powered by modern cloud architectures and AI-accelerated development frameworks.',
+        icon: 'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
+      },
+      {
+        title: 'UI/UX Strategy & Human-Centric Design',
+        subtitle: 'Data-driven interaction design',
+        desc: 'Crafting seamless, frictionless user journeys and interface systems validated through empirical user research, behavioral metrics, interaction prototyping, and digital accessibility standards.',
+        icon: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z',
+      },
+      {
+        title: 'Brand Architecture & Visual Identity',
+        subtitle: 'Adaptive enterprise design systems',
+        desc: 'Building enduring, adaptable visual identity systems, brand standards, and modular design tokens that maintain executive prestige and brand consistency across diverse digital touchpoints.',
+        icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
+      },
+      {
+        title: 'AI-Driven Digital Marketing & Growth',
+        subtitle: 'Intelligent search and content ecosystems',
+        desc: 'Employing machine-learning search optimization, automated content intelligence, and precision data analytics to optimize multi-channel outreach, amplify brand visibility, and generate high-intent conversions.',
+        icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+      },
+      {
+        title: 'Conversational Experiences & AI Agents',
+        subtitle: 'Automated 24/7 stakeholder engagement',
+        desc: 'Deploying cognitive virtual assistants, natural-language chatbots, and smart interactive agents that automate tier-1 inquiries, elevate support speed, and enrich stakeholder interactions.',
+        icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
+      },
+    ],
+  },
+  {
+    id: 'pillar-cognitive-automation',
+    number: '02',
+    title: 'Cognitive Automation and AI Engineering',
+    desc: 'We leverage advanced automation, predictive algorithms, cognitive decision-making, and deep data engineering to streamline complex operational bottlenecks and generate measurable organizational value.',
+    services: [
+      {
+        title: 'Custom AI and Machine Learning Solutions',
+        subtitle: 'Predictive models & decision logic',
+        desc: 'Architecting and training bespoke machine learning models for accurate forecasting, intelligent anomaly detection, and automated operational decision-making tailored to your enterprise workflows.',
+        icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+      },
+      {
+        title: 'Data & Predictive Analytics Intelligence',
+        subtitle: 'Real-time telemetry & executive dashboards',
+        desc: 'Transforming fragmented enterprise data into centralized, real-time analytics hubs and predictive dashboards that empower leadership to anticipate trends, evaluate risks, and optimize enterprise performance.',
+        icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+      },
+      {
+        title: 'Intelligent Robotic Process Automation (RPA)',
+        subtitle: 'Zero-error software bot orchestration',
+        desc: 'Deploying AI-powered robotic bots to handle high-frequency, rule-governed back-office tasks, eliminating manual processing delays while ensuring full audit traceability and operational rigor.',
+        icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+      },
+      {
+        title: 'Rapid AI Prototyping and MVP Incubation',
+        subtitle: 'De-risked fast experimentation',
+        desc: 'Accelerating artificial intelligence concepts through rapid prototyping, algorithmic sandboxing, and functional minimum viable products (MVPs), validating business impact before capital-intensive deployment.',
+        icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
+      },
+      {
+        title: 'Enterprise Generative AI Solutions',
+        subtitle: 'Private, secure domain intelligence',
+        desc: 'Engineering private, fine-tuned GenAI systems and Retrieval-Augmented Generation (RAG) pipelines customized to proprietary enterprise data, ensuring airtight data governance and zero data leakage.',
+        icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
+      },
+    ],
+  },
+  {
+    id: 'pillar-cloud-native-operations',
+    number: '03',
+    title: 'Cloud-Native Operations and Infrastructure Intelligence',
+    desc: 'We modernize, orchestrate, and safeguard enterprise IT environments with AI-driven capabilities to achieve institutional reliability, dynamic scalability, and uncompromising defense.',
+    services: [
+      {
+        title: 'ERP Implementation & Modernization',
+        subtitle: 'SAP, Oracle, Dynamics 365, Odoo, ERPNext & Zoho',
+        desc: 'End-to-end design, implementation, customization, and continuous support across leading ERP suites. Leveraging AI reporting, workflow automation, and predictive intelligence across accounting, HR, and supply chain.',
+        icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4',
+      },
+      {
+        title: 'AI-Optimized CloudOps & Managed Services',
+        subtitle: 'Self-healing, auto-scaling cloud environments',
+        desc: 'Managing multi-cloud and hybrid environments through automated AI telemetry, continuous infrastructure cost governance, intelligent load balancing, and self-healing system recovery.',
+        icon: 'M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z',
+      },
+      {
+        title: 'AI-Powered Cybersecurity & Risk Defense',
+        subtitle: 'Adaptive threat hunting & compliance',
+        desc: 'Deploying intelligent security solutions that detect anomalies in real time, enforce zero-trust identity architectures, safeguard federal data assets, and maintain continuous NIST & CMMC compliance.',
+        icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+      },
+      {
+        title: 'Predictive Infrastructure Planning',
+        subtitle: 'Hybrid and on-premise performance optimization',
+        desc: 'Applying predictive machine-learning analytics to model compute demand, prevent hardware bottlenecks, and ensure uninterrupted operations across hybrid cloud and mission-critical on-premise systems.',
+        icon: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z',
+      },
+      {
+        title: 'Talent as a Service (TaaS) & Agile Surge Teams',
+        subtitle: 'Instant access to pre-vetted elite technologists',
+        desc: 'Providing immediate access to senior developers, cloud architects, UI/UX designers, and data engineers. AI-accelerated skill matching ensures seamless team integration and accelerated project velocity.',
+        icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+      },
+    ],
+  },
+];
+
+// SECTION 3: 5-Stage Strategic Consulting Methodology (Vertical Timeline with Opening Aperture Nodes)
+const deliverySteps = [
+  {
+    step: '01',
+    num: 1,
+    title: 'Systems & Architecture Audit',
+    desc: 'Comprehensive diagnostic evaluation of enterprise software, data pipelines, infrastructure health, and cybersecurity posture.',
+    icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+    color: 'from-[#0C487A] to-[#1E40AF]',
+    iconColor: 'text-[#0C487A]',
+    bgTint: 'bg-blue-50',
+    badgeText: 'Milestone 01',
+  },
+  {
+    step: '02',
+    num: 2,
+    title: 'Technology & Governance Gap Analysis',
+    desc: 'Benchmarking enterprise workflows and cyber controls against modern engineering standards, NIST guidelines, and operational KPIs.',
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    color: 'from-[#0C487A] to-[#103E6B]',
+    iconColor: 'text-[#0C487A]',
+    bgTint: 'bg-sky-50',
+    badgeText: 'Milestone 02',
   },
   {
-    title: 'CMMC & NIST Compliance',
-    desc: 'Comprehensive System Security Plans (SSPs) and POA&Ms aligned with defense contracting cybersecurity mandates.',
-    icon: 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z',
+    step: '03',
+    num: 3,
+    title: 'Strategic Modernization Roadmap',
+    desc: 'Formulating prioritized, phased architectural roadmaps to modernize legacy applications, embed AI capabilities, and streamline operations.',
+    icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+    color: 'from-[#1E40AF] to-[#2563EB]',
+    iconColor: 'text-[#1E40AF]',
+    bgTint: 'bg-indigo-50',
+    badgeText: 'Milestone 03',
   },
   {
-    title: 'Operational Efficiency Gains',
-    desc: 'Streamlined workflows, automated data pipelines, and optimized cloud infrastructure reducing operational drag.',
+    step: '04',
+    num: 4,
+    title: 'Engineering Implementation & Integration',
+    desc: 'Executing end-to-end cloud deployments, custom algorithmic modeling, ERP integrations, and automated RPA workflow rollouts.',
+    icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
+    color: 'from-[#0C487A] to-[#2563EB]',
+    iconColor: 'text-[#0C487A]',
+    bgTint: 'bg-blue-50',
+    badgeText: 'Milestone 04',
+  },
+  {
+    step: '05',
+    num: 5,
+    title: 'Continuous Governance & Performance Optimization',
+    desc: 'Establishing automated monitoring telemetry, proactive security audits, and continuous cloud right-sizing for lasting enterprise ROI.',
+    icon: 'M12 19l9 2-9-18-9 18 9-2zm0 0v-8',
+    color: 'from-[#0C487A] to-[#1E40AF]',
+    iconColor: 'text-[#0C487A]',
+    bgTint: 'bg-sky-50',
+    badgeText: 'Milestone 05',
+  },
+];
+
+// SECTION 4: Strategic Differentiation Pillars ("Why UC?")
+const whyUcPillars = [
+  {
+    title: 'Proven Enterprise Experience',
+    desc: 'Deep technical acumen architecting resilient cloud systems, mission-critical portals, and multi-tier enterprise integrations.',
+    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+  },
+  {
+    title: 'Applied AI & Automation Leadership',
+    desc: 'Pragmatic artificial intelligence implementation that solves concrete operational bottlenecks and produces measurable ROI.',
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
   },
   {
-    title: 'Executive Advisory Support',
-    desc: 'High-level strategic counsel from seasoned consultants guiding high-stakes procurement and technical choices.',
-    icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+    title: 'Rigorous Cybersecurity & Standards',
+    desc: 'Uncompromising adherence to enterprise security governance, zero-trust architectures, and institutional compliance standards.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
   },
 ];
+
+const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7db-4a82-94e9-c023536d3178';
 ---
 
 <MainLayout
-  title="IT & Program Consulting - Unity Compass"
-  description="Unity Compass delivers innovative IT and business consulting solutions tailored to help organizations improve performance, navigate compliance, and modernize systems."
+  title="Information Technology and Business Consulting - Unity Compass"
+  description="Innovative IT and Business Consulting Solutions to empower organizations and drive success with tailored, cutting-edge services."
 >
   <div class="text-slate-800 overflow-hidden" id="it-consulting-page-root">
 
     <!-- ===================================================================== -->
-    <!-- SECTION 1: HERO (Content 45% | Image 55% with Unclipped Text Badge)  -->
-    <!-- Background: PURE WHITE (Order: White -> Blue -> White -> Blue -> White)-->
+    <!-- SECTION 1: HERO & PRACTICE OVERVIEW                                   -->
+    <!-- Top: Centered Shimmer Heading with Accent Line                        -->
+    <!-- Middle Row: Image (~68%) | Practice Areas Menu (~32%)                 -->
+    <!-- Bottom Row: Headline + Narrative (~56%) | 4 Centered Squares (~44%)   -->
+    <!-- Background: PURE WHITE                                                -->
     <!-- ===================================================================== -->
-    <section class="relative pt-16 sm:pt-20 lg:pt-24 pb-16 sm:pb-24 bg-white border-b border-slate-200/80 overflow-hidden" aria-labelledby="service-hero-heading">
+    <section class="relative z-20 pt-12 sm:pt-16 lg:pt-20 pb-20 sm:pb-24 lg:pb-28 bg-white overflow-visible" aria-labelledby="service-hero-heading">
       
       <!-- Subtle Radial Ambient Glows -->
       <div class="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(40,121,182,0.08)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-      <div class="absolute -top-20 -right-32 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(255,49,48,0.06)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute -top-20 -right-32 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(30,64,175,0.05)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
-      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12 sm:space-y-16">
         
-        <!-- 1. Centered Service Title at Top with Continuous Shimmer (Two Lines) -->
-        <div class="text-center max-w-4xl mx-auto space-y-4 mb-14 sm:mb-16 reveal-on-load">
+        <!-- PART 1: PAGE TOP CENTERED HEADER (Before Image) -->
+        <div class="text-center max-w-4xl mx-auto space-y-4">
           <h1
             id="service-hero-heading"
-            class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] text-center"
+            class="hero-heading-reveal text-3xl sm:text-4xl lg:text-[2.85rem] font-extrabold tracking-tight leading-[1.34] sm:leading-[1.36] lg:leading-[1.38] text-[#0B2553]"
           >
-            <span class="service-shimmer-center service-shimmer-line-1 block pb-1">IT & Program</span>
-            <span class="service-shimmer-center service-shimmer-line-1 block pb-1">Consulting</span>
+            <span class="service-shimmer-center service-shimmer-line-1 inline-block pb-2 pt-1">Information Technology and Business Consulting</span>
           </h1>
-          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
+          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto hero-subheading-reveal mt-2"></div>
         </div>
 
-        <!-- 2. Balanced Proportions: Content 45% | Image 55% Ratio -->
-        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-12 xl:gap-16">
+        <!-- PART 2: SHOWCASE FRAME (Image ~68%) + PRACTICE MENU (~32%) -->
+        <div class="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-8 xl:gap-10">
           
-          <!-- Content Column (45% Width) -->
-          <div class="w-full lg:w-[45%] space-y-6 text-left reveal-on-load" data-delay="100">
-            <h2 class="text-xl sm:text-2xl lg:text-[1.65rem] font-bold text-[#0B2553] leading-normal sm:leading-[1.5]">
-              Innovative Technology Modernization and Program Advisory Solutions
-            </h2>
-            <div class="w-16 h-1 rounded-full bg-gradient-to-r from-[#0C487A] to-[#FF3130]"></div>
-            
-            <!-- Paragraph with Logo-Colored Highlights: UC's in Red & 10+ Years in Blue (Line-Height: 2.05) -->
-            <p class="text-base sm:text-lg text-slate-600 leading-[2] sm:leading-[2.05] font-normal">
-              <strong class="font-extrabold text-[#FF3130]">UC’s</strong> technology and management consulting practice empowers organizations to modernize legacy systems, enhance cybersecurity posture, and optimize federal program delivery. Our senior advisors bridge the gap between technical architecture and enterprise strategy to ensure defensible, audit-ready operational success. With <strong class="font-bold text-[#0C487A]">10+ years of federal advisory experience,</strong> we deliver scalable digital transformation and measurable business growth.
-            </p>
-          </div>
-
-          <!-- Image Column (55% Width: Unclipped Graphic Artwork with Corner Badge 100% Visible) -->
-          <div class="w-full lg:w-[55%] relative flex justify-center items-center reveal-on-load" data-delay="200">
-            <div class="relative w-full max-w-2xl group">
+          <!-- Image Column (~68% Width: Unclipped Graphic Artwork with Corner Badge 100% Visible) -->
+          <div class="w-full lg:w-[68%] relative flex justify-center items-center hero-image-reveal">
+            <div class="relative w-full group h-full flex flex-col justify-center">
               
               <!-- Soft Dynamic Ambient Glow Aura -->
-              <div class="absolute -inset-4 bg-gradient-to-tr from-[#0C487A]/20 via-[#1E40AF]/15 to-[#FF3130]/15 rounded-3xl blur-2xl pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+              <div class="absolute -inset-4 bg-gradient-to-tr from-[#0C487A]/20 via-[#1E40AF]/15 to-[#0C487A]/10 rounded-3xl blur-2xl pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
               
-              <!-- Refined Image Window Frame (object-contain with natural aspect ratio to eliminate clipping) -->
+              <!-- Refined Image Window Frame -->
               <div class="relative rounded-3xl overflow-hidden border border-slate-200/90 bg-white shadow-[0_20px_50px_-12px_rgba(11,37,83,0.16)] w-full">
-                
                 <img
                   src="/images/service5.png"
-                  alt="IT & Program Consulting"
+                  alt="Information Technology and Business Consulting"
                   class="w-full h-auto aspect-[2752/1536] object-contain object-center group-hover:scale-[1.015] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] select-none block"
                   width="2752"
                   height="1536"
@@ -185,10 +367,114 @@ const deliverables = [
                 <div class="absolute inset-0 bg-gradient-to-tr from-black/5 via-transparent to-white/10 pointer-events-none"></div>
 
                 <!-- Glowing Top Accent Line on Hover -->
-                <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
+                <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
 
+            </div>
+          </div>
+
+          <!-- Practice Areas Menu Column (~32% Width: Current Page Excluded, Active Blue Hover) -->
+          <div class="w-full lg:w-[32%] flex flex-col justify-center hero-menu-reveal">
+            <div class="rounded-3xl border border-slate-200/90 bg-white/95 backdrop-blur-md p-4 sm:p-5 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.08)] flex flex-col justify-center space-y-2.5 h-full">
+              
+              <div class="space-y-2 flex-1 flex flex-col justify-center py-2">
+                {otherFederalServices.map((service, idx) => (
+                  <a
+                    href={service.href}
+                    class="group relative flex items-center justify-between px-4 sm:px-5 py-3.5 sm:py-4 rounded-2xl text-slate-700 font-semibold text-sm transition-all duration-300 border border-slate-200/60 hover:border-[#0C487A]/30 hover:bg-gradient-to-r hover:from-[#0C487A] hover:via-[#103E6B] hover:to-[#1E40AF] hover:text-white hover:shadow-[0_10px_25px_-5px_rgba(12,72,122,0.45)] hover:scale-[1.02] cursor-pointer"
+                    style={`--stagger-delay: ${idx * 40}ms;`}
+                  >
+                    <div class="flex items-center gap-3 min-w-0 pr-2">
+                      <span class="w-2.5 h-2.5 rounded-full bg-slate-300 group-hover:bg-[#0C487A] group-hover:shadow-[0_0_8px_rgba(12,72,122,0.4)] transition-all duration-300 shrink-0"></span>
+                      <span class="leading-snug transition-colors duration-300">{service.name}</span>
+                    </div>
+                    <svg class="w-4 h-4 text-slate-400 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PART 3: HEADLINE + NARRATIVE (~56%) + 4 SQUARES (~44%) IN BELOW ROW -->
+        <div class="pt-8 sm:pt-10 border-t border-slate-100 flex flex-col lg:flex-row items-center gap-10 lg:gap-12 xl:gap-14">
+          
+          <!-- Narrative Column (~56% Width: Headline before narrative with verbatim text) -->
+          <div class="w-full lg:w-[56%] space-y-4 text-left reveal-on-scroll reveal-left">
+            
+            <h2 class="text-xl sm:text-2xl lg:text-[1.75rem] font-extrabold text-[#0B2553] leading-snug sm:leading-[1.38] tracking-tight">
+              Innovative IT and Business Consulting Solutions
+            </h2>
+            <div class="w-16 h-1 rounded-full bg-gradient-to-r from-[#0C487A] to-[#FF3130] mb-3"></div>
+
+            <p class="text-base sm:text-lg text-slate-600 leading-[1.9] sm:leading-[1.95] font-normal pt-1">
+              At <strong class="font-bold text-[#0B2553]">Unity Compass (UC)</strong>, we specialize in delivering cutting-edge Information Technology and Business Consulting services designed to empower organizations and drive success. With a commitment to innovation and excellence, we provide tailored solutions that address the unique challenges and goals of each client.
+            </p>
+
+            <div class="pt-2">
+              <a
+                href={hubspotMeetingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-sm shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group"
+              >
+                <span>Book a Consultation</span>
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- 4 Square Animated Cards Column (~44% Width: 2x2 Grid with Two-Layer Sliding Profile Card Animation) -->
+          <div class="w-full lg:w-[44%] reveal-on-scroll reveal-right delay-150">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 w-full max-w-lg lg:max-w-xl mx-auto lg:mx-0">
+              {keySquareCards.map((card, idx) => (
+                <div
+                  class="square-slide-card self-contained-card group relative cursor-pointer"
+                  style={`transition-delay: ${idx * 60}ms;`}
+                >
+                  <div class="square-slide-inner">
+                    <!-- Slide 1: Top Deck (Icon + Title, smooth header transition, zero clipping) -->
+                    <div class="square-slide-top rounded-3xl bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-center text-white border border-white/15 shadow-[0_8px_20px_rgba(12,72,122,0.18)] flex flex-col items-center justify-center">
+                      <!-- Ambient Glow -->
+                      <div class="absolute inset-0 rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+
+                      <!-- Icon Wrap with Subtle Pulse Ring Affordance -->
+                      <div class="square-icon-wrap relative w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-2 shadow-inner transition-all duration-400">
+                        <div class="absolute -inset-1 rounded-2xl border border-white/30 opacity-70 animate-ping-slow pointer-events-none"></div>
+                        <svg class="square-icon-svg w-6 h-6 transition-all duration-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d={card.icon} />
+                        </svg>
+                      </div>
+
+                      <!-- Title -->
+                      <h3 class="square-title text-sm sm:text-base font-bold text-white tracking-tight leading-snug px-1 transition-all duration-400 line-clamp-2">
+                        {card.title}
+                      </h3>
+
+                      <!-- Subtle Federal Visual Affordance Pill -->
+                      <div class="square-affordance-pill flex items-center gap-1.5 mt-2 transition-all duration-300 group-hover:opacity-0 group-hover:h-0 group-hover:mt-0 overflow-hidden">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#FF3130] animate-pulse"></span>
+                        <span class="w-6 h-0.5 rounded-full bg-white/40"></span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-300/80"></span>
+                      </div>
+                    </div>
+
+                    <!-- Slide 2: Bottom Deck (Description docked in flow, zero overlap, zero clipping) -->
+                    <div class="square-slide-bottom bg-white border border-slate-200/90 shadow-[0_20px_40px_-10px_rgba(15,23,42,0.22)]">
+                      <p class="square-desc text-xs sm:text-[0.84rem] text-slate-700 leading-relaxed font-normal text-center">
+                        {card.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -198,10 +484,13 @@ const deliverables = [
     </section>
 
     <!-- ===================================================================== -->
-    <!-- SECTION 2: MORE CONTENT (67%) + OTHER SERVICES (33%)                  -->
+    <!-- SECTION 2: "OUR SERVICES: WHAT WE PROVIDE" (3 CORE SERVICE PILLARS)   -->
+    <!-- All 3 Pillars visible with expansive executive bento cards            -->
     <!-- Background: LIGHT BLUE BLUEPRINT CANVAS                               -->
     <!-- ===================================================================== -->
-    <section class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="deep-dive-heading">
+    <section id="our-services-provide" class="pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-label="Our Consulting Services">
+      <!-- Pure CSS SVG Wave Section Divider (wsd-01) Leading seamlessly from White Hero into Blueprint Section -->
+      <WaveDivider variant="wave" position="top" fillColor="#ffffff" />
       
       <!-- 16px Technical Blueprint Checks Pattern Overlay -->
       <div
@@ -212,255 +501,56 @@ const deliverables = [
 
       <!-- Ambient Glow Accents -->
       <div class="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(40,121,182,0.12)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-      <div class="absolute -bottom-24 right-10 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(255,49,48,0.06)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute -bottom-24 right-10 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(30,64,175,0.06)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
       <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          
-          <!-- Column 1 (Most Space: 8 of 12 cols ~ 67% space) -->
-          <div class="lg:col-span-8 space-y-6 reveal-on-load" data-delay="150">
-            
-            <div class="space-y-3">
-              <h2 id="deep-dive-heading" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#0B2553] leading-tight">
-                Modernizing Enterprise Systems for Rigorous Federal Standards
-              </h2>
-              <div class="w-20 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]"></div>
-            </div>
-
-            <!-- Distinct Executive Pull-Quote with Glass Aesthetic -->
-            <div class="p-6 sm:p-7 rounded-2xl bg-white/95 backdrop-blur-md border-l-4 border-l-[#FF3130] border border-slate-200/90 shadow-[0_8px_30px_rgba(15,39,74,0.06)]">
-              <p class="text-base sm:text-lg font-semibold text-[#0B2553] leading-[1.9] sm:leading-[2] italic">
-                “Navigating complex federal digital requirements demands more than technology—it requires strict alignment with cybersecurity mandates, governance frameworks, and mission objectives.”
-              </p>
-            </div>
-
-            <!-- Narrative Paragraphs: From in Red, UNITY COMPASS in Logo Colors (Line-Height: 2.05) -->
-            <div class="space-y-6 text-base sm:text-lg text-slate-600 leading-[2] sm:leading-[2.05] font-normal">
-              <p>
-                <strong class="font-extrabold text-[#FF3130]">From</strong> enterprise cloud migration to compliance with federal cybersecurity benchmarks, <span class="font-extrabold tracking-tight"><span class="text-[#FF3130]">UNITY</span> <span class="text-[#0C487A]">COMPASS</span></span> ensures that every facet of your IT infrastructure is optimized for performance and security. Our consultants specialize in enterprise architecture, cloud solutions, and workflow automation.
-              </p>
-              <p>
-                We guide contractors through rigorous compliance frameworks including NIST SP 800-171, CMMC 2.0, and FedRAMP readiness, eliminating audit findings and elevating technical evaluation scores across competitive federal procurements.
-              </p>
-            </div>
-
-          </div>
-
-          <!-- Column 2 (Less Space: 4 of 12 cols ~ 33% space - Clean Practice Directory) -->
-          <div class="lg:col-span-4 lg:sticky lg:top-28 space-y-3 reveal-on-load" data-delay="250">
-            
-            <div class="rounded-3xl bg-white/95 backdrop-blur-md border border-slate-200/90 p-6 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.10)] space-y-4">
-              <div class="pb-3 border-b border-slate-200/80">
-                <h3 class="text-base sm:text-lg font-bold text-[#0B2553] tracking-tight">
-                  Other Practice Areas
-                </h3>
-              </div>
-
-              <div class="space-y-2.5">
-                {otherFederalServices.map((item, idx) => (
-                  <a
-                    href={item.href}
-                    class="other-service-card group relative flex items-center justify-between p-3.5 rounded-2xl border border-slate-200/80 bg-white hover:bg-slate-50 hover:border-[#0C487A]/40 text-slate-700 hover:text-[#FF3130] text-sm font-bold shadow-2xs hover:shadow-md transition-all duration-300 overflow-hidden"
-                    style={`--stagger-delay: ${idx * 50}ms;`}
-                  >
-                    <!-- Left Accent Line on Hover -->
-                    <div class="absolute left-0 inset-y-0 w-1 rounded-l-2xl bg-gradient-to-b from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    <div class="flex items-center gap-3 min-w-0 pr-2 relative z-10">
-                      <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-[#0C487A] group-hover:text-white flex items-center justify-center shrink-0 transition-colors duration-200 shadow-2xs">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
-                        </svg>
-                      </span>
-                      <span class="whitespace-normal leading-snug text-xs sm:text-sm">{item.name}</span>
-                    </div>
-
-                    <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1.5 group-hover:text-[#FF3130] transition-all duration-200 shrink-0 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ===================================================================== -->
-    <!-- SECTION 3: "HOW WE DELIVER" (Contragenix-Inspired Process Carousel)    -->
-    <!-- Background: PURE WHITE CANVAS                                         -->
-    <!-- ===================================================================== -->
-    <section id="how-we-deliver" class="py-16 sm:py-24 bg-white border-b border-slate-200/80 relative z-10 scroll-mt-28" aria-labelledby="delivery-heading">
-      
-      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <!-- Header: Heading, Accent Line & Subtitle in Center as usual -->
-        <div class="text-center max-w-3xl mx-auto space-y-3 mb-10 reveal-on-load">
-          <h2 id="delivery-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-normal">
-            <span class="service-shimmer-center service-shimmer-line-1 block pb-1.5 pt-0.5">How We Deliver</span>
-          </h2>
-          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
-          <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
-            A structured, engineering-led modernization methodology designed to ensure seamless systems delivery and audit defense.
-          </p>
-        </div>
-
-        <!-- Carousel Navigation Controls Bar (Right aligned above cards) -->
-        <div class="flex items-center justify-end gap-3 mb-6 reveal-on-load">
-          <button
-            id="delivery-carousel-prev"
-            class="w-11 h-11 rounded-full border border-slate-200/90 bg-white hover:bg-slate-50 text-slate-700 hover:text-[#0C487A] shadow-xs hover:shadow-md flex items-center justify-center transition-all duration-200 cursor-pointer group active:scale-95"
-            aria-label="Previous Delivery Stage"
-          >
-            <svg class="w-5 h-5 transform group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <button
-            id="delivery-carousel-next"
-            class="w-11 h-11 rounded-full border border-slate-200/90 bg-white hover:bg-slate-50 text-slate-700 hover:text-[#FF3130] shadow-xs hover:shadow-md flex items-center justify-center transition-all duration-200 cursor-pointer group active:scale-95"
-            aria-label="Next Delivery Stage"
-          >
-            <svg class="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-
-        <!-- Automatic Infinite Looping Carousel Viewport & Sliding Track -->
-        <div class="relative overflow-hidden reveal-on-load" data-delay="120" id="delivery-carousel-viewport">
-          
-          <div
-            id="delivery-carousel-track"
-            class="flex gap-6 py-3 px-1 will-change-transform"
-          >
-            {/* 3 continuous sets (15 cards) for infinite seamless looping */}
-            {[...deliverySteps, ...deliverySteps, ...deliverySteps].map((step, idx) => (
-              <div
-                class="carousel-stage-card group relative rounded-3xl p-8 bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_20px_45px_-10px_rgba(12,72,122,0.18)] flex flex-col justify-between shrink-0 transition-shadow duration-300 w-[290px] sm:w-[340px] md:w-[370px] min-h-[280px] cursor-pointer"
-                data-card-idx={idx}
-              >
-                <!-- Glowing Top Accent Line on Hover -->
-                <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                <div>
-                  <!-- Glowing Circular Icon Badge with Soft Colored Radial Glow -->
-                  <div class="relative w-16 h-16 flex items-center justify-center mb-6">
-                    <div class={`absolute inset-0 rounded-full blur-xl opacity-35 group-hover:opacity-60 transition-opacity bg-gradient-to-br ${step.glowColor}`}></div>
-                    
-                    <div class={`relative w-14 h-14 rounded-full ${step.bgTint} ${step.iconColor} border border-slate-200/70 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform duration-300`}>
-                      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon} />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <!-- Numbered Title (E.g. "1. Systems Architecture Audit") -->
-                  <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors duration-200 tracking-tight leading-snug mb-3">
-                    {step.title}
-                  </h3>
-
-                  <!-- Description -->
-                  <p class="text-sm text-slate-600 leading-relaxed font-normal">
-                    {step.desc}
-                  </p>
-                </div>
-
-                <!-- Subtle Bottom Dot Indicator -->
-                <div class="pt-5 mt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span class="text-xs font-bold text-[#0C487A] group-hover:text-[#FF3130] transition-colors">Phase {step.step} of 5</span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-slate-300 group-hover:bg-[#FF3130] group-hover:scale-125 transition-all duration-200"></span>
-                </div>
-
-              </div>
-            ))}
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ===================================================================== -->
-    <!-- SECTION 4: "WHAT YOU GET?" (Shuttle Bottom-to-Top Color Fill Hover)   -->
-    <!-- Background: LIGHT BLUE BLUEPRINT CANVAS                               -->
-    <!-- ===================================================================== -->
-    <section class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="what-you-get-heading">
-      
-      <!-- Minute 16px Technical Checks Overlay -->
-      <div
-        class="absolute inset-0 pointer-events-none opacity-25 mix-blend-multiply"
-        style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.06) 1px, transparent 1px);"
-        aria-hidden="true"
-      ></div>
-
-      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <!-- Section Header with Shimmer & On-Load Reveal (Unclipped Descender on 'g') -->
-        <div class="text-center max-w-3xl mx-auto space-y-3 mb-14 sm:mb-16 reveal-on-load">
-          <h2 id="what-you-get-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-normal">
-            <span class="service-shimmer-center service-shimmer-line-1 block pb-2 pt-0.5">What you get?</span>
-          </h2>
-          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-3 mb-4"></div>
-          <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Audit-defensible technical architectures, automated workflows, and comprehensive federal compliance frameworks.
-          </p>
-        </div>
-
-        <!-- 4 Deliverable Cards: Shuttle Bottom-to-Top Color Fill Animation (From Screenshots 3 & 4) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal-on-load" data-delay="100">
-          {deliverables.map((item, idx) => (
-            <div
-              class="shuttle-card group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.28)] transition-all duration-400 flex flex-col justify-between min-h-[300px] p-7 sm:p-8 overflow-hidden cursor-pointer"
-              data-card-index={idx}
-            >
-              <!-- Shuttle Bottom-to-Top Color Fill with Organic Curved Top Crest (Screenshots 3 & 4 Inspiration) -->
-              <div
-                class="shuttle-fill-layer absolute inset-0 bg-gradient-to-t from-[#0C487A] via-[#103E6B] to-[#1E40AF] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none rounded-3xl overflow-hidden"
-                aria-hidden="true"
-              >
-                <!-- Organic Curved Soft Light Wave at the Leading Edge -->
-                <div class="absolute -top-5 left-0 right-0 h-10 bg-white/20 rounded-[100%] blur-sm pointer-events-none"></div>
-                <div class="absolute top-0 inset-x-0 h-1 bg-[#FF3130]/80"></div>
-              </div>
-
-              <!-- Top Content (Text & Icons transition smoothly to crisp white on hover) -->
-              <div class="relative z-10">
-                
-                <!-- Icon Badge with Soft Brand Tint & Glow -->
-                <div class="relative w-14 h-14 flex items-center justify-center mb-6">
-                  <div class="absolute inset-0 rounded-2xl bg-[#0C487A]/15 blur-lg opacity-40 group-hover:opacity-0 transition-opacity"></div>
-                  
-                  <div class="relative w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-white group-hover:text-[#FF3130] border border-blue-100/80 group-hover:border-white/30 flex items-center justify-center transition-all duration-400 shadow-2xs group-hover:scale-105">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
-                    </svg>
-                  </div>
-                </div>
-
-                <!-- Title -->
-                <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-white transition-colors duration-400 tracking-tight leading-snug mb-3">
-                  {item.title}
-                </h3>
-
-                <!-- Primary Description -->
-                <p class="text-sm text-slate-600 group-hover:text-white/95 transition-colors duration-400 leading-relaxed font-normal">
-                  {item.desc}
+        <!-- 3 Dedicated Service Pillars Container -->
+        <div class="space-y-20 sm:space-y-24">
+          {servicePillars.map((pillar) => (
+            <div class="space-y-8 sm:space-y-10" id={pillar.id}>
+              
+              <!-- Clean Centered Category Header (No bulky container banner, line-height optimized) -->
+              <div class="text-center max-w-3xl mx-auto space-y-3 reveal-on-scroll">
+                <h2 class="text-2xl sm:text-3xl lg:text-[2.2rem] font-extrabold text-[#0B2553] tracking-tight leading-[1.32] sm:leading-[1.35]">
+                  {pillar.title}
+                </h2>
+                <div class="w-20 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-2 mb-3"></div>
+                <p class="text-sm sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+                  {pillar.desc}
                 </p>
               </div>
 
-              <!-- Bottom Indicator -->
-              <div class="pt-5 mt-4 border-t border-slate-100 group-hover:border-white/20 flex items-center justify-between relative z-10 transition-colors">
-                <span class="text-xs font-bold text-[#0C487A] group-hover:text-white transition-colors">
-                  Key Deliverable
-                </span>
-                <span class="w-2.5 h-2.5 rounded-full bg-slate-300 group-hover:bg-[#FF3130] group-hover:scale-125 transition-all duration-300"></span>
+              <!-- 5 Service Offerings Grid with Gradient Border Draw Animation (card-08 Architecture) -->
+              <div class="services-cards-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+                {pillar.services.map((service, sIdx) => {
+                  return (
+                    <article
+                      class="gradient-border-card cascade-item group relative rounded-3xl bg-white p-6 sm:p-7 flex flex-col justify-start overflow-hidden cursor-pointer shadow-[0_8px_24px_rgba(11,37,83,0.06)]"
+                      data-cascade-index={sIdx}
+                    >
+                      <!-- Card Content Container -->
+                      <div class="relative z-10 space-y-3.5 flex flex-col justify-start h-full">
+                        <!-- Icon Container in Brand Colors -->
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-[#0C487A] group-hover:text-white group-hover:scale-110 flex items-center justify-center transition-all duration-300 border border-blue-100/80 shadow-2xs">
+                          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
+                          </svg>
+                        </div>
+
+                        <!-- Card Title with generous line-height in Brand Navy -->
+                        <h4 class="text-lg sm:text-[1.18rem] font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors leading-[1.32] sm:leading-[1.35]">
+                          {service.title}
+                        </h4>
+
+                        <!-- Card Description in clean slate -->
+                        <p class="text-xs sm:text-sm text-slate-600 group-hover:text-slate-700 leading-relaxed font-normal pt-0.5">
+                          {service.desc}
+                        </p>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
 
             </div>
@@ -471,15 +561,116 @@ const deliverables = [
     </section>
 
     <!-- ===================================================================== -->
-    <!-- SECTION 5: "WHY UC?" (3 Visible Cards with Smooth Bring-to-Front)     -->
+    <!-- SECTION 3: "HOW WE DELIVER" (Interactive Opening Node Timeline)       -->
+    <!-- As user scrolls, nodes open with expanding elastic aperture animations-->
     <!-- Background: PURE WHITE CANVAS                                         -->
     <!-- ===================================================================== -->
-    <section class="py-16 sm:py-24 bg-white relative z-10 scroll-mt-28" aria-labelledby="why-uc-heading">
+    <section id="how-we-deliver" class="py-16 sm:py-24 bg-white border-b border-slate-200/80 relative z-10 overflow-hidden scroll-mt-28" aria-labelledby="delivery-heading">
       
       <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <!-- Section Header with Shimmer & On-Load Reveal -->
-        <div class="text-center max-w-3xl mx-auto space-y-3 mb-10 reveal-on-load">
+        <!-- Header: Heading, Accent Line & Subtitle with Scroll Reveal -->
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-16 sm:mb-20 reveal-on-scroll">
+          <h2 id="delivery-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.32] sm:leading-[1.35]">
+            <span class="service-shimmer-center service-shimmer-line-1 block pb-1.5 pt-0.5">How We Deliver</span>
+          </h2>
+          <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+            A structured, audit-defensible consulting methodology transforming enterprise architectures into hardened organizational assets.
+          </p>
+        </div>
+
+        <!-- Animated Top-to-Bottom Vertical Timeline with Aperture Opening Nodes -->
+        <div class="relative max-w-5xl mx-auto">
+          
+          <!-- Central Spine Line Track (Desktop: Centered; Mobile: Left Aligned) -->
+          <div class="absolute left-6 md:left-1/2 top-4 bottom-4 w-1 -translate-x-1/2 bg-blue-200/60 rounded-full pointer-events-none" aria-hidden="true">
+            <!-- Radiant Progress Fill Line -->
+            <div class="w-full h-full bg-gradient-to-b from-[#0C487A] via-[#1E40AF] to-[#FF3130] rounded-full shadow-[0_0_10px_rgba(30,64,175,0.35)]"></div>
+          </div>
+
+          <!-- Timeline Milestone Rows (Parent Blur Focus Container) -->
+          <div class="timeline-step-container space-y-12 sm:space-y-16">
+            {deliverySteps.map((step, idx) => {
+              const isEven = idx % 2 === 1;
+              return (
+                <div
+                  class="timeline-step-row relative flex flex-col md:flex-row items-center"
+                  data-step-index={idx}
+                  style={`--step-idx: ${idx};`}
+                >
+                  
+                  <!-- Left Side Content (Desktop: Odd items on Left, Even items empty) -->
+                  <div class={`w-full md:w-1/2 pl-14 md:pl-0 ${isEven ? 'md:order-2 md:pl-12' : 'md:order-1 md:pr-12 md:text-right'}`}>
+                    
+                    <!-- Milestone Card with smooth leafy flowy floating animation & ample line-height -->
+                    <div
+                      class="timeline-card-box group relative rounded-3xl p-6 sm:p-7 bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] transition-all duration-300 overflow-hidden cursor-default reveal-on-scroll"
+                      style={`--step-idx: ${idx};`}
+                    >
+                      
+                      <!-- Glowing Top Accent Line on Hover -->
+                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                      <!-- Subtle Leafy Flow Ambient Radial Glow -->
+                      <div class="absolute -right-8 -bottom-8 w-36 h-36 bg-blue-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-[#0C487A]/10 transition-colors duration-500" aria-hidden="true"></div>
+
+                      <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors duration-200 tracking-tight leading-[1.32] sm:leading-[1.35] mb-2.5">
+                        {step.num}. {step.title}
+                      </h3>
+
+                      <p class="text-sm text-slate-600 leading-relaxed font-normal">
+                        {step.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Central Milestone Node on the Spine (Opens with aperture animation as you scroll) -->
+                  <div class="absolute left-6 md:left-1/2 top-6 md:top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                    <div class="timeline-node-core relative flex items-center justify-center cursor-pointer">
+                      
+                      <!-- Concentric Sonar Pulse Rings -->
+                      <div class="sonar-ring absolute -inset-2 rounded-full border-2 border-[#0C487A]/30 pointer-events-none"></div>
+                      <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-[#0C487A]/15 to-[#FF3130]/15 blur-xs"></div>
+
+                      <!-- Main Node Circular Aperture -->
+                      <div class="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white border-4 border-[#0C487A] text-[#0C487A] font-black text-sm sm:text-base flex items-center justify-center shadow-[0_8px_20px_rgba(12,72,122,0.25)] hover:border-[#1E40AF] hover:text-[#1E40AF] hover:scale-110 transition-all duration-300">
+                        <span>{step.step}</span>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Right Side Placeholder for Desktop Symmetry -->
+                  <div class={`hidden md:block md:w-1/2 ${isEven ? 'md:order-1' : 'md:order-2'}`}></div>
+
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 4: "WHY UC?" (3 Symmetrical Cards with Bring-to-Front)        -->
+    <!-- Background: LIGHT BLUE BLUEPRINT CANVAS                               -->
+    <!-- ===================================================================== -->
+    <section class="py-16 sm:py-24 bg-gradient-to-b from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] relative z-10 overflow-hidden scroll-mt-28 border-b border-slate-200/80" aria-labelledby="why-uc-heading">
+      
+      <!-- 16px Technical Blueprint Checks Pattern Overlay -->
+      <div
+        class="absolute inset-0 pointer-events-none opacity-25 mix-blend-multiply"
+        style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.06) 1px, transparent 1px);"
+        aria-hidden="true"
+      ></div>
+
+      <div class="max-w-7xl xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Section Header with Shimmer & Scroll Reveal -->
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-10 reveal-on-scroll">
           <h2 id="why-uc-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
             <span class="service-shimmer-center service-shimmer-line-1 block">Why UC?</span>
           </h2>
@@ -487,90 +678,79 @@ const deliverables = [
         </div>
 
         <!-- Value Proposition Quote Card with Glassmorphic Highlight -->
-        <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-slate-50/80 border border-slate-200/90 shadow-sm text-center mb-14 reveal-on-load">
+        <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-white/90 border border-slate-200/90 shadow-sm text-center mb-14 reveal-on-scroll">
           <p class="text-base sm:text-lg lg:text-xl font-bold text-[#0B2553] leading-relaxed">
-            At Unity Compass, we provide unmatched IT and program consulting through: deep enterprise architecture acumen, NIST/CMMC compliance rigor, and a commitment to quality without compromise
+            At Unity Compass, we deliver unmatched IT & business consulting through: deep enterprise architecture experience, pragmatic artificial intelligence execution, and an uncompromising commitment to cybersecurity standards.
           </p>
         </div>
 
-        <!-- Symmetrical 3-Card Stage: ALL 3 Cards are ALWAYS Visible Side-by-Side, Hovering Brings to Front -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch reveal-on-load" id="why-uc-cards-grid">
-          
-          <!-- Card 1 (Left Card) -->
-          <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30"
-          >
-            <!-- Top Line on Card Hover -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
+        <!-- Symmetrical 3-Card Stage: ALL 3 Cards are ALWAYS Visible Side-by-Side -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch reveal-on-scroll" id="why-uc-cards-grid">
+          {whyUcPillars.map((card) => (
+            <div
+              class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30"
+            >
+              <!-- Top Line on Card Hover -->
+              <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF]"></div>
 
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center font-bold mb-5 border border-blue-100/80 group-hover:bg-[#0C487A] group-hover:text-white transition-colors duration-300 shadow-2xs">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
+              <div>
+                <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center font-bold mb-5 border border-blue-100/80 group-hover:bg-[#0C487A] group-hover:text-white transition-colors duration-300 shadow-2xs">
+                  <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={card.icon} />
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors leading-[1.32]">{card.title}</h3>
+                <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                  {card.desc}
+                </p>
               </div>
-              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">Enterprise Technical Acumen</h3>
-              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
-                Extensive engineering background covering secure cloud architecture, microservices modernization, and automated pipelines.
-              </p>
             </div>
+          ))}
+        </div>
 
-            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A]">
-              <span>Pillar 01</span>
-              <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </div>
-          </div>
+      </div>
+    </section>
 
-          <!-- Card 2 (Center Card: Featured Elevation in Resting State) -->
-          <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_16px_36px_-8px_rgba(11,37,83,0.16)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(255,49,48,0.24)] hover:border-[#FF3130]/50 hover:z-30 md:-translate-y-1"
+    <!-- ===================================================================== -->
+    <!-- SECTION 5: "READY TO EMPOWER YOUR ORGANIZATION?" (CTA BANNER)         -->
+    <!-- Background: PURE WHITE CANVAS                                         -->
+    <!-- ===================================================================== -->
+    <section class="py-16 sm:py-24 bg-white relative z-10 overflow-hidden" aria-labelledby="cta-heading">
+      
+      <!-- Subtle Compass Star Watermark on Right Side -->
+      <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 w-[420px] h-[420px] pointer-events-none opacity-[0.06] text-[#0C487A]" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="currentColor">
+          <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="2" />
+          <polygon points="100,10 115,85 190,100 115,115 100,190 85,115 10,100 85,85" />
+        </svg>
+      </div>
+
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6 reveal-on-scroll">
+        
+        <!-- Section Title with Shimmer -->
+        <h2 id="cta-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0B2553] leading-[1.32] sm:leading-[1.35] lg:leading-[1.38]">
+          <span class="service-shimmer-center service-shimmer-line-1 block pb-1">Ready to Empower Your Organization with Innovative IT Solutions?</span>
+        </h2>
+        <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto"></div>
+
+        <!-- Narrative Subtext -->
+        <p class="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto pt-2">
+          If you're ready to see how our tailored IT and business consulting solutions can make a measurable difference, let's discuss how we can support your next big project.
+        </p>
+
+        <!-- Primary Action Button: Single Centered High-Conversion Call -->
+        <div class="pt-4 flex justify-center">
+          <a
+            href={hubspotMeetingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-3 px-9 sm:px-11 py-4 rounded-2xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
           >
-            <!-- Top Line on Card Hover -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#FF3130] to-[#DC2626]"></div>
-
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-red-50 text-[#FF3130] flex items-center justify-center font-bold mb-5 border border-red-100/80 group-hover:bg-[#FF3130] group-hover:text-white transition-colors duration-300 shadow-2xs">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#FF3130] transition-colors">CMMC & Audit Rigor</h3>
-              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
-                Pragmatic implementation of NIST 800-171 and CMMC controls ensuring total defense audit defense and certification readiness.
-              </p>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#FF3130]">
-              <span>Pillar 02</span>
-              <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </div>
-          </div>
-
-          <!-- Card 3 (Right Card) -->
-          <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30"
-          >
-            <!-- Top Line on Card Hover -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
-
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center font-bold mb-5 border border-blue-100/80 group-hover:bg-[#0C487A] group-hover:text-white transition-colors duration-300 shadow-2xs">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors">Quality Without Compromise</h3>
-              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
-                Measurable operational milestones, risk-adjusted migration schedules, and audit-ready performance guarantees.
-              </p>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A]">
-              <span>Pillar 03</span>
-              <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </div>
-          </div>
-
+            <span>Book a Strategic Consultation</span>
+            <svg class="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
         </div>
 
       </div>
@@ -579,158 +759,603 @@ const deliverables = [
   </div>
 </MainLayout>
 
-<!-- Client Script: Automatic Infinite Carousel Engine & On-Load Reveals -->
+<!-- Client Script: Scroll Reveals, Cursor Physics & Timeline Opening Nodes -->
 <script is:inline>
-  function initITConsultingPage() {
-    // 1. On-Load Staggered Reveals
-    const revealElements = document.querySelectorAll('.reveal-on-load');
-    revealElements.forEach((el) => {
-      const delay = el.getAttribute('data-delay') || '0';
-      setTimeout(() => {
-        el.classList.add('is-revealed');
-      }, parseInt(delay, 10));
+  function initITConsultingInteractions() {
+    // 1. General Viewport Scroll Reveals
+    const revealElements = document.querySelectorAll(
+      '.reveal-on-scroll, .reveal-left, .reveal-right'
+    );
+
+    if (!('IntersectionObserver' in window)) {
+      revealElements.forEach((el) => el.classList.add('is-revealed'));
+      document.querySelectorAll('.cascade-item').forEach((item) => item.classList.add('is-revealed'));
+      return;
+    }
+
+    const scrollObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -40px 0px', threshold: 0.1 }
+    );
+    revealElements.forEach((el) => scrollObserver.observe(el));
+
+    // 2. Cascading Service Offering Cards Observer (Section 2)
+    const cascadeItemObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            const idx = parseInt(target.getAttribute('data-cascade-index') || '0', 10);
+            setTimeout(() => {
+              target.classList.add('is-revealed');
+            }, idx * 85 + 100);
+            obs.unobserve(target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -30px 0px', threshold: 0.1 }
+    );
+    document.querySelectorAll('.gradient-border-card.cascade-item').forEach((card) => cascadeItemObserver.observe(card));
+
+    // 3. Ambient Cursor Spotlight Physics for Service Offering Cards
+    const consultingCards = document.querySelectorAll('.gradient-border-card');
+    consultingCards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
     });
 
-    // 2. Section 3: "How We Deliver" Infinite Seamless Carousel Engine (Contragenix Inspiration)
-    const track = document.getElementById('delivery-carousel-track');
-    const viewport = document.getElementById('delivery-carousel-viewport');
-    const prevBtn = document.getElementById('delivery-carousel-prev');
-    const nextBtn = document.getElementById('delivery-carousel-next');
-
-    if (track && viewport) {
-      const stepCount = 5; // 5 unique stages in deliverySteps
-      let currentIndex = stepCount; // Start at middle set (index 5 = Stage 1)
-      let isAnimating = false;
-      let autoplayTimer = null;
-
-      function getStepOffset() {
-        const card = track.querySelector('.carousel-stage-card');
-        if (!card) return 394;
-        const cardWidth = card.getBoundingClientRect().width;
-        const gap = 24; // 24px gap-6
-        return cardWidth + gap;
-      }
-
-      function setPosition(index, withTransition = true) {
-        const stepOffset = getStepOffset();
-        if (withTransition) {
-          track.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-        } else {
-          track.style.transition = 'none';
-        }
-        track.style.transform = `translateX(-${index * stepOffset}px)`;
-        currentIndex = index;
-      }
-
-      function nextSlide() {
-        if (isAnimating) return;
-        isAnimating = true;
-        setPosition(currentIndex + 1, true);
-      }
-
-      function prevSlide() {
-        if (isAnimating) return;
-        isAnimating = true;
-        setPosition(currentIndex - 1, true);
-      }
-
-      track.addEventListener('transitionend', () => {
-        isAnimating = false;
-        // Seamless wraparound: If moved into 3rd set (>= 10), instantly snap back to 2nd set (- 5)
-        if (currentIndex >= stepCount * 2) {
-          setPosition(currentIndex - stepCount, false);
-        }
-        // If moved into 1st set (< 5), instantly snap forward to 2nd set (+ 5)
-        else if (currentIndex < stepCount) {
-          setPosition(currentIndex + stepCount, false);
-        }
-      });
-
-      function startAutoplay() {
-        stopAutoplay();
-        autoplayTimer = setInterval(nextSlide, 3500);
-      }
-
-      function stopAutoplay() {
-        if (autoplayTimer) {
-          clearInterval(autoplayTimer);
-          autoplayTimer = null;
-        }
-      }
-
-      if (nextBtn) nextBtn.addEventListener('click', () => {
-        nextSlide();
-        startAutoplay();
-      });
-
-      if (prevBtn) prevBtn.addEventListener('click', () => {
-        prevSlide();
-        startAutoplay();
-      });
-
-      viewport.addEventListener('mouseenter', stopAutoplay);
-      viewport.addEventListener('mouseleave', startAutoplay);
-      viewport.addEventListener('touchstart', stopAutoplay, { passive: true });
-      viewport.addEventListener('touchend', startAutoplay, { passive: true });
-
-      window.addEventListener('resize', () => {
-        setPosition(currentIndex, false);
-      });
-
-      // Position at Stage 1 of the middle set immediately
-      setPosition(stepCount, false);
-      startAutoplay();
+    // 4. Timeline Opening Nodes Observer
+    const timelineRows = document.querySelectorAll('.timeline-step-row');
+    if (timelineRows.length) {
+      const nodeObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-node-active');
+              const node = entry.target.querySelector('.timeline-node-core');
+              if (node) {
+                node.classList.add('node-opened');
+              }
+            }
+          });
+        },
+        { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }
+      );
+      timelineRows.forEach((row) => nodeObserver.observe(row));
     }
+
+    // 5. Timeline Parent Blur / Sibling De-emphasis Focus Interaction (Strictly on Timeline Card Box)
+    const timelineContainers = document.querySelectorAll('.timeline-step-container');
+    timelineContainers.forEach((container) => {
+      const cards = container.querySelectorAll('.timeline-card-box');
+      cards.forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+          container.classList.add('has-card-hover');
+          card.classList.add('is-card-focused');
+          card.closest('.timeline-step-row')?.classList.add('is-active-row');
+        });
+        card.addEventListener('mouseleave', () => {
+          container.classList.remove('has-card-hover');
+          card.classList.remove('is-card-focused');
+          container.querySelectorAll('.timeline-step-row').forEach((r) => r.classList.remove('is-active-row'));
+        });
+      });
+    });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initITConsultingPage);
+    document.addEventListener('DOMContentLoaded', initITConsultingInteractions);
   } else {
-    initITConsultingPage();
+    initITConsultingInteractions();
   }
-  document.addEventListener('astro:page-load', initITConsultingPage);
+  document.addEventListener('astro:page-load', initITConsultingInteractions);
 </script>
 
 <style>
   /* ========================================================================= */
-  /* On-Load Dynamic Reveal Animation (Matches Homepage Motion)                */
+  /* Scroll-Triggered Soft-Reveal & Dissolve Animation                         */
   /* ========================================================================= */
-  .reveal-on-load {
+  .reveal-on-scroll {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
+    transform: translateY(28px);
+    filter: blur(5px);
+    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
   }
 
-  .reveal-on-load.is-revealed {
+  .reveal-on-scroll.is-revealed {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-35px) translateY(10px);
+    filter: blur(5px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal-left.is-revealed {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+    filter: blur(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(35px) translateY(10px);
+    filter: blur(5px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal-right.is-revealed {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+    filter: blur(0);
   }
 
   /* ========================================================================= */
-  /* Section 4: Shuttle Bottom-to-Top Color Fill Animation                      */
+  /* GRADIENT BORDER DRAW ANIMATION (card-08 Architecture in Brand Colors)     */
+  /* Multi-color conic gradient traces a live circuit around border on hover   */
   /* ========================================================================= */
-  .shuttle-card {
+  @property --card-border-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes gradientBorderSpin {
+    to {
+      --card-border-angle: 360deg;
+    }
+  }
+
+  .gradient-border-card {
+    --card-border-width: 2.5px;
+    position: relative;
+    border-radius: 1.5rem;
+    background: #ffffff;
+    cursor: pointer;
+    isolation: isolate;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, box-shadow;
   }
 
-  .shuttle-fill-layer {
-    will-change: transform;
+  /* Static Clean Base Border */
+  .gradient-border-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.35s ease;
+  }
+
+  /* Animated Conic Gradient Border Circuit in Website Colors */
+  .gradient-border-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: var(--card-border-width);
+    background: conic-gradient(
+      from var(--card-border-angle, 0deg),
+      transparent 0deg,
+      transparent 60deg,
+      #38BDF8 120deg,
+      #2563EB 175deg,
+      #0C487A 220deg,
+      #FF3130 270deg,
+      transparent 330deg,
+      transparent 360deg
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    animation: gradientBorderSpin 3.5s linear infinite paused;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Hover State: Traces the live circuit beam around the card perimeter */
+  .gradient-border-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px -10px rgba(12, 72, 122, 0.22), 0 0 35px rgba(37, 99, 235, 0.16);
+  }
+
+  .gradient-border-card:hover::before {
+    opacity: 1;
+    animation-play-state: running;
+  }
+
+  .gradient-border-card:hover::after {
+    opacity: 0;
+  }
+
+  /* Cascading Entrance */
+  .gradient-border-card.cascade-item {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(4px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s ease;
+  }
+
+  .gradient-border-card.cascade-item.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  .gradient-border-card.cascade-item.is-revealed:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px -10px rgba(12, 72, 122, 0.22), 0 0 35px rgba(37, 99, 235, 0.16);
   }
 
   /* ========================================================================= */
-  /* Center-Aligned Continuous Radiant Color Shimmer Sweep (From Homepage)     */
+  /* PARENT BLUR / SIBLING DE-EMPHASIS (FOCUS STATES) FOR TIMELINES            */
+  /* ONLY triggers when mouse enters .timeline-card-box; cleared on mouse out  */
   /* ========================================================================= */
-  .service-shimmer-center {
-    background: linear-gradient(
-      90deg,
-      #0F274A 0%,
-      #1E40AF 22%,
-      #2563EB 42%,
-      #DC2626 58%,
-      #EF4444 72%,
-      #0F274A 100%
+  .timeline-card-box {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.35s ease,
+                opacity 0.35s ease,
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
+    will-change: transform, filter, opacity;
+  }
+
+  .timeline-node-core {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.35s ease,
+                opacity 0.35s ease;
+    will-change: transform, filter, opacity;
+  }
+
+  /* When cursor is directly hovering over a timeline card: */
+  .timeline-card-box:hover,
+  .timeline-card-box.is-card-focused {
+    transform: translateY(-8px) scale(1.025) rotate(0deg) !important;
+    box-shadow: 0 24px 55px -10px rgba(12, 72, 122, 0.28), 0 0 0 1px rgba(12, 72, 122, 0.35);
+    border-color: rgba(12, 72, 122, 0.55);
+    z-index: 25;
+  }
+
+  .timeline-step-row:has(.timeline-card-box:hover) .timeline-node-core,
+  .timeline-step-row.is-active-row .timeline-node-core {
+    transform: scale(1.15) rotate(0deg) !important;
+    filter: none !important;
+    opacity: 1 !important;
+    z-index: 30;
+  }
+
+  /* ONLY non-hovered sibling timeline cards blur while a card is hovered */
+  .timeline-step-container:has(.timeline-card-box:hover) .timeline-card-box:not(:hover),
+  .timeline-step-container.has-card-hover .timeline-card-box:not(.is-card-focused) {
+    filter: blur(3.5px) saturate(0.6);
+    opacity: 0.42;
+    transform: scale(0.96);
+  }
+
+  .timeline-step-container:has(.timeline-card-box:hover) .timeline-step-row:not(:has(.timeline-card-box:hover)) .timeline-node-core,
+  .timeline-step-container.has-card-hover .timeline-step-row:not(.is-active-row) .timeline-node-core {
+    filter: blur(3px) saturate(0.6);
+    opacity: 0.45;
+  }
+
+  /* ========================================================================= */
+  /* Smooth Leafy Flowy Animation on Section 3 Milestone Cards (User Request)  */
+  /* ========================================================================= */
+  @keyframes leafyFlowSmooth {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg) skewX(0deg);
+    }
+    20% {
+      transform: translateY(-5px) rotate(0.65deg) skewX(0.35deg);
+    }
+    45% {
+      transform: translateY(-2px) rotate(-0.5deg) skewX(-0.25deg);
+    }
+    70% {
+      transform: translateY(-6px) rotate(0.4deg) skewX(0.2deg);
+    }
+    85% {
+      transform: translateY(-2.5px) rotate(-0.2deg) skewX(-0.1deg);
+    }
+  }
+
+  .timeline-card-box.is-revealed {
+    animation: leafyFlowSmooth 8.5s ease-in-out infinite;
+    animation-delay: calc(var(--step-idx, 0) * 1.35s);
+    will-change: transform;
+  }
+
+  .timeline-card-box:hover {
+    animation-play-state: paused;
+    transform: translateY(-8px) scale(1.015) rotate(0deg) !important;
+  }
+
+  /* Ambient Cursor Light Spotlight on Service Cards */
+  .consulting-card {
+    position: relative;
+  }
+
+  .consulting-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(12, 72, 122, 0.08),
+      transparent 68%
     );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .consulting-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Initial Page Load Animations */
+  @keyframes heroSoftReveal {
+    0% { opacity: 0; transform: translateY(16px); filter: blur(8px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+  .hero-heading-reveal { animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; will-change: opacity, transform, filter; }
+  .hero-subheading-reveal { animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; will-change: opacity, transform, filter; }
+  .hero-image-reveal { animation: heroSoftReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; will-change: opacity, transform, filter; }
+  .hero-menu-reveal { animation: heroSoftReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; will-change: opacity, transform, filter; }
+
+  /* Timeline Aperture Opening & Radiant Pulse Keyframes */
+  @keyframes nodeApertureOpen {
+    0% { transform: scale(0.2) rotate(-35deg); opacity: 0; filter: blur(8px); }
+    60% { transform: scale(1.18) rotate(5deg); opacity: 1; filter: blur(0); }
+    85% { transform: scale(0.96) rotate(-2deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0); }
+  }
+
+  @keyframes nodeSonarRing {
+    0% { transform: scale(0.75); opacity: 0.85; }
+    50% { transform: scale(1.7); opacity: 0.3; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+
+  .timeline-node-core {
+    opacity: 0;
+    transform: scale(0.25) rotate(-35deg);
+    transition: opacity 0.3s ease;
+    will-change: transform, opacity;
+  }
+
+  .timeline-node-core.node-opened {
+    animation: nodeApertureOpen 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .timeline-node-core.node-opened .sonar-ring {
+    animation: nodeSonarRing 2.5s ease-out infinite 0.45s;
+  }
+
+  /* Animated Square Feature Tiles */
+  @keyframes floatSubtle1 { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
+  @keyframes floatSubtle2 { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(5px); } }
+  .animate-float-subtle-1 { animation: floatSubtle1 5s ease-in-out infinite; }
+  .animate-float-subtle-2 { animation: floatSubtle2 6s ease-in-out infinite 0.6s; }
+  .animate-float-subtle-1:hover, .animate-float-subtle-2:hover { animation-play-state: paused; }
+
+  /* ========================================================================= */
+  /* Flow-Docked Two-Deck Card Animation (Hero 2x2 Grid)                       */
+  /* Zero title clipping, zero description clipping, zero leaking at rest      */
+  /* ========================================================================= */
+  /* ========================================================================= */
+  /* Spacious Self-Contained Zero-Overlap Hero Cards (200px Height)            */
+  /* Generous breathing space, zero collision with neighbor cards               */
+  /* ========================================================================= */
+  .square-slide-card {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    perspective: 1000px;
+    z-index: 10;
+    pointer-events: auto;
+  }
+
+  .square-slide-card:hover {
+    z-index: 60;
+  }
+
+  .self-contained-card {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px -4px rgba(12, 72, 122, 0.18);
+    transition: box-shadow 0.5s ease;
+  }
+
+  .self-contained-card:hover {
+    box-shadow: 0 20px 40px -8px rgba(12, 72, 122, 0.32);
+  }
+
+  /* Keep inner container strictly in place - ZERO upward translation! */
+  .self-contained-card .square-slide-inner,
+  .self-contained-card:hover .square-slide-inner {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Deck 1: Top Header at Rest (200px full height, generous vertical breathing space) */
+  .self-contained-card .square-slide-top {
+    height: 200px;
+    padding: 1.75rem 1.25rem 1.5rem 1.25rem;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: height 0.65s cubic-bezier(0.25, 1, 0.5, 1),
+                padding 0.65s cubic-bezier(0.25, 1, 0.5, 1),
+                border-radius 0.45s ease;
+  }
+
+  /* Deck 1: Top Header on Hover (Shrinks gracefully to 76px with ample breathing room) */
+  .self-contained-card:hover .square-slide-top {
+    height: 76px;
+    padding: 0.75rem 1rem 0.65rem 1rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 4px 16px rgba(12, 72, 122, 0.22);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Icon Wrap at Rest */
+  .self-contained-card .square-icon-wrap {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.75rem;
+    border-radius: 1rem;
+    transition: all 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .self-contained-card .square-icon-svg {
+    width: 1.65rem;
+    height: 1.65rem;
+    transition: all 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* Title at Rest */
+  .self-contained-card .square-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+    padding: 0 0.25rem;
+    transition: all 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* Icon Wrap on Hover: Smoothly scales down to compact 28px badge */
+  .self-contained-card:hover .square-icon-wrap {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-bottom: 0.25rem;
+    border-radius: 0.55rem;
+  }
+
+  .self-contained-card:hover .square-icon-svg {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+
+  /* Title on Hover: Crisp, clear, with plenty of margin */
+  .self-contained-card:hover .square-title {
+    font-size: 0.8125rem;
+    line-height: 1.25;
+  }
+
+  /* Deck 2: Bottom Description Drawer at Rest */
+  .self-contained-card .square-slide-bottom {
+    flex: 1;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(14px);
+    border: none;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.25rem;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.65s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.5s ease 0.06s,
+                transform 0.65s cubic-bezier(0.25, 1, 0.5, 1),
+                padding 0.5s ease;
+  }
+
+  /* Deck 2: Bottom Description Drawer on Hover (Fills the remaining 124px with generous breathing room) */
+  .self-contained-card:hover .square-slide-bottom {
+    max-height: 124px;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 0.85rem 1.25rem 1.15rem 1.25rem;
+  }
+
+  /* Description text typography: elegant, readable, relaxed line-height */
+  .self-contained-card .square-desc {
+    font-size: 0.825rem;
+    line-height: 1.55;
+    color: #334155;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  /* Bottom Red/Blue Accent Line on Slide 2 */
+  .self-contained-card .square-slide-bottom::after {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 3px;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #0C487A, #1E40AF, #FF3130);
+    border-radius: 2px;
+    transition: width 0.35s ease;
+  }
+
+  .self-contained-card:hover .square-slide-bottom::after {
+    width: 56px;
+  }
+
+  /* Subtle Radar Ping Animation for Federal Visual Affordance */
+  @keyframes pingSlow {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    70%, 100% { transform: scale(1.4); opacity: 0; }
+  }
+
+  .animate-ping-slow {
+    animation: pingSlow 3.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  /* Center-Aligned Continuous Radiant Color Shimmer Sweep */
+  .service-shimmer-center {
+    background: linear-gradient(90deg, #0F274A 0%, #1E40AF 22%, #2563EB 42%, #DC2626 58%, #EF4444 72%, #0F274A 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -742,15 +1367,13 @@ const deliverables = [
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    padding-bottom: 0.16em;
-    padding-top: 0.05em;
+    line-height: 1.36;
+    padding-bottom: 0.22em;
+    padding-top: 0.08em;
     overflow: visible;
   }
 
-  .service-shimmer-line-1 {
-    animation: servicePageShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
-
+  .service-shimmer-line-1 { animation: servicePageShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
   @keyframes servicePageShimmer1 {
     0% { background-position: 0% 50%; }
     48% { background-position: 100% 50%; }
@@ -760,26 +1383,11 @@ const deliverables = [
 
   /* Accessibility: Reduced Motion */
   @media (prefers-reduced-motion: reduce) {
-    .service-shimmer-center {
-      animation: none !important;
-      background: none !important;
-      -webkit-text-fill-color: #0F274A !important;
-      color: #0F274A !important;
-    }
-    .reveal-on-load {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
-    }
-    .shuttle-card,
-    .why-card,
-    .carousel-stage-card {
-      transition: none !important;
-      transform: none !important;
-    }
-    .shuttle-fill-layer {
-      transition: none !important;
-      display: none !important;
-    }
+    .service-shimmer-center { animation: none !important; background: none !important; -webkit-text-fill-color: #0F274A !important; color: #0F274A !important; }
+    .hero-heading-reveal, .hero-subheading-reveal, .hero-image-reveal, .hero-menu-reveal { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+    .timeline-node-core { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .why-card, .gradient-border-card, .timeline-card-box, .square-slide-top, .square-slide-bottom { transition: none !important; transform: none !important; animation: none !important; filter: none !important; }
+    .gradient-border-card::before { animation: none !important; }
+    .reveal-on-scroll, .reveal-left, .reveal-right, .gradient-border-card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   }
 </style>

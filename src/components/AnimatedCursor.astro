@@ -1,52 +1,67 @@
 ---
 /**
- * AnimatedCursor.astro - Executive Compass Navigational Reticle Cursor Follower
+ * AnimatedCursor.astro - Ultra-Smooth Two-Tone Brand Logo Interactive Cursor
  * 
  * Brand Harmony & GovCon Aesthetics:
- * - Dual-layer precision navigation follower:
- *   1. Inner Precision Micro-Dot: Sharp Needle Red (#FF3130) with soft radiant beacon glow.
- *   2. Outer Navigational Reticle Ring: Smooth 38px gliding compass circle with fine hairline
- *      cardinal tick marks (North, East, South, West notches).
+ * - Replaces the crosshair/compass reticle with a sleek, minimalist dual-color design:
+ *   1. Outer Ring: 34px fluid follower with an ultra-clean dual-color brand gradient
+ *      blending Unity Compass Navy Blue (#0C487A) and Federal Vibrant Red (#FF3130).
+ *      Gentle continuous 360° rotation adds a hypnotic, high-tech elegance.
+ *   2. Center Core Dot: Precision 5px micro-dot in vibrant brand red (#FF3130) with
+ *      soft radiant ambient glow.
  * - Interactive States:
- *   - Hovering over buttons/links/tabs: Ring expands to 56px, border transitions to vibrant red (#FF3130)
- *     with translucent red aura and illuminated cardinal ticks.
- *   - Clicking (mousedown): Elastic snap-in pulse (scale 0.85) for tactile visual response.
- *   - Offscreen/Idle: Graceful fade-out when mouse leaves the viewport.
- * - Hardware Accelerated: Uses requestAnimationFrame + translate3d for butter-smooth 60fps/120fps motion.
- * - Fully Non-Intrusive: pointer-events: none ensures zero interference with clicks, text selection, or OS cursor.
+ *   - Hovering over buttons/links/cards: Ring expands smoothly to 52px, gains a soft
+ *     translucent dual-brand aura, and the core dot scales gracefully.
+ *   - Clicking: Tactile micro-elastic compression snap (scale 0.82).
+ *   - Idle: Softens opacity after 3.5s of inactivity.
+ * - Hardware Accelerated: requestAnimationFrame + translate3d for 60fps/120fps glide.
+ * - Non-Intrusive: pointer-events: none on all elements guarantees zero interference.
  * - Auto-disabled on touch/mobile screens (@media (pointer: coarse)) and prefers-reduced-motion.
  */
 ---
 
-<div id="compass-cursor-wrap" class="compass-cursor-container" aria-hidden="true">
-  <!-- Outer Floating Navigational Reticle Ring with 4 Cardinal Compass Ticks -->
-  <div id="compass-cursor-ring" class="compass-cursor-ring">
-    <span class="compass-tick compass-tick-n"></span>
-    <span class="compass-tick compass-tick-e"></span>
-    <span class="compass-tick compass-tick-s"></span>
-    <span class="compass-tick compass-tick-w"></span>
+<div id="brand-cursor-wrap" class="brand-cursor-container" aria-hidden="true">
+  <!-- Outer Floating Dual-Color Brand Follower Ring -->
+  <div id="brand-cursor-ring" class="brand-cursor-ring">
+    <svg class="brand-cursor-svg w-full h-full" viewBox="0 0 44 44" fill="none">
+      <defs>
+        <linearGradient id="cursorTwoColorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#0C487A" />
+          <stop offset="48%" stop-color="#1E40AF" />
+          <stop offset="100%" stop-color="#FF3130" />
+        </linearGradient>
+      </defs>
+      <circle
+        class="brand-cursor-circle"
+        cx="22"
+        cy="22"
+        r="19"
+        stroke="url(#cursorTwoColorGrad)"
+        stroke-width="1.75"
+      />
+    </svg>
   </div>
 
-  <!-- Inner Pinpoint Needle-Red Precision Micro-Dot -->
-  <div id="compass-cursor-dot" class="compass-cursor-dot"></div>
+  <!-- Inner Center Precision Micro-Dot -->
+  <div id="brand-cursor-dot" class="brand-cursor-dot"></div>
 </div>
 
 <style>
-  .compass-cursor-container {
+  .brand-cursor-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none;
+    pointer-events: none !important;
     z-index: 99999;
     overflow: hidden;
   }
 
   /* -------------------------------------------------- */
-  /* Inner Precision Micro-Dot                          */
+  /* Inner Center Micro-Dot                             */
   /* -------------------------------------------------- */
-  .compass-cursor-dot {
+  .brand-cursor-dot {
     position: fixed;
     top: 0;
     left: 0;
@@ -56,149 +71,118 @@
     margin-left: -3px;
     border-radius: 50%;
     background: #FF3130;
-    box-shadow: 0 0 10px rgba(255, 49, 48, 0.7), 0 0 4px rgba(255, 49, 48, 0.9);
-    pointer-events: none;
+    box-shadow: 0 0 8px rgba(255, 49, 48, 0.75), 0 0 2px rgba(255, 49, 48, 0.9);
+    pointer-events: none !important;
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.3s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
     will-change: transform, opacity;
   }
 
   /* -------------------------------------------------- */
-  /* Outer Compass Navigational Reticle Ring            */
+  /* Outer Dual-Color Smooth Brand Ring                 */
   /* -------------------------------------------------- */
-  .compass-cursor-ring {
+  .brand-cursor-ring {
     position: fixed;
     top: 0;
     left: 0;
-    width: 38px;
-    height: 38px;
-    margin-top: -19px;
-    margin-left: -19px;
+    width: 34px;
+    height: 34px;
+    margin-top: -17px;
+    margin-left: -17px;
     border-radius: 50%;
-    border: 1.5px solid rgba(12, 72, 122, 0.40);
-    background: radial-gradient(circle, rgba(12, 72, 122, 0.04) 0%, transparent 70%);
-    box-shadow: 0 0 16px rgba(12, 72, 122, 0.10);
-    pointer-events: none;
+    pointer-events: none !important;
     opacity: 0;
-    transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-                height 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-                margin 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.25s ease,
-                background 0.25s ease,
-                box-shadow 0.25s ease,
-                opacity 0.3s ease;
+    transition: width 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+                margin 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease,
+                background 0.3s ease,
+                filter 0.3s ease;
     will-change: transform, opacity;
   }
 
-  /* 4 Cardinal Compass Rose Notches */
-  .compass-tick {
-    position: absolute;
-    background: rgba(12, 72, 122, 0.5);
-    transition: background-color 0.25s ease, transform 0.25s ease;
+  /* Smooth, hypnotic rotation of the dual-color gradient */
+  .brand-cursor-svg {
+    display: block;
+    animation: cursorSpin 6.5s linear infinite;
+    transform-origin: center center;
+    filter: drop-shadow(0 0 6px rgba(12, 72, 122, 0.25));
+    transition: filter 0.3s ease;
   }
 
-  .compass-tick-n {
-    top: -3px;
-    left: 50%;
-    width: 1.5px;
-    height: 5px;
-    transform: translateX(-50%);
+  .brand-cursor-circle {
+    transition: stroke-width 0.3s ease;
   }
 
-  .compass-tick-s {
-    bottom: -3px;
-    left: 50%;
-    width: 1.5px;
-    height: 5px;
-    transform: translateX(-50%);
-  }
-
-  .compass-tick-e {
-    right: -3px;
-    top: 50%;
-    width: 5px;
-    height: 1.5px;
-    transform: translateY(-50%);
-  }
-
-  .compass-tick-w {
-    left: -3px;
-    top: 50%;
-    width: 5px;
-    height: 1.5px;
-    transform: translateY(-50%);
+  @keyframes cursorSpin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   /* -------------------------------------------------- */
-  /* Active Hover State (Over Interactive Elements)     */
+  /* Hover State (Over Interactive Elements)            */
   /* -------------------------------------------------- */
-  .compass-cursor-ring.is-hovering {
-    width: 54px;
-    height: 54px;
-    margin-top: -27px;
-    margin-left: -27px;
-    border-color: #FF3130;
-    background: radial-gradient(circle, rgba(255, 49, 48, 0.12) 0%, rgba(12, 72, 122, 0.04) 60%, transparent 80%);
-    box-shadow: 0 0 24px rgba(255, 49, 48, 0.35), 0 0 8px rgba(255, 49, 48, 0.2) inset;
+  .brand-cursor-ring.is-hovering {
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    margin-left: -25px;
+    background: radial-gradient(circle, rgba(255, 49, 48, 0.08) 0%, rgba(12, 72, 122, 0.05) 55%, transparent 75%);
   }
 
-  .compass-cursor-ring.is-hovering .compass-tick {
-    background: #FF3130;
+  .brand-cursor-ring.is-hovering .brand-cursor-svg {
+    filter: drop-shadow(0 0 10px rgba(255, 49, 48, 0.4)) drop-shadow(0 0 14px rgba(12, 72, 122, 0.25));
   }
 
-  .compass-cursor-ring.is-hovering .compass-tick-n {
-    transform: translateX(-50%) translateY(-2px);
+  .brand-cursor-ring.is-hovering .brand-cursor-circle {
+    stroke-width: 2.2;
   }
 
-  .compass-cursor-ring.is-hovering .compass-tick-s {
-    transform: translateX(-50%) translateY(2px);
+  .brand-cursor-dot.is-hovering {
+    transform: scale(1.35);
+    box-shadow: 0 0 12px rgba(255, 49, 48, 0.9), 0 0 4px rgba(12, 72, 122, 0.8);
   }
 
-  .compass-cursor-ring.is-hovering .compass-tick-e {
-    transform: translateY(-50%) translateX(2px);
-  }
-
-  .compass-cursor-ring.is-hovering .compass-tick-w {
-    transform: translateY(-50%) translateX(-2px);
-  }
-
-  .compass-cursor-dot.is-hovering {
-    transform: scale(1.4);
-    box-shadow: 0 0 14px rgba(255, 49, 48, 0.9);
-  }
-
-  /* Click Down Pulse State */
-  .compass-cursor-ring.is-clicking {
-    transform: scale(0.82) !important;
-    border-color: #FF3130;
+  /* -------------------------------------------------- */
+  /* Click State (Tactile Compression Pulse)            */
+  /* -------------------------------------------------- */
+  .brand-cursor-ring.is-clicking {
+    transform: scale(0.8) !important;
     transition: transform 0.12s ease-out;
   }
 
-  .compass-cursor-dot.is-clicking {
-    transform: scale(0.7) !important;
+  .brand-cursor-dot.is-clicking {
+    transform: scale(0.65) !important;
   }
 
   /* -------------------------------------------------- */
   /* Mobile, Touch Devices & Reduced Motion Overrides   */
   /* -------------------------------------------------- */
   @media (pointer: coarse), (hover: none) {
-    .compass-cursor-container {
+    .brand-cursor-container {
       display: none !important;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .compass-cursor-container {
+    .brand-cursor-container {
       display: none !important;
+    }
+    .brand-cursor-svg {
+      animation: none !important;
     }
   }
 </style>
 
 <script>
-  function initCompassCursor() {
-    const wrap = document.getElementById('compass-cursor-wrap');
-    const ring = document.getElementById('compass-cursor-ring');
-    const dot = document.getElementById('compass-cursor-dot');
+  function initBrandCursor() {
+    const wrap = document.getElementById('brand-cursor-wrap');
+    const ring = document.getElementById('brand-cursor-ring');
+    const dot = document.getElementById('brand-cursor-dot');
 
     if (!wrap || !ring || !dot) return;
 
@@ -217,7 +201,7 @@
     let animId: number | null = null;
     let idleTimeout: ReturnType<typeof setTimeout> | null = null;
 
-    // Linear Interpolation factor (0.16 produces smooth, responsive aerodynamic lag)
+    // Fluid damping factor (0.16 produces butter-smooth, weightless follow)
     const LERP = 0.16;
 
     // 1. Mouse Movement Tracker
@@ -233,14 +217,14 @@
         ringY = mouseY;
       }
 
-      // Dot follows immediately with 0ms lag
+      // Center dot follows 1:1 with 0ms lag
       dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
 
       // Reset idle fade-out
       if (idleTimeout) clearTimeout(idleTimeout);
       idleTimeout = setTimeout(() => {
         if (!isHovering) {
-          ring.style.opacity = '0.4';
+          ring.style.opacity = '0.35';
         }
       }, 3500);
     }
@@ -251,7 +235,7 @@
         ringX += (mouseX - ringX) * LERP;
         ringY += (mouseY - ringY) * LERP;
 
-        const scale = isClicking ? ' scale(0.82)' : '';
+        const scale = isClicking ? ' scale(0.8)' : '';
         ring.style.transform = `translate3d(${ringX.toFixed(2)}px, ${ringY.toFixed(2)}px, 0)${scale}`;
       }
 
@@ -263,7 +247,7 @@
       if (!target) return false;
       return Boolean(
         target.closest(
-          'a, button, input, textarea, select, [role="button"], [role="tab"], .cursor-pointer, [data-interactive], summary'
+          'a, button, input, textarea, select, [role="button"], [role="tab"], .cursor-pointer, [data-interactive], summary, .square-slide-card, .shuttle-card, .why-card-spotlight'
         )
       );
     }
@@ -325,10 +309,9 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCompassCursor);
+    document.addEventListener('DOMContentLoaded', initBrandCursor);
   } else {
-    initCompassCursor();
+    initBrandCursor();
   }
-  document.addEventListener('astro:page-load', initCompassCursor);
+  document.addEventListener('astro:page-load', initBrandCursor);
 </script>
-

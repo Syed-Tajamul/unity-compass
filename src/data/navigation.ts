@@ -9,23 +9,6 @@ export interface NavItem {
 export const navigationLinks: NavItem[] = [
   { name: 'Home', href: '/' },
   {
-    name: 'About Us',
-    href: 'javascript:void(0)',
-    children: [
-      {
-        name: 'About Unity Compass',
-        href: 'javascript:void(0)',
-        description: 'Our mission, federal contracting standards, leadership, and operational methodology.',
-      },
-      {
-        name: 'Capability Statement (PDF)',
-        href: '/documents/capability-statement.pdf',
-        description: 'Official corporate capabilities, NAICS codes, past performance, and contract vehicles.',
-        badge: 'PDF',
-      },
-    ],
-  },
-  {
     name: 'Services',
     href: '/proposal-development-services',
     children: [
@@ -49,7 +32,7 @@ export const navigationLinks: NavItem[] = [
       {
         name: 'IT & Business Consulting',
         href: '/information-technology-and-business-consulting',
-        description: 'Systems architecture, federal compliance advisory, and OASIS+ readiness support.',
+        description: 'Systems architecture, federal compliance advisory, and digital transformation.',
       },
       {
         name: 'Customized Support Services',
@@ -58,8 +41,25 @@ export const navigationLinks: NavItem[] = [
       },
     ],
   },
+  { name: 'About Us', href: '/about-us' },
+  {
+    name: 'Resources',
+    href: '/blog',
+    children: [
+      {
+        name: 'Insights & Blog',
+        href: '/blog',
+        description: 'Federal contracting trends, capture strategies, and compliance best practices.',
+      },
+      {
+        name: 'Capability Statement (PDF)',
+        href: '/documents/capability-statement.pdf',
+        description: 'Official corporate capabilities, NAICS codes, past performance, and contract vehicles.',
+        badge: 'PDF',
+      },
+    ],
+  },
   { name: 'Careers', href: 'javascript:void(0)' },
-  { name: 'Blog', href: '/blog' },
   { name: 'Contact Us', href: 'javascript:void(0)' },
 ];
 

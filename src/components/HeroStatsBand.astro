@@ -9,11 +9,12 @@
  * - Deep Federal Navy figures (#0F274A) with signature needle red accents (#FF3130)
  * - Interactive hover micro-lift and animated count-up counters
  */
+import WaveDivider from './WaveDivider.astro';
 ---
 
 <section
   id="hero-stats-band"
-  class="relative bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] pt-2 pb-14 sm:pb-16 lg:pb-20 overflow-hidden"
+  class="relative bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] pt-2 pb-20 sm:pb-24 lg:pb-28 overflow-hidden"
   aria-label="Federal Credentials & Track Record"
 >
   <!-- Minute Checks Pattern Overlay (Matching Hero Section Canvas) -->
@@ -93,12 +94,8 @@
     </div>
   </div>
 
-  <!-- Smooth Transitional Divider Leading gracefully into Section 3 (LogoCarousel white canvas) -->
-  <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none z-10 -translate-y-[1px]">
-    <svg viewBox="0 0 1440 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-6 sm:h-9 text-white preserve-3d">
-      <path d="M0,20 C360,40 1080,0 1440,20 L1440,40 L0,40 Z" fill="currentColor"></path>
-    </svg>
-  </div>
+  <!-- Pure CSS + Inline SVG Wave Section Divider (wsd-01) Leading seamlessly into Section 3 (LogoCarousel white canvas) -->
+  <WaveDivider variant="wave" fillColor="#ffffff" />
 </section>
 
 <style>

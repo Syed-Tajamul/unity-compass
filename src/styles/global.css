@@ -308,36 +308,15 @@
   100% { background-position: 120% 50%; }
 }
 
+/* ========================================================================= */
+/* Clean, Prestigious Federal Headline Typography & Contrast                */
+/* Deep Navy (#0B2553) Dominant with Selective Brand Red Highlights          */
+/* ========================================================================= */
 .hero-shimmer-line {
-  background: linear-gradient(
-    90deg,
-    #0F274A 0%,
-    #1E40AF 22%,
-    #2563EB 42%,
-    #DC2626 58%,
-    #EF4444 72%,
-    #0F274A 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #0B2553;
   display: block;
   width: fit-content;
   max-width: 100%;
-  will-change: background-position;
-}
-
-.hero-shimmer-line-1 {
-  animation: line1ContinuousSweep 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-.hero-shimmer-line-2 {
-  animation: line2ContinuousSweep 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-.hero-shimmer-line-3 {
-  animation: line3ContinuousSweep 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 /* ========================================================================= */
@@ -347,8 +326,8 @@
 @keyframes heroSoftReveal {
   0% {
     opacity: 0;
-    transform: translateY(14px);
-    filter: blur(8px);
+    transform: translateY(12px);
+    filter: blur(6px);
   }
   100% {
     opacity: 1;
@@ -358,25 +337,22 @@
 }
 
 .hero-heading-reveal {
-  animation: heroSoftReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  animation: heroSoftReveal 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
   will-change: opacity, transform, filter;
 }
 
 .hero-subheading-reveal {
-  animation: heroSoftReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+  animation: heroSoftReveal 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
   will-change: opacity, transform, filter;
 }
 
 .hero-cta-reveal {
-  animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+  animation: heroSoftReveal 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
   will-change: opacity, transform, filter;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-shimmer-line {
-    background: none !important;
-    -webkit-text-fill-color: #0F274A !important;
-    color: #0F274A !important;
     animation: none !important;
   }
   .hero-heading-reveal,
@@ -390,35 +366,36 @@
 }
 
 /* ========================================================================= */
-/* Gentle 3D Levitating Floating Artwork & Synchronized Ground Shadow        */
+/* Subtle 3D Levitating Floating Artwork & Synchronized Ground Shadow        */
+/* Very subtle 6px float to convey life without distracting motion           */
 /* ========================================================================= */
 @keyframes heroArtFloat {
   0%, 100% {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-12px);
+    transform: translateY(-6px);
   }
 }
 
 @keyframes heroShadowBreathe {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.85;
+    opacity: 0.8;
   }
   50% {
-    transform: scale(0.9);
-    opacity: 0.5;
+    transform: scale(0.96);
+    opacity: 0.65;
   }
 }
 
 .hero-floating-artwork {
-  animation: heroArtFloat 6s ease-in-out infinite;
+  animation: heroArtFloat 6.5s ease-in-out infinite;
   will-change: transform;
 }
 
 .hero-floating-shadow {
-  animation: heroShadowBreathe 6s ease-in-out infinite;
+  animation: heroShadowBreathe 6.5s ease-in-out infinite;
   will-change: transform, opacity;
 }
 
@@ -528,62 +505,20 @@
 }
 
 /* ========================================================================= */
-/* Elegant Animated CTA Button Interactions (Light Sheen & Ambient Breathing) */
+/* Refined Red CTA Button: Soft Red-Tinted Shadow, Zero Aggressive Pulsing   */
 /* ========================================================================= */
-@keyframes ctaGlowPulse {
-  0%, 100% {
-    box-shadow: 0 4px 14px -2px rgba(220, 55, 62, 0.30);
-  }
-  50% {
-    box-shadow: 0 6px 20px 2px rgba(220, 55, 62, 0.48);
-  }
-}
-
-@keyframes btnSheenSweep {
-  0%, 65% {
-    left: -70%;
-  }
-  100% {
-    left: 150%;
-  }
-}
-
-.btn-sheen {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-sheen::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -70%;
-  width: 45%;
-  height: 200%;
-  background: linear-gradient(
-    60deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.35) 50%,
-    transparent 80%
-  );
-  transform: rotate(25deg);
-  animation: btnSheenSweep 8.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  pointer-events: none;
-}
-
 .btn-needle-red {
-  background: linear-gradient(135deg, #DC373E 0%, #C62828 100%);
+  background: linear-gradient(135deg, #FF3130 0%, #E02625 100%);
   color: #FFFFFF !important;
   font-weight: 600;
-  border-radius: 0.5rem;
-  animation: ctaGlowPulse 7s ease-in-out infinite;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 0.65rem;
+  box-shadow: 0 6px 20px -3px rgba(255, 49, 48, 0.28);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn-needle-red:hover {
-  background: linear-gradient(135deg, #C62828 0%, #B7161B 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px 2px rgba(220, 55, 62, 0.6);
-  animation: none;
+  background: linear-gradient(135deg, #E02625 0%, #C61E1D 100%);
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 24px -2px rgba(255, 49, 48, 0.38);
 }
 .btn-needle-red:active {
   transform: translateY(0);
