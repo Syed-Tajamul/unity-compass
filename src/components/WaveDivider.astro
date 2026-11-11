@@ -3,13 +3,13 @@
  * WaveDivider.astro - Pure CSS + Inline SVG Section Divider (wsd-01)
  *
  * Features:
- * - One inline SVG path, one CSS rule, zero dependencies, zero JavaScript, zero layout shift (CLS: 0)
- * - The drop-in replacement for a page-builder shape divider to break the boxy grid between two sections
+ * - One inline SVG path, zero dependencies, zero JavaScript, zero layout shift (CLS: 0)
  * - Supports variants:
  *   - 'wave' / 'dynamic' (wsd-01a): Organic wave breaking the straight boxy grid
  *   - 'gentle' / 'editorial' (wsd-01c): Subtle, low-amplitude editorial curve that reads as premium
  * - Supports custom target fill color (defaults to next section background: #ffffff)
- * - Supports 'bottom' or 'top' positioning, plus 'flip' horizontal mirroring
+ * - Supports 'bottom' and 'top' positioning with native SVG coordinate paths (0 transform artifacts)
+ * - Supports 'flip' for horizontal mirroring
  */
 
 interface Props {
@@ -29,42 +29,83 @@ const {
 } = Astro.props;
 
 const isGentle = variant === 'gentle' || variant === 'editorial';
+const isTop = position === 'top';
 ---
 
-{isGentle ? (
-  <svg
-    class:list={[
-      'wsd-wave',
-      'wsd-wave--gentle',
-      position === 'top' ? 'wsd-wave--top' : 'wsd-wave--bottom',
-      flip && 'wsd-wave--flipped',
-      className
-    ]}
-    style={{ color: fillColor }}
-    viewBox="0 0 1440 90"
-    preserveAspectRatio="none"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path d="M0,52 C180,4 360,4 540,44 C740,88 900,88 1080,50 C1220,20 1330,20 1440,42 L1440,90 L0,90 Z" fill="currentColor"></path>
-  </svg>
+{isTop ? (
+  /* Native TOP wave: flat solid at y=0 (top edge), wave hangs downwards into section */
+  isGentle ? (
+    <svg
+      class:list={[
+        'wsd-wave',
+        'wsd-wave--top',
+        'wsd-wave--gentle',
+        flip && 'wsd-wave--flipped',
+        className
+      ]}
+      style={{ color: fillColor }}
+      viewBox="0 0 1440 90"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M0,0 L1440,0 L1440,48 C1330,70 1220,70 1080,40 C900,2 740,2 540,46 C360,86 180,86 0,38 Z" fill="currentColor"></path>
+    </svg>
+  ) : (
+    <svg
+      class:list={[
+        'wsd-wave',
+        'wsd-wave--top',
+        'wsd-wave--dynamic',
+        flip && 'wsd-wave--flipped',
+        className
+      ]}
+      style={{ color: fillColor }}
+      viewBox="0 0 1440 120"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M0,0 L1440,0 L1440,48 C1200,0 960,48 720,80 C480,112 240,0 0,56 Z" fill="currentColor"></path>
+    </svg>
+  )
 ) : (
-  <svg
-    class:list={[
-      'wsd-wave',
-      'wsd-wave--dynamic',
-      position === 'top' ? 'wsd-wave--top' : 'wsd-wave--bottom',
-      flip && 'wsd-wave--flipped',
-      className
-    ]}
-    style={{ color: fillColor }}
-    viewBox="0 0 1440 120"
-    preserveAspectRatio="none"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path d="M0,64 C240,120 480,8 720,40 C960,72 1200,120 1440,72 L1440,120 L0,120 Z" fill="currentColor"></path>
-  </svg>
+  /* Native BOTTOM wave: flat solid at y=bottom, wave crests upwards */
+  isGentle ? (
+    <svg
+      class:list={[
+        'wsd-wave',
+        'wsd-wave--bottom',
+        'wsd-wave--gentle',
+        flip && 'wsd-wave--flipped',
+        className
+      ]}
+      style={{ color: fillColor }}
+      viewBox="0 0 1440 90"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M0,52 C180,4 360,4 540,44 C740,88 900,88 1080,50 C1220,20 1330,20 1440,42 L1440,90 L0,90 Z" fill="currentColor"></path>
+    </svg>
+  ) : (
+    <svg
+      class:list={[
+        'wsd-wave',
+        'wsd-wave--dynamic',
+        'wsd-wave--bottom',
+        flip && 'wsd-wave--flipped',
+        className
+      ]}
+      style={{ color: fillColor }}
+      viewBox="0 0 1440 120"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M0,64 C240,120 480,8 720,40 C960,72 1200,120 1440,72 L1440,120 L0,120 Z" fill="currentColor"></path>
+    </svg>
+  )
 )}
 
 <style>
@@ -75,7 +116,7 @@ const isGentle = variant === 'gentle' || variant === 'editorial';
     display: block;
     width: 100%;
     pointer-events: none;
-    z-index: 10;
+    z-index: 20;
   }
 
   .wsd-wave--bottom {
@@ -84,15 +125,10 @@ const isGentle = variant === 'gentle' || variant === 'editorial';
 
   .wsd-wave--top {
     top: -1px;
-    transform: rotate(180deg);
   }
 
-  .wsd-wave--bottom.wsd-wave--flipped {
+  .wsd-wave--flipped {
     transform: scaleX(-1);
-  }
-
-  .wsd-wave--top.wsd-wave--flipped {
-    transform: rotate(180deg) scaleX(-1);
   }
 
   .wsd-wave--dynamic {
@@ -107,4 +143,3 @@ const isGentle = variant === 'gentle' || variant === 'editorial';
     fill: currentColor;
   }
 </style>
-
