@@ -162,7 +162,7 @@ const staffingModels = [
     <!-- Bottom Row: Headline + Narrative (~56%) | 4 Centered Squares (~44%)   -->
     <!-- Background: PURE WHITE                                                -->
     <!-- ===================================================================== -->
-    <section class="relative pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 bg-white overflow-hidden" aria-labelledby="service-hero-heading">
+    <section class="relative z-20 pt-12 sm:pt-16 lg:pt-20 pb-20 sm:pb-24 lg:pb-28 bg-white overflow-visible" aria-labelledby="service-hero-heading">
       
       <!-- Subtle Radial Ambient Glows -->
       <div class="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(40,121,182,0.08)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
@@ -307,8 +307,8 @@ const staffingModels = [
                   </div>
 
                   <!-- Slide 2: Bottom Slide (Description, glides DOWN on hover) -->
-                  <div class="square-slide square-slide-bottom absolute inset-x-0 top-0 rounded-3xl bg-white border border-slate-200/90 p-4 sm:p-5 flex flex-col justify-center items-center shadow-[0_8px_20px_rgba(15,39,74,0.06)]">
-                    <p class="square-desc text-sm text-slate-700 leading-relaxed font-normal text-center">
+                  <div class="square-slide square-slide-bottom absolute inset-x-0 top-0 rounded-3xl bg-white border border-slate-200/90 px-4 py-3.5 pb-4 sm:px-4 sm:py-3.5 sm:pb-4 flex flex-col justify-center items-center shadow-[0_8px_20px_rgba(15,39,74,0.06)]">
+                    <p class="square-desc text-xs sm:text-[0.84rem] text-slate-700 leading-relaxed font-normal text-center">
                       {card.desc}
                     </p>
                   </div>
@@ -739,27 +739,27 @@ const staffingModels = [
   }
 
   .square-slide-card:hover .square-slide-top {
-    height: 88px;
-    transform: translateY(-26px);
+    height: 80px;
+    transform: translateY(-44px);
     box-shadow: 0 10px 24px -4px rgba(12, 72, 122, 0.35);
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
   }
 
-  /* Scale down Icon & Title when revealed to fit the 88px header perfectly */
+  /* Scale down Icon & Title when revealed to fit the 80px header perfectly */
   .square-slide-card:hover .square-icon-wrap {
-    width: 2rem;
-    height: 2rem;
-    margin-bottom: 0.2rem;
+    width: 1.85rem;
+    height: 1.85rem;
+    margin-bottom: 0.15rem;
   }
 
   .square-slide-card:hover .square-icon-svg {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 1rem;
+    height: 1rem;
   }
 
   .square-slide-card:hover .square-title {
-    font-size: 0.8125rem;
+    font-size: 0.8rem;
     line-height: 1.25;
   }
 
@@ -769,7 +769,7 @@ const staffingModels = [
     left: 0;
     right: 0;
     top: 0;
-    min-height: 150px;
+    min-height: 135px;
     z-index: 1;
     opacity: 0;
     visibility: hidden;
@@ -786,7 +786,7 @@ const staffingModels = [
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateY(66px);
+    transform: translateY(40px);
     box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.22);
     border-color: #cbd5e1;
     border-top-left-radius: 8px;
