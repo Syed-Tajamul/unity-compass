@@ -1,10 +1,38 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Button from '../../components/Button.astro';
-import { blogPosts, type BlogPost } from '../../data/blogPosts';
+import { blogPosts as fallbackBlogPosts, type BlogPost } from '../../data/blogPosts';
+import { supabase, isSupabaseConfigured } from '../../lib/supabase';
 
-export function getStaticPaths() {
-  return blogPosts.map((post) => ({
+export async function getStaticPaths() {
+  let posts: BlogPost[] = fallbackBlogPosts;
+
+  if (isSupabaseConfigured && supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('blogs')
+        .select('*')
+        .eq('is_published', true);
+
+      if (!error && data && data.length > 0) {
+        posts = data.map((d: any) => ({
+          slug: d.slug,
+          title: d.title,
+          date: d.date,
+          author: d.author || 'Unity Compass Team',
+          readTime: d.read_time || '5 min read',
+          category: d.category,
+          excerpt: d.excerpt,
+          image: d.image,
+          contentBlocks: Array.isArray(d.content_blocks) ? d.content_blocks : JSON.parse(d.content_blocks || '[]'),
+        }));
+      }
+    } catch (err) {
+      console.error('Failed to load blog paths from Supabase, using local fallback:', err);
+    }
+  }
+
+  return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
   }));
@@ -17,7 +45,7 @@ interface Props {
 const { post } = Astro.props;
 
 // Filter related posts (exclude current)
-const relatedPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+const relatedPosts = fallbackBlogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 ---
 
 <MainLayout

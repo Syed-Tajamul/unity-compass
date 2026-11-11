@@ -1,6 +1,35 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import { blogPosts } from '../../data/blogPosts';
+import { blogPosts as fallbackPosts, type BlogPost } from '../../data/blogPosts';
+import { supabase, isSupabaseConfigured } from '../../lib/supabase';
+
+let blogPosts: BlogPost[] = fallbackPosts;
+
+if (isSupabaseConfigured && supabase) {
+  try {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('is_published', true)
+      .order('created_at', { ascending: false });
+
+    if (!error && data && data.length > 0) {
+      blogPosts = data.map((d: any) => ({
+        slug: d.slug,
+        title: d.title,
+        date: d.date,
+        author: d.author || 'Unity Compass Team',
+        readTime: d.read_time || '5 min read',
+        category: d.category,
+        excerpt: d.excerpt,
+        image: d.image,
+        contentBlocks: Array.isArray(d.content_blocks) ? d.content_blocks : JSON.parse(d.content_blocks || '[]'),
+      }));
+    }
+  } catch (err) {
+    console.error('Failed to load blogs from Supabase, using local fallback:', err);
+  }
+}
 ---
 
 <MainLayout

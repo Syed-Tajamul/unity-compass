@@ -1,0 +1,38 @@
+name: Supabase Inactivity Keep-Alive
+
+on:
+  schedule:
+    # Runs every 2 days at 04:00 UTC to ensure Supabase never pauses (limit is 7 days)
+    - cron: '0 4 */2 * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Database via API
+        env:
+          SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          echo "Executing keep-alive ping to prevent Supabase inactivity pausing..."
+          
+          # If SITE_URL is defined, ping the Vercel keepalive API
+          if [ -n "$SITE_URL" ]; then
+            echo "Pinging site keepalive endpoint: $SITE_URL/api/cron/keepalive"
+            curl -s -f "$SITE_URL/api/cron/keepalive" || echo "Website ping failed, falling back to direct Supabase REST API."
+          fi
+
+          # Ping direct Supabase REST API to guarantee database activity
+          if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_ANON_KEY" ]; then
+            echo "Pinging Supabase REST API directly..."
+            curl -s -f \
+              -X GET "$SUPABASE_URL/rest/v1/jobs?select=id&limit=1" \
+              -H "apikey: $SUPABASE_ANON_KEY" \
+              -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
+              && echo "Supabase keep-alive ping successful! Inactivity timer reset."
+          else
+            echo "SUPABASE_URL or SUPABASE_ANON_KEY secret not set in GitHub repository secrets yet."
+          fi
+

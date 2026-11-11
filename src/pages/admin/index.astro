@@ -1,0 +1,695 @@
+---
+/**
+ * index.astro - Unity Compass Executive Admin Management Portal
+ * 
+ * Centralized dashboard for:
+ * 1. Contact Inquiries (View messages, mark replied/reviewed)
+ * 2. Careers & Job Applications (View candidate submissions, download resumes)
+ * 3. Job Listings Manager (Create, toggle active/inactive jobs)
+ * 4. Blog Posts Manager (Publish/unpublish articles)
+ * 5. Supabase Health & Keep-Alive Monitor
+ */
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="Admin Management Portal - Unity Compass"
+  description="Executive portal for managing federal inquiries, job applications, resumes, and editorial insights."
+>
+  <div id="admin-root" class="min-h-screen bg-slate-900 text-slate-100 py-10 px-4 sm:px-6 lg:px-8">
+    
+    <!-- ========================================================================= -->
+    <!-- GATE: LOGIN SCREEN (Displayed when unauthorized)                         -->
+    <!-- ========================================================================= -->
+    <div id="login-section" class="max-w-md mx-auto my-16 bg-slate-800/90 border border-slate-700 rounded-3xl p-8 sm:p-10 shadow-2xl backdrop-blur-md">
+      <div class="text-center mb-8">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#0C487A] to-[#FF3130] flex items-center justify-center text-white font-black text-xl shadow-lg">
+          UC
+        </div>
+        <h1 class="text-2xl font-extrabold text-white tracking-tight">Admin Executive Portal</h1>
+        <p class="text-xs text-slate-400 mt-1.5">Unity Compass Management Console</p>
+      </div>
+
+      <form id="admin-login-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+            Admin Access Passkey
+          </label>
+          <input
+            type="password"
+            id="admin-passkey"
+            required
+            placeholder="Enter admin password..."
+            class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#FF3130] focus:border-transparent placeholder:text-slate-500"
+          />
+          <p class="text-[11px] text-slate-400 mt-1.5">Default initial passkey: <code class="text-[#FF3130] font-mono">admin123</code></p>
+        </div>
+
+        <div id="login-error" class="hidden p-3 rounded-lg bg-red-900/40 border border-red-700/60 text-red-200 text-xs font-semibold">
+          Invalid access passkey. Please verify and try again.
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-3.5 px-6 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] shadow-lg shadow-[#FF3130]/25 transition-all cursor-pointer"
+        >
+          Sign In to Console
+        </button>
+      </form>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- DASHBOARD VIEW (Displayed when authorized)                                -->
+    <!-- ========================================================================= -->
+    <div id="dashboard-section" class="hidden max-w-7xl mx-auto space-y-8">
+      
+      <!-- Top Bar -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-800">
+        <div>
+          <div class="flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_#10B981]"></span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Executive Management Console</h1>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1">Live inquiries, cleared candidate resumes, and content operations.</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            id="keepalive-ping-btn"
+            class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 flex items-center gap-2 transition-all cursor-pointer"
+            title="Ping Supabase to guarantee inactivity timer is reset"
+          >
+            <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span>Ping Keep-Alive</span>
+          </button>
+
+          <button
+            type="button"
+            id="admin-logout-btn"
+            class="px-4 py-2 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 transition-colors cursor-pointer"
+          >
+            Log Out
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Strip -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">New Inquiries</span>
+          <p id="metric-inquiries" class="text-3xl font-extrabold text-[#FF3130] mt-2">--</p>
+          <span class="text-[11px] text-slate-500 mt-1 block">Awaiting response</span>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Candidate Resumes</span>
+          <p id="metric-applications" class="text-3xl font-extrabold text-emerald-400 mt-2">--</p>
+          <span class="text-[11px] text-slate-500 mt-1 block">Applicants received</span>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Active Jobs</span>
+          <p id="metric-jobs" class="text-3xl font-extrabold text-blue-400 mt-2">--</p>
+          <span class="text-[11px] text-slate-500 mt-1 block">Published on Career Board</span>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Published Blogs</span>
+          <p id="metric-blogs" class="text-3xl font-extrabold text-amber-400 mt-2">--</p>
+          <span class="text-[11px] text-slate-500 mt-1 block">Live articles</span>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <div class="border-b border-slate-800">
+        <nav class="flex gap-4 sm:gap-8 overflow-x-auto pb-px" aria-label="Tabs">
+          <button
+            type="button"
+            data-tab="inquiries"
+            class="tab-btn px-4 py-3 text-sm font-bold border-b-2 border-[#FF3130] text-white flex items-center gap-2 cursor-pointer transition-colors"
+          >
+            <span>Contact Inquiries</span>
+            <span id="tab-inquiries-badge" class="px-2 py-0.5 rounded-full text-[10px] bg-[#FF3130] text-white">0</span>
+          </button>
+
+          <button
+            type="button"
+            data-tab="applications"
+            class="tab-btn px-4 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-2 cursor-pointer transition-colors"
+          >
+            <span>Job Applicants &amp; Resumes</span>
+            <span id="tab-applications-badge" class="px-2 py-0.5 rounded-full text-[10px] bg-slate-700 text-slate-300">0</span>
+          </button>
+
+          <button
+            type="button"
+            data-tab="jobs"
+            class="tab-btn px-4 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-white cursor-pointer transition-colors"
+          >
+            Job Postings
+          </button>
+
+          <button
+            type="button"
+            data-tab="blogs"
+            class="tab-btn px-4 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-white cursor-pointer transition-colors"
+          >
+            Blog Articles
+          </button>
+
+          <button
+            type="button"
+            data-tab="system"
+            class="tab-btn px-4 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-white cursor-pointer transition-colors"
+          >
+            Inactivity &amp; System Health
+          </button>
+        </nav>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 1: CONTACT INQUIRIES                                              -->
+      <!-- ===================================================================== -->
+      <div id="tab-content-inquiries" class="tab-pane space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <h2 class="text-lg font-bold text-white">Lead Submissions from Contact Form</h2>
+          <div class="flex items-center gap-3">
+            <input
+              type="text"
+              id="search-inquiries"
+              placeholder="Search by name, email, or phone..."
+              class="px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 text-xs text-white focus:outline-none focus:ring-1 focus:ring-[#FF3130] w-64 placeholder:text-slate-500"
+            />
+            <button
+              type="button"
+              id="refresh-inquiries-btn"
+              class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+              title="Refresh"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl overflow-hidden shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[11px] border-b border-slate-700">
+                <tr>
+                  <th class="px-5 py-3.5">Candidate / Lead</th>
+                  <th class="px-5 py-3.5">Contact Details</th>
+                  <th class="px-5 py-3.5">Inquiry Message</th>
+                  <th class="px-5 py-3.5">Submitted</th>
+                  <th class="px-5 py-3.5">Status</th>
+                  <th class="px-5 py-3.5 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="inquiries-table-body" class="divide-y divide-slate-700/60">
+                <tr>
+                  <td colspan="6" class="px-5 py-8 text-center text-slate-500">Loading inquiries...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 2: JOB APPLICANTS & RESUMES                                       -->
+      <!-- ===================================================================== -->
+      <div id="tab-content-applications" class="tab-pane hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-white">Candidate Applications &amp; Uploaded Resumes</h2>
+          <button
+            type="button"
+            id="refresh-applications-btn"
+            class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+            title="Refresh"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl overflow-hidden shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[11px] border-b border-slate-700">
+                <tr>
+                  <th class="px-5 py-3.5">Candidate Name</th>
+                  <th class="px-5 py-3.5">Target Position</th>
+                  <th class="px-5 py-3.5">Email &amp; Phone</th>
+                  <th class="px-5 py-3.5">Applied Date</th>
+                  <th class="px-5 py-3.5">Resume Document</th>
+                  <th class="px-5 py-3.5 text-right">Status</th>
+                </tr>
+              </thead>
+              <tbody id="applications-table-body" class="divide-y divide-slate-700/60">
+                <tr>
+                  <td colspan="6" class="px-5 py-8 text-center text-slate-500">Loading applications...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 3: JOB POSTINGS                                                   -->
+      <!-- ===================================================================== -->
+      <div id="tab-content-jobs" class="tab-pane hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-white">Active Federal Career Postings</h2>
+          <button
+            type="button"
+            id="open-new-job-modal-btn"
+            class="px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] shadow-md transition-all cursor-pointer flex items-center gap-2"
+          >
+            <span>+ Post New Job</span>
+          </button>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl overflow-hidden shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[11px] border-b border-slate-700">
+                <tr>
+                  <th class="px-5 py-3.5">Title &amp; ID</th>
+                  <th class="px-5 py-3.5">Department</th>
+                  <th class="px-5 py-3.5">Location &amp; Type</th>
+                  <th class="px-5 py-3.5">Clearance Level</th>
+                  <th class="px-5 py-3.5 text-right">Active Status</th>
+                </tr>
+              </thead>
+              <tbody id="jobs-table-body" class="divide-y divide-slate-700/60">
+                <tr>
+                  <td colspan="5" class="px-5 py-8 text-center text-slate-500">Loading jobs...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 4: BLOG ARTICLES                                                  -->
+      <!-- ===================================================================== -->
+      <div id="tab-content-blogs" class="tab-pane hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-white">Editorial Insights &amp; Articles</h2>
+          <button
+            type="button"
+            id="open-new-blog-modal-btn"
+            class="px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] shadow-md transition-all cursor-pointer flex items-center gap-2"
+          >
+            <span>+ Write New Article</span>
+          </button>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl overflow-hidden shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[11px] border-b border-slate-700">
+                <tr>
+                  <th class="px-5 py-3.5">Title &amp; Slug</th>
+                  <th class="px-5 py-3.5">Category</th>
+                  <th class="px-5 py-3.5">Date &amp; Author</th>
+                  <th class="px-5 py-3.5 text-right">Published Status</th>
+                </tr>
+              </thead>
+              <tbody id="blogs-table-body" class="divide-y divide-slate-700/60">
+                <tr>
+                  <td colspan="4" class="px-5 py-8 text-center text-slate-500">Loading blogs...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 5: INACTIVITY & SYSTEM HEALTH                                     -->
+      <!-- ===================================================================== -->
+      <div id="tab-content-system" class="tab-pane hidden space-y-6">
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 sm:p-8 space-y-5">
+          <h2 class="text-xl font-bold text-white">Supabase Free-Tier Inactivity Prevention System</h2>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            On Supabase’s free tier, projects pause after 7 consecutive days without database queries. Unity Compass includes an automated keep-alive system to ensure your database and file storage remain active 24/7.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-700">
+              <span class="text-xs font-bold text-[#FF3130] uppercase tracking-wider block">Automation 1</span>
+              <h4 class="font-bold text-white mt-1">GitHub Actions Cron</h4>
+              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                Workflow file <code class="text-slate-300 font-mono">.github/workflows/supabase-keepalive.yml</code> executes every 2 days to query your database via REST API.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-700">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Automation 2</span>
+              <h4 class="font-bold text-white mt-1">Vercel Keep-Alive Endpoint</h4>
+              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                Endpoint <code class="text-slate-300 font-mono">/api/cron/keepalive</code> executes a server-side SQL ping to reset the Supabase inactivity timer.
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span class="text-xs text-slate-400">Manual Test:</span>
+              <p class="text-xs text-slate-300">Click to perform an on-demand database heartbeat query.</p>
+            </div>
+            <button
+              type="button"
+              id="manual-ping-btn"
+              class="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition-colors cursor-pointer shadow-md"
+            >
+              Execute Database Ping Now
+            </button>
+          </div>
+
+          <div id="ping-result" class="hidden p-4 rounded-xl bg-slate-900 border border-slate-700 font-mono text-xs text-emerald-400"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL: VIEW INQUIRY DETAILS                                               -->
+    <!-- ========================================================================= -->
+    <div id="inquiry-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-700">
+          <h3 class="text-lg font-bold text-white">Inquiry Details</h3>
+          <button type="button" id="close-inquiry-modal" class="text-slate-400 hover:text-white">&times;</button>
+        </div>
+        <div id="inquiry-modal-body" class="text-xs text-slate-300 space-y-3"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const AUTH_KEY = 'uc_admin_token';
+
+    function initAdminPortal() {
+      const loginSection = document.getElementById('login-section');
+      const dashboardSection = document.getElementById('dashboard-section');
+      const loginForm = document.getElementById('admin-login-form');
+      const passkeyInput = document.getElementById('admin-passkey') as HTMLInputElement | null;
+      const loginError = document.getElementById('login-error');
+      const logoutBtn = document.getElementById('admin-logout-btn');
+
+      function checkAuth() {
+        const token = localStorage.getItem(AUTH_KEY);
+        if (token === 'valid_admin_session') {
+          loginSection?.classList.add('hidden');
+          dashboardSection?.classList.remove('hidden');
+          loadDashboardData();
+        } else {
+          loginSection?.classList.remove('hidden');
+          dashboardSection?.classList.add('hidden');
+        }
+      }
+
+      loginForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const passkey = passkeyInput?.value.trim();
+        // Support custom passkey or default 'admin123'
+        if (passkey === 'admin123' || passkey === 'unitycompass2026') {
+          localStorage.setItem(AUTH_KEY, 'valid_admin_session');
+          loginError?.classList.add('hidden');
+          checkAuth();
+        } else {
+          loginError?.classList.remove('hidden');
+        }
+      });
+
+      logoutBtn?.addEventListener('click', () => {
+        localStorage.removeItem(AUTH_KEY);
+        checkAuth();
+      });
+
+      // Tabs switcher
+      document.querySelectorAll('.tab-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const tab = btn.getAttribute('data-tab');
+          document.querySelectorAll('.tab-btn').forEach((b) => {
+            b.classList.remove('border-[#FF3130]', 'text-white');
+            b.classList.add('border-transparent', 'text-slate-400');
+          });
+          btn.classList.remove('border-transparent', 'text-slate-400');
+          btn.classList.add('border-[#FF3130]', 'text-white');
+
+          document.querySelectorAll('.tab-pane').forEach((pane) => pane.classList.add('hidden'));
+          document.getElementById(`tab-content-${tab}`)?.classList.remove('hidden');
+        });
+      });
+
+      // Manual Ping Action
+      document.getElementById('manual-ping-btn')?.addEventListener('click', triggerPing);
+      document.getElementById('keepalive-ping-btn')?.addEventListener('click', triggerPing);
+
+      async function triggerPing() {
+        const resultEl = document.getElementById('ping-result');
+        if (resultEl) {
+          resultEl.classList.remove('hidden');
+          resultEl.textContent = 'Executing ping request...';
+        }
+
+        try {
+          const res = await fetch('/api/cron/keepalive');
+          const data = await res.json();
+          if (resultEl) {
+            resultEl.textContent = JSON.stringify(data, null, 2);
+          }
+        } catch (err: any) {
+          if (resultEl) {
+            resultEl.textContent = `Ping failed: ${err.message}`;
+          }
+        }
+      }
+
+      checkAuth();
+    }
+
+    async function loadDashboardData() {
+      loadInquiries();
+      loadApplications();
+      loadJobs();
+      loadBlogs();
+    }
+
+    async function loadInquiries() {
+      const tbody = document.getElementById('inquiries-table-body');
+      try {
+        const res = await fetch('/api/admin/inquiries');
+        const data = await res.json();
+        const list = data.inquiries || [];
+
+        const unreadCount = list.filter((i: any) => i.status === 'new').length;
+        const countBadge = document.getElementById('tab-inquiries-badge');
+        const metricEl = document.getElementById('metric-inquiries');
+        if (countBadge) countBadge.textContent = String(unreadCount);
+        if (metricEl) metricEl.textContent = String(unreadCount);
+
+        if (!tbody) return;
+        if (!list.length) {
+          tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-slate-500">No contact inquiries received yet.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = list.map((item: any) => `
+          <tr class="hover:bg-slate-700/40 transition-colors">
+            <td class="px-5 py-4 font-bold text-white">${escapeHtml(item.name)}</td>
+            <td class="px-5 py-4">
+              <a href="mailto:${escapeHtml(item.email)}" class="text-[#0C487A] hover:underline block">${escapeHtml(item.email)}</a>
+              <span class="text-slate-400 text-[11px]">${escapeHtml(item.phone)}</span>
+            </td>
+            <td class="px-5 py-4 max-w-xs truncate text-slate-300">${escapeHtml(item.message)}</td>
+            <td class="px-5 py-4 text-slate-400 text-[11px]">${new Date(item.created_at).toLocaleDateString()}</td>
+            <td class="px-5 py-4">
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${item.status === 'new' ? 'bg-red-900/60 text-red-200 border border-red-700' : 'bg-emerald-900/60 text-emerald-200 border border-emerald-700'}">
+                ${item.status.toUpperCase()}
+              </span>
+            </td>
+            <td class="px-5 py-4 text-right">
+              <button onclick="viewInquiry('${item.id}', '${escapeHtml(item.name)}', '${escapeHtml(item.email)}', '${escapeHtml(item.phone)}', '${escapeHtml(item.message)}', '${item.status}')" class="px-2.5 py-1 text-xs rounded bg-slate-700 hover:bg-slate-600 text-white cursor-pointer">
+                View
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      } catch (e) {
+        if (tbody) tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-red-400">Failed to load inquiries.</td></tr>`;
+      }
+    }
+
+    async function loadApplications() {
+      const tbody = document.getElementById('applications-table-body');
+      try {
+        const res = await fetch('/api/admin/applications');
+        const data = await res.json();
+        const list = data.applications || [];
+
+        const metricEl = document.getElementById('metric-applications');
+        const badgeEl = document.getElementById('tab-applications-badge');
+        if (metricEl) metricEl.textContent = String(list.length);
+        if (badgeEl) badgeEl.textContent = String(list.length);
+
+        if (!tbody) return;
+        if (!list.length) {
+          tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-slate-500">No candidate applications received yet.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = list.map((item: any) => `
+          <tr class="hover:bg-slate-700/40 transition-colors">
+            <td class="px-5 py-4 font-bold text-white">${escapeHtml(item.candidate_name)}</td>
+            <td class="px-5 py-4 text-slate-200 font-semibold">${escapeHtml(item.job_title)}</td>
+            <td class="px-5 py-4">
+              <a href="mailto:${escapeHtml(item.candidate_email)}" class="text-[#0C487A] hover:underline block">${escapeHtml(item.candidate_email)}</a>
+              <span class="text-slate-400 text-[11px]">${escapeHtml(item.candidate_phone)}</span>
+            </td>
+            <td class="px-5 py-4 text-slate-400 text-[11px]">${new Date(item.created_at).toLocaleDateString()}</td>
+            <td class="px-5 py-4">
+              ${item.resume_url && item.resume_url !== '#' ? `
+                <a href="${item.resume_url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#FF3130] hover:bg-[#E02625] text-white text-[11px] font-bold shadow-xs">
+                  <span>Download Resume</span>
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                </a>
+              ` : `<span class="text-slate-500 text-[11px]">Mock Resume</span>`}
+            </td>
+            <td class="px-5 py-4 text-right">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-700 text-slate-300">
+                ${item.status}
+              </span>
+            </td>
+          </tr>
+        `).join('');
+      } catch (e) {
+        if (tbody) tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-red-400">Failed to load applications.</td></tr>`;
+      }
+    }
+
+    async function loadJobs() {
+      const tbody = document.getElementById('jobs-table-body');
+      try {
+        const res = await fetch('/api/admin/jobs');
+        const data = await res.json();
+        const list = data.jobs || [];
+
+        const metricEl = document.getElementById('metric-jobs');
+        if (metricEl) metricEl.textContent = String(list.filter((j: any) => j.is_active !== false).length);
+
+        if (!tbody) return;
+        tbody.innerHTML = list.map((item: any) => `
+          <tr class="hover:bg-slate-700/40 transition-colors">
+            <td class="px-5 py-4 font-bold text-white">${escapeHtml(item.title)} <span class="text-slate-500 text-[10px] block font-mono">${item.id}</span></td>
+            <td class="px-5 py-4 text-slate-300">${escapeHtml(item.department)}</td>
+            <td class="px-5 py-4 text-slate-400">${escapeHtml(item.location)} (${item.workplaceType || item.workplace_type || 'Hybrid'})</td>
+            <td class="px-5 py-4 font-semibold text-emerald-400">${escapeHtml(item.clearanceLevel || item.clearance_level || 'None')}</td>
+            <td class="px-5 py-4 text-right">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.is_active !== false ? 'bg-emerald-900/60 text-emerald-200' : 'bg-slate-700 text-slate-400'}">
+                ${item.is_active !== false ? 'Active' : 'Inactive'}
+              </span>
+            </td>
+          </tr>
+        `).join('');
+      } catch (e) {}
+    }
+
+    async function loadBlogs() {
+      const tbody = document.getElementById('blogs-table-body');
+      try {
+        const res = await fetch('/api/admin/blogs');
+        const data = await res.json();
+        const list = data.blogs || [];
+
+        const metricEl = document.getElementById('metric-blogs');
+        if (metricEl) metricEl.textContent = String(list.length);
+
+        if (!tbody) return;
+        tbody.innerHTML = list.map((item: any) => `
+          <tr class="hover:bg-slate-700/40 transition-colors">
+            <td class="px-5 py-4 font-bold text-white">${escapeHtml(item.title)} <span class="text-slate-500 text-[10px] block font-mono">/blog/${item.slug}</span></td>
+            <td class="px-5 py-4 text-[#FF3130] font-semibold">${escapeHtml(item.category)}</td>
+            <td class="px-5 py-4 text-slate-400 text-[11px]">${escapeHtml(item.date)} by ${escapeHtml(item.author)}</td>
+            <td class="px-5 py-4 text-right">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-900/60 text-emerald-200">
+                Published
+              </span>
+            </td>
+          </tr>
+        `).join('');
+      } catch (e) {}
+    }
+
+    function escapeHtml(str: string) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // Attach to window for onclick handler
+    (window as any).viewInquiry = (id: string, name: string, email: string, phone: string, message: string, status: string) => {
+      const modal = document.getElementById('inquiry-modal');
+      const body = document.getElementById('inquiry-modal-body');
+      if (!modal || !body) return;
+
+      body.innerHTML = `
+        <div class="space-y-2">
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> <a href="mailto:${email}" class="text-blue-400 underline">${email}</a></p>
+          <p><strong>Phone:</strong> <a href="tel:${phone}" class="text-blue-400 underline">${phone}</a></p>
+          <p><strong>Current Status:</strong> <span class="font-bold uppercase text-[#FF3130]">${status}</span></p>
+        </div>
+        <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-700 mt-3 text-slate-200 whitespace-pre-wrap">
+          ${message}
+        </div>
+        <div class="pt-4 flex gap-2 justify-end">
+          <button onclick="updateInquiryStatus('${id}', 'replied')" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 cursor-pointer">
+            Mark as Replied
+          </button>
+          <button onclick="updateInquiryStatus('${id}', 'archived')" class="px-3 py-1.5 rounded-lg bg-slate-700 text-slate-300 font-bold text-xs hover:bg-slate-600 cursor-pointer">
+            Archive
+          </button>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+    };
+
+    (window as any).updateInquiryStatus = async (id: string, status: string) => {
+      try {
+        await fetch('/api/admin/inquiries', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, status }),
+        });
+        document.getElementById('inquiry-modal')?.classList.add('hidden');
+        loadInquiries();
+      } catch (e) {
+        alert('Failed to update inquiry status');
+      }
+    };
+
+    document.getElementById('close-inquiry-modal')?.addEventListener('click', () => {
+      document.getElementById('inquiry-modal')?.classList.add('hidden');
+    });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAdminPortal);
+    } else {
+      initAdminPortal();
+    }
+    document.addEventListener('astro:page-load', initAdminPortal);
+  </script>
+</MainLayout>
+

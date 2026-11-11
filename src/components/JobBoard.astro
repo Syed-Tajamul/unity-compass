@@ -1,5 +1,36 @@
 ---
-import { jobPositions } from '../data/jobs';
+import { jobPositions as fallbackPositions, type JobPosition } from '../data/jobs';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
+
+let jobPositions: JobPosition[] = fallbackPositions;
+
+if (isSupabaseConfigured && supabase) {
+  try {
+    const { data, error } = await supabase
+      .from('jobs')
+      .select('*')
+      .eq('is_active', true)
+      .order('created_at', { ascending: false });
+
+    if (!error && data && data.length > 0) {
+      jobPositions = data.map((d: any) => ({
+        id: d.id,
+        title: d.title,
+        department: d.department,
+        location: d.location,
+        workplaceType: d.workplace_type || 'Hybrid',
+        employmentType: d.employment_type || 'Full-Time',
+        clearanceLevel: d.clearance_level || 'None',
+        description: d.description,
+        requirements: Array.isArray(d.requirements) ? d.requirements : JSON.parse(d.requirements || '[]'),
+        responsibilities: Array.isArray(d.responsibilities) ? d.responsibilities : JSON.parse(d.responsibilities || '[]'),
+        postedDate: d.posted_date || 'Active',
+      }));
+    }
+  } catch (err) {
+    console.error('Failed to load jobs from Supabase, using local fallback:', err);
+  }
+}
 ---
 
 <div class="space-y-8" id="career-job-board">
@@ -411,7 +442,12 @@ import { jobPositions } from '../data/jobs';
   const submitAppBtn = document.getElementById('submit-app-btn') as HTMLButtonElement;
   const resumeInput = document.getElementById('app-resume') as HTMLInputElement;
 
-  function openModal(title: string) {
+  let currentJobTitle = 'General Talent Network';
+  let currentJobId: string | null = null;
+
+  function openModal(title: string, id?: string | null) {
+    currentJobTitle = title;
+    currentJobId = id || null;
     if (targetJobEl) targetJobEl.textContent = title;
     if (feedbackEl) feedbackEl.classList.add('hidden');
     modal?.classList.remove('hidden');
@@ -426,12 +462,13 @@ import { jobPositions } from '../data/jobs';
     btn.addEventListener('click', (e) => {
       const target = e.currentTarget as HTMLElement;
       const title = target.getAttribute('data-job-title') || 'Selected Role';
-      openModal(title);
+      const id = target.getAttribute('data-job-id') || null;
+      openModal(title, id);
     });
   });
 
   document.getElementById('general-apply-btn')?.addEventListener('click', () => {
-    openModal('General Talent Network (All Specializations)');
+    openModal('General Talent Network (All Specializations)', null);
   });
 
   closeModalBtn?.addEventListener('click', closeModal);
@@ -440,8 +477,8 @@ import { jobPositions } from '../data/jobs';
     if (e.target === modal) closeModal();
   });
 
-  // Form Submission & Resume Validation (1MB limit strictly enforced)
-  applyForm?.addEventListener('submit', (e) => {
+  // Form Submission & Resume Upload to Backend
+  applyForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!feedbackEl || !submitAppBtn) return;
 
@@ -467,30 +504,56 @@ import { jobPositions } from '../data/jobs';
       return;
     }
 
-    // 1MB limit check
-    const maxBytes = 1048576; // 1 MB
+    // 5MB limit check
+    const maxBytes = 5 * 1024 * 1024;
     if (file.size > maxBytes) {
-      feedbackEl.textContent = `Resume file size exceeds the 1MB limit (${(file.size / (1024 * 1024)).toFixed(2)}MB). Please upload a smaller document.`;
+      feedbackEl.textContent = `Resume file size exceeds the 5MB limit (${(file.size / (1024 * 1024)).toFixed(2)}MB). Please upload a smaller document.`;
       feedbackEl.classList.add('bg-red-50', 'text-red-800', 'border', 'border-red-200');
       feedbackEl.classList.remove('hidden');
       return;
     }
 
     submitAppBtn.disabled = true;
-    submitAppBtn.textContent = 'Submitting Application...';
+    submitAppBtn.textContent = 'Uploading Resume & Submitting...';
 
-    setTimeout(() => {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('jobTitle', currentJobTitle);
+    if (currentJobId) formData.append('jobId', currentJobId);
+    formData.append('resume', file);
+
+    try {
+      const res = await fetch('/api/careers/apply', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await res.json().catch(() => ({}));
+
+      if (res.ok && result.success) {
+        feedbackEl.textContent = result.message || 'Application successfully submitted! Our talent acquisition team will review your qualifications.';
+        feedbackEl.classList.add('bg-green-50', 'text-green-800', 'border', 'border-green-200');
+        feedbackEl.classList.remove('hidden');
+        applyForm.reset();
+
+        setTimeout(() => {
+          closeModal();
+        }, 2200);
+      } else {
+        feedbackEl.textContent = result.error || 'Failed to submit application. Please try again.';
+        feedbackEl.classList.add('bg-red-50', 'text-red-800', 'border', 'border-red-200');
+        feedbackEl.classList.remove('hidden');
+      }
+    } catch (err) {
+      feedbackEl.textContent = 'Network error while submitting application. Please try again or email us directly.';
+      feedbackEl.classList.add('bg-red-50', 'text-red-800', 'border', 'border-red-200');
+      feedbackEl.classList.remove('hidden');
+    } finally {
       submitAppBtn.disabled = false;
       submitAppBtn.textContent = 'Submit Application';
-      feedbackEl.textContent = 'Application successfully submitted! Our talent acquisition team will review your qualifications and clearance status.';
-      feedbackEl.classList.add('bg-green-50', 'text-green-800', 'border', 'border-green-200');
-      feedbackEl.classList.remove('hidden');
-      applyForm.reset();
-
-      setTimeout(() => {
-        closeModal();
-      }, 2000);
-    }, 1000);
+    }
   });
 </script>
 

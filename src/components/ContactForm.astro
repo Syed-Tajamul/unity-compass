@@ -202,13 +202,31 @@
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<span>Sending Message...</span>';
 
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-        successBox.classList.remove('hidden');
-        successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        form.reset();
-      }, 700);
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, message }),
+      })
+        .then(async (res) => {
+          const result = await res.json().catch(() => ({}));
+          if (res.ok && result.success) {
+            successBox.classList.remove('hidden');
+            successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            form.reset();
+          } else {
+            if (errorMsg) errorMsg.textContent = result.error || 'Failed to submit inquiry. Please try again.';
+            errorBox.classList.remove('hidden');
+            errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        })
+        .catch(() => {
+          if (errorMsg) errorMsg.textContent = 'Network error. Please try again or contact us directly.';
+          errorBox.classList.remove('hidden');
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        });
     });
   }
 
