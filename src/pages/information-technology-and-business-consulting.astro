@@ -506,33 +506,71 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 </p>
               </div>
 
-              <!-- 5 Service Offerings Grid with Gradient Border Draw Animation (card-08 Architecture) -->
+              <!-- 5 Service Offerings Grid with Two-Layer Sliding Profile Card Architecture -->
               <div class="services-cards-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                 {pillar.services.map((service, sIdx) => {
                   return (
                     <article
-                      class="gradient-border-card cascade-item group relative rounded-3xl bg-white p-6 sm:p-7 flex flex-col justify-start overflow-hidden cursor-pointer shadow-[0_8px_24px_rgba(11,37,83,0.06)]"
+                      class="it-sliding-card cascade-item group relative cursor-pointer"
                       data-cascade-index={sIdx}
                     >
-                      <!-- Card Content Container -->
-                      <div class="relative z-10 space-y-3.5 flex flex-col justify-start h-full">
-                        <!-- Icon Container in Brand Colors -->
-                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-[#0C487A] group-hover:text-white group-hover:scale-110 flex items-center justify-center transition-all duration-300 border border-blue-100/80 shadow-2xs">
-                          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <!-- Slide 1: Top Slide (Icon + Title, glides UP on hover) -->
+                      <div class="it-slide it-slide-top relative rounded-3xl bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] p-6 text-center text-white border border-white/15 shadow-[0_12px_28px_rgba(12,72,122,0.22)] flex flex-col items-center justify-center min-h-[185px]">
+                        
+                        <!-- Ambient Specular Glass Sheen -->
+                        <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-black/10 via-transparent to-white/10 pointer-events-none"></div>
+
+                        <!-- Frost Glass Icon Pill with Subtle Pulse Ring Affordance -->
+                        <div class="it-icon-wrap relative w-14 h-14 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-3 shadow-inner transition-all duration-500">
+                          <!-- Micro-Beacon Radar Ping (Subtle Executive Affordance) -->
+                          <div class="absolute -inset-1 rounded-2xl border border-white/30 opacity-70 animate-ping-slow pointer-events-none"></div>
+                          
+                          <svg class="it-icon-svg w-7 h-7 transition-all duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon} />
                           </svg>
                         </div>
 
-                        <!-- Card Title with generous line-height in Brand Navy -->
-                        <h4 class="text-lg sm:text-[1.18rem] font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors leading-[1.32] sm:leading-[1.35]">
+                        <!-- Card Title: Refined, bold, and transitions cleanly -->
+                        <h4 class="it-title text-lg sm:text-[1.15rem] font-bold text-white tracking-tight leading-[1.32] transition-all duration-500 px-2">
                           {service.title}
                         </h4>
 
-                        <!-- Card Description in clean slate -->
-                        <p class="text-xs sm:text-sm text-slate-600 group-hover:text-slate-700 leading-relaxed font-normal pt-0.5">
-                          {service.desc}
-                        </p>
+                        <!-- Micro Accent Indicator at Bottom Edge of Slide 1 (Replaces text with sophisticated visual cue) -->
+                        <div class="it-affordance-pill absolute bottom-3 flex items-center gap-1.5 opacity-80 group-hover:opacity-0 transition-opacity duration-300">
+                          <span class="w-1.5 h-1.5 rounded-full bg-[#FF3130] animate-pulse"></span>
+                          <span class="w-8 h-1 rounded-full bg-white/40"></span>
+                          <span class="w-1.5 h-1.5 rounded-full bg-blue-300/80"></span>
+                        </div>
+
                       </div>
+
+                      <!-- Slide 2: Bottom Slide (Description + Subtitle, glides DOWN on hover) -->
+                      <div class="it-slide it-slide-bottom relative rounded-3xl bg-white border border-slate-200/90 p-6 flex flex-col justify-between shadow-[0_10px_25px_rgba(15,39,74,0.06)] group-hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] min-h-[190px]">
+                        
+                        <div>
+                          <!-- Subtitle Pill in Brand Blue -->
+                          {service.subtitle && (
+                            <div class="mb-2.5 text-center">
+                              <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold bg-blue-50 text-[#0C487A] border border-blue-100">
+                                {service.subtitle}
+                              </span>
+                            </div>
+                          )}
+
+                          <!-- Full Description -->
+                          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-center">
+                            {service.desc}
+                          </p>
+                        </div>
+
+                        <!-- Bottom Key Area Indicator -->
+                        <div class="pt-3.5 mt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A]">
+                          <span>Consulting Practice</span>
+                          <span class="w-2.5 h-2.5 rounded-full bg-[#FF3130] shadow-[0_0_8px_#FF3130]"></span>
+                        </div>
+
+                      </div>
+
                     </article>
                   );
                 })}
@@ -787,7 +825,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
       },
       { rootMargin: '0px 0px -30px 0px', threshold: 0.1 }
     );
-    document.querySelectorAll('.gradient-border-card.cascade-item').forEach((card) => cascadeItemObserver.observe(card));
+    document.querySelectorAll('.it-sliding-card.cascade-item').forEach((card) => cascadeItemObserver.observe(card));
 
     // 3. Ambient Cursor Spotlight Physics for Service Offering Cards
     const consultingCards = document.querySelectorAll('.gradient-border-card');
@@ -899,108 +937,123 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
   }
 
   /* ========================================================================= */
-  /* GRADIENT BORDER DRAW ANIMATION (card-08 Architecture in Brand Colors)     */
-  /* Multi-color conic gradient traces a live circuit around border on hover   */
+  /* TWO-LAYER SLIDING PROFILE CARD HOVER ANIMATION (Codev Land Architecture)  */
+  /* Slide 1 (Icon+Title) shifts up, Slide 2 (Description) shifts down         */
   /* ========================================================================= */
-  @property --card-border-angle {
-    syntax: '<angle>';
-    initial-value: 0deg;
-    inherits: false;
+  .it-sliding-card {
+    position: relative;
+    width: 100%;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    perspective: 1000px;
   }
 
-  @keyframes gradientBorderSpin {
-    to {
-      --card-border-angle: 360deg;
+  .it-slide {
+    width: 100%;
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                border-radius 0.4s ease;
+    will-change: transform;
+  }
+
+  /* Slide 1: Top Slide (Tasteful size, starts pushed down to overlap slide 2) */
+  .it-slide-top {
+    position: relative;
+    z-index: 2;
+    transform: translateY(92px);
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-radius 0.3s ease;
+  }
+
+  .it-sliding-card:hover .it-slide-top {
+    transform: translateY(0px);
+    box-shadow: 0 10px 24px rgba(12, 72, 122, 0.18);
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+  }
+
+  /* Tasteful transition of Icon & Title when revealed */
+  .it-sliding-card:hover .it-icon-wrap {
+    width: 2.85rem; /* ~45px */
+    height: 2.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .it-sliding-card:hover .it-icon-svg {
+    width: 1.4rem; /* ~22px */
+    height: 1.4rem;
+  }
+
+  .it-sliding-card:hover .it-title {
+    font-size: 1rem;
+    line-height: 1.32;
+  }
+
+  /* Slide 2: Bottom Slide (Starts tucked up behind slide 1) */
+  .it-slide-bottom {
+    position: relative;
+    z-index: 1;
+    transform: translateY(-92px);
+    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-radius 0.3s ease;
+  }
+
+  .it-sliding-card:hover .it-slide-bottom {
+    transform: translateY(0px);
+    box-shadow: 0 24px 50px -10px rgba(12, 72, 122, 0.22);
+    border-color: #cbd5e1;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+  }
+
+  /* Bottom Red Accent Seam on Slide 2 */
+  .it-slide-bottom::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 3.5px;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #0C487A, #1E40AF, #FF3130);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  .it-sliding-card:hover .it-slide-bottom::after {
+    width: 65px;
+  }
+
+  /* Subtle Radar Ping Animation for Federal Visual Affordance */
+  @keyframes pingSlow {
+    0% {
+      transform: scale(0.95);
+      opacity: 0.8;
+    }
+    70%, 100% {
+      transform: scale(1.4);
+      opacity: 0;
     }
   }
 
-  .gradient-border-card {
-    --card-border-width: 2.5px;
-    position: relative;
-    border-radius: 1.5rem;
-    background: #ffffff;
-    cursor: pointer;
-    isolation: isolate;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform, box-shadow;
+  .animate-ping-slow {
+    animation: pingSlow 3.2s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
 
-  /* Static Clean Base Border */
-  .gradient-border-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    border: 1px solid rgba(226, 232, 240, 0.95);
-    pointer-events: none;
-    z-index: 1;
-    transition: opacity 0.35s ease;
-  }
-
-  /* Animated Conic Gradient Border Circuit in Website Colors */
-  .gradient-border-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: var(--card-border-width);
-    background: conic-gradient(
-      from var(--card-border-angle, 0deg),
-      transparent 0deg,
-      transparent 60deg,
-      #38BDF8 120deg,
-      #2563EB 175deg,
-      #0C487A 220deg,
-      #FF3130 270deg,
-      transparent 330deg,
-      transparent 360deg
-    );
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    animation: gradientBorderSpin 3.5s linear infinite paused;
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  /* Hover State: Traces the live circuit beam around the card perimeter */
-  .gradient-border-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 45px -10px rgba(12, 72, 122, 0.22), 0 0 35px rgba(37, 99, 235, 0.16);
-  }
-
-  .gradient-border-card:hover::before {
-    opacity: 1;
-    animation-play-state: running;
-  }
-
-  .gradient-border-card:hover::after {
-    opacity: 0;
-  }
-
-  /* Cascading Entrance */
-  .gradient-border-card.cascade-item {
+  /* Cascading Entrance for IT Sliding Card */
+  .it-sliding-card.cascade-item {
     opacity: 0;
     transform: translateY(24px);
     filter: blur(4px);
     transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.4s ease;
+                filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .gradient-border-card.cascade-item.is-revealed {
+  .it-sliding-card.cascade-item.is-revealed {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
-  }
-
-  .gradient-border-card.cascade-item.is-revealed:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 45px -10px rgba(12, 72, 122, 0.22), 0 0 35px rgba(37, 99, 235, 0.16);
   }
 
   /* ========================================================================= */
@@ -1190,8 +1243,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     .service-shimmer-center { animation: none !important; background: none !important; -webkit-text-fill-color: #0F274A !important; color: #0F274A !important; }
     .hero-heading-reveal, .hero-subheading-reveal, .hero-image-reveal, .hero-menu-reveal { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
     .timeline-node-core { opacity: 1 !important; transform: none !important; animation: none !important; }
-    .why-card, .gradient-border-card, .timeline-card-box { transition: none !important; transform: none !important; animation: none !important; filter: none !important; }
-    .gradient-border-card::before { animation: none !important; }
-    .reveal-on-scroll, .reveal-left, .reveal-right, .gradient-border-card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
+    .why-card, .it-sliding-card, .it-slide-top, .it-slide-bottom, .timeline-card-box { transition: none !important; transform: none !important; animation: none !important; filter: none !important; }
+    .reveal-on-scroll, .reveal-left, .reveal-right, .it-sliding-card.cascade-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   }
 </style>
