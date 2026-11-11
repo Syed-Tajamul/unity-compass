@@ -321,7 +321,10 @@ const deliverables = [
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 w-full max-w-lg mx-auto lg:mx-0">
               {keySquareCards.map((card, idx) => (
                 <div
-                  class="square-slide-card group relative cursor-pointer"
+                  class:list={[
+                    "square-slide-card group relative cursor-pointer",
+                    idx === 3 && "self-contained-card"
+                  ]}
                   style={`transition-delay: ${idx * 60}ms;`}
                 >
                   <div class="square-slide-inner">
@@ -1045,6 +1048,102 @@ const deliverables = [
 
   .square-slide-card:hover .square-slide-inner {
     transform: translateY(-24px);
+  }
+
+  /* ========================================================================= */
+  /* Self-Contained Zero-Overlap Test Card (Applied to Card 4)                 */
+  /* 100% contained within 155px boundary - ZERO collision with neighbor cards  */
+  /* ========================================================================= */
+  .self-contained-card {
+    height: 155px;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 20px rgba(12, 72, 122, 0.14);
+    transition: box-shadow 0.5s ease;
+  }
+
+  .self-contained-card:hover {
+    box-shadow: 0 16px 36px -6px rgba(12, 72, 122, 0.28);
+  }
+
+  /* Keep inner container strictly in place - ZERO upward translation! */
+  .self-contained-card .square-slide-inner,
+  .self-contained-card:hover .square-slide-inner {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Deck 1: Top Header shrinks gracefully from 155px to 58px inside the card */
+  .self-contained-card .square-slide-top {
+    height: 155px;
+    border-radius: 1.5rem;
+    transition: height 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+                padding 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+                border-radius 0.4s ease;
+  }
+
+  .self-contained-card:hover .square-slide-top {
+    height: 58px;
+    padding: 0.5rem 0.75rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 4px 12px rgba(12, 72, 122, 0.2);
+  }
+
+  .self-contained-card:hover .square-icon-wrap {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-bottom: 0.1rem;
+    border-radius: 0.5rem;
+  }
+
+  .self-contained-card:hover .square-icon-svg {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  .self-contained-card:hover .square-title {
+    font-size: 0.775rem;
+    line-height: 1.15;
+  }
+
+  /* Deck 2: Bottom Description expands inside the remaining 97px */
+  .self-contained-card .square-slide-bottom {
+    flex: 1;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(12px);
+    border: none;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.85rem;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.5s ease 0.05s,
+                transform 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+                padding 0.5s ease;
+  }
+
+  .self-contained-card:hover .square-slide-bottom {
+    max-height: 97px;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 0.5rem 0.85rem 0.65rem 0.85rem;
+  }
+
+  .self-contained-card .square-desc {
+    font-size: 0.785rem;
+    line-height: 1.45;
   }
 
   /* Deck 1: Top Header (Icon + Title, smooth gradual height shrink, zero clipping) */
