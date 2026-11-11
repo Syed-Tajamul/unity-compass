@@ -480,55 +480,52 @@ const deliverables = [
           </p>
         </div>
 
-        <!-- 4 Deliverable Cards: Shuttle Bottom-to-Top Color Fill Animation with Staggered Scroll Reveal -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- 4 Deliverable Cards: Codev Land Two-Layer Sliding Profile Card Hover Animation -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
           {deliverables.map((item, idx) => (
             <div
-              class="shuttle-card group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.28)] transition-all duration-400 flex flex-col justify-between min-h-[300px] p-7 sm:p-8 overflow-hidden cursor-pointer reveal-on-scroll"
+              class="codev-slide-card group relative cursor-pointer reveal-on-scroll"
               style={`transition-delay: ${idx * 80}ms;`}
               data-card-index={idx}
             >
-              <!-- Shuttle Bottom-to-Top Color Fill with Organic Curved Top Crest -->
-              <div
-                class="shuttle-fill-layer absolute inset-0 bg-gradient-to-t from-[#0C487A] via-[#103E6B] to-[#1E40AF] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none rounded-3xl overflow-hidden"
-                aria-hidden="true"
-              >
-                <!-- Organic Curved Soft Light Wave at the Leading Edge -->
-                <div class="absolute -top-5 left-0 right-0 h-10 bg-white/20 rounded-[100%] blur-sm pointer-events-none"></div>
-                <div class="absolute top-0 inset-x-0 h-1 bg-[#FF3130]/80"></div>
-              </div>
+              <!-- Slide 1: Top Slide (Icon + Title, glides UP on hover) -->
+              <div class="codev-slide codev-slide1 relative rounded-3xl bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] p-6 text-center text-white border border-white/15 shadow-[0_12px_28px_rgba(12,72,122,0.22)] flex flex-col items-center justify-center min-h-[190px]">
+                <!-- Ambient Subtle Glow Aura -->
+                <div class="absolute inset-0 rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-              <!-- Top Content (Text & Icons transition smoothly to crisp white on hover) -->
-              <div class="relative z-10">
-                
-                <!-- Icon Badge with Soft Brand Tint & Glow -->
-                <div class="relative w-14 h-14 flex items-center justify-center mb-6">
-                  <div class="absolute inset-0 rounded-2xl bg-[#0C487A]/15 blur-lg opacity-40 group-hover:opacity-0 transition-opacity"></div>
-                  
-                  <div class="relative w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] group-hover:bg-white group-hover:text-[#FF3130] border border-blue-100/80 group-hover:border-white/30 flex items-center justify-center transition-all duration-400 shadow-2xs group-hover:scale-105">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
-                    </svg>
-                  </div>
+                <!-- Icon in Frost Pill -->
+                <div class="w-13 h-13 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-3 shadow-inner group-hover:scale-110 group-hover:bg-white group-hover:text-[#FF3130] transition-all duration-400">
+                  <svg class="w-6 h-6 transition-colors duration-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
+                  </svg>
                 </div>
 
                 <!-- Title -->
-                <h3 class="text-xl font-bold text-[#0B2553] group-hover:text-white transition-colors duration-400 tracking-tight leading-snug mb-3">
+                <h3 class="text-lg font-bold text-white tracking-tight leading-snug px-1 mb-1">
                   {item.title}
                 </h3>
 
-                <!-- Primary Description -->
-                <p class="text-sm text-slate-600 group-hover:text-white/95 transition-colors duration-400 leading-relaxed font-normal">
-                  {item.desc}
-                </p>
+                <!-- Subtle Explore Prompt (Fades out when hovered) -->
+                <span class="text-[11px] font-semibold text-blue-200/80 group-hover:opacity-0 transition-opacity duration-300 flex items-center gap-1 mt-1">
+                  <span>Hover to reveal</span>
+                  <svg class="w-3 h-3 translate-y-0.5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
               </div>
 
-              <!-- Bottom Indicator -->
-              <div class="pt-5 mt-4 border-t border-slate-100 group-hover:border-white/20 flex items-center justify-between relative z-10 transition-colors">
-                <span class="text-xs font-bold text-[#0C487A] group-hover:text-white transition-colors">
-                  Key Deliverable
-                </span>
-                <span class="w-2.5 h-2.5 rounded-full bg-slate-300 group-hover:bg-[#FF3130] group-hover:scale-125 transition-all duration-300"></span>
+              <!-- Slide 2: Bottom Slide (Detailed Description + Deliverables, glides DOWN on hover) -->
+              <div class="codev-slide codev-slide2 relative rounded-3xl bg-white border border-slate-200/90 p-6 flex flex-col justify-between shadow-[0_10px_25px_rgba(15,39,74,0.06)] group-hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] min-h-[200px]">
+                <!-- Description -->
+                <p class="text-sm text-slate-600 leading-relaxed font-normal text-center pt-2">
+                  {item.desc}
+                </p>
+
+                <!-- Bottom Indicator & Brand Accent Seam -->
+                <div class="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A]">
+                  <span>Key Deliverable</span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#FF3130] shadow-[0_0_8px_#FF3130]"></span>
+                </div>
               </div>
 
             </div>
@@ -934,14 +931,74 @@ const deliverables = [
   }
 
   /* ========================================================================= */
-  /* Shuttle Bottom-to-Top Color Fill Animation                                */
+  /* Codev Land Two-Layer Sliding Profile Card Hover Animation                 */
+  /* Slide 1 (Icon+Title) shifts up, Slide 2 (Description) shifts down         */
   /* ========================================================================= */
-  .shuttle-card {
-    will-change: transform, box-shadow;
+  .codev-slide-card {
+    position: relative;
+    width: 100%;
+    min-height: 410px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    perspective: 1000px;
   }
 
-  .shuttle-fill-layer {
+  .codev-slide {
+    width: 100%;
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                border-radius 0.4s ease;
     will-change: transform;
+  }
+
+  /* Slide 1: Top Slide (Icon + Title, starts pushed down, slides up on hover) */
+  .codev-slide1 {
+    position: relative;
+    z-index: 2;
+    transform: translateY(96px);
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-radius 0.3s ease;
+  }
+
+  .codev-slide-card:hover .codev-slide1 {
+    transform: translateY(0px);
+    box-shadow: 0 10px 24px rgba(12, 72, 122, 0.18);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
+  /* Slide 2: Bottom Slide (Description, starts tucked up behind slide 1, slides down on hover) */
+  .codev-slide2 {
+    position: relative;
+    z-index: 1;
+    transform: translateY(-96px);
+    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-radius 0.3s ease;
+  }
+
+  .codev-slide-card:hover .codev-slide2 {
+    transform: translateY(0px);
+    box-shadow: 0 24px 50px -10px rgba(12, 72, 122, 0.22);
+    border-color: #cbd5e1;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  /* Bottom Red Accent Seam on Slide 2 (Matching Codev Land ::after rule) */
+  .codev-slide2::after {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 3.5px;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #0C487A, #1E40AF, #FF3130);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  .codev-slide-card:hover .codev-slide2::after {
+    width: 64px;
   }
 
   /* ========================================================================= */
@@ -1006,14 +1063,14 @@ const deliverables = [
       transform: none !important;
       animation: none !important;
     }
-    .shuttle-card,
+    .codev-slide1,
+    .codev-slide2 {
+      transform: none !important;
+      transition: none !important;
+    }
     .why-card {
       transition: none !important;
       transform: none !important;
-    }
-    .shuttle-fill-layer {
-      transition: none !important;
-      display: none !important;
     }
   }
 </style>
