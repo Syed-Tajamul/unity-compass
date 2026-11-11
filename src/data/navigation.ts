@@ -65,19 +65,19 @@ export const navigationLinks: NavItem[] = [
 
 export const footerLinks = {
   services: [
-    { name: 'Proposal Development', href: '/proposal-development-services' },
-    { name: 'Security-Cleared Recruitment', href: '/recruitment-services' },
-    { name: 'Staffing Solutions', href: '/staffing' },
-    { name: 'IT & Business Consulting', href: '/information-technology-and-business-consulting' },
-    { name: 'Customized Support Services', href: '/customized-support-services' },
+    { name: 'Proposal development', href: '/proposal-development-services' },
+    { name: 'Security-cleared recruitment', href: '/recruitment-services' },
+    { name: 'Staffing solutions', href: '/staffing' },
+    { name: 'IT and business consulting', href: '/information-technology-and-business-consulting' },
+    { name: 'Customized support services', href: '/customized-support-services' },
   ],
   company: [
-    { name: 'About Us', href: 'javascript:void(0)' },
-    { name: 'Capability Statement (PDF)', href: '/documents/capability-statement.pdf' },
-    { name: 'Careers & Job Board', href: 'javascript:void(0)' },
-    { name: 'Insights & Blog', href: '/blog' },
-    { name: 'Contact Us', href: 'javascript:void(0)' },
-    { name: 'Privacy Policy', href: '/privacy-policy' },
+    { name: 'About us', href: '/about-us' },
+    { name: 'Capability statement (PDF)', href: '/documents/capability-statement.pdf' },
+    { name: 'Careers and job board', href: 'javascript:void(0)' },
+    { name: 'Insights and blog', href: '/blog' },
+    { name: 'Contact us', href: 'javascript:void(0)' },
+    { name: 'Privacy policy', href: '/privacy-policy' },
   ],
   legal: [
     { name: 'Privacy Policy', href: '/privacy-policy' },
