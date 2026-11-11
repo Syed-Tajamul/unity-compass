@@ -60,7 +60,7 @@ export const navigationLinks: NavItem[] = [
     ],
   },
   { name: 'Careers', href: 'javascript:void(0)' },
-  { name: 'Contact Us', href: 'javascript:void(0)' },
+  { name: 'Contact Us', href: '/contact' },
 ];
 
 export const footerLinks = {
@@ -76,7 +76,7 @@ export const footerLinks = {
     { name: 'Capability Statement (PDF)', href: '/documents/capability-statement.pdf' },
     { name: 'Careers & Job Board', href: 'javascript:void(0)' },
     { name: 'Insights & Blog', href: '/blog' },
-    { name: 'Contact Us', href: 'javascript:void(0)' },
+    { name: 'Contact Us', href: '/contact' },
     { name: 'Privacy Policy', href: '/privacy-policy' },
   ],
   legal: [
