@@ -3,8 +3,7 @@
  * ServicesGrid.astro - Bold & Highly Animated Services Carousel Section
  * 
  * Strict User Requirements:
- * - 6 Dedicated Service Images (service1.png through service6.png):
- *   Each 3D visual has the service title sculpted into the bottom-left of the image.
+ * - Six distinct service visuals with consistent logo and title overlays.
  * - On Hover Interaction:
  *   * The image smoothly disappears (fades out and scales gracefully).
  *   * The card reveals a rich, branded Deep Federal Navy canvas (#0F274A to #0C487A)
@@ -24,6 +23,8 @@ export interface ServiceItem {
   description: string;
   href: string;
   image: string;
+  imagePosition: string;
+  imageScale: number;
   category: string;
 }
 
@@ -35,7 +36,9 @@ const services: ServiceItem[] = [
     title: 'Proposal Development & Federal Bid Support',
     description: 'Structured proposal lifecycle support including capture planning, proposal structuring, narrative development, and submission readiness.',
     href: '/proposal-development-services',
-    image: '/images/service1.png',
+    image: '/images/service-proposal-card.jpg',
+    imagePosition: 'center top',
+    imageScale: 1.3,
     category: 'Capture & Proposal Lifecycle',
   },
   {
@@ -45,7 +48,9 @@ const services: ServiceItem[] = [
     title: 'OASIS+ & IDIQ Qualification Support',
     description: 'We assist organizations in preparing defensible eligibility packages aligned with domain scoring and qualification matrices.',
     href: '/customized-support-services',
-    image: '/images/service2.png',
+    image: '/images/service-oasis-card.jpg',
+    imagePosition: 'center center',
+    imageScale: 1,
     category: 'GSA Vehicle Readiness',
   },
   {
@@ -55,7 +60,9 @@ const services: ServiceItem[] = [
     title: 'Security-Cleared Recruitment',
     description: 'Recruitment services for cleared and non-cleared federal roles including verification, screening, and documentation readiness.',
     href: '/recruitment-services',
-    image: '/images/service3.png',
+    image: '/images/service-recruitment-card.jpg',
+    imagePosition: 'center top',
+    imageScale: 1.3,
     category: 'TS/SCI & Poly Sourcing',
   },
   {
@@ -65,7 +72,9 @@ const services: ServiceItem[] = [
     title: 'Staffing Solutions',
     description: 'Flexible staffing models including contract staffing, direct hire, and contract-to-hire aligned with federal program needs.',
     href: '/staffing',
-    image: '/images/service4.png',
+    image: '/images/service-staffing-card.jpg',
+    imagePosition: 'center center',
+    imageScale: 1,
     category: 'Workforce Surge Delivery',
   },
   {
@@ -75,7 +84,9 @@ const services: ServiceItem[] = [
     title: 'IT & Program Consulting',
     description: 'Technical advisory and program governance services to support federal systems delivery and performance oversight.',
     href: '/information-technology-and-business-consulting',
-    image: '/images/service5.png',
+    image: '/images/about-hero-1600.webp',
+    imagePosition: 'center center',
+    imageScale: 1,
     category: 'Systems & Architecture',
   },
   {
@@ -85,7 +96,9 @@ const services: ServiceItem[] = [
     title: 'Contract Compliance Support',
     description: 'Contract documentation management, compliance preparation, and audit-ready operational processes.',
     href: '/customized-support-services',
-    image: '/images/service6.png',
+    image: '/images/service-compliance-card.jpg',
+    imagePosition: 'center center',
+    imageScale: 1,
     category: 'FAR/DFARS Audit-Ready',
   },
 ];
@@ -193,16 +206,31 @@ const services: ServiceItem[] = [
             <!-- Inner Card Container -->
             <div class="relative w-full h-full rounded-[1.7rem] overflow-hidden bg-white p-2 sm:p-2.5">
               
-              <!-- 1. RESTING STATE: The 3D Image with Sculpted White Tab (Fills container with little even padding, fades out smoothly on hover) -->
-              <div class="absolute inset-0 z-10 overflow-hidden bg-white p-2 sm:p-2.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:opacity-0 group-hover/card:scale-105 pointer-events-none">
+              <!-- 1. RESTING STATE: Distinct service artwork with shared branding and label treatment -->
+              <div class="absolute inset-0 z-10 overflow-hidden bg-gradient-to-br from-white via-[#EDF4FB] to-[#DCEAF7] p-2 sm:p-2.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:opacity-0 group-hover/card:scale-105 pointer-events-none" aria-hidden="true">
                 <img
                   src={item.image}
-                  alt={item.title}
+                  alt=""
                   class="w-full h-full object-cover rounded-[1.35rem] select-none"
+                  style={`object-position: ${item.imagePosition}; transform: scale(${item.imageScale}); transform-origin: center top;`}
                   loading="lazy"
                   width="2752"
                   height="1536"
                 />
+
+                <span class="absolute right-4 top-4 z-20 sm:right-5 sm:top-5" aria-hidden="true">
+                  <img
+                    src="/images/unity-compass-clean.png"
+                    alt=""
+                    class="service-image-logo h-auto w-24 sm:w-28"
+                    width="488"
+                    height="89"
+                  />
+                </span>
+
+                <div class="absolute bottom-6 right-6 z-20 max-w-[78%] text-right sm:bottom-7 sm:right-7">
+                  <h3 class="service-image-label text-lg font-extrabold leading-tight tracking-tight text-white sm:text-xl lg:text-2xl">{item.shortTitle}</h3>
+                </div>
               </div>
 
               <!-- 2. HOVER STATE: Branded Deep Federal Navy Canvas with Minute Checks & Ambient Radial Glow -->
@@ -373,6 +401,20 @@ const services: ServiceItem[] = [
   .service-card-item {
     will-change: transform;
     transform: translateZ(0);
+  }
+
+  .service-image-label {
+    text-shadow:
+      0 1px 2px rgba(8, 27, 51, 1),
+      0 3px 8px rgba(8, 27, 51, 0.95),
+      0 8px 22px rgba(8, 27, 51, 0.75);
+  }
+
+  .service-image-logo {
+    filter:
+      drop-shadow(0 0 2px rgba(255, 255, 255, 1))
+      drop-shadow(0 2px 7px rgba(255, 255, 255, 0.9))
+      drop-shadow(0 7px 16px rgba(8, 27, 51, 0.35));
   }
 </style>
 

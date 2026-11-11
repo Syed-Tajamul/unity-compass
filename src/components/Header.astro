@@ -160,6 +160,7 @@ const aboutDropdown = [
                 {aboutDropdown.map((item) => (
                   <a
                     href={item.href}
+                    data-astro-prefetch={item.href === '/about-us' ? 'hover' : undefined}
                     target={item.isPdf ? '_blank' : undefined}
                     rel={item.isPdf ? 'noopener noreferrer' : undefined}
                     class="dropdown-link-row group/item"
@@ -348,6 +349,7 @@ const aboutDropdown = [
           {aboutDropdown.map((sub) => (
             <a
               href={sub.href}
+              data-astro-prefetch={sub.href === '/about-us' ? 'hover' : undefined}
               target={sub.isPdf ? '_blank' : undefined}
               rel={sub.isPdf ? 'noopener noreferrer' : undefined}
               class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-[#0C487A] hover:bg-slate-50 transition-colors"

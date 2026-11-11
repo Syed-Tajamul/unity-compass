@@ -48,6 +48,7 @@ import { companyInfo } from '../data/company';
             <li>
               <a
                 href={item.href}
+                data-astro-prefetch={item.href === '/about-us' ? 'hover' : undefined}
                 target={item.href.endsWith('.pdf') ? '_blank' : undefined}
                 rel={item.href.endsWith('.pdf') ? 'noopener noreferrer' : undefined}
                 class="footer-link"
