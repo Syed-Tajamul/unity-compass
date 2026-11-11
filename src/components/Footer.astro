@@ -91,11 +91,15 @@ import WaveDivider from './WaveDivider.astro';
     <div class="footer-lower">
       <div class="footer-divider" aria-hidden="true">
         <span></span>
-        <span class="footer-compass-mark">
-          <span class="footer-compass-axis"></span>
-          <span class="footer-compass-north"></span>
-          <span class="footer-compass-south"></span>
-        </span>
+        <img
+          src="/favicon.png"
+          alt=""
+          class="footer-compass-mark"
+          width="300"
+          height="300"
+          loading="lazy"
+          decoding="async"
+        />
         <span></span>
       </div>
 
@@ -239,47 +243,11 @@ import WaveDivider from './WaveDivider.astro';
   }
 
   .footer-compass-mark {
-    position: relative;
     display: block;
-    width: 3.25rem;
-    height: 3.25rem;
-    border: 2px solid #cad7e6;
-    border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.92);
-    box-shadow: 0 9px 22px -14px rgba(15, 39, 74, 0.5);
-  }
-
-  .footer-compass-axis {
-    position: absolute;
-    top: 50%;
-    left: 0.6rem;
-    width: calc(100% - 1.2rem);
-    height: 2px;
-    background: #9eabc0;
-    transform: translateY(-50%);
-  }
-
-  .footer-compass-north,
-  .footer-compass-south {
-    position: absolute;
-    left: 50%;
-    width: 0;
-    height: 0;
-    transform: translateX(-50%);
-  }
-
-  .footer-compass-north {
-    top: 0.2rem;
-    border-right: 0.32rem solid transparent;
-    border-bottom: 1.4rem solid #d20f39;
-    border-left: 0.32rem solid transparent;
-  }
-
-  .footer-compass-south {
-    bottom: 0.2rem;
-    border-top: 1.4rem solid #10295b;
-    border-right: 0.32rem solid transparent;
-    border-left: 0.32rem solid transparent;
+    width: 3.75rem;
+    height: 3.75rem;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 16px rgba(15, 39, 74, 0.18));
   }
 
   .footer-meta {

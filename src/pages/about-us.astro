@@ -195,8 +195,8 @@ const aboutPageSchema = {
 
     <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:px-8 lg:pt-20 pb-24 sm:pb-28 lg:pb-32">
       <div class="max-w-3xl">
-        <h1 class="hero-heading-reveal max-w-2xl text-3xl font-extrabold leading-[1.16] tracking-tight text-[#0F274A] sm:text-4xl sm:leading-[1.18] lg:text-[2.75rem] xl:text-[3.15rem]">
-          A practical partner for <span class="about-gradient-text">federal work.</span>
+        <h1 class="hero-heading-reveal max-w-2xl text-3xl font-extrabold leading-[1.16] tracking-tight sm:text-4xl sm:leading-[1.18] lg:text-[2.75rem] xl:text-[3.15rem]">
+          <span class="about-gradient-text">A practical partner for federal work.</span>
         </h1>
         <p class="hero-subheading-reveal mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
           We help contractors compete, hire, and deliver in regulated environments.
@@ -232,7 +232,7 @@ const aboutPageSchema = {
         <img
           src="/images/about-hero-960.webp"
           srcset="/images/about-hero-480.webp 480w, /images/about-hero-960.webp 960w, /images/about-hero-1600.webp 1600w"
-          sizes="(min-width: 1280px) 672px, (min-width: 1024px) 52vw, 100vw"
+          sizes="(min-width: 1280px) 626px, (min-width: 1024px) calc(54vw - 65px), (min-width: 720px) 672px, calc(100vw - 48px)"
           alt=""
           width="1600"
           height="900"
@@ -310,7 +310,7 @@ const aboutPageSchema = {
           <div class="capabilities-track" data-capabilities-track>
             {capabilityGroups.map((group, groupIndex) => (
               <section
-                class="capability-slide p-5 sm:p-7"
+                class={`capability-slide p-5 sm:p-7 ${groupIndex === 0 ? 'is-active' : ''}`}
                 aria-label={`${groupIndex + 1} of ${capabilityGroups.length}: ${group.label}`}
                 aria-roledescription="slide"
                 aria-hidden={groupIndex === 0 ? 'false' : 'true'}
@@ -539,11 +539,14 @@ const aboutPageSchema = {
         {companyValues.map((value, index) => {
           const Icon = value.icon;
           return (
-          <li class={`about-reveal about-delay-${Math.min(index + 1, 5)} flex min-h-20 items-center rounded-xl border border-slate-200/90 bg-white/90 px-4 py-4 text-sm font-bold leading-6 text-[#0F274A] shadow-[0_10px_28px_-22px_rgba(15,39,74,0.3)] backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:bg-white`}>
-            <span class="mr-3 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#0C487A]/[0.08] text-[#0C487A]" aria-hidden="true">
+          <li
+            class={`value-gradient-card about-reveal about-delay-${Math.min(index + 1, 5)} group relative flex min-h-20 cursor-pointer items-center overflow-hidden rounded-xl border border-slate-200/90 bg-white/95 px-4 py-4 text-sm font-bold leading-6 text-[#0F274A] backdrop-blur-md`}
+            style={`--value-border-delay: -${index * 0.7}s;`}
+          >
+            <span class="relative z-10 mr-3 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[#0C487A]/10 bg-[#0C487A]/[0.08] text-[#0C487A] transition duration-300 group-hover:scale-110 group-hover:border-white/20 group-hover:bg-[#0C487A] group-hover:text-white group-hover:shadow-[0_7px_18px_-8px_rgba(12,72,122,0.8)]" aria-hidden="true">
               <Icon class="h-4 w-4" stroke-width={1.8} />
             </span>
-            {value.title}
+            <span class="relative z-10">{value.title}</span>
           </li>
           );
         })}
@@ -594,19 +597,11 @@ const aboutPageSchema = {
       linear-gradient(to bottom, rgba(12, 72, 122, 0.08) 1px, transparent 1px);
   }
 
-  .about-hero .hero-heading-reveal {
-    animation-duration: 700ms;
-    animation-delay: 0ms;
-  }
-
-  .about-hero .hero-subheading-reveal {
-    animation-duration: 700ms;
-    animation-delay: 80ms;
-  }
-
+  .about-hero .hero-heading-reveal,
+  .about-hero .hero-subheading-reveal,
   .about-hero .hero-cta-reveal {
-    animation-duration: 650ms;
-    animation-delay: 140ms;
+    animation: none;
+    will-change: auto;
   }
 
   .about-gradient-text {
@@ -624,21 +619,128 @@ const aboutPageSchema = {
     color: transparent;
   }
 
+  @property --value-border-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes valueGradientBorderSpin {
+    to { --value-border-angle: 360deg; }
+  }
+
+  .value-gradient-card {
+    --value-border-width: 2px;
+    isolation: isolate;
+    box-shadow: 0 10px 28px -22px rgba(15, 39, 74, 0.3);
+  }
+
+  .value-gradient-card:hover {
+    box-shadow:
+      0 16px 34px -18px rgba(12, 72, 122, 0.45),
+      0 0 24px rgba(37, 99, 235, 0.13);
+  }
+
+  .value-gradient-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    padding: var(--value-border-width);
+    background: conic-gradient(
+      from var(--value-border-angle),
+      transparent 0deg,
+      transparent 60deg,
+      #38BDF8 120deg,
+      #2563EB 175deg,
+      #0C487A 220deg,
+      #FF3130 270deg,
+      transparent 330deg,
+      transparent 360deg
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    animation: valueGradientBorderSpin 3.5s linear infinite paused;
+    animation-delay: var(--value-border-delay, 0s);
+    transition: opacity 350ms ease;
+    pointer-events: none;
+  }
+
+  .value-gradient-card:hover::before {
+    opacity: 1;
+    animation-play-state: running;
+  }
+
   .capabilities-viewport {
     overflow: hidden;
     touch-action: pan-y;
   }
 
   .capabilities-track {
-    display: flex;
+    display: grid;
     align-items: stretch;
-    transition: transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
   }
 
   .capability-slide {
-    flex: 0 0 100%;
+    grid-area: 1 / 1;
     min-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .capability-slide.is-active {
+    z-index: 2;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .capability-slide.is-entering-next {
+    animation: capabilityEnterRight 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .capability-slide.is-entering-previous {
+    animation: capabilityEnterLeft 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .capability-slide.is-leaving-next,
+  .capability-slide.is-leaving-previous {
+    z-index: 1;
+    visibility: visible;
+    pointer-events: none;
+  }
+
+  .capability-slide.is-leaving-next {
+    animation: capabilityLeaveLeft 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .capability-slide.is-leaving-previous {
+    animation: capabilityLeaveRight 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes capabilityEnterRight {
+    from { opacity: 0.35; transform: translateX(42%) scale(0.985); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+  }
+
+  @keyframes capabilityEnterLeft {
+    from { opacity: 0.35; transform: translateX(-42%) scale(0.985); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+  }
+
+  @keyframes capabilityLeaveLeft {
+    from { opacity: 1; transform: translateX(0) scale(1); }
+    to { opacity: 0; transform: translateX(-24%) scale(0.985); }
+  }
+
+  @keyframes capabilityLeaveRight {
+    from { opacity: 1; transform: translateX(0) scale(1); }
+    to { opacity: 0; transform: translateX(24%) scale(0.985); }
   }
 
   .capability-control {
@@ -834,7 +936,7 @@ const aboutPageSchema = {
   }
 
   .about-hero-art {
-    animation: aboutHeroIn 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: none;
   }
 
   .about-float {
@@ -844,12 +946,9 @@ const aboutPageSchema = {
   .about-reveal {
     opacity: 0;
     transform: translateY(24px);
-    filter: blur(8px);
-    will-change: opacity, transform, filter;
     transition:
       opacity 750ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 750ms cubic-bezier(0.16, 1, 0.3, 1),
-      filter 750ms cubic-bezier(0.16, 1, 0.3, 1);
+      transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .about-reveal.is-visible {
@@ -858,22 +957,6 @@ const aboutPageSchema = {
     filter: blur(0);
   }
 
-  .about-scroll-region :is(h2, h3, h4, p, dt, dd) {
-    opacity: 0;
-    transform: translateY(18px);
-    filter: blur(8px);
-    will-change: opacity, transform, filter;
-    transition:
-      opacity 750ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 750ms cubic-bezier(0.16, 1, 0.3, 1),
-      filter 750ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .about-scroll-region :is(h2, h3, h4, p, dt, dd).is-visible {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
 
   .about-delay-1 { transition-delay: 80ms; }
   .about-delay-2 { transition-delay: 160ms; }
@@ -1067,8 +1150,18 @@ const aboutPageSchema = {
       display: none !important;
     }
 
-    .capabilities-track {
-      transition: none !important;
+    .capability-slide {
+      animation: none !important;
+    }
+
+    .capability-slide.is-active {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .value-gradient-card::before {
+      --value-border-angle: 135deg;
+      animation: none !important;
     }
 
     .process-timeline::before {
@@ -1087,13 +1180,24 @@ const aboutPageSchema = {
       if (card.dataset.radarInitialized === 'true') return;
       card.dataset.radarInitialized = 'true';
 
+      let frame: number | undefined;
+      let pointerX = 0;
+      let pointerY = 0;
       card.addEventListener('pointermove', (event) => {
-        const bounds = card.getBoundingClientRect();
-        card.style.setProperty('--spot-x', `${event.clientX - bounds.left}px`);
-        card.style.setProperty('--spot-y', `${event.clientY - bounds.top}px`);
+        pointerX = event.clientX;
+        pointerY = event.clientY;
+        if (frame !== undefined) return;
+        frame = requestAnimationFrame(() => {
+          frame = undefined;
+          const bounds = card.getBoundingClientRect();
+          card.style.setProperty('--spot-x', `${pointerX - bounds.left}px`);
+          card.style.setProperty('--spot-y', `${pointerY - bounds.top}px`);
+        });
       });
 
       card.addEventListener('pointerleave', () => {
+        if (frame !== undefined) cancelAnimationFrame(frame);
+        frame = undefined;
         card.style.setProperty('--spot-x', '50%');
         card.style.setProperty('--spot-y', '50%');
       });
@@ -1115,14 +1219,31 @@ const aboutPageSchema = {
     if (!track || !viewport || slides.length === 0) return;
 
     carousel.dataset.initialized = 'true';
+    const AUTOPLAY_DELAY = 4000;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let currentIndex = 0;
     let touchStartX: number | undefined;
     let suppressClick = false;
+    let autoplayTimer: number | undefined;
+    let isTransitioning = false;
+    let isInViewport = !('IntersectionObserver' in window);
 
-    function showSlide(nextIndex: number) {
-      currentIndex = (nextIndex + slides.length) % slides.length;
-      track.style.transform = `translate3d(-${currentIndex * 100}%, 0, 0)`;
+    function stopAutoplay() {
+      if (autoplayTimer === undefined) return;
+      window.clearInterval(autoplayTimer);
+      autoplayTimer = undefined;
+    }
 
+    function startAutoplay() {
+      stopAutoplay();
+      if (reducedMotion || !isInViewport || document.hidden || carousel.matches(':hover, :focus-within')) return;
+      autoplayTimer = window.setInterval(() => {
+        if (document.hidden) return;
+        showSlide(currentIndex + 1);
+      }, AUTOPLAY_DELAY);
+    }
+
+    function updateCarouselState() {
       slides.forEach((slide, index) => {
         const isCurrent = index === currentIndex;
         slide.setAttribute('aria-hidden', String(!isCurrent));
@@ -1142,13 +1263,46 @@ const aboutPageSchema = {
       if (status) status.textContent = `${currentIndex + 1} / ${slides.length}`;
     }
 
-    previousButton?.addEventListener('click', () => showSlide(currentIndex - 1));
-    nextButton?.addEventListener('click', () => showSlide(currentIndex + 1));
+    function showSlide(nextIndex: number) {
+      const normalizedIndex = (nextIndex + slides.length) % slides.length;
+      if (normalizedIndex === currentIndex || isTransitioning) {
+        updateCarouselState();
+        return;
+      }
+
+      const direction = nextIndex < currentIndex ? 'previous' : 'next';
+      const outgoingSlide = slides[currentIndex];
+      const incomingSlide = slides[normalizedIndex];
+      if (!outgoingSlide || !incomingSlide) return;
+
+      isTransitioning = true;
+      outgoingSlide.classList.remove('is-active');
+      outgoingSlide.classList.add(`is-leaving-${direction}`);
+      incomingSlide.classList.add('is-active', `is-entering-${direction}`);
+      currentIndex = normalizedIndex;
+      updateCarouselState();
+
+      window.setTimeout(() => {
+        outgoingSlide.classList.remove(`is-leaving-${direction}`);
+        incomingSlide.classList.remove(`is-entering-${direction}`);
+        isTransitioning = false;
+      }, reducedMotion ? 0 : 820);
+    }
+
+    previousButton?.addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+      startAutoplay();
+    });
+    nextButton?.addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+      startAutoplay();
+    });
 
     dots.forEach((dot) => {
       dot.addEventListener('click', () => {
         const index = Number.parseInt(dot.dataset.capabilityDot ?? '0', 10);
         showSlide(index);
+        startAutoplay();
       });
     });
 
@@ -1156,6 +1310,22 @@ const aboutPageSchema = {
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
       event.preventDefault();
       showSlide(currentIndex + (event.key === 'ArrowRight' ? 1 : -1));
+      startAutoplay();
+    });
+
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('focusin', stopAutoplay);
+    carousel.addEventListener('focusout', (event) => {
+      const nextTarget = event.relatedTarget as Node | null;
+      if (!nextTarget || !carousel.contains(nextTarget)) startAutoplay();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
     });
 
     viewport.addEventListener('touchstart', (event) => {
@@ -1171,6 +1341,7 @@ const aboutPageSchema = {
       if (Math.abs(distance) < 50) return;
       suppressClick = true;
       showSlide(currentIndex + (distance < 0 ? 1 : -1));
+      startAutoplay();
       window.setTimeout(() => { suppressClick = false; }, 250);
     }, { passive: true });
 
@@ -1181,6 +1352,15 @@ const aboutPageSchema = {
     }, true);
 
     showSlide(0);
+    if ('IntersectionObserver' in window) {
+      const visibilityObserver = new IntersectionObserver(([entry]) => {
+        isInViewport = entry.isIntersecting;
+        if (isInViewport) startAutoplay();
+        else stopAutoplay();
+      });
+      visibilityObserver.observe(carousel);
+    }
+    startAutoplay();
   }
 
   function initTimelineFocusStates() {
@@ -1207,8 +1387,22 @@ const aboutPageSchema = {
     initCapabilitiesCarousel();
     initTimelineFocusStates();
 
+    const heroArtwork = document.querySelector<HTMLElement>('.about-float');
+    if (heroArtwork && 'IntersectionObserver' in window) {
+      let artworkVisible = true;
+      const updateArtworkAnimation = () => {
+        heroArtwork.style.animationPlayState = artworkVisible && !document.hidden ? 'running' : 'paused';
+      };
+      const artworkObserver = new IntersectionObserver(([entry]) => {
+        artworkVisible = entry.isIntersecting;
+        updateArtworkAnimation();
+      });
+      artworkObserver.observe(heroArtwork);
+      document.addEventListener('visibilitychange', updateArtworkAnimation);
+    }
+
     const elements = document.querySelectorAll<HTMLElement>(
-      '.about-reveal, .about-scroll-region :is(h2, h3, h4, p, dt, dd)'
+      '.about-reveal, .about-count'
     );
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
