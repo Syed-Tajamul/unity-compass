@@ -57,103 +57,51 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
 <div class="space-y-10" id="career-job-board">
   
   <!-- ========================================================================= -->
-  <!-- SEARCH & MULTI-FILTER BAR WITH RESET ACTION                               -->
+  <!-- SEARCH & STREAMLINED FILTER BAR                                           -->
   <!-- ========================================================================= -->
-  <div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] relative overflow-hidden">
+  <div class="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] relative overflow-hidden">
     <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#0B2553] via-[#FF3130] to-[#0B2553]"></div>
 
-    <div class="space-y-5">
-      <!-- Search Input & Quick Status -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
-        
-        <!-- Keyword Search -->
-        <div class="lg:col-span-8 relative">
-          <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <input
-            type="text"
-            id="job-search-input"
-            placeholder="Search positions by title, clearance, or skill keyword..."
-            class="w-full pl-12 pr-4 py-3.5 text-sm rounded-2xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400"
-          />
-        </div>
-
-        <!-- Reset Filters Button & Results Count -->
-        <div class="lg:col-span-4 flex items-center justify-between lg:justify-end gap-3">
-          <button
-            type="button"
-            id="reset-filters-btn"
-            class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
-            title="Clear all active filters"
-          >
-            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-            <span>Reset Filters</span>
-          </button>
-
-          <span class="text-xs font-semibold text-slate-500">
-            <span id="job-results-count" class="font-extrabold text-[#0B2553]">{jobPositions.length}</span> Openings
-          </span>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+      <!-- Keyword Search (takes 6 cols on md) -->
+      <div class="md:col-span-6 relative">
+        <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          type="text"
+          id="job-search-input"
+          placeholder="Search positions by title, clearance, or skill keyword..."
+          class="w-full pl-12 pr-4 py-3 text-sm rounded-2xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400"
+        />
       </div>
 
-      <!-- 4 Explicit Filter Dropdowns -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-3 border-t border-slate-100">
-        
-        <!-- 1. Department Filter -->
-        <div>
-          <label class="block text-[11px] font-bold text-[#0B2553] uppercase tracking-wider mb-1">Department</label>
-          <select
-            id="job-dept-filter"
-            class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
-          >
-            {departments.map((dept) => (
-              <option value={dept === 'All Departments' ? '' : dept}>{dept}</option>
-            ))}
-          </select>
-        </div>
+      <!-- Employment Type Filter (takes 3 cols on md) -->
+      <div class="md:col-span-3">
+        <select
+          id="job-type-filter"
+          class="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
+        >
+          {employmentTypes.map((type) => (
+            <option value={type === 'All Employment Types' ? '' : type}>{type}</option>
+          ))}
+        </select>
+      </div>
 
-        <!-- 2. Clearance Filter -->
-        <div>
-          <label class="block text-[11px] font-bold text-[#0B2553] uppercase tracking-wider mb-1">Clearance Level</label>
-          <select
-            id="job-clearance-filter"
-            class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
-          >
-            {clearanceLevels.map((lvl) => (
-              <option value={lvl === 'All Clearances' ? '' : lvl}>{lvl}</option>
-            ))}
-          </select>
-        </div>
+      <!-- Workplace Model Filter & Count (takes 3 cols on md) -->
+      <div class="md:col-span-3 flex items-center gap-3">
+        <select
+          id="job-workplace-filter"
+          class="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
+        >
+          {workplaceTypes.map((model) => (
+            <option value={model === 'All Workplace Models' ? '' : model}>{model}</option>
+          ))}
+        </select>
 
-        <!-- 3. Employment Type Filter -->
-        <div>
-          <label class="block text-[11px] font-bold text-[#0B2553] uppercase tracking-wider mb-1">Employment Type</label>
-          <select
-            id="job-type-filter"
-            class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
-          >
-            {employmentTypes.map((type) => (
-              <option value={type === 'All Employment Types' ? '' : type}>{type}</option>
-            ))}
-          </select>
-        </div>
-
-        <!-- 4. Workplace Model Filter -->
-        <div>
-          <label class="block text-[11px] font-bold text-[#0B2553] uppercase tracking-wider mb-1">Workplace Model</label>
-          <select
-            id="job-workplace-filter"
-            class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
-          >
-            {workplaceTypes.map((model) => (
-              <option value={model === 'All Workplace Models' ? '' : model}>{model}</option>
-            ))}
-          </select>
-        </div>
-
+        <span class="text-xs font-semibold text-slate-500 whitespace-nowrap pl-1 shrink-0">
+          <span id="job-results-count" class="font-extrabold text-[#0B2553]">{jobPositions.length}</span> Openings
+        </span>
       </div>
     </div>
   </div>
@@ -444,11 +392,8 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
 
 <script>
   const searchInput = document.getElementById('job-search-input') as HTMLInputElement;
-  const deptFilter = document.getElementById('job-dept-filter') as HTMLSelectElement;
-  const clearanceFilter = document.getElementById('job-clearance-filter') as HTMLSelectElement;
   const typeFilter = document.getElementById('job-type-filter') as HTMLSelectElement;
   const workplaceFilter = document.getElementById('job-workplace-filter') as HTMLSelectElement;
-  const resetBtn = document.getElementById('reset-filters-btn');
   const emptyResetBtn = document.getElementById('empty-reset-btn');
   const resultsCount = document.getElementById('job-results-count');
   const noJobsFound = document.getElementById('no-jobs-found');
@@ -456,8 +401,6 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
 
   function applyFilters() {
     const query = searchInput?.value.toLowerCase().trim() || '';
-    const selectedDept = deptFilter?.value.toLowerCase() || '';
-    const selectedClearance = clearanceFilter?.value || '';
     const selectedType = typeFilter?.value || '';
     const selectedWorkplace = workplaceFilter?.value || '';
 
@@ -471,12 +414,10 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
       const workplace = card.getAttribute('data-workplace') || '';
 
       const matchesSearch = !query || title.includes(query) || department.includes(query) || clearance.toLowerCase().includes(query);
-      const matchesDept = !selectedDept || department.includes(selectedDept);
-      const matchesClearance = !selectedClearance || clearance === selectedClearance;
       const matchesType = !selectedType || type === selectedType;
       const matchesWorkplace = !selectedWorkplace || workplace === selectedWorkplace;
 
-      if (matchesSearch && matchesDept && matchesClearance && matchesType && matchesWorkplace) {
+      if (matchesSearch && matchesType && matchesWorkplace) {
         card.style.display = 'block';
         visibleCount++;
       } else {
@@ -496,19 +437,14 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
 
   function resetAllFilters() {
     if (searchInput) searchInput.value = '';
-    if (deptFilter) deptFilter.value = '';
-    if (clearanceFilter) clearanceFilter.value = '';
     if (typeFilter) typeFilter.value = '';
     if (workplaceFilter) workplaceFilter.value = '';
     applyFilters();
   }
 
   searchInput?.addEventListener('input', applyFilters);
-  deptFilter?.addEventListener('change', applyFilters);
-  clearanceFilter?.addEventListener('change', applyFilters);
   typeFilter?.addEventListener('change', applyFilters);
   workplaceFilter?.addEventListener('change', applyFilters);
-  resetBtn?.addEventListener('click', resetAllFilters);
   emptyResetBtn?.addEventListener('click', resetAllFilters);
 
   // Modal Handling
