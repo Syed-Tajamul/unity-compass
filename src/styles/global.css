@@ -408,6 +408,70 @@
 }
 
 /* ========================================================================= */
+/* Contragenix-Style Wave / Ripple Kinetic Character Jump on Button Hover    */
+/* Staggered parabolic wave with micro-tilt along the curve arc              */
+/* ========================================================================= */
+.btn-wave-text {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.btn-wave-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.btn-wave-space {
+  display: inline-block;
+  width: 0.28em;
+}
+
+.btn-wave-char {
+  display: inline-block;
+  transform-origin: 50% 90%;
+  will-change: transform;
+  transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes btnWaveCharJump {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  16% {
+    transform: translateY(calc(var(--wave-height, -9px) * 0.75)) rotate(-4.5deg);
+  }
+  30% {
+    transform: translateY(var(--wave-height, -9px)) rotate(0deg);
+  }
+  46% {
+    transform: translateY(calc(var(--wave-height, -9px) * 0.5)) rotate(4.5deg);
+  }
+  60% {
+    transform: translateY(0.5px) rotate(0.5deg);
+  }
+  70%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* Trigger wave animation when parent button / link is hovered */
+.group:hover .btn-wave-char,
+.btn-wave-btn:hover .btn-wave-char,
+#hero-btn-book:hover .btn-wave-char,
+#header-btn-book:hover .btn-wave-char {
+  animation: btnWaveCharJump 1.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  animation-delay: calc(var(--char-index, 0) * 0.032s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-wave-char {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ========================================================================= */
 /* Solid, High-Contrast Navigation Dropdown & Crisp, Readable Interactions   */
 /* ========================================================================= */
 .nav-dropdown-panel {

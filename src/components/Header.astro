@@ -206,13 +206,45 @@ const resourcesDropdown = [
 
       </nav>
 
-      <!-- Zone 3 (Right): Aligned Action CTA Button with Soft Red-Tinted Shadow -->
+      <!-- Zone 3 (Right): Aligned Action CTA Button with Contragenix-Style Wave Character Animation on Hover -->
       <div class="hidden lg:flex items-center shrink-0">
         <a
           href="/contact"
-          class="whitespace-nowrap inline-flex items-center justify-center h-10.5 sm:h-11 px-5.5 sm:px-6 rounded-xl bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] text-white text-xs sm:text-[13.5px] font-bold shadow-[0_4px_16px_-2px_rgba(255,49,48,0.25)] hover:shadow-[0_8px_22px_-2px_rgba(255,49,48,0.35)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer shrink-0"
+          id="header-btn-book"
+          class="btn-wave-btn whitespace-nowrap inline-flex items-center justify-center h-10.5 sm:h-11 px-5.5 sm:px-6 rounded-xl bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] text-white text-xs sm:text-[13.5px] font-bold shadow-[0_4px_16px_-2px_rgba(255,49,48,0.25)] hover:shadow-[0_8px_22px_-2px_rgba(255,49,48,0.35)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer shrink-0"
+          style="--wave-height: -6.5px;"
+          aria-label="Book a Strategy Call"
         >
-          <span>Book a Strategy Call</span>
+          <span class="btn-wave-text pointer-events-none">
+            <span class="btn-wave-word">
+              <span class="btn-wave-char" style="--char-index: 0" aria-hidden="true">B</span>
+              <span class="btn-wave-char" style="--char-index: 1" aria-hidden="true">o</span>
+              <span class="btn-wave-char" style="--char-index: 2" aria-hidden="true">o</span>
+              <span class="btn-wave-char" style="--char-index: 3" aria-hidden="true">k</span>
+            </span>
+            <span class="btn-wave-space" aria-hidden="true">&nbsp;</span>
+            <span class="btn-wave-word">
+              <span class="btn-wave-char" style="--char-index: 4" aria-hidden="true">a</span>
+            </span>
+            <span class="btn-wave-space" aria-hidden="true">&nbsp;</span>
+            <span class="btn-wave-word">
+              <span class="btn-wave-char" style="--char-index: 5" aria-hidden="true">S</span>
+              <span class="btn-wave-char" style="--char-index: 6" aria-hidden="true">t</span>
+              <span class="btn-wave-char" style="--char-index: 7" aria-hidden="true">r</span>
+              <span class="btn-wave-char" style="--char-index: 8" aria-hidden="true">a</span>
+              <span class="btn-wave-char" style="--char-index: 9" aria-hidden="true">t</span>
+              <span class="btn-wave-char" style="--char-index: 10" aria-hidden="true">e</span>
+              <span class="btn-wave-char" style="--char-index: 11" aria-hidden="true">g</span>
+              <span class="btn-wave-char" style="--char-index: 12" aria-hidden="true">y</span>
+            </span>
+            <span class="btn-wave-space" aria-hidden="true">&nbsp;</span>
+            <span class="btn-wave-word">
+              <span class="btn-wave-char" style="--char-index: 13" aria-hidden="true">C</span>
+              <span class="btn-wave-char" style="--char-index: 14" aria-hidden="true">a</span>
+              <span class="btn-wave-char" style="--char-index: 15" aria-hidden="true">l</span>
+              <span class="btn-wave-char" style="--char-index: 16" aria-hidden="true">l</span>
+            </span>
+          </span>
         </a>
       </div>
 
@@ -389,6 +421,56 @@ const resourcesDropdown = [
 </aside>
 
 <style>
+  /* Contragenix-Style Wave Character Animation on Hover */
+  .btn-wave-text {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .btn-wave-word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .btn-wave-space {
+    display: inline-block;
+    width: 0.28em;
+  }
+
+  .btn-wave-char {
+    display: inline-block;
+    transform-origin: 50% 90%;
+    will-change: transform;
+    transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  @keyframes btnWaveCharJump {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    16% {
+      transform: translateY(calc(var(--wave-height, -6.5px) * 0.75)) rotate(-4.5deg);
+    }
+    30% {
+      transform: translateY(var(--wave-height, -6.5px)) rotate(0deg);
+    }
+    46% {
+      transform: translateY(calc(var(--wave-height, -6.5px) * 0.5)) rotate(4.5deg);
+    }
+    60% {
+      transform: translateY(0.5px) rotate(0.5deg);
+    }
+    70%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+  }
+
+  #header-btn-book:hover .btn-wave-char {
+    animation: btnWaveCharJump 1.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+    animation-delay: calc(var(--char-index, 0) * 0.032s);
+  }
+
   #main-header {
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
