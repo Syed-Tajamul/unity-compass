@@ -367,35 +367,35 @@
 
 /* ========================================================================= */
 /* Subtle 3D Levitating Floating Artwork & Synchronized Ground Shadow        */
-/* Very subtle 6px float to convey life without distracting motion           */
+/* Smooth, reduced 8px float to convey life with executive refinement        */
 /* ========================================================================= */
 @keyframes heroArtFloat {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-16px) rotate(0.6deg);
+    transform: translateY(-8px) rotate(0.4deg);
   }
 }
 
 @keyframes heroShadowBreathe {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.82;
+    opacity: 0.8;
   }
   50% {
-    transform: scale(0.86);
-    opacity: 0.45;
+    transform: scale(0.92);
+    opacity: 0.6;
   }
 }
 
 .hero-floating-artwork {
-  animation: heroArtFloat 3.2s ease-in-out infinite;
+  animation: heroArtFloat 4.8s ease-in-out infinite;
   will-change: transform;
 }
 
 .hero-floating-shadow {
-  animation: heroShadowBreathe 3.2s ease-in-out infinite;
+  animation: heroShadowBreathe 4.8s ease-in-out infinite;
   will-change: transform, opacity;
 }
 
