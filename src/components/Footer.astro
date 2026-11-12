@@ -1,50 +1,94 @@
 ---
-import { Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-astro';
+/**
+ * Footer.astro - Executive GovCon Enterprise Light Footer with Wavy Divider
+ * 
+ * Harmonized Theme & Visual Continuity:
+ * - Pure CSS SVG Wave Section Divider (wsd-01) creating an organic transition from the white section above into the footer
+ * - Light sky-to-slate blueprint canvas (#F4F8FC via #EBF3FA to #DFEDF8) matching Hero
+ * - Minute 16px × 16px technical blueprint checks overlay
+ * - Soft ambient radial blue and red glows
+ * - Official Tagline in brand red (#FF3130)
+ * - Verbatim Unity Compass corporate narrative
+ * - Crisp, elegant navigation columns with hover horizontal glide
+ * - Interactive social media pills and contact details
+ * - 100% harmonious typography and palette consistency
+ */
+
 import { footerLinks } from '../data/navigation';
 import { companyInfo } from '../data/company';
 import WaveDivider from './WaveDivider.astro';
 ---
 
-<footer class="footer-frame" aria-labelledby="footer-heading">
+<footer class="relative bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] text-slate-700 overflow-hidden" aria-labelledby="footer-heading">
+  <!-- Pure CSS SVG Wave Section Divider (wsd-01) Leading from White Canvas into Footer Gradient -->
+  <WaveDivider variant="wave" position="top" fillColor="#ffffff" />
+
   <h2 id="footer-heading" class="sr-only">Footer</h2>
 
-  <div class="footer-shell">
-    <div class="footer-columns">
-      <section class="footer-brand" aria-label="About Unity Compass">
+  <!-- Minute Checks Pattern Overlay (Matching Hero & ServicesGrid) -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-35 mix-blend-multiply"
+    style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.08) 1px, transparent 1px);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Ambient Subtle Radial Glows -->
+  <div class="absolute -top-32 left-1/4 w-96 h-96 bg-[radial-gradient(circle,rgba(40,121,182,0.12)_0%,transparent_70%)] pointer-events-none blur-3xl" aria-hidden="true"></div>
+  <div class="absolute -bottom-32 right-10 w-96 h-96 bg-[radial-gradient(circle,rgba(255,49,48,0.08)_0%,transparent_70%)] pointer-events-none blur-3xl" aria-hidden="true"></div>
+
+  <!-- Main Footer Content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-16 lg:pb-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
+      
+      <!-- Brand & Mission Column (Spans 2 cols on lg) -->
+      <div class="lg:col-span-2 space-y-5">
         <a
           href="/"
-          class="inline-block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D20F39] focus-visible:ring-offset-4"
-          aria-label="Unity Compass home"
+          class="inline-block focus:outline-none focus:ring-2 focus:ring-[#FF3130] rounded-lg group"
+          aria-label="Unity Compass Home"
         >
           <img
-            src="/images/unity-compass-clean.png"
+            src="/images/Green-Minimal-Travel-Business-Logo.png"
             alt="Unity Compass"
-            class="h-10 w-auto sm:h-11"
-            width="488"
-            height="89"
+            class="h-10 w-auto object-contain group-hover:opacity-90 transition-opacity duration-200"
+            width="180"
+            height="52"
           />
         </a>
 
-        <p class="mt-5 max-w-sm text-base font-semibold leading-7 text-[#D20F39] sm:text-lg">
-          Your partner in government contracting success!
+        <!-- Official Tagline in Brand Red -->
+        <p class="text-base sm:text-lg font-extrabold tracking-tight text-[#FF3130]">
+          Your Partner in Government Contracting Success!
         </p>
-        <p class="mt-3 max-w-sm text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
+
+        <!-- Verbatim Authentic Corporate Narrative -->
+        <p class="text-sm text-slate-600 leading-relaxed max-w-sm font-normal">
           Unity Compass is a government contracting consulting and staffing firm dedicated to helping commercial businesses and federal contractors compete, qualify, and perform in complex federal environments.
         </p>
-      </section>
+      </div>
 
-      <nav aria-labelledby="footer-services-heading">
-        <h3 id="footer-services-heading" class="footer-title">Core services</h3>
-        <ul class="footer-link-list" role="list">
+      <!-- Core Services Column -->
+      <div>
+        <h3 class="text-sm font-bold text-[#0B2553] tracking-tight mb-4">
+          Core Services
+        </h3>
+        <ul class="space-y-3 text-sm">
           {footerLinks.services.map((item) => (
-            <li><a href={item.href} class="footer-link">{item.name}</a></li>
+            <li>
+              <a href={item.href} class="footer-link">
+                {item.name}
+              </a>
+            </li>
           ))}
         </ul>
-      </nav>
+      </div>
 
-      <nav aria-labelledby="footer-company-heading">
-        <h3 id="footer-company-heading" class="footer-title">Company</h3>
-        <ul class="footer-link-list" role="list">
+      <!-- Company & Navigation Links Column -->
+      <div>
+        <h3 class="text-sm font-bold text-[#0B2553] tracking-tight mb-4">
+          Company
+        </h3>
+        <ul class="space-y-3 text-sm">
           {footerLinks.company.map((item) => (
             <li>
               <a
@@ -59,7 +103,7 @@ import WaveDivider from './WaveDivider.astro';
             </li>
           ))}
         </ul>
-      </nav>
+      </div>
 
       <section aria-labelledby="footer-connect-heading">
         <h3 id="footer-connect-heading" class="footer-title">Connect with us</h3>
@@ -135,93 +179,60 @@ import WaveDivider from './WaveDivider.astro';
             <Instagram class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />
           </a>
         </div>
+      </div>
+    </div>
 
-        <p class="text-center text-xs text-slate-500 sm:text-sm">
-          Copyright &copy; 2026 Unity Compass&nbsp; | &nbsp;By Unity Compass
-        </p>
+    <!-- Bottom Copyright & Legal Line -->
+    <div class="mt-14 pt-8 border-t border-slate-200/90 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-normal">
+      <p>&copy; 2026 All Rights Reserved.</p>
+
+      <div class="flex items-center gap-6">
+        <a href="/privacy-policy" class="footer-bottom-link">
+          Privacy Policy
+        </a>
+        <a href="/contact" class="footer-bottom-link cursor-pointer">
+          Contact Us
+        </a>
+        <span class="text-slate-400">Frederick, MD 21702-6418, USA</span>
       </div>
     </div>
   </div>
 </footer>
 
 <style>
-  .footer-frame {
+  /* ========================================================================= */
+  /* Elegant Footer Navigation Links: Color Animation & Animated Underline     */
+  /* ========================================================================= */
+  .footer-link {
     position: relative;
-    overflow: hidden;
-    width: 100%;
-    border-top: 1px solid rgba(203, 213, 225, 0.82);
-    background-color: #eef4fb;
-    background-image:
-      linear-gradient(to right, rgba(12, 72, 122, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(12, 72, 122, 0.035) 1px, transparent 1px);
-    background-size: 24px 24px;
-    color: #475569;
-  }
-
-  .footer-shell {
-    display: flex;
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 4rem 1rem 2rem;
-    flex-direction: column;
-  }
-
-  .footer-columns {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.75rem;
-  }
-
-  .footer-title {
-    color: #10295b;
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.025em;
-  }
-
-  .footer-link-list {
-    display: grid;
-    gap: 0.75rem;
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    line-height: 1.65;
-  }
-
-  .footer-link,
-  .footer-contact-link {
-    position: relative;
-    color: #526078;
+    display: inline-block;
+    color: #475569; /* text-slate-600 */
     text-decoration: none;
-    transition: color 200ms ease;
+    transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, color;
   }
 
-  .footer-contact-link {
-    color: #10295b;
-  }
-
-  .footer-link::after,
-  .footer-contact-link::after {
+  .footer-link::after {
     content: '';
     position: absolute;
-    right: 0;
-    bottom: -0.18rem;
+    bottom: -2.5px;
     left: 0;
+    width: 100%;
     height: 2px;
+    background: linear-gradient(90deg, #FF3130 0%, #E02424 60%, #1E40AF 100%);
     border-radius: 9999px;
-    background: #d20f39;
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 220ms ease;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .footer-link:hover,
-  .footer-contact-link:hover {
-    color: #d20f39;
+  .footer-link:hover {
+    color: #FF3130 !important;
+    transform: translateX(4px);
   }
 
-  .footer-link:hover::after,
-  .footer-contact-link:hover::after {
+  .footer-link:hover::after {
     transform: scaleX(1);
   }
 
@@ -279,71 +290,11 @@ import WaveDivider from './WaveDivider.astro';
     transform: translateY(-2px);
   }
 
-  .footer-link:focus-visible,
-  .footer-contact-link:focus-visible,
-  .footer-social-link:focus-visible {
-    outline: 2px solid #d20f39;
-    outline-offset: 4px;
+  .footer-bottom-link:hover {
+    color: #FF3130 !important;
   }
 
-  @media (min-width: 640px) {
-    .footer-shell {
-      padding-right: 1.5rem;
-      padding-left: 1.5rem;
-    }
-
-    .footer-columns {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 3rem 4rem;
-    }
-
-    .footer-brand {
-      grid-column: 1 / -1;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .footer-shell {
-      padding-right: 2rem;
-      padding-left: 2rem;
-    }
-
-    .footer-columns {
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.82fr) minmax(0, 0.88fr) minmax(0, 1.08fr);
-      gap: 2rem;
-    }
-
-    .footer-brand {
-      grid-column: auto;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .footer-columns {
-      gap: 3.25rem;
-    }
-  }
-
-  @media (max-width: 639px) {
-    .footer-lower {
-      margin-top: 3rem;
-    }
-
-    .footer-divider {
-      gap: 0.75rem;
-    }
-
-    .footer-meta {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .footer-link,
-    .footer-contact-link,
-    .footer-social-link {
-      transition: none;
-    }
+  .footer-bottom-link:hover::after {
+    transform: scaleX(1);
   }
 </style>

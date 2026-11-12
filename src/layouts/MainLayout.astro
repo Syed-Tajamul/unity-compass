@@ -161,7 +161,7 @@ const schemaOrg = {
         setupScrollReveal();
       }
 
-      // Client Demo Mode: Safely disable navigation for Careers and Contact Us
+      // Client Demo Mode: Safely disable navigation only for unlinked placeholder routes
       document.addEventListener('click', (e) => {
         const target = (e.target as HTMLElement)?.closest('a');
         if (!target) return;
@@ -172,10 +172,6 @@ const schemaOrg = {
           cleanHref === '/career' ||
           cleanHref === '/career/' ||
           cleanHref.startsWith('/career?') ||
-          cleanHref === '/contact' ||
-          cleanHref === '/contact/' ||
-          cleanHref.startsWith('/contact?') ||
-          cleanHref.includes('unitycompass.com/contact') ||
           cleanHref.startsWith('javascript:void')
         ) {
           e.preventDefault();
