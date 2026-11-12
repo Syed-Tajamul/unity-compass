@@ -144,7 +144,6 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
           id="articles-heading"
           class="blog-reveal text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.32] sm:leading-[1.40] text-center"
         >
-          <span class="block text-[#0B2553] pb-2 sm:pb-3.5">Federal Intelligence Hub</span>
           <span class="service-shimmer-center service-shimmer-line-1 block pb-2.5 pt-1">Explore Latest Articles &amp; Advisory Briefs</span>
         </h2>
 
@@ -189,68 +188,65 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
         </div>
       </div>
 
-      <!-- All Articles Grid with Continuous Animated Gradient Border & Viewport Stagger -->
+      <!-- All Articles Grid with Viewport Stagger & Smooth Elevation -->
       <div id="blog-posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts.map((post, idx) => (
           <article
-            class="blog-post-card blog-reveal group relative p-[2px] rounded-3xl blog-animated-border shadow-[0_10px_30px_-6px_rgba(12,72,122,0.08)] hover:shadow-[0_24px_50px_-8px_rgba(12,72,122,0.20)] hover:-translate-y-2.5 transition-all duration-300 flex flex-col overflow-hidden"
+            class="blog-post-card blog-reveal group relative rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-7 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_22px_45px_-8px_rgba(12,72,122,0.14)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             style={`transition-delay: ${idx * 90}ms;`}
             data-title={post.title.toLowerCase()}
             data-category={post.category}
             data-excerpt={post.excerpt.toLowerCase()}
           >
-            <!-- Inner White Card Surface -->
-            <div class="relative bg-white rounded-[22px] p-6 sm:p-7 flex flex-col justify-between h-full w-full z-10 overflow-hidden">
-              <div>
-                <!-- Cover Image with Zoom Effect -->
-                <a href={`/blog/${post.slug}`} class="block aspect-[16/10] overflow-hidden rounded-2xl bg-slate-100 mb-5 border border-slate-200/80 relative group/img">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <!-- Subtle gradient vignette on hover -->
-                  <div class="absolute inset-0 bg-gradient-to-t from-[#0B2553]/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                </a>
+            <div>
+              <!-- Cover Image with Zoom Effect -->
+              <a href={`/blog/${post.slug}`} class="block aspect-[16/10] overflow-hidden rounded-2xl bg-slate-100 mb-5 border border-slate-200/80 relative group/img">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <!-- Subtle gradient vignette on hover -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0B2553]/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              </a>
 
-                <!-- Meta Pill Row -->
-                <div class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-3">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-red-50 text-[#FF3130] border border-red-100">
-                    {post.category}
-                  </span>
-                  <span>•</span>
-                  <span class="text-slate-500 font-medium">{post.readTime}</span>
-                </div>
-
-                <!-- Title -->
-                <h3 class="text-lg sm:text-xl font-extrabold text-[#0B2553] tracking-tight leading-snug group-hover:text-[#0C487A] transition-colors line-clamp-2">
-                  <a href={`/blog/${post.slug}`}>
-                    {post.title}
-                  </a>
-                </h3>
-
-                <!-- Excerpt -->
-                <p class="text-xs sm:text-sm text-[#243A5E] mt-3 leading-relaxed line-clamp-3 font-normal">
-                  {post.excerpt}
-                </p>
-              </div>
-
-              <!-- Footer Author, Date & Read CTA -->
-              <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span class="text-slate-400 font-medium">
-                  {post.date}
+              <!-- Meta Pill Row -->
+              <div class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-3">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-red-50 text-[#FF3130] border border-red-100">
+                  {post.category}
                 </span>
-                <a
-                  href={`/blog/${post.slug}`}
-                  class="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-[#FF3130] hover:text-[#E02625] group-hover:translate-x-1 transition-all"
-                >
-                  <span>Read Article</span>
-                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
+                <span>•</span>
+                <span class="text-slate-500 font-medium">{post.readTime}</span>
               </div>
+
+              <!-- Title -->
+              <h3 class="text-lg sm:text-xl font-extrabold text-[#0B2553] tracking-tight leading-snug group-hover:text-[#0C487A] transition-colors line-clamp-2">
+                <a href={`/blog/${post.slug}`}>
+                  {post.title}
+                </a>
+              </h3>
+
+              <!-- Excerpt -->
+              <p class="text-xs sm:text-sm text-[#243A5E] mt-3 leading-relaxed line-clamp-3 font-normal">
+                {post.excerpt}
+              </p>
+            </div>
+
+            <!-- Footer Author, Date & Read CTA -->
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-slate-400 font-medium">
+                {post.date}
+              </span>
+              <a
+                href={`/blog/${post.slug}`}
+                class="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-[#FF3130] hover:text-[#E02625] group-hover:translate-x-1 transition-all"
+              >
+                <span>Read Article</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
             </div>
           </article>
         ))}
@@ -315,33 +311,6 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
     animation: blogFloatLevitation 6.5s ease-in-out infinite;
   }
 
-  /* Continuous Animated Gradient Border on Blog Cards */
-  @keyframes blogBorderFlow {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  .blog-animated-border {
-    background: linear-gradient(
-      125deg,
-      #0C487A 0%,
-      #1E40AF 22%,
-      #FF3130 45%,
-      #E02625 55%,
-      #0B2553 78%,
-      #0C487A 100%
-    );
-    background-size: 300% 300%;
-    animation: blogBorderFlow 5.5s ease infinite;
-  }
-
   /* Center-Aligned Continuous Radiant Color Shimmer Sweep */
   .service-shimmer-center {
     background: linear-gradient(
@@ -389,10 +358,6 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
     }
     .blog-float {
       animation: none !important;
-    }
-    .blog-animated-border {
-      animation: none !important;
-      background: #E2E8F0 !important;
     }
     .service-shimmer-center {
       animation: none !important;
