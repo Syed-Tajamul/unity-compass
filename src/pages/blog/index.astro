@@ -6,10 +6,9 @@
  * - Sky blueprint split-screen Hero with 3D isometric visual (blog-960.webp)
  * - Harmonized animations, floating levitation, and blur-to-sharp scroll-reveals
  * - Clean search bar & category filter pills
- * - Signature GovCon featured article spotlight card
- * - Responsive 3-column article cards grid with alternating top stripes and smooth zoom hover
+ * - Uniform articles grid with continuous animated gradient border on cards
+ * - Smooth elevation and zoom hover effects
  * - Pure CSS WaveDivider transition
- * - Executive Newsletter / Stay Ahead CTA
  */
 import MainLayout from '../../layouts/MainLayout.astro';
 import WaveDivider from '../../components/WaveDivider.astro';
@@ -44,7 +43,6 @@ if (isSupabaseConfigured && supabase) {
   }
 }
 
-const featuredPost = blogPosts[0];
 const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category)))];
 ---
 
@@ -56,7 +54,7 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
   <!-- SECTION 1: HERO (Sophisticated Split-Screen Layout with 3D Visual)         -->
   <!-- ========================================================================= -->
   <section
-    class="relative min-h-[580px] sm:min-h-[620px] lg:min-h-[660px] flex items-center overflow-hidden bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] pt-16 sm:pt-20 lg:pt-24 pb-20 sm:pb-28"
+    class="relative min-h-[560px] sm:min-h-[600px] lg:min-h-[640px] flex items-center overflow-hidden bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] pt-16 sm:pt-20 lg:pt-24 pb-20 sm:pb-28"
     aria-labelledby="blog-hero-heading"
   >
     <!-- Technical Blueprint Check Pattern (Matching Homepage & Careers) -->
@@ -74,14 +72,6 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
         
         <!-- LEFT COLUMN: Headline, Description & CTAs -->
         <div class="max-w-2xl">
-          <!-- Eyebrow Badge -->
-          <div class="blog-reveal mb-4">
-            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-[#FF3130]/10 text-[#FF3130] border border-[#FF3130]/20 shadow-2xs">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#FF3130] animate-pulse"></span>
-              GovCon Intelligence &amp; Analysis
-            </span>
-          </div>
-
           <!-- Headline with Homepage Hero Line-Height -->
           <h1
             id="blog-hero-heading"
@@ -100,7 +90,7 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
             Actionable intelligence on federal proposal development, security-cleared recruitment, AI-driven compliance, and agile staffing strategies across DoD and civilian environments.
           </p>
 
-          <!-- Primary CTAs -->
+          <!-- Primary CTA Button (Explore Articles) -->
           <div class="blog-reveal blog-delay-2 mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#articles"
@@ -109,16 +99,6 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
               <span>Explore Articles</span>
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </a>
-
-            <a
-              href="/contact"
-              class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl border border-slate-300/80 hover:border-[#0C487A] bg-white/80 hover:bg-white text-[#0B2553] font-bold text-base shadow-xs hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
-            >
-              <span>Consult Our Team</span>
-              <svg class="w-4 h-4 text-[#FF3130]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </a>
           </div>
@@ -155,7 +135,7 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
   <!-- ========================================================================= -->
   <!-- SECTION 2: ARTICLES DIRECTORY, SEARCH & CATEGORY HUB                      -->
   <!-- ========================================================================= -->
-  <section id="articles" class="relative bg-white py-16 sm:py-24" aria-labelledby="articles-heading">
+  <section id="articles" class="relative bg-white pt-16 sm:pt-24 pb-24 sm:pb-32" aria-labelledby="articles-heading">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
       
       <!-- Section Heading with Gradient Shimmer & Homepage Line-Height -->
@@ -169,7 +149,7 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
         </h2>
 
         <!-- Brand Accent Bar -->
-        <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
+        <div class="blog-reveal blog-delay-1 w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
 
         <p class="blog-reveal blog-delay-1 mt-2 text-base sm:text-lg text-[#243A5E] leading-[1.78] sm:leading-[1.82] font-normal max-w-2xl mx-auto">
           Curated strategies, contracting best practices, and executive insights from our senior capture directors.
@@ -209,128 +189,68 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
         </div>
       </div>
 
-      <!-- Featured Story Spotlight (If exists) -->
-      {featuredPost && (
-        <div id="featured-article-card" class="blog-reveal blog-delay-2 group relative rounded-3xl bg-gradient-to-br from-[#F4F8FC] to-white border border-slate-200/90 p-6 sm:p-10 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.14)] transition-all duration-300 overflow-hidden">
-          <!-- Top Accent Stripe -->
-          <div class="absolute top-0 inset-x-0 h-1.5 bg-[#FF3130]"></div>
-
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <!-- Image Frame with Zoom Hover -->
-            <div class="lg:col-span-6 aspect-[16/10] overflow-hidden rounded-2xl bg-slate-100 border border-slate-200 relative shadow-sm">
-              <img
-                src={featuredPost.image}
-                alt={featuredPost.title}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="eager"
-              />
-              <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white/95 text-[#FF3130] border border-red-200/80 shadow-xs backdrop-blur-sm">
-                Featured Analysis
-              </span>
-            </div>
-
-            <!-- Content Column -->
-            <div class="lg:col-span-6 space-y-4">
-              <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
-                <span class="text-[#FF3130] uppercase tracking-wider font-bold">{featuredPost.category}</span>
-                <span>•</span>
-                <span>{featuredPost.readTime}</span>
-                <span>•</span>
-                <span>{featuredPost.date}</span>
-              </div>
-
-              <h3 class="text-2xl sm:text-3xl font-extrabold text-[#0B2553] tracking-tight leading-snug group-hover:text-[#0C487A] transition-colors">
-                <a href={`/blog/${featuredPost.slug}`}>
-                  {featuredPost.title}
-                </a>
-              </h3>
-
-              <p class="text-sm sm:text-base text-[#243A5E] leading-relaxed font-normal">
-                {featuredPost.excerpt}
-              </p>
-
-              <div class="pt-3 flex items-center justify-between border-t border-slate-100">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded-full bg-[#0B2553] text-white flex items-center justify-center font-bold text-xs">
-                    UC
-                  </div>
-                  <div>
-                    <p class="text-xs font-bold text-[#0B2553]">{featuredPost.author}</p>
-                    <p class="text-[11px] text-slate-400">Unity Compass Editorial</p>
-                  </div>
-                </div>
-
-                <a
-                  href={`/blog/${featuredPost.slug}`}
-                  class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF3130] hover:text-[#E02625] group-hover:translate-x-1 transition-all"
-                >
-                  <span>Read Article</span>
-                  <span aria-hidden="true">&rarr;</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <!-- All Articles Grid with Staggered Viewport Entrance -->
+      <!-- All Articles Grid with Continuous Animated Gradient Border & Viewport Stagger -->
       <div id="blog-posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts.map((post, idx) => (
           <article
-            class="blog-post-card blog-reveal group relative rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-7 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.14)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden"
-            style={`transition-delay: ${idx * 110}ms;`}
+            class="blog-post-card blog-reveal group relative p-[2px] rounded-3xl blog-animated-border shadow-[0_10px_30px_-6px_rgba(12,72,122,0.08)] hover:shadow-[0_24px_50px_-8px_rgba(12,72,122,0.20)] hover:-translate-y-2.5 transition-all duration-300 flex flex-col overflow-hidden"
+            style={`transition-delay: ${idx * 90}ms;`}
             data-title={post.title.toLowerCase()}
             data-category={post.category}
             data-excerpt={post.excerpt.toLowerCase()}
           >
-            <!-- Top Color Stripe (Alternating Brand Colors) -->
-            <div class={`absolute top-0 inset-x-0 h-1.5 ${idx % 2 === 0 ? 'bg-[#0B2553]' : 'bg-[#FF3130]'}`}></div>
+            <!-- Inner White Card Surface -->
+            <div class="relative bg-white rounded-[22px] p-6 sm:p-7 flex flex-col justify-between h-full w-full z-10 overflow-hidden">
+              <div>
+                <!-- Cover Image with Zoom Effect -->
+                <a href={`/blog/${post.slug}`} class="block aspect-[16/10] overflow-hidden rounded-2xl bg-slate-100 mb-5 border border-slate-200/80 relative group/img">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <!-- Subtle gradient vignette on hover -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#0B2553]/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                </a>
 
-            <div>
-              <!-- Cover Image with Zoom Effect -->
-              <a href={`/blog/${post.slug}`} class="block aspect-[16/10] overflow-hidden rounded-2xl bg-slate-100 mb-5 border border-slate-200/80 relative">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-              </a>
+                <!-- Meta Pill Row -->
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-3">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-red-50 text-[#FF3130] border border-red-100">
+                    {post.category}
+                  </span>
+                  <span>•</span>
+                  <span class="text-slate-500 font-medium">{post.readTime}</span>
+                </div>
 
-              <!-- Meta Pill Row -->
-              <div class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-2.5">
-                <span class="text-[#FF3130] uppercase tracking-wider text-[11px] font-bold">
-                  {post.category}
-                </span>
-                <span>•</span>
-                <span>{post.readTime}</span>
+                <!-- Title -->
+                <h3 class="text-lg sm:text-xl font-extrabold text-[#0B2553] tracking-tight leading-snug group-hover:text-[#0C487A] transition-colors line-clamp-2">
+                  <a href={`/blog/${post.slug}`}>
+                    {post.title}
+                  </a>
+                </h3>
+
+                <!-- Excerpt -->
+                <p class="text-xs sm:text-sm text-[#243A5E] mt-3 leading-relaxed line-clamp-3 font-normal">
+                  {post.excerpt}
+                </p>
               </div>
 
-              <!-- Title -->
-              <h3 class="text-lg font-bold text-[#0B2553] tracking-tight leading-snug group-hover:text-[#0C487A] transition-colors line-clamp-2">
-                <a href={`/blog/${post.slug}`}>
-                  {post.title}
+              <!-- Footer Author, Date & Read CTA -->
+              <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span class="text-slate-400 font-medium">
+                  {post.date}
+                </span>
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-[#FF3130] hover:text-[#E02625] group-hover:translate-x-1 transition-all"
+                >
+                  <span>Read Article</span>
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
                 </a>
-              </h3>
-
-              <!-- Excerpt -->
-              <p class="text-xs sm:text-sm text-[#243A5E] mt-2.5 leading-relaxed line-clamp-3 font-normal">
-                {post.excerpt}
-              </p>
-            </div>
-
-            <!-- Footer Author & Date -->
-            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-              <span class="text-slate-400 font-medium">
-                {post.date}
-              </span>
-              <a
-                href={`/blog/${post.slug}`}
-                class="inline-flex items-center gap-1 font-bold text-[#FF3130] hover:text-[#E02625] group-hover:translate-x-1 transition-all"
-              >
-                <span>Read</span>
-                <span aria-hidden="true">&rarr;</span>
-              </a>
+              </div>
             </div>
           </article>
         ))}
@@ -351,64 +271,10 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
 
     </div>
   </section>
-
-  <!-- ========================================================================= -->
-  <!-- SECTION 3: EXECUTIVE NEWSLETTER & STAY AHEAD CTA                          -->
-  <!-- ========================================================================= -->
-  <section class="relative bg-white py-16 sm:py-24 border-t border-slate-200/80" aria-labelledby="blog-cta-heading">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="relative rounded-3xl bg-gradient-to-br from-[#0B2553] via-[#0C3860] to-[#081832] p-10 sm:p-14 lg:p-16 text-center text-white shadow-2xl border border-blue-900/40 overflow-hidden blog-reveal">
-        <!-- Blueprint Grid Checks Overlay -->
-        <div
-          class="absolute inset-0 pointer-events-none opacity-20"
-          style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);"
-          aria-hidden="true"
-        ></div>
-
-        <!-- Ambient Glow -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[radial-gradient(ellipse,rgba(255,49,48,0.25)_0%,transparent_70%)] pointer-events-none blur-3xl"></div>
-
-        <div class="relative z-10 max-w-2xl mx-auto space-y-6">
-          <h2
-            id="blog-cta-heading"
-            class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.18] sm:leading-[1.20]"
-          >
-            Stay Ahead of <span class="text-[#FF3130]">Federal Solicitations.</span>
-          </h2>
-
-          <p class="text-sm sm:text-base text-slate-300 leading-[1.78] sm:leading-[1.82] font-normal">
-            Subscribe to receive our monthly GovCon capture digest, RFP compliance checklists, and defense staffing insights directly in your inbox.
-          </p>
-
-          <form id="newsletter-form" class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Unity Compass GovCon Intelligence!');">
-            <input
-              type="email"
-              required
-              placeholder="Enter your executive email..."
-              class="w-full px-5 py-4 rounded-xl border border-white/20 bg-white/10 text-white placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF3130] focus:bg-white/15 transition-all"
-            />
-            <button
-              type="submit"
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-lg shadow-[#FF3130]/30 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
-            >
-              <span>Subscribe</span>
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </button>
-          </form>
-
-          <p class="text-xs text-slate-400 pt-1">
-            Zero spam. Unsubscribe at any time. Read our <a href="/privacy-policy" class="text-white hover:underline">Privacy Policy</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 </MainLayout>
 
 <!-- ========================================================================= -->
-<!-- GLOBAL STYLES & ANIMATIONS: Viewport Reveal, Levitation, Shimmer           -->
+<!-- GLOBAL STYLES & ANIMATIONS: Viewport Reveal, Levitation, Shimmer, Borders  -->
 <!-- ========================================================================= -->
 <style is:global>
   /* Viewport Scroll Reveal (Harmonized with about-us.astro, career.astro, contact.astro) */
@@ -447,6 +313,33 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
 
   .blog-float {
     animation: blogFloatLevitation 6.5s ease-in-out infinite;
+  }
+
+  /* Continuous Animated Gradient Border on Blog Cards */
+  @keyframes blogBorderFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .blog-animated-border {
+    background: linear-gradient(
+      125deg,
+      #0C487A 0%,
+      #1E40AF 22%,
+      #FF3130 45%,
+      #E02625 55%,
+      #0B2553 78%,
+      #0C487A 100%
+    );
+    background-size: 300% 300%;
+    animation: blogBorderFlow 5.5s ease infinite;
   }
 
   /* Center-Aligned Continuous Radiant Color Shimmer Sweep */
@@ -497,6 +390,10 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
     .blog-float {
       animation: none !important;
     }
+    .blog-animated-border {
+      animation: none !important;
+      background: #E2E8F0 !important;
+    }
     .service-shimmer-center {
       animation: none !important;
       background: none !important;
@@ -537,7 +434,6 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
     const categoryPills = document.querySelectorAll<HTMLButtonElement>('.blog-category-pill');
     const postCards = document.querySelectorAll<HTMLElement>('.blog-post-card');
     const noBlogsFound = document.getElementById('no-blogs-found');
-    const featuredArticleCard = document.getElementById('featured-article-card');
 
     let activeCategory = 'All';
 
@@ -556,7 +452,7 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
 
         if (matchesSearch && matchesCategory) {
           card.style.display = 'flex';
-          card.style.transitionDelay = `${visibleIndex * 80}ms`;
+          card.style.transitionDelay = `${visibleIndex * 60}ms`;
           card.classList.add('is-visible');
           visibleIndex++;
           visibleCount++;
@@ -564,15 +460,6 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
           card.style.display = 'none';
         }
       });
-
-      // Toggle featured card if filtering by category or query
-      if (featuredArticleCard) {
-        if (query || activeCategory !== 'All') {
-          featuredArticleCard.style.display = 'none';
-        } else {
-          featuredArticleCard.style.display = 'block';
-        }
-      }
 
       if (noBlogsFound) {
         if (visibleCount === 0) {
