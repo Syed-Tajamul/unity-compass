@@ -1,12 +1,19 @@
 ---
 /**
- * JobBoard.astro - Executive GovCon Career & Job Board Component
+ * JobBoard.astro - Section 03: Explore Open Positions
  * 
- * Redesigned for Maximum Readability & Clarity:
- * - Solves clutter by presenting spacious, structured positions with full visibility
- * - Explicit Key Responsibilities & Required Qualifications (no truncated text)
- * - Simplified, elegant search & filter bar with department quick-filter pills
- * - Integrated Application Modal with Drag & Drop resume upload directly to Supabase Storage
+ * Strict Specification:
+ * - Heading: "Find Your Next Opportunity"
+ * - Description: "Explore current openings and discover a role that aligns with your experience, skills, and career goals."
+ * - Search by job title or keyword.
+ * - Department, Employment Type, Workplace Model, and Security Clearance filters.
+ * - Clear filter / reset functionality.
+ * - Responsive job cards displaying:
+ *   - Title, short description, department, employment type, workplace model, location,
+ *     experience requirements, security clearance requirements.
+ *   - "View Position" CTA (navigates to dedicated page /career/[id])
+ *   - "Apply Now" CTA (opens application modal)
+ * - Loading, empty, and error states.
  */
 import { jobPositions as fallbackPositions, type JobPosition } from '../data/jobs';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
@@ -41,102 +48,127 @@ if (isSupabaseConfigured && supabase) {
   }
 }
 
-// Extract unique departments for filter pills
-const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => j.department)))];
+const departments = ['All Departments', ...Array.from(new Set(jobPositions.map((j) => j.department)))];
+const clearanceLevels = ['All Clearances', 'TS/SCI with Polygraph', 'Top Secret / SCI', 'Secret', 'Public Trust', 'None'];
+const employmentTypes = ['All Employment Types', 'Full-Time', 'Contract', 'Temp-to-Hire', 'Part-Time'];
+const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
 ---
 
 <div class="space-y-10" id="career-job-board">
   
   <!-- ========================================================================= -->
-  <!-- SIMPLIFIED, INTUITIVE SEARCH & FILTER CONTROLS BAR (as requested in ss3)  -->
+  <!-- SEARCH & MULTI-FILTER BAR WITH RESET ACTION                               -->
   <!-- ========================================================================= -->
   <div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] relative overflow-hidden">
-    <!-- Subtle Top Red Accent Line -->
     <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#0B2553] via-[#FF3130] to-[#0B2553]"></div>
 
     <div class="space-y-5">
-      <!-- Search & Main Selects Row -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+      <!-- Search Input & Quick Status -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
         
-        <!-- Search Input -->
-        <div class="md:col-span-6 relative">
-          <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Keyword Search -->
+        <div class="lg:col-span-8 relative">
+          <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
             type="text"
             id="job-search-input"
-            placeholder="Search roles by title, clearance, or skills (e.g. AWS, TS/SCI, Shipley)..."
-            class="w-full pl-12 pr-4 py-3 text-sm rounded-2xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400"
+            placeholder="Search positions by title, clearance, or skill keyword..."
+            class="w-full pl-12 pr-4 py-3.5 text-sm rounded-2xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400"
           />
         </div>
 
-        <!-- Clearance Filter Dropdown -->
-        <div class="md:col-span-3">
-          <select
-            id="job-clearance-filter"
-            class="w-full px-4 py-3 text-sm rounded-2xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
+        <!-- Reset Filters Button & Results Count -->
+        <div class="lg:col-span-4 flex items-center justify-between lg:justify-end gap-3">
+          <button
+            type="button"
+            id="reset-filters-btn"
+            class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
+            title="Clear all active filters"
           >
-            <option value="">All Security Clearances</option>
-            <option value="TS/SCI with Polygraph">TS/SCI with Polygraph</option>
-            <option value="Top Secret / SCI">Top Secret / SCI</option>
-            <option value="Secret">Secret</option>
-            <option value="Public Trust">Public Trust</option>
-            <option value="None">Non-Cleared</option>
-          </select>
-        </div>
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span>Reset Filters</span>
+          </button>
 
-        <!-- Workplace Filter Dropdown -->
-        <div class="md:col-span-3">
-          <select
-            id="job-workplace-filter"
-            class="w-full px-4 py-3 text-sm rounded-2xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
-          >
-            <option value="">All Workplace Models</option>
-            <option value="Hybrid">Hybrid</option>
-            <option value="Remote">Remote</option>
-            <option value="On-site">On-site</option>
-          </select>
+          <span class="text-xs font-semibold text-slate-500">
+            <span id="job-results-count" class="font-extrabold text-[#0B2553]">{jobPositions.length}</span> Openings
+          </span>
         </div>
       </div>
 
-      <!-- Quick Department Category Pills -->
-      <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100">
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-1 hidden sm:inline">Department:</span>
-          {departments.map((dept, idx) => (
-            <button
-              type="button"
-              class={`job-dept-pill px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                idx === 0
-                  ? 'active bg-[#0B2553] text-white shadow-xs'
-                  : 'bg-slate-100 text-[#243A5E] hover:bg-slate-200/80'
-              }`}
-              data-dept={dept === 'All Roles' ? '' : dept}
-            >
-              {dept}
-            </button>
-          ))}
+      <!-- 4 Explicit Filter Dropdowns -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-3 border-t border-slate-100">
+        
+        <!-- 1. Department Filter -->
+        <div>
+          <label class="block text-[11px] font-bold text-[#0B2553] uppercase tracking-wider mb-1">Department</label>
+          <select
+            id="job-dept-filter"
+            class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
+          >
+            {departments.map((dept) => (
+              <option value={dept === 'All Departments' ? '' : dept}>{dept}</option>
+            ))}
+          </select>
         </div>
 
-        <!-- Live Positions Counter -->
-        <div class="text-xs font-semibold text-slate-500 shrink-0">
-          Showing <span id="job-results-count" class="font-extrabold text-[#0B2553]">{jobPositions.length}</span> open positions
+        <!-- 2. Clearance Filter -->
+        <div>
+          <label class="block text-[11px] font-bold text-[#0B2553] uppercase tracking-wider mb-1">Clearance Level</label>
+          <select
+            id="job-clearance-filter"
+            class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
+          >
+            {clearanceLevels.map((lvl) => (
+              <option value={lvl === 'All Clearances' ? '' : lvl}>{lvl}</option>
+            ))}
+          </select>
         </div>
+
+        <!-- 3. Employment Type Filter -->
+        <div>
+          <label class="block text-[11px] font-bold text-[#0B2553] uppercase tracking-wider mb-1">Employment Type</label>
+          <select
+            id="job-type-filter"
+            class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
+          >
+            {employmentTypes.map((type) => (
+              <option value={type === 'All Employment Types' ? '' : type}>{type}</option>
+            ))}
+          </select>
+        </div>
+
+        <!-- 4. Workplace Model Filter -->
+        <div>
+          <label class="block text-[11px] font-bold text-[#0B2553] uppercase tracking-wider mb-1">Workplace Model</label>
+          <select
+            id="job-workplace-filter"
+            class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
+          >
+            {workplaceTypes.map((model) => (
+              <option value={model === 'All Workplace Models' ? '' : model}>{model}</option>
+            ))}
+          </select>
+        </div>
+
       </div>
     </div>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- HIGHLY READABLE & UNCLUTTERED JOB CARDS CONTAINER                         -->
+  <!-- JOB LISTING CARDS (Responsive, Highly Readable, Uncluttered)              -->
   <!-- ========================================================================= -->
-  <div id="jobs-container" class="space-y-8">
+  <div id="jobs-container" class="space-y-6 sm:space-y-8">
     {jobPositions.map((job, idx) => {
       const isRedAccent = idx % 2 === 0;
-      
+      const experienceSnippet = job.requirements?.[1] || job.requirements?.[0] || 'Experience aligned with federal labor category';
+
       return (
         <article
-          class="job-card group relative rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-10 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.12)] transition-all duration-300 overflow-hidden"
+          class="job-card group relative rounded-3xl bg-white border border-slate-200/90 p-7 sm:p-9 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.12)] transition-all duration-300 overflow-hidden"
           data-title={job.title.toLowerCase()}
           data-department={job.department.toLowerCase()}
           data-type={job.employmentType}
@@ -146,13 +178,13 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
           <!-- Top Accent Stripe -->
           <div class={`absolute top-0 inset-x-0 h-1.5 ${isRedAccent ? 'bg-[#FF3130]' : 'bg-[#0B2553]'}`}></div>
 
-          <!-- 1. Header Bar: Title, Metadata Tags, and Quick Apply Button -->
+          <!-- Card Content Grid -->
           <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-slate-100">
             <div class="space-y-3 max-w-3xl">
               
               <!-- Badges Row -->
               <div class="flex flex-wrap items-center gap-2">
-                <!-- Clearance Level -->
+                <!-- Clearance Badge -->
                 <span class={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${
                   job.clearanceLevel.includes('Poly')
                     ? 'bg-red-50 text-[#FF3130] border-red-200/80'
@@ -167,29 +199,29 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
                   {job.clearanceLevel}
                 </span>
 
-                <!-- Employment & Workplace -->
+                <!-- Department Badge -->
                 <span class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200/70">
-                  {job.employmentType}
+                  {job.department}
                 </span>
+
+                <!-- Workplace Model & Type -->
                 <span class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200/70">
                   {job.workplaceType}
+                </span>
+                <span class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200/70">
+                  {job.employmentType}
                 </span>
               </div>
 
               <!-- Job Title -->
               <h3 class="text-2xl sm:text-3xl font-extrabold text-[#0B2553] tracking-tight group-hover:text-[#0C487A] transition-colors leading-tight">
-                {job.title}
+                <a href={`/career/${job.id}`} class="hover:underline">
+                  {job.title}
+                </a>
               </h3>
 
-              <!-- Department and Location Info -->
+              <!-- Location & Date -->
               <div class="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-500">
-                <span class="flex items-center gap-1.5 text-[#0C487A]">
-                  <svg class="w-4 h-4 text-[#EE8522]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                  {job.department}
-                </span>
-                <span>•</span>
                 <span class="flex items-center gap-1.5 text-slate-600">
                   <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -198,105 +230,55 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
                   {job.location}
                 </span>
                 <span>•</span>
-                <span class="text-slate-400">
+                <span class="text-slate-400 font-normal">
                   Posted {job.postedDate}
                 </span>
               </div>
             </div>
 
-            <!-- Apply CTA Button on Top Right -->
-            <div class="shrink-0 flex items-center lg:items-end">
+            <!-- Dual Action CTAs: View Position & Apply Now -->
+            <div class="shrink-0 flex flex-wrap sm:flex-nowrap items-center gap-3">
+              <a
+                href={`/career/${job.id}`}
+                class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider text-[#0B2553] bg-slate-100 hover:bg-slate-200 border border-slate-200/80 transition-all cursor-pointer"
+              >
+                <span>View Position</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+
               <button
                 type="button"
-                class="apply-trigger-btn inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-md shadow-[#FF3130]/25 active:scale-[0.98] transition-all cursor-pointer"
+                class="apply-trigger-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-md shadow-[#FF3130]/25 active:scale-[0.98] transition-all cursor-pointer"
                 data-job-id={job.id}
                 data-job-title={job.title}
               >
-                <span>Apply for this Role</span>
-                <span aria-hidden="true">&rarr;</span>
+                <span>Apply Now</span>
               </button>
             </div>
           </div>
 
-          <!-- 2. Role Overview Description -->
-          <div class="py-6 border-b border-slate-100">
-            <h4 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-2">
-              Role Overview &amp; Mission Scope
-            </h4>
+          <!-- Short Description -->
+          <div class="pt-5 pb-5 border-b border-slate-100">
             <p class="text-sm sm:text-base text-[#243A5E] leading-relaxed font-normal">
               {job.description}
             </p>
           </div>
 
-          <!-- 3. Two Spacious Columns: Responsibilities & Requirements (Never truncated) -->
-          <div class="pt-6 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            
-            <!-- Left Column: Key Responsibilities -->
-            <div class="space-y-4">
-              <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-[#FF3130]"></span>
-                <h4 class="text-sm font-extrabold text-[#0B2553] uppercase tracking-wider">
-                  Key Responsibilities
-                </h4>
-              </div>
-              
-              <ul class="space-y-3 text-xs sm:text-sm text-[#243A5E]">
-                {job.responsibilities && job.responsibilities.length > 0 ? (
-                  job.responsibilities.map((resp) => (
-                    <li class="flex items-start gap-3">
-                      <span class="w-5 h-5 rounded-full bg-red-50 text-[#FF3130] flex items-center justify-center shrink-0 mt-0.5 border border-red-200/60">
-                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                      <span class="leading-relaxed font-normal">{resp}</span>
-                    </li>
-                  ))
-                ) : (
-                  <li class="text-slate-400 italic text-xs">Standard GovCon program responsibilities align with labor category.</li>
-                )}
-              </ul>
+          <!-- Highlight Requirements & Experience Strip -->
+          <div class="pt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-600">
+            <div class="flex items-center gap-2 font-medium">
+              <span class="w-4 h-4 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
+                <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span><strong class="text-[#0B2553]">Key Requirement:</strong> {experienceSnippet}</span>
             </div>
 
-            <!-- Right Column: Qualifications & Clearance -->
-            <div class="space-y-4">
-              <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-[#0B2553]"></span>
-                <h4 class="text-sm font-extrabold text-[#0B2553] uppercase tracking-wider">
-                  Required Qualifications &amp; Clearance
-                </h4>
-              </div>
-
-              <ul class="space-y-3 text-xs sm:text-sm text-[#243A5E]">
-                {job.requirements.map((req) => (
-                  <li class="flex items-start gap-3">
-                    <span class="w-5 h-5 rounded-full bg-blue-50 text-[#0B2553] flex items-center justify-center shrink-0 mt-0.5 border border-blue-200/60">
-                      <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </span>
-                    <span class="leading-relaxed font-normal">{req}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-          </div>
-
-          <!-- 4. Card Bottom Action -->
-          <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <span class="text-xs text-slate-400 font-medium">
-              Requisition ID: <code class="text-[#0B2553] font-mono font-bold uppercase">{job.id}</code>
-            </span>
-            <button
-              type="button"
-              class="apply-trigger-btn inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF3130] hover:text-[#E02625] transition-colors cursor-pointer"
-              data-job-id={job.id}
-              data-job-title={job.title}
-            >
-              <span>Submit Resume for {job.title}</span>
+            <a href={`/career/${job.id}`} class="text-[#FF3130] font-bold hover:underline inline-flex items-center gap-1">
+              <span>Read Full Scope &amp; Responsibilities</span>
               <span aria-hidden="true">&rarr;</span>
-            </button>
+            </a>
           </div>
 
         </article>
@@ -304,60 +286,30 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
     })}
   </div>
 
-  <!-- Empty State (Hidden initially) -->
+  <!-- Empty Search Results State -->
   <div id="no-jobs-found" class="hidden text-center py-16 px-6 rounded-3xl border border-dashed border-slate-300 bg-slate-50/70">
     <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-red-50 text-[#FF3130] flex items-center justify-center">
       <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     </div>
-    <h4 class="text-lg font-bold text-[#0B2553]">No matching opportunities found</h4>
+    <h4 class="text-lg font-bold text-[#0B2553]">No matching positions found</h4>
     <p class="text-xs sm:text-sm text-[#243A5E] mt-1.5 max-w-md mx-auto font-normal">
-      Try loosening your search terms or filters. Alternatively, submit your general resume below to join our confidential cleared talent network.
+      Try loosening your search terms or resetting filters. Alternatively, submit your resume below to our Talent Network.
     </p>
+    <button
+      type="button"
+      id="empty-reset-btn"
+      class="mt-4 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-colors cursor-pointer"
+    >
+      Reset All Filters
+    </button>
   </div>
 
-  <!-- ========================================================================= -->
-  <!-- GENERAL TALENT NETWORK CTA BANNER                                         -->
-  <!-- ========================================================================= -->
-  <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0B2553] via-[#0C3860] to-[#081832] p-8 sm:p-12 text-white shadow-xl border border-blue-900/40">
-    <!-- Minute Checks Pattern Overlay -->
-    <div
-      class="absolute inset-0 pointer-events-none opacity-20"
-      style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);"
-      aria-hidden="true"
-    ></div>
-
-    <!-- Ambient Red Glow -->
-    <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-[radial-gradient(circle,rgba(255,49,48,0.2)_0%,transparent_70%)] pointer-events-none blur-2xl"></div>
-
-    <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-      <div class="max-w-2xl">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-[#FF3130]/20 text-red-300 border border-[#FF3130]/30 mb-3">
-          Confidential Talent Network
-        </span>
-        <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
-          Don’t see your exact role listed?
-        </h3>
-        <p class="mt-2 text-sm text-slate-300 leading-relaxed font-normal">
-          Unity Compass places cleared professionals across DoD, DHS, IC, and civilian agencies continuously. Submit your resume to be matched with upcoming contract awards.
-        </p>
-      </div>
-
-      <button
-        type="button"
-        id="general-apply-btn"
-        class="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-lg shadow-[#FF3130]/30 active:scale-[0.98] transition-all cursor-pointer"
-      >
-        <span>Submit General Resume</span>
-        <span aria-hidden="true">&rarr;</span>
-      </button>
-    </div>
-  </div>
 </div>
 
 <!-- ========================================================================= -->
-<!-- APPLICATION MODAL (Drag & Drop Resume Upload to Supabase Storage)          -->
+<!-- APPLICATION MODAL WITH RESUME UPLOAD                                      -->
 <!-- ========================================================================= -->
 <div
   id="apply-modal"
@@ -367,7 +319,6 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
   aria-labelledby="modal-title"
 >
   <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-9 shadow-2xl border border-slate-200 relative max-h-[92vh] overflow-y-auto transform transition-transform duration-300">
-    <!-- Top Accent Stripe -->
     <div class="absolute top-0 inset-x-0 h-1.5 bg-[#FF3130]"></div>
 
     <!-- Close Button -->
@@ -390,11 +341,10 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
         Apply for Position
       </h3>
       <p id="modal-subtitle" class="text-xs sm:text-sm text-slate-500 mt-1">
-        Target Role: <span id="modal-target-job" class="font-bold text-[#0B2553]">Senior Cleared Cloud Architect</span>
+        Target Role: <span id="modal-target-job" class="font-bold text-[#0B2553]">Position</span>
       </p>
     </div>
 
-    <!-- Application Form -->
     <form id="job-apply-form" class="space-y-4" novalidate>
       <div id="modal-feedback" class="hidden p-3.5 rounded-xl text-xs font-semibold"></div>
 
@@ -407,7 +357,7 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
             type="text"
             id="app-name"
             required
-            placeholder="John Doe"
+            placeholder="Jane Doe"
             class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all"
           />
         </div>
@@ -434,7 +384,7 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
           type="email"
           id="app-email"
           required
-          placeholder="john.doe@example.com"
+          placeholder="jane.doe@example.com"
           class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all"
         />
       </div>
@@ -442,7 +392,7 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
       <!-- Resume File Upload Zone -->
       <div>
         <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">
-          Attach Resume (PDF, DOCX up to 5MB) *
+          Attach Resume (PDF, DOC, DOCX up to 5MB) *
         </label>
         <div
           id="resume-dropzone"
@@ -461,7 +411,7 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
             <p class="text-xs font-bold text-[#0B2553]">
-              Click to upload or drag &amp; drop
+              Click to select or drag &amp; drop
             </p>
             <p class="text-[11px] text-slate-500">
               PDF or Word document (Max 5MB)
@@ -492,21 +442,23 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
   </div>
 </div>
 
-<!-- Client-side Interactive Filter & Upload Script -->
 <script>
   const searchInput = document.getElementById('job-search-input') as HTMLInputElement;
-  const deptPills = document.querySelectorAll<HTMLButtonElement>('.job-dept-pill');
+  const deptFilter = document.getElementById('job-dept-filter') as HTMLSelectElement;
   const clearanceFilter = document.getElementById('job-clearance-filter') as HTMLSelectElement;
+  const typeFilter = document.getElementById('job-type-filter') as HTMLSelectElement;
   const workplaceFilter = document.getElementById('job-workplace-filter') as HTMLSelectElement;
+  const resetBtn = document.getElementById('reset-filters-btn');
+  const emptyResetBtn = document.getElementById('empty-reset-btn');
   const resultsCount = document.getElementById('job-results-count');
   const noJobsFound = document.getElementById('no-jobs-found');
   const jobCards = document.querySelectorAll<HTMLElement>('.job-card');
 
-  let activeDept = '';
-
   function applyFilters() {
     const query = searchInput?.value.toLowerCase().trim() || '';
+    const selectedDept = deptFilter?.value.toLowerCase() || '';
     const selectedClearance = clearanceFilter?.value || '';
+    const selectedType = typeFilter?.value || '';
     const selectedWorkplace = workplaceFilter?.value || '';
 
     let visibleCount = 0;
@@ -515,14 +467,16 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
       const title = card.getAttribute('data-title') || '';
       const department = card.getAttribute('data-department') || '';
       const clearance = card.getAttribute('data-clearance') || '';
+      const type = card.getAttribute('data-type') || '';
       const workplace = card.getAttribute('data-workplace') || '';
 
       const matchesSearch = !query || title.includes(query) || department.includes(query) || clearance.toLowerCase().includes(query);
-      const matchesDept = !activeDept || department.includes(activeDept.toLowerCase());
+      const matchesDept = !selectedDept || department.includes(selectedDept);
       const matchesClearance = !selectedClearance || clearance === selectedClearance;
+      const matchesType = !selectedType || type === selectedType;
       const matchesWorkplace = !selectedWorkplace || workplace === selectedWorkplace;
 
-      if (matchesSearch && matchesDept && matchesClearance && matchesWorkplace) {
+      if (matchesSearch && matchesDept && matchesClearance && matchesType && matchesWorkplace) {
         card.style.display = 'block';
         visibleCount++;
       } else {
@@ -540,24 +494,22 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
     }
   }
 
+  function resetAllFilters() {
+    if (searchInput) searchInput.value = '';
+    if (deptFilter) deptFilter.value = '';
+    if (clearanceFilter) clearanceFilter.value = '';
+    if (typeFilter) typeFilter.value = '';
+    if (workplaceFilter) workplaceFilter.value = '';
+    applyFilters();
+  }
+
   searchInput?.addEventListener('input', applyFilters);
+  deptFilter?.addEventListener('change', applyFilters);
   clearanceFilter?.addEventListener('change', applyFilters);
+  typeFilter?.addEventListener('change', applyFilters);
   workplaceFilter?.addEventListener('change', applyFilters);
-
-  deptPills.forEach((pill) => {
-    pill.addEventListener('click', () => {
-      deptPills.forEach((p) => {
-        p.classList.remove('active', 'bg-[#0B2553]', 'text-white', 'shadow-xs');
-        p.classList.add('bg-slate-100', 'text-[#243A5E]');
-      });
-
-      pill.classList.add('active', 'bg-[#0B2553]', 'text-white', 'shadow-xs');
-      pill.classList.remove('bg-slate-100', 'text-[#243A5E]');
-
-      activeDept = pill.getAttribute('data-dept') || '';
-      applyFilters();
-    });
-  });
+  resetBtn?.addEventListener('click', resetAllFilters);
+  emptyResetBtn?.addEventListener('click', resetAllFilters);
 
   // Modal Handling
   const modal = document.getElementById('apply-modal');
@@ -589,7 +541,6 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
     document.body.style.overflow = '';
   }
 
-  // Resume File Selection Display
   resumeInput?.addEventListener('change', () => {
     if (resumeInput.files && resumeInput.files[0]) {
       const file = resumeInput.files[0];
@@ -609,17 +560,13 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
     });
   });
 
-  document.getElementById('general-apply-btn')?.addEventListener('click', () => {
-    openModal('General Talent Network (All Specializations)', null);
-  });
-
   closeModalBtn?.addEventListener('click', closeModal);
   cancelModalBtn?.addEventListener('click', closeModal);
   modal?.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
   });
 
-  // Form Submission & Resume Upload to Backend
+  // Submit Application to /api/careers/apply
   applyForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!feedbackEl || !submitAppBtn) return;
@@ -646,7 +593,6 @@ const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => 
       return;
     }
 
-    // 5MB limit check
     const maxBytes = 5 * 1024 * 1024;
     if (file.size > maxBytes) {
       feedbackEl.textContent = `Resume file size exceeds the 5MB limit (${(file.size / (1024 * 1024)).toFixed(2)}MB). Please upload a smaller document.`;
