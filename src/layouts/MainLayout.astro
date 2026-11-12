@@ -160,23 +160,6 @@ const schemaOrg = {
       } else {
         setupScrollReveal();
       }
-
-      // Client Demo Mode: Safely disable navigation only for unlinked placeholder routes
-      document.addEventListener('click', (e) => {
-        const target = (e.target as HTMLElement)?.closest('a');
-        if (!target) return;
-        const href = target.getAttribute('href');
-        if (!href) return;
-        const cleanHref = href.trim().toLowerCase();
-        if (
-          cleanHref === '/career' ||
-          cleanHref === '/career/' ||
-          cleanHref.startsWith('/career?') ||
-          cleanHref.startsWith('javascript:void')
-        ) {
-          e.preventDefault();
-        }
-      });
     </script>
   </body>
 </html>
