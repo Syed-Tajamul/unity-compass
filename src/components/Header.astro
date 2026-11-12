@@ -338,6 +338,7 @@ const resourcesDropdown = [
           {resourcesDropdown.map((sub) => (
             <a
               href={sub.href}
+              data-astro-prefetch={sub.href === '/about-us' ? 'hover' : undefined}
               target={sub.isPdf ? '_blank' : undefined}
               rel={sub.isPdf ? 'noopener noreferrer' : undefined}
               class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-[#0C487A] hover:bg-slate-50 transition-colors"
