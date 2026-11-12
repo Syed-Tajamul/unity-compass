@@ -14,14 +14,17 @@ import { companyInfo } from '../data/company';
 ---
 
 <section
-  class="relative min-h-[560px] sm:min-h-[600px] lg:min-h-[640px] flex items-center overflow-hidden bg-white pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10 lg:pb-12"
+  class="relative min-h-[560px] sm:min-h-[600px] lg:min-h-[640px] flex items-center overflow-hidden bg-gradient-to-br from-[#F0F6FD] via-[#E2EEFB] to-[#CCE3F7] pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10 lg:pb-12"
   aria-labelledby="hero-title"
 >
   <!-- Atmospheric Ambient Sky Lighting & Technical Blueprint Grid Pattern (Opacity reduced by ~40%) -->
   <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <!-- Soft Ambient Left Fill Light -->
+    <div class="absolute -top-12 -left-12 w-[420px] h-[420px] bg-[radial-gradient(circle,rgba(59,130,246,0.08)_0%,transparent_68%)] rounded-full blur-3xl pointer-events-none"></div>
+
     <!-- Technical Blueprint Check Grid Pattern: Refined and reduced by ~40% for subtle architectural authority -->
     <div
-      class="absolute inset-0 opacity-[0.24] mix-blend-multiply pointer-events-none"
+      class="absolute inset-0 opacity-[0.22] mix-blend-multiply pointer-events-none"
       style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.08) 1px, transparent 1px);"
     ></div>
 
@@ -101,7 +104,7 @@ import { companyInfo } from '../data/company';
           
           <!-- Subtle Radial Blue Glow directly behind compass illustration for gentle visual anchoring -->
           <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] sm:w-[620px] lg:w-[680px] h-[520px] sm:h-[620px] lg:h-[680px] bg-[radial-gradient(circle,rgba(12,72,122,0.11)_0%,rgba(30,64,175,0.05)_42%,transparent_70%)] rounded-full blur-3xl pointer-events-none -z-10"
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[540px] sm:w-[640px] lg:w-[700px] h-[540px] sm:h-[640px] lg:h-[700px] bg-[radial-gradient(circle,rgba(37,99,235,0.16)_0%,rgba(12,72,122,0.12)_35%,rgba(30,64,175,0.04)_55%,transparent_72%)] rounded-full blur-3xl pointer-events-none -z-10"
             aria-hidden="true"
           ></div>
 
