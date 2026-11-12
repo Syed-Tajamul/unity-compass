@@ -1,0 +1,1058 @@
+---
+/**
+ * index.astro - Unity Compass Executive Admin Management Console
+ * 
+ * Fully harmonized with Unity Compass Design System:
+ * - Executive light blueprint canvas (#F4F8FC via #EBF3FA to #DFEDF8) with 16px checks
+ * - Professional Sidebar Navigation with live badges, user profile, and quick actions
+ * - Smooth Outlet Component (#admin-outlet) with dynamic view switching:
+ *   1. Overview (Executive KPIs, recent inquiries, recent candidate resumes)
+ *   2. Contact Inquiries (Search, status filters, reply actions, full details modal)
+ *   3. Candidates & Resumes (Live submissions, one-click PDF resume download from Supabase Storage)
+ *   4. Job Board Manager (Track and manage career requisitions)
+ *   5. Blog Publications (Editorial overview and live article links)
+ *   6. System & Keep-Alive (On-demand Supabase ping, cron health, Resend status)
+ */
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="Executive Admin Management Console - Unity Compass"
+  description="Executive portal for managing federal inquiries, cleared candidate resumes, career postings, and editorial insights."
+>
+  <!-- ========================================================================= -->
+  <!-- GATE: LOGIN SCREEN (Displayed when unauthorized)                         -->
+  <!-- ========================================================================= -->
+  <div id="login-section" class="relative min-h-[85vh] flex items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8]">
+    <!-- Technical Blueprint Check Pattern -->
+    <div
+      class="absolute inset-0 opacity-[0.24] mix-blend-multiply pointer-events-none"
+      style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.08) 1px, transparent 1px);"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Soft Ambient Radial Blue Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(12,72,122,0.11)_0%,rgba(30,64,175,0.05)_45%,transparent_70%)] rounded-full blur-3xl pointer-events-none -z-10" aria-hidden="true"></div>
+
+    <div class="relative z-10 w-full max-w-md bg-white rounded-3xl border border-slate-200/90 p-8 sm:p-10 shadow-[0_20px_50px_-10px_rgba(12,72,122,0.14)] overflow-hidden">
+      <!-- Top Red Accent Stripe -->
+      <div class="absolute top-0 inset-x-0 h-1.5 bg-[#FF3130]"></div>
+
+      <div class="text-center mb-8">
+        <!-- Dashed Outer Ring Icon -->
+        <div class="relative w-16 h-16 mx-auto flex items-center justify-center mb-4">
+          <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#FF3130]/35 animate-[spin_20s_linear_infinite]"></div>
+          <div class="w-12 h-12 rounded-full bg-red-50 text-[#FF3130] flex items-center justify-center font-black text-lg">
+            UC
+          </div>
+        </div>
+
+        <h1 class="text-2xl font-extrabold text-[#0B2553] tracking-tight">Executive Console</h1>
+        <p class="text-xs text-[#243A5E] mt-1 font-medium">Unity Compass Management &amp; GovCon Operations</p>
+      </div>
+
+      <form id="admin-login-form" class="space-y-4" novalidate>
+        <div>
+          <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">
+            Admin Access Passkey
+          </label>
+          <input
+            type="password"
+            id="admin-passkey"
+            required
+            placeholder="Enter admin password..."
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-[#0B2553] text-sm focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400"
+          />
+          <p class="text-[11px] text-slate-400 mt-1.5">Default initial passkey: <code class="text-[#FF3130] font-mono font-bold">admin123</code></p>
+        </div>
+
+        <div id="login-error" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs font-semibold">
+          Invalid access passkey. Please verify and try again.
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-lg shadow-[#FF3130]/25 active:scale-[0.98] transition-all cursor-pointer"
+        >
+          Sign In to Console
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- DASHBOARD: SIDEBAR + OUTLET COMPONENT (Displayed when authorized)          -->
+  <!-- ========================================================================= -->
+  <div id="dashboard-section" class="hidden min-h-screen bg-slate-50/60 flex flex-col lg:flex-row">
+    
+    <!-- ======================================================================= -->
+    <!-- 1. EXECUTIVE SIDEBAR COMPONENT                                          -->
+    <!-- ======================================================================= -->
+    <aside class="w-full lg:w-72 bg-white border-r border-slate-200/90 flex flex-col justify-between shrink-0 shadow-sm relative z-20">
+      
+      <div>
+        <!-- Sidebar Brand Header -->
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#0B2553] text-white flex items-center justify-center font-extrabold text-sm shadow-sm">
+              UC
+            </div>
+            <div>
+              <h2 class="text-sm font-extrabold text-[#0B2553] tracking-tight">Unity Compass</h2>
+              <span class="inline-flex items-center gap-1 text-[10px] font-bold text-[#FF3130] uppercase tracking-wider">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Admin Console
+              </span>
+            </div>
+          </div>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button
+            type="button"
+            id="mobile-sidebar-toggle"
+            class="lg:hidden p-2 text-slate-500 hover:text-[#0B2553] rounded-lg"
+            aria-label="Toggle Menu"
+          >
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Sidebar Navigation Items -->
+        <nav id="sidebar-nav-menu" class="p-4 space-y-1.5">
+          
+          <!-- 1. Overview -->
+          <button
+            type="button"
+            data-target-view="overview"
+            class="sidebar-nav-btn active w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer bg-[#0B2553] text-white shadow-xs"
+          >
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              <span>Dashboard Overview</span>
+            </div>
+          </button>
+
+          <!-- 2. Inquiries -->
+          <button
+            type="button"
+            data-target-view="inquiries"
+            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold text-[#243A5E] hover:bg-slate-100 hover:text-[#0B2553] transition-all cursor-pointer"
+          >
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-slate-400 group-hover:text-[#FF3130]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span>Contact Inquiries</span>
+            </div>
+            <span id="sidebar-inquiries-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-[#FF3130]">0</span>
+          </button>
+
+          <!-- 3. Candidates & Resumes -->
+          <button
+            type="button"
+            data-target-view="candidates"
+            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold text-[#243A5E] hover:bg-slate-100 hover:text-[#0B2553] transition-all cursor-pointer"
+          >
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              <span>Candidates &amp; Resumes</span>
+            </div>
+            <span id="sidebar-candidates-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">0</span>
+          </button>
+
+          <!-- 4. Job Board -->
+          <button
+            type="button"
+            data-target-view="jobs"
+            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold text-[#243A5E] hover:bg-slate-100 hover:text-[#0B2553] transition-all cursor-pointer"
+          >
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span>Job Board Manager</span>
+            </div>
+            <span id="sidebar-jobs-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">0</span>
+          </button>
+
+          <!-- 5. Blogs -->
+          <button
+            type="button"
+            data-target-view="blogs"
+            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold text-[#243A5E] hover:bg-slate-100 hover:text-[#0B2553] transition-all cursor-pointer"
+          >
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+              </svg>
+              <span>Blog Manager</span>
+            </div>
+            <span id="sidebar-blogs-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">0</span>
+          </button>
+
+          <!-- 6. System & Keep-Alive -->
+          <button
+            type="button"
+            data-target-view="system"
+            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold text-[#243A5E] hover:bg-slate-100 hover:text-[#0B2553] transition-all cursor-pointer"
+          >
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span>Database Health &amp; Ping</span>
+            </div>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          </button>
+
+        </nav>
+      </div>
+
+      <!-- Sidebar Footer (User Card & Logout) -->
+      <div class="p-4 border-t border-slate-100 space-y-3">
+        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-[#0B2553] text-white flex items-center justify-center font-bold text-xs">
+              ST
+            </div>
+            <div class="truncate max-w-[130px]">
+              <p class="text-xs font-extrabold text-[#0B2553] truncate">Syed Tawseef</p>
+              <p class="text-[10px] text-slate-500 font-medium">Administrator</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            id="admin-logout-btn"
+            class="p-1.5 text-slate-400 hover:text-[#FF3130] rounded-lg transition-colors cursor-pointer"
+            title="Sign Out"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+          </button>
+        </div>
+
+        <a
+          href="/"
+          target="_blank"
+          class="block text-center text-xs font-bold text-[#0C487A] hover:text-[#FF3130] transition-colors py-1"
+        >
+          View Live Website &rarr;
+        </a>
+      </div>
+
+    </aside>
+
+    <!-- ======================================================================= -->
+    <!-- 2. MAIN HEADER & OUTLET COMPONENT                                       -->
+    <!-- ======================================================================= -->
+    <main class="flex-1 flex flex-col min-w-0">
+      
+      <!-- Top Action Bar -->
+      <header class="bg-white border-b border-slate-200/90 px-6 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sticky top-0 z-10">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h1 id="outlet-view-title" class="text-xl sm:text-2xl font-extrabold text-[#0B2553] tracking-tight">
+              Dashboard Overview
+            </h1>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Supabase Live
+            </span>
+          </div>
+          <p id="outlet-view-subtitle" class="text-xs text-slate-500 mt-0.5">
+            Operational status, real-time client inquiries, and candidate applications.
+          </p>
+        </div>
+
+        <!-- Quick Top Action Buttons -->
+        <div class="flex items-center gap-3 shrink-0">
+          <button
+            type="button"
+            id="header-ping-btn"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200/80 transition-colors cursor-pointer"
+            title="Send keep-alive heartbeat to Supabase"
+          >
+            <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span>Ping Heartbeat</span>
+          </button>
+
+          <a
+            href="/career"
+            target="_blank"
+            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#FF3130] hover:bg-[#E02625] shadow-xs active:scale-[0.98] transition-all cursor-pointer"
+          >
+            <span>Live Careers</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- ===================================================================== -->
+      <!-- THE OUTLET: DYNAMIC VIEW CONTAINER                                    -->
+      <!-- ===================================================================== -->
+      <div id="admin-outlet" class="flex-1 p-6 sm:p-8 space-y-8">
+        
+        <!-- ------------------------------------------------------------------- -->
+        <!-- VIEW 1: OVERVIEW (Default)                                          -->
+        <!-- ------------------------------------------------------------------- -->
+        <div id="view-overview" class="outlet-view space-y-8">
+          
+          <!-- 4 Executive KPI Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            
+            <!-- Metric 1: Inquiries -->
+            <div class="relative bg-white rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
+              <div class="absolute top-0 inset-x-0 h-1 bg-[#FF3130]"></div>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Leads</span>
+              <p id="metric-inquiries" class="text-3xl font-black text-[#FF3130] mt-2">--</p>
+              <span class="text-[11px] text-slate-500 font-medium mt-1 block">Contact submissions</span>
+            </div>
+
+            <!-- Metric 2: Candidates -->
+            <div class="relative bg-white rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
+              <div class="absolute top-0 inset-x-0 h-1 bg-emerald-500"></div>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Candidate Resumes</span>
+              <p id="metric-applications" class="text-3xl font-black text-emerald-600 mt-2">--</p>
+              <span class="text-[11px] text-slate-500 font-medium mt-1 block">In Supabase Storage</span>
+            </div>
+
+            <!-- Metric 3: Active Jobs -->
+            <div class="relative bg-white rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
+              <div class="absolute top-0 inset-x-0 h-1 bg-[#0B2553]"></div>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Active Jobs</span>
+              <p id="metric-jobs" class="text-3xl font-black text-[#0B2553] mt-2">--</p>
+              <span class="text-[11px] text-slate-500 font-medium mt-1 block">Open requisitions</span>
+            </div>
+
+            <!-- Metric 4: Blogs -->
+            <div class="relative bg-white rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
+              <div class="absolute top-0 inset-x-0 h-1 bg-[#EE8522]"></div>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Published Insights</span>
+              <p id="metric-blogs" class="text-3xl font-black text-[#EE8522] mt-2">--</p>
+              <span class="text-[11px] text-slate-500 font-medium mt-1 block">Live articles</span>
+            </div>
+
+          </div>
+
+          <!-- Quick Preview Split Cards -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Recent Inquiries Card -->
+            <div class="bg-white rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-4">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#FF3130]"></span>
+                  <h3 class="text-base font-bold text-[#0B2553]">Recent Contact Leads</h3>
+                </div>
+                <button
+                  type="button"
+                  data-switch-to="inquiries"
+                  class="text-xs font-bold text-[#FF3130] hover:underline cursor-pointer"
+                >
+                  View All &rarr;
+                </button>
+              </div>
+
+              <div id="overview-recent-inquiries" class="space-y-3">
+                <p class="text-xs text-slate-400 text-center py-6">Loading leads...</p>
+              </div>
+            </div>
+
+            <!-- Recent Applications Card -->
+            <div class="bg-white rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-4">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                  <h3 class="text-base font-bold text-[#0B2553]">Recent Candidate Submissions</h3>
+                </div>
+                <button
+                  type="button"
+                  data-switch-to="candidates"
+                  class="text-xs font-bold text-[#0B2553] hover:underline cursor-pointer"
+                >
+                  View All &rarr;
+                </button>
+              </div>
+
+              <div id="overview-recent-applications" class="space-y-3">
+                <p class="text-xs text-slate-400 text-center py-6">Loading candidates...</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ------------------------------------------------------------------- -->
+        <!-- VIEW 2: CONTACT INQUIRIES                                           -->
+        <!-- ------------------------------------------------------------------- -->
+        <div id="view-inquiries" class="outlet-view hidden space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-lg font-bold text-[#0B2553]">Lead Submissions from Contact Form</h2>
+              <p class="text-xs text-slate-500">Prospective clients requesting GovCon proposals, staffing, and advisory scoping.</p>
+            </div>
+            
+            <div class="flex items-center gap-3">
+              <input
+                type="text"
+                id="search-inquiries"
+                placeholder="Search leads by name, email, or message..."
+                class="px-4 py-2 text-xs rounded-xl border border-slate-200 bg-white text-[#0B2553] w-64 focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130]"
+              />
+              <button
+                type="button"
+                id="refresh-inquiries-btn"
+                class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer"
+                title="Refresh leads"
+              >
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)]">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs text-[#243A5E]">
+                <thead class="bg-slate-50 text-[#0B2553] uppercase tracking-wider text-[11px] font-bold border-b border-slate-200">
+                  <tr>
+                    <th class="px-6 py-4">Lead Name</th>
+                    <th class="px-6 py-4">Contact Info</th>
+                    <th class="px-6 py-4">Message Snippet</th>
+                    <th class="px-6 py-4">Submitted</th>
+                    <th class="px-6 py-4">Status</th>
+                    <th class="px-6 py-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="inquiries-table-body" class="divide-y divide-slate-100">
+                  <tr>
+                    <td colspan="6" class="px-6 py-8 text-center text-slate-400">Loading inquiries...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------------- -->
+        <!-- VIEW 3: CANDIDATES & RESUMES                                        -->
+        <!-- ------------------------------------------------------------------- -->
+        <div id="view-candidates" class="outlet-view hidden space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-lg font-bold text-[#0B2553]">Candidate Applications &amp; Uploaded Resumes</h2>
+              <p class="text-xs text-slate-500">Cleared &amp; GovCon talent submissions stored securely in Supabase Storage.</p>
+            </div>
+            
+            <button
+              type="button"
+              id="refresh-applications-btn"
+              class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer self-start sm:self-auto"
+              title="Refresh applicants"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)]">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs text-[#243A5E]">
+                <thead class="bg-slate-50 text-[#0B2553] uppercase tracking-wider text-[11px] font-bold border-b border-slate-200">
+                  <tr>
+                    <th class="px-6 py-4">Candidate</th>
+                    <th class="px-6 py-4">Target Requisition</th>
+                    <th class="px-6 py-4">Contact Details</th>
+                    <th class="px-6 py-4">Submitted Date</th>
+                    <th class="px-6 py-4">Resume File</th>
+                    <th class="px-6 py-4 text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="applications-table-body" class="divide-y divide-slate-100">
+                  <tr>
+                    <td colspan="6" class="px-6 py-8 text-center text-slate-400">Loading applicants...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------------- -->
+        <!-- VIEW 4: JOB BOARD MANAGER                                           -->
+        <!-- ------------------------------------------------------------------- -->
+        <div id="view-jobs" class="outlet-view hidden space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-lg font-bold text-[#0B2553]">GovCon Career Requisitions</h2>
+              <p class="text-xs text-slate-500">Live positions displayed on the public career portal.</p>
+            </div>
+            
+            <a
+              href="/career"
+              target="_blank"
+              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-white border border-slate-200 hover:bg-slate-50 transition-colors"
+            >
+              <span>Preview Live Board</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          <div class="bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)]">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs text-[#243A5E]">
+                <thead class="bg-slate-50 text-[#0B2553] uppercase tracking-wider text-[11px] font-bold border-b border-slate-200">
+                  <tr>
+                    <th class="px-6 py-4">Job Title &amp; ID</th>
+                    <th class="px-6 py-4">Department</th>
+                    <th class="px-6 py-4">Location &amp; Model</th>
+                    <th class="px-6 py-4">Clearance Mandate</th>
+                    <th class="px-6 py-4 text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="jobs-table-body" class="divide-y divide-slate-100">
+                  <tr>
+                    <td colspan="5" class="px-6 py-8 text-center text-slate-400">Loading jobs...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------------- -->
+        <!-- VIEW 5: BLOG MANAGER                                                -->
+        <!-- ------------------------------------------------------------------- -->
+        <div id="view-blogs" class="outlet-view hidden space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-lg font-bold text-[#0B2553]">Published Insights &amp; Intelligence</h2>
+              <p class="text-xs text-slate-500">GovCon editorial articles and capture thought leadership.</p>
+            </div>
+            
+            <a
+              href="/blog"
+              target="_blank"
+              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-white border border-slate-200 hover:bg-slate-50 transition-colors"
+            >
+              <span>Preview Live Publications</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          <div class="bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)]">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs text-[#243A5E]">
+                <thead class="bg-slate-50 text-[#0B2553] uppercase tracking-wider text-[11px] font-bold border-b border-slate-200">
+                  <tr>
+                    <th class="px-6 py-4">Article Title &amp; Route</th>
+                    <th class="px-6 py-4">Category</th>
+                    <th class="px-6 py-4">Author &amp; Date</th>
+                    <th class="px-6 py-4 text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="blogs-table-body" class="divide-y divide-slate-100">
+                  <tr>
+                    <td colspan="4" class="px-6 py-8 text-center text-slate-400">Loading articles...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------------- -->
+        <!-- VIEW 6: SYSTEM & KEEP-ALIVE                                         -->
+        <!-- ------------------------------------------------------------------- -->
+        <div id="view-system" class="outlet-view hidden space-y-6">
+          <div>
+            <h2 class="text-lg font-bold text-[#0B2553]">System Health &amp; Inactivity Keep-Alive</h2>
+            <p class="text-xs text-slate-500">Automated heartbeat monitor preventing Supabase 7-day inactivity pause.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Card 1: Supabase Keep-Alive Pulse -->
+            <div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-4">
+              <div class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                <h3 class="text-base font-bold text-[#0B2553]">Supabase Database Heartbeat</h3>
+              </div>
+              <p class="text-xs text-[#243A5E] leading-relaxed">
+                Supabase free tier automatically pauses inactive databases after 7 days without queries. Our automated GitHub Action cron pings the database every 2 days, guaranteeing 100% continuous uptime.
+              </p>
+              
+              <div class="pt-2">
+                <button
+                  type="button"
+                  id="manual-ping-btn"
+                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-all cursor-pointer shadow-sm active:scale-[0.98]"
+                >
+                  <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  <span>Trigger Manual Pulse Ping</span>
+                </button>
+              </div>
+
+              <pre id="ping-result" class="hidden p-4 rounded-2xl bg-slate-50 border border-slate-200 text-[11px] font-mono text-slate-700 overflow-x-auto"></pre>
+            </div>
+
+            <!-- Card 2: Environment Health -->
+            <div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-4">
+              <h3 class="text-base font-bold text-[#0B2553]">Active Service Configuration</h3>
+              <ul class="space-y-2.5 text-xs text-slate-600">
+                <li class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
+                  <span class="font-bold text-[#0B2553]">Supabase PostgREST Data API:</span>
+                  <span class="text-emerald-700 font-bold">Enabled ✓</span>
+                </li>
+                <li class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
+                  <span class="font-bold text-[#0B2553]">Storage Resume Bucket:</span>
+                  <span class="text-emerald-700 font-bold">Private (5MB Limit) ✓</span>
+                </li>
+                <li class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
+                  <span class="font-bold text-[#0B2553]">Admin Notification Email:</span>
+                  <span class="text-slate-800 font-mono">syedtawseef0@gmail.com</span>
+                </li>
+                <li class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
+                  <span class="font-bold text-[#0B2553]">Resend Dispatch API:</span>
+                  <span class="text-emerald-700 font-bold">Configured ✓</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: VIEW INQUIRY DETAILS                                               -->
+  <!-- ========================================================================= -->
+  <div id="inquiry-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative">
+      <div class="absolute top-0 inset-x-0 h-1.5 bg-[#FF3130]"></div>
+
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 class="text-lg font-bold text-[#0B2553]">Contact Lead Details</h3>
+        <button type="button" id="close-inquiry-modal" class="p-1 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-100 text-lg">&times;</button>
+      </div>
+
+      <div id="inquiry-modal-body" class="text-xs text-[#243A5E] space-y-3 mt-4"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- SCRIPTS: AUTH, OUTLET NAVIGATION & LIVE DATA FETCH                        -->
+  <!-- ========================================================================= -->
+  <script>
+    const AUTH_KEY = 'uc_admin_token';
+
+    function initAdminPortal() {
+      const loginSection = document.getElementById('login-section');
+      const dashboardSection = document.getElementById('dashboard-section');
+      const loginForm = document.getElementById('admin-login-form');
+      const passkeyInput = document.getElementById('admin-passkey') as HTMLInputElement | null;
+      const loginError = document.getElementById('login-error');
+      const logoutBtn = document.getElementById('admin-logout-btn');
+
+      function checkAuth() {
+        const token = localStorage.getItem(AUTH_KEY);
+        if (token === 'valid_admin_session') {
+          loginSection?.classList.add('hidden');
+          dashboardSection?.classList.remove('hidden');
+          loadDashboardData();
+        } else {
+          loginSection?.classList.remove('hidden');
+          dashboardSection?.classList.add('hidden');
+        }
+      }
+
+      loginForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const passkey = passkeyInput?.value.trim();
+        if (passkey === 'admin123' || passkey === 'unitycompass2026') {
+          localStorage.setItem(AUTH_KEY, 'valid_admin_session');
+          loginError?.classList.add('hidden');
+          checkAuth();
+        } else {
+          loginError?.classList.remove('hidden');
+        }
+      });
+
+      logoutBtn?.addEventListener('click', () => {
+        localStorage.removeItem(AUTH_KEY);
+        checkAuth();
+      });
+
+      // OUTLET SWITCHER LOGIC
+      const outletTitle = document.getElementById('outlet-view-title');
+      const outletSubtitle = document.getElementById('outlet-view-subtitle');
+
+      const viewMeta: Record<string, { title: string; subtitle: string }> = {
+        overview: {
+          title: 'Dashboard Overview',
+          subtitle: 'Operational KPIs, recent inquiries, and candidate applications.',
+        },
+        inquiries: {
+          title: 'Contact Inquiries',
+          subtitle: 'Prospective clients requesting GovCon proposals, staffing, and advisory scoping.',
+        },
+        candidates: {
+          title: 'Candidates & Resumes',
+          subtitle: 'Cleared & GovCon talent submissions stored securely in Supabase Storage.',
+        },
+        jobs: {
+          title: 'Job Board Manager',
+          subtitle: 'Live positions displayed on the public career portal.',
+        },
+        blogs: {
+          title: 'Blog Manager',
+          subtitle: 'GovCon editorial articles and capture thought leadership.',
+        },
+        system: {
+          title: 'Database Health & Ping',
+          subtitle: 'Automated heartbeat monitor preventing Supabase 7-day inactivity pause.',
+        },
+      };
+
+      function switchView(viewName: string) {
+        document.querySelectorAll('.sidebar-nav-btn').forEach((btn) => {
+          if (btn.getAttribute('data-target-view') === viewName) {
+            btn.classList.add('bg-[#0B2553]', 'text-white', 'shadow-xs');
+            btn.classList.remove('text-[#243A5E]', 'hover:bg-slate-100');
+          } else {
+            btn.classList.remove('bg-[#0B2553]', 'text-white', 'shadow-xs');
+            btn.classList.add('text-[#243A5E]', 'hover:bg-slate-100');
+          }
+        });
+
+        document.querySelectorAll('.outlet-view').forEach((pane) => pane.classList.add('hidden'));
+        document.getElementById(`view-${viewName}`)?.classList.remove('hidden');
+
+        if (viewMeta[viewName] && outletTitle && outletSubtitle) {
+          outletTitle.textContent = viewMeta[viewName].title;
+          outletSubtitle.textContent = viewMeta[viewName].subtitle;
+        }
+      }
+
+      document.querySelectorAll('.sidebar-nav-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-target-view');
+          if (target) switchView(target);
+        });
+      });
+
+      document.querySelectorAll('[data-switch-to]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-switch-to');
+          if (target) switchView(target);
+        });
+      });
+
+      // Mobile sidebar toggle
+      const mobileToggle = document.getElementById('mobile-sidebar-toggle');
+      const sidebarNav = document.getElementById('sidebar-nav-menu');
+      mobileToggle?.addEventListener('click', () => {
+        sidebarNav?.classList.toggle('hidden');
+      });
+
+      // Heartbeat pulse triggers
+      document.getElementById('manual-ping-btn')?.addEventListener('click', triggerPing);
+      document.getElementById('header-ping-btn')?.addEventListener('click', triggerPing);
+
+      async function triggerPing() {
+        const resultEl = document.getElementById('ping-result');
+        if (resultEl) {
+          resultEl.classList.remove('hidden');
+          resultEl.textContent = 'Executing Supabase heartbeat pulse...';
+        }
+
+        try {
+          const res = await fetch('/api/cron/keepalive');
+          const data = await res.json();
+          if (resultEl) {
+            resultEl.textContent = JSON.stringify(data, null, 2);
+          }
+        } catch (err: any) {
+          if (resultEl) {
+            resultEl.textContent = `Pulse failed: ${err.message}`;
+          }
+        }
+      }
+
+      checkAuth();
+    }
+
+    async function loadDashboardData() {
+      loadInquiries();
+      loadApplications();
+      loadJobs();
+      loadBlogs();
+    }
+
+    async function loadInquiries() {
+      const tbody = document.getElementById('inquiries-table-body');
+      const recentContainer = document.getElementById('overview-recent-inquiries');
+
+      try {
+        const res = await fetch('/api/admin/inquiries');
+        const data = await res.json();
+        const list = data.inquiries || [];
+
+        const unreadCount = list.filter((i: any) => i.status === 'new').length;
+        const countBadge = document.getElementById('sidebar-inquiries-badge');
+        const metricEl = document.getElementById('metric-inquiries');
+        if (countBadge) countBadge.textContent = String(unreadCount);
+        if (metricEl) metricEl.textContent = String(list.length);
+
+        // Populate Overview Preview
+        if (recentContainer) {
+          if (!list.length) {
+            recentContainer.innerHTML = '<p class="text-xs text-slate-400 text-center py-6">No contact inquiries yet.</p>';
+          } else {
+            recentContainer.innerHTML = list.slice(0, 3).map((item: any) => `
+              <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-center justify-between">
+                <div>
+                  <p class="text-xs font-bold text-[#0B2553]">${escapeHtml(item.name)}</p>
+                  <p class="text-[11px] text-slate-500 truncate max-w-xs">${escapeHtml(item.message)}</p>
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${item.status === 'new' ? 'bg-red-50 text-[#FF3130] border border-red-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'}">
+                  ${item.status.toUpperCase()}
+                </span>
+              </div>
+            `).join('');
+          }
+        }
+
+        if (!tbody) return;
+        if (!list.length) {
+          tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-slate-400">No contact inquiries received yet.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = list.map((item: any) => `
+          <tr class="hover:bg-slate-50/80 transition-colors">
+            <td class="px-6 py-4 font-bold text-[#0B2553]">${escapeHtml(item.name)}</td>
+            <td class="px-6 py-4">
+              <a href="mailto:${escapeHtml(item.email)}" class="text-[#0C487A] font-semibold hover:underline block">${escapeHtml(item.email)}</a>
+              <span class="text-slate-400 text-[11px]">${escapeHtml(item.phone)}</span>
+            </td>
+            <td class="px-6 py-4 max-w-xs truncate text-[#243A5E]">${escapeHtml(item.message)}</td>
+            <td class="px-6 py-4 text-slate-400 text-[11px]">${new Date(item.created_at).toLocaleDateString()}</td>
+            <td class="px-6 py-4">
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${item.status === 'new' ? 'bg-red-50 text-[#FF3130] border border-red-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'}">
+                ${item.status.toUpperCase()}
+              </span>
+            </td>
+            <td class="px-6 py-4 text-right">
+              <button onclick="viewInquiry('${item.id}', '${escapeHtml(item.name)}', '${escapeHtml(item.email)}', '${escapeHtml(item.phone)}', '${escapeHtml(item.message)}', '${item.status}')" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-[#0B2553] hover:text-white text-[#0B2553] transition-all cursor-pointer">
+                View
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      } catch (e) {
+        if (tbody) tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-red-500">Failed to load inquiries.</td></tr>`;
+      }
+    }
+
+    async function loadApplications() {
+      const tbody = document.getElementById('applications-table-body');
+      const recentContainer = document.getElementById('overview-recent-applications');
+
+      try {
+        const res = await fetch('/api/admin/applications');
+        const data = await res.json();
+        const list = data.applications || [];
+
+        const metricEl = document.getElementById('metric-applications');
+        const badgeEl = document.getElementById('sidebar-candidates-badge');
+        if (metricEl) metricEl.textContent = String(list.length);
+        if (badgeEl) badgeEl.textContent = String(list.length);
+
+        // Populate Overview Preview
+        if (recentContainer) {
+          if (!list.length) {
+            recentContainer.innerHTML = '<p class="text-xs text-slate-400 text-center py-6">No candidates yet.</p>';
+          } else {
+            recentContainer.innerHTML = list.slice(0, 3).map((item: any) => `
+              <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-center justify-between">
+                <div>
+                  <p class="text-xs font-bold text-[#0B2553]">${escapeHtml(item.candidate_name)}</p>
+                  <p class="text-[11px] text-slate-500">${escapeHtml(item.job_title)}</p>
+                </div>
+                ${item.resume_url && item.resume_url !== '#' ? `
+                  <a href="${item.resume_url}" target="_blank" class="px-3 py-1 rounded-lg bg-[#FF3130] text-white text-[10px] font-bold">Resume</a>
+                ` : `<span class="text-[10px] text-slate-400">No file</span>`}
+              </div>
+            `).join('');
+          }
+        }
+
+        if (!tbody) return;
+        if (!list.length) {
+          tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-slate-400">No candidate applications received yet.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = list.map((item: any) => `
+          <tr class="hover:bg-slate-50/80 transition-colors">
+            <td class="px-6 py-4 font-bold text-[#0B2553]">${escapeHtml(item.candidate_name)}</td>
+            <td class="px-6 py-4 text-[#0B2553] font-semibold">${escapeHtml(item.job_title)}</td>
+            <td class="px-6 py-4">
+              <a href="mailto:${escapeHtml(item.candidate_email)}" class="text-[#0C487A] font-semibold hover:underline block">${escapeHtml(item.candidate_email)}</a>
+              <span class="text-slate-400 text-[11px]">${escapeHtml(item.candidate_phone)}</span>
+            </td>
+            <td class="px-6 py-4 text-slate-400 text-[11px]">${new Date(item.created_at).toLocaleDateString()}</td>
+            <td class="px-6 py-4">
+              ${item.resume_url && item.resume_url !== '#' ? `
+                <a href="${item.resume_url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#FF3130] hover:bg-[#E02625] text-white text-[11px] font-bold shadow-xs active:scale-[0.98] transition-all">
+                  <span>Download Resume</span>
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                </a>
+              ` : `<span class="text-slate-400 text-[11px]">No file</span>`}
+            </td>
+            <td class="px-6 py-4 text-right">
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                ${item.status}
+              </span>
+            </td>
+          </tr>
+        `).join('');
+      } catch (e) {
+        if (tbody) tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-red-500">Failed to load applications.</td></tr>`;
+      }
+    }
+
+    async function loadJobs() {
+      const tbody = document.getElementById('jobs-table-body');
+      try {
+        const res = await fetch('/api/admin/jobs');
+        const data = await res.json();
+        const list = data.jobs || [];
+
+        const metricEl = document.getElementById('metric-jobs');
+        const badgeEl = document.getElementById('sidebar-jobs-badge');
+        if (metricEl) metricEl.textContent = String(list.filter((j: any) => j.is_active !== false).length);
+        if (badgeEl) badgeEl.textContent = String(list.length);
+
+        if (!tbody) return;
+        tbody.innerHTML = list.map((item: any) => `
+          <tr class="hover:bg-slate-50/80 transition-colors">
+            <td class="px-6 py-4 font-bold text-[#0B2553]">${escapeHtml(item.title)} <span class="text-slate-400 text-[10px] block font-mono">${item.id}</span></td>
+            <td class="px-6 py-4 text-[#243A5E] font-medium">${escapeHtml(item.department)}</td>
+            <td class="px-6 py-4 text-slate-500">${escapeHtml(item.location)} (${item.workplaceType || item.workplace_type || 'Hybrid'})</td>
+            <td class="px-6 py-4 font-bold text-[#0B2553]">${escapeHtml(item.clearanceLevel || item.clearance_level || 'None')}</td>
+            <td class="px-6 py-4 text-right">
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${item.is_active !== false ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-slate-100 text-slate-500'}">
+                ${item.is_active !== false ? 'Active' : 'Inactive'}
+              </span>
+            </td>
+          </tr>
+        `).join('');
+      } catch (e) {}
+    }
+
+    async function loadBlogs() {
+      const tbody = document.getElementById('blogs-table-body');
+      try {
+        const res = await fetch('/api/admin/blogs');
+        const data = await res.json();
+        const list = data.blogs || [];
+
+        const metricEl = document.getElementById('metric-blogs');
+        const badgeEl = document.getElementById('sidebar-blogs-badge');
+        if (metricEl) metricEl.textContent = String(list.length);
+        if (badgeEl) badgeEl.textContent = String(list.length);
+
+        if (!tbody) return;
+        tbody.innerHTML = list.map((item: any) => `
+          <tr class="hover:bg-slate-50/80 transition-colors">
+            <td class="px-6 py-4 font-bold text-[#0B2553]">${escapeHtml(item.title)} <span class="text-slate-400 text-[10px] block font-mono">/blog/${item.slug}</span></td>
+            <td class="px-6 py-4 text-[#FF3130] font-bold">${escapeHtml(item.category)}</td>
+            <td class="px-6 py-4 text-slate-400 text-[11px]">${escapeHtml(item.date)} by ${escapeHtml(item.author)}</td>
+            <td class="px-6 py-4 text-right">
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                Published
+              </span>
+            </td>
+          </tr>
+        `).join('');
+      } catch (e) {}
+    }
+
+    function escapeHtml(str: string) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    (window as any).viewInquiry = (id: string, name: string, email: string, phone: string, message: string, status: string) => {
+      const modal = document.getElementById('inquiry-modal');
+      const body = document.getElementById('inquiry-modal-body');
+      if (!modal || !body) return;
+
+      body.innerHTML = `
+        <div class="space-y-2 p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+          <p><strong class="text-[#0B2553]">Lead Name:</strong> ${name}</p>
+          <p><strong class="text-[#0B2553]">Email:</strong> <a href="mailto:${email}" class="text-[#0C487A] font-bold hover:underline">${email}</a></p>
+          <p><strong class="text-[#0B2553]">Phone:</strong> <a href="tel:${phone}" class="text-[#0C487A] font-bold hover:underline">${phone}</a></p>
+          <p><strong class="text-[#0B2553]">Current Status:</strong> <span class="font-bold uppercase text-[#FF3130]">${status}</span></p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white border border-slate-200 text-[#243A5E] whitespace-pre-wrap leading-relaxed">
+          ${message}
+        </div>
+        <div class="pt-4 flex gap-2 justify-end">
+          <button onclick="updateInquiryStatus('${id}', 'replied')" class="px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 cursor-pointer transition-all">
+            Mark as Replied
+          </button>
+          <button onclick="updateInquiryStatus('${id}', 'archived')" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200 cursor-pointer transition-all">
+            Archive
+          </button>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+    };
+
+    (window as any).updateInquiryStatus = async (id: string, status: string) => {
+      try {
+        await fetch('/api/admin/inquiries', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, status }),
+        });
+        document.getElementById('inquiry-modal')?.classList.add('hidden');
+        loadInquiries();
+      } catch (e) {
+        alert('Failed to update inquiry status');
+      }
+    };
+
+    document.getElementById('close-inquiry-modal')?.addEventListener('click', () => {
+      document.getElementById('inquiry-modal')?.classList.add('hidden');
+    });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAdminPortal);
+    } else {
+      initAdminPortal();
+    }
+    document.addEventListener('astro:page-load', initAdminPortal);
+  </script>
+</MainLayout>

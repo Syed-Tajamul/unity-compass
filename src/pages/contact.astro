@@ -25,10 +25,10 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
   description="Connect with Unity Compass in Frederick, MD for proposal development, security-cleared recruitment, staffing solutions, and IT consulting. Direct advisory response within 1 business day."
 >
   <!-- ========================================================================= -->
-  <!-- SECTION 1: HERO & 3 TOP CONTACT CARDS                                     -->
+  <!-- SECTION 1: HERO & 3 TOP CONTACT CARDS (Split-Screen Layout)               -->
   <!-- ========================================================================= -->
   <section class="relative overflow-hidden bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] pt-16 sm:pt-20 lg:pt-24 pb-28 sm:pb-36 lg:pb-40" aria-labelledby="contact-hero-heading">
-    <!-- Technical Blueprint Check Pattern -->
+    <!-- Technical Blueprint Check Pattern (Matching Homepage & Careers) -->
     <div
       class="absolute inset-0 opacity-[0.24] mix-blend-multiply pointer-events-none"
       style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.08) 1px, transparent 1px);"
@@ -38,28 +38,85 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     <!-- Soft Ambient Radial Blue Glow -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(12,72,122,0.11)_0%,rgba(30,64,175,0.05)_45%,transparent_70%)] rounded-full blur-3xl pointer-events-none -z-10" aria-hidden="true"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-      <!-- Header Area -->
-      <div class="text-center max-w-3xl mx-auto">
-        <!-- Headline: Connect With Our Team -->
-        <h1
-          id="contact-hero-heading"
-          class="scroll-reveal text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0B2553] leading-[1.16]"
-        >
-          Connect With Our <span class="text-[#FF3130]">Team</span>
-        </h1>
+    <div class="max-w-7xl xl:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      
+      <!-- Split-Screen Grid: Content & 3D Isometric Illustration -->
+      <div class="grid grid-cols-1 lg:grid-cols-[0.94fr_1.06fr] gap-10 lg:gap-14 xl:gap-16 items-center">
+        
+        <!-- LEFT COLUMN: Headline, Description & CTAs -->
+        <div class="max-w-2xl">
+          <!-- Headline with Homepage Hero Typography -->
+          <h1
+            id="contact-hero-heading"
+            class="contact-reveal text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.15rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.20] text-[#0B2553]"
+          >
+            <span class="block text-[#0B2553]">
+              Connect With
+            </span>
+            <span class="block text-[#FF3130]">
+              Our Team.
+            </span>
+          </h1>
 
-        <!-- Subtitle -->
-        <p class="scroll-reveal delay-100 mt-4 text-base sm:text-lg text-[#243A5E] leading-[1.75] max-w-2xl mx-auto font-normal">
-          We're here to answer your questions, evaluate active solicitations, and provide the strategic GovCon and staffing support you need.
-        </p>
+          <!-- Subtitle with Relaxed Leading -->
+          <p class="contact-reveal contact-delay-1 mt-5 sm:mt-6 text-base sm:text-lg text-[#243A5E] leading-[1.78] sm:leading-[1.82] font-normal max-w-xl">
+            We're here to answer your questions, evaluate active solicitations, and provide the strategic GovCon advisory and staffing solutions you need across federal environments.
+          </p>
+
+          <!-- Primary CTAs -->
+          <div class="contact-reveal contact-delay-2 mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
+            <a
+              href="#send-message"
+              class="inline-flex items-center justify-center gap-3 px-8 sm:px-9 py-4 rounded-xl bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] text-white text-base font-bold shadow-[0_8px_24px_-4px_rgba(255,49,48,0.25)] hover:shadow-[0_12px_28px_-2px_rgba(255,49,48,0.35)] cursor-pointer whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+            >
+              <span>Send Us a Message</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </a>
+
+            <a
+              href={hubspotMeetingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl border border-slate-300/80 hover:border-[#0C487A] bg-white/80 hover:bg-white text-[#0B2553] font-bold text-base shadow-xs hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
+            >
+              <span>Book a Strategy Call</span>
+              <svg class="w-4 h-4 text-[#FF3130]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: 3D Isometric Art Sized Exactly as in career.astro & about-us.astro -->
+        <div class="contact-reveal contact-delay-2 relative mx-auto w-full max-w-2xl flex items-center justify-center" aria-hidden="true">
+          <!-- Ambient Blue Shadow Diffusion & Ground Glow -->
+          <div class="absolute inset-x-[12%] bottom-[5%] h-[24%] rounded-full bg-[#0C487A]/15 blur-3xl pointer-events-none"></div>
+          
+          <!-- Clean 3D Transparent Illustration without any background artifacts -->
+          <img
+            src="/images/contactus-960.webp"
+            srcset="/images/contactus-960.webp 960w, /images/contactus.webp 2512w"
+            sizes="(min-width: 1280px) 672px, (min-width: 1024px) 52vw, 100vw"
+            alt="Unity Compass Contact & Advisory Team"
+            class="contact-float relative h-auto w-full object-contain drop-shadow-[0_24px_22px_rgba(15,39,74,0.14)]"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            width="2512"
+            height="1400"
+            onerror="this.src='/images/contactus.png'"
+          />
+        </div>
+
       </div>
 
-      <!-- 3 Prominent Contact Cards -->
-      <div class="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+      <!-- 3 Prominent Contact Cards with Sequential Staggered Entrance -->
+      <div class="mt-16 sm:mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
         
         <!-- CARD 1: EMAIL -->
-        <div class="scroll-reveal delay-150 group relative rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+        <div class="contact-reveal contact-delay-1 group relative rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
           <!-- Top Accent Border Bar (Brand Red) -->
           <div class="absolute top-0 inset-x-0 h-1.5 bg-[#FF3130]"></div>
 
@@ -100,7 +157,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
         </div>
 
         <!-- CARD 2: CALL US ANYTIME -->
-        <div class="scroll-reveal delay-250 group relative rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+        <div class="contact-reveal contact-delay-2 group relative rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
           <!-- Top Accent Border Bar (Navy Blue) -->
           <div class="absolute top-0 inset-x-0 h-1.5 bg-[#0C487A]"></div>
 
@@ -141,7 +198,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
         </div>
 
         <!-- CARD 3: VISIT OUR OFFICE / BOOK A MEETING -->
-        <div class="scroll-reveal delay-350 group relative rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+        <div class="contact-reveal contact-delay-3 group relative rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
           <!-- Top Accent Border Bar (Brand Red) -->
           <div class="absolute top-0 inset-x-0 h-1.5 bg-[#FF3130]"></div>
 
@@ -188,19 +245,23 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     <WaveDivider variant="wave" position="bottom" fillColor="#ffffff" />
   </section>
 
+    <!-- Organic Pure CSS Wave Divider Transitioning from Hero into White Canvas -->
+    <WaveDivider variant="wave" position="bottom" fillColor="#ffffff" />
+  </section>
+
   <!-- ========================================================================= -->
   <!-- SECTION 2: "SEND US A MESSAGE" (Image 6 Split Layout)                     -->
   <!-- Left: Headline, Narrative & 3 Confidence Pills                            -->
   <!-- Right: Streamlined Project Brief & Inquiry Form                           -->
   <!-- ========================================================================= -->
-  <section class="py-16 sm:py-24 lg:py-28 bg-white relative z-10" aria-label="Send Us a Message and Project Inquiry Form">
+  <section id="send-message" class="py-16 sm:py-24 lg:py-28 bg-white relative z-10" aria-label="Send Us a Message and Project Inquiry Form">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-16 items-start">
         
         <!-- Left Column (5 cols): Headline, Narrative & Confidence Pills -->
         <div class="lg:col-span-5 space-y-6 sm:space-y-8">
           
-          <div class="scroll-reveal">
+          <div class="contact-reveal">
             <!-- Main Section Title -->
             <h2 class="text-3xl sm:text-4xl font-extrabold text-[#0B2553] tracking-tight leading-tight">
               Send Us a Message
@@ -218,7 +279,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
           <!-- 3 Confidence Pills in Executive Blue with Brand Red Checkmark Badge -->
           <div class="space-y-3.5 pt-1">
             <!-- Pill 1 -->
-            <div class="scroll-reveal delay-150 group flex items-center gap-3.5 px-5 py-4 rounded-2xl bg-[#F4F8FC] border border-[#0C487A]/15 text-[#0B2553] text-sm font-semibold shadow-2xs hover:bg-[#EBF3FA] hover:border-[#0C487A]/25 transition-all duration-200">
+            <div class="contact-reveal contact-delay-2 group flex items-center gap-3.5 px-5 py-4 rounded-2xl bg-[#F4F8FC] border border-[#0C487A]/15 text-[#0B2553] text-sm font-semibold shadow-2xs hover:bg-[#EBF3FA] hover:border-[#0C487A]/25 transition-all duration-200">
               <div class="w-6 h-6 rounded-full bg-red-50 text-[#FF3130] border border-[#FF3130]/25 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-[#FF3130] group-hover:text-white transition-all duration-200">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8" d="M5 13l4 4L19 7" />
@@ -228,7 +289,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
             </div>
 
             <!-- Pill 2 -->
-            <div class="scroll-reveal delay-250 group flex items-center gap-3.5 px-5 py-4 rounded-2xl bg-[#F4F8FC] border border-[#0C487A]/15 text-[#0B2553] text-sm font-semibold shadow-2xs hover:bg-[#EBF3FA] hover:border-[#0C487A]/25 transition-all duration-200">
+            <div class="contact-reveal contact-delay-3 group flex items-center gap-3.5 px-5 py-4 rounded-2xl bg-[#F4F8FC] border border-[#0C487A]/15 text-[#0B2553] text-sm font-semibold shadow-2xs hover:bg-[#EBF3FA] hover:border-[#0C487A]/25 transition-all duration-200">
               <div class="w-6 h-6 rounded-full bg-red-50 text-[#FF3130] border border-[#FF3130]/25 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-[#FF3130] group-hover:text-white transition-all duration-200">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8" d="M5 13l4 4L19 7" />
@@ -238,7 +299,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
             </div>
 
             <!-- Pill 3 -->
-            <div class="scroll-reveal delay-350 group flex items-center gap-3.5 px-5 py-4 rounded-2xl bg-[#F4F8FC] border border-[#0C487A]/15 text-[#0B2553] text-sm font-semibold shadow-2xs hover:bg-[#EBF3FA] hover:border-[#0C487A]/25 transition-all duration-200">
+            <div class="contact-reveal contact-delay-4 group flex items-center gap-3.5 px-5 py-4 rounded-2xl bg-[#F4F8FC] border border-[#0C487A]/15 text-[#0B2553] text-sm font-semibold shadow-2xs hover:bg-[#EBF3FA] hover:border-[#0C487A]/25 transition-all duration-200">
               <div class="w-6 h-6 rounded-full bg-red-50 text-[#FF3130] border border-[#FF3130]/25 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-[#FF3130] group-hover:text-white transition-all duration-200">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8" d="M5 13l4 4L19 7" />
@@ -251,7 +312,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
         </div>
 
         <!-- Right Column (7 cols): Clean Contact Form -->
-        <div class="lg:col-span-7 scroll-reveal delay-200">
+        <div class="lg:col-span-7 contact-reveal contact-delay-2">
           <ContactForm />
         </div>
 
@@ -262,39 +323,61 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
   <!-- ========================================================================= -->
   <!-- SCROLL REVEAL ANIMATION STYLES & INTERSECTION OBSERVER SCRIPT            -->
   <!-- ========================================================================= -->
-  <style is:inline>
-    .scroll-reveal {
+  <style is:global>
+    /* Viewport Scroll Reveal (Harmonized with about-us.astro & career.astro) */
+    .contact-reveal {
       opacity: 0;
       transform: translateY(28px);
-      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+      filter: blur(6px);
+      will-change: opacity, transform, filter;
+      transition:
+        opacity 750ms cubic-bezier(0.16, 1, 0.3, 1),
+        transform 750ms cubic-bezier(0.16, 1, 0.3, 1),
+        filter 750ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .scroll-reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
+    .contact-reveal.is-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      filter: blur(0) !important;
     }
 
-    .delay-100 { transition-delay: 100ms; }
-    .delay-150 { transition-delay: 150ms; }
-    .delay-200 { transition-delay: 200ms; }
-    .delay-250 { transition-delay: 250ms; }
-    .delay-300 { transition-delay: 300ms; }
-    .delay-350 { transition-delay: 350ms; }
-    .delay-400 { transition-delay: 400ms; }
+    .contact-delay-1 { transition-delay: 90ms; }
+    .contact-delay-2 { transition-delay: 180ms; }
+    .contact-delay-3 { transition-delay: 270ms; }
+    .contact-delay-4 { transition-delay: 360ms; }
+    .contact-delay-5 { transition-delay: 450ms; }
+
+    /* Floating Levitation on Hero Visual (Exact 6.5s matching career.astro & about-us.astro) */
+    @keyframes contactFloatLevitation {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .contact-float {
+      animation: contactFloatLevitation 6.5s ease-in-out infinite;
+    }
 
     @media (prefers-reduced-motion: reduce) {
-      .scroll-reveal {
+      .contact-reveal {
         opacity: 1 !important;
         transform: none !important;
+        filter: none !important;
         transition: none !important;
+      }
+      .contact-float {
+        animation: none !important;
       }
     }
   </style>
 
   <script>
     function setupContactScrollReveal() {
-      const elements = document.querySelectorAll<HTMLElement>('.scroll-reveal');
+      const elements = document.querySelectorAll<HTMLElement>('.contact-reveal');
       if (!elements.length) return;
 
       if (!('IntersectionObserver' in window)) {
@@ -313,7 +396,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
         },
         {
           root: null,
-          rootMargin: '0px 0px -40px 0px',
+          rootMargin: '0px 0px -6% 0px',
           threshold: 0.1,
         }
       );

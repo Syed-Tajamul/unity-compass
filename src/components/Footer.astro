@@ -17,7 +17,7 @@
 import { footerLinks } from '../data/navigation';
 import { companyInfo } from '../data/company';
 import WaveDivider from './WaveDivider.astro';
-import { Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from 'lucide-astro';
+import Icon from './Icon.astro';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -115,20 +115,20 @@ const currentYear = new Date().getFullYear();
         <address class="mt-4 not-italic">
           <ul class="space-y-5 text-sm text-slate-600 sm:text-base" role="list">
             <li class="flex items-start gap-2">
-              <MapPin class="mt-1 h-5 w-5 shrink-0 text-[#D20F39]" aria-hidden="true" stroke-width={1.8} />
+              <Icon name="MapPin" class="mt-1 h-5 w-5 shrink-0 text-[#D20F39]" aria-hidden="true" stroke-width={1.8} />
               <span class="leading-7">
                 {companyInfo.address.street}<br />
                 {companyInfo.address.city} {companyInfo.address.state} {companyInfo.address.zip}
               </span>
             </li>
             <li class="flex items-center gap-2">
-              <Phone class="h-5 w-5 shrink-0 text-[#D20F39]" aria-hidden="true" stroke-width={1.8} />
+              <Icon name="Phone" class="h-5 w-5 shrink-0 text-[#D20F39]" aria-hidden="true" stroke-width={1.8} />
               <span>
                 <a href={`tel:${companyInfo.phoneRaw}`} class="footer-contact-link">{companyInfo.phone}</a>
               </span>
             </li>
             <li class="flex items-center gap-2">
-              <Mail class="h-5 w-5 shrink-0 text-[#D20F39]" aria-hidden="true" stroke-width={1.8} />
+              <Icon name="Mail" class="h-5 w-5 shrink-0 text-[#D20F39]" aria-hidden="true" stroke-width={1.8} />
               <a href={`mailto:${companyInfo.email}`} class="footer-contact-link break-all">{companyInfo.email}</a>
             </li>
           </ul>
@@ -160,7 +160,7 @@ const currentYear = new Date().getFullYear();
             class="footer-social-link"
             aria-label="LinkedIn"
           >
-            <Linkedin class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />
+            <Icon name="Linkedin" class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />
           </a>
           <a
             href={companyInfo.social.twitter}
@@ -169,7 +169,7 @@ const currentYear = new Date().getFullYear();
             class="footer-social-link"
             aria-label="X (Twitter)"
           >
-            <Twitter class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />
+            <Icon name="Twitter" class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />
           </a>
           <a
             href={companyInfo.social.instagram}
@@ -178,7 +178,7 @@ const currentYear = new Date().getFullYear();
             class="footer-social-link"
             aria-label="Instagram"
           >
-            <Instagram class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />
+            <Icon name="Instagram" class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />
           </a>
         </div>
 

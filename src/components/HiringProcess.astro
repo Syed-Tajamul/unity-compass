@@ -1,0 +1,268 @@
+---
+/**
+ * HiringProcess.astro - Section 04: Our Hiring Process
+ * 
+ * Strict Specification & Enhancements:
+ * - Removed "Candidate Journey" badge completely as requested
+ * - Headline: "A Clear Path to Your Next Opportunity" matching homepage hero line-height
+ *   with continuous vibrant animated color shimmer gradient on "Next Opportunity"
+ * - Subtitle with relaxed, easy-to-read line-height
+ * - 4 Interactive Two-Layer Sliding Cards matching Screenshot 4 (codev-slide-card):
+ *   * Top Slide (Resting): Deep Federal Navy gradient canvas, frosted glass centered icon,
+ *     title, "Hover to reveal v" indicator with gentle bounce animation
+ *   * Bottom Slide (Hover): Smoothly glides down, revealing the full step description,
+ *     stage number, and expanding bottom accent seam
+ */
+
+interface HiringStep {
+  number: string;
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const steps: HiringStep[] = [
+  {
+    number: '01',
+    title: 'Submit Your Application',
+    description: 'Apply for an open position and share your resume and relevant professional experience through our secure portal.',
+    // Document with pencil/upload SVG
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+  {
+    number: '02',
+    title: 'Initial Review',
+    description: 'Our recruitment team reviews your qualifications, clearance level, and domain expertise against the specific role requirements.',
+    // Search user / Verification shield SVG
+    icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
+  },
+  {
+    number: '03',
+    title: 'Interview & Evaluation',
+    description: 'Discuss your experience, technical capabilities, and cultural suitability for the opportunity with our practice leadership.',
+    // Users collaboration SVG
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+  },
+  {
+    number: '04',
+    title: 'Selection & Next Steps',
+    description: 'Successful candidates proceed through the relevant clearance verification, selection, and structured program onboarding process.',
+    // Award / Verification Check SVG
+    icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
+  },
+];
+---
+
+<section
+  id="hiring-process"
+  class="relative bg-gradient-to-b from-white via-[#F8FAFC] to-[#F1F5F9] py-20 sm:py-28 overflow-hidden border-t border-slate-200/80"
+  aria-labelledby="hiring-process-heading"
+>
+  <!-- Technical Blueprint Check Pattern Overlay (16px grid matching Hero & Services) -->
+  <div
+    class="absolute inset-0 opacity-[0.18] mix-blend-multiply pointer-events-none"
+    style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.08) 1px, transparent 1px);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Ambient Radial Glow -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[380px] bg-[radial-gradient(ellipse,rgba(12,72,122,0.08)_0%,transparent_70%)] pointer-events-none blur-3xl -z-10" aria-hidden="true"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Heading with Exact Homepage Hero Line-Height & Animated Gradient -->
+    <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+      <h2
+        id="hiring-process-heading"
+        class="career-reveal text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.20] text-center"
+      >
+        <span class="text-[#0B2553]">A Clear Path to Your </span>
+        <span class="service-shimmer-center service-shimmer-line-1 inline-block pb-1.5 pt-0.5">Next Opportunity</span>
+      </h2>
+
+      <!-- Branded Accent Bar -->
+      <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
+
+      <!-- Supporting Text with Homepage Leading -->
+      <p class="career-reveal career-delay-1 mt-2 text-base sm:text-lg text-[#243A5E] leading-[1.78] sm:leading-[1.82] font-normal max-w-2xl mx-auto">
+        Putting people first begins the moment we connect. A transparent four-step evaluation process designed to respect your expertise.
+      </p>
+    </div>
+
+    <!-- 4 Deliverable Cards: Codev Land Two-Layer Sliding Profile Card Hover Animation (Screenshot 4) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
+      {steps.map((step, idx) => (
+        <div
+          class="codev-slide-card group relative cursor-pointer career-reveal"
+          style={`transition-delay: ${idx * 150}ms;`}
+          data-step-index={idx}
+        >
+          <!-- Slide 1: Top Slide (Dark Navy Gradient, Icon + Title, glides UP on hover) -->
+          <div class="codev-slide codev-slide1 relative rounded-3xl bg-gradient-to-br from-[#0B2553] via-[#0C3860] to-[#081832] p-6 text-center text-white border border-white/15 shadow-[0_12px_28px_rgba(12,72,122,0.22)] flex flex-col items-center justify-center min-h-[195px]">
+            <!-- Ambient Subtle Glow Aura -->
+            <div class="absolute inset-0 rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+            <!-- Icon in Frosted Pill -->
+            <div class="w-13 h-13 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-3 shadow-inner group-hover:scale-110 group-hover:bg-white group-hover:text-[#FF3130] transition-all duration-400">
+              <svg class="w-6 h-6 transition-colors duration-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon} />
+              </svg>
+            </div>
+
+            <!-- Step Title -->
+            <h3 class="text-base sm:text-lg font-bold text-white tracking-tight leading-snug px-1 mb-1">
+              {step.title}
+            </h3>
+
+            <!-- Subtle Explore Prompt (Fades out when hovered) -->
+            <span class="text-[11px] font-semibold text-blue-200/80 group-hover:opacity-0 transition-opacity duration-300 flex items-center gap-1 mt-1">
+              <span>Hover to reveal</span>
+              <svg class="w-3 h-3 translate-y-0.5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </div>
+
+          <!-- Slide 2: Bottom Slide (Detailed Description, glides DOWN on hover) -->
+          <div class="codev-slide codev-slide2 relative rounded-3xl bg-white border border-slate-200/90 p-6 flex flex-col justify-between shadow-[0_10px_25px_rgba(15,39,74,0.06)] group-hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] min-h-[200px]">
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-center pt-2">
+              {step.description}
+            </p>
+
+            <!-- Bottom Indicator & Brand Accent Seam -->
+            <div class="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0C487A]">
+              <span>Step {step.number} of 04</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#FF3130] shadow-[0_0_8px_#FF3130]"></span>
+            </div>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ========================================================================= */
+  /* Codev Land Two-Layer Sliding Profile Card Hover Animation (Screenshot 4)  */
+  /* Slide 1 (Icon+Title) shifts up, Slide 2 (Description) shifts down         */
+  /* ========================================================================= */
+  .codev-slide-card {
+    position: relative;
+    width: 100%;
+    min-height: 410px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    perspective: 1000px;
+  }
+
+  .codev-slide {
+    width: 100%;
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                border-radius 0.4s ease;
+    will-change: transform;
+  }
+
+  /* Slide 1: Top Slide (Icon + Title, starts pushed down, slides up on hover) */
+  .codev-slide1 {
+    position: relative;
+    z-index: 2;
+    transform: translateY(96px);
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-radius 0.3s ease;
+  }
+
+  .codev-slide-card:hover .codev-slide1 {
+    transform: translateY(0px);
+    box-shadow: 0 10px 24px rgba(12, 72, 122, 0.18);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
+  /* Slide 2: Bottom Slide (Description, starts tucked up behind slide 1, slides down on hover) */
+  .codev-slide2 {
+    position: relative;
+    z-index: 1;
+    transform: translateY(-96px);
+    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-radius 0.3s ease;
+  }
+
+  .codev-slide-card:hover .codev-slide2 {
+    transform: translateY(0px);
+    box-shadow: 0 24px 50px -10px rgba(12, 72, 122, 0.22);
+    border-color: #cbd5e1;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  /* Bottom Red Accent Seam on Slide 2 */
+  .codev-slide2::after {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 3.5px;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #0C487A, #1E40AF, #FF3130);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  .codev-slide-card:hover .codev-slide2::after {
+    width: 64px;
+  }
+
+  /* Center-Aligned Continuous Radiant Color Shimmer Sweep */
+  .service-shimmer-center {
+    background: linear-gradient(
+      90deg,
+      #0F274A 0%,
+      #1E40AF 22%,
+      #2563EB 42%,
+      #DC2626 58%,
+      #EF4444 72%,
+      #0F274A 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    will-change: background-position;
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-bottom: 0.16em;
+    padding-top: 0.05em;
+    overflow: visible;
+  }
+
+  .service-shimmer-line-1 {
+    animation: servicePageShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes servicePageShimmer1 {
+    0% { background-position: 0% 50%; }
+    48% { background-position: 100% 50%; }
+    52% { background-position: 100% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-shimmer-center {
+      animation: none !important;
+      background: none !important;
+      -webkit-text-fill-color: #0F274A !important;
+      color: #0F274A !important;
+    }
+    .codev-slide1, .codev-slide2 {
+      transform: none !important;
+    }
+  }
+</style>

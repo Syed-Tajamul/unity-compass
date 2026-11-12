@@ -1,49 +1,30 @@
 ---
 /**
- * AnimatedCursor.astro - Ultra-Smooth Two-Tone Brand Logo Interactive Cursor
+ * AnimatedCursor.astro - Two-Tone Minimal Dual-Dot Cursor Follower
  * 
- * Brand Harmony & GovCon Aesthetics:
- * - Replaces the crosshair/compass reticle with a sleek, minimalist dual-color design:
- *   1. Outer Ring: 34px fluid follower with an ultra-clean dual-color brand gradient
- *      blending Unity Compass Navy Blue (#0C487A) and Federal Vibrant Red (#FF3130).
- *      Gentle continuous 360° rotation adds a hypnotic, high-tech elegance.
- *   2. Center Core Dot: Precision 5px micro-dot in vibrant brand red (#FF3130) with
- *      soft radiant ambient glow.
+ * Clean, modern two-dot trailing cursor:
+ * - Lead Dot: Precision 6px vibrant red dot (#FF3130) positioned at exact mouse pointer with 0 latency.
+ * - Follower Dot: Smooth 10px companion dot (#0C487A navy blue, semi-transparent 0.65 opacity)
+ *   that fluidly glides and curves behind the lead dot using 60/120fps hardware-accelerated LERP physics.
  * - Interactive States:
- *   - Hovering over buttons/links/cards: Ring expands smoothly to 52px, gains a soft
- *     translucent dual-brand aura, and the core dot scales gracefully.
- *   - Clicking: Tactile micro-elastic compression snap (scale 0.82).
- *   - Idle: Softens opacity after 3.5s of inactivity.
- * - Hardware Accelerated: requestAnimationFrame + translate3d for 60fps/120fps glide.
- * - Non-Intrusive: pointer-events: none on all elements guarantees zero interference.
- * - Auto-disabled on touch/mobile screens (@media (pointer: coarse)) and prefers-reduced-motion.
+ *   - Hovering over buttons/links/cards: Subtle gentle scale up and vibrant glow.
+ *   - Clicking: Tactile micro-compression snap.
+ *   - Idle: Softens opacity after inactivity.
+ * - Fully non-intrusive: pointer-events: none on all elements.
+ * - Touch & reduced-motion: Automatically disabled on mobile/touch screens and prefers-reduced-motion.
  */
 ---
 
 <div id="brand-cursor-wrap" class="brand-cursor-container" aria-hidden="true">
-  <!-- Outer Floating Dual-Color Brand Follower Ring -->
-  <div id="brand-cursor-ring" class="brand-cursor-ring">
-    <svg class="brand-cursor-svg w-full h-full" viewBox="0 0 44 44" fill="none">
-      <defs>
-        <linearGradient id="cursorTwoColorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#0C487A" />
-          <stop offset="48%" stop-color="#1E40AF" />
-          <stop offset="100%" stop-color="#FF3130" />
-        </linearGradient>
-      </defs>
-      <circle
-        class="brand-cursor-circle"
-        cx="22"
-        cy="22"
-        r="19"
-        stroke="url(#cursorTwoColorGrad)"
-        stroke-width="1.75"
-      />
-    </svg>
+  <!-- Follower Dot (Smoothly trails behind) -->
+  <div id="brand-cursor-follower" class="brand-cursor-follower">
+    <div class="brand-cursor-follower-dot"></div>
   </div>
 
-  <!-- Inner Center Precision Micro-Dot -->
-  <div id="brand-cursor-dot" class="brand-cursor-dot"></div>
+  <!-- Lead Precision Dot (0ms lag, pins to mouse) -->
+  <div id="brand-cursor-lead" class="brand-cursor-lead">
+    <div class="brand-cursor-lead-dot"></div>
+  </div>
 </div>
 
 <style>
@@ -59,104 +40,88 @@
   }
 
   /* -------------------------------------------------- */
-  /* Inner Center Micro-Dot                             */
+  /* Outer Translation Wrappers                         */
   /* -------------------------------------------------- */
-  .brand-cursor-dot {
+  .brand-cursor-lead,
+  .brand-cursor-follower {
     position: fixed;
     top: 0;
     left: 0;
+    pointer-events: none !important;
+    opacity: 0;
+    will-change: transform, opacity;
+    transition: opacity 0.25s ease;
+  }
+
+  .brand-cursor-lead {
+    z-index: 999999;
+  }
+
+  .brand-cursor-follower {
+    z-index: 999998;
+  }
+
+  /* -------------------------------------------------- */
+  /* Lead Dot: Precision 6px Vibrant Red Center Point   */
+  /* -------------------------------------------------- */
+  .brand-cursor-lead-dot {
     width: 6px;
     height: 6px;
     margin-top: -3px;
     margin-left: -3px;
     border-radius: 50%;
     background: #FF3130;
-    box-shadow: 0 0 8px rgba(255, 49, 48, 0.75), 0 0 2px rgba(255, 49, 48, 0.9);
+    box-shadow: 0 0 6px rgba(255, 49, 48, 0.75);
     pointer-events: none !important;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
-    will-change: transform, opacity;
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.18s ease;
+    will-change: transform;
   }
 
   /* -------------------------------------------------- */
-  /* Outer Dual-Color Smooth Brand Ring                 */
+  /* Follower Dot: 10px Navy Companion Trailing Behind  */
   /* -------------------------------------------------- */
-  .brand-cursor-ring {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 34px;
-    height: 34px;
-    margin-top: -17px;
-    margin-left: -17px;
+  .brand-cursor-follower-dot {
+    width: 10px;
+    height: 10px;
+    margin-top: -5px;
+    margin-left: -5px;
     border-radius: 50%;
+    background: #0C487A;
+    opacity: 0.65;
+    box-shadow: 0 0 8px rgba(12, 72, 122, 0.45);
     pointer-events: none !important;
-    opacity: 0;
-    transition: width 0.34s cubic-bezier(0.16, 1, 0.3, 1),
-                height 0.34s cubic-bezier(0.16, 1, 0.3, 1),
-                margin 0.34s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.3s ease,
-                background 0.3s ease,
-                filter 0.3s ease;
-    will-change: transform, opacity;
-  }
-
-  /* Smooth, hypnotic rotation of the dual-color gradient */
-  .brand-cursor-svg {
-    display: block;
-    animation: cursorSpin 6.5s linear infinite;
-    transform-origin: center center;
-    filter: drop-shadow(0 0 6px rgba(12, 72, 122, 0.25));
-    transition: filter 0.3s ease;
-  }
-
-  .brand-cursor-circle {
-    transition: stroke-width 0.3s ease;
-  }
-
-  @keyframes cursorSpin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.22s ease,
+                opacity 0.22s ease,
+                box-shadow 0.22s ease;
+    will-change: transform;
   }
 
   /* -------------------------------------------------- */
   /* Hover State (Over Interactive Elements)            */
   /* -------------------------------------------------- */
-  .brand-cursor-ring.is-hovering {
-    width: 50px;
-    height: 50px;
-    margin-top: -25px;
-    margin-left: -25px;
-    background: radial-gradient(circle, rgba(255, 49, 48, 0.08) 0%, rgba(12, 72, 122, 0.05) 55%, transparent 75%);
+  .brand-cursor-container.is-hovering .brand-cursor-lead-dot {
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(255, 49, 48, 0.95);
   }
 
-  .brand-cursor-ring.is-hovering .brand-cursor-svg {
-    filter: drop-shadow(0 0 10px rgba(255, 49, 48, 0.4)) drop-shadow(0 0 14px rgba(12, 72, 122, 0.25));
-  }
-
-  .brand-cursor-ring.is-hovering .brand-cursor-circle {
-    stroke-width: 2.2;
-  }
-
-  .brand-cursor-dot.is-hovering {
-    transform: scale(1.35);
-    box-shadow: 0 0 12px rgba(255, 49, 48, 0.9), 0 0 4px rgba(12, 72, 122, 0.8);
+  .brand-cursor-container.is-hovering .brand-cursor-follower-dot {
+    transform: scale(1.4);
+    background-color: #1E40AF;
+    opacity: 0.8;
+    box-shadow: 0 0 12px rgba(30, 64, 175, 0.6);
   }
 
   /* -------------------------------------------------- */
-  /* Click State (Tactile Compression Pulse)            */
+  /* Click State (Tactile Compression Snap)             */
   /* -------------------------------------------------- */
-  .brand-cursor-ring.is-clicking {
-    transform: scale(0.8) !important;
-    transition: transform 0.12s ease-out;
+  .brand-cursor-container.is-clicking .brand-cursor-lead-dot {
+    transform: scale(0.65);
   }
 
-  .brand-cursor-dot.is-clicking {
-    transform: scale(0.65) !important;
+  .brand-cursor-container.is-clicking .brand-cursor-follower-dot {
+    transform: scale(0.6);
   }
 
   /* -------------------------------------------------- */
@@ -172,19 +137,16 @@
     .brand-cursor-container {
       display: none !important;
     }
-    .brand-cursor-svg {
-      animation: none !important;
-    }
   }
 </style>
 
 <script>
   function initBrandCursor() {
     const wrap = document.getElementById('brand-cursor-wrap');
-    const ring = document.getElementById('brand-cursor-ring');
-    const dot = document.getElementById('brand-cursor-dot');
+    const lead = document.getElementById('brand-cursor-lead');
+    const follower = document.getElementById('brand-cursor-follower');
 
-    if (!wrap || !ring || !dot) return;
+    if (!wrap || !lead || !follower) return;
 
     // Disable if touch screen or reduced motion
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
@@ -193,16 +155,16 @@
 
     let mouseX = -100;
     let mouseY = -100;
-    let ringX = -100;
-    let ringY = -100;
+    let followerX = -100;
+    let followerY = -100;
     let isVisible = false;
     let isHovering = false;
     let isClicking = false;
     let animId: number | null = null;
     let idleTimeout: ReturnType<typeof setTimeout> | null = null;
 
-    // Fluid damping factor (0.16 produces butter-smooth, weightless follow)
-    const LERP = 0.16;
+    // Smooth fluid damping factor for follower dot
+    const LERP = 0.18;
 
     // 1. Mouse Movement Tracker
     function onMouseMove(e: MouseEvent) {
@@ -211,32 +173,34 @@
 
       if (!isVisible) {
         isVisible = true;
-        ring.style.opacity = '1';
-        dot.style.opacity = '1';
-        ringX = mouseX;
-        ringY = mouseY;
+        lead.style.opacity = '1';
+        follower.style.opacity = '1';
+        followerX = mouseX;
+        followerY = mouseY;
       }
 
-      // Center dot follows 1:1 with 0ms lag
-      dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+      // Lead dot follows 1:1 with 0ms lag
+      lead.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
 
       // Reset idle fade-out
       if (idleTimeout) clearTimeout(idleTimeout);
+      lead.style.opacity = '1';
+      follower.style.opacity = '1';
       idleTimeout = setTimeout(() => {
         if (!isHovering) {
-          ring.style.opacity = '0.35';
+          lead.style.opacity = '0.4';
+          follower.style.opacity = '0.3';
         }
       }, 3500);
     }
 
-    // 2. Continuous 60fps/120fps Ring Damping Loop
+    // 2. Continuous 60fps/120fps Follower Damping Loop
     function render() {
       if (isVisible) {
-        ringX += (mouseX - ringX) * LERP;
-        ringY += (mouseY - ringY) * LERP;
+        followerX += (mouseX - followerX) * LERP;
+        followerY += (mouseY - followerY) * LERP;
 
-        const scale = isClicking ? ' scale(0.8)' : '';
-        ring.style.transform = `translate3d(${ringX.toFixed(2)}px, ${ringY.toFixed(2)}px, 0)${scale}`;
+        follower.style.transform = `translate3d(${followerX.toFixed(2)}px, ${followerY.toFixed(2)}px, 0)`;
       }
 
       animId = requestAnimationFrame(render);
@@ -247,7 +211,7 @@
       if (!target) return false;
       return Boolean(
         target.closest(
-          'a, button, input, textarea, select, [role="button"], [role="tab"], .cursor-pointer, [data-interactive], summary, .square-slide-card, .shuttle-card, .why-card-spotlight'
+          'a, button, input, textarea, select, [role="button"], [role="tab"], .cursor-pointer, [data-interactive], summary, .square-slide-card, .shuttle-card, .why-card-spotlight, .blog-post-card'
         )
       );
     }
@@ -257,15 +221,12 @@
       if (checkInteractive(target)) {
         if (!isHovering) {
           isHovering = true;
-          ring.classList.add('is-hovering');
-          dot.classList.add('is-hovering');
-          ring.style.opacity = '1';
+          wrap.classList.add('is-hovering');
         }
       } else {
         if (isHovering) {
           isHovering = false;
-          ring.classList.remove('is-hovering');
-          dot.classList.remove('is-hovering');
+          wrap.classList.remove('is-hovering');
         }
       }
     }
@@ -273,27 +234,25 @@
     // 4. Click Micro-Interactions
     function onMouseDown() {
       isClicking = true;
-      ring.classList.add('is-clicking');
-      dot.classList.add('is-clicking');
+      wrap.classList.add('is-clicking');
     }
 
     function onMouseUp() {
       isClicking = false;
-      ring.classList.remove('is-clicking');
-      dot.classList.remove('is-clicking');
+      wrap.classList.remove('is-clicking');
     }
 
     // 5. Window Enter / Leave
     function onMouseLeave() {
       isVisible = false;
-      ring.style.opacity = '0';
-      dot.style.opacity = '0';
+      lead.style.opacity = '0';
+      follower.style.opacity = '0';
     }
 
     function onMouseEnter() {
       isVisible = true;
-      ring.style.opacity = '1';
-      dot.style.opacity = '1';
+      lead.style.opacity = '1';
+      follower.style.opacity = '1';
     }
 
     // Attach listeners

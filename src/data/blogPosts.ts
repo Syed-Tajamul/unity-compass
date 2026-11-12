@@ -1,6 +1,8 @@
 export interface ContentBlock {
   tag: string;
-  text: string;
+  text?: string;
+  image?: string;
+  caption?: string;
 }
 
 export interface BlogPost {
@@ -12,7 +14,10 @@ export interface BlogPost {
   category: string;
   excerpt: string;
   image: string;
+  galleryImages?: string[];
+  relatedSlugs?: string[];
   contentBlocks: ContentBlock[];
+  metadata?: Record<string, any>;
 }
 
 export const blogPosts: BlogPost[] = [
