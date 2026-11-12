@@ -76,28 +76,72 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
         />
       </div>
 
-      <!-- Employment Type Filter (takes 3 cols on md) -->
-      <div class="md:col-span-3">
-        <select
-          id="job-type-filter"
-          class="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
+      <!-- Custom Employment Type Dropdown (takes 3 cols on md) -->
+      <div class="md:col-span-3 relative custom-dropdown-wrap" data-dropdown-id="type">
+        <button
+          type="button"
+          class="custom-dropdown-btn w-full px-4 py-3 text-xs sm:text-sm rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] transition-all flex items-center justify-between font-semibold shadow-xs cursor-pointer group"
+          aria-haspopup="listbox"
+          aria-expanded="false"
         >
-          {employmentTypes.map((type) => (
-            <option value={type === 'All Employment Types' ? '' : type}>{type}</option>
-          ))}
-        </select>
+          <span class="custom-dropdown-label truncate">All Employment Types</span>
+          <svg class="w-4 h-4 text-slate-400 group-hover:text-[#FF3130] transition-transform duration-300 transform shrink-0 ml-1.5 custom-dropdown-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <input type="hidden" id="job-type-filter" value="" />
+
+        <!-- Floating Styled Menu Panel -->
+        <div class="custom-dropdown-menu hidden absolute left-0 top-full mt-2 w-full rounded-2xl bg-white p-2 shadow-[0_20px_45px_-10px_rgba(15,39,74,0.18),0_0_0_1px_rgba(15,39,74,0.08)] border border-slate-200 z-50 transition-all duration-200">
+          <div class="space-y-0.5" role="listbox">
+            {employmentTypes.map((type, i) => (
+              <button
+                type="button"
+                class={`dropdown-opt w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-[#0B2553] hover:text-[#FF3130] hover:bg-slate-50 flex items-center justify-between transition-colors cursor-pointer ${i === 0 ? 'bg-slate-50 text-[#FF3130]' : ''}`}
+                data-value={type === 'All Employment Types' ? '' : type}
+                data-label={type}
+              >
+                <span>{type}</span>
+                <span class={`opt-check text-xs text-[#FF3130] font-bold ${i === 0 ? 'opacity-100' : 'opacity-0'}`}>✓</span>
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <!-- Workplace Model Filter & Count (takes 3 cols on md) -->
+      <!-- Custom Workplace Model Dropdown & Count (takes 3 cols on md) -->
       <div class="md:col-span-3 flex items-center gap-3">
-        <select
-          id="job-workplace-filter"
-          class="w-full px-4 py-3 text-xs sm:text-sm rounded-2xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
-        >
-          {workplaceTypes.map((model) => (
-            <option value={model === 'All Workplace Models' ? '' : model}>{model}</option>
-          ))}
-        </select>
+        <div class="relative w-full custom-dropdown-wrap" data-dropdown-id="workplace">
+          <button
+            type="button"
+            class="custom-dropdown-btn w-full px-4 py-3 text-xs sm:text-sm rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] transition-all flex items-center justify-between font-semibold shadow-xs cursor-pointer group"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+          >
+            <span class="custom-dropdown-label truncate">All Workplace Models</span>
+            <svg class="w-4 h-4 text-slate-400 group-hover:text-[#FF3130] transition-transform duration-300 transform shrink-0 ml-1.5 custom-dropdown-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <input type="hidden" id="job-workplace-filter" value="" />
+
+          <!-- Floating Styled Menu Panel -->
+          <div class="custom-dropdown-menu hidden absolute left-0 top-full mt-2 w-full rounded-2xl bg-white p-2 shadow-[0_20px_45px_-10px_rgba(15,39,74,0.18),0_0_0_1px_rgba(15,39,74,0.08)] border border-slate-200 z-50 transition-all duration-200">
+            <div class="space-y-0.5" role="listbox">
+              {workplaceTypes.map((model, i) => (
+                <button
+                  type="button"
+                  class={`dropdown-opt w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-[#0B2553] hover:text-[#FF3130] hover:bg-slate-50 flex items-center justify-between transition-colors cursor-pointer ${i === 0 ? 'bg-slate-50 text-[#FF3130]' : ''}`}
+                  data-value={model === 'All Workplace Models' ? '' : model}
+                  data-label={model}
+                >
+                  <span>{model}</span>
+                  <span class={`opt-check text-xs text-[#FF3130] font-bold ${i === 0 ? 'opacity-100' : 'opacity-0'}`}>✓</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
 
         <span class="text-xs font-semibold text-slate-500 whitespace-nowrap pl-1 shrink-0">
           <span id="job-results-count" class="font-extrabold text-[#0B2553]">{jobPositions.length}</span> Openings
@@ -116,7 +160,8 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
 
       return (
         <article
-          class="job-card group relative rounded-3xl bg-white border border-slate-200/90 p-7 sm:p-9 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.12)] transition-all duration-300 overflow-hidden"
+          class="job-card career-reveal group relative rounded-3xl bg-white border border-slate-200/90 p-7 sm:p-9 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.12)] transition-all duration-300 overflow-hidden"
+          style={`transition-delay: ${idx * 140}ms;`}
           data-title={job.title.toLowerCase()}
           data-department={job.department.toLowerCase()}
           data-type={job.employmentType}
@@ -405,6 +450,7 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
     const selectedWorkplace = workplaceFilter?.value || '';
 
     let visibleCount = 0;
+    let visibleIndex = 0;
 
     jobCards.forEach((card) => {
       const title = card.getAttribute('data-title') || '';
@@ -419,6 +465,9 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
 
       if (matchesSearch && matchesType && matchesWorkplace) {
         card.style.display = 'block';
+        card.style.transitionDelay = `${visibleIndex * 90}ms`;
+        card.classList.add('is-visible');
+        visibleIndex++;
         visibleCount++;
       } else {
         card.style.display = 'none';
@@ -439,8 +488,124 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
     if (searchInput) searchInput.value = '';
     if (typeFilter) typeFilter.value = '';
     if (workplaceFilter) workplaceFilter.value = '';
+    
+    // Reset custom dropdown labels & checks
+    const typeWrap = document.querySelector('[data-dropdown-id="type"]');
+    if (typeWrap) {
+      const lbl = typeWrap.querySelector('.custom-dropdown-label');
+      if (lbl) lbl.textContent = 'All Employment Types';
+      typeWrap.querySelectorAll('.dropdown-opt').forEach((o, i) => {
+        if (i === 0) {
+          o.classList.add('bg-slate-50', 'text-[#FF3130]');
+          o.querySelector('.opt-check')?.classList.replace('opacity-0', 'opacity-100');
+        } else {
+          o.classList.remove('bg-slate-50', 'text-[#FF3130]');
+          o.querySelector('.opt-check')?.classList.replace('opacity-100', 'opacity-0');
+        }
+      });
+    }
+
+    const wpWrap = document.querySelector('[data-dropdown-id="workplace"]');
+    if (wpWrap) {
+      const lbl = wpWrap.querySelector('.custom-dropdown-label');
+      if (lbl) lbl.textContent = 'All Workplace Models';
+      wpWrap.querySelectorAll('.dropdown-opt').forEach((o, i) => {
+        if (i === 0) {
+          o.classList.add('bg-slate-50', 'text-[#FF3130]');
+          o.querySelector('.opt-check')?.classList.replace('opacity-0', 'opacity-100');
+        } else {
+          o.classList.remove('bg-slate-50', 'text-[#FF3130]');
+          o.querySelector('.opt-check')?.classList.replace('opacity-100', 'opacity-0');
+        }
+      });
+    }
+
     applyFilters();
   }
+
+  // Custom Dropdown Interactive Behavior
+  document.querySelectorAll<HTMLElement>('.custom-dropdown-wrap').forEach((wrap) => {
+    const btn = wrap.querySelector<HTMLButtonElement>('.custom-dropdown-btn');
+    const menu = wrap.querySelector<HTMLElement>('.custom-dropdown-menu');
+    const chevron = wrap.querySelector<HTMLElement>('.custom-dropdown-chevron');
+    const label = wrap.querySelector<HTMLElement>('.custom-dropdown-label');
+    const hiddenInput = wrap.querySelector<HTMLInputElement>('input[type="hidden"]');
+    const options = wrap.querySelectorAll<HTMLButtonElement>('.dropdown-opt');
+
+    btn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+      // Close all other open dropdowns
+      document.querySelectorAll('.custom-dropdown-menu').forEach((m) => {
+        if (m !== menu) m.classList.add('hidden');
+      });
+      document.querySelectorAll('.custom-dropdown-btn').forEach((b) => {
+        if (b !== btn) {
+          b.setAttribute('aria-expanded', 'false');
+          b.querySelector('.custom-dropdown-chevron')?.classList.remove('rotate-180');
+        }
+      });
+
+      if (isExpanded) {
+        btn.setAttribute('aria-expanded', 'false');
+        menu?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+      } else {
+        btn.setAttribute('aria-expanded', 'true');
+        menu?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+      }
+    });
+
+    options.forEach((opt) => {
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const val = opt.getAttribute('data-value') || '';
+        const optLabel = opt.getAttribute('data-label') || '';
+
+        if (hiddenInput) hiddenInput.value = val;
+        if (label) label.textContent = optLabel;
+
+        options.forEach((o) => {
+          o.classList.remove('bg-slate-50', 'text-[#FF3130]');
+          const chk = o.querySelector('.opt-check');
+          chk?.classList.remove('opacity-100');
+          chk?.classList.add('opacity-0');
+        });
+
+        opt.classList.add('bg-slate-50', 'text-[#FF3130]');
+        const activeChk = opt.querySelector('.opt-check');
+        activeChk?.classList.remove('opacity-0');
+        activeChk?.classList.add('opacity-100');
+
+        btn?.setAttribute('aria-expanded', 'false');
+        menu?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+
+        applyFilters();
+      });
+    });
+  });
+
+  // Close dropdowns on click outside or escape key
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.custom-dropdown-menu').forEach((m) => m.classList.add('hidden'));
+    document.querySelectorAll('.custom-dropdown-btn').forEach((b) => {
+      b.setAttribute('aria-expanded', 'false');
+      b.querySelector('.custom-dropdown-chevron')?.classList.remove('rotate-180');
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.custom-dropdown-menu').forEach((m) => m.classList.add('hidden'));
+      document.querySelectorAll('.custom-dropdown-btn').forEach((b) => {
+        b.setAttribute('aria-expanded', 'false');
+        b.querySelector('.custom-dropdown-chevron')?.classList.remove('rotate-180');
+      });
+    }
+  });
 
   searchInput?.addEventListener('input', applyFilters);
   typeFilter?.addEventListener('change', applyFilters);
