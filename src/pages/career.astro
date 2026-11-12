@@ -1,18 +1,18 @@
 ---
 /**
- * career.astro - Executive GovCon & Cleared Talent Placement Hub
+ * career.astro - Executive GovCon & Cleared Career Portal
  * 
- * Fully harmonized with Unity Compass Design System:
- * - Sky blueprint canvas (#F4F8FC via #EBF3FA to #DFEDF8) with technical 16px checks
- * - Pure CSS WaveDivider transition leading into the interactive Job Board
- * - 3 Prominent Cleared Placement Advantage Cards with dashed spinning accent rings
- * - Interactive JobBoard component connected dynamically to Supabase
- * - Fluid scroll-reveal animations matching Home and Services pages
+ * Harmonized with Unity Compass Design System:
+ * - Clean, focused Hero with technical blueprint grid and ambient radial glow
+ * - Explore Open Opportunities section with uncluttered, spacious job listings
+ * - Full visibility for Key Responsibilities & Required Qualifications
+ * - Dedicated Hiring Process Section (5 Milestones matching client spec)
+ * - Pure CSS WaveDivider transitions
  */
 import MainLayout from '../layouts/MainLayout.astro';
 import JobBoard from '../components/JobBoard.astro';
+import HiringProcess from '../components/HiringProcess.astro';
 import WaveDivider from '../components/WaveDivider.astro';
-import { companyInfo } from '../data/company';
 ---
 
 <MainLayout
@@ -20,9 +20,9 @@ import { companyInfo } from '../data/company';
   description="Explore active cleared and non-cleared career opportunities in federal contracting, IT systems architecture, defense engineering, and proposal development with Unity Compass."
 >
   <!-- ========================================================================= -->
-  <!-- SECTION 1: HERO & CLEARED ADVANTAGE CARDS                                 -->
+  <!-- SECTION 1: CLEAN, FOCUSED EXECUTIVE HERO                                  -->
   <!-- ========================================================================= -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] pt-16 sm:pt-20 lg:pt-24 pb-28 sm:pb-36 lg:pb-40" aria-labelledby="career-hero-heading">
+  <section class="relative overflow-hidden bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] pt-16 sm:pt-20 lg:pt-24 pb-24 sm:pb-32 lg:pb-36" aria-labelledby="career-hero-heading">
     <!-- Technical Blueprint Check Pattern -->
     <div
       class="absolute inset-0 opacity-[0.24] mix-blend-multiply pointer-events-none"
@@ -34,149 +34,53 @@ import { companyInfo } from '../data/company';
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(12,72,122,0.11)_0%,rgba(30,64,175,0.05)_45%,transparent_70%)] rounded-full blur-3xl pointer-events-none -z-10" aria-hidden="true"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-      <!-- Header Area -->
       <div class="text-center max-w-3xl mx-auto">
-        <!-- Eyebrow Pill -->
-        <span class="scroll-reveal inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-[#FF3130]/10 text-[#FF3130] border border-[#FF3130]/20 mb-4">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#FF3130] animate-pulse"></span>
-          Talent Acquisition & GovCon Careers
-        </span>
-
         <!-- Headline -->
         <h1
           id="career-hero-heading"
-          class="scroll-reveal delay-100 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0B2553] leading-[1.16]"
+          class="scroll-reveal text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0B2553] leading-[1.16]"
         >
           Empowering Mission-Critical <span class="text-[#FF3130]">Careers</span>
         </h1>
 
         <!-- Subtitle -->
-        <p class="scroll-reveal delay-150 mt-4 text-base sm:text-lg text-[#243A5E] leading-[1.75] max-w-2xl mx-auto font-normal">
+        <p class="scroll-reveal delay-100 mt-4 text-base sm:text-lg text-[#243A5E] leading-[1.75] max-w-2xl mx-auto font-normal">
           Direct permanent, contract, and cleared placements across federal defense, intelligence, and civilian agencies. Find your next leadership, technical, or proposal mission.
         </p>
       </div>
-
-      <!-- 3 Prominent Talent Advantage Cards -->
-      <div class="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
-        
-        <!-- CARD 1: CLEARED SPECIALIZATION -->
-        <div class="scroll-reveal delay-200 group relative rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
-          <div class="absolute top-0 inset-x-0 h-1.5 bg-[#FF3130]"></div>
-
-          <div class="text-center">
-            <div class="relative w-16 h-16 mx-auto flex items-center justify-center mb-5">
-              <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#FF3130]/35 animate-[spin_20s_linear_infinite]"></div>
-              <div class="w-12 h-12 rounded-full bg-red-50 text-[#FF3130] flex items-center justify-center group-hover:scale-105 transition-transform">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-            </div>
-
-            <h3 class="text-xl font-bold text-[#0B2553] tracking-tight">
-              Cleared & Sensitive Roles
-            </h3>
-
-            <p class="text-xs sm:text-sm text-[#243A5E] mt-3 leading-relaxed">
-              Confidential placements requiring TS/SCI with Full-Scope Polygraph, Top Secret, Secret, and DHS Public Trust credentials.
-            </p>
-          </div>
-
-          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-center gap-2 text-xs font-semibold text-[#0C487A]">
-            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-            Active DoD & IC Solicitations
-          </div>
-        </div>
-
-        <!-- CARD 2: DIRECT PRIME RELATIONSHIPS -->
-        <div class="scroll-reveal delay-250 group relative rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
-          <div class="absolute top-0 inset-x-0 h-1.5 bg-[#0B2553]"></div>
-
-          <div class="text-center">
-            <div class="relative w-16 h-16 mx-auto flex items-center justify-center mb-5">
-              <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#0B2553]/35 animate-[spin_20s_linear_infinite]"></div>
-              <div class="w-12 h-12 rounded-full bg-blue-50 text-[#0B2553] flex items-center justify-center group-hover:scale-105 transition-transform">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-              </div>
-            </div>
-
-            <h3 class="text-xl font-bold text-[#0B2553] tracking-tight">
-              Federal Primes & Agency Teams
-            </h3>
-
-            <p class="text-xs sm:text-sm text-[#243A5E] mt-3 leading-relaxed">
-              Direct access to established prime contractors, OASIS+ holders, and major programs across defense and civilian domains.
-            </p>
-          </div>
-
-          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-center gap-2 text-xs font-semibold text-[#0C487A]">
-            <span class="inline-block w-2 h-2 rounded-full bg-blue-500"></span>
-            Prime & Subcontracting Tracks
-          </div>
-        </div>
-
-        <!-- CARD 3: CANDIDATE CONCIERGE -->
-        <div class="scroll-reveal delay-300 group relative rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
-          <div class="absolute top-0 inset-x-0 h-1.5 bg-[#EE8522]"></div>
-
-          <div class="text-center">
-            <div class="relative w-16 h-16 mx-auto flex items-center justify-center mb-5">
-              <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#EE8522]/35 animate-[spin_20s_linear_infinite]"></div>
-              <div class="w-12 h-12 rounded-full bg-amber-50 text-[#EE8522] flex items-center justify-center group-hover:scale-105 transition-transform">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-            </div>
-
-            <h3 class="text-xl font-bold text-[#0B2553] tracking-tight">
-              Confidential 48-Hour Review
-            </h3>
-
-            <p class="text-xs sm:text-sm text-[#243A5E] mt-3 leading-relaxed">
-              Every applicant receives dedicated recruiter review with complete discretion. We match candidate skills with funded requisitions.
-            </p>
-          </div>
-
-          <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-center gap-2 text-xs font-semibold text-[#0C487A]">
-            <span class="inline-block w-2 h-2 rounded-full bg-[#EE8522]"></span>
-            Direct Talent Partner Support
-          </div>
-        </div>
-
-      </div>
     </div>
 
-    <!-- Pure CSS SVG Wave Section Divider Leading into Job Board -->
+    <!-- Pure CSS SVG Wave Section Divider Leading into Opportunities -->
     <WaveDivider variant="wave" position="bottom" fillColor="#ffffff" />
   </section>
 
   <!-- ========================================================================= -->
-  <!-- SECTION 2: INTERACTIVE JOB BOARD SECTION                                  -->
+  <!-- SECTION 2: EXPLORE OPEN OPPORTUNITIES (Uncluttered, Highly Readable)      -->
   <!-- ========================================================================= -->
   <section class="relative bg-white py-16 sm:py-24" aria-label="Open Positions">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Section Heading with Red Micro-Badge -->
+      <!-- Section Heading (Clean & Simple) -->
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-        <span class="scroll-reveal inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-[#FF3130]/10 text-[#FF3130] border border-[#FF3130]/20 mb-3">
-          Current Requisitions
-        </span>
-        <h2 class="scroll-reveal delay-100 text-3xl sm:text-4xl font-extrabold text-[#0B2553] tracking-tight">
+        <h2 class="scroll-reveal text-3xl sm:text-4xl font-extrabold text-[#0B2553] tracking-tight">
           Explore Open <span class="text-[#FF3130]">Opportunities</span>
         </h2>
-        <p class="scroll-reveal delay-150 text-sm sm:text-base text-[#243A5E] mt-3">
+        <p class="scroll-reveal delay-100 text-sm sm:text-base text-[#243A5E] mt-3 font-normal">
           Filter positions by department, workplace model, and security clearance requirement.
         </p>
       </div>
 
-      <!-- Live Job Board Component (Supabase-powered) -->
-      <div class="scroll-reveal delay-200">
+      <!-- Live Job Board Component (Spacious, Complete Responsibilities & Requirements) -->
+      <div class="scroll-reveal delay-150">
         <JobBoard />
       </div>
 
     </div>
   </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 3: HIRING PROCESS WORKFLOW                                        -->
+  <!-- ========================================================================= -->
+  <HiringProcess />
+
 </MainLayout>

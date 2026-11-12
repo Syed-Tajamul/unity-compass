@@ -2,11 +2,11 @@
 /**
  * JobBoard.astro - Executive GovCon Career & Job Board Component
  * 
- * Harmonized with Unity Compass Design System:
- * - Signature card elevations with top accent stripe (#FF3130 or #0B2553)
- * - GovCon clearance color coding (TS/SCI Poly, Top Secret, Secret, Public Trust)
- * - Quick filter tags & real-time search with smooth transitions
- * - Executive Application Modal with Drag & Drop resume upload to Supabase Storage
+ * Redesigned for Maximum Readability & Clarity:
+ * - Solves clutter by presenting spacious, structured positions with full visibility
+ * - Explicit Key Responsibilities & Required Qualifications (no truncated text)
+ * - Simplified, elegant search & filter bar with department quick-filter pills
+ * - Integrated Application Modal with Drag & Drop resume upload directly to Supabase Storage
  */
 import { jobPositions as fallbackPositions, type JobPosition } from '../data/jobs';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
@@ -40,196 +40,266 @@ if (isSupabaseConfigured && supabase) {
     console.error('Failed to load jobs from Supabase, using local fallback:', err);
   }
 }
+
+// Extract unique departments for filter pills
+const departments = ['All Roles', ...Array.from(new Set(jobPositions.map((j) => j.department)))];
 ---
 
-<div class="space-y-8" id="career-job-board">
+<div class="space-y-10" id="career-job-board">
   
   <!-- ========================================================================= -->
-  <!-- CONTROLS: SEARCH & MULTI-FILTER BAR                                      -->
+  <!-- SIMPLIFIED, INTUITIVE SEARCH & FILTER CONTROLS BAR (as requested in ss3)  -->
   <!-- ========================================================================= -->
-  <div class="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-7 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] relative overflow-hidden">
-    <!-- Subtle Top Red Line -->
-    <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#0B2553] via-[#FF3130] to-[#0B2553]"></div>
+  <div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] relative overflow-hidden">
+    <!-- Subtle Top Red Accent Line -->
+    <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#0B2553] via-[#FF3130] to-[#0B2553]"></div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
-      
-      <!-- Search Input -->
-      <div class="relative">
-        <svg class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <input
-          type="text"
-          id="job-search-input"
-          placeholder="Search roles or clearance..."
-          class="w-full pl-11 pr-4 py-2.5 text-sm rounded-xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400"
-        />
-      </div>
+    <div class="space-y-5">
+      <!-- Search & Main Selects Row -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+        
+        <!-- Search Input -->
+        <div class="md:col-span-6 relative">
+          <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            type="text"
+            id="job-search-input"
+            placeholder="Search roles by title, clearance, or skills (e.g. AWS, TS/SCI, Shipley)..."
+            class="w-full pl-12 pr-4 py-3 text-sm rounded-2xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400"
+          />
+        </div>
 
-      <!-- Department Filter -->
-      <div>
-        <select
-          id="job-dept-filter"
-          class="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer"
-        >
-          <option value="">All Departments</option>
-          <option value="Proposal & Capture">Proposal & Capture</option>
-          <option value="Recruitment & Talent">Recruitment & Talent</option>
-          <option value="IT & Consulting">IT & Consulting</option>
-          <option value="Engineering & Defense">Engineering & Defense</option>
-          <option value="Operations">Operations</option>
-        </select>
-      </div>
-
-      <!-- Clearance Filter -->
-      <div>
-        <select
-          id="job-clearance-filter"
-          class="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer"
-        >
-          <option value="">All Clearance Levels</option>
-          <option value="TS/SCI with Polygraph">TS/SCI with Polygraph</option>
-          <option value="Top Secret / SCI">Top Secret / SCI</option>
-          <option value="Secret">Secret</option>
-          <option value="Public Trust">Public Trust</option>
-          <option value="None">Non-Cleared</option>
-        </select>
-      </div>
-
-      <!-- View Switcher & Counter -->
-      <div class="flex items-center justify-between sm:justify-end gap-3">
-        <span class="text-xs font-semibold text-slate-500">
-          <span id="job-results-count" class="font-extrabold text-[#0B2553]">{jobPositions.length}</span> Roles
-        </span>
-        <div class="inline-flex rounded-xl border border-slate-200 p-1 bg-slate-100/70">
-          <button
-            type="button"
-            id="view-grid-btn"
-            class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-[#0B2553] shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
-            aria-label="Grid View"
+        <!-- Clearance Filter Dropdown -->
+        <div class="md:col-span-3">
+          <select
+            id="job-clearance-filter"
+            class="w-full px-4 py-3 text-sm rounded-2xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
           >
-            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-            </svg>
-            <span>Grid</span>
-          </button>
-          <button
-            type="button"
-            id="view-list-btn"
-            class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-[#0B2553] flex items-center gap-1.5 transition-all cursor-pointer"
-            aria-label="List View"
+            <option value="">All Security Clearances</option>
+            <option value="TS/SCI with Polygraph">TS/SCI with Polygraph</option>
+            <option value="Top Secret / SCI">Top Secret / SCI</option>
+            <option value="Secret">Secret</option>
+            <option value="Public Trust">Public Trust</option>
+            <option value="None">Non-Cleared</option>
+          </select>
+        </div>
+
+        <!-- Workplace Filter Dropdown -->
+        <div class="md:col-span-3">
+          <select
+            id="job-workplace-filter"
+            class="w-full px-4 py-3 text-sm rounded-2xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all cursor-pointer font-medium"
           >
-            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <span>List</span>
-          </button>
+            <option value="">All Workplace Models</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Remote">Remote</option>
+            <option value="On-site">On-site</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Quick Department Category Pills -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-1 hidden sm:inline">Department:</span>
+          {departments.map((dept, idx) => (
+            <button
+              type="button"
+              class={`job-dept-pill px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                idx === 0
+                  ? 'active bg-[#0B2553] text-white shadow-xs'
+                  : 'bg-slate-100 text-[#243A5E] hover:bg-slate-200/80'
+              }`}
+              data-dept={dept === 'All Roles' ? '' : dept}
+            >
+              {dept}
+            </button>
+          ))}
+        </div>
+
+        <!-- Live Positions Counter -->
+        <div class="text-xs font-semibold text-slate-500 shrink-0">
+          Showing <span id="job-results-count" class="font-extrabold text-[#0B2553]">{jobPositions.length}</span> open positions
         </div>
       </div>
     </div>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- JOBS CONTAINER (Grid mode by default)                                     -->
+  <!-- HIGHLY READABLE & UNCLUTTERED JOB CARDS CONTAINER                         -->
   <!-- ========================================================================= -->
-  <div id="jobs-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-300">
+  <div id="jobs-container" class="space-y-8">
     {jobPositions.map((job, idx) => {
       const isRedAccent = idx % 2 === 0;
+      
       return (
-        <div
-          class="job-card group relative rounded-3xl bg-white border border-slate-200/90 p-7 sm:p-8 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.14)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+        <article
+          class="job-card group relative rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-10 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.12)] transition-all duration-300 overflow-hidden"
           data-title={job.title.toLowerCase()}
           data-department={job.department.toLowerCase()}
           data-type={job.employmentType}
           data-clearance={job.clearanceLevel}
           data-workplace={job.workplaceType}
         >
-          <!-- Top Brand Accent Stripe -->
+          <!-- Top Accent Stripe -->
           <div class={`absolute top-0 inset-x-0 h-1.5 ${isRedAccent ? 'bg-[#FF3130]' : 'bg-[#0B2553]'}`}></div>
 
-          <div>
-            <!-- Clearance & Workplace Badges -->
-            <div class="flex flex-wrap items-center gap-2 mb-4">
-              <span class={`text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${
-                job.clearanceLevel.includes('Poly')
-                  ? 'bg-red-50 text-[#FF3130] border-red-200/80'
-                  : job.clearanceLevel.includes('Top Secret')
-                  ? 'bg-blue-50 text-[#0B2553] border-blue-200/80'
-                  : job.clearanceLevel.includes('Secret')
-                  ? 'bg-amber-50 text-amber-900 border-amber-200/80'
-                  : job.clearanceLevel.includes('Trust')
-                  ? 'bg-emerald-50 text-emerald-900 border-emerald-200/80'
-                  : 'bg-slate-100 text-slate-700 border-slate-200'
-              }`}>
-                {job.clearanceLevel}
-              </span>
-              <span class="text-[11px] font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-                {job.employmentType}
-              </span>
-              <span class="text-[11px] font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-                {job.workplaceType}
-              </span>
+          <!-- 1. Header Bar: Title, Metadata Tags, and Quick Apply Button -->
+          <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-slate-100">
+            <div class="space-y-3 max-w-3xl">
+              
+              <!-- Badges Row -->
+              <div class="flex flex-wrap items-center gap-2">
+                <!-- Clearance Level -->
+                <span class={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${
+                  job.clearanceLevel.includes('Poly')
+                    ? 'bg-red-50 text-[#FF3130] border-red-200/80'
+                    : job.clearanceLevel.includes('Top Secret')
+                    ? 'bg-blue-50 text-[#0B2553] border-blue-200/80'
+                    : job.clearanceLevel.includes('Secret')
+                    ? 'bg-amber-50 text-amber-900 border-amber-200/80'
+                    : job.clearanceLevel.includes('Trust')
+                    ? 'bg-emerald-50 text-emerald-900 border-emerald-200/80'
+                    : 'bg-slate-100 text-slate-700 border-slate-200'
+                }`}>
+                  {job.clearanceLevel}
+                </span>
+
+                <!-- Employment & Workplace -->
+                <span class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200/70">
+                  {job.employmentType}
+                </span>
+                <span class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200/70">
+                  {job.workplaceType}
+                </span>
+              </div>
+
+              <!-- Job Title -->
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-[#0B2553] tracking-tight group-hover:text-[#0C487A] transition-colors leading-tight">
+                {job.title}
+              </h3>
+
+              <!-- Department and Location Info -->
+              <div class="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-500">
+                <span class="flex items-center gap-1.5 text-[#0C487A]">
+                  <svg class="w-4 h-4 text-[#EE8522]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                  {job.department}
+                </span>
+                <span>•</span>
+                <span class="flex items-center gap-1.5 text-slate-600">
+                  <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  {job.location}
+                </span>
+                <span>•</span>
+                <span class="text-slate-400">
+                  Posted {job.postedDate}
+                </span>
+              </div>
             </div>
 
-            <!-- Title -->
-            <h3 class="text-xl font-bold text-[#0B2553] tracking-tight leading-snug group-hover:text-[#0C487A] transition-colors">
-              {job.title}
-            </h3>
-
-            <!-- Department & Location with Micro-Icons -->
-            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mt-2">
-              <span class="flex items-center gap-1 text-[#0C487A]">
-                <svg class="w-3.5 h-3.5 text-[#EE8522]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-                {job.department}
-              </span>
-              <span>•</span>
-              <span class="flex items-center gap-1 text-slate-600">
-                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                {job.location}
-              </span>
+            <!-- Apply CTA Button on Top Right -->
+            <div class="shrink-0 flex items-center lg:items-end">
+              <button
+                type="button"
+                class="apply-trigger-btn inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-md shadow-[#FF3130]/25 active:scale-[0.98] transition-all cursor-pointer"
+                data-job-id={job.id}
+                data-job-title={job.title}
+              >
+                <span>Apply for this Role</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
             </div>
-
-            <!-- Description -->
-            <p class="text-xs sm:text-sm text-[#243A5E] mt-3.5 leading-relaxed line-clamp-3 font-normal">
-              {job.description}
-            </p>
-
-            <!-- Requirements Snippet with Checkmarks -->
-            <ul class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-600">
-              {job.requirements.slice(0, 2).map((req) => (
-                <li class="flex items-start gap-2">
-                  <span class="w-4 h-4 rounded-full bg-red-50 text-[#FF3130] flex items-center justify-center shrink-0 mt-0.5">
-                    <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </span>
-                  <span class="line-clamp-1">{req}</span>
-                </li>
-              ))}
-            </ul>
           </div>
 
-          <!-- Card Action Footer -->
-          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-xs font-medium text-slate-400">
-              Active requisition
+          <!-- 2. Role Overview Description -->
+          <div class="py-6 border-b border-slate-100">
+            <h4 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-2">
+              Role Overview &amp; Mission Scope
+            </h4>
+            <p class="text-sm sm:text-base text-[#243A5E] leading-relaxed font-normal">
+              {job.description}
+            </p>
+          </div>
+
+          <!-- 3. Two Spacious Columns: Responsibilities & Requirements (Never truncated) -->
+          <div class="pt-6 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            
+            <!-- Left Column: Key Responsibilities -->
+            <div class="space-y-4">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#FF3130]"></span>
+                <h4 class="text-sm font-extrabold text-[#0B2553] uppercase tracking-wider">
+                  Key Responsibilities
+                </h4>
+              </div>
+              
+              <ul class="space-y-3 text-xs sm:text-sm text-[#243A5E]">
+                {job.responsibilities && job.responsibilities.length > 0 ? (
+                  job.responsibilities.map((resp) => (
+                    <li class="flex items-start gap-3">
+                      <span class="w-5 h-5 rounded-full bg-red-50 text-[#FF3130] flex items-center justify-center shrink-0 mt-0.5 border border-red-200/60">
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                      <span class="leading-relaxed font-normal">{resp}</span>
+                    </li>
+                  ))
+                ) : (
+                  <li class="text-slate-400 italic text-xs">Standard GovCon program responsibilities align with labor category.</li>
+                )}
+              </ul>
+            </div>
+
+            <!-- Right Column: Qualifications & Clearance -->
+            <div class="space-y-4">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#0B2553]"></span>
+                <h4 class="text-sm font-extrabold text-[#0B2553] uppercase tracking-wider">
+                  Required Qualifications &amp; Clearance
+                </h4>
+              </div>
+
+              <ul class="space-y-3 text-xs sm:text-sm text-[#243A5E]">
+                {job.requirements.map((req) => (
+                  <li class="flex items-start gap-3">
+                    <span class="w-5 h-5 rounded-full bg-blue-50 text-[#0B2553] flex items-center justify-center shrink-0 mt-0.5 border border-blue-200/60">
+                      <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </span>
+                    <span class="leading-relaxed font-normal">{req}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- 4. Card Bottom Action -->
+          <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <span class="text-xs text-slate-400 font-medium">
+              Requisition ID: <code class="text-[#0B2553] font-mono font-bold uppercase">{job.id}</code>
             </span>
             <button
               type="button"
-              class="apply-trigger-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-sm hover:shadow active:scale-[0.98] transition-all cursor-pointer"
+              class="apply-trigger-btn inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF3130] hover:text-[#E02625] transition-colors cursor-pointer"
               data-job-id={job.id}
               data-job-title={job.title}
             >
-              <span>Apply Now</span>
+              <span>Submit Resume for {job.title}</span>
               <span aria-hidden="true">&rarr;</span>
             </button>
           </div>
-        </div>
+
+        </article>
       );
     })}
   </div>
@@ -242,7 +312,7 @@ if (isSupabaseConfigured && supabase) {
       </svg>
     </div>
     <h4 class="text-lg font-bold text-[#0B2553]">No matching opportunities found</h4>
-    <p class="text-xs sm:text-sm text-[#243A5E] mt-1.5 max-w-md mx-auto">
+    <p class="text-xs sm:text-sm text-[#243A5E] mt-1.5 max-w-md mx-auto font-normal">
       Try loosening your search terms or filters. Alternatively, submit your general resume below to join our confidential cleared talent network.
     </p>
   </div>
@@ -277,7 +347,7 @@ if (isSupabaseConfigured && supabase) {
       <button
         type="button"
         id="general-apply-btn"
-        class="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-lg shadow-[#FF3130]/30 active:scale-[0.98] transition-all cursor-pointer"
+        class="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-lg shadow-[#FF3130]/30 active:scale-[0.98] transition-all cursor-pointer"
       >
         <span>Submit General Resume</span>
         <span aria-hidden="true">&rarr;</span>
@@ -425,18 +495,19 @@ if (isSupabaseConfigured && supabase) {
 <!-- Client-side Interactive Filter & Upload Script -->
 <script>
   const searchInput = document.getElementById('job-search-input') as HTMLInputElement;
-  const deptFilter = document.getElementById('job-dept-filter') as HTMLSelectElement;
+  const deptPills = document.querySelectorAll<HTMLButtonElement>('.job-dept-pill');
   const clearanceFilter = document.getElementById('job-clearance-filter') as HTMLSelectElement;
-  const jobsContainer = document.getElementById('jobs-container');
+  const workplaceFilter = document.getElementById('job-workplace-filter') as HTMLSelectElement;
   const resultsCount = document.getElementById('job-results-count');
   const noJobsFound = document.getElementById('no-jobs-found');
   const jobCards = document.querySelectorAll<HTMLElement>('.job-card');
 
-  // Filter Logic
+  let activeDept = '';
+
   function applyFilters() {
     const query = searchInput?.value.toLowerCase().trim() || '';
-    const selectedDept = deptFilter?.value.toLowerCase() || '';
     const selectedClearance = clearanceFilter?.value || '';
+    const selectedWorkplace = workplaceFilter?.value || '';
 
     let visibleCount = 0;
 
@@ -444,13 +515,15 @@ if (isSupabaseConfigured && supabase) {
       const title = card.getAttribute('data-title') || '';
       const department = card.getAttribute('data-department') || '';
       const clearance = card.getAttribute('data-clearance') || '';
+      const workplace = card.getAttribute('data-workplace') || '';
 
       const matchesSearch = !query || title.includes(query) || department.includes(query) || clearance.toLowerCase().includes(query);
-      const matchesDept = !selectedDept || department.includes(selectedDept);
+      const matchesDept = !activeDept || department.includes(activeDept.toLowerCase());
       const matchesClearance = !selectedClearance || clearance === selectedClearance;
+      const matchesWorkplace = !selectedWorkplace || workplace === selectedWorkplace;
 
-      if (matchesSearch && matchesDept && matchesClearance) {
-        card.style.display = 'flex';
+      if (matchesSearch && matchesDept && matchesClearance && matchesWorkplace) {
+        card.style.display = 'block';
         visibleCount++;
       } else {
         card.style.display = 'none';
@@ -468,29 +541,22 @@ if (isSupabaseConfigured && supabase) {
   }
 
   searchInput?.addEventListener('input', applyFilters);
-  deptFilter?.addEventListener('change', applyFilters);
   clearanceFilter?.addEventListener('change', applyFilters);
+  workplaceFilter?.addEventListener('change', applyFilters);
 
-  // View switchers
-  const gridBtn = document.getElementById('view-grid-btn');
-  const listBtn = document.getElementById('view-list-btn');
+  deptPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      deptPills.forEach((p) => {
+        p.classList.remove('active', 'bg-[#0B2553]', 'text-white', 'shadow-xs');
+        p.classList.add('bg-slate-100', 'text-[#243A5E]');
+      });
 
-  gridBtn?.addEventListener('click', () => {
-    jobsContainer?.classList.remove('grid-cols-1');
-    jobsContainer?.classList.add('md:grid-cols-2', 'lg:grid-cols-3');
-    gridBtn.classList.add('bg-white', 'text-[#0B2553]', 'shadow-xs');
-    gridBtn.classList.remove('text-slate-500');
-    listBtn?.classList.remove('bg-white', 'text-[#0B2553]', 'shadow-xs');
-    listBtn?.classList.add('text-slate-500');
-  });
+      pill.classList.add('active', 'bg-[#0B2553]', 'text-white', 'shadow-xs');
+      pill.classList.remove('bg-slate-100', 'text-[#243A5E]');
 
-  listBtn?.addEventListener('click', () => {
-    jobsContainer?.classList.remove('md:grid-cols-2', 'lg:grid-cols-3');
-    jobsContainer?.classList.add('grid-cols-1');
-    listBtn.classList.add('bg-white', 'text-[#0B2553]', 'shadow-xs');
-    listBtn.classList.remove('text-slate-500');
-    gridBtn?.classList.remove('bg-white', 'text-[#0B2553]', 'shadow-xs');
-    gridBtn?.classList.add('text-slate-500');
+      activeDept = pill.getAttribute('data-dept') || '';
+      applyFilters();
+    });
   });
 
   // Modal Handling
