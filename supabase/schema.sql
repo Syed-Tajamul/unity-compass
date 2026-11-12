@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS public.contact_inquiries (
     phone TEXT NOT NULL,
     message TEXT NOT NULL,
     status TEXT NOT NULL DEFAULT 'new' CHECK (status IN ('new', 'in_review', 'replied', 'archived')),
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
@@ -58,6 +59,7 @@ CREATE TABLE IF NOT EXISTS public.jobs (
     responsibilities JSONB NOT NULL DEFAULT '[]'::jsonb,
     posted_date TEXT NOT NULL,
     is_active BOOLEAN NOT NULL DEFAULT true,
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
@@ -94,6 +96,7 @@ CREATE TABLE IF NOT EXISTS public.job_applications (
     candidate_phone TEXT NOT NULL,
     resume_url TEXT NOT NULL,
     status TEXT NOT NULL DEFAULT 'submitted' CHECK (status IN ('submitted', 'reviewed', 'shortlisted', 'rejected')),
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
@@ -119,7 +122,7 @@ CREATE POLICY "Admins have full access to applications"
 
 
 -- =========================================================================
--- 5. BLOGS / ARTICLES TABLE
+-- 5. BLOGS / ARTICLES TABLE (Supports Multiple Images & Related Slugs)
 -- =========================================================================
 CREATE TABLE IF NOT EXISTS public.blogs (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -130,13 +133,17 @@ CREATE TABLE IF NOT EXISTS public.blogs (
     read_time TEXT NOT NULL DEFAULT '5 min read',
     category TEXT NOT NULL,
     excerpt TEXT NOT NULL,
-    image TEXT NOT NULL,
-    content_blocks JSONB NOT NULL DEFAULT '[]'::jsonb,
+    image TEXT NOT NULL,                                -- Primary Featured / Cover Image
+    gallery_images JSONB NOT NULL DEFAULT '[]'::jsonb,  -- Array of additional image URLs
+    related_slugs JSONB NOT NULL DEFAULT '[]'::jsonb,   -- Specific curated related article slugs
+    content_blocks JSONB NOT NULL DEFAULT '[]'::jsonb,  -- Paragraphs, headings, bullet points, and inline images
     is_published BOOLEAN NOT NULL DEFAULT true,
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,        -- SEO tags (meta_title, meta_description, keywords)
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
 CREATE INDEX IF NOT EXISTS idx_blogs_slug ON public.blogs (slug);
+CREATE INDEX IF NOT EXISTS idx_blogs_category ON public.blogs (category);
 CREATE INDEX IF NOT EXISTS idx_blogs_published ON public.blogs (is_published, created_at DESC);
 
 -- Enable RLS
@@ -171,14 +178,14 @@ VALUES (
     ARRAY['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
 ) ON CONFLICT (id) DO NOTHING;
 
--- Insert 'blog-images' bucket (public for article hero images)
+-- Insert 'blog-images' bucket (public for article hero & gallery images)
 INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 VALUES (
     'blog-images',
     'blog-images',
     true,
     5242880, -- 5 MB
-    ARRAY['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml']
+    ARRAY['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml', 'image/gif']
 ) ON CONFLICT (id) DO NOTHING;
 
 -- Storage Policies for Resumes
@@ -211,7 +218,7 @@ CREATE POLICY "Admins can upload blog images"
 -- =========================================================================
 -- 7. INITIAL SEED DATA (CORE JOBS)
 -- =========================================================================
-INSERT INTO public.jobs (id, title, department, location, workplace_type, employment_type, clearance_level, description, requirements, responsibilities, posted_date, is_active)
+INSERT INTO public.jobs (id, title, department, location, workplace_type, employment_type, clearance_level, description, requirements, responsibilities, posted_date, is_active, metadata)
 VALUES
 (
     'uc-job-101',
@@ -225,7 +232,8 @@ VALUES
     '["Active TS/SCI with CI or Full Scope Polygraph", "8+ years cloud engineering experience with AWS GovCloud or Azure Government", "DoD 8570/8140 IAM Level II or III certification (CISSP, CCSP, or CISM)", "Experience with Infrastructure as Code (Terraform, Ansible)"]'::jsonb,
     '["Design multi-tenant cloud solutions compliant with FedRAMP High and DoD IL5/IL6", "Collaborate with agency security officers on ATO (Authority to Operate) documentation", "Mentor engineering teams in zero-trust architecture principles"]'::jsonb,
     'February 2026',
-    true
+    true,
+    '{"priority": "high", "hiring_manager": "Engineering Lead"}'::jsonb
 ),
 (
     'uc-job-102',
@@ -239,7 +247,8 @@ VALUES
     '["5+ years federal proposal management experience with documented $20M+ win record", "Deep mastery of FAR, DFARS, Section L & M evaluation criteria, and Shipley methodology", "Bachelor’s degree in English, Journalism, Business, or technical discipline"]'::jsonb,
     '["Lead color team reviews (Pink, Red, Gold Team) ensuring strict compliance with RFP instructions", "Develop Executive Summaries, win themes, and compliance matrices", "Manage multidisciplinary volume leads and SME contributors under tight deadlines"]'::jsonb,
     'February 2026',
-    true
+    true,
+    '{"priority": "urgent", "contract_vehicle": "OASIS+"}'::jsonb
 ),
 (
     'uc-job-103',
@@ -253,7 +262,7 @@ VALUES
     '["Active Top Secret / SCI clearance", "4+ years SOC or Threat Hunting experience in DoD or federal civilian environments", "Security+ CE, CySA+, or CEH certification", "Hands-on expertise with Splunk, Elastic, Sentinel, and CrowdStrike Falcon"]'::jsonb,
     '["Detect, investigate, and remediate advanced persistent threat (APT) indicators", "Author incident post-mortems and present actionable mitigation plans to government task leads", "Maintain continuous compliance with DISA STIGs and NIST SP 800-53"]'::jsonb,
     'February 2026',
-    true
+    true,
+    '{"priority": "normal", "target_program": "Cyber Defense Initiative"}'::jsonb
 )
 ON CONFLICT (id) DO NOTHING;
-
