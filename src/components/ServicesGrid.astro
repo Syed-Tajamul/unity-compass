@@ -197,14 +197,14 @@ const services: ServiceItem[] = [
       >
         {services.map((item, index) => (
           <article
-            class="service-card-item group/card relative shrink-0 w-[320px] sm:w-[440px] md:w-[500px] lg:w-[560px] aspect-[16/9.2] rounded-[1.85rem] p-[2px] bg-gradient-to-br from-blue-400/40 via-slate-200 to-[#FF3130]/40 hover:from-[#1E40AF] hover:via-[#2563EB] hover:to-[#FF3130] shadow-[0_12px_36px_rgba(15,39,74,0.08)] hover:shadow-[0_24px_50px_rgba(15,39,74,0.22)] transition-all duration-500 hover:-translate-y-2 select-none"
+            class="service-card-item group/card relative shrink-0 w-[320px] sm:w-[440px] md:w-[500px] lg:w-[560px] aspect-[16/9.2] rounded-2xl sm:rounded-3xl p-[2px] bg-gradient-to-br from-blue-400/40 via-slate-200 to-[#FF3130]/40 hover:from-[#1E40AF] hover:via-[#2563EB] hover:to-[#FF3130] shadow-[0_12px_36px_rgba(15,39,74,0.08)] hover:shadow-[0_24px_50px_rgba(15,39,74,0.22)] transition-all duration-500 hover:-translate-y-2 select-none"
             data-index={index}
           >
             <!-- Ambient Glowing Backlight on Hover -->
-            <div class="absolute -inset-1 rounded-[2.1rem] bg-gradient-to-r from-blue-500/25 via-indigo-500/15 to-[#FF3130]/25 blur-lg opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            <div class="absolute -inset-1 rounded-[20px] sm:rounded-[28px] bg-gradient-to-r from-blue-500/25 via-indigo-500/15 to-[#FF3130]/25 blur-lg opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
             <!-- Inner Card Container -->
-            <div class="relative w-full h-full rounded-[1.7rem] overflow-hidden bg-white p-2 sm:p-2.5">
+            <div class="relative w-full h-full rounded-[14px] sm:rounded-[22px] overflow-hidden bg-white p-2 sm:p-2.5">
               
               <!-- 1. RESTING STATE: Distinct service artwork with shared branding and label treatment -->
               <div class="absolute inset-0 z-10 overflow-hidden bg-gradient-to-br from-white via-[#EDF4FB] to-[#DCEAF7] p-2 sm:p-2.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:opacity-0 group-hover/card:scale-105 pointer-events-none" aria-hidden="true">

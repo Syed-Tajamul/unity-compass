@@ -254,7 +254,7 @@ const aboutPageSchema = {
       </div>
 
       <aside
-        class="capabilities-carousel about-reveal about-delay-1 overflow-hidden rounded-3xl border border-slate-200 bg-[#F4F8FC] shadow-[0_24px_60px_-30px_rgba(15,39,74,0.38)]"
+        class="capabilities-carousel about-reveal about-delay-1 overflow-hidden rounded-2xl border border-slate-200 bg-[#F4F8FC] shadow-[0_24px_60px_-30px_rgba(15,39,74,0.38)] sm:rounded-3xl"
         aria-label="Unity Compass service capabilities"
         aria-roledescription="carousel"
         role="region"
@@ -291,7 +291,7 @@ const aboutPageSchema = {
 
                 <div class="mt-5 grid gap-8">
                   {group.services.map((service) => (
-                    <a href={service.href} class="group/service rounded-2xl border border-white bg-white/95 p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#0C487A]/20 hover:shadow-md sm:p-5">
+                    <a href={service.href} class="group/service rounded-2xl border border-white bg-white/95 p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#0C487A]/20 hover:shadow-md sm:rounded-3xl sm:p-5">
                       <div class="flex items-start gap-4">
                         <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0C487A] text-white transition-colors duration-300 group-hover/service:bg-[#FF3130]" aria-hidden="true">
                           <AboutIcon name={service.icon} class="h-5 w-5" stroke-width={1.8} />
@@ -333,7 +333,7 @@ const aboutPageSchema = {
     <div class="absolute inset-0 about-grid opacity-35" aria-hidden="true"></div>
     <div class="absolute left-1/2 top-1/2 h-48 w-4/5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(40,121,182,0.12)_0%,transparent_70%)] blur-3xl" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="about-reveal rounded-3xl border border-slate-200/90 bg-white/90 px-5 py-7 shadow-[0_18px_45px_-20px_rgba(15,39,74,0.22),0_0_0_1px_rgba(255,255,255,0.9)_inset] backdrop-blur-xl sm:px-8 sm:py-9 lg:px-10">
+      <div class="about-reveal rounded-2xl border border-slate-200/90 bg-white/90 px-5 py-7 shadow-[0_18px_45px_-20px_rgba(15,39,74,0.22),0_0_0_1px_rgba(255,255,255,0.9)_inset] backdrop-blur-xl sm:rounded-3xl sm:px-8 sm:py-9 lg:px-10">
         <dl class="grid grid-cols-2 gap-8 md:grid-cols-5">
           {performanceMetrics.map((metric, index) => (
             <div class={`about-reveal about-delay-${Math.min(index + 1, 5)} relative px-2 py-2 text-center sm:px-4 ${index > 0 ? 'md:border-l md:border-slate-200' : ''} ${index === performanceMetrics.length - 1 ? 'col-span-2 md:col-span-1' : ''}`}>
@@ -367,7 +367,7 @@ const aboutPageSchema = {
 
       <ul class="grid gap-8 md:grid-cols-3" role="list">
         {differentiators.map((item, index) => (
-          <li class={`service-radar-card about-reveal about-delay-${index + 1} group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-500 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_26px_55px_-20px_rgba(15,39,74,0.42)] sm:p-8`} data-service-radar>
+          <li class={`service-radar-card about-reveal about-delay-${index + 1} group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-500 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_26px_55px_-20px_rgba(15,39,74,0.42)] sm:rounded-3xl sm:p-8`} data-service-radar>
             <span class="service-radar-scan" aria-hidden="true"></span>
             <span class="service-radar-number absolute right-6 top-5 text-sm font-extrabold tracking-[0.12em] text-slate-200" aria-hidden="true">{item.number}</span>
             <div class="service-radar-icon flex h-12 w-12 items-center justify-center rounded-xl bg-[#0C487A] text-white shadow-[0_8px_22px_-8px_rgba(12,72,122,0.7)]">
@@ -401,7 +401,7 @@ const aboutPageSchema = {
           <li class={`about-reveal about-delay-${Math.min(index + 1, 5)}`}>
             <a
               href={service.href}
-              class="service-radar-card group relative flex h-full min-h-72 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-500 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_26px_55px_-20px_rgba(15,39,74,0.42)] focus-visible:-translate-y-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF3130] focus-visible:ring-offset-4 sm:p-8"
+              class="service-radar-card group relative flex h-full min-h-72 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-500 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_26px_55px_-20px_rgba(15,39,74,0.42)] focus-visible:-translate-y-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF3130] focus-visible:ring-offset-4 sm:rounded-3xl sm:p-8"
               data-service-radar
             >
               <span class="service-radar-scan" aria-hidden="true"></span>
@@ -465,7 +465,7 @@ const aboutPageSchema = {
       </div>
 
       <div class="mt-10 grid gap-8 lg:grid-cols-2">
-        <article class="about-reveal group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-7 shadow-[0_18px_45px_-24px_rgba(15,39,74,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.34)] sm:p-8">
+        <article class="about-reveal group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-7 shadow-[0_18px_45px_-24px_rgba(15,39,74,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.34)] sm:rounded-3xl sm:p-8">
           <span class="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-[#0C487A] to-[#1E40AF]" aria-hidden="true"></span>
           <div class="flex items-center gap-3">
             <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0C487A]/[0.08] text-[#0C487A]" aria-hidden="true">
@@ -476,7 +476,7 @@ const aboutPageSchema = {
           <h3 class="mt-3 text-xl font-bold text-[#0F274A] sm:text-2xl">Empower organizations to compete and perform</h3>
           <p class="mt-4 leading-7 text-slate-600">To empower businesses with innovative solutions, exceptional talent, and strategic support to achieve their goals in the government marketplace.</p>
         </article>
-        <article class="about-reveal about-delay-1 group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-7 shadow-[0_18px_45px_-24px_rgba(15,39,74,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.34)] sm:p-8">
+        <article class="about-reveal about-delay-1 group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-7 shadow-[0_18px_45px_-24px_rgba(15,39,74,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.34)] sm:rounded-3xl sm:p-8">
           <span class="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-[#FF3130] to-[#DC2626]" aria-hidden="true"></span>
           <div class="flex items-center gap-3">
             <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0C487A]/[0.08] text-[#0C487A]" aria-hidden="true">
@@ -491,7 +491,7 @@ const aboutPageSchema = {
 
       <ul class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-5" aria-label="Unity Compass values" role="list">
         {companyValues.map((value, index) => (
-          <li class={`about-reveal about-delay-${Math.min(index + 1, 5)} flex min-h-20 items-center rounded-xl border border-slate-200/90 bg-white/90 px-4 py-4 text-sm font-bold leading-6 text-[#0F274A] shadow-[0_10px_28px_-22px_rgba(15,39,74,0.3)] backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:bg-white`}>
+          <li class={`about-reveal about-delay-${Math.min(index + 1, 5)} flex min-h-20 items-center rounded-2xl border border-slate-200/90 bg-white/90 px-4 py-4 text-sm font-bold leading-6 text-[#0F274A] shadow-[0_10px_28px_-22px_rgba(15,39,74,0.3)] backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:bg-white sm:rounded-3xl`}>
             <span class="mr-3 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#0C487A]/[0.08] text-[#0C487A]" aria-hidden="true">
               <AboutIcon name={value.icon} class="h-4 w-4" stroke-width={1.8} />
             </span>
@@ -504,7 +504,7 @@ const aboutPageSchema = {
 
   <section class="about-scroll-region relative overflow-hidden bg-white py-20 sm:py-24" aria-labelledby="conversation-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="about-reveal relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-[#F4F8FC] via-white to-[#EBF3FA] px-6 py-12 shadow-[0_24px_60px_-30px_rgba(15,39,74,0.35)] sm:px-10 sm:py-14 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:px-14">
+      <div class="about-reveal relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-[#F4F8FC] via-white to-[#EBF3FA] px-6 py-12 shadow-[0_24px_60px_-30px_rgba(15,39,74,0.35)] sm:rounded-3xl sm:px-10 sm:py-14 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:px-14">
         <div class="absolute -right-20 -top-28 h-72 w-72 rounded-full border-[48px] border-[#0C487A]/5" aria-hidden="true"></div>
         <div class="relative max-w-2xl">
           <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Your next move</p>
@@ -975,6 +975,12 @@ const aboutPageSchema = {
     box-shadow: 0 18px 45px -28px rgba(15, 39, 74, 0.38);
     transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease, opacity 0.4s ease;
     will-change: transform, filter, opacity;
+  }
+
+  @media (min-width: 640px) {
+    .timeline-card {
+      border-radius: 1.5rem;
+    }
   }
 
   /* Parent Blur / Sibling De-emphasis (Focus States) for Timeline */
