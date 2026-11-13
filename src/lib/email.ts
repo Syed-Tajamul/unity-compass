@@ -5,11 +5,21 @@
  * Zero dependencies, ultra-lightweight, and fully portable across Vercel serverless.
  */
 
-const resendApiKey = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY || '';
-const adminEmail = import.meta.env.ADMIN_EMAIL || process.env.ADMIN_EMAIL || 'sales@unitycompass.com';
-const fromEmail = import.meta.env.FROM_EMAIL || process.env.FROM_EMAIL || 'Unity Compass <notifications@unitycompass.com>';
+function getEnv(key: string, fallback = ''): string {
+  if (typeof process !== 'undefined' && process.env && process.env[key]) {
+    return process.env[key] as string;
+  }
+  try {
+    if (import.meta && (import.meta as any).env && (import.meta as any).env[key]) {
+      return (import.meta as any).env[key];
+    }
+  } catch {}
+  return fallback;
+}
 
-export const isResendConfigured = Boolean(resendApiKey && !resendApiKey.includes('placeholder'));
+export const isResendConfigured = Boolean(
+  getEnv('RESEND_API_KEY') && !getEnv('RESEND_API_KEY').includes('placeholder')
+);
 
 async function callResendApi(payload: {
   from: string;
@@ -18,7 +28,8 @@ async function callResendApi(payload: {
   subject: string;
   html: string;
 }) {
-  if (!isResendConfigured) {
+  const apiKey = getEnv('RESEND_API_KEY');
+  if (!apiKey || apiKey.includes('placeholder')) {
     console.warn('[Email] RESEND_API_KEY not configured. Mocking notification for:', payload.to);
     return { success: true, mocked: true };
   }
@@ -27,7 +38,7 @@ async function callResendApi(payload: {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${resendApiKey}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
@@ -55,6 +66,9 @@ export async function sendContactNotification(data: {
   phone: string;
   message: string;
 }) {
+  const adminEmail = getEnv('ADMIN_EMAIL', 'syedtawseef0@gmail.com');
+  const fromEmail = getEnv('FROM_EMAIL', 'Unity Compass <onboarding@resend.dev>');
+
   return callResendApi({
     from: fromEmail,
     to: [adminEmail],
@@ -104,6 +118,9 @@ export async function sendJobApplicationNotification(data: {
   jobTitle: string;
   resumeUrl: string;
 }) {
+  const adminEmail = getEnv('ADMIN_EMAIL', 'syedtawseef0@gmail.com');
+  const fromEmail = getEnv('FROM_EMAIL', 'Unity Compass <onboarding@resend.dev>');
+
   return callResendApi({
     from: fromEmail,
     to: [adminEmail],
