@@ -17,23 +17,6 @@
   <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]"></div>
 
   <form id="contact-form" class="space-y-5" novalidate>
-    <!-- Success Banner -->
-    <div id="contact-success" class="hidden p-5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm shadow-xs animate-in fade-in duration-300">
-      <div class="flex items-start gap-3">
-        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <div>
-          <h4 class="font-bold text-emerald-950 text-base">Message Sent Successfully</h4>
-          <p class="mt-1 text-emerald-800 leading-relaxed">
-            Thank you for reaching out to Unity Compass. A member of our federal capture and workforce practice will review your message and follow up within one business day.
-          </p>
-        </div>
-      </div>
-    </div>
-
     <!-- Error Banner -->
     <div id="contact-error" class="hidden p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm shadow-xs animate-in fade-in duration-200">
       <div class="flex items-center gap-2 font-bold mb-1">
@@ -163,7 +146,6 @@
 <script>
   function initContactForm() {
     const form = document.getElementById('contact-form') as HTMLFormElement | null;
-    const successBox = document.getElementById('contact-success');
     const errorBox = document.getElementById('contact-error');
     const errorMsg = document.getElementById('contact-error-msg');
     const submitBtn = document.getElementById('contact-submit-btn') as HTMLButtonElement | null;
@@ -172,10 +154,9 @@
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      if (!form || !successBox || !errorBox || !submitBtn) return;
+      if (!form || !errorBox || !submitBtn) return;
 
       errorBox.classList.add('hidden');
-      successBox.classList.add('hidden');
 
       const name = (document.getElementById('contact-name') as HTMLInputElement)?.value.trim();
       const email = (document.getElementById('contact-email') as HTMLInputElement)?.value.trim();
@@ -210,8 +191,13 @@
         .then(async (res) => {
           const result = await res.json().catch(() => ({}));
           if (res.ok && result.success) {
-            successBox.classList.remove('hidden');
-            successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (window.showToast) {
+              window.showToast({
+                title: 'Message Sent Successfully',
+                message: 'Thank you for reaching out to Unity Compass. A member of our federal capture and workforce practice will review your message and follow up within one business day.',
+                type: 'success',
+              });
+            }
             form.reset();
           } else {
             if (errorMsg) errorMsg.textContent = result.error || 'Failed to submit inquiry. Please try again.';

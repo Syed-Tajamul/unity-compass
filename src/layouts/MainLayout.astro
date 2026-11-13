@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AnimatedCursor from '../components/AnimatedCursor.astro';
 import FloatingContactWidget from '../components/FloatingContactWidget.astro';
+import Toast from '../components/Toast.astro';
 import { companyInfo } from '../data/company';
 import '../styles/global.css';
 
@@ -123,6 +124,9 @@ const schemaOrg = {
 
     <!-- Executive Compass Navigational Reticle Cursor Follower -->
     <AnimatedCursor />
+
+    <!-- Global Executive Dismissible Toaster -->
+    <Toast />
 
     <!-- Global Scroll Reveal Observer Script -->
     <script>

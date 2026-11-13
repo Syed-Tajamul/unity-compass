@@ -444,9 +444,14 @@ const { job } = Astro.props;
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && data.success) {
-        feedback.textContent = 'Application submitted successfully! Our recruitment team will review your qualifications.';
-        feedback.classList.add('bg-emerald-50', 'text-emerald-800', 'border', 'border-emerald-200');
-        feedback.classList.remove('hidden');
+        feedback.classList.add('hidden');
+        if (window.showToast) {
+          window.showToast({
+            title: 'Application Submitted Successfully',
+            message: 'Application submitted successfully! Our recruitment team will review your qualifications.',
+            type: 'success',
+          });
+        }
         form.reset();
       } else {
         feedback.textContent = data.error || 'Failed to submit application. Please try again.';

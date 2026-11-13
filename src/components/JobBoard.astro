@@ -22,11 +22,18 @@ let jobPositions: JobPosition[] = fallbackPositions;
 
 if (isSupabaseConfigured && supabase) {
   try {
-    const { data, error } = await supabase
+    const jobsQuery = supabase
       .from('jobs')
       .select('*')
       .eq('is_active', true)
       .order('created_at', { ascending: false });
+
+    // 1.2s timeout so slow or cold database never delays page rendering
+    const timeoutPromise = new Promise<{ data: any; error: any }>((resolve) =>
+      setTimeout(() => resolve({ data: null, error: new Error('Supabase jobs timeout') }), 1200)
+    );
+
+    const { data, error } = await Promise.race([jobsQuery, timeoutPromise]);
 
     if (!error && data && data.length > 0) {
       jobPositions = data.map((d: any) => ({
@@ -734,15 +741,16 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
       const result = await res.json().catch(() => ({}));
 
       if (res.ok && result.success) {
-        feedbackEl.textContent = result.message || 'Application successfully submitted! Our talent acquisition team will review your qualifications.';
-        feedbackEl.classList.add('bg-emerald-50', 'text-emerald-800', 'border', 'border-emerald-200');
-        feedbackEl.classList.remove('hidden');
+        closeModal();
+        if (window.showToast) {
+          window.showToast({
+            title: 'Application Submitted Successfully',
+            message: result.message || `Your application for ${currentJobTitle} has been received. Our talent acquisition practice will review your qualifications shortly.`,
+            type: 'success',
+          });
+        }
         applyForm.reset();
         if (fileSelectedName) fileSelectedName.classList.add('hidden');
-
-        setTimeout(() => {
-          closeModal();
-        }, 2200);
       } else {
         feedbackEl.textContent = result.error || 'Failed to submit application. Please try again.';
         feedbackEl.classList.add('bg-red-50', 'text-red-800', 'border', 'border-red-200');

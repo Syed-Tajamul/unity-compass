@@ -1,0 +1,134 @@
+---
+/**
+ * Toast.astro - Global Executive Dismissible Notification Toaster
+ * 
+ * Features:
+ * - Fixed floating toaster positioned at bottom-right (responsive)
+ * - Persists until explicitly read and dismissed by the user (with 'X' close button)
+ * - Executive Unity Compass styling (glassmorphism, subtle gradient seam, deep navy typography)
+ * - Accessible (role="status", aria-live="polite")
+ * - Global window.showToast({ title, message, type }) API
+ */
+---
+
+<div
+  id="global-toast-container"
+  class="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-[9999] flex flex-col gap-3 pointer-events-none max-w-[92vw] sm:max-w-md w-full"
+  aria-live="polite"
+  aria-atomic="true"
+></div>
+
+<template id="toast-template">
+  <div
+    class="toast-card pointer-events-auto relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-4 sm:p-5 shadow-[0_20px_50px_-10px_rgba(12,72,122,0.22)] backdrop-blur-md transition-all duration-300 transform translate-y-4 opacity-0"
+    role="alert"
+  >
+    <!-- Top Accent Bar -->
+    <div class="toast-bar absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-emerald-500 via-[#0C487A] to-[#1E40AF]"></div>
+
+    <div class="flex items-start gap-3.5">
+      <!-- Icon Badge -->
+      <div class="toast-icon-wrapper w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+        <svg class="toast-icon-svg w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <!-- Text Details -->
+      <div class="flex-grow pr-2">
+        <h4 class="toast-title text-sm sm:text-base font-extrabold text-[#0B2553] tracking-tight">
+          Message Sent Successfully
+        </h4>
+        <p class="toast-message mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+          Thank you for reaching out to Unity Compass. A member of our federal capture practice will review your message and follow up shortly.
+        </p>
+      </div>
+
+      <!-- Close / Dismiss Button -->
+      <button
+        type="button"
+        class="toast-close-btn -mr-1 -mt-1 p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer shrink-0"
+        aria-label="Dismiss notification"
+      >
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</template>
+
+<script>
+  interface ToastOptions {
+    title: string;
+    message: string;
+    type?: 'success' | 'error' | 'info';
+  }
+
+  declare global {
+    interface Window {
+      showToast?: (opts: ToastOptions) => void;
+    }
+  }
+
+  function initToaster() {
+    const container = document.getElementById('global-toast-container');
+    const template = document.getElementById('toast-template') as HTMLTemplateElement | null;
+
+    if (!container || !template) return;
+
+    window.showToast = function ({ title, message, type = 'success' }: ToastOptions) {
+      const clone = template.content.cloneNode(true) as DocumentFragment;
+      const card = clone.querySelector('.toast-card') as HTMLElement;
+      const bar = clone.querySelector('.toast-bar') as HTMLElement;
+      const iconWrapper = clone.querySelector('.toast-icon-wrapper') as HTMLElement;
+      const iconSvg = clone.querySelector('.toast-icon-svg') as SVGElement;
+      const titleEl = clone.querySelector('.toast-title') as HTMLElement;
+      const messageEl = clone.querySelector('.toast-message') as HTMLElement;
+      const closeBtn = clone.querySelector('.toast-close-btn') as HTMLButtonElement;
+
+      if (!card || !titleEl || !messageEl || !closeBtn) return;
+
+      titleEl.textContent = title;
+      messageEl.textContent = message;
+
+      if (type === 'error') {
+        bar.className = 'toast-bar absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-rose-500 to-[#FF3130]';
+        iconWrapper.className = 'toast-icon-wrapper w-9 h-9 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center shrink-0 mt-0.5';
+        iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />';
+      } else {
+        bar.className = 'toast-bar absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-emerald-500 via-[#0C487A] to-[#1E40AF]';
+        iconWrapper.className = 'toast-icon-wrapper w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5';
+        iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />';
+      }
+
+      function dismissToast() {
+        card.classList.remove('translate-y-0', 'opacity-100');
+        card.classList.add('translate-y-4', 'opacity-0');
+        setTimeout(() => {
+          card.remove();
+        }, 300);
+      }
+
+      closeBtn.addEventListener('click', dismissToast);
+
+      container.appendChild(clone);
+
+      // Trigger entrance animation next microtask
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          card.classList.remove('translate-y-4', 'opacity-0');
+          card.classList.add('translate-y-0', 'opacity-100');
+        });
+      });
+    };
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initToaster);
+  } else {
+    initToaster();
+  }
+  document.addEventListener('astro:page-load', initToaster);
+</script>
+
