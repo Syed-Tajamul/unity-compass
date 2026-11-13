@@ -381,7 +381,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 {otherFederalServices.map((service, idx) => (
                   <a
                     href={service.href}
-                    class="group relative flex items-center justify-between px-4 sm:px-5 py-3.5 sm:py-4 rounded-2xl text-slate-700 font-semibold text-sm transition-all duration-300 border border-slate-200/60 hover:border-[#0C487A]/30 hover:bg-gradient-to-r hover:from-[#0C487A] hover:via-[#103E6B] hover:to-[#1E40AF] hover:text-white hover:shadow-[0_10px_25px_-5px_rgba(12,72,122,0.45)] hover:scale-[1.02] cursor-pointer"
+                    class="group relative flex items-center justify-between px-4 sm:px-5 py-3.5 sm:py-4 rounded-md sm:rounded-lg text-slate-700 font-semibold text-sm transition-all duration-300 border border-slate-200/60 hover:border-[#0C487A]/30 hover:bg-gradient-to-r hover:from-[#0C487A] hover:via-[#103E6B] hover:to-[#1E40AF] hover:text-white hover:shadow-[0_10px_25px_-5px_rgba(12,72,122,0.45)] hover:scale-[1.02] cursor-pointer"
                     style={`--stagger-delay: ${idx * 40}ms;`}
                   >
                     <div class="flex items-center gap-3 min-w-0 pr-2">
@@ -420,7 +420,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
                 href={hubspotMeetingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-sm shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group"
+                class="inline-flex items-center gap-2.5 px-6 py-3 rounded-md sm:rounded-lg bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-sm shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group"
               >
                 <span>Book a Consultation</span>
                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -433,7 +433,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
 
           <!-- 4 Square Animated Cards Column (~44% Width: 2x2 Grid with Two-Layer Sliding Profile Card Animation) -->
           <div class="w-full lg:w-[44%] reveal-on-scroll reveal-right delay-150">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 w-full max-w-lg lg:max-w-xl mx-auto lg:mx-0">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-lg lg:max-w-xl mx-auto lg:mx-0">
               {keySquareCards.map((card, idx) => (
                 <div
                   class="square-slide-card self-contained-card group relative cursor-pointer"
@@ -522,7 +522,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
               </div>
 
               <!-- 5 Service Offerings Grid with Gradient Border Draw Animation (card-08 Architecture) -->
-              <div class="services-cards-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+              <div class="services-cards-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
                 {pillar.services.map((service, sIdx) => {
                   return (
                     <article
@@ -685,7 +685,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
         </div>
 
         <!-- Symmetrical 3-Card Stage: ALL 3 Cards are ALWAYS Visible Side-by-Side -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch reveal-on-scroll" id="why-uc-cards-grid">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch reveal-on-scroll" id="why-uc-cards-grid">
           {whyUcPillars.map((card) => (
             <div
               class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30"
@@ -744,7 +744,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
             href={hubspotMeetingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-3 px-9 sm:px-11 py-4 rounded-2xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
+            class="inline-flex items-center justify-center gap-3 px-9 sm:px-11 py-4 rounded-md sm:rounded-lg bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
           >
             <span>Book a Strategic Consultation</span>
             <svg class="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -59,12 +59,12 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
   <!-- ========================================================================= -->
   <!-- SEARCH & STREAMLINED FILTER BAR                                           -->
   <!-- ========================================================================= -->
-  <div class="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] relative z-30">
+  <div class="bg-white rounded-lg border border-slate-200/90 p-5 sm:p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] relative z-30">
     <div class="absolute top-0 inset-x-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0B2553] via-[#FF3130] to-[#0B2553]"></div>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-      <!-- Keyword Search (takes 6 cols on md) -->
-      <div class="md:col-span-6 relative">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+      <!-- Keyword Search (takes 5 cols on md) -->
+      <div class="md:col-span-5 relative">
         <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
@@ -72,7 +72,7 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
           type="text"
           id="job-search-input"
           placeholder="Search positions by title, clearance, or skill keyword..."
-          class="w-full pl-12 pr-4 py-3 text-sm rounded-2xl border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400"
+          class="w-full pl-12 pr-4 py-3 text-sm rounded border border-slate-200 bg-slate-50/50 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400"
         />
       </div>
 
@@ -80,7 +80,7 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
       <div class="md:col-span-3 relative custom-dropdown-wrap" data-dropdown-id="type">
         <button
           type="button"
-          class="custom-dropdown-btn w-full px-4 py-3 text-xs sm:text-sm rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] transition-all flex items-center justify-between font-semibold shadow-xs cursor-pointer group"
+          class="custom-dropdown-btn w-full px-4 py-3 text-xs sm:text-sm rounded border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] transition-all flex items-center justify-between font-semibold shadow-xs cursor-pointer group"
           aria-haspopup="listbox"
           aria-expanded="false"
         >
@@ -97,7 +97,7 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
             {employmentTypes.map((type, i) => (
               <button
                 type="button"
-                class={`dropdown-opt w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-[#0B2553] hover:text-[#FF3130] hover:bg-slate-50 flex items-center justify-between transition-colors cursor-pointer ${i === 0 ? 'bg-slate-50 text-[#FF3130]' : ''}`}
+                class={`dropdown-opt w-full text-left px-3.5 py-2.5 rounded-md sm:rounded-lg text-xs sm:text-sm font-semibold text-[#0B2553] hover:text-[#FF3130] hover:bg-slate-50 flex items-center justify-between transition-colors cursor-pointer ${i === 0 ? 'bg-slate-50 text-[#FF3130]' : ''}`}
                 data-value={type === 'All Employment Types' ? '' : type}
                 data-label={type}
               >
@@ -109,12 +109,12 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
         </div>
       </div>
 
-      <!-- Custom Workplace Model Dropdown & Count (takes 3 cols on md) -->
-      <div class="md:col-span-3 flex items-center gap-3">
+      <!-- Custom Workplace Model Dropdown & Count (takes 4 cols on md) -->
+      <div class="md:col-span-4 flex items-center gap-3">
         <div class="relative w-full custom-dropdown-wrap" data-dropdown-id="workplace">
           <button
             type="button"
-            class="custom-dropdown-btn w-full px-4 py-3 text-xs sm:text-sm rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] transition-all flex items-center justify-between font-semibold shadow-xs cursor-pointer group"
+            class="custom-dropdown-btn w-full px-4 py-3 text-xs sm:text-sm rounded border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] transition-all flex items-center justify-between font-semibold shadow-xs cursor-pointer group"
             aria-haspopup="listbox"
             aria-expanded="false"
           >
@@ -131,7 +131,7 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
               {workplaceTypes.map((model, i) => (
                 <button
                   type="button"
-                  class={`dropdown-opt w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-[#0B2553] hover:text-[#FF3130] hover:bg-slate-50 flex items-center justify-between transition-colors cursor-pointer ${i === 0 ? 'bg-slate-50 text-[#FF3130]' : ''}`}
+                  class={`dropdown-opt w-full text-left px-3.5 py-2.5 rounded-md sm:rounded-lg text-xs sm:text-sm font-semibold text-[#0B2553] hover:text-[#FF3130] hover:bg-slate-50 flex items-center justify-between transition-colors cursor-pointer ${i === 0 ? 'bg-slate-50 text-[#FF3130]' : ''}`}
                   data-value={model === 'All Workplace Models' ? '' : model}
                   data-label={model}
                 >
@@ -233,7 +233,7 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
             <div class="shrink-0 flex flex-wrap sm:flex-nowrap items-center gap-3">
               <a
                 href={`/career/${job.id}`}
-                class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider text-[#0B2553] bg-slate-100 hover:bg-slate-200 border border-slate-200/80 transition-all cursor-pointer"
+                class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md sm:rounded-lg text-xs font-bold uppercase tracking-wider text-[#0B2553] bg-slate-100 hover:bg-slate-200 border border-slate-200/80 transition-all cursor-pointer"
               >
                 <span>View Position</span>
                 <span aria-hidden="true">&rarr;</span>
@@ -241,7 +241,7 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
 
               <button
                 type="button"
-                class="apply-trigger-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-md shadow-[#FF3130]/25 active:scale-[0.98] transition-all cursor-pointer"
+                class="apply-trigger-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md sm:rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-md shadow-[#FF3130]/25 active:scale-[0.98] transition-all cursor-pointer"
                 data-job-id={job.id}
                 data-job-title={job.title}
               >
@@ -293,7 +293,7 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
     <button
       type="button"
       id="empty-reset-btn"
-      class="mt-4 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-colors cursor-pointer"
+      class="mt-4 px-5 py-2.5 rounded-md sm:rounded-lg text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-colors cursor-pointer"
     >
       Reset All Filters
     </button>
@@ -341,7 +341,7 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
     <form id="job-apply-form" class="space-y-4" novalidate>
       <div id="modal-feedback" class="hidden p-3.5 rounded-xl text-xs font-semibold"></div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
         <div>
           <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">
             Full Name *
@@ -419,14 +419,14 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
         <button
           type="button"
           id="cancel-modal-btn"
-          class="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
+          class="px-4 py-2.5 rounded-md sm:rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
         >
           Cancel
         </button>
         <button
           type="submit"
           id="submit-app-btn"
-          class="px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-sm hover:shadow active:scale-[0.98] transition-all cursor-pointer"
+          class="px-6 py-2.5 rounded-md sm:rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-sm hover:shadow active:scale-[0.98] transition-all cursor-pointer"
         >
           Submit Application
         </button>

@@ -162,7 +162,7 @@ const aboutPageSchema = {
     <div class="absolute -left-32 top-16 h-80 w-80 rounded-full bg-blue-300/20 blur-3xl" aria-hidden="true"></div>
     <div class="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-red-300/10 blur-3xl" aria-hidden="true"></div>
 
-    <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:px-8 lg:pt-20 pb-24 sm:pb-28 lg:pb-32">
+    <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-8 px-4 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:pt-20 pb-24 sm:pb-28 lg:pb-32">
       <div class="max-w-3xl">
         <h1 class="hero-heading-reveal max-w-2xl text-3xl font-extrabold leading-[1.16] tracking-tight sm:text-4xl sm:leading-[1.18] lg:text-[2.75rem] xl:text-[3.15rem]">
           <span class="about-gradient-text">A practical partner for federal work.</span>
@@ -171,7 +171,7 @@ const aboutPageSchema = {
           We help contractors compete, hire, and deliver in regulated environments.
         </p>
 
-        <dl class="hero-cta-reveal mt-10 grid max-w-xl grid-cols-2 gap-x-6 gap-y-4 border-t border-[#0C487A]/15 pt-6 sm:grid-cols-3">
+        <dl class="hero-cta-reveal mt-10 grid max-w-xl grid-cols-2 gap-8 border-t border-[#0C487A]/15 pt-6 sm:grid-cols-3">
           <div>
             <dt class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
               <AboutIcon name="Target" class="h-3.5 w-3.5 text-[#0C487A]" stroke-width={2.25} />
@@ -217,7 +217,7 @@ const aboutPageSchema = {
   </header>
 
   <section class="about-scroll-region bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="company-heading">
-    <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16 lg:px-8">
+    <div class="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8">
       <div class="about-reveal max-w-3xl">
         <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Who we are</p>
         <h2 id="company-heading" class="about-section-heading mt-3 max-w-2xl text-2xl font-extrabold leading-[1.18] tracking-tight sm:text-3xl sm:leading-[1.22] md:text-4xl lg:text-[2.65rem] lg:leading-[1.24]">
@@ -237,7 +237,7 @@ const aboutPageSchema = {
           </p>
         </div>
 
-        <dl class="mt-8 grid grid-cols-2 gap-4 border-t border-slate-200 pt-6 sm:grid-cols-3">
+        <dl class="mt-8 grid grid-cols-2 gap-8 border-t border-slate-200 pt-6 sm:grid-cols-3">
           <div>
             <dt class="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Experience</dt>
             <dd class="mt-1 text-sm font-extrabold text-[#0B2553]">10+ years</dd>
@@ -289,7 +289,7 @@ const aboutPageSchema = {
                 <p class="text-xs font-bold uppercase tracking-[0.14em] text-[#0C487A]">{group.label}</p>
                 <h3 class="mt-2 text-xl font-extrabold leading-snug tracking-tight text-[#0B2553] sm:text-2xl">{group.title}</h3>
 
-                <div class="mt-5 grid gap-3">
+                <div class="mt-5 grid gap-8">
                   {group.services.map((service) => (
                     <a href={service.href} class="group/service rounded-2xl border border-white bg-white/95 p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#0C487A]/20 hover:shadow-md sm:p-5">
                       <div class="flex items-start gap-4">
@@ -334,7 +334,7 @@ const aboutPageSchema = {
     <div class="absolute left-1/2 top-1/2 h-48 w-4/5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(40,121,182,0.12)_0%,transparent_70%)] blur-3xl" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="about-reveal rounded-3xl border border-slate-200/90 bg-white/90 px-5 py-7 shadow-[0_18px_45px_-20px_rgba(15,39,74,0.22),0_0_0_1px_rgba(255,255,255,0.9)_inset] backdrop-blur-xl sm:px-8 sm:py-9 lg:px-10">
-        <dl class="grid grid-cols-2 gap-x-4 gap-y-7 md:grid-cols-5 md:gap-0">
+        <dl class="grid grid-cols-2 gap-8 md:grid-cols-5">
           {performanceMetrics.map((metric, index) => (
             <div class={`about-reveal about-delay-${Math.min(index + 1, 5)} relative px-2 py-2 text-center sm:px-4 ${index > 0 ? 'md:border-l md:border-slate-200' : ''} ${index === performanceMetrics.length - 1 ? 'col-span-2 md:col-span-1' : ''}`}>
               <span class="mx-auto mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-[#0C487A]/[0.08] text-[#0C487A]" aria-hidden="true">
@@ -365,7 +365,7 @@ const aboutPageSchema = {
         </p>
       </div>
 
-      <ul class="grid gap-5 md:grid-cols-3" role="list">
+      <ul class="grid gap-8 md:grid-cols-3" role="list">
         {differentiators.map((item, index) => (
           <li class={`service-radar-card about-reveal about-delay-${index + 1} group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-500 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_26px_55px_-20px_rgba(15,39,74,0.42)] sm:p-8`} data-service-radar>
             <span class="service-radar-scan" aria-hidden="true"></span>
@@ -396,7 +396,7 @@ const aboutPageSchema = {
         </p>
       </div>
 
-      <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3" role="list">
+      <ul class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" role="list">
         {coreServices.map((service, index) => (
           <li class={`about-reveal about-delay-${Math.min(index + 1, 5)}`}>
             <a
@@ -464,7 +464,7 @@ const aboutPageSchema = {
         <div class="mt-5 h-1.5 w-20 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]" aria-hidden="true"></div>
       </div>
 
-      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+      <div class="mt-10 grid gap-8 lg:grid-cols-2">
         <article class="about-reveal group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-7 shadow-[0_18px_45px_-24px_rgba(15,39,74,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.34)] sm:p-8">
           <span class="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-[#0C487A] to-[#1E40AF]" aria-hidden="true"></span>
           <div class="flex items-center gap-3">
@@ -489,7 +489,7 @@ const aboutPageSchema = {
         </article>
       </div>
 
-      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5" aria-label="Unity Compass values" role="list">
+      <ul class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-5" aria-label="Unity Compass values" role="list">
         {companyValues.map((value, index) => (
           <li class={`about-reveal about-delay-${Math.min(index + 1, 5)} flex min-h-20 items-center rounded-xl border border-slate-200/90 bg-white/90 px-4 py-4 text-sm font-bold leading-6 text-[#0F274A] shadow-[0_10px_28px_-22px_rgba(15,39,74,0.3)] backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:bg-white`}>
             <span class="mr-3 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#0C487A]/[0.08] text-[#0C487A]" aria-hidden="true">
@@ -520,14 +520,14 @@ const aboutPageSchema = {
             href={meetingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl bg-[#0C487A] px-6 py-3 text-sm font-bold text-white shadow-[0_10px_26px_-10px_rgba(12,72,122,0.7)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0A2540] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF3130]"
+            class="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-md sm:rounded-lg bg-[#0C487A] px-6 py-3 text-sm font-bold text-white shadow-[0_10px_26px_-10px_rgba(12,72,122,0.7)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0A2540] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF3130]"
           >
             Talk with our team
             <AboutIcon name="ArrowRight" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" stroke-width={2.25} />
           </a>
           <a
             href={`mailto:${companyInfo.email}`}
-            class="inline-flex min-h-12 items-center justify-center rounded-xl border border-[#0C487A]/20 bg-white px-6 py-3 text-sm font-bold text-[#0C487A] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#0C487A]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0C487A]"
+            class="inline-flex min-h-12 items-center justify-center rounded-md sm:rounded-lg border border-[#0C487A]/20 bg-white px-6 py-3 text-sm font-bold text-[#0C487A] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#0C487A]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0C487A]"
           >
             {companyInfo.email}
           </a>

@@ -35,12 +35,15 @@ const variantStyles = {
 };
 
 const sizeStyles = {
-  sm: 'text-xs px-3.5 py-1.5 rounded-md gap-1.5 font-semibold',
-  md: 'text-xs sm:text-sm px-5 py-2.5 rounded-lg gap-2 font-bold uppercase tracking-wider',
-  lg: 'text-sm sm:text-base px-7 py-3.5 rounded-lg gap-2.5 font-bold uppercase tracking-wider',
+  sm: 'text-xs px-3.5 py-1.5 gap-1.5 font-semibold',
+  md: 'text-xs sm:text-sm px-5 py-2.5 gap-2 font-bold uppercase tracking-wider',
+  lg: 'text-sm sm:text-base px-7 py-3.5 gap-2.5 font-bold uppercase tracking-wider',
 };
 
-const classes = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
+const radiusStyles = className.split(/\s+/).some((value) => value.endsWith('rounded-full'))
+  ? 'rounded-full'
+  : 'rounded-md sm:rounded-lg';
+const classes = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${radiusStyles} ${className}`;
 ---
 
 {

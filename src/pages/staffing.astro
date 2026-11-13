@@ -227,7 +227,7 @@ const staffingModels = [
                 {otherFederalServices.map((service, idx) => (
                   <a
                     href={service.href}
-                    class="group relative flex items-center justify-between px-4 sm:px-5 py-3.5 sm:py-4 rounded-2xl text-slate-700 font-semibold text-sm transition-all duration-300 border border-slate-200/60 hover:border-[#0C487A]/30 hover:bg-gradient-to-r hover:from-[#0C487A] hover:via-[#103E6B] hover:to-[#1E40AF] hover:text-white hover:shadow-[0_10px_25px_-5px_rgba(12,72,122,0.45)] hover:scale-[1.02] cursor-pointer"
+                    class="group relative flex items-center justify-between px-4 sm:px-5 py-3.5 sm:py-4 rounded-md sm:rounded-lg text-slate-700 font-semibold text-sm transition-all duration-300 border border-slate-200/60 hover:border-[#0C487A]/30 hover:bg-gradient-to-r hover:from-[#0C487A] hover:via-[#103E6B] hover:to-[#1E40AF] hover:text-white hover:shadow-[0_10px_25px_-5px_rgba(12,72,122,0.45)] hover:scale-[1.02] cursor-pointer"
                     style={`--stagger-delay: ${idx * 40}ms;`}
                   >
                     <div class="flex items-center gap-3 min-w-0 pr-2">
@@ -274,7 +274,7 @@ const staffingModels = [
 
           <!-- 4 Square Animated Cards Column (~44% Width: 2x2 Grid with Two-Layer Sliding Profile Card Animation) -->
           <div class="w-full lg:w-[44%] reveal-on-scroll reveal-right delay-150">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 w-full max-w-lg lg:max-w-xl mx-auto lg:mx-0">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-lg lg:max-w-xl mx-auto lg:mx-0">
               {keySquareCards.map((card, idx) => (
                 <div
                   class="square-slide-card self-contained-card group relative cursor-pointer"
@@ -358,7 +358,7 @@ const staffingModels = [
         </div>
 
         <!-- 3 Staffing Models: Shuttle Bottom-to-Top Color Fill Cards (Same as Proposal Page) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {staffingModels.map((item, idx) => (
             <div
               class="shuttle-card group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.28)] transition-all duration-400 flex flex-col justify-between min-h-[320px] p-7 sm:p-8 overflow-hidden cursor-pointer reveal-on-scroll"
@@ -444,7 +444,7 @@ const staffingModels = [
         </div>
 
         <!-- 3 Cards Stage: New Latest Prism Spotlight Stage Animation -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch" id="why-uc-cards-grid">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch" id="why-uc-cards-grid">
           
           <!-- Card 1 -->
           <div
@@ -561,7 +561,7 @@ const staffingModels = [
         <div class="pt-4 flex justify-center">
           <a
             href="/contact"
-            class="inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 rounded-2xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
+            class="inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 rounded-md sm:rounded-lg bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
           >
             <span>Request Staffing Support</span>
             <svg class="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">

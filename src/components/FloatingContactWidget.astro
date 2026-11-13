@@ -32,7 +32,7 @@ import { companyInfo } from '../data/company';
       <button
         type="button"
         id="support-hub-close"
-        class="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/20 text-white/80 hover:text-white flex items-center justify-center transition-colors cursor-pointer shrink-0"
+        class="w-7 h-7 rounded-md sm:rounded-lg bg-white/10 hover:bg-white/20 text-white/80 hover:text-white flex items-center justify-center transition-colors cursor-pointer shrink-0"
         aria-label="Close menu"
       >
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -46,7 +46,7 @@ import { companyInfo } from '../data/company';
       <!-- 1. Direct Phone Call -->
       <a
         href={`tel:${companyInfo.phoneRaw}`}
-        class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50/80 border border-slate-200/70 hover:border-[#0C487A]/30 transition-all duration-200 group"
+        class="flex items-center gap-3 p-2.5 rounded-md sm:rounded-lg bg-slate-50 hover:bg-blue-50/80 border border-slate-200/70 hover:border-[#0C487A]/30 transition-all duration-200 group"
       >
         <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#0C487A] to-[#1E40AF] text-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -62,7 +62,7 @@ import { companyInfo } from '../data/company';
       <!-- 2. Book a Strategy Call -->
       <a
         href="/contact"
-        class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 hover:bg-red-50/80 border border-slate-200/70 hover:border-[#FF3130]/30 transition-all duration-200 group"
+        class="flex items-center gap-3 p-2.5 rounded-md sm:rounded-lg bg-slate-50 hover:bg-red-50/80 border border-slate-200/70 hover:border-[#FF3130]/30 transition-all duration-200 group"
       >
         <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF3130] to-[#DC2626] text-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -81,7 +81,7 @@ import { companyInfo } from '../data/company';
       <!-- 3. Corporate Email Support -->
       <a
         href={`mailto:${companyInfo.email}`}
-        class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100/90 border border-slate-200/70 hover:border-slate-300 transition-all duration-200 group"
+        class="flex items-center gap-3 p-2.5 rounded-md sm:rounded-lg bg-slate-50 hover:bg-slate-100/90 border border-slate-200/70 hover:border-slate-300 transition-all duration-200 group"
       >
         <div class="w-9 h-9 rounded-xl bg-slate-200 text-slate-700 flex items-center justify-center shrink-0 group-hover:bg-[#0C487A] group-hover:text-white transition-colors">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -101,7 +101,7 @@ import { companyInfo } from '../data/company';
   <button
     type="button"
     id="support-hub-trigger"
-    class="relative flex items-center justify-center w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white shadow-[0_12px_32px_rgba(12,72,122,0.38),0_4px_12px_rgba(255,49,48,0.22)] border-2 border-white/30 hover:scale-105 active:scale-95 transition-all duration-300 group cursor-pointer ml-auto pointer-events-auto"
+    class="relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white shadow-[0_12px_32px_rgba(12,72,122,0.38),0_4px_12px_rgba(255,49,48,0.22)] border-2 border-white/30 hover:scale-105 active:scale-95 transition-all duration-300 group cursor-pointer ml-auto pointer-events-auto"
     aria-label="Open contact options"
     aria-expanded="false"
   >
