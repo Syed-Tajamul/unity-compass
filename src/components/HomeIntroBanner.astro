@@ -81,15 +81,12 @@
         <div class="space-y-4">
           <h2
             id="intro-statement"
-            class="who-heading-reveal text-3xl sm:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.22] sm:leading-[1.25] text-slate-900 text-left"
+            class="who-heading-reveal section-shimmer-heading text-3xl sm:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.22] sm:leading-[1.25] text-left"
           >
-            <span class="block text-slate-900">Helping commercial firms</span>
-            <span class="block text-slate-900">and federal contractors</span>
+            <span class="block">Helping commercial firms</span>
+            <span class="block">and federal contractors</span>
             <span class="block mt-1">
-              <span class="who-action-word who-action-navy">compete,</span>
-              <span class="who-action-word who-action-blue">qualify,</span>
-              <span class="text-slate-900 font-bold">and</span>
-              <span class="who-action-word who-action-red">win.</span>
+              compete, qualify, and win.
             </span>
           </h2>
 
@@ -366,8 +363,8 @@
     }
 
     function updateParallax() {
-      // Smooth linear interpolation (lerp)
-      currentScrollY += (scrollTargetY - currentScrollY) * 0.09;
+      // Brisk, responsive linear interpolation (lerp)
+      currentScrollY += (scrollTargetY - currentScrollY) * 0.22;
 
       // 1. ON-SCROLL PARALLAX: Main Artwork Container glides smoothly with page scroll
       if (parallaxScrollContainer) {
@@ -376,7 +373,7 @@
 
       // 2. OPTICAL GLOW: Displaces with secondary depth
       if (glowBackdrop) {
-        const glowScrollY = currentScrollY * 0.45;
+        const glowScrollY = currentScrollY * 0.55;
         glowBackdrop.style.transform = `translate(-50%, calc(-50% + ${glowScrollY.toFixed(1)}px))`;
       }
 
@@ -395,8 +392,8 @@
       if (rect.bottom > -100 && rect.top < winHeight + 100) {
         const progress = (winHeight - rect.top) / (winHeight + rect.height);
         const clamped = Math.max(0, Math.min(1, progress));
-        // Generates 110px total fluid on-scroll parallax travel (+55px to -55px)
-        scrollTargetY = (clamped - 0.5) * -110;
+        // Generates 300px fluid on-scroll parallax travel (+150px to -150px) for visibly faster scroll displacement
+        scrollTargetY = (clamped - 0.5) * -300;
         requestTick();
       }
     }

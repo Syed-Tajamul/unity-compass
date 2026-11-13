@@ -63,7 +63,7 @@ const faqs = [
   },
   {
     question: 'Can I submit my resume if there are no suitable openings?',
-    answer: 'Yes! We encourage you to submit your credentials to our Talent Network section below. Our recruitment directors continuously evaluate candidates against pipeline solicitations, upcoming contract awards, and unadvertised cleared requisitions.',
+    answer: 'Yes! We encourage you to submit your credentials below. Our recruitment directors continuously evaluate candidates against pipeline solicitations, upcoming contract awards, and unadvertised cleared requisitions.',
   },
   {
     question: 'What types of employment opportunities are available?',
@@ -111,29 +111,29 @@ const faqs = [
         <!-- LEFT COLUMN: Headline, Description & Single Clean CTA -->
         <div class="max-w-2xl">
           
-          <!-- Heading with Homepage Hero Line-Height -->
+          <!-- Heading with Homepage Hero Line-Height & Continuous Radiant Shimmer Gradient -->
           <h1
             id="career-hero-heading"
-            class="career-reveal text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.15rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.20] text-[#0B2553]"
+            class="hero-heading-reveal text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.15rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.20]"
           >
-            <span class="block text-[#0B2553]">
+            <span class="hero-shimmer-title-line hero-shimmer-title-line-1 block">
               Build Your Career.
             </span>
-            <span class="block text-[#FF3130]">
+            <span class="hero-shimmer-title-line hero-shimmer-title-line-2 block">
               Make an Impact.
             </span>
           </h1>
 
           <!-- Description with Relaxed Homepage Hero Line-Height -->
-          <p class="career-reveal career-delay-1 mt-5 sm:mt-6 text-base sm:text-lg text-[#243A5E] leading-[1.78] sm:leading-[1.82] font-normal max-w-xl">
+          <p class="hero-subheading-reveal mt-5 sm:mt-6 text-base sm:text-lg text-[#243A5E] leading-[1.78] sm:leading-[1.82] font-normal max-w-xl">
             Explore career opportunities with Unity Compass across federal contracting, defense, intelligence, and civilian agencies. Whether you're an experienced professional, technical specialist, or emerging leader, discover opportunities where your expertise contributes to meaningful missions.
           </p>
 
-          <!-- Primary CTA Button (Explore Open Positions only) -->
-          <div class="career-reveal career-delay-2 mt-8 sm:mt-10 flex items-center">
+          <!-- Primary CTA Button (Explore Open Positions only - Button 1 in Sequence) -->
+          <div class="mt-8 sm:mt-10 flex items-center">
             <a
               href="#open-positions"
-              class="inline-flex items-center justify-center gap-3 px-8 sm:px-9 py-4 rounded-xl bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] text-white text-base font-bold shadow-[0_8px_24px_-4px_rgba(255,49,48,0.25)] hover:shadow-[0_12px_28px_-2px_rgba(255,49,48,0.35)] cursor-pointer whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+              class="hero-cta-btn-1 inline-flex items-center justify-center gap-3 px-8 sm:px-9 py-4 rounded-xl bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] text-white text-base font-bold shadow-[0_8px_24px_-4px_rgba(255,49,48,0.25)] hover:shadow-[0_12px_28px_-2px_rgba(255,49,48,0.35)] cursor-pointer whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
             >
               <span>Explore Open Positions</span>
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -144,8 +144,8 @@ const faqs = [
 
         </div>
 
-        <!-- RIGHT COLUMN: 3D Isometric Art Sized Exactly as in about-us.astro -->
-        <div class="career-reveal career-delay-2 relative mx-auto w-full max-w-2xl flex items-center justify-center" aria-hidden="true">
+        <!-- RIGHT COLUMN: 3D Isometric Art Sized Exactly as in about-us.astro (Enters in Sequence Step 4) -->
+        <div class="hero-artwork-reveal relative mx-auto w-full max-w-2xl flex items-center justify-center" aria-hidden="true">
           <!-- Ambient Blue Shadow Diffusion & Ground Glow Matching about-us.astro -->
           <div class="absolute inset-x-[12%] bottom-[5%] h-[24%] rounded-full bg-[#0C487A]/15 blur-3xl pointer-events-none"></div>
           
@@ -429,7 +429,7 @@ const faqs = [
                   id="tn-submit-btn"
                   class="w-full py-4 px-6 rounded-2xl text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-lg shadow-[#FF3130]/25 active:scale-[0.98] transition-all cursor-pointer"
                 >
-                  Submit Your Resume to Talent Network
+                  Submit Your Resume
                 </button>
               </div>
             </form>
@@ -776,7 +776,7 @@ const faqs = [
           if (window.showToast) {
             window.showToast({
               title: 'Resume Submitted Successfully',
-              message: 'Thank you! Your resume has been submitted to the Unity Compass Talent Network. Our executive recruitment directors will review your qualifications.',
+              message: 'Thank you! Your resume has been submitted. Our executive recruitment directors will review your qualifications.',
               type: 'success',
             });
           }
@@ -793,7 +793,7 @@ const faqs = [
         tnFeedback.classList.remove('hidden');
       } finally {
         tnSubmitBtn.disabled = false;
-        tnSubmitBtn.textContent = 'Submit Your Resume to Talent Network';
+        tnSubmitBtn.textContent = 'Submit Your Resume';
       }
     });
   }

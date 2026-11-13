@@ -72,26 +72,26 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
         
         <!-- LEFT COLUMN: Headline, Description & CTAs -->
         <div class="max-w-2xl">
-          <!-- Headline with Homepage Hero Line-Height -->
+          <!-- Headline with Homepage Hero Line-Height & Signature Animated Radiant Gradient -->
           <h1
             id="blog-hero-heading"
-            class="blog-reveal text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.15rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.20] text-[#0B2553]"
+            class="hero-heading-reveal text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.15rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.20]"
           >
-            <span class="block text-[#0B2553]">
+            <span class="hero-shimmer-title-line hero-shimmer-title-line-1 block">
               Insights, Trends &amp;
             </span>
-            <span class="block text-[#FF3130]">
+            <span class="hero-shimmer-title-line hero-shimmer-title-line-2 block">
               Capture Strategies.
             </span>
           </h1>
 
           <!-- Description with Relaxed Homepage Hero Line-Height -->
-          <p class="blog-reveal blog-delay-1 mt-5 sm:mt-6 text-base sm:text-lg text-[#243A5E] leading-[1.78] sm:leading-[1.82] font-normal max-w-xl">
+          <p class="hero-subheading-reveal mt-5 sm:mt-6 text-base sm:text-lg text-[#243A5E] leading-[1.78] sm:leading-[1.82] font-normal max-w-xl">
             Actionable intelligence on federal proposal development, security-cleared recruitment, AI-driven compliance, and agile staffing strategies across DoD and civilian environments.
           </p>
 
           <!-- Primary CTA Button (Explore Articles) -->
-          <div class="blog-reveal blog-delay-2 mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
+          <div class="hero-cta-btn-1 mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#articles"
               class="inline-flex items-center justify-center gap-3 px-8 sm:px-9 py-4 rounded-xl bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] text-white text-base font-bold shadow-[0_8px_24px_-4px_rgba(255,49,48,0.25)] hover:shadow-[0_12px_28px_-2px_rgba(255,49,48,0.35)] cursor-pointer whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
@@ -105,7 +105,7 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
         </div>
 
         <!-- RIGHT COLUMN: 3D Isometric Art Sized Exactly as in career.astro & about-us.astro -->
-        <div class="blog-reveal blog-delay-2 relative mx-auto w-full max-w-2xl flex items-center justify-center" aria-hidden="true">
+        <div class="hero-artwork-reveal relative mx-auto w-full max-w-2xl flex items-center justify-center" aria-hidden="true">
           <!-- Ambient Blue Shadow Diffusion & Ground Glow -->
           <div class="absolute inset-x-[12%] bottom-[5%] h-[24%] rounded-full bg-[#0C487A]/15 blur-3xl pointer-events-none"></div>
           

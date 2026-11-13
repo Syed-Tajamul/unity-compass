@@ -320,44 +320,198 @@
 }
 
 /* ========================================================================= */
-/* Cinematic Initial Load Soft-Reveal (Blur Dissipation & Upward Glide)      */
-/* Applied gracefully across Heading, Subheading, and Dual CTA Buttons       */
+/* Choreographed Hero Entrance Animations (Sequential On-Load Reveal)        */
+/* Sequence: 1. Heading -> 2. Description -> 3. Buttons (staggered) -> 4. Art*/
 /* ========================================================================= */
-@keyframes heroSoftReveal {
+@keyframes heroEntranceHeading {
   0% {
     opacity: 0;
-    transform: translateY(12px);
-    filter: blur(6px);
+    transform: translateY(24px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
+    transform: none;
   }
 }
 
+@keyframes heroEntranceSubheading {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes heroEntranceButton {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes heroEntranceArtwork {
+  0% {
+    opacity: 0;
+    transform: translateY(32px) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* 1. Heading Entrance: starts at 0.10s */
 .hero-heading-reveal {
-  animation: heroSoftReveal 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-  will-change: opacity, transform, filter;
+  animation: heroEntranceHeading 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.10s both;
+  will-change: opacity, transform;
 }
 
+/* 2. Subheading / Description Entrance: starts at 0.38s */
 .hero-subheading-reveal {
-  animation: heroSoftReveal 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
-  will-change: opacity, transform, filter;
+  animation: heroEntranceSubheading 0.90s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
+  will-change: opacity, transform;
 }
 
-.hero-cta-reveal {
-  animation: heroSoftReveal 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
-  will-change: opacity, transform, filter;
+/* 3. Button Group Fallback, Practice Menu & Individual Staggered Buttons */
+.hero-cta-reveal,
+.hero-menu-reveal {
+  animation: heroEntranceButton 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.62s both;
+  will-change: opacity, transform;
+}
+
+.hero-cta-btn-1 {
+  animation: heroEntranceButton 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.62s both;
+  will-change: opacity, transform;
+}
+
+.hero-cta-btn-2 {
+  animation: heroEntranceButton 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.82s both;
+  will-change: opacity, transform;
+}
+
+.hero-cta-btn-3 {
+  animation: heroEntranceButton 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.98s both;
+  will-change: opacity, transform;
+}
+
+/* 4. Hero Artwork / Image Entrance: starts at 1.08s after buttons */
+.hero-artwork-reveal,
+.hero-image-reveal,
+.about-hero-art {
+  animation: heroEntranceArtwork 1.15s cubic-bezier(0.16, 1, 0.3, 1) 1.08s both;
+  will-change: opacity, transform;
+}
+
+/* ========================================================================= */
+/* Universal Section Heading Shimmer Gradient (Site-Wide Brand Signature)   */
+/* Continuous Smooth Flowing Brand Logo Red & Blue Gradient                 */
+/* ========================================================================= */
+@keyframes heroHeadingShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.section-shimmer-heading,
+.about-section-heading,
+.service-shimmer-line,
+.service-shimmer-center,
+.testimonial-shimmer-line,
+.prime-shimmer-line,
+.about-gradient-text,
+.hero-shimmer-title-line {
+  background-image: linear-gradient(
+    90deg,
+    #0B2553 0%,
+    #0C487A 14%,
+    #1E40AF 26%,
+    #2563EB 36%,
+    #DC2626 46%,
+    #FF3130 52%,
+    #FF4D4D 58%,
+    #DC2626 68%,
+    #2563EB 78%,
+    #1E40AF 86%,
+    #0C487A 93%,
+    #0B2553 100%
+  ) !important;
+  background-size: 200% 100% !important;
+  background-repeat: repeat !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: heroHeadingShimmer 6s linear infinite !important;
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.hero-shimmer-title-line {
+  display: block !important;
+  width: fit-content !important;
+}
+
+.hero-shimmer-title-line-1 {
+  animation: heroHeadingShimmer 6s linear infinite !important;
+  animation-delay: 0s !important;
+}
+
+.hero-shimmer-title-line-2 {
+  animation: heroHeadingShimmer 6s linear infinite !important;
+  animation-delay: -0.4s !important;
+}
+
+.hero-shimmer-title-line-3 {
+  animation: heroHeadingShimmer 6s linear infinite !important;
+  animation-delay: -0.8s !important;
+}
+
+.section-shimmer-heading span:not([data-no-shimmer]),
+.about-section-heading span:not([data-no-shimmer]),
+.testimonial-shimmer-line span:not([data-no-shimmer]),
+.prime-shimmer-line span:not([data-no-shimmer]) {
+  background: inherit !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-shimmer-line {
+  .hero-shimmer-line,
+  .section-shimmer-heading,
+  .about-section-heading,
+  .service-shimmer-line,
+  .service-shimmer-center,
+  .testimonial-shimmer-line,
+  .prime-shimmer-line,
+  .about-gradient-text,
+  .hero-shimmer-title-line {
     animation: none !important;
+    background: none !important;
+    -webkit-text-fill-color: #0B2553 !important;
+    color: #0B2553 !important;
   }
   .hero-heading-reveal,
   .hero-subheading-reveal,
-  .hero-cta-reveal {
+  .hero-cta-reveal,
+  .hero-cta-btn-1,
+  .hero-cta-btn-2,
+  .hero-cta-btn-3,
+  .hero-artwork-reveal,
+  .hero-image-reveal,
+  .about-hero-art {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -719,40 +873,59 @@
 }
 
 /* ========================================================================= */
-/* Global Scroll Reveal Animations                                           */
+/* ========================================================================= */
+/* Global Staggered Scroll Reveal Animations                                  */
+/* Soft cinematic upward translation, blur dissipation, and scale settling    */
 /* ========================================================================= */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translateY(26px) scale(0.98);
+  filter: blur(4px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
 }
 
 .reveal-on-scroll.is-revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  filter: none !important;
 }
 
 .reveal-left {
   opacity: 0;
   transform: translateX(-30px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(4px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
 }
 
 .reveal-left.is-revealed {
   opacity: 1;
   transform: translateX(0);
+  filter: none !important;
 }
 
 .reveal-right {
   opacity: 0;
   transform: translateX(30px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(4px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
 }
 
 .reveal-right.is-revealed {
   opacity: 1;
   transform: translateX(0);
+  filter: none !important;
 }
 
 /* Stagger Delays */
@@ -763,6 +936,8 @@
 .delay-300 { transition-delay: 300ms; }
 .delay-400 { transition-delay: 400ms; }
 .delay-500 { transition-delay: 500ms; }
+.delay-600 { transition-delay: 600ms; }
+.delay-700 { transition-delay: 700ms; }
 
 /* 3D Tilt Container for Services */
 .tilt-card-container {

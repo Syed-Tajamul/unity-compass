@@ -171,22 +171,22 @@ const aboutPageSchema = {
           We help contractors compete, hire, and deliver in regulated environments.
         </p>
 
-        <dl class="hero-cta-reveal mt-10 grid max-w-xl grid-cols-2 gap-x-6 gap-y-4 border-t border-[#0C487A]/15 pt-6 sm:grid-cols-3">
-          <div>
+        <dl class="mt-10 grid max-w-xl grid-cols-2 gap-x-6 gap-y-4 border-t border-[#0C487A]/15 pt-6 sm:grid-cols-3">
+          <div class="hero-cta-btn-1">
             <dt class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
               <AboutIcon name="Target" class="h-3.5 w-3.5 text-[#0C487A]" stroke-width={2.25} />
               Focus
             </dt>
             <dd class="mt-1 text-sm font-semibold text-[#0F274A]">Federal delivery</dd>
           </div>
-          <div>
+          <div class="hero-cta-btn-2">
             <dt class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
               <AboutIcon name="Layers3" class="h-3.5 w-3.5 text-[#0C487A]" stroke-width={2.25} />
               Model
             </dt>
             <dd class="mt-1 text-sm font-semibold text-[#0F274A]">Integrated support</dd>
           </div>
-          <div class="col-span-2 sm:col-span-1">
+          <div class="col-span-2 sm:col-span-1 hero-cta-btn-3">
             <dt class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
               <AboutIcon name="MapPin" class="h-3.5 w-3.5 text-[#0C487A]" stroke-width={2.25} />
               Based in
@@ -196,7 +196,7 @@ const aboutPageSchema = {
         </dl>
       </div>
 
-      <div class="about-hero-art relative mx-auto w-full max-w-2xl" aria-hidden="true">
+      <div class="about-hero-art hero-artwork-reveal relative mx-auto w-full max-w-2xl" aria-hidden="true">
         <div class="absolute inset-x-[12%] bottom-[5%] h-[24%] rounded-full bg-[#0C487A]/15 blur-3xl"></div>
         <img
           src="/images/about-hero-960.webp"
@@ -545,26 +545,25 @@ const aboutPageSchema = {
       linear-gradient(to bottom, rgba(12, 72, 122, 0.08) 1px, transparent 1px);
   }
 
-  .about-hero .hero-heading-reveal,
-  .about-hero .hero-subheading-reveal,
-  .about-hero .hero-cta-reveal {
-    animation: none;
-    will-change: auto;
-  }
-
-  .about-gradient-text {
-    background: linear-gradient(100deg, #0C487A 5%, #1E40AF 40%, #FF3130 90%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
+  .about-gradient-text,
   .about-section-heading {
-    background: linear-gradient(100deg, #0F274A 0%, #1E40AF 62%, #DC2626 100%);
+    background: linear-gradient(
+      90deg,
+      #0B2553 0%,
+      #0C487A 16%,
+      #1E40AF 34%,
+      #DC2626 52%,
+      #FF3130 66%,
+      #2563EB 82%,
+      #0B2553 100%
+    );
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+    animation: heroHeadingShimmer 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: background-position;
   }
 
   @property --value-border-angle {

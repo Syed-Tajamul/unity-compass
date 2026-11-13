@@ -128,42 +128,122 @@ const schemaOrg = {
     <!-- Global Executive Dismissible Toaster -->
     <Toast />
 
-    <!-- Global Scroll Reveal Observer Script -->
+    <!-- Global Motion & Universal Section Gradient Controller -->
     <script>
-      function setupScrollReveal() {
-        const revealElements = document.querySelectorAll<HTMLElement>(
-          '.reveal-on-scroll, .reveal-left, .reveal-right'
+      function isDarkContainer(el: HTMLElement | null): boolean {
+        let curr: HTMLElement | null = el;
+        while (curr && curr !== document.body) {
+          const cls = curr.className;
+          if (typeof cls === 'string') {
+            if (
+              cls.includes('bg-[#0A1B3A]') ||
+              cls.includes('bg-[#0B2553]') ||
+              cls.includes('bg-[#0F172A]') ||
+              cls.includes('bg-[#071120]') ||
+              cls.includes('bg-slate-900') ||
+              cls.includes('dark-section')
+            ) {
+              return true;
+            }
+          }
+          if (curr.getAttribute('data-theme') === 'dark') return true;
+          if (curr.tagName === 'FOOTER') return true;
+          curr = curr.parentElement;
+        }
+        return false;
+      }
+
+      function applyUniversalSectionHeadingGradient() {
+        // Automatically find all section headings across every single page
+        const headings = document.querySelectorAll<HTMLElement>(
+          'section h2, main h2, [aria-labelledby] h2, article h2'
         );
 
-        if (!('IntersectionObserver' in window)) {
-          // Fallback if IntersectionObserver is unsupported
-          revealElements.forEach((el) => el.classList.add('is-revealed'));
+        headings.forEach((h2) => {
+          if (
+            h2.classList.contains('sr-only') ||
+            h2.dataset.noShimmer !== undefined ||
+            h2.classList.contains('text-white') ||
+            isDarkContainer(h2)
+          ) {
+            return;
+          }
+          h2.classList.add('section-shimmer-heading');
+        });
+      }
+
+      function setupScrollReveal() {
+        const revealElements = document.querySelectorAll<HTMLElement>(
+          '.reveal-on-scroll, .reveal-left, .reveal-right, .about-reveal, .career-reveal, .contact-reveal, .blog-reveal'
+        );
+
+        if (!revealElements.length) return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (!('IntersectionObserver' in window) || prefersReducedMotion) {
+          revealElements.forEach((el) => {
+            el.classList.add('is-revealed', 'is-visible');
+          });
           return;
         }
 
+        // Fast-path: reveal anything already in viewport immediately
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        revealElements.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= windowHeight + 60 && rect.bottom >= -60) {
+            el.classList.add('is-revealed', 'is-visible');
+          }
+        });
+
         const observerOptions: IntersectionObserverInit = {
           root: null,
-          rootMargin: '0px 0px -60px 0px',
-          threshold: 0.1,
+          rootMargin: '0px 0px -20px 0px',
+          threshold: 0.05,
         };
 
         const observer = new IntersectionObserver((entries, obs) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('is-revealed');
-              obs.unobserve(entry.target);
+              const target = entry.target as HTMLElement;
+              target.classList.add('is-revealed', 'is-visible');
+              obs.unobserve(target);
             }
           });
         }, observerOptions);
 
-        revealElements.forEach((el) => observer.observe(el));
+        revealElements.forEach((el) => {
+          if (!el.classList.contains('is-revealed')) {
+            observer.observe(el);
+          }
+        });
+      }
+
+      function initGlobalPageMotion() {
+        try {
+          applyUniversalSectionHeadingGradient();
+        } catch (err) {
+          console.warn('[Unity Compass] Heading gradient:', err);
+        }
+
+        try {
+          setupScrollReveal();
+        } catch (err) {
+          console.warn('[Unity Compass] Scroll reveal:', err);
+          document.querySelectorAll('.reveal-on-scroll, .reveal-left, .reveal-right').forEach((el) => {
+            el.classList.add('is-revealed');
+          });
+        }
       }
 
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupScrollReveal);
+        document.addEventListener('DOMContentLoaded', initGlobalPageMotion);
       } else {
-        setupScrollReveal();
+        initGlobalPageMotion();
       }
+
+      document.addEventListener('astro:page-load', initGlobalPageMotion);
     </script>
   </body>
 </html>

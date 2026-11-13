@@ -3,12 +3,15 @@
  * Testimonials.astro - Executive GovCon Client Testimonials Section
  * 
  * Harmonized Theme & Visual Continuity:
- * - Positioned directly after "Our Mission: Navigating Federal Complexity with Clarity, Compliance, and Confidence"
- * - Exact same background as Defense Industry Giants section (bg-white with 16px checks grid and radial blue glow)
- * - Complete 2-line headline with unbroken continuous radiant color shimmer animation
- * - Signature animated tri-color blended accent bar (Navy to Royal to Red)
- * - Removed visible "Chief Technology Officer" label while preserving accessible reference
- * - Automatic transition every 4.5 seconds with pause on hover/focus and circular arrow controls
+ * - Positioned after "Our Mission: Navigating Federal Complexity"
+ * - Subtle ambient floating background orbs and 16px checks grid
+ * - Glassmorphic executive card with multi-layer border
+ * - Centered levitating quotation mark icon badge with pulsing outer glow ring
+ * - Category pills & impact footnotes per quote
+ * - Velvety dissolve slide transitions (opacity, scale, translateY, filter)
+ * - Signature Reddish Active Dot Indicator (#FF3130) with subtle countdown sheen sweep
+ * - Clean circular arrow controls
+ * - 100% Verbatim Authentic Client Quotes intact
  */
 
 import { testimonials } from '../data/testimonials';
@@ -16,28 +19,36 @@ import { testimonials } from '../data/testimonials';
 
 <section
   id="testimonials"
-  class="relative py-20 sm:py-24 lg:py-28 bg-white overflow-hidden scroll-mt-16 border-t border-slate-200/80"
+  class="relative py-20 sm:py-24 lg:py-28 bg-gradient-to-b from-[#F8FAFC] via-white to-[#F4F8FC] overflow-hidden scroll-mt-16 border-t border-slate-200/80"
   aria-labelledby="testimonials-heading"
 >
-  <!-- Minute Checks Pattern Overlay (Identical 16px × 16px grid as Defense Primes section) -->
+  <!-- Minute Technical Blueprint Grid (16px × 16px) -->
   <div
-    class="absolute inset-0 pointer-events-none opacity-30 mix-blend-multiply"
+    class="absolute inset-0 pointer-events-none opacity-35 mix-blend-multiply"
     style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.08) 1px, transparent 1px);"
     aria-hidden="true"
   ></div>
 
-  <!-- Soft Ambient Radial Blue Glow centered on section (Matching Defense Primes) -->
+  <!-- Animated Living Ambient Glowing Orbs drifting in the background -->
   <div
-    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-64 bg-[radial-gradient(ellipse,rgba(40,121,182,0.07)_0%,transparent_70%)] pointer-events-none"
+    class="testimonial-orb testimonial-orb-1 absolute -top-24 -left-24 w-[520px] h-[520px] rounded-full pointer-events-none blur-3xl opacity-60"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="testimonial-orb testimonial-orb-2 absolute -bottom-24 -right-24 w-[500px] h-[500px] rounded-full pointer-events-none blur-3xl opacity-50"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-[420px] bg-[radial-gradient(circle,rgba(40,121,182,0.12)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none"
     aria-hidden="true"
   ></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     
-    <!-- Top Header Group: Centered in Middle Matching Above Sections -->
+    <!-- Top Header Group: Centered in Middle Matching Adjacent Sections -->
     <div class="text-center max-w-4xl mx-auto mb-12 sm:mb-16 testimonial-header-wrap">
       
-      <!-- Main Headline with Tight Cohesive Line-Height & Continuous Blended Color Shimmer Animation -->
+      <!-- Main Headline with Continuous Blended Color Shimmer Animation -->
       <h2
         id="testimonials-heading"
         class="testimonial-heading-reveal text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] lg:leading-[1.24] max-w-4xl mx-auto text-center"
@@ -52,13 +63,13 @@ import { testimonials } from '../data/testimonials';
       <!-- Animated Brand Accent Bar (Navy-to-Red Dynamic Pulse) -->
       <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] section-accent-line mx-auto mt-4 mb-5"></div>
 
-      <!-- Supporting Narrative Description (Verbatim Phrase Preserved) -->
+      <!-- Supporting Narrative Description -->
       <p class="testimonial-subheading-reveal text-sm sm:text-base lg:text-[1.05rem] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-center">
         Trusted by federal primes, defense contractors, and emerging commercial leaders across the United States. We believe in the power of strong relationships and transparent communication.
       </p>
     </div>
 
-    <!-- Elegant Clean Testimonial Showcase -->
+    <!-- Elegant Lively Testimonial Showcase -->
     <div
       class="max-w-4xl mx-auto testimonial-showcase-wrap"
       id="testimonial-slider-container"
@@ -66,90 +77,129 @@ import { testimonials } from '../data/testimonials';
       aria-roledescription="carousel"
       aria-label="Client Testimonials"
     >
-      <!-- Glassmorphic Testimonial Card Frame -->
-      <div class="relative bg-white/95 backdrop-blur-xl rounded-3xl p-8 sm:p-12 lg:p-14 border border-slate-200/90 shadow-[0_20px_50px_-15px_rgba(11,37,83,0.10),0_0_0_1px_rgba(255,255,255,0.9)_inset] transition-all duration-300">
+      <!-- Outer Dynamic Glowing Border Container -->
+      <div class="relative rounded-[2.35rem] p-[2px] bg-gradient-to-br from-blue-400/40 via-slate-200 to-[#FF3130]/40 shadow-[0_20px_60px_-15px_rgba(11,37,83,0.12)] hover:shadow-[0_30px_70px_-10px_rgba(11,37,83,0.22)] transition-all duration-700">
         
-        <!-- Subtle Brand Red Quotation Icon Badge -->
-        <div class="flex justify-center mb-6" aria-hidden="true">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0C487A] via-[#1E40AF] to-[#FF3130] text-white flex items-center justify-center shadow-md shadow-[#0C487A]/20">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-            </svg>
-          </div>
-        </div>
+        <!-- Ambient Glowing Aura Behind Card -->
+        <div class="absolute -inset-1.5 rounded-[2.5rem] bg-gradient-to-r from-blue-500/20 via-indigo-500/15 to-[#FF3130]/20 blur-xl opacity-70 pointer-events-none"></div>
 
-        <!-- Slides Viewport -->
-        <div class="relative min-h-[190px] sm:min-h-[160px] lg:min-h-[140px] flex items-center justify-center" id="testimonial-card-frame">
-          {testimonials.map((t, index) => (
-            <div
-              class={`testimonial-slide transition-all duration-600 ease-in-out absolute inset-0 flex flex-col items-center justify-center text-center ${
-                index === 0
-                  ? 'opacity-100 translate-y-0 pointer-events-auto z-10'
-                  : 'opacity-0 translate-y-3 pointer-events-none z-0'
-              }`}
-              data-index={index}
-              role="tabpanel"
-              aria-label={`Testimonial ${index + 1} of ${testimonials.length}`}
-            >
-              <!-- Verbatim Authentic Client Quote -->
-              <blockquote class="text-base sm:text-lg lg:text-[1.18rem] text-slate-800 font-medium leading-[1.78] max-w-3xl mx-auto select-text">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-
-              <!-- Accessible role reference for verification (label visually removed per user request) -->
-              {t.authorRole && (
-                <span class="sr-only">{t.authorRole}</span>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <!-- Navigation Controls: Circular Arrows & Pagination Indicator Pills -->
-        <div class="flex items-center justify-between mt-8 pt-6 border-t border-slate-100/90 gap-4">
+        <!-- Glassmorphic Inner Testimonial Card Frame -->
+        <div class="relative bg-white/95 backdrop-blur-2xl rounded-[2.25rem] p-7 sm:p-11 lg:p-13 border border-white/80 overflow-hidden">
           
-          <!-- Left Arrow Button -->
-          <button
-            type="button"
-            id="testimonial-prev-btn"
-            class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white border border-slate-200 text-[#0B2553] hover:text-white hover:bg-[#0C487A] hover:border-[#0C487A] active:bg-[#FF3130] active:border-[#FF3130] flex items-center justify-center transition-all duration-200 shadow-sm active:scale-95 cursor-pointer group"
-            aria-label="Previous quote"
-          >
-            <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+          <!-- Subtle Top Specular Light Sheen -->
+          <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF3130]/60 to-transparent pointer-events-none" aria-hidden="true"></div>
 
-          <!-- Pagination Indicator Dots -->
-          <div
-            class="flex items-center justify-center gap-2"
-            role="tablist"
-            aria-label="Testimonial pagination"
-          >
-            {testimonials.map((_, index) => (
-              <button
-                type="button"
-                class={`testimonial-dot h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  index === 0 ? 'bg-[#FF3130] w-8' : 'bg-slate-200 hover:bg-slate-300 w-2.5'
+          <!-- Centered Levitating Quotation Badge with Glowing Pulse Ring -->
+          <div class="flex justify-center mb-6 sm:mb-8" aria-hidden="true">
+            <div class="relative group/quote">
+              <div class="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] blur-sm opacity-40 animate-pulse"></div>
+              <div class="relative w-12 h-12 sm:w-13 sm:h-13 rounded-2xl bg-gradient-to-br from-[#0C487A] via-[#1E40AF] to-[#FF3130] text-white flex items-center justify-center shadow-lg shadow-[#0C487A]/25 float-quote-icon">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slides Viewport with Velvety Dissolve -->
+          <div class="relative min-h-[220px] sm:min-h-[185px] lg:min-h-[165px] flex items-center justify-center" id="testimonial-card-frame">
+            {testimonials.map((t, index) => (
+              <div
+                class={`testimonial-slide absolute inset-0 flex flex-col items-center justify-center text-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  index === 0
+                    ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto z-10 filter-none'
+                    : 'opacity-0 scale-95 translate-y-4 pointer-events-none z-0 blur-xs'
                 }`}
                 data-index={index}
-                aria-label={`Go to slide ${index + 1}`}
-                role="tab"
-                aria-selected={index === 0 ? 'true' : 'false'}
-              />
+                role="tabpanel"
+                aria-label={`Testimonial ${index + 1} of ${testimonials.length}`}
+              >
+                <!-- Category Tag Pill -->
+                {t.category && (
+                  <span class="inline-block mb-3 px-3.5 py-1 rounded-lg text-xs font-extrabold uppercase tracking-widest text-[#0C487A] bg-[#0C487A]/8 border border-[#0C487A]/15">
+                    {t.category}
+                  </span>
+                )}
+
+                <!-- Verbatim Authentic Client Quote -->
+                <blockquote class="text-base sm:text-lg lg:text-[1.2rem] text-slate-800 font-medium leading-[1.8] sm:leading-[1.85] max-w-3xl mx-auto select-text">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+
+                <!-- Impact Area Footnote Badge -->
+                {t.impactArea && (
+                  <div class="mt-4 flex items-center justify-center gap-2 text-xs font-semibold text-slate-500">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#FF3130]"></span>
+                    <span>{t.impactArea}</span>
+                    {t.organizationType && (
+                      <>
+                        <span class="text-slate-300">•</span>
+                        <span>{t.organizationType}</span>
+                      </>
+                    )}
+                  </div>
+                )}
+
+                <!-- Accessible role reference for verification -->
+                {t.authorRole && (
+                  <span class="sr-only">{t.authorRole}</span>
+                )}
+              </div>
             ))}
           </div>
 
-          <!-- Right Arrow Button -->
-          <button
-            type="button"
-            id="testimonial-next-btn"
-            class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white border border-slate-200 text-[#0B2553] hover:text-white hover:bg-[#0C487A] hover:border-[#0C487A] active:bg-[#FF3130] active:border-[#FF3130] flex items-center justify-center transition-all duration-200 shadow-sm active:scale-95 cursor-pointer group"
-            aria-label="Next quote"
-          >
-            <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+          <!-- Navigation Controls: Circular Arrows & Signature Reddish Pagination Dots -->
+          <div class="flex items-center justify-between pt-8 mt-4 border-t border-slate-100/90 gap-4">
+            
+            <!-- Left Arrow Button with Hover Halo & Spring Micro-Feedback -->
+            <button
+              type="button"
+              id="testimonial-prev-btn"
+              class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white border border-slate-200/90 text-[#0B2553] hover:text-white hover:bg-[#FF3130] hover:border-[#FF3130] active:scale-95 flex items-center justify-center transition-all duration-300 shadow-[0_4px_14px_rgba(11,37,83,0.08)] hover:shadow-[0_8px_20px_rgba(255,49,48,0.3)] cursor-pointer group"
+              aria-label="Previous quote"
+            >
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <!-- Center: Signature Reddish Pagination Dots with Countdown Sheen Indicator -->
+            <div
+              class="flex items-center justify-center gap-2.5"
+              role="tablist"
+              aria-label="Testimonial pagination"
+            >
+              {testimonials.map((_, index) => (
+                <button
+                  type="button"
+                  class={`testimonial-dot h-2.5 rounded-full transition-all duration-400 cursor-pointer relative overflow-hidden p-0 ${
+                    index === 0
+                      ? 'w-8 bg-[#FF3130] shadow-[0_2px_8px_rgba(255,49,48,0.45)] is-active'
+                      : 'w-2.5 bg-slate-300 hover:bg-slate-400'
+                  }`}
+                  data-index={index}
+                  aria-label={`Go to slide ${index + 1}`}
+                  role="tab"
+                  aria-selected={index === 0 ? 'true' : 'false'}
+                >
+                  <span class="testimonial-dot-sheen" aria-hidden="true"></span>
+                </button>
+              ))}
+            </div>
+
+            <!-- Right Arrow Button with Hover Halo & Spring Micro-Feedback -->
+            <button
+              type="button"
+              id="testimonial-next-btn"
+              class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white border border-slate-200/90 text-[#0B2553] hover:text-white hover:bg-[#FF3130] hover:border-[#FF3130] active:scale-95 flex items-center justify-center transition-all duration-300 shadow-[0_4px_14px_rgba(11,37,83,0.08)] hover:shadow-[0_8px_20px_rgba(255,49,48,0.3)] cursor-pointer group"
+              aria-label="Next quote"
+            >
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+          </div>
 
         </div>
 
@@ -161,6 +211,44 @@ import { testimonials } from '../data/testimonials';
 </section>
 
 <style>
+  /* ========================================================================= */
+  /* Animated Floating Background Ambient Glowing Orbs                         */
+  /* ========================================================================= */
+  .testimonial-orb-1 {
+    background: radial-gradient(circle, rgba(30, 64, 175, 0.16) 0%, rgba(12, 72, 122, 0.08) 45%, transparent 70%);
+    animation: floatOrb1 16s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  .testimonial-orb-2 {
+    background: radial-gradient(circle, rgba(255, 49, 48, 0.14) 0%, rgba(30, 64, 175, 0.08) 50%, transparent 70%);
+    animation: floatOrb2 18s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes floatOrb1 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(45px, -35px) scale(1.12); }
+    100% { transform: translate(-30px, 25px) scale(0.95); }
+  }
+
+  @keyframes floatOrb2 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-40px, 30px) scale(1.1); }
+    100% { transform: translate(25px, -20px) scale(0.92); }
+  }
+
+  /* Levitating Quote Icon Badge */
+  .float-quote-icon {
+    animation: quoteLevitate 4.5s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  @keyframes quoteLevitate {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
   /* ========================================================================= */
   /* Scroll-Triggered Soft-Reveal Animation (Matching Hero & ServicesGrid)     */
   /* ========================================================================= */
@@ -204,12 +292,13 @@ import { testimonials } from '../data/testimonials';
     display: block;
     background: linear-gradient(
       90deg,
-      #0F274A 0%,
-      #1E40AF 22%,
-      #2563EB 42%,
-      #DC2626 58%,
-      #EF4444 72%,
-      #0F274A 100%
+      #0B2553 0%,
+      #0C487A 16%,
+      #1E40AF 34%,
+      #DC2626 52%,
+      #FF3130 66%,
+      #2563EB 82%,
+      #0B2553 100%
     );
     background-size: 200% auto;
     -webkit-background-clip: text;
@@ -220,11 +309,11 @@ import { testimonials } from '../data/testimonials';
   }
 
   .testimonial-shimmer-line-1 {
-    animation: testimonialShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: heroHeadingShimmer 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 
   .testimonial-shimmer-line-2 {
-    animation: testimonialShimmer2 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: heroHeadingShimmer 7s cubic-bezier(0.4, 0, 0.2, 1) 0.8s infinite;
   }
 
   @keyframes testimonialShimmer1 {
@@ -241,15 +330,44 @@ import { testimonials } from '../data/testimonials';
     100% { background-position: 150% 50%; }
   }
 
+  /* ========================================================================= */
+  /* Reddish Active Dot with Subtle Progress Sheen                             */
+  /* ========================================================================= */
+  .testimonial-dot-sheen {
+    position: absolute;
+    inset: 0;
+    width: 60%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.65) 50%, transparent 100%);
+    transform: translateX(-150%);
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  .testimonial-dot.is-active .testimonial-dot-sheen {
+    animation: dotSheenSweep 4.8s linear forwards;
+  }
+
+  :global(#testimonial-slider-container.is-paused) .testimonial-dot.is-active .testimonial-dot-sheen {
+    animation-play-state: paused;
+  }
+
+  @keyframes dotSheenSweep {
+    0% { transform: translateX(-130%); }
+    100% { transform: translateX(210%); }
+  }
+
   /* Reduced Motion Override */
   @media (prefers-reduced-motion: reduce) {
     .testimonial-heading-reveal,
     .testimonial-subheading-reveal,
-    .testimonial-showcase-wrap {
+    .testimonial-showcase-wrap,
+    .testimonial-orb,
+    .float-quote-icon {
       opacity: 1 !important;
       transform: none !important;
       filter: none !important;
       transition: none !important;
+      animation: none !important;
     }
     .testimonial-shimmer-line {
       animation: none !important;
@@ -276,7 +394,7 @@ import { testimonials } from '../data/testimonials';
     let currentIndex = 0;
     const totalSlides = slides.length;
     let autoPlayTimer: ReturnType<typeof setInterval> | null = null;
-    const AUTO_INTERVAL = 4500; // Changes automatically every 4.5 seconds
+    const AUTO_INTERVAL = 4800; // 4.8 seconds
 
     // Scroll reveal observer
     if ('IntersectionObserver' in window) {
@@ -287,28 +405,44 @@ import { testimonials } from '../data/testimonials';
             revealObserver.unobserve(section);
           }
         });
-      }, { threshold: 0.20 });
+      }, { threshold: 0.15 });
       revealObserver.observe(section);
     } else {
       section.classList.add('is-revealed');
     }
 
+    function restartDotSheen(dotElement: HTMLElement | null) {
+      if (!dotElement) return;
+      const sheen = dotElement.querySelector<HTMLElement>('.testimonial-dot-sheen');
+      if (sheen) {
+        sheen.style.animation = 'none';
+        void sheen.offsetWidth; // Force DOM reflow to restart animation
+        sheen.style.animation = '';
+      }
+    }
+
     function goToSlide(index: number) {
       if (index === currentIndex) return;
 
-      slides[currentIndex].classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto', 'z-10');
-      slides[currentIndex].classList.add('opacity-0', 'translate-y-3', 'pointer-events-none', 'z-0');
-      dots[currentIndex]?.classList.remove('bg-[#FF3130]', 'w-8');
-      dots[currentIndex]?.classList.add('bg-slate-200', 'w-2.5');
+      // Deactivate current slide & dot
+      slides[currentIndex].classList.remove('opacity-100', 'scale-100', 'translate-y-0', 'pointer-events-auto', 'z-10', 'filter-none');
+      slides[currentIndex].classList.add('opacity-0', 'scale-95', 'translate-y-4', 'pointer-events-none', 'z-0', 'blur-xs');
+      
+      dots[currentIndex]?.classList.remove('w-8', 'bg-[#FF3130]', 'shadow-[0_2px_8px_rgba(255,49,48,0.45)]', 'is-active');
+      dots[currentIndex]?.classList.add('w-2.5', 'bg-slate-300');
       dots[currentIndex]?.setAttribute('aria-selected', 'false');
 
       currentIndex = (index + totalSlides) % totalSlides;
 
-      slides[currentIndex].classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none', 'z-0');
-      slides[currentIndex].classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto', 'z-10');
-      dots[currentIndex]?.classList.remove('bg-slate-200', 'w-2.5');
-      dots[currentIndex]?.classList.add('bg-[#FF3130]', 'w-8');
+      // Activate new slide & dot
+      slides[currentIndex].classList.remove('opacity-0', 'scale-95', 'translate-y-4', 'pointer-events-none', 'z-0', 'blur-xs');
+      slides[currentIndex].classList.add('opacity-100', 'scale-100', 'translate-y-0', 'pointer-events-auto', 'z-10', 'filter-none');
+      
+      dots[currentIndex]?.classList.remove('w-2.5', 'bg-slate-300');
+      dots[currentIndex]?.classList.add('w-8', 'bg-[#FF3130]', 'shadow-[0_2px_8px_rgba(255,49,48,0.45)]', 'is-active');
       dots[currentIndex]?.setAttribute('aria-selected', 'true');
+
+      restartDotSheen(dots[currentIndex]);
     }
 
     function nextSlide() {
@@ -329,6 +463,12 @@ import { testimonials } from '../data/testimonials';
         clearInterval(autoPlayTimer);
         autoPlayTimer = null;
       }
+      container.classList.add('is-paused');
+    }
+
+    function resumeAutoPlay() {
+      container.classList.remove('is-paused');
+      startAutoPlay();
     }
 
     if (prevBtn) {
@@ -356,9 +496,9 @@ import { testimonials } from '../data/testimonials';
     });
 
     container.addEventListener('mouseenter', stopAutoPlay);
-    container.addEventListener('mouseleave', startAutoPlay);
+    container.addEventListener('mouseleave', resumeAutoPlay);
     container.addEventListener('focusin', stopAutoPlay);
-    container.addEventListener('focusout', startAutoPlay);
+    container.addEventListener('focusout', resumeAutoPlay);
 
     // Keyboard navigation
     container.addEventListener('keydown', (e) => {
@@ -373,6 +513,8 @@ import { testimonials } from '../data/testimonials';
       }
     });
 
+    // Start initial dot sheen and auto-play
+    restartDotSheen(dots[0]);
     startAutoPlay();
   }
 

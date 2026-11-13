@@ -277,7 +277,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
               <div class="relative rounded-3xl overflow-hidden border border-slate-200/90 bg-white shadow-[0_20px_50px_-12px_rgba(11,37,83,0.16)] w-full">
                 
                 <img
-                  src="/images/service3.png"
+                  src="/images/new security cleared.png"
                   alt="Security-Cleared Recruitment"
                   class="w-full h-auto aspect-[2752/1536] object-contain object-center group-hover:scale-[1.015] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] select-none block"
                   width="2752"
@@ -1150,15 +1150,11 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     filter: blur(0);
   }
 
-  /* Initial Page Load Soft-Reveal */
-  @keyframes heroSoftReveal {
-    0% { opacity: 0; transform: translateY(16px); filter: blur(8px); }
-    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
-  }
-  .hero-heading-reveal { animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; will-change: opacity, transform, filter; }
-  .hero-subheading-reveal { animation: heroSoftReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; will-change: opacity, transform, filter; }
-  .hero-image-reveal { animation: heroSoftReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; will-change: opacity, transform, filter; }
-  .hero-menu-reveal { animation: heroSoftReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; will-change: opacity, transform, filter; }
+  /* Choreographed Hero Entrance (Heading -> Subheading -> Menu -> Image) */
+  .hero-heading-reveal { animation: heroEntranceHeading 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.10s both; will-change: opacity, transform, filter; }
+  .hero-subheading-reveal { animation: heroEntranceSubheading 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both; will-change: opacity, transform, filter; }
+  .hero-menu-reveal { animation: heroEntranceButton 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.62s both; will-change: opacity, transform, filter; }
+  .hero-image-reveal { animation: heroEntranceArtwork 1.20s cubic-bezier(0.16, 1, 0.3, 1) 1.08s both; will-change: opacity, transform, filter; }
 
   /* Floating Squares */
   @keyframes floatSubtle1 { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
@@ -1514,7 +1510,16 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
 
   /* Continuous Radiant Shimmer Sweep */
   .service-shimmer-center {
-    background: linear-gradient(90deg, #0F274A 0%, #1E40AF 22%, #2563EB 42%, #DC2626 58%, #EF4444 72%, #0F274A 100%);
+    background: linear-gradient(
+      90deg,
+      #0B2553 0%,
+      #0C487A 16%,
+      #1E40AF 34%,
+      #DC2626 52%,
+      #FF3130 66%,
+      #2563EB 82%,
+      #0B2553 100%
+    );
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -1530,13 +1535,7 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
     padding-top: 0.05em;
     overflow: visible;
   }
-  .service-shimmer-line-1 { animation: servicePageShimmer1 9.5s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
-  @keyframes servicePageShimmer1 {
-    0% { background-position: 0% 50%; }
-    48% { background-position: 100% 50%; }
-    52% { background-position: 100% 50%; }
-    100% { background-position: 200% 50%; }
-  }
+  .service-shimmer-line-1 { animation: heroHeadingShimmer 7s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
 
   /* Accessibility: Reduced Motion */
   @media (prefers-reduced-motion: reduce) {
