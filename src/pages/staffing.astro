@@ -221,13 +221,13 @@ const staffingModels = [
 
           <!-- Practice Areas Menu Column (~32% Width: Current Page Excluded, Active Blue Hover) -->
           <div class="w-full lg:w-[32%] flex flex-col justify-center hero-menu-reveal">
-            <div class="rounded-3xl border border-slate-200/90 bg-white/95 backdrop-blur-md p-4 sm:p-5 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.08)] flex flex-col justify-center space-y-2.5 h-full">
+            <div class="rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white/95 backdrop-blur-md p-4 sm:p-5 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.08)] flex flex-col justify-center space-y-2.5 h-full">
               
               <div class="space-y-2 flex-1 flex flex-col justify-center py-2">
                 {otherFederalServices.map((service, idx) => (
                   <a
                     href={service.href}
-                    class="group relative flex items-center justify-between px-4 sm:px-5 py-3.5 sm:py-4 rounded-2xl text-slate-700 font-semibold text-sm transition-all duration-300 border border-slate-200/60 hover:border-[#0C487A]/30 hover:bg-gradient-to-r hover:from-[#0C487A] hover:via-[#103E6B] hover:to-[#1E40AF] hover:text-white hover:shadow-[0_10px_25px_-5px_rgba(12,72,122,0.45)] hover:scale-[1.02] cursor-pointer"
+                    class="group relative flex items-center justify-between px-4 sm:px-5 py-3.5 sm:py-4 rounded-md sm:rounded-lg text-slate-700 font-semibold text-sm transition-all duration-300 border border-slate-200/60 hover:border-[#0C487A]/30 hover:bg-gradient-to-r hover:from-[#0C487A] hover:via-[#103E6B] hover:to-[#1E40AF] hover:text-white hover:shadow-[0_10px_25px_-5px_rgba(12,72,122,0.45)] hover:scale-[1.02] cursor-pointer"
                     style={`--stagger-delay: ${idx * 40}ms;`}
                   >
                     <div class="flex items-center gap-3 min-w-0 pr-2">
@@ -274,17 +274,17 @@ const staffingModels = [
 
           <!-- 4 Square Animated Cards Column (~44% Width: 2x2 Grid with Two-Layer Sliding Profile Card Animation) -->
           <div class="w-full lg:w-[44%] reveal-on-scroll reveal-right delay-150">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 w-full max-w-lg lg:max-w-xl mx-auto lg:mx-0">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-lg lg:max-w-xl mx-auto lg:mx-0">
               {keySquareCards.map((card, idx) => (
                 <div
-                  class="square-slide-card self-contained-card group relative cursor-pointer"
+                  class="square-slide-card self-contained-card group relative rounded-2xl sm:rounded-3xl cursor-pointer"
                   style={`transition-delay: ${idx * 60}ms;`}
                 >
                   <div class="square-slide-inner">
                     <!-- Slide 1: Top Deck (Icon + Title, smooth header transition, zero clipping) -->
-                    <div class="square-slide-top rounded-3xl bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-center text-white border border-white/15 shadow-[0_8px_20px_rgba(12,72,122,0.18)] flex flex-col items-center justify-center">
+                    <div class="square-slide-top rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-center text-white border border-white/15 shadow-[0_8px_20px_rgba(12,72,122,0.18)] flex flex-col items-center justify-center">
                       <!-- Ambient Glow -->
-                      <div class="absolute inset-0 rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                      <div class="absolute inset-0 rounded-2xl sm:rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
                       <!-- Icon Wrap with Subtle Pulse Ring Affordance -->
                       <div class="square-icon-wrap relative w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-2 shadow-inner transition-all duration-400">
@@ -308,7 +308,7 @@ const staffingModels = [
                     </div>
 
                     <!-- Slide 2: Bottom Deck (Description docked in flow, zero overlap, zero clipping) -->
-                    <div class="square-slide-bottom bg-white border border-slate-200/90 shadow-[0_20px_40px_-10px_rgba(15,23,42,0.22)]">
+                    <div class="square-slide-bottom rounded-b-2xl sm:rounded-b-3xl bg-white border border-slate-200/90 shadow-[0_20px_40px_-10px_rgba(15,23,42,0.22)]">
                       <p class="square-desc text-xs sm:text-[0.84rem] text-slate-700 leading-relaxed font-normal text-center">
                         {card.desc}
                       </p>
@@ -358,16 +358,16 @@ const staffingModels = [
         </div>
 
         <!-- 3 Staffing Models: Shuttle Bottom-to-Top Color Fill Cards (Same as Proposal Page) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {staffingModels.map((item, idx) => (
             <div
-              class="shuttle-card group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.28)] transition-all duration-400 flex flex-col justify-between min-h-[320px] p-7 sm:p-8 overflow-hidden cursor-pointer reveal-on-scroll"
+              class="shuttle-card group relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.28)] transition-all duration-400 flex flex-col justify-between min-h-[320px] p-7 sm:p-8 overflow-hidden cursor-pointer reveal-on-scroll"
               style={`transition-delay: ${idx * 90}ms;`}
               data-card-index={idx}
             >
               <!-- Shuttle Bottom-to-Top Color Fill with Organic Curved Top Crest -->
               <div
-                class="shuttle-fill-layer absolute inset-0 bg-gradient-to-t from-[#0C487A] via-[#103E6B] to-[#1E40AF] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none rounded-3xl overflow-hidden"
+                class="shuttle-fill-layer absolute inset-0 bg-gradient-to-t from-[#0C487A] via-[#103E6B] to-[#1E40AF] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none rounded-2xl sm:rounded-3xl overflow-hidden"
                 aria-hidden="true"
               >
                 <!-- Organic Curved Soft Light Wave at Leading Edge -->
@@ -437,21 +437,21 @@ const staffingModels = [
         </div>
 
         <!-- Value Proposition Quote Card with Glassmorphic Highlight -->
-        <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-slate-50/80 border border-slate-200/90 shadow-sm text-center mb-14 reveal-on-scroll delay-100">
+        <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-slate-50/80 border border-slate-200/90 shadow-sm text-center mb-14 reveal-on-scroll delay-100">
           <p class="text-base sm:text-lg lg:text-xl font-bold text-[#0B2553] leading-relaxed">
             At Unity Compass, we deliver agile staffing solutions through: deep government contracting knowledge, rapid talent mobilization, and an unwavering commitment to compliance quality
           </p>
         </div>
 
         <!-- 3 Cards Stage: New Latest Prism Spotlight Stage Animation -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch" id="why-uc-cards-grid">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch" id="why-uc-cards-grid">
           
           <!-- Card 1 -->
           <div
-            class="why-card-spotlight group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-start reveal-on-scroll delay-100"
+            class="why-card-spotlight group relative p-7 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-start reveal-on-scroll delay-100"
           >
             <!-- Glowing Radiant Accent Line at Top -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF]"></div>
+            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-2xl sm:rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF]"></div>
 
             <div class="relative z-10">
               <!-- Floating Icon Badge -->
@@ -473,10 +473,10 @@ const staffingModels = [
 
           <!-- Card 2 -->
           <div
-            class="why-card-spotlight group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_16px_36px_-8px_rgba(11,37,83,0.16)] cursor-pointer overflow-hidden flex flex-col justify-start md:-translate-y-1 reveal-on-scroll delay-200"
+            class="why-card-spotlight group relative p-7 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-[0_16px_36px_-8px_rgba(11,37,83,0.16)] cursor-pointer overflow-hidden flex flex-col justify-start md:-translate-y-1 reveal-on-scroll delay-200"
           >
             <!-- Glowing Radiant Accent Line at Top -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#FF3130] via-[#EF4444] to-[#DC2626]"></div>
+            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-2xl sm:rounded-t-3xl bg-gradient-to-r from-[#FF3130] via-[#EF4444] to-[#DC2626]"></div>
 
             <div class="relative z-10">
               <!-- Floating Icon Badge -->
@@ -498,10 +498,10 @@ const staffingModels = [
 
           <!-- Card 3 -->
           <div
-            class="why-card-spotlight group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-start reveal-on-scroll delay-300"
+            class="why-card-spotlight group relative p-7 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-start reveal-on-scroll delay-300"
           >
             <!-- Glowing Radiant Accent Line at Top -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#2563EB]"></div>
+            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-2xl sm:rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#2563EB]"></div>
 
             <div class="relative z-10">
               <!-- Floating Icon Badge -->
@@ -561,7 +561,7 @@ const staffingModels = [
         <div class="pt-4 flex justify-center">
           <a
             href="/contact"
-            class="inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 rounded-2xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
+            class="inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 rounded-md sm:rounded-lg bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
           >
             <span>Request Staffing Support</span>
             <svg class="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -719,7 +719,7 @@ const staffingModels = [
   .self-contained-card {
     height: 200px;
     overflow: hidden;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     box-shadow: 0 10px 25px -4px rgba(12, 72, 122, 0.18);
     transition: box-shadow 0.5s ease;
   }
@@ -745,7 +745,7 @@ const staffingModels = [
   .self-contained-card .square-slide-top {
     height: 200px;
     padding: 1.75rem 1.25rem 1.5rem 1.25rem;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -815,8 +815,8 @@ const staffingModels = [
     opacity: 0;
     transform: translateY(14px);
     border: none;
-    border-bottom-left-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
     background: #ffffff;
     display: flex;
     flex-direction: column;
@@ -837,6 +837,23 @@ const staffingModels = [
     opacity: 1;
     transform: translateY(0);
     padding: 0.85rem 1.25rem 1.15rem 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .self-contained-card,
+    .self-contained-card .square-slide-top {
+      border-radius: 1.5rem;
+    }
+
+    .self-contained-card:hover .square-slide-top {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .self-contained-card .square-slide-bottom {
+      border-bottom-left-radius: 1.5rem;
+      border-bottom-right-radius: 1.5rem;
+    }
   }
 
   /* Description text typography: elegant, readable, relaxed line-height */

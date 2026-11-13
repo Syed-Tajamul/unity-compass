@@ -274,13 +274,13 @@ const deliverables = [
 
           <!-- Practice Areas Menu Column (~32% Width: Current Page Excluded, Active Blue Hover) -->
           <div class="w-full lg:w-[32%] flex flex-col justify-center hero-menu-reveal">
-            <div class="rounded-3xl border border-slate-200/90 bg-white/95 backdrop-blur-md p-4 sm:p-5 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.08)] flex flex-col justify-center space-y-2.5 h-full">
+            <div class="rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white/95 backdrop-blur-md p-4 sm:p-5 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.08)] flex flex-col justify-center space-y-2.5 h-full">
               
               <div class="space-y-2 flex-1 flex flex-col justify-center py-2">
                 {otherFederalServices.map((service, idx) => (
                   <a
                     href={service.href}
-                    class="group relative flex items-center justify-between px-4 sm:px-5 py-3.5 sm:py-4 rounded-2xl text-slate-700 font-semibold text-sm transition-all duration-300 border border-slate-200/60 hover:border-[#0C487A]/30 hover:bg-gradient-to-r hover:from-[#0C487A] hover:via-[#103E6B] hover:to-[#1E40AF] hover:text-white hover:shadow-[0_10px_25px_-5px_rgba(12,72,122,0.45)] hover:scale-[1.02] cursor-pointer"
+                    class="group relative flex items-center justify-between px-4 sm:px-5 py-3.5 sm:py-4 rounded-md sm:rounded-lg text-slate-700 font-semibold text-sm transition-all duration-300 border border-slate-200/60 hover:border-[#0C487A]/30 hover:bg-gradient-to-r hover:from-[#0C487A] hover:via-[#103E6B] hover:to-[#1E40AF] hover:text-white hover:shadow-[0_10px_25px_-5px_rgba(12,72,122,0.45)] hover:scale-[1.02] cursor-pointer"
                     style={`--stagger-delay: ${idx * 40}ms;`}
                   >
                     <div class="flex items-center gap-3 min-w-0 pr-2">
@@ -323,17 +323,17 @@ const deliverables = [
 
           <!-- 4 Square Animated Cards Column (~44% Width: 2x2 Grid with Two-Layer Sliding Profile Card Animation) -->
           <div class="w-full lg:w-[44%] reveal-on-scroll reveal-right delay-150">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 w-full max-w-lg lg:max-w-xl mx-auto lg:mx-0">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-lg lg:max-w-xl mx-auto lg:mx-0">
               {keySquareCards.map((card, idx) => (
                 <div
-                  class="square-slide-card self-contained-card group relative cursor-pointer"
+                  class="square-slide-card self-contained-card group relative rounded-2xl sm:rounded-3xl cursor-pointer"
                   style={`transition-delay: ${idx * 60}ms;`}
                 >
                   <div class="square-slide-inner">
                     <!-- Slide 1: Top Deck (Icon + Title, smooth header transition, zero clipping) -->
-                    <div class="square-slide-top rounded-3xl bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-center text-white border border-white/15 shadow-[0_8px_20px_rgba(12,72,122,0.18)] flex flex-col items-center justify-center">
+                    <div class="square-slide-top rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-center text-white border border-white/15 shadow-[0_8px_20px_rgba(12,72,122,0.18)] flex flex-col items-center justify-center">
                       <!-- Ambient Glow -->
-                      <div class="absolute inset-0 rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                      <div class="absolute inset-0 rounded-2xl sm:rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
                       <!-- Icon Wrap with Subtle Pulse Ring Affordance -->
                       <div class="square-icon-wrap relative w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-2 shadow-inner transition-all duration-400">
@@ -357,7 +357,7 @@ const deliverables = [
                     </div>
 
                     <!-- Slide 2: Bottom Deck (Description docked in flow, zero overlap, zero clipping) -->
-                    <div class="square-slide-bottom bg-white border border-slate-200/90 shadow-[0_20px_40px_-10px_rgba(15,23,42,0.22)]">
+                    <div class="square-slide-bottom rounded-b-2xl sm:rounded-b-3xl bg-white border border-slate-200/90 shadow-[0_20px_40px_-10px_rgba(15,23,42,0.22)]">
                       <p class="square-desc text-xs sm:text-[0.84rem] text-slate-700 leading-relaxed font-normal text-center">
                         {card.desc}
                       </p>
@@ -429,10 +429,10 @@ const deliverables = [
                   <div class={`w-full md:w-1/2 pl-14 md:pl-0 ${isEven ? 'md:order-2 md:pl-12' : 'md:order-1 md:pr-12 md:text-right'}`}>
                     
                     <!-- Milestone Card with smooth glide-in on scroll -->
-                    <div class={`timeline-card-box group relative rounded-3xl p-6 sm:p-7 bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-default reveal-on-scroll ${isEven ? 'reveal-right' : 'reveal-left'}`}>
+                    <div class={`timeline-card-box group relative rounded-2xl sm:rounded-3xl p-6 sm:p-7 bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-default reveal-on-scroll ${isEven ? 'reveal-right' : 'reveal-left'}`}>
                       
                       <!-- Glowing Top Accent Line on Hover -->
-                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-2xl sm:rounded-t-3xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                       <!-- Milestone Pill Tag & Icon -->
                       <div class={`flex items-center gap-3 mb-3.5 ${isEven ? '' : 'md:justify-end'}`}>
@@ -501,16 +501,16 @@ const deliverables = [
         </div>
 
         <!-- 4 Deliverable Cards: Shuttle Bottom-to-Top Color Fill Animation with Staggered Scroll Reveal -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {deliverables.map((item, idx) => (
             <div
-              class={`shuttle-card group relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.28)] transition-all duration-400 flex flex-col justify-between min-h-[300px] p-7 sm:p-8 overflow-hidden cursor-pointer reveal-on-scroll`}
+              class={`shuttle-card group relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-[0_10px_30px_rgba(15,39,74,0.06)] hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.28)] transition-all duration-400 flex flex-col justify-between min-h-[300px] p-7 sm:p-8 overflow-hidden cursor-pointer reveal-on-scroll`}
               style={`transition-delay: ${idx * 80}ms;`}
               data-card-index={idx}
             >
               <!-- Shuttle Bottom-to-Top Color Fill with Organic Curved Top Crest (Screenshots 3 & 4 Inspiration) -->
               <div
-                class="shuttle-fill-layer absolute inset-0 bg-gradient-to-t from-[#0C487A] via-[#103E6B] to-[#1E40AF] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none rounded-3xl overflow-hidden"
+                class="shuttle-fill-layer absolute inset-0 bg-gradient-to-t from-[#0C487A] via-[#103E6B] to-[#1E40AF] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none rounded-2xl sm:rounded-3xl overflow-hidden"
                 aria-hidden="true"
               >
                 <!-- Organic Curved Soft Light Wave at the Leading Edge -->
@@ -585,21 +585,21 @@ const deliverables = [
         </div>
 
         <!-- Value Proposition Quote Card with Glassmorphic Highlight -->
-        <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-slate-50/80 border border-slate-200/90 shadow-sm text-center mb-14 reveal-on-scroll delay-100">
+        <div class="max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-slate-50/80 border border-slate-200/90 shadow-sm text-center mb-14 reveal-on-scroll delay-100">
           <p class="text-base sm:text-lg lg:text-xl font-bold text-[#0B2553] leading-relaxed">
             At Unity Compass, we provide unmatched proposal and capture services through: deep government contracting knowledge, agile solutions, and a commitment to quality without compromise
           </p>
         </div>
 
         <!-- Symmetrical 3-Card Stage: ALL 3 Cards are ALWAYS Visible Side-by-Side, Hovering Brings to Front -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch" id="why-uc-cards-grid">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch" id="why-uc-cards-grid">
           
           <!-- Card 1 (Left Card) -->
           <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30 reveal-on-scroll delay-100"
+            class="why-card group relative p-7 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30 reveal-on-scroll delay-100"
           >
             <!-- Top Line on Card Hover -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
+            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-2xl sm:rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
 
             <div>
               <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center font-bold mb-5 border border-blue-100/80 group-hover:bg-[#0C487A] group-hover:text-white transition-colors duration-300 shadow-2xs">
@@ -621,10 +621,10 @@ const deliverables = [
 
           <!-- Card 2 (Center Card: Featured Elevation in Resting State) -->
           <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_16px_36px_-8px_rgba(11,37,83,0.16)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(255,49,48,0.24)] hover:border-[#FF3130]/50 hover:z-30 md:-translate-y-1 reveal-on-scroll delay-200"
+            class="why-card group relative p-7 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-[0_16px_36px_-8px_rgba(11,37,83,0.16)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(255,49,48,0.24)] hover:border-[#FF3130]/50 hover:z-30 md:-translate-y-1 reveal-on-scroll delay-200"
           >
             <!-- Top Line on Card Hover -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#FF3130] to-[#DC2626]"></div>
+            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-2xl sm:rounded-t-3xl bg-gradient-to-r from-[#FF3130] to-[#DC2626]"></div>
 
             <div>
               <div class="w-12 h-12 rounded-2xl bg-red-50 text-[#FF3130] flex items-center justify-center font-bold mb-5 border border-red-100/80 group-hover:bg-[#FF3130] group-hover:text-white transition-colors duration-300 shadow-2xs">
@@ -646,10 +646,10 @@ const deliverables = [
 
           <!-- Card 3 (Right Card) -->
           <div
-            class="why-card group relative p-7 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30 reveal-on-scroll delay-300"
+            class="why-card group relative p-7 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_32px_-8px_rgba(11,37,83,0.12)] cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_28px_55px_-10px_rgba(12,72,122,0.24)] hover:border-[#0C487A]/50 hover:z-30 reveal-on-scroll delay-300"
           >
             <!-- Top Line on Card Hover -->
-            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
+            <div class="absolute inset-x-0 top-0 h-1.5 rounded-t-2xl sm:rounded-t-3xl bg-gradient-to-r from-[#0C487A] to-[#1E40AF]"></div>
 
             <div>
               <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0C487A] flex items-center justify-center font-bold mb-5 border border-blue-100/80 group-hover:bg-[#0C487A] group-hover:text-white transition-colors duration-300 shadow-2xs">
@@ -706,7 +706,7 @@ const deliverables = [
         <div class="pt-4 flex justify-center">
           <a
             href="/contact"
-            class="inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 rounded-2xl bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
+            class="inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 rounded-md sm:rounded-lg bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] text-white font-bold text-base sm:text-lg shadow-[0_12px_28px_-6px_rgba(12,72,122,0.45)] hover:shadow-[0_18px_36px_-6px_rgba(12,72,122,0.55)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 group"
           >
             <span>Book a Strategic Call</span>
             <svg class="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -990,7 +990,7 @@ const deliverables = [
   .self-contained-card {
     height: 200px;
     overflow: hidden;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     box-shadow: 0 10px 25px -4px rgba(12, 72, 122, 0.18);
     transition: box-shadow 0.5s ease;
   }
@@ -1016,7 +1016,7 @@ const deliverables = [
   .self-contained-card .square-slide-top {
     height: 200px;
     padding: 1.75rem 1.25rem 1.5rem 1.25rem;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1086,8 +1086,8 @@ const deliverables = [
     opacity: 0;
     transform: translateY(14px);
     border: none;
-    border-bottom-left-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
     background: #ffffff;
     display: flex;
     flex-direction: column;
@@ -1100,6 +1100,18 @@ const deliverables = [
                 opacity 0.5s ease 0.06s,
                 transform 0.65s cubic-bezier(0.25, 1, 0.5, 1),
                 padding 0.5s ease;
+  }
+
+  @media (min-width: 640px) {
+    .self-contained-card,
+    .self-contained-card .square-slide-top {
+      border-radius: 1.5rem;
+    }
+
+    .self-contained-card .square-slide-bottom {
+      border-bottom-left-radius: 1.5rem;
+      border-bottom-right-radius: 1.5rem;
+    }
   }
 
   /* Deck 2: Bottom Description Drawer on Hover (Fills the remaining 124px with generous breathing room) */

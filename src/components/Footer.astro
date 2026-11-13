@@ -157,7 +157,7 @@ const currentYear = new Date().getFullYear();
             href={companyInfo.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            class="footer-social-link"
+            class="footer-social-link rounded-full"
             aria-label="LinkedIn"
           >
             <Icon name="Linkedin" class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />
@@ -166,7 +166,7 @@ const currentYear = new Date().getFullYear();
             href={companyInfo.social.twitter}
             target="_blank"
             rel="noopener noreferrer"
-            class="footer-social-link"
+            class="footer-social-link rounded-full"
             aria-label="X (Twitter)"
           >
             <Icon name="Twitter" class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />
@@ -175,7 +175,7 @@ const currentYear = new Date().getFullYear();
             href={companyInfo.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            class="footer-social-link"
+            class="footer-social-link rounded-full"
             aria-label="Instagram"
           >
             <Icon name="Instagram" class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />
@@ -183,7 +183,7 @@ const currentYear = new Date().getFullYear();
         </div>
 
         <!-- Bottom Copyright & Legal Line -->
-        <div class=" flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-normal">
+        <div class="text-sm text-slate-500 font-normal">
           <p>Copyright &copy; <time class="font-bold" datetime={String(currentYear)} data-current-year>{currentYear}</time> Unity Compass <strong>| By Unity Compass</strong></p>
         </div>
       </div>
@@ -265,7 +265,6 @@ const currentYear = new Date().getFullYear();
     align-items: center;
     justify-content: center;
     border: 1px solid #d4deea;
-    border-radius: 0.85rem;
     background: rgba(255, 255, 255, 0.94);
     box-shadow: 0 8px 18px -14px rgba(15, 39, 74, 0.55);
     color: #10295b;

@@ -90,7 +90,7 @@ const steps: HiringStep[] = [
     </div>
 
     <!-- 4 Deliverable Cards: Codev Land Two-Layer Sliding Profile Card Hover Animation (Screenshot 4) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-center">
       {steps.map((step, idx) => (
         <div
           class="codev-slide-card group relative cursor-pointer career-reveal"
@@ -98,9 +98,9 @@ const steps: HiringStep[] = [
           data-step-index={idx}
         >
           <!-- Slide 1: Top Slide (Dark Navy Gradient, Icon + Title, glides UP on hover) -->
-          <div class="codev-slide codev-slide1 relative rounded-3xl bg-gradient-to-br from-[#0B2553] via-[#0C3860] to-[#081832] p-6 text-center text-white border border-white/15 shadow-[0_12px_28px_rgba(12,72,122,0.22)] flex flex-col items-center justify-center min-h-[195px]">
+          <div class="codev-slide codev-slide1 relative rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0B2553] via-[#0C3860] to-[#081832] p-6 text-center text-white border border-white/15 shadow-[0_12px_28px_rgba(12,72,122,0.22)] flex flex-col items-center justify-center min-h-[195px]">
             <!-- Ambient Subtle Glow Aura -->
-            <div class="absolute inset-0 rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            <div class="codev-slide1-overlay absolute inset-0 rounded-2xl sm:rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-[opacity,border-radius] duration-500 pointer-events-none"></div>
 
             <!-- Icon in Frosted Pill -->
             <div class="w-13 h-13 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-3 shadow-inner group-hover:scale-110 group-hover:bg-white group-hover:text-[#FF3130] transition-all duration-400">
@@ -124,7 +124,7 @@ const steps: HiringStep[] = [
           </div>
 
           <!-- Slide 2: Bottom Slide (Detailed Description, glides DOWN on hover) -->
-          <div class="codev-slide codev-slide2 relative rounded-3xl bg-white border border-slate-200/90 p-6 flex flex-col justify-between shadow-[0_10px_25px_rgba(15,39,74,0.06)] group-hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] min-h-[200px]">
+          <div class="codev-slide codev-slide2 relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-6 flex flex-col justify-between shadow-[0_10px_25px_rgba(15,39,74,0.06)] group-hover:shadow-[0_24px_50px_-10px_rgba(12,72,122,0.22)] min-h-[200px]">
             <!-- Description -->
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-center pt-2">
               {step.description}
@@ -161,9 +161,9 @@ const steps: HiringStep[] = [
 
   .codev-slide {
     width: 100%;
-    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-                border-radius 0.4s ease;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 1s cubic-bezier(0.16, 1, 0.3, 1),
+                border-radius 0.7s ease;
     will-change: transform;
   }
 
@@ -172,7 +172,7 @@ const steps: HiringStep[] = [
     position: relative;
     z-index: 2;
     transform: translateY(96px);
-    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-radius 0.3s ease;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease, border-radius 0.6s ease;
   }
 
   .codev-slide-card:hover .codev-slide1 {
@@ -182,16 +182,21 @@ const steps: HiringStep[] = [
     border-bottom-right-radius: 12px;
   }
 
+  .codev-slide-card:hover .codev-slide1-overlay {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
   /* Slide 2: Bottom Slide (Description, starts tucked up behind slide 1, slides down on hover) */
   .codev-slide2 {
     position: relative;
     z-index: 1;
     transform: translateY(-96px);
-    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-radius 0.3s ease;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease, border-radius 0.6s ease;
   }
 
   .codev-slide-card:hover .codev-slide2 {
-    transform: translateY(0px);
+    transform: translateY(2px);
     box-shadow: 0 24px 50px -10px rgba(12, 72, 122, 0.22);
     border-color: #cbd5e1;
     border-top-left-radius: 12px;

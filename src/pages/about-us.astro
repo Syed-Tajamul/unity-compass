@@ -162,7 +162,7 @@ const aboutPageSchema = {
     <div class="absolute -left-32 top-16 h-80 w-80 rounded-full bg-blue-300/20 blur-3xl" aria-hidden="true"></div>
     <div class="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-red-300/10 blur-3xl" aria-hidden="true"></div>
 
-    <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:px-8 lg:pt-20 pb-24 sm:pb-28 lg:pb-32">
+    <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-8 px-4 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:pt-20 pb-24 sm:pb-28 lg:pb-32">
       <div class="max-w-3xl">
         <h1 class="hero-heading-reveal max-w-2xl text-3xl font-extrabold leading-[1.16] tracking-tight sm:text-4xl sm:leading-[1.18] lg:text-[2.75rem] xl:text-[3.15rem]">
           <span class="about-gradient-text">A practical partner for federal work.</span>
@@ -171,8 +171,8 @@ const aboutPageSchema = {
           We help contractors compete, hire, and deliver in regulated environments.
         </p>
 
-        <dl class="mt-10 grid max-w-xl grid-cols-2 gap-x-6 gap-y-4 border-t border-[#0C487A]/15 pt-6 sm:grid-cols-3">
-          <div class="hero-cta-btn-1">
+        <dl class="hero-cta-reveal mt-10 grid max-w-xl grid-cols-2 gap-8 border-t border-[#0C487A]/15 pt-6 sm:grid-cols-3">
+          <div>
             <dt class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
               <AboutIcon name="Target" class="h-3.5 w-3.5 text-[#0C487A]" stroke-width={2.25} />
               Focus
@@ -217,7 +217,7 @@ const aboutPageSchema = {
   </header>
 
   <section class="about-scroll-region bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="company-heading">
-    <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16 lg:px-8">
+    <div class="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8">
       <div class="about-reveal max-w-3xl">
         <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Who we are</p>
         <h2 id="company-heading" class="about-section-heading mt-3 max-w-2xl text-2xl font-extrabold leading-[1.18] tracking-tight sm:text-3xl sm:leading-[1.22] md:text-4xl lg:text-[2.65rem] lg:leading-[1.24]">
@@ -237,7 +237,7 @@ const aboutPageSchema = {
           </p>
         </div>
 
-        <dl class="mt-8 grid grid-cols-2 gap-4 border-t border-slate-200 pt-6 sm:grid-cols-3">
+        <dl class="mt-8 grid grid-cols-2 gap-8 border-t border-slate-200 pt-6 sm:grid-cols-3">
           <div>
             <dt class="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Experience</dt>
             <dd class="mt-1 text-sm font-extrabold text-[#0B2553]">10+ years</dd>
@@ -254,7 +254,7 @@ const aboutPageSchema = {
       </div>
 
       <aside
-        class="capabilities-carousel about-reveal about-delay-1 overflow-hidden rounded-3xl border border-slate-200 bg-[#F4F8FC] shadow-[0_24px_60px_-30px_rgba(15,39,74,0.38)]"
+        class="capabilities-carousel about-reveal about-delay-1 overflow-hidden rounded-2xl border border-slate-200 bg-[#F4F8FC] shadow-[0_24px_60px_-30px_rgba(15,39,74,0.38)] sm:rounded-3xl"
         aria-label="Unity Compass service capabilities"
         aria-roledescription="carousel"
         role="region"
@@ -289,9 +289,9 @@ const aboutPageSchema = {
                 <p class="text-xs font-bold uppercase tracking-[0.14em] text-[#0C487A]">{group.label}</p>
                 <h3 class="mt-2 text-xl font-extrabold leading-snug tracking-tight text-[#0B2553] sm:text-2xl">{group.title}</h3>
 
-                <div class="mt-5 grid gap-3">
+                <div class="mt-5 grid gap-8">
                   {group.services.map((service) => (
-                    <a href={service.href} class="group/service rounded-2xl border border-white bg-white/95 p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#0C487A]/20 hover:shadow-md sm:p-5">
+                    <a href={service.href} class="group/service rounded-2xl border border-white bg-white/95 p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#0C487A]/20 hover:shadow-md sm:rounded-3xl sm:p-5">
                       <div class="flex items-start gap-4">
                         <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0C487A] text-white transition-colors duration-300 group-hover/service:bg-[#FF3130]" aria-hidden="true">
                           <AboutIcon name={service.icon} class="h-5 w-5" stroke-width={1.8} />
@@ -333,8 +333,8 @@ const aboutPageSchema = {
     <div class="absolute inset-0 about-grid opacity-35" aria-hidden="true"></div>
     <div class="absolute left-1/2 top-1/2 h-48 w-4/5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(40,121,182,0.12)_0%,transparent_70%)] blur-3xl" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="about-reveal rounded-3xl border border-slate-200/90 bg-white/90 px-5 py-7 shadow-[0_18px_45px_-20px_rgba(15,39,74,0.22),0_0_0_1px_rgba(255,255,255,0.9)_inset] backdrop-blur-xl sm:px-8 sm:py-9 lg:px-10">
-        <dl class="grid grid-cols-2 gap-x-4 gap-y-7 md:grid-cols-5 md:gap-0">
+      <div class="about-reveal rounded-2xl border border-slate-200/90 bg-white/90 px-5 py-7 shadow-[0_18px_45px_-20px_rgba(15,39,74,0.22),0_0_0_1px_rgba(255,255,255,0.9)_inset] backdrop-blur-xl sm:rounded-3xl sm:px-8 sm:py-9 lg:px-10">
+        <dl class="grid grid-cols-2 gap-8 md:grid-cols-5">
           {performanceMetrics.map((metric, index) => (
             <div class={`about-reveal about-delay-${Math.min(index + 1, 5)} relative px-2 py-2 text-center sm:px-4 ${index > 0 ? 'md:border-l md:border-slate-200' : ''} ${index === performanceMetrics.length - 1 ? 'col-span-2 md:col-span-1' : ''}`}>
               <span class="mx-auto mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-[#0C487A]/[0.08] text-[#0C487A]" aria-hidden="true">
@@ -365,9 +365,9 @@ const aboutPageSchema = {
         </p>
       </div>
 
-      <ul class="grid gap-5 md:grid-cols-3" role="list">
+      <ul class="grid gap-8 md:grid-cols-3" role="list">
         {differentiators.map((item, index) => (
-          <li class={`service-radar-card about-reveal about-delay-${index + 1} group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-500 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_26px_55px_-20px_rgba(15,39,74,0.42)] sm:p-8`} data-service-radar>
+          <li class={`service-radar-card about-reveal about-delay-${index + 1} group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-500 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_26px_55px_-20px_rgba(15,39,74,0.42)] sm:rounded-3xl sm:p-8`} data-service-radar>
             <span class="service-radar-scan" aria-hidden="true"></span>
             <span class="service-radar-number absolute right-6 top-5 text-sm font-extrabold tracking-[0.12em] text-slate-200" aria-hidden="true">{item.number}</span>
             <div class="service-radar-icon flex h-12 w-12 items-center justify-center rounded-xl bg-[#0C487A] text-white shadow-[0_8px_22px_-8px_rgba(12,72,122,0.7)]">
@@ -396,12 +396,12 @@ const aboutPageSchema = {
         </p>
       </div>
 
-      <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3" role="list">
+      <ul class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" role="list">
         {coreServices.map((service, index) => (
           <li class={`about-reveal about-delay-${Math.min(index + 1, 5)}`}>
             <a
               href={service.href}
-              class="service-radar-card group relative flex h-full min-h-72 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-500 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_26px_55px_-20px_rgba(15,39,74,0.42)] focus-visible:-translate-y-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF3130] focus-visible:ring-offset-4 sm:p-8"
+              class="service-radar-card group relative flex h-full min-h-72 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 shadow-[0_16px_45px_-24px_rgba(15,39,74,0.3)] transition duration-500 hover:-translate-y-1.5 hover:border-[#0C487A]/30 hover:shadow-[0_26px_55px_-20px_rgba(15,39,74,0.42)] focus-visible:-translate-y-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF3130] focus-visible:ring-offset-4 sm:rounded-3xl sm:p-8"
               data-service-radar
             >
               <span class="service-radar-scan" aria-hidden="true"></span>
@@ -464,8 +464,8 @@ const aboutPageSchema = {
         <div class="mt-5 h-1.5 w-20 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]" aria-hidden="true"></div>
       </div>
 
-      <div class="mt-10 grid gap-5 lg:grid-cols-2">
-        <article class="about-reveal group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-7 shadow-[0_18px_45px_-24px_rgba(15,39,74,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.34)] sm:p-8">
+      <div class="mt-10 grid gap-8 lg:grid-cols-2">
+        <article class="about-reveal group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-7 shadow-[0_18px_45px_-24px_rgba(15,39,74,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.34)] sm:rounded-3xl sm:p-8">
           <span class="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-[#0C487A] to-[#1E40AF]" aria-hidden="true"></span>
           <div class="flex items-center gap-3">
             <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0C487A]/[0.08] text-[#0C487A]" aria-hidden="true">
@@ -476,7 +476,7 @@ const aboutPageSchema = {
           <h3 class="mt-3 text-xl font-bold text-[#0F274A] sm:text-2xl">Empower organizations to compete and perform</h3>
           <p class="mt-4 leading-7 text-slate-600">To empower businesses with innovative solutions, exceptional talent, and strategic support to achieve their goals in the government marketplace.</p>
         </article>
-        <article class="about-reveal about-delay-1 group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-7 shadow-[0_18px_45px_-24px_rgba(15,39,74,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.34)] sm:p-8">
+        <article class="about-reveal about-delay-1 group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-7 shadow-[0_18px_45px_-24px_rgba(15,39,74,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:shadow-[0_24px_50px_-22px_rgba(15,39,74,0.34)] sm:rounded-3xl sm:p-8">
           <span class="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-[#FF3130] to-[#DC2626]" aria-hidden="true"></span>
           <div class="flex items-center gap-3">
             <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0C487A]/[0.08] text-[#0C487A]" aria-hidden="true">
@@ -489,9 +489,9 @@ const aboutPageSchema = {
         </article>
       </div>
 
-      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5" aria-label="Unity Compass values" role="list">
+      <ul class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-5" aria-label="Unity Compass values" role="list">
         {companyValues.map((value, index) => (
-          <li class={`about-reveal about-delay-${Math.min(index + 1, 5)} flex min-h-20 items-center rounded-xl border border-slate-200/90 bg-white/90 px-4 py-4 text-sm font-bold leading-6 text-[#0F274A] shadow-[0_10px_28px_-22px_rgba(15,39,74,0.3)] backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:bg-white`}>
+          <li class={`about-reveal about-delay-${Math.min(index + 1, 5)} flex min-h-20 items-center rounded-2xl border border-slate-200/90 bg-white/90 px-4 py-4 text-sm font-bold leading-6 text-[#0F274A] shadow-[0_10px_28px_-22px_rgba(15,39,74,0.3)] backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-[#0C487A]/25 hover:bg-white sm:rounded-3xl`}>
             <span class="mr-3 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#0C487A]/[0.08] text-[#0C487A]" aria-hidden="true">
               <AboutIcon name={value.icon} class="h-4 w-4" stroke-width={1.8} />
             </span>
@@ -504,7 +504,7 @@ const aboutPageSchema = {
 
   <section class="about-scroll-region relative overflow-hidden bg-white py-20 sm:py-24" aria-labelledby="conversation-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="about-reveal relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-[#F4F8FC] via-white to-[#EBF3FA] px-6 py-12 shadow-[0_24px_60px_-30px_rgba(15,39,74,0.35)] sm:px-10 sm:py-14 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:px-14">
+      <div class="about-reveal relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-[#F4F8FC] via-white to-[#EBF3FA] px-6 py-12 shadow-[0_24px_60px_-30px_rgba(15,39,74,0.35)] sm:rounded-3xl sm:px-10 sm:py-14 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:px-14">
         <div class="absolute -right-20 -top-28 h-72 w-72 rounded-full border-[48px] border-[#0C487A]/5" aria-hidden="true"></div>
         <div class="relative max-w-2xl">
           <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Your next move</p>
@@ -520,14 +520,14 @@ const aboutPageSchema = {
             href={meetingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl bg-[#0C487A] px-6 py-3 text-sm font-bold text-white shadow-[0_10px_26px_-10px_rgba(12,72,122,0.7)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0A2540] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF3130]"
+            class="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-md sm:rounded-lg bg-[#0C487A] px-6 py-3 text-sm font-bold text-white shadow-[0_10px_26px_-10px_rgba(12,72,122,0.7)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0A2540] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF3130]"
           >
             Talk with our team
             <AboutIcon name="ArrowRight" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" stroke-width={2.25} />
           </a>
           <a
             href={`mailto:${companyInfo.email}`}
-            class="inline-flex min-h-12 items-center justify-center rounded-xl border border-[#0C487A]/20 bg-white px-6 py-3 text-sm font-bold text-[#0C487A] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#0C487A]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0C487A]"
+            class="inline-flex min-h-12 items-center justify-center rounded-md sm:rounded-lg border border-[#0C487A]/20 bg-white px-6 py-3 text-sm font-bold text-[#0C487A] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#0C487A]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0C487A]"
           >
             {companyInfo.email}
           </a>
@@ -974,6 +974,12 @@ const aboutPageSchema = {
     box-shadow: 0 18px 45px -28px rgba(15, 39, 74, 0.38);
     transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease, opacity 0.4s ease;
     will-change: transform, filter, opacity;
+  }
+
+  @media (min-width: 640px) {
+    .timeline-card {
+      border-radius: 1.5rem;
+    }
   }
 
   /* Parent Blur / Sibling De-emphasis (Focus States) for Timeline */

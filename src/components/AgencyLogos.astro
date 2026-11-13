@@ -8,9 +8,9 @@ import { clientAgencies } from '../data/company';
       Select Federal Agencies & Industry Giants We Support & Collaborate With
     </p>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 items-center justify-items-center">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-items-center">
       {clientAgencies.map((agency) => (
-        <div class="flex flex-col items-center justify-center p-4 rounded-xl bg-white border border-slate-200/60 shadow-subtle hover:shadow-md hover:border-slate-300 transition-all duration-200 w-full max-w-[200px] h-28 group">
+        <div class="flex flex-col items-center justify-center p-4 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/60 shadow-subtle hover:shadow-md hover:border-slate-300 transition-all duration-200 w-full max-w-[200px] h-28 group">
           <img
             src={agency.logo}
             alt={`${agency.name} Seal`}

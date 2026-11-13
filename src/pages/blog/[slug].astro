@@ -213,7 +213,7 @@ relatedPosts = relatedPosts.slice(0, 3);
           <span class="text-xs font-bold uppercase tracking-wider text-[#FF3130] block mb-2">Visual Gallery</span>
           <h3 class="text-2xl font-extrabold text-[#0B2553] tracking-tight mb-6">Program &amp; Solution Imagery</h3>
           
-          <div class={`grid gap-4 sm:gap-6 ${post.galleryImages.length === 1 ? 'grid-cols-1' : post.galleryImages.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
+          <div class={`grid gap-8 ${post.galleryImages.length === 1 ? 'grid-cols-1' : post.galleryImages.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
             {post.galleryImages.map((imgUrl, idx) => (
               <div class="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-[0_4px_20px_-4px_rgba(12,72,122,0.06)] hover:shadow-[0_12px_30px_-6px_rgba(12,72,122,0.14)] transition-all">
                 <img
@@ -229,7 +229,7 @@ relatedPosts = relatedPosts.slice(0, 3);
       )}
 
       <!-- Strategic GovCon Advisory CTA Box -->
-      <div class="mt-16 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0B2553] via-[#0C3860] to-[#081832] p-8 sm:p-10 text-white shadow-xl border border-blue-900/40">
+      <div class="mt-16 relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0B2553] via-[#0C3860] to-[#081832] p-8 sm:p-10 text-white shadow-xl border border-blue-900/40">
         <div
           class="absolute inset-0 pointer-events-none opacity-20"
           style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);"
@@ -246,7 +246,7 @@ relatedPosts = relatedPosts.slice(0, 3);
           </div>
           <a
             href="/contact"
-            class="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-lg shadow-[#FF3130]/30 active:scale-[0.98] transition-all cursor-pointer"
+            class="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-md sm:rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-lg shadow-[#FF3130]/30 active:scale-[0.98] transition-all cursor-pointer"
           >
             <span>Book Consultation</span>
             <span aria-hidden="true">&rarr;</span>
@@ -285,7 +285,7 @@ relatedPosts = relatedPosts.slice(0, 3);
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           {relatedPosts.map((rel, idx) => (
-            <article class="group relative rounded-3xl bg-white border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.14)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+            <article class="group relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.14)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
               <div class={`absolute top-0 inset-x-0 h-1.5 ${idx % 2 === 0 ? 'bg-[#0B2553]' : 'bg-[#FF3130]'}`}></div>
 
               <div>

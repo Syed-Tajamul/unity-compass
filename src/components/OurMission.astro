@@ -8,7 +8,7 @@
  * - Animated tri-color brand accent bar (Navy to Red, matching HomeIntroBanner)
  * - Executive White-and-Navy Marine Compass Instrument Centerpiece with 4s auto-play circular countdown arc
  * - The Four Cardinal Bearings (01 North, 02 East, 03 South, 04 West)
- * - 4 Premium White Cards (rounded-3xl, shadow, bold #0B2553 typography & #0C487A/#FF3130 badges)
+ * - 4 Premium White Cards (shadow, bold #0B2553 typography & #0C487A/#FF3130 badges)
  * - Smooth spring-like needle easing (~700ms) with shortest continuous angular rotation
  * - 100% WCAG AA contrast, semantic HTML, and full keyboard/screen-reader accessibility
  */
@@ -82,7 +82,7 @@
       <button
         type="button"
         id="pillar-card-01"
-        class="mission-pillar-card pillar-card-top is-active"
+        class="mission-pillar-card pillar-card-top is-active rounded-2xl sm:rounded-3xl"
         data-index="0"
         data-angle="0"
         role="tab"
@@ -114,7 +114,7 @@
       <button
         type="button"
         id="pillar-card-02"
-        class="mission-pillar-card pillar-card-right"
+        class="mission-pillar-card pillar-card-right rounded-2xl sm:rounded-3xl"
         data-index="1"
         data-angle="90"
         role="tab"
@@ -292,7 +292,7 @@
       <button
         type="button"
         id="pillar-card-03"
-        class="mission-pillar-card pillar-card-bottom"
+        class="mission-pillar-card pillar-card-bottom rounded-2xl sm:rounded-3xl"
         data-index="2"
         data-angle="180"
         role="tab"
@@ -325,7 +325,7 @@
       <button
         type="button"
         id="pillar-card-04"
-        class="mission-pillar-card pillar-card-left"
+        class="mission-pillar-card pillar-card-left rounded-2xl sm:rounded-3xl"
         data-index="3"
         data-angle="270"
         role="tab"
@@ -663,13 +663,12 @@
 
   /* -------------------------------------------------- */
   /* PILLAR CARDS (Homepage Harmonized Style)           */
-  /* Matching WhyChooseUs (rounded-3xl, shadow, #0B2553)*/
+  /* Matching WhyChooseUs (shadow, #0B2553)             */
   /* -------------------------------------------------- */
   .mission-pillar-card {
     width: 100%;
     max-width: 330px;
     background: #FFFFFF;
-    border-radius: 24px;
     padding: 24px 26px;
     text-align: left;
     color: var(--slate-heading);

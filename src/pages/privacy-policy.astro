@@ -26,7 +26,7 @@ import { companyInfo } from '../data/company';
   <article class="py-16 sm:py-20 bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-slate max-w-none text-slate-700 leading-relaxed space-y-8">
       
-      <div class="p-6 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-600 leading-relaxed">
+      <div class="p-6 rounded-2xl sm:rounded-3xl bg-slate-50 border border-slate-200 text-sm text-slate-600 leading-relaxed">
         <p class="m-0">
           At Unity Compass, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you interact with our LinkedIn Ads and visit our website, <a href="https://unitycompass.com" class="text-brand-navy font-semibold underline">www.unitycompass.com</a>. By using our website or engaging with our ads, you consent to the practices described in this policy.
         </p>
@@ -123,7 +123,7 @@ import { companyInfo } from '../data/company';
         <p class="text-sm text-slate-600">
           If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:
         </p>
-        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm space-y-1">
+        <div class="bg-slate-50 p-4 rounded-2xl sm:rounded-3xl border border-slate-200 text-sm space-y-1">
           <p class="font-bold text-slate-900">{companyInfo.name}</p>
           <p>Email: <a href={`mailto:${companyInfo.infoEmail}`} class="text-brand-navy underline">{companyInfo.infoEmail}</a></p>
           <p>Phone: <a href={`tel:${companyInfo.phoneRaw}`} class="text-brand-navy underline">{companyInfo.phone}</a></p>
