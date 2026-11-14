@@ -34,6 +34,13 @@ import { companyInfo } from '../data/company';
       <!-- LEFT COLUMN: Headline, Subheading & Dual CTA Buttons (6 cols on lg) -->
       <div class="lg:col-span-6 max-w-2xl">
         
+        <!-- Hero Section Pill Label -->
+        <div class="mb-4 sm:mb-5 hero-badge-reveal">
+          <span class="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-extrabold uppercase tracking-wider bg-[#0C487A]/10 text-[#0C487A] border border-[#0C487A]/20 shadow-2xs">
+            Government Contracting Advisory &amp; Staffing
+          </span>
+        </div>
+
         <!-- Main Headline with Continuous Animated Radiant Gradient -->
         <h1
           id="hero-title"
@@ -66,16 +73,21 @@ import { companyInfo } from '../data/company';
           id="hero-cta-group"
           class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5"
         >
-          <!-- Primary CTA: "Book a Strategy Call" with Hover Text Animation (Button 1 in sequence) -->
+          <!-- Primary CTA: "Book a Strategy Call" with High-Conversion Hover Animation & Light Beam Sheen -->
           <a
             href="/contact"
             id="hero-btn-book"
-            class="hero-cta-btn inline-flex items-center justify-center gap-3 px-8 sm:px-9 py-4 sm:py-4.5 rounded-md sm:rounded-lg bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] text-white text-base font-bold shadow-[0_8px_24px_-4px_rgba(255,49,48,0.25)] hover:shadow-[0_12px_28px_-2px_rgba(255,49,48,0.35)] cursor-pointer whitespace-nowrap group transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 ease-out"
+            class="hero-cta-btn hero-cta-btn-1 group relative inline-flex items-center justify-center gap-3.5 px-8 sm:px-9 py-4 rounded-md sm:rounded-lg text-base font-bold text-white bg-gradient-to-r from-[#FF3130] via-[#E02625] to-[#FF3130] bg-[length:200%_auto] hover:bg-right shadow-[0_10px_28px_rgba(255,49,48,0.28)] hover:shadow-[0_16px_36px_rgba(255,49,48,0.42)] hover:-translate-y-1 active:translate-y-0 transition-all duration-300 overflow-hidden cursor-pointer whitespace-nowrap"
           >
-            <span class="btn-text-content">Book a Strategy Call</span>
-            <svg class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
+            <!-- Animated Light Beam Sheen on Hover -->
+            <span class="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-out pointer-events-none"></span>
+
+            <span class="relative z-10 tracking-wide btn-text-content">Book a Strategy Call</span>
+            <div class="relative z-10 w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center group-hover:bg-white group-hover:text-[#FF3130] transition-all duration-300 shadow-2xs">
+              <svg class="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
           </a>
 
           <!-- Secondary CTA: "Capability Statement (PDF)" with Hover Text Animation (Button 2 in sequence) -->
@@ -85,7 +97,7 @@ import { companyInfo } from '../data/company';
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Download Unity Compass Capability Statement (PDF)"
-            class="hero-cta-btn inline-flex items-center justify-center gap-2.5 px-7 sm:px-8 py-4 sm:py-4.5 rounded-md sm:rounded-lg border border-slate-200/90 hover:border-[#0C487A]/35 bg-white hover:bg-slate-50/90 text-[#0B2553] hover:text-[#0C487A] text-base font-bold shadow-[0_4px_16px_-2px_rgba(11,37,83,0.06)] hover:shadow-[0_8px_24px_-4px_rgba(11,37,83,0.10)] whitespace-nowrap group transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 ease-out cursor-pointer"
+            class="hero-cta-btn hero-cta-btn-2 inline-flex items-center justify-center gap-2.5 px-7 sm:px-8 py-4 sm:py-4.5 rounded-md sm:rounded-lg border border-slate-200/90 hover:border-[#0C487A]/35 bg-white hover:bg-slate-50/90 text-[#0B2553] hover:text-[#0C487A] text-base font-bold shadow-[0_4px_16px_-2px_rgba(11,37,83,0.06)] hover:shadow-[0_8px_24px_-4px_rgba(11,37,83,0.10)] whitespace-nowrap group transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 ease-out cursor-pointer"
           >
             <svg class="w-4 h-4 text-[#FF3130] transition-transform duration-200 group-hover:scale-110 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -127,6 +139,103 @@ import { companyInfo } from '../data/company';
 </section>
 
 <style>
+  /* ========================================================================= */
+  /* Hero Load Sequential Entrance Animations (Badge -> Headline -> Subtitle -> Buttons -> Art) */
+  /* ========================================================================= */
+  .hero-badge-reveal {
+    animation: heroBadgeEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+    will-change: opacity, transform, filter;
+  }
+
+  .hero-heading-reveal {
+    animation: heroHeadingEntrance 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+    will-change: opacity, transform, filter;
+  }
+
+  .hero-subheading-reveal {
+    animation: heroSubheadingEntrance 0.90s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
+    will-change: opacity, transform, filter;
+  }
+
+  .hero-cta-btn-1 {
+    animation: heroButtonEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.58s both;
+    will-change: opacity, transform, filter;
+  }
+
+  .hero-cta-btn-2 {
+    animation: heroButtonEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.74s both;
+    will-change: opacity, transform, filter;
+  }
+
+  .hero-artwork-reveal {
+    animation: heroArtworkEntrance 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.90s both;
+    will-change: opacity, transform, filter;
+  }
+
+  @keyframes heroBadgeEntrance {
+    0% {
+      opacity: 0;
+      transform: translateY(-14px) scale(0.96);
+      filter: blur(5px);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+
+  @keyframes heroHeadingEntrance {
+    0% {
+      opacity: 0;
+      transform: translateY(22px);
+      filter: blur(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+
+  @keyframes heroSubheadingEntrance {
+    0% {
+      opacity: 0;
+      transform: translateY(18px);
+      filter: blur(4px);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+
+  @keyframes heroButtonEntrance {
+    0% {
+      opacity: 0;
+      transform: translateY(18px) scale(0.95);
+      filter: blur(4px);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+
+  @keyframes heroArtworkEntrance {
+    0% {
+      opacity: 0;
+      transform: translateY(28px) scale(0.94);
+      filter: blur(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
   /* ========================================================================= */
   /* Continuous Soft Animated Gradient Headline Flow (Logo Red & Blue)         */
   /* ========================================================================= */
@@ -192,19 +301,6 @@ import { companyInfo } from '../data/company';
 
   /* --- Hover Text Animation for Book a Strategy Call --- */
   #hero-btn-book:hover .btn-text-content {
-    background: linear-gradient(
-      90deg,
-      #FFFFFF 0%,
-      #FFF6C5 25%,
-      #FFFFFF 50%,
-      #FFD2D1 75%,
-      #FFFFFF 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: btnTextHoverShimmer 1.3s linear infinite, btnTextHoverLift 1.6s ease-in-out infinite;
     letter-spacing: 0.015em;
   }
 

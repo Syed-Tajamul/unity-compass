@@ -50,6 +50,13 @@
       <!-- Content Container -->
       <div class="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-5">
         
+        <!-- Section Pill Label -->
+        <div class="cta-badge-reveal">
+          <span class="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-extrabold uppercase tracking-wider bg-[#0C487A]/10 text-[#0C487A] border border-[#0C487A]/20 shadow-2xs">
+            Start Your Journey
+          </span>
+        </div>
+
         <!-- Main Headline with Tight Cohesive Line-Height & Continuous Blended Color Shimmer Animation -->
         <h2
           id="cta-heading"
@@ -74,12 +81,17 @@
         <div class="mt-4 cta-action-reveal">
           <a
             href="/contact"
-            class="inline-flex items-center justify-center gap-3 px-9 sm:px-11 py-4 rounded-md sm:rounded-lg bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#0C487A] hover:from-[#FF3130] hover:via-[#DC2626] hover:to-[#FF3130] text-white text-sm sm:text-base font-bold shadow-lg shadow-[#0C487A]/25 hover:shadow-red-500/25 transform hover:-translate-y-1 active:translate-y-0 transition-all duration-300 cursor-pointer group"
+            class="group relative inline-flex items-center justify-center gap-3.5 px-9 sm:px-11 py-4 rounded-md sm:rounded-lg bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#0C487A] bg-[length:200%_auto] hover:bg-right text-white text-sm sm:text-base font-bold shadow-[0_10px_28px_rgba(12,72,122,0.25)] hover:shadow-[0_16px_36px_rgba(12,72,122,0.38)] hover:-translate-y-1 active:translate-y-0 transition-all duration-300 overflow-hidden cursor-pointer"
           >
-            <span>Get in Touch</span>
-            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
+            <!-- Animated Light Beam Sheen on Hover -->
+            <span class="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-out pointer-events-none"></span>
+
+            <span class="relative z-10 tracking-wide">Get in Touch</span>
+            <div class="relative z-10 w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center group-hover:bg-white group-hover:text-[#0C487A] transition-all duration-300 shadow-2xs">
+              <svg class="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
           </a>
         </div>
 
@@ -93,6 +105,7 @@
   /* ========================================================================= */
   /* Scroll-Triggered Soft-Reveal Animation (Matching Hero & ServicesGrid)     */
   /* ========================================================================= */
+  .cta-badge-reveal,
   .cta-heading-reveal,
   .cta-subheading-reveal,
   .cta-card-reveal,
@@ -112,11 +125,18 @@
     filter: blur(0);
   }
 
+  :global(#contact-cta.is-revealed) .cta-badge-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.04s;
+  }
+
   :global(#contact-cta.is-revealed) .cta-heading-reveal {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
-    transition-delay: 0.08s;
+    transition-delay: 0.12s;
   }
 
   :global(#contact-cta.is-revealed) .cta-subheading-reveal {

@@ -1,0 +1,33 @@
+---
+/**
+ * SectionBadge.astro - Contragenix-Style Section Pill Label
+ * 
+ * Harmonized with Unity Compass brand palette:
+ * - Rounded pill silhouette (rounded-full)
+ * - Soft brand red tint background (#FF3130 at 10% opacity)
+ * - Needle Red bold uppercase text (#FF3130)
+ * - Subtle needle red border (#FF3130 at 20% opacity)
+ * - Clean, balanced padding and typography
+ */
+interface Props {
+  text: string;
+  class?: string;
+  variant?: 'blue' | 'navy' | 'red' | 'white';
+}
+
+const { text, class: className = '', variant = 'blue' } = Astro.props;
+
+const variantClasses = {
+  blue: 'bg-[#0C487A]/10 text-[#0C487A] border border-[#0C487A]/20 shadow-2xs',
+  navy: 'bg-[#0C487A]/10 text-[#0C487A] border border-[#0C487A]/20 shadow-2xs',
+  red: 'bg-[#FF3130]/10 text-[#FF3130] border border-[#FF3130]/20 shadow-2xs',
+  white: 'bg-white/15 text-white border border-white/25 backdrop-blur-sm shadow-2xs',
+};
+---
+
+<span
+  class={`inline-flex items-center justify-center px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-extrabold uppercase tracking-wider ${variantClasses[variant]} ${className}`}
+>
+  {text}
+</span>
+

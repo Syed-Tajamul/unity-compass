@@ -47,6 +47,13 @@
     <!-- Top Header Group: Centered in Middle Matching Above Sections -->
     <div class="text-center max-w-4xl mx-auto mb-12 sm:mb-16 mission-header-wrap">
       
+      <!-- Section Pill Label -->
+      <div class="mb-4 sm:mb-5 mission-badge-reveal">
+        <span class="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-extrabold uppercase tracking-wider bg-[#0C487A]/10 text-[#0C487A] border border-[#0C487A]/20 shadow-2xs">
+          Why Unity Compass
+        </span>
+      </div>
+
       <!-- Main Substantive Headline with Continuous Blended Color Shimmer Animation (Matching ServicesGrid & Hero) -->
       <h2
         id="mission-heading"
@@ -395,6 +402,7 @@
   /* -------------------------------------------------- */
   /* SCROLL-TRIGGERED REVEAL (Matching ServicesGrid)     */
   /* -------------------------------------------------- */
+  .mission-badge-reveal,
   .mission-heading-reveal,
   .mission-subheading-reveal {
     opacity: 0;
@@ -403,20 +411,112 @@
     transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                 filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
   }
 
-  :global(#our-mission.is-revealed) .mission-heading-reveal {
+  :global(#our-mission.is-revealed) .mission-badge-reveal {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
     transition-delay: 0.05s;
   }
 
+  :global(#our-mission.is-revealed) .mission-heading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.16s;
+  }
+
   :global(#our-mission.is-revealed) .mission-subheading-reveal {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
-    transition-delay: 0.25s;
+    transition-delay: 0.28s;
+  }
+
+  /* Centerpiece Compass Reveal */
+  .compass-centerpiece {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(8px);
+    transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  :global(#our-mission.is-revealed) .compass-centerpiece {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+    transition-delay: 0.38s;
+  }
+
+  /* Staggered entrance for the 4 cardinal cards around compass */
+  .mission-pillar-card {
+    opacity: 0;
+    filter: blur(6px);
+    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  .pillar-card-top {
+    transform: translateY(-24px) scale(0.96);
+  }
+  .pillar-card-right {
+    transform: translateX(24px) scale(0.96);
+  }
+  .pillar-card-bottom {
+    transform: translateY(24px) scale(0.96);
+  }
+  .pillar-card-left {
+    transform: translateX(-24px) scale(0.96);
+  }
+
+  :global(#our-mission.is-revealed) .pillar-card-top {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    transition-delay: 0.48s;
+  }
+
+  :global(#our-mission.is-revealed) .pillar-card-right {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+    transition-delay: 0.62s;
+  }
+
+  :global(#our-mission.is-revealed) .pillar-card-bottom {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    transition-delay: 0.76s;
+  }
+
+  :global(#our-mission.is-revealed) .pillar-card-left {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+    transition-delay: 0.90s;
+  }
+
+  @media (max-width: 1023px) {
+    .pillar-card-top,
+    .pillar-card-right,
+    .pillar-card-bottom,
+    .pillar-card-left {
+      transform: translateY(20px) scale(0.96);
+    }
+    :global(#our-mission.is-revealed) .pillar-card-top,
+    :global(#our-mission.is-revealed) .pillar-card-right,
+    :global(#our-mission.is-revealed) .pillar-card-bottom,
+    :global(#our-mission.is-revealed) .pillar-card-left {
+      transform: translateY(0) scale(1);
+    }
   }
 
   /* -------------------------------------------------- */
@@ -937,10 +1037,12 @@
   /* PREFERS-REDUCED-MOTION                             */
   /* -------------------------------------------------- */
   @media (prefers-reduced-motion: reduce) {
+    .mission-badge-reveal,
     .mission-heading-reveal,
     .mission-subheading-reveal,
     .mission-shimmer-line,
     .mission-accent-line,
+    .compass-centerpiece,
     .mission-pillar-card,
     .compass-ring-path,
     .compass-ticks-group,

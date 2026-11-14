@@ -17,8 +17,9 @@ import MainLayout from '../../layouts/MainLayout.astro';
 ---
 
 <MainLayout
-  title="Executive Admin Management Console - Unity Compass"
-  description="Executive portal for managing federal inquiries, cleared candidate resumes, career postings, and editorial insights."
+  title="Admin Panel - Unity Compass"
+  description="Administrator management portal for Unity Compass."
+  hideFooter={true}
 >
   <!-- ========================================================================= -->
   <!-- GATE: LOGIN SCREEN (Displayed when unauthorized)                         -->
@@ -38,43 +39,59 @@ import MainLayout from '../../layouts/MainLayout.astro';
       <!-- Top Red Accent Stripe -->
       <div class="absolute top-0 inset-x-0 h-1.5 bg-[#FF3130]"></div>
 
-      <div class="text-center mb-8">
-        <!-- Dashed Outer Ring Icon -->
-        <div class="relative w-16 h-16 mx-auto flex items-center justify-center mb-4">
-          <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#FF3130]/35 animate-[spin_20s_linear_infinite]"></div>
-          <div class="w-12 h-12 rounded-full bg-red-50 text-[#FF3130] flex items-center justify-center font-black text-lg">
-            UC
-          </div>
+      <div class="text-center mb-6">
+        <!-- Actual Unity Compass Official Logo -->
+        <div class="flex justify-center mb-4">
+          <img
+            src="/images/Green-Minimal-Travel-Business-Logo.png"
+            alt="Unity Compass"
+            class="h-10 sm:h-11 w-auto object-contain"
+          />
         </div>
 
-        <h1 class="text-2xl font-extrabold text-[#0B2553] tracking-tight">Executive Console</h1>
-        <p class="text-xs text-[#243A5E] mt-1 font-medium">Unity Compass Management &amp; GovCon Operations</p>
+        <h1 class="text-xl sm:text-2xl font-extrabold text-[#0B2553] tracking-tight">Admin Panel</h1>
+        <p class="text-xs text-slate-500 mt-1">Sign in with administrator credentials</p>
       </div>
 
       <form id="admin-login-form" class="space-y-4" novalidate>
         <div>
           <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">
-            Admin Access Passkey
+            Admin Email
+          </label>
+          <input
+            type="email"
+            id="admin-email"
+            required
+            autocomplete="email"
+            placeholder="admin@unitycompass.com"
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-[#0B2553] text-sm focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553] focus:bg-white transition-all placeholder:text-slate-400"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">
+            Password
           </label>
           <input
             type="password"
-            id="admin-passkey"
+            id="admin-password"
             required
-            placeholder="Enter admin password..."
-            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-[#0B2553] text-sm focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400"
+            autocomplete="current-password"
+            placeholder="••••••••"
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-[#0B2553] text-sm focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553] focus:bg-white transition-all placeholder:text-slate-400"
           />
-          <p class="text-[11px] text-slate-400 mt-1.5">Default initial passkey: <code class="text-[#FF3130] font-mono font-bold">admin123</code></p>
         </div>
 
-        <div id="login-error" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs font-semibold">
-          Invalid access passkey. Please verify and try again.
+        <div id="login-error" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-[#FF3130] text-xs font-semibold text-center">
+          Invalid admin credentials. Access is restricted to administrators only.
         </div>
 
         <button
           type="submit"
-          class="w-full py-3.5 px-6 rounded-md sm:rounded-lg font-bold text-xs uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] shadow-lg shadow-[#FF3130]/25 active:scale-[0.98] transition-all cursor-pointer"
+          id="admin-login-btn"
+          class="w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#0B2553] hover:bg-[#0C487A] shadow-md shadow-[#0B2553]/20 active:scale-[0.98] transition-all cursor-pointer"
         >
-          Sign In to Console
+          Sign In to Admin Panel
         </button>
       </form>
     </div>
@@ -83,34 +100,21 @@ import MainLayout from '../../layouts/MainLayout.astro';
   <!-- ========================================================================= -->
   <!-- DASHBOARD: SIDEBAR + OUTLET COMPONENT (Displayed when authorized)          -->
   <!-- ========================================================================= -->
-  <div id="dashboard-section" class="hidden min-h-screen bg-slate-50/60 flex flex-col lg:flex-row">
+  <div id="dashboard-section" class="hidden flex-1 lg:h-[calc(100vh-5rem)] lg:max-h-[calc(100vh-5rem)] bg-slate-50/60 flex flex-col lg:flex-row overflow-hidden">
     
     <!-- ======================================================================= -->
     <!-- 1. EXECUTIVE SIDEBAR COMPONENT                                          -->
     <!-- ======================================================================= -->
-    <aside class="w-full lg:w-72 bg-white border-r border-slate-200/90 flex flex-col justify-between shrink-0 shadow-sm relative z-20">
+    <aside class="w-full lg:w-72 bg-white border-r border-slate-200/90 flex flex-col justify-between shrink-0 shadow-sm relative z-20 h-auto lg:h-full lg:overflow-y-auto">
       
       <div>
-        <!-- Sidebar Brand Header -->
-        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-[#0B2553] text-white flex items-center justify-center font-extrabold text-sm shadow-sm">
-              UC
-            </div>
-            <div>
-              <h2 class="text-sm font-extrabold text-[#0B2553] tracking-tight">Unity Compass</h2>
-              <span class="inline-flex items-center gap-1 text-[10px] font-bold text-[#FF3130] uppercase tracking-wider">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                Admin Console
-              </span>
-            </div>
-          </div>
-
-          <!-- Mobile Hamburger Toggle -->
+        <!-- Mobile-Only Sidebar Toggle (On desktop, items start directly below the navbar logo) -->
+        <div class="lg:hidden p-3.5 border-b border-slate-100 flex items-center justify-between bg-white">
+          <span class="text-xs font-bold text-[#0B2553] uppercase tracking-wider">Console Navigation</span>
           <button
             type="button"
             id="mobile-sidebar-toggle"
-            class="lg:hidden p-2 text-slate-500 hover:text-[#0B2553] rounded-md sm:rounded-lg"
+            class="p-2 text-slate-500 hover:text-[#0B2553] rounded-lg"
             aria-label="Toggle Menu"
           >
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -252,43 +256,25 @@ import MainLayout from '../../layouts/MainLayout.astro';
     <!-- ======================================================================= -->
     <!-- 2. MAIN HEADER & OUTLET COMPONENT                                       -->
     <!-- ======================================================================= -->
-    <main class="flex-1 flex flex-col min-w-0">
+    <main class="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
       
       <!-- Top Action Bar -->
-      <header class="bg-white border-b border-slate-200/90 px-6 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sticky top-0 z-10">
+      <header class="bg-white border-b border-slate-200/90 px-5 sm:px-6 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shrink-0 z-10">
         <div>
-          <div class="flex items-center gap-2.5">
-            <h1 id="outlet-view-title" class="text-xl sm:text-2xl font-extrabold text-[#0B2553] tracking-tight">
-              Dashboard Overview
-            </h1>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              Supabase Live
-            </span>
-          </div>
+          <h1 id="outlet-view-title" class="text-lg sm:text-xl font-extrabold text-[#0B2553] tracking-tight">
+            Dashboard Overview
+          </h1>
           <p id="outlet-view-subtitle" class="text-xs text-slate-500 mt-0.5">
             Operational status, real-time client inquiries, and candidate applications.
           </p>
         </div>
 
         <!-- Quick Top Action Buttons -->
-        <div class="flex items-center gap-3 shrink-0">
-          <button
-            type="button"
-            id="header-ping-btn"
-            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md sm:rounded-lg text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200/80 transition-colors cursor-pointer"
-            title="Send keep-alive heartbeat to Supabase"
-          >
-            <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            <span>Ping Heartbeat</span>
-          </button>
-
+        <div class="flex items-center gap-2.5 shrink-0">
           <a
             href="/career"
             target="_blank"
-            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md sm:rounded-lg text-xs font-bold text-white bg-[#FF3130] hover:bg-[#E02625] shadow-xs active:scale-[0.98] transition-all cursor-pointer"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-white bg-[#FF3130] hover:bg-[#E02625] shadow-xs active:scale-[0.98] transition-all cursor-pointer"
           >
             <span>Live Careers</span>
             <span aria-hidden="true">&rarr;</span>
@@ -299,34 +285,34 @@ import MainLayout from '../../layouts/MainLayout.astro';
       <!-- ===================================================================== -->
       <!-- THE OUTLET: DYNAMIC VIEW CONTAINER                                    -->
       <!-- ===================================================================== -->
-      <div id="admin-outlet" class="flex-1 p-6 sm:p-8 space-y-8">
+      <div id="admin-outlet" class="flex-1 p-4 sm:p-6 space-y-4 sm:space-y-5 overflow-y-auto">
         
         <!-- ------------------------------------------------------------------- -->
         <!-- VIEW 1: OVERVIEW (Default)                                          -->
         <!-- ------------------------------------------------------------------- -->
-        <div id="view-overview" class="outlet-view space-y-8">
+        <div id="view-overview" class="outlet-view space-y-4 sm:space-y-5">
           
           <!-- 4 Executive KPI Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             
             <!-- Metric 1: Inquiries -->
-            <div class="relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
+            <div class="relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
               <div class="absolute top-0 inset-x-0 h-1 bg-[#FF3130]"></div>
-              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Leads</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Inquiries</span>
               <p id="metric-inquiries" class="text-3xl font-black text-[#FF3130] mt-2">--</p>
-              <span class="text-[11px] text-slate-500 font-medium mt-1 block">Contact submissions</span>
+              <span class="text-[11px] text-slate-500 font-medium mt-1 block">Contact form submissions</span>
             </div>
 
             <!-- Metric 2: Candidates -->
-            <div class="relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
+            <div class="relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
               <div class="absolute top-0 inset-x-0 h-1 bg-emerald-500"></div>
               <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Candidate Resumes</span>
               <p id="metric-applications" class="text-3xl font-black text-emerald-600 mt-2">--</p>
-              <span class="text-[11px] text-slate-500 font-medium mt-1 block">In Supabase Storage</span>
+              <span class="text-[11px] text-slate-500 font-medium mt-1 block">Uploaded applications</span>
             </div>
 
             <!-- Metric 3: Active Jobs -->
-            <div class="relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
+            <div class="relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
               <div class="absolute top-0 inset-x-0 h-1 bg-[#0B2553]"></div>
               <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Active Jobs</span>
               <p id="metric-jobs" class="text-3xl font-black text-[#0B2553] mt-2">--</p>
@@ -334,7 +320,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
             </div>
 
             <!-- Metric 4: Blogs -->
-            <div class="relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
+            <div class="relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
               <div class="absolute top-0 inset-x-0 h-1 bg-[#EE8522]"></div>
               <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Published Insights</span>
               <p id="metric-blogs" class="text-3xl font-black text-[#EE8522] mt-2">--</p>
@@ -344,14 +330,14 @@ import MainLayout from '../../layouts/MainLayout.astro';
           </div>
 
           <!-- Quick Preview Split Cards -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
             
             <!-- Recent Inquiries Card -->
-            <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-4">
+            <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-3">
               <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div class="flex items-center gap-2">
                   <span class="w-2.5 h-2.5 rounded-full bg-[#FF3130]"></span>
-                  <h3 class="text-base font-bold text-[#0B2553]">Recent Contact Leads</h3>
+                  <h3 class="text-base font-bold text-[#0B2553]">Recent Contact Queries</h3>
                 </div>
                 <button
                   type="button"
@@ -363,12 +349,12 @@ import MainLayout from '../../layouts/MainLayout.astro';
               </div>
 
               <div id="overview-recent-inquiries" class="space-y-3">
-                <p class="text-xs text-slate-400 text-center py-6">Loading leads...</p>
+                <p class="text-xs text-slate-400 text-center py-6">Loading queries...</p>
               </div>
             </div>
 
             <!-- Recent Applications Card -->
-            <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-4">
+            <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-3">
               <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div class="flex items-center gap-2">
                   <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
@@ -395,27 +381,52 @@ import MainLayout from '../../layouts/MainLayout.astro';
         <!-- ------------------------------------------------------------------- -->
         <!-- VIEW 2: CONTACT INQUIRIES                                           -->
         <!-- ------------------------------------------------------------------- -->
-        <div id="view-inquiries" class="outlet-view hidden space-y-6">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h2 class="text-lg font-bold text-[#0B2553]">Lead Submissions from Contact Form</h2>
-              <p class="text-xs text-slate-500">Prospective clients requesting GovCon proposals, staffing, and advisory scoping.</p>
-            </div>
-            
-            <div class="flex items-center gap-3">
-              <input
-                type="text"
-                id="search-inquiries"
-                placeholder="Search leads by name, email, or message..."
-                class="px-4 py-2 text-xs rounded-xl border border-slate-200 bg-white text-[#0B2553] w-64 focus:outline-none focus:ring-2 focus:ring-[#FF3130]/30 focus:border-[#FF3130]"
-              />
+        <div id="view-inquiries" class="outlet-view hidden space-y-3.5 sm:space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <!-- Search Bar -->
+              <div class="relative">
+                <input
+                  type="text"
+                  id="search-inquiries"
+                  placeholder="Search queries by name, email, or message..."
+                  class="pl-9 pr-4 py-1.5 text-xs rounded-xl border border-slate-200 bg-white text-[#0B2553] w-60 sm:w-72 focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553] transition-all"
+                />
+                <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+
+              <!-- Date Sort Filter (Recent vs Oldest) -->
+              <select
+                id="sort-inquiries"
+                class="px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-white text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 cursor-pointer transition-all"
+                title="Sort by date"
+              >
+                <option value="recent">Newest First</option>
+                <option value="oldest">Oldest First</option>
+              </select>
+
+              <!-- Status Filter -->
+              <select
+                id="status-filter-inquiries"
+                class="px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-white text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 cursor-pointer transition-all"
+                title="Filter by status"
+              >
+                <option value="all">All Statuses</option>
+                <option value="new">New (Unviewed)</option>
+                <option value="viewed">Viewed</option>
+                <option value="replied">Replied</option>
+              </select>
+
+              <!-- Refresh Button -->
               <button
                 type="button"
                 id="refresh-inquiries-btn"
-                class="p-2.5 rounded-md sm:rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer"
-                title="Refresh leads"
+                class="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-[#0B2553] hover:text-[#0C487A] transition-all cursor-pointer shadow-xs active:scale-95 flex items-center justify-center"
+                title="Refresh queries"
               >
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg id="refresh-inquiries-icon" class="w-4 h-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
               </button>
@@ -427,17 +438,17 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <table class="w-full text-left text-xs text-[#243A5E]">
                 <thead class="bg-slate-50 text-[#0B2553] uppercase tracking-wider text-[11px] font-bold border-b border-slate-200">
                   <tr>
-                    <th class="px-6 py-4">Lead Name</th>
-                    <th class="px-6 py-4">Contact Info</th>
-                    <th class="px-6 py-4">Message Snippet</th>
-                    <th class="px-6 py-4">Submitted</th>
-                    <th class="px-6 py-4">Status</th>
-                    <th class="px-6 py-4 text-right">Actions</th>
+                    <th class="px-5 py-3">Name</th>
+                    <th class="px-5 py-3">Contact Info</th>
+                    <th class="px-5 py-3">Message Snippet</th>
+                    <th class="px-5 py-3">Submitted</th>
+                    <th class="px-5 py-3">Status</th>
+                    <th class="px-5 py-3 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody id="inquiries-table-body" class="divide-y divide-slate-100">
                   <tr>
-                    <td colspan="6" class="px-6 py-8 text-center text-slate-400">Loading inquiries...</td>
+                    <td colspan="6" class="px-5 py-8 text-center text-slate-400">Loading queries...</td>
                   </tr>
                 </tbody>
               </table>
@@ -448,22 +459,22 @@ import MainLayout from '../../layouts/MainLayout.astro';
         <!-- ------------------------------------------------------------------- -->
         <!-- VIEW 3: CANDIDATES & RESUMES                                        -->
         <!-- ------------------------------------------------------------------- -->
-        <div id="view-candidates" class="outlet-view hidden space-y-6">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h2 class="text-lg font-bold text-[#0B2553]">Candidate Applications &amp; Uploaded Resumes</h2>
-              <p class="text-xs text-slate-500">Cleared &amp; GovCon talent submissions stored securely in Supabase Storage.</p>
+        <div id="view-candidates" class="outlet-view hidden space-y-3.5 sm:space-y-4">
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-xs font-bold text-[#0B2553] tracking-wide">Candidate Applications &amp; Resumes</span>
             </div>
-            
             <button
               type="button"
               id="refresh-applications-btn"
-              class="p-2.5 rounded-md sm:rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer self-start sm:self-auto"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-[#0B2553] transition-all cursor-pointer shadow-xs active:scale-95"
               title="Refresh applicants"
             >
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-3.5 h-3.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
+              <span>Refresh Candidates</span>
             </button>
           </div>
 
@@ -472,17 +483,17 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <table class="w-full text-left text-xs text-[#243A5E]">
                 <thead class="bg-slate-50 text-[#0B2553] uppercase tracking-wider text-[11px] font-bold border-b border-slate-200">
                   <tr>
-                    <th class="px-6 py-4">Candidate</th>
-                    <th class="px-6 py-4">Target Requisition</th>
-                    <th class="px-6 py-4">Contact Details</th>
-                    <th class="px-6 py-4">Submitted Date</th>
-                    <th class="px-6 py-4">Resume File</th>
-                    <th class="px-6 py-4 text-right">Status</th>
+                    <th class="px-5 py-3">Candidate</th>
+                    <th class="px-5 py-3">Target Requisition</th>
+                    <th class="px-5 py-3">Contact Details</th>
+                    <th class="px-5 py-3">Submitted Date</th>
+                    <th class="px-5 py-3">Resume File</th>
+                    <th class="px-5 py-3 text-right">Status</th>
                   </tr>
                 </thead>
                 <tbody id="applications-table-body" class="divide-y divide-slate-100">
                   <tr>
-                    <td colspan="6" class="px-6 py-8 text-center text-slate-400">Loading applicants...</td>
+                    <td colspan="6" class="px-5 py-8 text-center text-slate-400">Loading applicants...</td>
                   </tr>
                 </tbody>
               </table>
@@ -493,19 +504,18 @@ import MainLayout from '../../layouts/MainLayout.astro';
         <!-- ------------------------------------------------------------------- -->
         <!-- VIEW 4: JOB BOARD MANAGER                                           -->
         <!-- ------------------------------------------------------------------- -->
-        <div id="view-jobs" class="outlet-view hidden space-y-6">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h2 class="text-lg font-bold text-[#0B2553]">GovCon Career Requisitions</h2>
-              <p class="text-xs text-slate-500">Live positions displayed on the public career portal.</p>
+        <div id="view-jobs" class="outlet-view hidden space-y-3.5 sm:space-y-4">
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#0B2553]"></span>
+              <span class="text-xs font-bold text-[#0B2553] tracking-wide">Career Requisitions</span>
             </div>
-            
             <a
               href="/career"
               target="_blank"
-              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md sm:rounded-lg text-xs font-bold text-[#0B2553] bg-white border border-slate-200 hover:bg-slate-50 transition-colors"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-[#0B2553] bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
             >
-              <span>Preview Live Board</span>
+              <span>Preview Public Board</span>
               <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
@@ -515,16 +525,16 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <table class="w-full text-left text-xs text-[#243A5E]">
                 <thead class="bg-slate-50 text-[#0B2553] uppercase tracking-wider text-[11px] font-bold border-b border-slate-200">
                   <tr>
-                    <th class="px-6 py-4">Job Title &amp; ID</th>
-                    <th class="px-6 py-4">Department</th>
-                    <th class="px-6 py-4">Location &amp; Model</th>
-                    <th class="px-6 py-4">Clearance Mandate</th>
-                    <th class="px-6 py-4 text-right">Status</th>
+                    <th class="px-5 py-3">Job Title &amp; ID</th>
+                    <th class="px-5 py-3">Department</th>
+                    <th class="px-5 py-3">Location &amp; Model</th>
+                    <th class="px-5 py-3">Clearance Mandate</th>
+                    <th class="px-5 py-3 text-right">Status</th>
                   </tr>
                 </thead>
                 <tbody id="jobs-table-body" class="divide-y divide-slate-100">
                   <tr>
-                    <td colspan="5" class="px-6 py-8 text-center text-slate-400">Loading jobs...</td>
+                    <td colspan="5" class="px-5 py-8 text-center text-slate-400">Loading jobs...</td>
                   </tr>
                 </tbody>
               </table>
@@ -535,19 +545,18 @@ import MainLayout from '../../layouts/MainLayout.astro';
         <!-- ------------------------------------------------------------------- -->
         <!-- VIEW 5: BLOG MANAGER                                                -->
         <!-- ------------------------------------------------------------------- -->
-        <div id="view-blogs" class="outlet-view hidden space-y-6">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h2 class="text-lg font-bold text-[#0B2553]">Published Insights &amp; Intelligence</h2>
-              <p class="text-xs text-slate-500">GovCon editorial articles and capture thought leadership.</p>
+        <div id="view-blogs" class="outlet-view hidden space-y-3.5 sm:space-y-4">
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#EE8522]"></span>
+              <span class="text-xs font-bold text-[#0B2553] tracking-wide">Published Insights</span>
             </div>
-            
             <a
               href="/blog"
               target="_blank"
-              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md sm:rounded-lg text-xs font-bold text-[#0B2553] bg-white border border-slate-200 hover:bg-slate-50 transition-colors"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-[#0B2553] bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
             >
-              <span>Preview Live Publications</span>
+              <span>Preview Live Articles</span>
               <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
@@ -557,15 +566,15 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <table class="w-full text-left text-xs text-[#243A5E]">
                 <thead class="bg-slate-50 text-[#0B2553] uppercase tracking-wider text-[11px] font-bold border-b border-slate-200">
                   <tr>
-                    <th class="px-6 py-4">Article Title &amp; Route</th>
-                    <th class="px-6 py-4">Category</th>
-                    <th class="px-6 py-4">Author &amp; Date</th>
-                    <th class="px-6 py-4 text-right">Status</th>
+                    <th class="px-5 py-3">Article Title &amp; Route</th>
+                    <th class="px-5 py-3">Category</th>
+                    <th class="px-5 py-3">Author &amp; Date</th>
+                    <th class="px-5 py-3 text-right">Status</th>
                   </tr>
                 </thead>
                 <tbody id="blogs-table-body" class="divide-y divide-slate-100">
                   <tr>
-                    <td colspan="4" class="px-6 py-8 text-center text-slate-400">Loading articles...</td>
+                    <td colspan="4" class="px-5 py-8 text-center text-slate-400">Loading articles...</td>
                   </tr>
                 </tbody>
               </table>
@@ -576,16 +585,11 @@ import MainLayout from '../../layouts/MainLayout.astro';
         <!-- ------------------------------------------------------------------- -->
         <!-- VIEW 6: SYSTEM & KEEP-ALIVE                                         -->
         <!-- ------------------------------------------------------------------- -->
-        <div id="view-system" class="outlet-view hidden space-y-6">
-          <div>
-            <h2 class="text-lg font-bold text-[#0B2553]">System Health &amp; Inactivity Keep-Alive</h2>
-            <p class="text-xs text-slate-500">Automated heartbeat monitor preventing Supabase 7-day inactivity pause.</p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div id="view-system" class="outlet-view hidden space-y-3.5 sm:space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
             
             <!-- Card 1: Supabase Keep-Alive Pulse -->
-            <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-4">
+            <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-3">
               <div class="flex items-center gap-3">
                 <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
                 <h3 class="text-base font-bold text-[#0B2553]">Supabase Database Heartbeat</h3>
@@ -598,7 +602,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
                 <button
                   type="button"
                   id="manual-ping-btn"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md sm:rounded-lg text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-all cursor-pointer shadow-sm active:scale-[0.98]"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-all cursor-pointer shadow-sm active:scale-[0.98]"
                 >
                   <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -611,22 +615,22 @@ import MainLayout from '../../layouts/MainLayout.astro';
             </div>
 
             <!-- Card 2: Environment Health -->
-            <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-4">
+            <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] space-y-3">
               <h3 class="text-base font-bold text-[#0B2553]">Active Service Configuration</h3>
-              <ul class="space-y-2.5 text-xs text-slate-600">
-                <li class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
+              <ul class="space-y-2 text-xs text-slate-600">
+                <li class="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200/60">
                   <span class="font-bold text-[#0B2553]">Supabase PostgREST Data API:</span>
                   <span class="text-emerald-700 font-bold">Enabled ✓</span>
                 </li>
-                <li class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
+                <li class="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200/60">
                   <span class="font-bold text-[#0B2553]">Storage Resume Bucket:</span>
                   <span class="text-emerald-700 font-bold">Private (5MB Limit) ✓</span>
                 </li>
-                <li class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
+                <li class="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200/60">
                   <span class="font-bold text-[#0B2553]">Admin Notification Email:</span>
                   <span class="text-slate-800 font-mono">syedtawseef0@gmail.com</span>
                 </li>
-                <li class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
+                <li class="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200/60">
                   <span class="font-bold text-[#0B2553]">Resend Dispatch API:</span>
                   <span class="text-emerald-700 font-bold">Configured ✓</span>
                 </li>
@@ -649,12 +653,45 @@ import MainLayout from '../../layouts/MainLayout.astro';
       <div class="absolute top-0 inset-x-0 h-1.5 bg-[#FF3130]"></div>
 
       <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-        <h3 class="text-lg font-bold text-[#0B2553]">Contact Lead Details</h3>
-        <button type="button" id="close-inquiry-modal" class="p-1 text-slate-400 hover:text-slate-700 rounded-md sm:rounded-lg hover:bg-slate-100 text-lg">&times;</button>
+        <h3 class="text-lg font-bold text-[#0B2553]">Contact Query Details</h3>
+        <button type="button" id="close-inquiry-modal" class="p-1 text-slate-400 hover:text-slate-700 rounded-md sm:rounded-lg hover:bg-slate-100 text-lg cursor-pointer">&times;</button>
       </div>
 
-      <div id="inquiry-modal-body" class="text-xs text-[#243A5E] space-y-3 mt-4"></div>
+      <div id="inquiry-modal-body" class="text-xs text-[#243A5E] space-y-4 mt-4"></div>
     </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- FLOATING CUSTOM STATUS DROPDOWN MENU FOR INQUIRIES                        -->
+  <!-- ========================================================================= -->
+  <div
+    id="table-status-popover"
+    class="hidden fixed z-50 w-36 bg-white/95 backdrop-blur-md rounded-2xl shadow-[0_12px_28px_-6px_rgba(11,37,83,0.18),0_4px_12px_rgba(0,0,0,0.06)] border border-slate-200/90 p-1.5 transition-all text-xs font-bold"
+  >
+    <button
+      type="button"
+      data-status-choice="new"
+      class="w-full text-left px-3 py-1.5 rounded-xl flex items-center gap-2 hover:bg-red-50 text-[#FF3130] transition-colors cursor-pointer"
+    >
+      <span class="w-2 h-2 rounded-full bg-[#FF3130]"></span>
+      <span>New</span>
+    </button>
+    <button
+      type="button"
+      data-status-choice="viewed"
+      class="w-full text-left px-3 py-1.5 rounded-xl flex items-center gap-2 hover:bg-blue-50 text-blue-700 transition-colors cursor-pointer"
+    >
+      <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+      <span>Viewed</span>
+    </button>
+    <button
+      type="button"
+      data-status-choice="replied"
+      class="w-full text-left px-3 py-1.5 rounded-xl flex items-center gap-2 hover:bg-emerald-50 text-emerald-700 transition-colors cursor-pointer"
+    >
+      <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+      <span>Replied</span>
+    </button>
   </div>
 
   <!-- ========================================================================= -->
@@ -662,41 +699,84 @@ import MainLayout from '../../layouts/MainLayout.astro';
   <!-- ========================================================================= -->
   <script>
     const AUTH_KEY = 'uc_admin_token';
+    let allInquiries: any[] = [];
 
     function initAdminPortal() {
       const loginSection = document.getElementById('login-section');
       const dashboardSection = document.getElementById('dashboard-section');
       const loginForm = document.getElementById('admin-login-form');
-      const passkeyInput = document.getElementById('admin-passkey') as HTMLInputElement | null;
+      const emailInput = document.getElementById('admin-email') as HTMLInputElement | null;
+      const passwordInput = document.getElementById('admin-password') as HTMLInputElement | null;
+      const loginBtn = document.getElementById('admin-login-btn') as HTMLButtonElement | null;
       const loginError = document.getElementById('login-error');
       const logoutBtn = document.getElementById('admin-logout-btn');
 
       function checkAuth() {
         const token = localStorage.getItem(AUTH_KEY);
-        if (token === 'valid_admin_session') {
+        if (token === 'uc_admin_session_auth_v1' || token === 'valid_admin_session') {
           loginSection?.classList.add('hidden');
           dashboardSection?.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
           loadDashboardData();
         } else {
           loginSection?.classList.remove('hidden');
           dashboardSection?.classList.add('hidden');
+          document.body.style.overflow = '';
         }
       }
 
-      loginForm?.addEventListener('submit', (e) => {
+      loginForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const passkey = passkeyInput?.value.trim();
-        if (passkey === 'admin123' || passkey === 'unitycompass2026') {
-          localStorage.setItem(AUTH_KEY, 'valid_admin_session');
-          loginError?.classList.add('hidden');
-          checkAuth();
-        } else {
-          loginError?.classList.remove('hidden');
+        const email = emailInput?.value.trim() || '';
+        const password = passwordInput?.value.trim() || '';
+
+        if (!email || !password) {
+          if (loginError) {
+            loginError.textContent = 'Please enter both admin email and password.';
+            loginError.classList.remove('hidden');
+          }
+          return;
+        }
+
+        if (loginBtn) {
+          loginBtn.disabled = true;
+          loginBtn.textContent = 'Verifying...';
+        }
+
+        try {
+          const res = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          });
+          const data = await res.json();
+
+          if (res.ok && data.success) {
+            localStorage.setItem(AUTH_KEY, data.token || 'uc_admin_session_auth_v1');
+            loginError?.classList.add('hidden');
+            checkAuth();
+          } else {
+            if (loginError) {
+              loginError.textContent = data.error || 'Invalid administrator email or password.';
+              loginError.classList.remove('hidden');
+            }
+          }
+        } catch (err) {
+          if (loginError) {
+            loginError.textContent = 'Sign-in verification failed. Please try again.';
+            loginError.classList.remove('hidden');
+          }
+        } finally {
+          if (loginBtn) {
+            loginBtn.disabled = false;
+            loginBtn.textContent = 'Sign In to Admin Panel';
+          }
         }
       });
 
       logoutBtn?.addEventListener('click', () => {
         localStorage.removeItem(AUTH_KEY);
+        document.body.style.overflow = '';
         checkAuth();
       });
 
@@ -707,15 +787,15 @@ import MainLayout from '../../layouts/MainLayout.astro';
       const viewMeta: Record<string, { title: string; subtitle: string }> = {
         overview: {
           title: 'Dashboard Overview',
-          subtitle: 'Operational KPIs, recent inquiries, and candidate applications.',
+          subtitle: 'Operational status, real-time client inquiries, and candidate applications.',
         },
         inquiries: {
           title: 'Contact Inquiries',
-          subtitle: 'Prospective clients requesting GovCon proposals, staffing, and advisory scoping.',
+          subtitle: 'Messages and inquiries submitted by users through the contact form.',
         },
         candidates: {
           title: 'Candidates & Resumes',
-          subtitle: 'Cleared & GovCon talent submissions stored securely in Supabase Storage.',
+          subtitle: 'Cleared & GovCon talent submissions.',
         },
         jobs: {
           title: 'Job Board Manager',
@@ -723,7 +803,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         },
         blogs: {
           title: 'Blog Manager',
-          subtitle: 'GovCon editorial articles and capture thought leadership.',
+          subtitle: 'GovCon editorial articles and thought leadership.',
         },
         system: {
           title: 'Database Health & Ping',
@@ -772,15 +852,53 @@ import MainLayout from '../../layouts/MainLayout.astro';
         sidebarNav?.classList.toggle('hidden');
       });
 
-      // Heartbeat pulse triggers
+      // Search & Filters for Contact Queries
+      const searchInput = document.getElementById('search-inquiries');
+      const sortSelect = document.getElementById('sort-inquiries');
+      const statusFilter = document.getElementById('status-filter-inquiries');
+      const refreshInquiriesBtn = document.getElementById('refresh-inquiries-btn');
+      const refreshApplicationsBtn = document.getElementById('refresh-applications-btn');
+
+      searchInput?.addEventListener('input', () => {
+        renderInquiriesTable();
+      });
+
+      sortSelect?.addEventListener('change', () => {
+        renderInquiriesTable();
+      });
+
+      statusFilter?.addEventListener('change', () => {
+        renderInquiriesTable();
+      });
+
+      refreshInquiriesBtn?.addEventListener('click', async () => {
+        const icon = document.getElementById('refresh-inquiries-icon');
+        icon?.classList.add('animate-spin');
+        try {
+          await loadInquiries();
+        } finally {
+          setTimeout(() => icon?.classList.remove('animate-spin'), 500);
+        }
+      });
+
+      refreshApplicationsBtn?.addEventListener('click', async () => {
+        const icon = refreshApplicationsBtn.querySelector('svg');
+        icon?.classList.add('animate-spin');
+        try {
+          await loadApplications();
+        } finally {
+          setTimeout(() => icon?.classList.remove('animate-spin'), 500);
+        }
+      });
+
+      // Heartbeat pulse trigger (In System Tab)
       document.getElementById('manual-ping-btn')?.addEventListener('click', triggerPing);
-      document.getElementById('header-ping-btn')?.addEventListener('click', triggerPing);
 
       async function triggerPing() {
         const resultEl = document.getElementById('ping-result');
         if (resultEl) {
           resultEl.classList.remove('hidden');
-          resultEl.textContent = 'Executing Supabase heartbeat pulse...';
+          resultEl.textContent = 'Executing database heartbeat pulse...';
         }
 
         try {
@@ -806,69 +924,237 @@ import MainLayout from '../../layouts/MainLayout.astro';
       loadBlogs();
     }
 
-    async function loadInquiries() {
-      const tbody = document.getElementById('inquiries-table-body');
+    function updateInquiriesMetrics() {
+      const unreadCount = allInquiries.filter((i: any) => i.status === 'new').length;
+      const countBadge = document.getElementById('sidebar-inquiries-badge');
+      const metricEl = document.getElementById('metric-inquiries');
+      if (countBadge) countBadge.textContent = String(unreadCount);
+      if (metricEl) metricEl.textContent = String(allInquiries.length);
+    }
+
+    function renderOverviewInquiries() {
       const recentContainer = document.getElementById('overview-recent-inquiries');
+      if (!recentContainer) return;
 
-      try {
-        const res = await fetch('/api/admin/inquiries');
-        const data = await res.json();
-        const list = data.inquiries || [];
+      if (!allInquiries.length) {
+        recentContainer.innerHTML = '<p class="text-xs text-slate-400 text-center py-6">No contact queries yet.</p>';
+        return;
+      }
 
-        const unreadCount = list.filter((i: any) => i.status === 'new').length;
-        const countBadge = document.getElementById('sidebar-inquiries-badge');
-        const metricEl = document.getElementById('metric-inquiries');
-        if (countBadge) countBadge.textContent = String(unreadCount);
-        if (metricEl) metricEl.textContent = String(list.length);
+      // Sort newest first for overview
+      const sorted = [...allInquiries].sort((a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime());
+      const top3 = sorted.slice(0, 3);
 
-        // Populate Overview Preview
-        if (recentContainer) {
-          if (!list.length) {
-            recentContainer.innerHTML = '<p class="text-xs text-slate-400 text-center py-6">No contact inquiries yet.</p>';
-          } else {
-            recentContainer.innerHTML = list.slice(0, 3).map((item: any) => `
-              <div class="p-3.5 rounded-2xl sm:rounded-3xl bg-slate-50 border border-slate-200/70 flex items-center justify-between">
-                <div>
-                  <p class="text-xs font-bold text-[#0B2553]">${escapeHtml(item.name)}</p>
-                  <p class="text-[11px] text-slate-500 truncate max-w-xs">${escapeHtml(item.message)}</p>
-                </div>
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${item.status === 'new' ? 'bg-red-50 text-[#FF3130] border border-red-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'}">
-                  ${item.status.toUpperCase()}
-                </span>
-              </div>
-            `).join('');
+      recentContainer.innerHTML = top3.map((item: any) => {
+        const isNew = item.status === 'new';
+        const isViewed = item.status === 'viewed';
+        const isReplied = item.status === 'replied';
+
+        const badgeClass = isNew
+          ? 'bg-red-50 text-[#FF3130] border border-red-200'
+          : isViewed
+          ? 'bg-blue-50 text-blue-700 border border-blue-200'
+          : isReplied
+          ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+          : 'bg-slate-100 text-slate-700 border border-slate-200';
+
+        const badgeText = isNew ? 'NEW' : isViewed ? 'VIEWED' : isReplied ? 'REPLIED' : (item.status || 'NEW').toUpperCase();
+
+        return `
+          <div onclick="viewInquiry('${item.id}')" class="p-3.5 rounded-2xl sm:rounded-3xl bg-slate-50 hover:bg-slate-100/90 border border-slate-200/70 flex items-center justify-between cursor-pointer transition-all">
+            <div class="pr-2 min-w-0">
+              <p class="text-xs font-bold text-[#0B2553] truncate">${escapeHtml(item.name)}</p>
+              <p class="text-[11px] text-slate-500 truncate max-w-xs">${escapeHtml(item.message)}</p>
+            </div>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold shrink-0 ${badgeClass}">
+              ${badgeText}
+            </span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function getFilteredAndSortedInquiries() {
+      const searchInput = document.getElementById('search-inquiries') as HTMLInputElement | null;
+      const sortSelect = document.getElementById('sort-inquiries') as HTMLSelectElement | null;
+      const statusFilter = document.getElementById('status-filter-inquiries') as HTMLSelectElement | null;
+
+      const query = (searchInput?.value || '').toLowerCase().trim();
+      const sortOrder = sortSelect?.value || 'recent';
+      const status = statusFilter?.value || 'all';
+
+      let filtered = allInquiries.filter((item: any) => {
+        // Status filter
+        if (status !== 'all' && item.status !== status) {
+          return false;
+        }
+        // Search filter
+        if (query) {
+          const nameMatch = (item.name || '').toLowerCase().includes(query);
+          const emailMatch = (item.email || '').toLowerCase().includes(query);
+          const phoneMatch = (item.phone || '').toLowerCase().includes(query);
+          const messageMatch = (item.message || '').toLowerCase().includes(query);
+          if (!nameMatch && !emailMatch && !phoneMatch && !messageMatch) {
+            return false;
           }
         }
+        return true;
+      });
 
-        if (!tbody) return;
-        if (!list.length) {
-          tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-slate-400">No contact inquiries received yet.</td></tr>`;
-          return;
+      // Sort by date (recent vs oldest)
+      filtered.sort((a: any, b: any) => {
+        const timeA = new Date(a.created_at || 0).getTime();
+        const timeB = new Date(b.created_at || 0).getTime();
+        return sortOrder === 'oldest' ? timeA - timeB : timeB - timeA;
+      });
+
+      return filtered;
+    }
+
+    let activeStatusMenuInquiryId: string | null = null;
+
+    (window as any).openStatusMenu = (id: string, e: MouseEvent) => {
+      e.stopPropagation();
+      const popover = document.getElementById('table-status-popover');
+      if (!popover) return;
+
+      if (activeStatusMenuInquiryId === id && !popover.classList.contains('hidden')) {
+        popover.classList.add('hidden');
+        activeStatusMenuInquiryId = null;
+        return;
+      }
+
+      activeStatusMenuInquiryId = id;
+      const trigger = e.currentTarget as HTMLElement;
+      const rect = trigger.getBoundingClientRect();
+
+      const popoverWidth = 144;
+      let left = rect.left;
+      if (left + popoverWidth > window.innerWidth - 12) {
+        left = Math.max(12, rect.right - popoverWidth);
+      }
+
+      popover.style.top = `${rect.bottom + 4}px`;
+      popover.style.left = `${left}px`;
+      popover.classList.remove('hidden');
+    };
+
+    function closeStatusMenu() {
+      const popover = document.getElementById('table-status-popover');
+      if (popover && !popover.classList.contains('hidden')) {
+        popover.classList.add('hidden');
+        activeStatusMenuInquiryId = null;
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const popover = document.getElementById('table-status-popover');
+      if (popover && !popover.contains(e.target as Node)) {
+        closeStatusMenu();
+      }
+    });
+
+    window.addEventListener('scroll', closeStatusMenu, true);
+
+    document.querySelectorAll('#table-status-popover button[data-status-choice]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const status = (btn as HTMLElement).getAttribute('data-status-choice');
+        if (activeStatusMenuInquiryId && status) {
+          (window as any).updateInquiryStatus(activeStatusMenuInquiryId, status);
         }
+        closeStatusMenu();
+      });
+    });
 
-        tbody.innerHTML = list.map((item: any) => `
+    function renderInquiriesTable() {
+      const tbody = document.getElementById('inquiries-table-body');
+      if (!tbody) return;
+
+      const list = getFilteredAndSortedInquiries();
+
+      if (!list.length) {
+        const searchInput = document.getElementById('search-inquiries') as HTMLInputElement | null;
+        const query = searchInput?.value.trim();
+        tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-slate-400">${
+          query ? `No queries found matching "${escapeHtml(query)}".` : 'No contact queries received yet.'
+        }</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map((item: any) => {
+        const isNew = item.status === 'new';
+        const isViewed = item.status === 'viewed';
+        const isReplied = item.status === 'replied';
+
+        const badgeClass = isNew
+          ? 'bg-red-50 text-[#FF3130] border-red-200 hover:bg-red-100/70'
+          : isViewed
+          ? 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100/70'
+          : isReplied
+          ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100/70'
+          : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100';
+
+        const dotColor = isNew
+          ? 'bg-[#FF3130]'
+          : isViewed
+          ? 'bg-blue-600'
+          : isReplied
+          ? 'bg-emerald-600'
+          : 'bg-slate-400';
+
+        const badgeText = isNew ? 'New' : isViewed ? 'Viewed' : isReplied ? 'Replied' : (item.status || 'New');
+
+        return `
           <tr class="hover:bg-slate-50/80 transition-colors">
-            <td class="px-6 py-4 font-bold text-[#0B2553]">${escapeHtml(item.name)}</td>
-            <td class="px-6 py-4">
+            <td class="px-5 py-3.5 font-bold text-[#0B2553] whitespace-nowrap">${escapeHtml(item.name)}</td>
+            <td class="px-5 py-3.5 whitespace-nowrap">
               <a href="mailto:${escapeHtml(item.email)}" class="text-[#0C487A] font-semibold hover:underline block">${escapeHtml(item.email)}</a>
-              <span class="text-slate-400 text-[11px]">${escapeHtml(item.phone)}</span>
+              <span class="text-slate-400 text-[11px]">${escapeHtml(item.phone || 'No phone')}</span>
             </td>
-            <td class="px-6 py-4 max-w-xs truncate text-[#243A5E]">${escapeHtml(item.message)}</td>
-            <td class="px-6 py-4 text-slate-400 text-[11px]">${new Date(item.created_at).toLocaleDateString()}</td>
-            <td class="px-6 py-4">
-              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${item.status === 'new' ? 'bg-red-50 text-[#FF3130] border border-red-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'}">
-                ${item.status.toUpperCase()}
-              </span>
+            <td class="px-5 py-3.5 max-w-xs truncate text-[#243A5E]" title="${escapeHtml(item.message)}">${escapeHtml(item.message)}</td>
+            <td class="px-5 py-3.5 text-slate-400 text-[11px] whitespace-nowrap">${item.created_at ? new Date(item.created_at).toLocaleDateString() : 'N/A'}</td>
+            <td class="px-5 py-3.5 whitespace-nowrap">
+              <button
+                type="button"
+                id="status-trigger-${item.id}"
+                onclick="openStatusMenu('${item.id}', event)"
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-2xs hover:shadow-xs active:scale-95 ${badgeClass}"
+                title="Change status"
+              >
+                <span class="w-1.5 h-1.5 rounded-full ${dotColor}"></span>
+                <span>${badgeText}</span>
+                <svg class="w-3 h-3 opacity-60 ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
             </td>
-            <td class="px-6 py-4 text-right">
-              <button onclick="viewInquiry('${item.id}', '${escapeHtml(item.name)}', '${escapeHtml(item.email)}', '${escapeHtml(item.phone)}', '${escapeHtml(item.message)}', '${item.status}')" class="px-3 py-1.5 text-xs font-bold rounded-md sm:rounded-lg bg-slate-100 hover:bg-[#0B2553] hover:text-white text-[#0B2553] transition-all cursor-pointer">
+            <td class="px-5 py-3.5 text-right whitespace-nowrap">
+              <button
+                onclick="viewInquiry('${item.id}')"
+                class="px-3 py-1.5 text-xs font-bold rounded-lg bg-slate-100 hover:bg-[#0B2553] hover:text-white text-[#0B2553] transition-all cursor-pointer"
+                title="View full query details"
+              >
                 View
               </button>
             </td>
           </tr>
-        `).join('');
+        `;
+      }).join('');
+    }
+
+    async function loadInquiries() {
+      try {
+        const res = await fetch('/api/admin/inquiries');
+        const data = await res.json();
+        allInquiries = data.inquiries || [];
+
+        updateInquiriesMetrics();
+        renderOverviewInquiries();
+        renderInquiriesTable();
       } catch (e) {
-        if (tbody) tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-red-500">Failed to load inquiries.</td></tr>`;
+        const tbody = document.getElementById('inquiries-table-body');
+        if (tbody) tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-red-500">Failed to load contact queries.</td></tr>`;
       }
     }
 
@@ -907,28 +1193,28 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
         if (!tbody) return;
         if (!list.length) {
-          tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-slate-400">No candidate applications received yet.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-slate-400">No candidate applications received yet.</td></tr>`;
           return;
         }
 
         tbody.innerHTML = list.map((item: any) => `
           <tr class="hover:bg-slate-50/80 transition-colors">
-            <td class="px-6 py-4 font-bold text-[#0B2553]">${escapeHtml(item.candidate_name)}</td>
-            <td class="px-6 py-4 text-[#0B2553] font-semibold">${escapeHtml(item.job_title)}</td>
-            <td class="px-6 py-4">
+            <td class="px-5 py-3.5 font-bold text-[#0B2553]">${escapeHtml(item.candidate_name)}</td>
+            <td class="px-5 py-3.5 text-[#0B2553] font-semibold">${escapeHtml(item.job_title)}</td>
+            <td class="px-5 py-3.5">
               <a href="mailto:${escapeHtml(item.candidate_email)}" class="text-[#0C487A] font-semibold hover:underline block">${escapeHtml(item.candidate_email)}</a>
               <span class="text-slate-400 text-[11px]">${escapeHtml(item.candidate_phone)}</span>
             </td>
-            <td class="px-6 py-4 text-slate-400 text-[11px]">${new Date(item.created_at).toLocaleDateString()}</td>
-            <td class="px-6 py-4">
+            <td class="px-5 py-3.5 text-slate-400 text-[11px]">${item.created_at ? new Date(item.created_at).toLocaleDateString() : 'N/A'}</td>
+            <td class="px-5 py-3.5">
               ${item.resume_url && item.resume_url !== '#' ? `
-                <a href="${item.resume_url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md sm:rounded-lg bg-[#FF3130] hover:bg-[#E02625] text-white text-[11px] font-bold shadow-xs active:scale-[0.98] transition-all">
+                <a href="${item.resume_url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF3130] hover:bg-[#E02625] text-white text-[11px] font-bold shadow-xs active:scale-[0.98] transition-all">
                   <span>Download Resume</span>
                   <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 </a>
               ` : `<span class="text-slate-400 text-[11px]">No file</span>`}
             </td>
-            <td class="px-6 py-4 text-right">
+            <td class="px-5 py-3.5 text-right">
               <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
                 ${item.status}
               </span>
@@ -936,7 +1222,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
           </tr>
         `).join('');
       } catch (e) {
-        if (tbody) tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-red-500">Failed to load applications.</td></tr>`;
+        if (tbody) tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-red-500">Failed to load applications.</td></tr>`;
       }
     }
 
@@ -955,11 +1241,11 @@ import MainLayout from '../../layouts/MainLayout.astro';
         if (!tbody) return;
         tbody.innerHTML = list.map((item: any) => `
           <tr class="hover:bg-slate-50/80 transition-colors">
-            <td class="px-6 py-4 font-bold text-[#0B2553]">${escapeHtml(item.title)} <span class="text-slate-400 text-[10px] block font-mono">${item.id}</span></td>
-            <td class="px-6 py-4 text-[#243A5E] font-medium">${escapeHtml(item.department)}</td>
-            <td class="px-6 py-4 text-slate-500">${escapeHtml(item.location)} (${item.workplaceType || item.workplace_type || 'Hybrid'})</td>
-            <td class="px-6 py-4 font-bold text-[#0B2553]">${escapeHtml(item.clearanceLevel || item.clearance_level || 'None')}</td>
-            <td class="px-6 py-4 text-right">
+            <td class="px-5 py-3.5 font-bold text-[#0B2553]">${escapeHtml(item.title)} <span class="text-slate-400 text-[10px] block font-mono">${item.id}</span></td>
+            <td class="px-5 py-3.5 text-[#243A5E] font-medium">${escapeHtml(item.department)}</td>
+            <td class="px-5 py-3.5 text-slate-500">${escapeHtml(item.location)} (${item.workplaceType || item.workplace_type || 'Hybrid'})</td>
+            <td class="px-5 py-3.5 font-bold text-[#0B2553]">${escapeHtml(item.clearanceLevel || item.clearance_level || 'None')}</td>
+            <td class="px-5 py-3.5 text-right">
               <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${item.is_active !== false ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-slate-100 text-slate-500'}">
                 ${item.is_active !== false ? 'Active' : 'Inactive'}
               </span>
@@ -984,10 +1270,10 @@ import MainLayout from '../../layouts/MainLayout.astro';
         if (!tbody) return;
         tbody.innerHTML = list.map((item: any) => `
           <tr class="hover:bg-slate-50/80 transition-colors">
-            <td class="px-6 py-4 font-bold text-[#0B2553]">${escapeHtml(item.title)} <span class="text-slate-400 text-[10px] block font-mono">/blog/${item.slug}</span></td>
-            <td class="px-6 py-4 text-[#FF3130] font-bold">${escapeHtml(item.category)}</td>
-            <td class="px-6 py-4 text-slate-400 text-[11px]">${escapeHtml(item.date)} by ${escapeHtml(item.author)}</td>
-            <td class="px-6 py-4 text-right">
+            <td class="px-5 py-3.5 font-bold text-[#0B2553]">${escapeHtml(item.title)} <span class="text-slate-400 text-[10px] block font-mono">/blog/${item.slug}</span></td>
+            <td class="px-5 py-3.5 text-[#FF3130] font-bold">${escapeHtml(item.category)}</td>
+            <td class="px-5 py-3.5 text-slate-400 text-[11px]">${escapeHtml(item.date)} by ${escapeHtml(item.author)}</td>
+            <td class="px-5 py-3.5 text-right">
               <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
                 Published
               </span>
@@ -1002,27 +1288,84 @@ import MainLayout from '../../layouts/MainLayout.astro';
       return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    (window as any).viewInquiry = (id: string, name: string, email: string, phone: string, message: string, status: string) => {
+    (window as any).viewInquiry = (id: string) => {
       const modal = document.getElementById('inquiry-modal');
       const body = document.getElementById('inquiry-modal-body');
       if (!modal || !body) return;
 
+      const item = allInquiries.find((i: any) => String(i.id) === String(id));
+      if (!item) return;
+
+      const isNew = item.status === 'new';
+      const isViewed = item.status === 'viewed';
+      const isReplied = item.status === 'replied';
+
       body.innerHTML = `
-        <div class="space-y-2 p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
-          <p><strong class="text-[#0B2553]">Lead Name:</strong> ${name}</p>
-          <p><strong class="text-[#0B2553]">Email:</strong> <a href="mailto:${email}" class="text-[#0C487A] font-bold hover:underline">${email}</a></p>
-          <p><strong class="text-[#0B2553]">Phone:</strong> <a href="tel:${phone}" class="text-[#0C487A] font-bold hover:underline">${phone}</a></p>
-          <p><strong class="text-[#0B2553]">Current Status:</strong> <span class="font-bold uppercase text-[#FF3130]">${status}</span></p>
+        <div class="space-y-2.5 p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500 font-medium">Name:</span>
+            <span class="font-bold text-[#0B2553] text-sm">${escapeHtml(item.name)}</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500 font-medium">Email:</span>
+            <a href="mailto:${escapeHtml(item.email)}" class="text-[#0C487A] font-bold hover:underline">${escapeHtml(item.email)}</a>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500 font-medium">Phone:</span>
+            <a href="tel:${escapeHtml(item.phone || '')}" class="text-[#0C487A] font-bold hover:underline">${escapeHtml(item.phone || 'N/A')}</a>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500 font-medium">Submitted:</span>
+            <span class="text-slate-600 font-semibold">${item.created_at ? new Date(item.created_at).toLocaleString() : 'N/A'}</span>
+          </div>
+          <div class="flex items-center justify-between pt-2.5 border-t border-slate-200/60">
+            <span class="text-xs text-slate-500 font-medium">Status:</span>
+            <div class="inline-flex rounded-lg p-0.5 bg-slate-200/70">
+              <button
+                type="button"
+                onclick="updateInquiryStatus('${item.id}', 'new')"
+                class="px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                  isNew ? 'bg-white text-[#FF3130] shadow-xs' : 'text-slate-600 hover:text-[#0B2553]'
+                }"
+              >
+                ● New
+              </button>
+              <button
+                type="button"
+                onclick="updateInquiryStatus('${item.id}', 'viewed')"
+                class="px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                  isViewed ? 'bg-white text-blue-700 shadow-xs' : 'text-slate-600 hover:text-[#0B2553]'
+                }"
+              >
+                ● Viewed
+              </button>
+              <button
+                type="button"
+                onclick="updateInquiryStatus('${item.id}', 'replied')"
+                class="px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                  isReplied ? 'bg-white text-emerald-700 shadow-xs' : 'text-slate-600 hover:text-[#0B2553]'
+                }"
+              >
+                ● Replied
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="p-4 rounded-2xl bg-white border border-slate-200 text-[#243A5E] whitespace-pre-wrap leading-relaxed">
-          ${message}
+
+        <div>
+          <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">User Message</label>
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 text-[#243A5E] whitespace-pre-wrap leading-relaxed max-h-60 overflow-y-auto">
+            ${escapeHtml(item.message)}
+          </div>
         </div>
-        <div class="pt-4 flex gap-2 justify-end">
-          <button onclick="updateInquiryStatus('${id}', 'replied')" class="px-4 py-2 rounded-md sm:rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 cursor-pointer transition-all">
-            Mark as Replied
-          </button>
-          <button onclick="updateInquiryStatus('${id}', 'archived')" class="px-4 py-2 rounded-md sm:rounded-lg bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200 cursor-pointer transition-all">
-            Archive
+
+        <div class="pt-2 border-t border-slate-100 flex justify-end">
+          <button
+            type="button"
+            onclick="document.getElementById('inquiry-modal').classList.add('hidden')"
+            class="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-[#0B2553] font-bold text-xs transition-all cursor-pointer"
+          >
+            Close
           </button>
         </div>
       `;
@@ -1031,21 +1374,43 @@ import MainLayout from '../../layouts/MainLayout.astro';
     };
 
     (window as any).updateInquiryStatus = async (id: string, status: string) => {
+      closeStatusMenu();
+      // Optimistic update
+      const item = allInquiries.find((i: any) => String(i.id) === String(id));
+      if (item) {
+        item.status = status;
+      }
+
+      updateInquiriesMetrics();
+      renderOverviewInquiries();
+      renderInquiriesTable();
+
+      // If modal is currently open with this inquiry, re-render it
+      const modal = document.getElementById('inquiry-modal');
+      if (modal && !modal.classList.contains('hidden')) {
+        (window as any).viewInquiry(id);
+      }
+
       try {
         await fetch('/api/admin/inquiries', {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id, status }),
         });
-        document.getElementById('inquiry-modal')?.classList.add('hidden');
-        loadInquiries();
       } catch (e) {
-        alert('Failed to update inquiry status');
+        console.error('Failed to update inquiry status in backend:', e);
       }
     };
 
     document.getElementById('close-inquiry-modal')?.addEventListener('click', () => {
       document.getElementById('inquiry-modal')?.classList.add('hidden');
+    });
+
+    // Close modal on backdrop click
+    document.getElementById('inquiry-modal')?.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        document.getElementById('inquiry-modal')?.classList.add('hidden');
+      }
     });
 
     if (document.readyState === 'loading') {
@@ -1054,5 +1419,21 @@ import MainLayout from '../../layouts/MainLayout.astro';
       initAdminPortal();
     }
     document.addEventListener('astro:page-load', initAdminPortal);
+    document.addEventListener('astro:before-swap', () => {
+      document.body.style.overflow = '';
+    });
   </script>
+
+  <style is:global>
+    /* Isolate scrolling strictly to #admin-outlet when the admin dashboard is active */
+    body:has(#dashboard-section:not(.hidden)) {
+      overflow: hidden !important;
+      height: 100vh !important;
+    }
+
+    #admin-outlet {
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+  </style>
 </MainLayout>

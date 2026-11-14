@@ -12,6 +12,7 @@ interface Props {
   description?: string;
   ogImage?: string;
   canonicalUrl?: string;
+  hideFooter?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   description = 'Unity Compass delivers strategic proposal development, OASIS+ readiness support, security-cleared recruitment, staffing solutions, and IT consulting to help federal contractors and commercial firms win and perform.',
   ogImage = '/images/Green-Minimal-Travel-Business-Logo.png',
   canonicalUrl = Astro.url.href,
+  hideFooter = false,
 } = Astro.props;
 
 const siteUrl = 'https://unitycompass.com';
@@ -112,12 +114,12 @@ const schemaOrg = {
     <Header />
 
     <!-- Main Content Slot -->
-    <main id="main-content" class="flex-grow">
+    <main id="main-content" class={`flex-grow ${hideFooter ? 'flex flex-col min-h-0' : ''}`}>
       <slot />
     </main>
 
     <!-- Global Enterprise Footer -->
-    <Footer />
+    {!hideFooter && <Footer />}
 
     <!-- Global Floating Contact & Support Hub -->
     <FloatingContactWidget />

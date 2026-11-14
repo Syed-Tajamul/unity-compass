@@ -78,10 +78,15 @@ import { companyInfo } from '../data/company';
         </svg>
       </a>
 
-      <!-- 3. Corporate Email Support -->
+      <!-- 3. Corporate Email Support (Opens Gmail Compose in New Tab + Instant Clipboard Copy) -->
       <a
-        href={`mailto:${companyInfo.email}`}
-        class="flex items-center gap-3 p-2.5 rounded-md sm:rounded-lg bg-slate-50 hover:bg-slate-100/90 border border-slate-200/70 hover:border-slate-300 transition-all duration-200 group"
+        href={`https://mail.google.com/mail/?view=cm&fs=1&to=${companyInfo.email}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        id="support-hub-email-btn"
+        data-email={companyInfo.email}
+        class="flex items-center gap-3 p-2.5 rounded-md sm:rounded-lg bg-slate-50 hover:bg-slate-100/90 border border-slate-200/70 hover:border-slate-300 transition-all duration-200 group relative cursor-pointer"
+        aria-label="Email us via Gmail or copy address"
       >
         <div class="w-9 h-9 rounded-xl bg-slate-200 text-slate-700 flex items-center justify-center shrink-0 group-hover:bg-[#0C487A] group-hover:text-white transition-colors">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -89,8 +94,13 @@ import { companyInfo } from '../data/company';
           </svg>
         </div>
         <div class="min-w-0 flex-1">
-          <span class="text-xs font-bold text-slate-900 group-hover:text-[#0C487A] transition-colors block">Email Us</span>
-          <span class="text-[11px] text-slate-500 truncate block">{companyInfo.email}</span>
+          <div class="flex items-center justify-between gap-1">
+            <span class="text-xs font-bold text-slate-900 group-hover:text-[#0C487A] transition-colors block">Email Us</span>
+            <span id="support-hub-copied-pill" class="text-[10px] font-bold text-emerald-700 bg-emerald-100/90 border border-emerald-300/80 px-1.5 py-0.5 rounded opacity-0 transition-opacity duration-200">
+              ✓ Copied!
+            </span>
+          </div>
+          <span id="support-hub-email-text" class="text-[11px] text-slate-500 truncate block transition-colors">{companyInfo.email}</span>
         </div>
       </a>
     </div>
@@ -167,6 +177,30 @@ import { companyInfo } from '../data/company';
       defaultIcon?.classList.remove('hidden');
       closeIcon?.classList.add('hidden');
     }
+
+    const emailBtn = document.getElementById('support-hub-email-btn');
+    const emailPill = document.getElementById('support-hub-copied-pill');
+    const emailText = document.getElementById('support-hub-email-text');
+
+    emailBtn?.addEventListener('click', () => {
+      const email = emailBtn.getAttribute('data-email') || 'sales@unitycompass.com';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+          if (emailPill) emailPill.classList.remove('opacity-0');
+          if (emailText) {
+            emailText.textContent = 'Copied to clipboard!';
+            emailText.classList.add('text-emerald-600', 'font-semibold');
+          }
+          setTimeout(() => {
+            if (emailPill) emailPill.classList.add('opacity-0');
+            if (emailText) {
+              emailText.textContent = email;
+              emailText.classList.remove('text-emerald-600', 'font-semibold');
+            }
+          }, 2400);
+        }).catch(() => {});
+      }
+    });
 
     trigger.addEventListener('click', (e) => {
       e.stopPropagation();

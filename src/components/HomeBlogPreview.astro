@@ -42,6 +42,13 @@ const featuredPosts = blogPosts.slice(0, 3);
     <!-- Section Header (Verbatim Unity Compass) -->
     <div class="text-center max-w-4xl mx-auto mb-14 lg:mb-16 insights-header-wrap">
       
+      <!-- Section Pill Label -->
+      <div class="mb-4 sm:mb-5 insights-badge-reveal">
+        <span class="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-extrabold uppercase tracking-wider bg-[#0C487A]/10 text-[#0C487A] border border-[#0C487A]/20 shadow-2xs">
+          Latest Insights &amp; Articles
+        </span>
+      </div>
+
       <!-- Main Headline with Tight Cohesive Line-Height & Continuous Blended Color Shimmer Animation -->
       <h2
         id="insights-heading"
@@ -132,6 +139,7 @@ const featuredPosts = blogPosts.slice(0, 3);
   /* ========================================================================= */
   /* Scroll-Triggered Soft-Reveal Animation (Matching Hero & ServicesGrid)     */
   /* ========================================================================= */
+  .insights-badge-reveal,
   .insights-heading-reveal,
   .insights-subheading-reveal,
   .insights-grid-wrap {
@@ -144,25 +152,32 @@ const featuredPosts = blogPosts.slice(0, 3);
     will-change: opacity, transform, filter;
   }
 
-  :global(#insights.is-revealed) .insights-heading-reveal {
+  :global(#insights.is-revealed) .insights-badge-reveal {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
     transition-delay: 0.05s;
   }
 
+  :global(#insights.is-revealed) .insights-heading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.16s;
+  }
+
   :global(#insights.is-revealed) .insights-subheading-reveal {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
-    transition-delay: 0.15s;
+    transition-delay: 0.28s;
   }
 
   :global(#insights.is-revealed) .insights-grid-wrap {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
-    transition-delay: 0.25s;
+    transition-delay: 0.40s;
   }
 
   /* ========================================================================= */

@@ -100,6 +100,13 @@ const primePartners: PrimePartner[] = [
   <!-- Trust Heading Block with Scroll-Triggered Reveal -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center mb-12 sm:mb-14 prime-content-wrap">
     
+    <!-- Section Pill Label -->
+    <div class="mb-4 sm:mb-5 prime-badge-reveal">
+      <span class="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-extrabold uppercase tracking-wider bg-[#0C487A]/10 text-[#0C487A] border border-[#0C487A]/20 shadow-2xs">
+        Prime Partner Ecosystem
+      </span>
+    </div>
+
     <!-- Main Headline with Tight Cohesive Line-Height & Blended Color Sweep Animation -->
     <h2 class="prime-heading-reveal prime-heading text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] lg:leading-[1.24] max-w-4xl mx-auto text-center">
       <span class="prime-shimmer-line prime-shimmer-line-1">The defense industry giants we have had</span>
@@ -248,6 +255,7 @@ const primePartners: PrimePartner[] = [
   /* ========================================================================= */
   /* Scroll-Triggered Soft-Reveal Animation (Identical to Hero Initial Load)   */
   /* ========================================================================= */
+  .prime-badge-reveal,
   .prime-heading-reveal,
   .prime-subheading-reveal,
   .prime-carousel-reveal {
@@ -261,11 +269,18 @@ const primePartners: PrimePartner[] = [
   }
 
   /* Staggered entry timing for natural executive flow */
-  :global(#defense-primes-ecosystem.is-revealed) .prime-heading-reveal {
+  :global(#defense-primes-ecosystem.is-revealed) .prime-badge-reveal {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
     transition-delay: 0.05s;
+  }
+
+  :global(#defense-primes-ecosystem.is-revealed) .prime-heading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.16s;
   }
 
   :global(#defense-primes-ecosystem.is-revealed) .prime-subheading-reveal {
@@ -321,6 +336,7 @@ const primePartners: PrimePartner[] = [
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
     will-change: background-position;
   }
 

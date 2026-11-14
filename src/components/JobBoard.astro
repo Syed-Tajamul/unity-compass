@@ -313,7 +313,7 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
 <!-- ========================================================================= -->
 <div
   id="apply-modal"
-  class="fixed inset-0 z-50  items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md hidden transition-opacity duration-300"
+  class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md hidden transition-opacity duration-300"
   role="dialog"
   aria-modal="true"
   aria-labelledby="modal-title"
@@ -653,11 +653,13 @@ const workplaceTypes = ['All Workplace Models', 'Hybrid', 'Remote', 'On-site'];
     if (fileSelectedName) fileSelectedName.classList.add('hidden');
     applyForm?.reset();
     modal?.classList.remove('hidden');
+    modal?.classList.add('flex');
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
     modal?.classList.add('hidden');
+    modal?.classList.remove('flex');
     document.body.style.overflow = '';
   }
 

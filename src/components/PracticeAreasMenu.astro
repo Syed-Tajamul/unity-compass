@@ -1,0 +1,78 @@
+---
+/**
+ * PracticeAreasMenu.astro
+ * 
+ * Clean, modern executive service practice area navigation menu.
+ * Matches Contrageix-style vertical list:
+ * - Clean left-aligned typography
+ * - Thin, subtle horizontal dividers between items
+ * - Active service page highlighted as a solid royal blue rounded pill with subtle warm shadow
+ * - Inactive services transition smoothly on hover
+ * - No distracting dots or chevron arrows
+ */
+
+interface Props {
+  activeId: 'proposal-development' | 'recruitment' | 'staffing' | 'it-consulting' | 'customized-support';
+}
+
+const { activeId } = Astro.props;
+
+const practiceServices = [
+  {
+    id: 'proposal-development',
+    name: 'Proposal Development Services',
+    href: '/proposal-development-services',
+  },
+  {
+    id: 'recruitment',
+    name: 'Security-Cleared Recruitment',
+    href: '/recruitment-services',
+  },
+  {
+    id: 'staffing',
+    name: 'Staffing Solutions',
+    href: '/staffing',
+  },
+  {
+    id: 'it-consulting',
+    name: 'IT & Program Consulting',
+    href: '/information-technology-and-business-consulting',
+  },
+  {
+    id: 'customized-support',
+    name: 'Customized Support Services',
+    href: '/customized-support-services',
+  },
+];
+---
+
+<div class="rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white/95 backdrop-blur-md p-6 sm:p-7 lg:p-8 shadow-[0_12px_36px_-10px_rgba(11,37,83,0.08)] flex flex-col justify-center h-full select-none">
+  <div class="flex-1 flex flex-col justify-center py-2 space-y-1">
+    {practiceServices.map((service, idx) => {
+      const isActive = service.id === activeId;
+      return (
+        <div class="w-full">
+          {idx > 0 && <div class="h-px bg-slate-200/70 w-full my-2 sm:my-2.5" aria-hidden="true" />}
+          <a
+            href={service.href}
+            class="relative isolate group block w-full px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl cursor-pointer"
+            aria-current={isActive ? 'page' : undefined}
+          >
+            <!-- Hardware-Accelerated Dissolving Backdrop Layer (Gradient + Glow Shadow) -->
+            <span
+              class="absolute inset-0 bg-gradient-to-r from-[#0C487A] via-[#103E6B] to-[#1E40AF] rounded-xl shadow-[0_10px_24px_-4px_rgba(12,72,122,0.38),0_4px_16px_rgba(255,49,48,0.22)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out pointer-events-none -z-10 will-change-[opacity]"
+              aria-hidden="true"
+            ></span>
+
+            <!-- Text with Smooth Cross-Fade & Fluid Micro-Nudge -->
+            <span
+              class="relative z-10 block text-[#0F274A] group-hover:text-white font-semibold text-sm sm:text-[0.98rem] lg:text-[1.03rem] tracking-tight transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5 will-change-[transform,color]"
+            >
+              {service.name}
+            </span>
+          </a>
+        </div>
+      );
+    })}
+  </div>
+</div>

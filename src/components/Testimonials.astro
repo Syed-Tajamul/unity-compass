@@ -48,13 +48,20 @@ import { testimonials } from '../data/testimonials';
     <!-- Top Header Group: Centered in Middle Matching Adjacent Sections -->
     <div class="text-center max-w-4xl mx-auto mb-12 sm:mb-16 testimonial-header-wrap">
       
+      <!-- Section Pill Label -->
+      <div class="mb-4 sm:mb-5 testimonial-badge-reveal">
+        <span class="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-extrabold uppercase tracking-wider bg-[#0C487A]/10 text-[#0C487A] border border-[#0C487A]/20 shadow-2xs">
+          Client Testimonials
+        </span>
+      </div>
+
       <!-- Main Headline with Continuous Blended Color Shimmer Animation -->
       <h2
         id="testimonials-heading"
         class="testimonial-heading-reveal text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] lg:leading-[1.24] max-w-4xl mx-auto text-center"
       >
-        <span class="testimonial-shimmer-line testimonial-shimmer-line-1">What Our Clients Say:</span>
-        <span class="testimonial-shimmer-line testimonial-shimmer-line-2">Proven Track Record Across Federal Engagements</span>
+        <span class="testimonial-shimmer-line testimonial-shimmer-line-1 block mx-auto text-center">What Our Clients Say:</span>
+        <span class="testimonial-shimmer-line testimonial-shimmer-line-2 block mx-auto text-center">Proven Track Record Across Federal Engagements</span>
       </h2>
 
       <!-- Accessible Exact Heading Anchor -->
@@ -149,7 +156,7 @@ import { testimonials } from '../data/testimonials';
           </div>
 
           <!-- Navigation Controls: Circular Arrows & Signature Reddish Pagination Dots -->
-          <div class="flex items-center justify-between pt-8 mt-4 border-t border-slate-100/90 gap-4">
+          <div class="flex items-center justify-between pt-8 mt-4 border-t border-slate-100/90 gap-4 testimonial-controls-reveal">
             
             <!-- Left Arrow Button with Hover Halo & Spring Micro-Feedback -->
             <button
@@ -252,37 +259,53 @@ import { testimonials } from '../data/testimonials';
   /* ========================================================================= */
   /* Scroll-Triggered Soft-Reveal Animation (Matching Hero & ServicesGrid)     */
   /* ========================================================================= */
+  .testimonial-badge-reveal,
   .testimonial-heading-reveal,
   .testimonial-subheading-reveal,
-  .testimonial-showcase-wrap {
+  .testimonial-showcase-wrap,
+  .testimonial-controls-reveal {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(20px);
     filter: blur(8px);
-    transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1.3s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform, filter;
   }
 
-  :global(#testimonials.is-revealed) .testimonial-heading-reveal {
+  :global(#testimonials.is-revealed) .testimonial-badge-reveal {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
     transition-delay: 0.05s;
   }
 
+  :global(#testimonials.is-revealed) .testimonial-heading-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.18s;
+  }
+
   :global(#testimonials.is-revealed) .testimonial-subheading-reveal {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
-    transition-delay: 0.15s;
+    transition-delay: 0.30s;
   }
 
   :global(#testimonials.is-revealed) .testimonial-showcase-wrap {
     opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    transition-delay: 0.44s;
+  }
+
+  :global(#testimonials.is-revealed) .testimonial-controls-reveal {
+    opacity: 1;
     transform: translateY(0);
     filter: blur(0);
-    transition-delay: 0.25s;
+    transition-delay: 0.60s;
   }
 
   /* ========================================================================= */
@@ -290,22 +313,32 @@ import { testimonials } from '../data/testimonials';
   /* ========================================================================= */
   .testimonial-shimmer-line {
     display: block;
-    background: linear-gradient(
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-image: linear-gradient(
       90deg,
       #0B2553 0%,
-      #0C487A 16%,
-      #1E40AF 34%,
-      #DC2626 52%,
-      #FF3130 66%,
-      #2563EB 82%,
+      #0C487A 14%,
+      #1E40AF 26%,
+      #2563EB 36%,
+      #DC2626 46%,
+      #FF3130 52%,
+      #FF4D4D 58%,
+      #DC2626 68%,
+      #2563EB 78%,
+      #1E40AF 86%,
+      #0C487A 93%,
       #0B2553 100%
     );
-    background-size: 200% auto;
+    background-size: 200% 100%;
+    background-repeat: repeat;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    will-change: background-position;
   }
 
   .testimonial-shimmer-line-1 {
@@ -358,9 +391,11 @@ import { testimonials } from '../data/testimonials';
 
   /* Reduced Motion Override */
   @media (prefers-reduced-motion: reduce) {
+    .testimonial-badge-reveal,
     .testimonial-heading-reveal,
     .testimonial-subheading-reveal,
     .testimonial-showcase-wrap,
+    .testimonial-controls-reveal,
     .testimonial-orb,
     .float-quote-icon {
       opacity: 1 !important;

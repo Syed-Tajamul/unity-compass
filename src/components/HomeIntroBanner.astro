@@ -31,7 +31,7 @@
       <!-- LEFT COLUMN: Substantially Larger 3D Artwork with On-Scroll Parallax & Blended Circular Glow (7 cols on lg) -->
       <div
         id="who-visual-wrapper"
-        class="lg:col-span-7 relative flex justify-center items-center select-none who-visual-col"
+        class="lg:col-span-7 relative flex justify-center items-center select-none who-visual-col who-visual-reveal"
       >
         <!-- Parallax Scroll Container: Smoothly translates vertically with page scroll -->
         <div
@@ -79,6 +79,11 @@
         
         <!-- Main Headline: Perfectly Uniform 3-Line Distribution -->
         <div class="space-y-4">
+          <div class="who-badge-reveal">
+            <span class="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-extrabold uppercase tracking-wider bg-[#0C487A]/10 text-[#0C487A] border border-[#0C487A]/20 shadow-2xs">
+              Who We Are
+            </span>
+          </div>
           <h2
             id="intro-statement"
             class="who-heading-reveal section-shimmer-heading text-3xl sm:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.22] sm:leading-[1.25] text-left"
@@ -269,6 +274,17 @@
   /* ========================================================================= */
   /* Scroll-Triggered Soft-Reveal Animation (Matching Hero & Services)         */
   /* ========================================================================= */
+  .who-visual-reveal {
+    opacity: 0;
+    transform: translateY(32px) scale(0.96);
+    filter: blur(8px);
+    transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  .who-badge-reveal,
   .who-heading-reveal,
   .who-subheading-reveal,
   .who-cta-reveal {
@@ -281,31 +297,47 @@
     will-change: opacity, transform, filter;
   }
 
+  :global(#who-we-are.is-revealed) .who-visual-reveal {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    transition-delay: 0.10s;
+  }
+
+  :global(#who-we-are.is-revealed) .who-badge-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: 0.22s;
+  }
+
   :global(#who-we-are.is-revealed) .who-heading-reveal {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
-    transition-delay: 0.05s;
+    transition-delay: 0.34s;
   }
 
   :global(#who-we-are.is-revealed) .who-subheading-reveal {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
-    transition-delay: 0.20s;
+    transition-delay: 0.46s;
   }
 
   :global(#who-we-are.is-revealed) .who-cta-reveal {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
-    transition-delay: 0.35s;
+    transition-delay: 0.58s;
   }
 
   /* ========================================================================= */
   /* Reduced Motion Accessibility                                              */
   /* ========================================================================= */
   @media (prefers-reduced-motion: reduce) {
+    .who-visual-reveal,
+    .who-badge-reveal,
     .who-heading-reveal,
     .who-subheading-reveal,
     .who-cta-reveal,

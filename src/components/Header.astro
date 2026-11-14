@@ -206,13 +206,15 @@ const resourcesDropdown = [
 
       </nav>
 
-      <!-- Zone 3 (Right): Aligned Action CTA Button with Soft Red-Tinted Shadow -->
+      <!-- Zone 3 (Right): Aligned Action CTA Button with Soft Red-Tinted Shadow & Sheen -->
       <div class="hidden lg:flex items-center shrink-0">
         <a
           href="/contact"
-          class="whitespace-nowrap inline-flex items-center justify-center h-10.5 sm:h-11 px-5.5 sm:px-6 rounded-md sm:rounded-lg bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] text-white text-xs sm:text-[13.5px] font-bold shadow-[0_4px_16px_-2px_rgba(255,49,48,0.25)] hover:shadow-[0_8px_22px_-2px_rgba(255,49,48,0.35)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer shrink-0"
+          class="group relative whitespace-nowrap inline-flex items-center justify-center h-10.5 sm:h-11 px-5.5 sm:px-6 rounded-md sm:rounded-lg bg-gradient-to-r from-[#FF3130] via-[#E02625] to-[#FF3130] bg-[length:200%_auto] hover:bg-right text-white text-xs sm:text-[13.5px] font-bold shadow-[0_4px_16px_-2px_rgba(255,49,48,0.25)] hover:shadow-[0_8px_22px_-2px_rgba(255,49,48,0.35)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer shrink-0 overflow-hidden"
         >
-          Book a Strategy Call
+          <!-- Animated Light Beam Sheen on Hover -->
+          <span class="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-out pointer-events-none"></span>
+          <span class="relative z-10">Book a Strategy Call</span>
         </a>
       </div>
 
