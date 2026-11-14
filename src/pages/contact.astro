@@ -10,6 +10,7 @@
  * - "Send Us a Message" section (Image 6 layout):
  *   - Left: Title, explanatory narrative, and 3 soft-green checkmark pills
  *   - Right: Streamlined ContactForm (Name, Email, Phone, Message)
+ * - Responsive office location card with a lazy-loaded Google Maps embed
  * - Silk-smooth scroll-reveal animations for all cards, text, pills, and form
  */
 import MainLayout from '../layouts/MainLayout.astro';
@@ -18,6 +19,9 @@ import WaveDivider from '../components/WaveDivider.astro';
 import { companyInfo } from '../data/company';
 
 const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7f0-4fa8-b2ef-37ecde56e4c2';
+const encodedOfficeAddress = encodeURIComponent(companyInfo.address.full);
+const mapEmbedUrl = `https://www.google.com/maps?q=${encodedOfficeAddress}&output=embed`;
+const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedOfficeAddress}`;
 ---
 
 <MainLayout
@@ -217,9 +221,10 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
             <h3 class="text-xl font-bold text-[#0B2553]">Visit Our Office</h3>
             <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold">Corporate Headquarters</p>
             
-            <p class="mt-3 text-sm sm:text-base font-semibold text-[#0B2553]">
-              Frederick, MD 21702
-            </p>
+            <address class="mt-3 text-sm sm:text-base font-semibold not-italic text-[#0B2553] leading-relaxed">
+              <span class="block">{companyInfo.address.street}</span>
+              <span>{companyInfo.address.city}, {companyInfo.address.state} {companyInfo.address.zip}</span>
+            </address>
             <p class="text-xs text-slate-400 mt-0.5">NCR Corridor &bull; Near DC &amp; Fort Meade</p>
           </div>
 
@@ -316,6 +321,78 @@ const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7
           <ContactForm />
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 3: OFFICE LOCATION & DIRECTIONS                                   -->
+  <!-- ========================================================================= -->
+  <section id="office-location" class="relative overflow-hidden border-y border-slate-200/80 bg-[#F4F8FC] py-16 sm:py-24 lg:py-28" aria-labelledby="office-location-heading">
+    <div
+      class="absolute inset-0 opacity-40 pointer-events-none"
+      style="background-size: 24px 24px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.05) 1px, transparent 1px);"
+      aria-hidden="true"
+    ></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="contact-reveal grid overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white shadow-[0_24px_60px_-24px_rgba(11,37,83,0.28)] lg:grid-cols-[0.78fr_1.22fr]">
+        <div class="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
+          <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Corporate Headquarters</p>
+          <h2 id="office-location-heading" class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-[#0B2553]">
+            Visit Our Frederick Office
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-slate-600">
+            Meet with the Unity Compass team at our Frederick, Maryland headquarters for GovCon advisory, proposal, staffing, and technology discussions.
+          </p>
+
+          <address class="mt-7 flex items-start gap-4 not-italic">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0C487A]/10 text-[#0C487A]" aria-hidden="true">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </span>
+            <span class="text-sm sm:text-base font-semibold leading-7 text-[#0B2553]">
+              <span class="block">{companyInfo.address.street}</span>
+              <span class="block">{companyInfo.address.city}, {companyInfo.address.state} {companyInfo.address.zip}</span>
+            </span>
+          </address>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a
+              href={directionsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2.5 rounded-md sm:rounded-lg bg-gradient-to-r from-[#FF3130] to-[#E02625] px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_22px_-5px_rgba(255,49,48,0.34)] transition-all duration-200 hover:-translate-y-0.5 hover:from-[#E02625] hover:to-[#C61E1D] hover:shadow-[0_12px_26px_-4px_rgba(255,49,48,0.4)]"
+              aria-label={`Get directions to ${companyInfo.address.full}`}
+            >
+              <span>Get Directions</span>
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+            <a
+              href={hubspotMeetingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center rounded-md sm:rounded-lg border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-[#0B2553] shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#0C487A] hover:shadow-md"
+            >
+              Book a Meeting
+            </a>
+          </div>
+        </div>
+
+        <div class="relative min-h-[320px] border-t border-slate-200 bg-slate-100 sm:min-h-[400px] lg:min-h-[460px] lg:border-l lg:border-t-0">
+          <iframe
+            src={mapEmbedUrl}
+            title={`Map showing ${companyInfo.name} at ${companyInfo.address.full}`}
+            class="absolute inset-0 h-full w-full border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
       </div>
     </div>
   </section>
