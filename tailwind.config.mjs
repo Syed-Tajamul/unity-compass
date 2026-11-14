@@ -17,16 +17,7 @@ export default {
         'subtle-surface': '#F1F5F9',
         'brand-border': '#E2E8F0',
 
-        // Contragenix-Style Reference Palette
-        'cg-blue': '#0B2553',
-        'cg-royal': '#3355A5',
-        'cg-orange': '#EE8522',
-        'cg-orange-hover': '#D97312',
-        'cg-peach': '#FDF0E6',
-        'cg-light-blue': '#F0F6FD',
-        'cg-soft-surface': '#F8FAFD',
-        'cg-border': '#E8EEF5',
-        
+
         // Backward-compatibility token mapping
         brand: {
           navy: '#0C487A',

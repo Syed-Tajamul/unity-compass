@@ -70,30 +70,8 @@
     @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-red-50 text-[#FF3130] border border-red-200/60;
   }
 
-  /* Contragenix Reference Pill */
-  .badge-cg-orange {
-    @apply inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-[#FDF0E6] text-[#EE8522];
-  }
-
-  /* Contragenix Signature Buttons */
-  .btn-cg-orange {
-    background-color: #EE8522;
-    color: #FFFFFF;
-    font-weight: 600;
-    border-radius: 0.5rem;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .btn-cg-orange:hover {
-    background-color: #D97312;
-    transform: translateY(-1.5px);
-    box-shadow: 0 8px 20px -4px rgba(238, 133, 34, 0.4);
-  }
-  .btn-cg-orange:active {
-    transform: translateY(0);
-  }
-
-  /* Contragenix Blue Vertical Dotted Lines */
-  .bg-cg-dotted {
+  /* Vertical Dotted Guidelines */
+  .bg-vertical-dotted-guidelines {
     background-image: 
       repeating-linear-gradient(to right, transparent, transparent 24.8%, rgba(255, 255, 255, 0.14) 24.8%, rgba(255, 255, 255, 0.14) 25%, transparent 25%);
   }
@@ -288,25 +266,6 @@
   }
 }
 
-/* ========================================================================= */
-/* Contragenix Signature Warm Orange CTA Button (#EE8522)                    */
-/* ========================================================================= */
-.btn-cg-orange {
-  background-color: #EE8522;
-  color: #FFFFFF !important;
-  font-weight: 600;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(238, 133, 34, 0.25);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.btn-cg-orange:hover {
-  background-color: #D97312;
-  transform: translateY(-1.5px);
-  box-shadow: 0 6px 16px rgba(238, 133, 34, 0.38);
-}
-.btn-cg-orange:active {
-  transform: translateY(0);
-}
 
 /* ========================================================================= */
 /* Continuous Unbroken 3-Line Radiant Shimmer Animation                      */
@@ -1028,7 +987,7 @@
   }
 }
 
-/* Contragenix-Style Section Pill Label */
+/* Section Pill Label */
 .section-pill-badge {
   display: inline-flex;
   align-items: center;
