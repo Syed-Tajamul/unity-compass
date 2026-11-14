@@ -1,400 +1,279 @@
 ---
 /**
- * OurMission.astro - "The Four Bearings" Interactive Mission Section for Unity Compass
- * 
- * 100% Homepage Harmony & Consistency:
- * - Substantive multi-line animated headline with continuous radiant color shimmer (matching Hero & ServicesGrid)
- * - Upper eyebrow pill badge with red pulse indicator (matching WhyChooseUs & CompanyValues)
- * - Animated tri-color brand accent bar (Navy to Red, matching HomeIntroBanner)
- * - Executive White-and-Navy Marine Compass Instrument Centerpiece with 4s auto-play circular countdown arc
- * - The Four Cardinal Bearings (01 North, 02 East, 03 South, 04 West)
- * - 4 Premium White Cards (shadow, bold #0B2553 typography & #0C487A/#FF3130 badges)
- * - Smooth spring-like needle easing (~700ms) with shortest continuous angular rotation
- * - 100% WCAG AA contrast, semantic HTML, and full keyboard/screen-reader accessibility
+ * OurMission.astro - "The Route" Scroll-Driven About Section for Unity Compass
+ *
+ * - Shimmer headline, eyebrow pill, animated accent bar (matches Hero / ServicesGrid / HomeIntroBanner)
+ * - Blueprint grid, ambient radial glow, four-point sparkles (matches homepage)
+ * - Winding navigation route over a topographic map; a compass marker travels the path on scroll
+ * - Four waypoints: 01 Who We Are → 02 Our Values → 03 Our Mission → 04 Our Vision
+ * - Sticky GPS bar (progress + next waypoint)
+ * - Reached waypoints light up navy; the current waypoint gets the red active card treatment
+ * - Stacked timeline under 760px, reduced-motion support, semantic list + live region
  */
+
+const waypoints = [
+  { num: '01', title: 'Who We Are',  coords: 'N 38.8951° · W 77.0364°', side: 'l', top: '14.18%' },
+  { num: '02', title: 'Our Values',  coords: 'N 38.8977° · W 77.0365°', side: 'r', top: '38.81%' },
+  { num: '03', title: 'Our Mission', coords: 'N 38.8899° · W 77.0091°', side: 'l', top: '63.43%' },
+  { num: '04', title: 'Our Vision',  coords: 'N 38.8893° · W 77.0502°', side: 'r', top: '88.06%' },
+];
+
+const values = [
+  { label: 'Client First', icon: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>' },
+  { label: 'Integrity & Transparency', icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>' },
+  { label: 'Innovation', icon: '<path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/>' },
+  { label: 'Quality Excellence', icon: '<circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/>' },
+  { label: 'Long-Term Partnerships', icon: '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>' },
+];
+
+const routePath = 'M600,30 C600,110 480,110 480,190 C480,370 720,350 720,520 C720,690 480,670 480,850 C480,1030 720,1010 720,1180 C720,1260 600,1260 600,1310';
 ---
 
 <section
   id="our-mission"
-  class="relative py-20 sm:py-24 lg:py-28 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] overflow-hidden scroll-mt-16 border-t border-slate-200/80"
+  class="relative py-20 sm:py-24 lg:py-28 bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] overflow-clip scroll-mt-16 border-t border-slate-200/80"
   aria-labelledby="mission-heading"
 >
-  <!-- Very Minute Technical Blueprint Check Grid Pattern (16px x 16px, Identical to Hero & ServicesGrid) -->
+  <!-- Blueprint grid (matches Hero & ServicesGrid) -->
   <div
     class="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply"
     style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(12, 72, 122, 0.09) 1px, transparent 1px), linear-gradient(to bottom, rgba(12, 72, 122, 0.09) 1px, transparent 1px);"
     aria-hidden="true"
   ></div>
 
-  <!-- Soft Ambient Radial Blue Glow focused behind the center stage (Identical to ServicesGrid) -->
+  <!-- Ambient radial glow -->
   <div
-    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-[560px] bg-[radial-gradient(circle,rgba(40,121,182,0.14)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none"
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-[760px] bg-[radial-gradient(circle,rgba(40,121,182,0.12)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none"
     aria-hidden="true"
   ></div>
 
-  <!-- Ambient Four-Point Star Sparkles (Unity Compass Logo Mark) -->
+  <!-- Four-point sparkles (Unity Compass mark) -->
   <div class="mission-sparkles" aria-hidden="true">
-    <svg class="sparkle-star sparkle-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
-    <svg class="sparkle-star sparkle-2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
-    <svg class="sparkle-star sparkle-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
-    <svg class="sparkle-star sparkle-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
-    <svg class="sparkle-star sparkle-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
-    <svg class="sparkle-star sparkle-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z"/></svg>
+    {[1, 2, 3, 4, 5, 6].map((n) => (
+      <svg class={`sparkle-star sparkle-${n}`} viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z" /></svg>
+    ))}
   </div>
 
   <div class="max-w-7xl xl:max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    
-    <!-- Top Header Group: Centered in Middle Matching Above Sections -->
-    <div class="text-center max-w-4xl mx-auto mb-12 sm:mb-16 mission-header-wrap">
-      
-      <!-- Main Substantive Headline with Continuous Blended Color Shimmer Animation (Matching ServicesGrid & Hero) -->
+
+    <!-- Header -->
+    <div class="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
+      <span class="mission-eyebrow mission-heading-reveal">
+        <span class="mission-eyebrow-dot" aria-hidden="true"></span>
+        About Unity Compass
+      </span>
+
       <h2
         id="mission-heading"
-        class="mission-heading-reveal text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] lg:leading-[1.24] max-w-4xl mx-auto text-center"
+        class="mission-heading-reveal mt-5 text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] lg:leading-[1.24] max-w-4xl mx-auto text-center"
       >
-        <span class="mission-shimmer-line mission-shimmer-line-1">Our Mission: Navigating Federal Complexity</span>
-        <span class="mission-shimmer-line mission-shimmer-line-2">with Clarity, Compliance, and Confidence</span>
+        <span class="mission-shimmer-line mission-shimmer-line-1">Every Partnership Starts</span>
+        <span class="mission-shimmer-line mission-shimmer-line-2">With a Clear Route</span>
       </h2>
 
-      <!-- Accessible Exact Heading Anchor -->
-      <span class="sr-only">Our Mission</span>
-
-      <!-- Animated Brand Accent Bar (Navy-to-Red Dynamic Pulse, Matching HomeIntroBanner) -->
       <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mission-accent-line section-accent-line mx-auto mt-4 mb-5"></div>
 
-      <!-- Supporting Narrative Description (Matching ServicesGrid & HomeIntroBanner) -->
       <p class="mission-subheading-reveal text-sm sm:text-base lg:text-[1.05rem] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-center">
-        To help organizations navigate federal contracting requirements with clarity, compliance, and confidence, while reducing risk and improving competitive positioning.
+        Follow the path from who we are to where we're taking our clients: four waypoints that define how Unity Compass works.
       </p>
-
     </div>
 
-    <!-- Cardinal Compass Navigation Stage -->
-    <div id="mission-stage" class="mission-cardinal-stage">
-      
-      <!-- Hairline Connector Lines (Desktop) -->
-      <div id="connector-top" class="connector-line connector-v connector-top is-active" aria-hidden="true"></div>
-      <div id="connector-right" class="connector-line connector-h connector-right" aria-hidden="true"></div>
-      <div id="connector-bottom" class="connector-line connector-v connector-bottom" aria-hidden="true"></div>
-      <div id="connector-left" class="connector-line connector-h connector-left" aria-hidden="true"></div>
-
-      <!-- Pillar 01: Top (North / Bearing 0°) -->
-      <button
-        type="button"
-        id="pillar-card-01"
-        class="mission-pillar-card pillar-card-top is-active rounded-2xl sm:rounded-3xl"
-        data-index="0"
-        data-angle="0"
-        role="tab"
-        aria-selected="true"
-        aria-controls="compass-announcement"
-      >
-        <div class="pillar-card-inner floating-01">
-          <div class="pillar-card-topbar">
-            <div class="pillar-badge-wrap">
-              <div class="pillar-badge-glow"></div>
-              <div class="pillar-badge-icon" aria-hidden="true">
-                <!-- Shield-Check Icon -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  <path d="M9 12l2 2 4-4"/>
-                </svg>
-              </div>
-            </div>
-            <span class="pillar-num">01</span>
-          </div>
-          <h3 class="pillar-title">Compliance-Centered Approach</h3>
-          <p class="pillar-desc">
-            Every proposal, staffing action, and documentation package is built to withstand evaluation and audit scrutiny.
-          </p>
-        </div>
-      </button>
-
-      <!-- Pillar 02: Right (East / Bearing 90°) -->
-      <button
-        type="button"
-        id="pillar-card-02"
-        class="mission-pillar-card pillar-card-right rounded-2xl sm:rounded-3xl"
-        data-index="1"
-        data-angle="90"
-        role="tab"
-        aria-selected="false"
-        aria-controls="compass-announcement"
-      >
-        <div class="pillar-card-inner floating-02">
-          <div class="pillar-card-topbar">
-            <div class="pillar-badge-wrap">
-              <div class="pillar-badge-glow"></div>
-              <div class="pillar-badge-icon" aria-hidden="true">
-                <!-- Grid Icon -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="7" height="7"/>
-                  <rect x="14" y="3" width="7" height="7"/>
-                  <rect x="14" y="14" width="7" height="7"/>
-                  <rect x="3" y="14" width="7" height="7"/>
-                </svg>
-              </div>
-            </div>
-            <span class="pillar-num">02</span>
-          </div>
-          <h3 class="pillar-title">Structured Methodology</h3>
-          <p class="pillar-desc">
-            From Qualifying Project (QP) structuring to clearance verification, our processes are systematic and repeatable.
-          </p>
-        </div>
-      </button>
-
-      <!-- Centerpiece: Compass (420px Desktop / 170px Mobile) -->
-      <div
-        class="compass-centerpiece"
-        role="img"
-        aria-label="Interactive Navigation Compass with Four Bearings"
-      >
-        <svg
-          class="compass-svg"
-          viewBox="0 0 420 420"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <!-- Lustrous Compass Dial Radial Gradient (Matching Site Ice Palette) -->
-            <radialGradient id="compass-dial-face" cx="210" cy="210" r="160" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#FFFFFF"/>
-              <stop offset="60%" stop-color="#F8FAFC"/>
-              <stop offset="90%" stop-color="#EDF3FB"/>
-              <stop offset="100%" stop-color="#E2E8F0"/>
-            </radialGradient>
-            <!-- Soft Depth Shadow -->
-            <filter id="compass-shadow" x="30" y="30" width="360" height="360" filterUnits="userSpaceOnUse">
-              <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0B2553" flood-opacity="0.14"/>
-            </filter>
-          </defs>
-
-          <!-- 1. Ambient Rotating Concentric Rings & Fine Ticks (120s per rotation) -->
-          <g class="compass-ambient-rings">
-            <!-- Outer Blueprint Ring -->
-            <circle cx="210" cy="210" r="198" stroke="rgba(12, 72, 122, 0.16)" stroke-width="1.2" stroke-dasharray="3 6"/>
-            <!-- Intermediate Sky Accent Ring -->
-            <circle cx="210" cy="210" r="182" stroke="rgba(56, 189, 248, 0.45)" stroke-width="1.2"/>
-            <!-- Perimeter Fine Degree Marks -->
-            <circle cx="210" cy="210" r="172" stroke="rgba(12, 72, 122, 0.14)" stroke-width="1"/>
-            <!-- 8 Sub-Degree Micro Rays -->
-            <g stroke="rgba(12, 72, 122, 0.22)" stroke-width="1.2">
-              <line x1="210" y1="10" x2="210" y2="18"/>
-              <line x1="210" y1="402" x2="210" y2="410"/>
-              <line x1="10" y1="210" x2="18" y2="210"/>
-              <line x1="402" y1="210" x2="410" y2="210"/>
-              <line x1="68" y1="68" x2="74" y2="74"/>
-              <line x1="352" y1="68" x2="346" y2="74"/>
-              <line x1="68" y1="352" x2="74" y2="346"/>
-              <line x1="352" y1="352" x2="346" y2="346"/>
-            </g>
-          </g>
-
-          <!-- 2. Static Precision Compass Housing & Dial Face -->
-          <!-- Main Pearl White Dial Face with Double Bezel -->
-          <circle cx="210" cy="210" r="162" fill="url(#compass-dial-face)" stroke="#0C487A" stroke-width="2.5" filter="url(#compass-shadow)"/>
-          <!-- Secondary Inner Bezel Track -->
-          <circle cx="210" cy="210" r="150" stroke="rgba(12, 72, 122, 0.35)" stroke-width="1.5" stroke-dasharray="2 3"/>
-
-          <!-- Circular Progress Countdown Arc (Auto-Play Indicator) -->
-          <circle
-            id="compass-progress-ring"
-            class="compass-progress-arc"
-            cx="210"
-            cy="210"
-            r="162"
-            stroke="#FF3130"
-            stroke-width="3"
-            fill="none"
-            stroke-linecap="round"
-          />
-
-          <!-- Main Navy Outer Ring Path with Dashoffset Reveal -->
-          <circle
-            class="compass-ring-path"
-            cx="210"
-            cy="210"
-            r="162"
-            stroke="rgba(12, 72, 122, 0.2)"
-            stroke-width="1.5"
-            fill="none"
-          />
-
-          <!-- Precision Tick Marks & Cardinal Indicators -->
-          <g class="compass-ticks-group">
-            <!-- Cardinal Marks N, E, S, W in Brand Navy -->
-            <text x="210" y="78" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" fill="#0C487A" text-anchor="middle" letter-spacing="1">N</text>
-            <text x="342" y="214" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" fill="#0C487A" text-anchor="middle" dominant-baseline="central" letter-spacing="1">E</text>
-            <text x="210" y="350" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" fill="#0C487A" text-anchor="middle" letter-spacing="1">S</text>
-            <text x="78" y="214" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" fill="#0C487A" text-anchor="middle" dominant-baseline="central" letter-spacing="1">W</text>
-
-            <!-- 36 Dial Degree Ticks -->
-            <g stroke="#0C487A" stroke-width="1.5">
-              <!-- Primary Cardinals -->
-              <line x1="210" y1="52" x2="210" y2="64" stroke="#FF3130" stroke-width="2.5"/>
-              <line x1="368" y1="210" x2="356" y2="210" stroke="#0C487A" stroke-width="2.5"/>
-              <line x1="210" y1="368" x2="210" y2="356" stroke="#0C487A" stroke-width="2.5"/>
-              <line x1="52" y1="210" x2="64" y2="210" stroke="#0C487A" stroke-width="2.5"/>
-
-              <!-- Diagonals -->
-              <g stroke="rgba(12, 72, 122, 0.45)" stroke-width="1.2">
-                <line x1="285" y1="80" x2="279" y2="89"/>
-                <line x1="340" y1="135" x2="331" y2="141"/>
-                <line x1="340" y1="285" x2="331" y2="279"/>
-                <line x1="285" y1="340" x2="279" y2="331"/>
-                <line x1="135" y1="340" x2="141" y2="331"/>
-                <line x1="80" y1="285" x2="89" y2="279"/>
-                <line x1="80" y1="135" x2="89" y2="141"/>
-                <line x1="135" y1="80" x2="141" y2="89"/>
-              </g>
-            </g>
-
-            <!-- Four-Point Compass-Rose Star Geometry -->
-            <g opacity="0.8">
-              <!-- North-South Star Facets -->
-              <polygon points="210,95 218,210 210,210" fill="#0C487A"/>
-              <polygon points="210,95 202,210 210,210" fill="rgba(56, 189, 248, 0.5)"/>
-              <polygon points="210,325 218,210 210,210" fill="rgba(56, 189, 248, 0.35)"/>
-              <polygon points="210,325 202,210 210,210" fill="#0C487A"/>
-              <!-- East-West Star Facets -->
-              <polygon points="325,210 210,202 210,210" fill="#0C487A"/>
-              <polygon points="325,210 210,218 210,210" fill="rgba(56, 189, 248, 0.5)"/>
-              <polygon points="95,210 210,202 210,210" fill="rgba(56, 189, 248, 0.35)"/>
-              <polygon points="95,210 210,218 210,210" fill="#0C487A"/>
-            </g>
-          </g>
-
-          <!-- 3. Dynamic Magnetic Needle Layer (Controlled by JS) -->
-          <g id="compass-needle" class="compass-needle-layer">
-            <!-- North Needle (Official Brand Red #FF3130) with Shaded 3D Facets -->
-            <polygon points="210,54 203,210 210,210" fill="#FF3130"/>
-            <polygon points="210,54 217,210 210,210" fill="#FF5252"/>
-
-            <!-- South Counter-Needle (Deep Navy / Sky Accent) -->
-            <polygon points="210,272 205,210 210,210" fill="#0C487A"/>
-            <polygon points="210,272 215,210 210,210" fill="rgba(56, 189, 248, 0.7)"/>
-          </g>
-
-          <!-- 4. Center Disc Housing & Active Bearing Number -->
-          <circle cx="210" cy="210" r="46" fill="#0C487A" stroke="#FFFFFF" stroke-width="2.5" filter="drop-shadow(0 4px 10px rgba(12,72,122,0.35))"/>
-          <!-- Center Mini Bearing Caption -->
-          <text x="210" y="191" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="700" fill="#38BDF8" text-anchor="middle" letter-spacing="2">BEARING</text>
-          <!-- Large Active Pillar Indicator Number (01, 02, 03, 04) -->
-          <text id="compass-bearing-num" class="compass-center-number" x="210" y="217" text-anchor="middle" dominant-baseline="central">01</text>
-          <!-- Center Pivot Cap -->
-          <circle cx="210" cy="210" r="5.5" fill="#07192C" stroke="#FFFFFF" stroke-width="1.2"/>
-          <circle cx="210" cy="210" r="2.2" fill="#FF3130"/>
-        </svg>
+    <div class="route-wrap">
+      <!-- Sticky GPS bar -->
+      <div class="route-hud" aria-hidden="true">
+        <span class="route-hud-live"><i></i>Route Active</span>
+        <div class="route-hud-bar"><span id="route-hud-fill"></span></div>
+        <span class="route-hud-next" id="route-hud-next">Next: <b>Who We Are</b></span>
       </div>
 
-      <!-- Pillar 03: Bottom (South / Bearing 180°) -->
-      <button
-        type="button"
-        id="pillar-card-03"
-        class="mission-pillar-card pillar-card-bottom rounded-2xl sm:rounded-3xl"
-        data-index="2"
-        data-angle="180"
-        role="tab"
-        aria-selected="false"
-        aria-controls="compass-announcement"
-      >
-        <div class="pillar-card-inner floating-03">
-          <div class="pillar-card-topbar">
-            <div class="pillar-badge-wrap">
-              <div class="pillar-badge-glow"></div>
-              <div class="pillar-badge-icon" aria-hidden="true">
-                <!-- Layers Icon -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                  <polyline points="2 17 12 22 22 17"/>
-                  <polyline points="2 12 12 17 22 12"/>
-                </svg>
+      <!-- Map stage -->
+      <div class="route-map" id="route-map">
+        <svg class="route-svg" id="route-svg" viewBox="0 0 1200 1340" aria-hidden="true">
+          <defs>
+            <linearGradient id="ucr-route-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#0B2553" />
+              <stop offset=".45" stop-color="#0C487A" />
+              <stop offset=".75" stop-color="#1E40AF" />
+              <stop offset="1" stop-color="#FF3130" />
+            </linearGradient>
+          </defs>
+
+          <!-- Topographic contours -->
+          <g class="route-topo" fill="none" stroke="rgba(12,72,122,0.10)" stroke-width="2">
+            <ellipse cx="1060" cy="170" rx="80" ry="55" transform="rotate(-15 1060 170)" />
+            <ellipse cx="1060" cy="170" rx="140" ry="95" transform="rotate(-15 1060 170)" />
+            <ellipse cx="1060" cy="170" rx="200" ry="135" transform="rotate(-15 1060 170)" />
+            <ellipse cx="150" cy="1200" rx="90" ry="60" transform="rotate(20 150 1200)" />
+            <ellipse cx="150" cy="1200" rx="160" ry="105" transform="rotate(20 150 1200)" />
+            <ellipse cx="150" cy="1200" rx="230" ry="150" transform="rotate(20 150 1200)" />
+            <ellipse cx="600" cy="690" rx="60" ry="40" />
+            <ellipse cx="600" cy="690" rx="110" ry="75" />
+          </g>
+
+          <!-- Compass rose watermark -->
+          <g class="route-rose" transform="translate(1060 170)" fill="none" stroke="rgba(12,72,122,0.22)" stroke-width="2">
+            <circle r="38" stroke-dasharray="3 5" />
+            <path d="M0,-56 L0,56 M-56,0 L56,0" />
+            <path d="M0,-36 L8,0 L0,36 L-8,0Z" fill="rgba(12,72,122,0.18)" />
+            <text y="-64" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="16" fill="#0C487A" stroke="none">N</text>
+          </g>
+
+          <!-- Planned route (dotted) -->
+          <path d={routePath} fill="none" stroke="rgba(12,72,122,0.25)" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 14" />
+
+          <!-- Travelled route -->
+          <path id="route-path" d={routePath} fill="none" stroke="url(#ucr-route-grad)" stroke-width="7" stroke-linecap="round" />
+
+          <!-- Compass marker -->
+          <g id="route-marker">
+            <circle r="30" fill="rgba(255,49,48,0.14)" class="route-marker-halo" />
+            <circle r="19" fill="#FFFFFF" stroke="#0C487A" stroke-width="3" />
+            <path d="M-7,-8 L10,0 L-7,8 L-3,0Z" fill="#FF3130" />
+          </g>
+        </svg>
+
+        <!-- Origin / Destination chips -->
+        <div class="route-chip" style="left:50%;top:2.24%" aria-hidden="true">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" /></svg></span>
+          Origin
+        </div>
+        <div class="route-chip route-chip--dest" id="route-dest" style="left:50%;top:97.76%" aria-hidden="true">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4" /><path d="M4 4h12l-2 4 2 4H4" /></svg></span>
+          A Trusted Partner
+        </div>
+
+        <!-- Waypoint pins -->
+        {waypoints.map((w) => (
+          <span class="route-pin" style={`left:${w.side === 'l' ? 40 : 60}%;top:${w.top}`} aria-hidden="true">{w.num}</span>
+        ))}
+
+        <!-- Waypoint cards -->
+        <ol class="route-cards" role="list">
+          <!-- 01 Who We Are -->
+          <li class="route-card route-card--l" style={`top:${waypoints[0].top}`}>
+            <div class="route-card-top">
+              <div class="pillar-badge-wrap">
+                <div class="pillar-badge-glow"></div>
+                <div class="pillar-badge-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18" /><path d="M5 21V7l7-4 7 4v14" /><path d="M9 21v-6h6v6" /><path d="M9 10h.01M15 10h.01" /></svg>
+                </div>
+              </div>
+              <div class="route-card-meta">
+                <span class="pillar-num">Waypoint 01</span>
+                <span class="route-coords">{waypoints[0].coords}</span>
               </div>
             </div>
-            <span class="pillar-num">03</span>
-          </div>
-          <h3 class="pillar-title">Integrated Support Model</h3>
-          <p class="pillar-desc">
-            We bridge proposal strategy, staffing execution, and technical advisory, reducing fragmentation common in federal projects.
-          </p>
-        </div>
-      </button>
+            <h3 class="pillar-title">Who We Are</h3>
+            <p class="pillar-desc">
+              <strong>Unity Compass (UC)</strong> specializes in IT and Business Consulting, providing Staffing, Recruitment, Proposal Development, and digital solutions for commercial and federal clients. We are dedicated to delivering results, ensuring lasting partnerships, and driving innovation and quality across every project.
+            </p>
+            <div class="route-tags">
+              <span>Staffing</span><span>Recruitment</span><span>Proposal Development</span><span>Digital Solutions</span>
+            </div>
+          </li>
 
-      <!-- Pillar 04: Left (West / Bearing 270°) -->
-      <button
-        type="button"
-        id="pillar-card-04"
-        class="mission-pillar-card pillar-card-left rounded-2xl sm:rounded-3xl"
-        data-index="3"
-        data-angle="270"
-        role="tab"
-        aria-selected="false"
-        aria-controls="compass-announcement"
-      >
-        <div class="pillar-card-inner floating-04">
-          <div class="pillar-card-topbar">
-            <div class="pillar-badge-wrap">
-              <div class="pillar-badge-glow"></div>
-              <div class="pillar-badge-icon" aria-hidden="true">
-                <!-- Trending-Up Icon -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                  <polyline points="17 6 23 6 23 12"/>
-                </svg>
+          <!-- 02 Our Values -->
+          <li class="route-card route-card--r" style={`top:${waypoints[1].top}`}>
+            <div class="route-card-top">
+              <div class="pillar-badge-wrap">
+                <div class="pillar-badge-glow"></div>
+                <div class="pillar-badge-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+                </div>
+              </div>
+              <div class="route-card-meta">
+                <span class="pillar-num">Waypoint 02</span>
+                <span class="route-coords">{waypoints[1].coords}</span>
               </div>
             </div>
-            <span class="pillar-num">04</span>
-          </div>
-          <h3 class="pillar-title">Performance-Focused Delivery</h3>
-          <p class="pillar-desc">
-            We align services to measurable outcomes such as submission readiness, staffing cycle reduction, and defensible past performance records.
-          </p>
-        </div>
-      </button>
+            <h3 class="pillar-title">Our Values</h3>
+            <p class="pillar-desc">Five principles we carry through every mile of an engagement.</p>
+            <ul class="route-values" role="list">
+              {values.map((v) => (
+                <li>
+                  <span class="route-value-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={v.icon} />
+                  </span>
+                  {v.label}
+                </li>
+              ))}
+            </ul>
+          </li>
 
+          <!-- 03 Our Mission -->
+          <li class="route-card route-card--l" style={`top:${waypoints[2].top}`}>
+            <div class="route-card-top">
+              <div class="pillar-badge-wrap">
+                <div class="pillar-badge-glow"></div>
+                <div class="pillar-badge-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>
+                </div>
+              </div>
+              <div class="route-card-meta">
+                <span class="pillar-num">Waypoint 03</span>
+                <span class="route-coords">{waypoints[2].coords}</span>
+              </div>
+            </div>
+            <h3 class="pillar-title">Our Mission</h3>
+            <p class="pillar-desc pillar-desc--lead">
+              To empower businesses with innovative solutions, exceptional talent, and strategic support to achieve their goals in the government marketplace.
+            </p>
+            <div class="route-tags route-tags--red">
+              <span>Innovative Solutions</span><span>Exceptional Talent</span><span>Strategic Support</span>
+            </div>
+          </li>
+
+          <!-- 04 Our Vision -->
+          <li class="route-card route-card--r" style={`top:${waypoints[3].top}`}>
+            <div class="route-card-top">
+              <div class="pillar-badge-wrap">
+                <div class="pillar-badge-glow"></div>
+                <div class="pillar-badge-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></svg>
+                </div>
+              </div>
+              <div class="route-card-meta">
+                <span class="pillar-num">Waypoint 04</span>
+                <span class="route-coords">{waypoints[3].coords}</span>
+              </div>
+            </div>
+            <h3 class="pillar-title">Our Vision</h3>
+            <p class="pillar-desc pillar-desc--lead">
+              To be a trusted partner for organizations seeking to make a meaningful impact across federal, state, and local markets.
+            </p>
+            <div class="route-markets">
+              <div><strong>Federal</strong><small>Agencies &amp; Primes</small></div>
+              <div><strong>State</strong><small>Statewide Programs</small></div>
+              <div><strong>Local</strong><small>Municipal Partners</small></div>
+            </div>
+          </li>
+        </ol>
+      </div>
     </div>
 
-    <!-- Live Region for Accessibility Announcements -->
-    <div id="compass-announcement" class="sr-only" aria-live="polite">
-      Pillar 01: Compliance-Centered Approach active. Bearing: North.
-    </div>
-
+    <div id="route-announcement" class="sr-only" aria-live="polite"></div>
   </div>
 </section>
 
 <style>
-  /* -------------------------------------------------- */
-  /* BRAND SYSTEM & CONFIGURATION TOKENS                */
-  /* Official Unity Compass Palette                     */
-  /* -------------------------------------------------- */
-  :root {
+  /* ------------------------------------------------ */
+  /* TOKENS (scoped to avoid clobbering :root)        */
+  /* ------------------------------------------------ */
+  #our-mission {
     --navy: #0C487A;
     --deep-navy: #0B2553;
-    --royal-navy: #1B3A8F;
     --red: #FF3130;
-    --red-hover: #E02827;
-    --ice: #F8FAFC;
     --sky: #38BDF8;
-    --white: #FFFFFF;
-    --slate-heading: #0B2553;
     --slate-subtext: #475569;
-
-    /* Typography */
+    --route-line: rgba(12, 72, 122, 0.25);
     --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    /* Animation Timing & Easings */
-    --needle-duration: 700ms;
-    --needle-ease: cubic-bezier(0.34, 1.56, 0.64, 1); /* Spring-like overshoot */
-    --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
-    --auto-interval: 4000ms;
-    --ring-spin-duration: 120s;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: var(--font-sans);
   }
 
-  /* -------------------------------------------------- */
-  /* SCROLL-TRIGGERED REVEAL (Matching ServicesGrid)     */
-  /* -------------------------------------------------- */
+  /* ------------------------------------------------ */
+  /* HEADER REVEAL + SHIMMER (homepage harmony)       */
+  /* ------------------------------------------------ */
   .mission-heading-reveal,
   .mission-subheading-reveal {
     opacity: 0;
@@ -404,778 +283,340 @@
                 transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                 filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
+  :global(#our-mission.is-revealed) .mission-heading-reveal { opacity: 1; transform: none; filter: blur(0); transition-delay: .05s; }
+  :global(#our-mission.is-revealed) .mission-subheading-reveal { opacity: 1; transform: none; filter: blur(0); transition-delay: .25s; }
 
-  :global(#our-mission.is-revealed) .mission-heading-reveal {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-    transition-delay: 0.05s;
+  .mission-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 16px; border-radius: 999px;
+    background: #FFFFFF; border: 1px solid rgba(12, 72, 122, 0.14);
+    box-shadow: 0 6px 18px -10px rgba(11, 37, 83, 0.35);
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--navy);
   }
-
-  :global(#our-mission.is-revealed) .mission-subheading-reveal {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-    transition-delay: 0.25s;
+  .mission-eyebrow-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--red);
+    box-shadow: 0 0 0 0 rgba(255, 49, 48, 0.5);
+    animation: eyebrowPulse 2s ease-out infinite;
   }
-
-  /* -------------------------------------------------- */
-  /* CONTINUOUS RADIANT COLOR SHIMMER                   */
-  /* -------------------------------------------------- */
-  @keyframes missionShimmer1 {
-    0% { background-position: 0% 50%; }
-    48% { background-position: 100% 50%; }
-    52% { background-position: 100% 50%; }
-    100% { background-position: 200% 50%; }
-  }
-
-  @keyframes missionShimmer2 {
-    0% { background-position: -50% 50%; }
-    48% { background-position: 50% 50%; }
-    52% { background-position: 50% 50%; }
-    100% { background-position: 150% 50%; }
+  @keyframes eyebrowPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 49, 48, 0.5); }
+    100% { box-shadow: 0 0 0 9px rgba(255, 49, 48, 0); }
   }
 
   .mission-shimmer-line {
-    background: linear-gradient(
-      90deg,
-      #0B2553 0%,
-      #0C487A 16%,
-      #1E40AF 34%,
-      #DC2626 52%,
-      #FF3130 66%,
-      #2563EB 82%,
-      #0B2553 100%
-    );
+    background: linear-gradient(90deg, #0B2553 0%, #0C487A 16%, #1E40AF 34%, #DC2626 52%, #FF3130 66%, #2563EB 82%, #0B2553 100%);
     background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    display: block;
-    width: fit-content;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    display: block; width: fit-content; max-width: 100%; margin-inline: auto;
     will-change: background-position;
   }
+  .mission-shimmer-line-1 { animation: heroHeadingShimmer 7s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+  .mission-shimmer-line-2 { animation: heroHeadingShimmer 7s cubic-bezier(0.4, 0, 0.2, 1) 0.8s infinite; }
 
-  .mission-shimmer-line-1 {
-    animation: heroHeadingShimmer 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  .mission-accent-line { background-size: 200% 100%; animation: missionAccentShift 6s ease-in-out infinite alternate; }
+  @keyframes missionAccentShift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+  /* Sparkles */
+  .mission-sparkles { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+  .sparkle-star { position: absolute; color: var(--navy); opacity: .16; animation: starTwinkle 7s ease-in-out infinite alternate; }
+  .sparkle-1 { top: 8%;  left: 12%; width: 14px; height: 14px; animation-delay: 0s; }
+  .sparkle-2 { top: 14%; right: 14%; width: 18px; height: 18px; animation-delay: 2.2s; }
+  .sparkle-3 { bottom: 18%; left: 6%; width: 12px; height: 12px; animation-delay: 4.1s; }
+  .sparkle-4 { bottom: 8%; right: 10%; width: 16px; height: 16px; animation-delay: 1.5s; }
+  .sparkle-5 { top: 44%; left: 4%; width: 10px; height: 10px; animation-delay: 5.3s; }
+  .sparkle-6 { top: 60%; right: 4%; width: 14px; height: 14px; animation-delay: 3.4s; }
+  @keyframes starTwinkle { 0%,100% { opacity: .12; transform: scale(.85); } 50% { opacity: .45; transform: scale(1.15); } }
+
+  /* ------------------------------------------------ */
+  /* ROUTE STAGE                                      */
+  /* ------------------------------------------------ */
+  .route-wrap { max-width: 1200px; margin: 0 auto; container-type: inline-size; }
+
+  /* Sticky GPS bar (sits under the site header) */
+  .route-hud {
+    position: sticky; top: 84px; z-index: 30;
+    display: flex; align-items: center; gap: 16px;
+    max-width: 640px; margin: 0 auto 28px; padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(10px);
+    border: 1px solid rgba(12, 72, 122, 0.12); border-radius: 999px;
+    box-shadow: 0 14px 34px -20px rgba(11, 37, 83, 0.45);
+    font-size: 0.8rem; font-weight: 700; color: var(--deep-navy);
   }
+  .route-hud-live { display: flex; align-items: center; gap: 7px; white-space: nowrap; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); }
+  .route-hud-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--red); animation: hudBlink 1.4s ease-in-out infinite; }
+  @keyframes hudBlink { 50% { opacity: .25; } }
+  .route-hud-bar { flex: 1; height: 6px; border-radius: 6px; background: #E2EAF4; overflow: hidden; }
+  .route-hud-bar span { display: block; height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg, var(--navy), #1E40AF, var(--red)); }
+  .route-hud-next { white-space: nowrap; color: var(--slate-subtext); font-weight: 600; }
+  .route-hud-next :global(b) { color: var(--deep-navy); font-weight: 800; }
 
-  .mission-shimmer-line-2 {
-    animation: heroHeadingShimmer 7s cubic-bezier(0.4, 0, 0.2, 1) 0.8s infinite;
+  .route-map { position: relative; width: 100%; aspect-ratio: 1200 / 1340; }
+  .route-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .route-cards { margin: 0; padding: 0; list-style: none; }
+
+  .route-rose { transform-box: fill-box; }
+  .route-marker-halo { animation: haloPulse 2.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes haloPulse { 50% { transform: scale(1.25); opacity: .55; } }
+
+  /* Pins */
+  .route-pin {
+    position: absolute; z-index: 15;
+    width: 46px; height: 46px; transform: translate(-50%, -50%);
+    display: grid; place-items: center; border-radius: 50%;
+    background: #FFFFFF; border: 2px solid rgba(12, 72, 122, 0.22);
+    font-family: var(--font-mono); font-size: .85rem; font-weight: 800; color: rgba(12, 72, 122, 0.45);
+    transition: all .45s cubic-bezier(0.16, 1, 0.3, 1);
   }
+  .route-pin.is-reached { background: var(--navy); border-color: var(--navy); color: #FFFFFF; box-shadow: 0 0 0 8px rgba(12, 72, 122, 0.12); }
+  .route-pin.is-current { background: var(--red); border-color: var(--red); box-shadow: 0 0 0 8px rgba(255, 49, 48, 0.16); transform: translate(-50%, -50%) scale(1.08); }
+  .route-pin.is-current::after { content: ""; position: absolute; inset: -9px; border-radius: 50%; border: 2px solid rgba(255, 49, 48, 0.4); animation: pinRing 2s ease-out infinite; }
+  @keyframes pinRing { to { transform: scale(1.6); opacity: 0; } }
 
-  /* Animated Tri-Color Accent Line (Matching HomeIntroBanner) */
-  .mission-accent-line {
-    background-size: 200% 100%;
-    animation: missionAccentShift 6s ease-in-out infinite alternate;
+  /* Origin / destination chips */
+  .route-chip {
+    position: absolute; z-index: 15; transform: translate(-50%, -50%);
+    display: flex; align-items: center; gap: 8px; padding: 6px 16px 6px 6px; border-radius: 999px;
+    background: var(--deep-navy); color: #FFFFFF; font-size: .82rem; font-weight: 800; white-space: nowrap;
+    box-shadow: 0 12px 26px -12px rgba(11, 37, 83, 0.6);
   }
+  .route-chip span { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, 0.16); }
+  .route-chip svg { width: 16px; height: 16px; }
+  .route-chip--dest { background: #94A3B8; box-shadow: none; transition: background .5s ease, box-shadow .5s ease; }
+  .route-chip--dest.is-arrived { background: var(--red); box-shadow: 0 12px 26px -12px rgba(255, 49, 48, 0.65); }
 
-  @keyframes missionAccentShift {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-  }
-
-  /* Ambient Twinkling 4-Point Stars (Unity Compass Mark) */
-  .mission-sparkles {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  .sparkle-star {
-    position: absolute;
-    color: var(--navy);
-    opacity: 0.16;
-    animation: starTwinkle 7s ease-in-out infinite alternate;
-  }
-
-  .sparkle-1 { top: 16%; left: 12%; width: 14px; height: 14px; animation-delay: 0s; }
-  .sparkle-2 { top: 26%; right: 14%; width: 18px; height: 18px; animation-delay: 2.2s; }
-  .sparkle-3 { bottom: 22%; left: 15%; width: 12px; height: 12px; animation-delay: 4.1s; }
-  .sparkle-4 { bottom: 15%; right: 18%; width: 16px; height: 16px; animation-delay: 1.5s; }
-  .sparkle-5 { top: 48%; left: 7%; width: 10px; height: 10px; animation-delay: 5.3s; }
-  .sparkle-6 { top: 52%; right: 8%; width: 14px; height: 14px; animation-delay: 3.4s; }
-
-  @keyframes starTwinkle {
-    0%, 100% { opacity: 0.12; transform: scale(0.85); }
-    50% { opacity: 0.45; transform: scale(1.15); }
-  }
-
-  /* -------------------------------------------------- */
-  /* CARDINAL STAGE & DESKTOP GRID LAYOUT               */
-  /* -------------------------------------------------- */
-  .mission-cardinal-stage {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    min-height: 740px;
-    display: grid;
-    grid-template-columns: 330px 1fr 330px;
-    grid-template-rows: auto 420px auto;
-    align-items: center;
-    justify-items: center;
-    margin: 0 auto;
-  }
-
-  /* Desktop Cardinal Positions */
-  .pillar-card-top {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: center;
-    margin-bottom: 28px;
-  }
-
-  .pillar-card-right {
-    grid-column: 3;
-    grid-row: 2;
-    justify-self: start;
-    margin-left: 16px;
-  }
-
-  .pillar-card-bottom {
-    grid-column: 2;
-    grid-row: 3;
-    justify-self: center;
-    margin-top: 28px;
-  }
-
-  .pillar-card-left {
-    grid-column: 1;
-    grid-row: 2;
-    justify-self: end;
-    margin-right: 16px;
-  }
-
-  /* -------------------------------------------------- */
-  /* COMPASS CENTER CONTAINER                           */
-  /* -------------------------------------------------- */
-  .compass-centerpiece {
-    grid-column: 2;
-    grid-row: 2;
-    position: relative;
-    width: 420px;
-    height: 420px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    user-select: none;
-  }
-
-  .compass-svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-  }
-
-  /* Ambient Concentric Rings (120s per rotation) */
-  .compass-ambient-rings {
-    transform-box: view-box;
-    transform-origin: 210px 210px;
-    animation: compassSpinAmbient var(--ring-spin-duration) linear infinite;
-  }
-
-  @keyframes compassSpinAmbient {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  /* Compass Main Ring SVG Stroke Reveal */
-  .compass-ring-path {
-    stroke-dasharray: 1017.9;
-    stroke-dashoffset: 1017.9;
-    transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
-  }
-
-  .compass-ticks-group {
-    opacity: 0;
-    transition: opacity 0.8s ease 0.6s;
-  }
-
-  /* Auto-Play Circular Progress Countdown Arc */
-  .compass-progress-arc {
-    stroke-dasharray: 1017.9;
-    stroke-dashoffset: 1017.9;
-    transform: rotate(-90deg);
-    transform-box: view-box;
-    transform-origin: 210px 210px;
-    transition: stroke-dashoffset 100ms linear;
-    pointer-events: none;
-  }
-
-  /* Needle Layer with Fluid Spring Overshoot Easing */
-  .compass-needle-layer {
-    transform-box: view-box;
-    transform-origin: 210px 210px;
-    transition: transform var(--needle-duration) var(--needle-ease);
-    will-change: transform;
-  }
-
-  /* Active Bearing Number in Center Disc */
-  .compass-center-number {
-    font-family: var(--font-sans);
-    font-weight: 800;
-    font-size: 32px;
-    fill: var(--white);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  /* -------------------------------------------------- */
-  /* CONNECTORS (Desktop Cardinal Hairline Guides)       */
-  /* -------------------------------------------------- */
-  .connector-line {
-    position: absolute;
-    pointer-events: none;
-    z-index: 5;
-    transition: background-color 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
-    opacity: 0.45;
-  }
-
-  .connector-v {
-    width: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(to bottom, rgba(12, 72, 122, 0.15), rgba(56, 189, 248, 0.5), rgba(12, 72, 122, 0.15));
-  }
-
-  .connector-h {
-    height: 2px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: linear-gradient(to right, rgba(12, 72, 122, 0.15), rgba(56, 189, 248, 0.5), rgba(12, 72, 122, 0.15));
-  }
-
-  .connector-top { top: 140px; height: 48px; }
-  .connector-bottom { bottom: 140px; height: 48px; }
-  .connector-left { left: 330px; width: 48px; }
-  .connector-right { right: 330px; width: 48px; }
-
-  .connector-line.is-active {
-    opacity: 1;
-    background: var(--red);
-    box-shadow: 0 0 10px rgba(255, 49, 48, 0.5);
-  }
-
-  /* -------------------------------------------------- */
-  /* PILLAR CARDS (Homepage Harmonized Style)           */
-  /* Matching WhyChooseUs (shadow, #0B2553)             */
-  /* -------------------------------------------------- */
-  .mission-pillar-card {
-    width: 100%;
-    max-width: 330px;
-    background: #FFFFFF;
-    padding: 24px 26px;
-    text-align: left;
-    color: var(--slate-heading);
-    cursor: pointer;
-    position: relative;
-    z-index: 10;
-    outline: none;
-    border: 2px solid #F1F5F9;
+  /* Cards (WhyChooseUs harmony) */
+  .route-card {
+    position: absolute; z-index: 10; width: 35%;
+    transform: translateY(-50%) scale(.97);
+    padding: 24px 26px; border-radius: 24px;
+    background: #FFFFFF; border: 2px solid #F1F5F9;
     box-shadow: 0 10px 35px -5px rgba(11, 37, 83, 0.08);
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.2s ease,
-                box-shadow 0.25s ease,
-                opacity 0.2s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    transition-delay: 0s !important;
-    will-change: transform, box-shadow;
+    opacity: .5; filter: grayscale(.65);
+    transition: opacity .55s ease, filter .55s ease, transform .55s cubic-bezier(0.16, 1, 0.3, 1), border-color .3s ease, box-shadow .3s ease;
+  }
+  .route-card--l { left: 0; }
+  .route-card--r { right: 0; }
+  .route-card.is-reached { opacity: 1; filter: none; transform: translateY(-50%) scale(1); }
+  .route-card.is-current {
+    border-color: var(--red);
+    box-shadow: 0 20px 45px -10px rgba(11, 37, 83, 0.16), 0 0 25px rgba(255, 49, 48, 0.18);
   }
 
-  .mission-pillar-card:focus-visible {
-    outline: 2px solid var(--red);
-    outline-offset: 4px;
+  /* Dashed connector from card to pin */
+  .route-card::after {
+    content: ""; position: absolute; top: 50%; width: 14.3%;
+    border-top: 2px dashed var(--route-line); transition: border-color .45s ease;
   }
+  .route-card--l::after { left: 100%; }
+  .route-card--r::after { right: 100%; }
+  .route-card.is-reached::after { border-top-color: var(--navy); }
+  .route-card.is-current::after { border-top-color: var(--red); }
 
-  /* Ambient Vertical Float on Inner Content (4-6px) */
-  .pillar-card-inner {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+  .route-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .route-card-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right; }
+  .route-coords { font-family: var(--font-mono); font-size: .68rem; color: #94A3B8; letter-spacing: .02em; }
 
-  .floating-01 { animation: floatCard1 7s ease-in-out infinite alternate; }
-  .floating-02 { animation: floatCard2 8.5s ease-in-out 1.2s infinite alternate; }
-  .floating-03 { animation: floatCard3 6.5s ease-in-out 2.5s infinite alternate; }
-  .floating-04 { animation: floatCard4 9s ease-in-out 0.8s infinite alternate; }
-
-  @keyframes floatCard1 { from { transform: translateY(0); } to { transform: translateY(-5px); } }
-  @keyframes floatCard2 { from { transform: translateY(0); } to { transform: translateY(-6px); } }
-  @keyframes floatCard3 { from { transform: translateY(0); } to { transform: translateY(-4px); } }
-  @keyframes floatCard4 { from { transform: translateY(0); } to { transform: translateY(-5px); } }
-
-  /* Inactive Card Dimming (70% Opacity on Light Canvas) - never dim when hovered or focused */
-  .mission-cardinal-stage.has-interaction .mission-pillar-card:not(.is-active):not(:hover):not(:focus-visible) {
-    opacity: 0.70;
-    transform: scale(0.985);
-  }
-
-  /* Active & Hover Card Styling: Immediate Butter-Smooth Elevation, Red Border, Shadow Bloom */
-  .mission-pillar-card:hover,
-  .mission-pillar-card:focus-visible,
-  .mission-pillar-card.is-active {
-    opacity: 1 !important;
-    transform: translateY(-6px) scale(1.02) !important;
-    border-color: var(--red) !important;
-    background: #FFFFFF !important;
-    box-shadow: 0 20px 45px -10px rgba(11, 37, 83, 0.16), 0 0 25px rgba(255, 49, 48, 0.2) !important;
-    transition-delay: 0s !important;
-    z-index: 25 !important;
-  }
-
-  /* Pause floating oscillation immediately while hovered or active so elevation is rock-steady */
-  .mission-pillar-card:hover .pillar-card-inner,
-  .mission-pillar-card:focus-visible .pillar-card-inner,
-  .mission-pillar-card.is-active .pillar-card-inner {
-    animation-play-state: paused;
-  }
-
-  .pillar-card-topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-  }
-
-  .pillar-badge-wrap {
-    position: relative;
-    width: 48px;
-    height: 48px;
-  }
-
-  /* Soft Pulsing Ambient Glow Behind Active Badge */
-  .pillar-badge-glow {
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 49, 48, 0.35) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-  }
-
-  .mission-pillar-card:hover .pillar-badge-glow,
-  .mission-pillar-card:focus-visible .pillar-badge-glow,
-  .mission-pillar-card.is-active .pillar-badge-glow {
-    opacity: 1 !important;
-    animation: badgePulse 2.8s ease-in-out infinite alternate;
-  }
-
-  @keyframes badgePulse {
-    from { transform: scale(0.95); opacity: 0.45; }
-    to { transform: scale(1.15); opacity: 0.85; }
-  }
-
+  .pillar-badge-wrap { position: relative; width: 48px; height: 48px; flex-shrink: 0; }
+  .pillar-badge-glow { position: absolute; inset: -4px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 49, 48, 0.35) 0%, transparent 70%); opacity: 0; transition: opacity .4s ease; }
   .pillar-badge-icon {
-    position: relative;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--navy);
-    border: 1px solid rgba(12, 72, 122, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    box-shadow: 0 6px 18px rgba(12, 72, 122, 0.25);
-    transition: all 0.25s ease;
+    position: relative; width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--navy); color: #FFFFFF; box-shadow: 0 6px 18px rgba(12, 72, 122, 0.25); transition: all .3s ease;
+  }
+  .route-card.is-current .pillar-badge-glow { opacity: 1; animation: badgePulse 2.8s ease-in-out infinite alternate; }
+  .route-card.is-current .pillar-badge-icon { background: var(--red); box-shadow: 0 8px 25px rgba(255, 49, 48, 0.38); }
+  @keyframes badgePulse { from { transform: scale(.95); opacity: .45; } to { transform: scale(1.15); opacity: .85; } }
+
+  .pillar-num { font-family: var(--font-mono); font-size: .8rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); transition: color .3s ease; }
+  .route-card.is-current .pillar-num { color: var(--red); }
+  .pillar-title { margin: 0 0 8px; font-size: 1.3rem; font-weight: 800; line-height: 1.3; color: var(--deep-navy); }
+  .pillar-desc { margin: 0; font-size: .9rem; line-height: 1.65; color: var(--slate-subtext); }
+  .pillar-desc strong { color: var(--deep-navy); font-weight: 700; }
+  .pillar-desc--lead { font-size: .98rem; color: #1E293B; }
+
+  .route-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .route-tags span { padding: 5px 12px; border-radius: 999px; font-size: .75rem; font-weight: 700; color: var(--navy); background: #F1F6FC; border: 1px solid #E2EAF4; }
+  .route-tags--red span { background: #FFF0F0; border-color: #FFD3D2; color: #C81E1E; }
+
+  .route-values { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .route-values li {
+    display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 12px;
+    background: #F6F9FD; border: 1px solid #E8EFF7;
+    font-size: .8rem; font-weight: 700; line-height: 1.3; color: var(--deep-navy);
+    transition: transform .25s ease, border-color .25s ease, background .25s ease;
+  }
+  .route-values li:hover { transform: translateY(-2px); background: #FFFFFF; border-color: rgba(12, 72, 122, 0.25); }
+  .route-values li:last-child { grid-column: 1 / -1; }
+  .route-value-icon { flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: var(--navy); color: #FFFFFF; }
+  .route-values li:nth-child(even) .route-value-icon { background: var(--red); }
+  .route-value-icon svg { width: 16px; height: 16px; }
+
+  .route-markets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+  .route-markets div { padding: 12px 8px; border-radius: 12px; background: #F6F9FD; border: 1px solid #E8EFF7; text-align: center; }
+  .route-markets strong { display: block; font-size: .9rem; font-weight: 800; color: var(--deep-navy); }
+  .route-markets small { display: block; margin-top: 2px; font-size: .7rem; color: var(--slate-subtext); }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  /* ------------------------------------------------ */
+  /* TABLET (container 760–1080px)                    */
+  /* ------------------------------------------------ */
+  @container (max-width: 1080px) {
+    .route-card { padding: 18px 20px; border-radius: 20px; }
+    .route-coords { display: none; }
+    .pillar-title { font-size: 1.1rem; }
+    .pillar-desc { font-size: .82rem; }
+    .pillar-desc--lead { font-size: .88rem; }
+    .route-values { grid-template-columns: 1fr; gap: 6px; }
+    .route-values li { padding: 6px 8px; }
+    .route-pin { width: 38px; height: 38px; font-size: .75rem; }
   }
 
-  .mission-pillar-card:hover .pillar-badge-icon,
-  .mission-pillar-card:focus-visible .pillar-badge-icon,
-  .mission-pillar-card.is-active .pillar-badge-icon {
-    background: var(--red) !important;
-    border-color: var(--red) !important;
-    box-shadow: 0 8px 25px rgba(255, 49, 48, 0.38) !important;
-    color: var(--white) !important;
-  }
-
-  .pillar-num {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    font-weight: 800;
-    color: var(--navy);
-    letter-spacing: 0.05em;
-    opacity: 0.85;
-    transition: color 0.25s ease, opacity 0.25s ease;
-  }
-
-  .mission-pillar-card:hover .pillar-num,
-  .mission-pillar-card:focus-visible .pillar-num,
-  .mission-pillar-card.is-active .pillar-num {
-    color: var(--red) !important;
-    opacity: 1 !important;
-  }
-
-  .pillar-title {
-    font-size: 1.15rem;
-    font-weight: 800;
-    line-height: 1.35;
-    color: var(--slate-heading);
-    margin: 0 0 8px 0;
-    transition: color 0.25s ease;
-  }
-
-  .mission-pillar-card:hover .pillar-title,
-  .mission-pillar-card:focus-visible .pillar-title,
-  .mission-pillar-card.is-active .pillar-title {
-    color: var(--navy) !important;
-  }
-
-  .pillar-desc {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: var(--slate-subtext);
-    margin: 0;
-    font-weight: 400;
-  }
-
-  .mission-pillar-card:hover .pillar-desc,
-  .mission-pillar-card:focus-visible .pillar-desc,
-  .mission-pillar-card.is-active .pillar-desc {
-    color: #1E293B;
-  }
-
-  /* -------------------------------------------------- */
-  /* ENTRANCE ANIMATION (30% Visibility)                */
-  /* -------------------------------------------------- */
-  :global(#our-mission.is-revealed) .compass-ring-path {
-    stroke-dashoffset: 0;
-  }
-
-  :global(#our-mission.is-revealed) .compass-ticks-group {
-    opacity: 1;
-  }
-
-  :global(#our-mission.is-revealed) .mission-pillar-card {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Screen Reader Live Region */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  /* -------------------------------------------------- */
-  /* TABLET ADAPTATION (768px - 1120px)                 */
-  /* -------------------------------------------------- */
-  @media (min-width: 768px) and (max-width: 1120px) {
-    .mission-cardinal-stage {
-      grid-template-columns: 280px 1fr 280px;
+  /* ------------------------------------------------ */
+  /* MOBILE (container < 760px): stacked route        */
+  /* ------------------------------------------------ */
+  @container (max-width: 760px) {
+    .route-hud { display: none; }
+    .route-map { aspect-ratio: auto; padding-left: 34px; }
+    .route-map::before {
+      content: ""; position: absolute; left: 11px; top: 10px; bottom: 10px; width: 3px; border-radius: 3px;
+      background: linear-gradient(180deg, var(--deep-navy), var(--navy), #1E40AF, var(--red));
     }
-    .compass-centerpiece {
-      width: 340px;
-      height: 340px;
+    .route-svg, .route-pin, .route-chip { display: none; }
+    .route-cards { display: flex; flex-direction: column; gap: 20px; }
+    .route-card, .route-card.is-reached {
+      position: relative; top: auto !important; width: 100%;
+      transform: none; opacity: 1; filter: none;
     }
-    .mission-pillar-card {
-      max-width: 280px;
-      padding: 20px 22px;
+    .route-card::after {
+      left: -31px !important; right: auto !important; width: 16px; height: 16px;
+      border: 3px solid var(--navy) !important; border-radius: 50%; background: #FFFFFF; transform: translateY(-50%);
     }
-    .connector-left { left: 280px; width: 30px; }
-    .connector-right { right: 280px; width: 30px; }
+    .route-card:nth-child(3)::after { border-color: var(--red) !important; }
+    .route-values { grid-template-columns: 1fr 1fr; }
+  }
+  @container (max-width: 420px) {
+    .route-values, .route-markets { grid-template-columns: 1fr; }
   }
 
-  /* -------------------------------------------------- */
-  /* MOBILE RESPONSIVE ADAPTATION (< 768px)             */
-  /* -------------------------------------------------- */
-  @media (max-width: 767px) {
-    .mission-cardinal-stage {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      min-height: auto;
-    }
-
-    .compass-centerpiece {
-      order: 1;
-      width: 170px;
-      height: 170px;
-      margin-bottom: 16px;
-    }
-
-    .connector-line {
-      display: none;
-    }
-
-    .pillar-card-top,
-    .pillar-card-right,
-    .pillar-card-bottom,
-    .pillar-card-left {
-      grid-column: auto;
-      grid-row: auto;
-      order: 2;
-      margin: 0;
-      max-width: 100%;
-    }
-
-    .floating-01, .floating-02, .floating-03, .floating-04 {
-      animation: none;
-    }
-
-    .compass-center-number {
-      font-size: 26px;
-    }
-  }
-
-  /* -------------------------------------------------- */
-  /* PREFERS-REDUCED-MOTION                             */
-  /* -------------------------------------------------- */
+  /* ------------------------------------------------ */
+  /* REDUCED MOTION                                   */
+  /* ------------------------------------------------ */
   @media (prefers-reduced-motion: reduce) {
-    .mission-heading-reveal,
-    .mission-subheading-reveal,
-    .mission-shimmer-line,
-    .mission-accent-line,
-    .mission-pillar-card,
-    .compass-ring-path,
-    .compass-ticks-group,
-    .compass-needle-layer {
-      opacity: 1 !important;
-      transform: none !important;
-      filter: none !important;
-      stroke-dashoffset: 0 !important;
-      transition: none !important;
-      animation: none !important;
-    }
-
-    .compass-ambient-rings,
-    .sparkle-star,
-    .floating-01,
-    .floating-02,
-    .floating-03,
-    .floating-04 {
-      animation: none !important;
-    }
+    .mission-heading-reveal, .mission-subheading-reveal { opacity: 1 !important; transform: none !important; filter: none !important; }
+    #our-mission *, #our-mission *::after { animation: none !important; transition: none !important; }
   }
 </style>
 
 <script>
   function initOurMissionSection() {
     const section = document.getElementById('our-mission');
-    const stage = document.getElementById('mission-stage');
-    const needle = document.getElementById('compass-needle');
-    const bearingNum = document.getElementById('compass-bearing-num');
-    const progressRing = document.getElementById('compass-progress-ring');
-    const announcement = document.getElementById('compass-announcement');
-    const cards = Array.from(document.querySelectorAll('.mission-pillar-card'));
-    const connectors = {
-      0: document.getElementById('connector-top'),
-      1: document.getElementById('connector-right'),
-      2: document.getElementById('connector-bottom'),
-      3: document.getElementById('connector-left')
-    };
+    if (!section || section.dataset.routeInit === 'true') return;
+    section.dataset.routeInit = 'true';
 
-    if (!section || !needle || cards.length === 0) return;
+    const map = document.getElementById('route-map');
+    const svg = document.getElementById('route-svg');
+    const route = document.getElementById('route-path') as SVGPathElement | null;
+    const marker = document.getElementById('route-marker');
+    const fill = document.getElementById('route-hud-fill');
+    const next = document.getElementById('route-hud-next');
+    const dest = document.getElementById('route-dest');
+    const announce = document.getElementById('route-announcement');
+    const pins = Array.from(section.querySelectorAll<HTMLElement>('.route-pin'));
+    const cards = Array.from(section.querySelectorAll<HTMLElement>('.route-card'));
+    if (!map || !svg || !route || !marker) return;
 
-    // Four Bearings Configuration
-    const bearings = [
-      { index: 0, angle: 0, num: '01', title: 'Compliance-Centered Approach', cardinal: 'North' },
-      { index: 1, angle: 90, num: '02', title: 'Structured Methodology', cardinal: 'East' },
-      { index: 2, angle: 180, num: '03', title: 'Integrated Support Model', cardinal: 'South' },
-      { index: 3, angle: 270, num: '04', title: 'Performance-Focused Delivery', cardinal: 'West' }
-    ];
+    const names = ['Who We Are', 'Our Values', 'Our Mission', 'Our Vision'];
+    const WP: [number, number][] = [[480, 190], [720, 520], [480, 850], [720, 1180]];
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let currentIndex = 0;
-    let currentAngle = 0;
-    let isPaused = false;
-    let autoTimer = null;
-    let progressStart = null;
-    let progressAnimId = null;
-    const AUTO_INTERVAL = 4000;
-    const CIRCUMFERENCE = 1017.9;
-
-    // Reduced motion check
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // 1. Entrance Observer (Triggers at 30% visibility)
+    // Header entrance
     if ('IntersectionObserver' in window) {
-      const entranceObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            section.classList.add('is-revealed');
-            entranceObserver.unobserve(section);
-            if (!prefersReducedMotion) {
-              setTimeout(startAutoPlay, 1000);
-            }
-          }
-        });
-      }, { threshold: 0.25 });
-      entranceObserver.observe(section);
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { section.classList.add('is-revealed'); io.disconnect(); } });
+      }, { threshold: 0.15 });
+      io.observe(section);
     } else {
       section.classList.add('is-revealed');
-      if (!prefersReducedMotion) startAutoPlay();
     }
 
-    // 2. Shortest Continuous Angular Rotation
-    function getShortestAngle(current, target) {
-      let diff = (target - (current % 360) + 540) % 360 - 180;
-      return current + diff;
-    }
-
-    // 3. Set Active Pillar Bearing
-    function setActiveBearing(index, isUserInteraction = false) {
-      if (index < 0 || index >= bearings.length) return;
-      currentIndex = index;
-      const bearing = bearings[index];
-
-      if (stage) stage.classList.add('has-interaction');
-
-      currentAngle = getShortestAngle(currentAngle, bearing.angle);
-      needle.style.transform = `rotate(${currentAngle}deg)`;
-
-      if (bearingNum) {
-        bearingNum.textContent = bearing.num;
+    // Route geometry
+    const L = route.getTotalLength();
+    route.style.strokeDasharray = `${L}`;
+    route.style.strokeDashoffset = `${L}`;
+    const wpL = WP.map(([x, y]) => {
+      let best = 0, bd = Infinity;
+      for (let i = 0; i <= 600; i++) {
+        const l = (L * i) / 600, p = route.getPointAtLength(l);
+        const d = (p.x - x) ** 2 + (p.y - y) ** 2;
+        if (d < bd) { bd = d; best = l; }
       }
-
-      cards.forEach((card, idx) => {
-        const isActive = (idx === index);
-        card.classList.toggle('is-active', isActive);
-        card.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        card.setAttribute('tabindex', isActive ? '0' : '-1');
-      });
-
-      Object.keys(connectors).forEach(key => {
-        if (connectors[key]) {
-          connectors[key].classList.toggle('is-active', Number(key) === index);
-        }
-      });
-
-      if (announcement) {
-        announcement.textContent = `Pillar ${bearing.num}: ${bearing.title} active. Bearing: ${bearing.cardinal}.`;
-      }
-
-      if (!isPaused && !prefersReducedMotion) {
-        restartProgressBar();
-      }
-    }
-
-    // 4. Circular Progress Arc Animation
-    function restartProgressBar() {
-      if (!progressRing || prefersReducedMotion) return;
-      cancelAnimationFrame(progressAnimId);
-      progressRing.style.strokeDashoffset = CIRCUMFERENCE;
-      progressStart = performance.now();
-
-      function stepProgress(now) {
-        if (isPaused) {
-          progressStart = now;
-          progressAnimId = requestAnimationFrame(stepProgress);
-          return;
-        }
-        const elapsed = now - progressStart;
-        const progress = Math.min(1, elapsed / AUTO_INTERVAL);
-        const offset = CIRCUMFERENCE * (1 - progress);
-        progressRing.style.strokeDashoffset = offset.toFixed(1);
-
-        if (progress < 1) {
-          progressAnimId = requestAnimationFrame(stepProgress);
-        }
-      }
-      progressAnimId = requestAnimationFrame(stepProgress);
-    }
-
-    // 5. Auto-Play System (4s Interval)
-    function nextBearing() {
-      if (isPaused || prefersReducedMotion) return;
-      const nextIdx = (currentIndex + 1) % bearings.length;
-      setActiveBearing(nextIdx, false);
-    }
-
-    function startAutoPlay() {
-      if (prefersReducedMotion) return;
-      clearInterval(autoTimer);
-      autoTimer = setInterval(nextBearing, AUTO_INTERVAL);
-      restartProgressBar();
-    }
-
-    function pauseAutoPlay() {
-      isPaused = true;
-    }
-
-    function resumeAutoPlay() {
-      isPaused = false;
-      progressStart = performance.now();
-    }
-
-    // 6. User Event Listeners (Hover, Focus, Click)
-    cards.forEach((card, idx) => {
-      card.addEventListener('mouseenter', () => {
-        pauseAutoPlay();
-        setActiveBearing(idx, true);
-      });
-
-      card.addEventListener('focus', () => {
-        pauseAutoPlay();
-        setActiveBearing(idx, true);
-      });
-
-      card.addEventListener('click', (e) => {
-        e.preventDefault();
-        pauseAutoPlay();
-        setActiveBearing(idx, true);
-      });
+      return best;
     });
 
-    // Pause on section hover/focus; resume on leave
-    section.addEventListener('mouseenter', pauseAutoPlay);
-    section.addEventListener('mouseleave', resumeAutoPlay);
-    section.addEventListener('focusin', pauseAutoPlay);
-    section.addEventListener('focusout', resumeAutoPlay);
+    let lastCurrent = -2;
 
-    // 7. Keyboard Navigation (Arrow Keys & Home/End)
-    stage.addEventListener('keydown', (e) => {
-      let targetIdx = currentIndex;
+    function setProgress(p: number) {
+      const l = L * p;
+      route!.style.strokeDashoffset = `${L - l}`;
 
-      switch (e.key) {
-        case 'ArrowUp':
-          targetIdx = 0; // North
-          break;
-        case 'ArrowRight':
-          targetIdx = (e.shiftKey) ? 1 : (currentIndex + 1) % 4; // East / Next
-          break;
-        case 'ArrowDown':
-          targetIdx = 2; // South
-          break;
-        case 'ArrowLeft':
-          targetIdx = (e.shiftKey) ? 3 : (currentIndex - 1 + 4) % 4; // West / Prev
-          break;
-        case 'Home':
-          targetIdx = 0;
-          break;
-        case 'End':
-          targetIdx = 3;
-          break;
-        default:
-          return;
+      const a = route!.getPointAtLength(l);
+      const f = route!.getPointAtLength(Math.min(l + 3, L));
+      const b = route!.getPointAtLength(Math.max(l - 3, 0));
+      const angle = (Math.atan2(f.y - b.y, f.x - b.x) * 180) / Math.PI;
+      marker!.setAttribute('transform', `translate(${a.x} ${a.y}) rotate(${angle})`);
+
+      let current = -1;
+      wpL.forEach((w, i) => {
+        const reached = l >= w - 1;
+        pins[i]?.classList.toggle('is-reached', reached);
+        cards[i]?.classList.toggle('is-reached', reached);
+        if (reached) current = i;
+      });
+      pins.forEach((pin, i) => pin.classList.toggle('is-current', i === current));
+      cards.forEach((card, i) => card.classList.toggle('is-current', i === current));
+
+      const arrived = p > 0.985;
+      dest?.classList.toggle('is-arrived', arrived);
+      if (fill) fill.style.width = `${(p * 100).toFixed(1)}%`;
+      if (next) {
+        next.innerHTML = arrived
+          ? 'Arrived: <b>A Trusted Partner</b>'
+          : current >= 3 ? 'Next: <b>Destination</b>' : `Next: <b>${names[current + 1]}</b>`;
       }
 
-      e.preventDefault();
-      setActiveBearing(targetIdx, true);
-      if (cards[targetIdx]) {
-        cards[targetIdx].focus();
+      if (current !== lastCurrent && current >= 0 && announce) {
+        announce.textContent = `Waypoint 0${current + 1}: ${names[current]}.`;
       }
-    });
+      lastCurrent = current;
+    }
 
-    // Initialize initial active bearing (01 North)
-    setActiveBearing(0, false);
+    const isStacked = () => getComputedStyle(svg).display === 'none';
+
+    let ticking = false;
+    function update() {
+      ticking = false;
+      if (isStacked()) { cards.forEach((c) => c.classList.add('is-reached')); return; }
+      if (reduced) { setProgress(1); return; }
+      const r = map!.getBoundingClientRect();
+      const p = Math.min(Math.max((window.innerHeight * 0.6 - r.top) / (r.height * 0.92), 0), 1);
+      setProgress(p);
+    }
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+
+    const controller = new AbortController();
+    window.addEventListener('scroll', onScroll, { passive: true, signal: controller.signal });
+    window.addEventListener('resize', onScroll, { signal: controller.signal });
+    document.addEventListener('astro:before-swap', () => {
+      controller.abort();
+      delete section.dataset.routeInit;
+    }, { once: true });
+
+    update();
   }
 
-  // Astro page-load and DOMContentLoaded lifecycle
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initOurMissionSection);
   } else {
