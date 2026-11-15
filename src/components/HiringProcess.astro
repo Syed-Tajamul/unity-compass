@@ -90,7 +90,7 @@ const steps: HiringStep[] = [
     </div>
 
     <!-- 4 Deliverable Cards: Codev Land Two-Layer Sliding Profile Card Hover Animation (Screenshot 4) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-center">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 items-start">
       {steps.map((step, idx) => (
         <div
           class="codev-slide-card group relative cursor-pointer career-reveal"
@@ -221,27 +221,35 @@ const steps: HiringStep[] = [
     width: 64px;
   }
 
-  @media (max-width: 639px) {
+  @media (max-width: 1023px) {
     .codev-slide-card {
-      min-height: 200px;
-      transition: min-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      min-height: auto !important;
+      perspective: none;
     }
     .codev-slide1 {
-      transform: translateY(0);
+      transform: translateY(0) !important;
     }
     .codev-slide2 {
-      transform: translateY(0);
+      display: none !important;
+      transform: translateY(0) !important;
+    }
+    .codev-slide-card:hover .codev-slide2,
+    .codev-slide-card:focus-within .codev-slide2,
+    .codev-slide-card.is-expanded .codev-slide2 {
+      display: flex !important;
+      animation: codevSlideFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      margin-top: 12px;
+    }
+  }
+
+  @keyframes codevSlideFadeIn {
+    from {
       opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: opacity 0.4s ease, max-height 0.5s ease;
+      transform: translateY(-8px);
     }
-    .codev-slide-card:hover {
-      min-height: 400px;
-    }
-    .codev-slide-card:hover .codev-slide2 {
+    to {
       opacity: 1;
-      max-height: 250px;
+      transform: translateY(0);
     }
   }
 
@@ -295,3 +303,25 @@ const steps: HiringStep[] = [
     }
   }
 </style>
+
+<script>
+  function setupHiringProcessCards() {
+    const codevCards = document.querySelectorAll('.codev-slide-card');
+    codevCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        if (window.innerWidth < 1024) {
+          const wasActive = card.classList.contains('is-expanded');
+          codevCards.forEach((c) => c.classList.remove('is-expanded'));
+          if (!wasActive) card.classList.add('is-expanded');
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupHiringProcessCards);
+  } else {
+    setupHiringProcessCards();
+  }
+  document.addEventListener('astro:page-load', setupHiringProcessCards);
+</script>
