@@ -54,7 +54,7 @@ export const POST: APIRoute = async ({ request }) => {
         read_time: body.readTime || '5 min read',
         category: body.category || 'GovCon Advisory',
         excerpt: body.excerpt,
-        image: body.image || '/images/ChatGPT-Image-Feb-12-2026-03_22_39-PM.png',
+        image: body.image || '/images/blogs/blog-1-growth.jpg',
         content_blocks: body.contentBlocks || [],
         is_published: true,
       })

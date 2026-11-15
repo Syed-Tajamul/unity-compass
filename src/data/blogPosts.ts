@@ -29,7 +29,7 @@ export const blogPosts: BlogPost[] = [
     "readTime": "6 min read",
     "category": "Company Growth",
     "excerpt": "A retrospective on how strategic proposal development, cleared recruitment, and agile staffing enabled our partners to capture federal contracts and scale.",
-    "image": "/images/ChatGPT-Image-Feb-12-2026-03_22_39-PM.png",
+    "image": "/images/blogs/blog-1-growth.jpg",
     "contentBlocks": [
       {
         "tag": "li",
@@ -233,7 +233,7 @@ export const blogPosts: BlogPost[] = [
     "readTime": "7 min read",
     "category": "Cybersecurity & Compliance",
     "excerpt": "Essential cybersecurity safeguards and compliance milestones for SMBs competing in federal and commercial technology environments.",
-    "image": "/images/ChatGPT-Image-Feb-10-2026-05_15_36-PM.png",
+    "image": "/images/blogs/blog-2-cybersecurity.jpg",
     "contentBlocks": [
       {
         "tag": "li",
@@ -449,7 +449,7 @@ export const blogPosts: BlogPost[] = [
     "readTime": "5 min read",
     "category": "Business Consulting",
     "excerpt": "Understanding the measurable returns of strategic advisory, operational structuring, and expert guidance when entering government contracting.",
-    "image": "/images/ChatGPT-Image-Feb-6-2026-03_13_58-PM.png",
+    "image": "/images/blogs/blog-3-mentorship.jpg",
     "contentBlocks": [
       {
         "tag": "li",
@@ -653,7 +653,7 @@ export const blogPosts: BlogPost[] = [
     "readTime": "6 min read",
     "category": "IT & Innovation",
     "excerpt": "Assessing data architecture, security posture, and cloud readiness before integrating AI into enterprise workflows.",
-    "image": "/images/ChatGPT-Image-Feb-5-2026-04_41_43-PM.png",
+    "image": "/images/blogs/blog-4-digital-transformation.jpg",
     "contentBlocks": [
       {
         "tag": "li",
@@ -853,7 +853,7 @@ export const blogPosts: BlogPost[] = [
     "readTime": "8 min read",
     "category": "Proposal Development",
     "excerpt": "Why qualified contractors lose winnable bids: non-compliance, generic narratives, weak past performance mapping, and how to avoid them.",
-    "image": "/images/ChatGPT-Image-Feb-5-2026-04_29_27-PM.png",
+    "image": "/images/blogs/blog-5-proposal-mistakes.jpg",
     "contentBlocks": [
       {
         "tag": "li",
@@ -1033,7 +1033,7 @@ export const blogPosts: BlogPost[] = [
     "readTime": "5 min read",
     "category": "Staffing & Recruitment",
     "excerpt": "How flexible contract and temp-to-hire staffing models give government contractors a competitive edge in volatile hiring environments.",
-    "image": "/images/Untitled-design-8.png",
+    "image": "/images/blogs/blog-6-agile-staffing.jpg",
     "contentBlocks": [
       {
         "tag": "li",

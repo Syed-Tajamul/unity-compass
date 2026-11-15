@@ -84,7 +84,7 @@ export const servicesData: ServiceDetail[] = [
       'Oral Presentation Coaching & Slide Development',
       'Past Performance Fact Sheet Architecture',
     ],
-    image: '/images/ChatGPT-Image-Feb-5-2026-04_29_27-PM.png',
+    image: '/images/services/proposal-development.jpg',
   },
   {
     id: 'recruitment-services',
@@ -144,7 +144,7 @@ export const servicesData: ServiceDetail[] = [
       'Contract SOW & Labor Category Mapping',
       'Subcontractor Clearance Sponsorship Navigation',
     ],
-    image: '/images/ChatGPT-Image-Feb-6-2026-03_13_58-PM.png',
+    image: '/images/services/security-cleared-recruitment.jpg',
   },
   {
     id: 'staffing',
@@ -199,7 +199,7 @@ export const servicesData: ServiceDetail[] = [
       'Commercial & Federal Technical Staffing',
       'Labor Rate & GSA Schedule Wage Compliance (SCA / Davis-Bacon)',
     ],
-    image: '/images/Untitled-design-8.png',
+    image: '/images/services/staffing-solutions.jpg',
   },
   {
     id: 'information-technology-and-business-consulting',
@@ -259,7 +259,7 @@ export const servicesData: ServiceDetail[] = [
       'Cybersecurity Readiness & NIST 800-171 Compliance',
       'Process Re-engineering & Program Governance',
     ],
-    image: '/images/ChatGPT-Image-Feb-5-2026-04_41_43-PM.png',
+    image: '/images/services/it-program-consulting.jpg',
   },
   {
     id: 'customized-support-services',
@@ -314,7 +314,7 @@ export const servicesData: ServiceDetail[] = [
       'Specialized Program Operations Consulting',
       'Executive Strategy Sessions & Growth Roadmapping',
     ],
-    image: '/images/ChatGPT-Image-Feb-10-2026-05_15_36-PM.png',
+    image: '/images/services/customized-support.jpg',
   },
 ];
 
