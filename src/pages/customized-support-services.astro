@@ -981,39 +981,71 @@ const deliverables = [
     transition: width 0.4s ease;
   }
 
-  .codev-slide-card:hover .codev-slide2::after {
+  .codev-slide-card:hover .codev-slide2::after,
+  .codev-slide-card.is-expanded .codev-slide2::after {
     width: 64px;
   }
 
   @media (max-width: 1023px) {
     .codev-slide-card {
-      min-height: auto !important;
+      min-height: 195px !important;
+      max-height: 195px;
+      overflow: hidden;
+      justify-content: flex-start !important;
       perspective: none;
+      transition: max-height 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  min-height 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
+    .codev-slide-card:hover,
+    .codev-slide-card:focus-within,
+    .codev-slide-card.is-expanded {
+      min-height: 415px !important;
+      max-height: 480px;
+      overflow: visible;
+    }
+
     .codev-slide1 {
+      position: relative;
+      z-index: 2;
       transform: translateY(0) !important;
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.5s ease,
+                  border-radius 0.3s ease !important;
     }
+
+    .codev-slide-card:hover .codev-slide1,
+    .codev-slide-card:focus-within .codev-slide1,
+    .codev-slide-card.is-expanded .codev-slide1 {
+      transform: translateY(0) !important;
+      box-shadow: 0 10px 24px rgba(12, 72, 122, 0.18);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+
     .codev-slide2 {
-      display: none !important;
-      transform: translateY(0) !important;
+      display: flex !important;
+      position: relative;
+      z-index: 1;
+      transform: translateY(-90%) !important;
+      opacity: 0 !important;
+      pointer-events: none;
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.45s ease,
+                  box-shadow 0.6s ease,
+                  border-radius 0.3s ease !important;
     }
+
     .codev-slide-card:hover .codev-slide2,
     .codev-slide-card:focus-within .codev-slide2,
     .codev-slide-card.is-expanded .codev-slide2 {
-      display: flex !important;
-      animation: codevSlideFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      margin-top: 12px;
-    }
-  }
-
-  @keyframes codevSlideFadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+      transform: translateY(4px) !important;
+      opacity: 1 !important;
+      pointer-events: auto;
+      box-shadow: 0 24px 50px -10px rgba(12, 72, 122, 0.22);
+      border-color: #cbd5e1;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
     }
   }
 
