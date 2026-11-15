@@ -3,6 +3,7 @@ import { navigationLinks } from '../data/navigation';
 import { companyInfo } from '../data/company';
 
 const currentPath = Astro.url.pathname;
+const normalizedCurrentPath = currentPath.replace(/\/$/, '') || '/';
 
 // 5 Core Service Practice Areas (OASIS+ qualification removed per user request)
 const servicesDropdown = [
@@ -108,22 +109,24 @@ const resourcesDropdown = [
           <!-- Dropdown Panel: Solid White Card (Zero Transparency Bleed, 100% Readable) -->
           <div class="nav-dropdown-panel absolute left-0 top-full -mt-1 w-[380px] sm:w-[420px] rounded-2xl bg-white p-2.5 shadow-[0_24px_50px_-10px_rgba(15,39,74,0.22),0_0_0_1px_rgba(15,39,74,0.08)] border border-slate-200 z-50">
             <div class="space-y-0.5">
-              {servicesDropdown.map((service) => (
-                <a
-                  href={service.href}
-                  class="dropdown-link-row group/item rounded-md sm:rounded-lg"
-                >
-                  <div class="flex items-center gap-2.5 min-w-0 pr-1">
-                    <span class="dropdown-pip shrink-0" aria-hidden="true"></span>
-                    <span class="dropdown-link-text text-[13px] sm:text-[13.5px] font-semibold whitespace-nowrap">
-                      {service.name}
-                    </span>
-                  </div>
-                  <svg class="dropdown-arrow w-3.5 h-3.5 shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              ))}
+              {servicesDropdown
+                .filter((service) => service.href.replace(/\/$/, '') !== normalizedCurrentPath)
+                .map((service) => (
+                  <a
+                    href={service.href}
+                    class="dropdown-link-row group/item rounded-md sm:rounded-lg service-nav-item"
+                  >
+                    <div class="flex items-center gap-2.5 min-w-0 pr-1">
+                      <span class="dropdown-pip shrink-0" aria-hidden="true"></span>
+                      <span class="dropdown-link-text text-[13px] sm:text-[13.5px] font-semibold whitespace-nowrap">
+                        {service.name}
+                      </span>
+                    </div>
+                    <svg class="dropdown-arrow w-3.5 h-3.5 shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                ))}
             </div>
           </div>
         </div>
@@ -317,16 +320,18 @@ const resourcesDropdown = [
         </button>
         <div class="mobile-accordion-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out">
           <div class="overflow-hidden pl-3 pr-1 space-y-1">
-            {servicesDropdown.map((sub) => (
-              <a
-                href={sub.href}
-                class={`block px-3 py-2 rounded-md sm:rounded-lg text-sm font-medium transition-colors ${
-                  currentPath === sub.href ? 'text-[#FF3130] bg-red-50/60 font-semibold' : 'text-slate-700 hover:text-[#0C487A] hover:bg-slate-50'
-                }`}
-              >
-                {sub.name}
-              </a>
-            ))}
+            {servicesDropdown
+              .filter((sub) => sub.href.replace(/\/$/, '') !== normalizedCurrentPath)
+              .map((sub) => (
+                <a
+                  href={sub.href}
+                  class={`block px-3 py-2 rounded-md sm:rounded-lg text-sm font-medium transition-colors service-nav-item ${
+                    currentPath === sub.href ? 'text-[#FF3130] bg-red-50/60 font-semibold' : 'text-slate-700 hover:text-[#0C487A] hover:bg-slate-50'
+                  }`}
+                >
+                  {sub.name}
+                </a>
+              ))}
           </div>
         </div>
       </div>
@@ -527,6 +532,20 @@ const resourcesDropdown = [
       }
     });
   });
+
+  function hideCurrentServiceLink() {
+    const current = window.location.pathname.replace(/\/$/, '') || '/';
+    document.querySelectorAll<HTMLAnchorElement>('.service-nav-item').forEach((link) => {
+      const href = link.getAttribute('href')?.replace(/\/$/, '');
+      if (href && href === current) {
+        link.style.display = 'none';
+      } else {
+        link.style.display = '';
+      }
+    });
+  }
+  hideCurrentServiceLink();
+  document.addEventListener('astro:page-load', hideCurrentServiceLink);
 
   document.addEventListener('keydown', (event) => {
     if (!menuOpen || !menu) return;
