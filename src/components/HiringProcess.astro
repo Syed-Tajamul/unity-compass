@@ -103,7 +103,7 @@ const steps: HiringStep[] = [
             <div class="codev-slide1-overlay absolute inset-0 rounded-2xl sm:rounded-3xl bg-white/5 opacity-0 group-hover:opacity-100 transition-[opacity,border-radius] duration-500 pointer-events-none"></div>
 
             <!-- Icon in Frosted Pill -->
-            <div class="w-13 h-13 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-3 shadow-inner group-hover:scale-110 group-hover:bg-white group-hover:text-[#FF3130] transition-all duration-400">
+            <div class="w-12 h-12 p-2.5 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-3 shadow-inner group-hover:scale-110 group-hover:bg-white group-hover:text-[#FF3130] transition-all duration-400">
               <svg class="w-6 h-6 transition-colors duration-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon} />
               </svg>
@@ -219,6 +219,30 @@ const steps: HiringStep[] = [
 
   .codev-slide-card:hover .codev-slide2::after {
     width: 64px;
+  }
+
+  @media (max-width: 639px) {
+    .codev-slide-card {
+      min-height: 200px;
+      transition: min-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .codev-slide1 {
+      transform: translateY(0);
+    }
+    .codev-slide2 {
+      transform: translateY(0);
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.4s ease, max-height 0.5s ease;
+    }
+    .codev-slide-card:hover {
+      min-height: 400px;
+    }
+    .codev-slide-card:hover .codev-slide2 {
+      opacity: 1;
+      max-height: 250px;
+    }
   }
 
   /* Center-Aligned Continuous Radiant Color Shimmer Sweep */

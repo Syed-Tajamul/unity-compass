@@ -170,12 +170,12 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
           />
         </div>
 
-        <!-- Category Filter Pills -->
-        <div class="flex flex-wrap items-center justify-center gap-2 pt-1" role="tablist" aria-label="Article Categories">
+        <!-- Category Filter Pills (Scrollable Row on Mobile, Centered Wrap on Desktop) -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth py-2 px-1 -mx-2 sm:mx-0 sm:overflow-visible sm:flex-wrap sm:justify-center" role="tablist" aria-label="Article Categories">
           {categories.map((cat, idx) => (
             <button
               type="button"
-              class={`blog-category-pill px-4 py-2 rounded-md sm:rounded-lg text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-xs ${
+              class={`blog-category-pill shrink-0 whitespace-nowrap px-4 py-2 rounded-md sm:rounded-lg text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-xs ${
                 idx === 0
                   ? 'active bg-[#0B2553] text-white shadow-md'
                   : 'bg-white text-[#243A5E] hover:bg-slate-100 hover:text-[#0B2553] border border-slate-200/80'
@@ -273,6 +273,14 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
 <!-- GLOBAL STYLES & ANIMATIONS: Viewport Reveal, Levitation, Shimmer, Borders  -->
 <!-- ========================================================================= -->
 <style is:global>
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Viewport Scroll Reveal (Harmonized with about-us.astro, career.astro, contact.astro) */
   .blog-reveal {
     opacity: 0;

@@ -91,16 +91,16 @@ import { testimonials } from '../data/testimonials';
         <div class="absolute -inset-1.5 rounded-[2.5rem] bg-gradient-to-r from-blue-500/20 via-indigo-500/15 to-[#FF3130]/20 blur-xl opacity-70 pointer-events-none"></div>
 
         <!-- Glassmorphic Inner Testimonial Card Frame -->
-        <div class="relative bg-white/95 backdrop-blur-2xl rounded-[2.25rem] p-7 sm:p-11 lg:p-13 border border-white/80 overflow-hidden">
+        <div class="relative bg-white/95 backdrop-blur-2xl rounded-[2.25rem] p-5 xs:p-7 sm:p-11 lg:p-13 border border-white/80 overflow-hidden">
           
           <!-- Subtle Top Specular Light Sheen -->
           <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF3130]/60 to-transparent pointer-events-none" aria-hidden="true"></div>
 
           <!-- Centered Levitating Quotation Badge with Glowing Pulse Ring -->
-          <div class="flex justify-center mb-6 sm:mb-8" aria-hidden="true">
+          <div class="flex justify-center mb-4 sm:mb-8" aria-hidden="true">
             <div class="relative group/quote">
-              <div class="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] blur-sm opacity-40 animate-pulse"></div>
-              <div class="relative w-12 h-12 sm:w-13 sm:h-13 rounded-2xl bg-gradient-to-br from-[#0C487A] via-[#1E40AF] to-[#FF3130] text-white flex items-center justify-center shadow-lg shadow-[#0C487A]/25 float-quote-icon">
+              <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] blur-xs opacity-30"></div>
+              <div class="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#0C487A] via-[#1E40AF] to-[#FF3130] text-white flex items-center justify-center shadow-lg shadow-[#0C487A]/25 float-quote-icon">
                 <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                 </svg>
@@ -109,7 +109,7 @@ import { testimonials } from '../data/testimonials';
           </div>
 
           <!-- Slides Viewport with Velvety Dissolve -->
-          <div class="relative min-h-[220px] sm:min-h-[185px] lg:min-h-[165px] flex items-center justify-center" id="testimonial-card-frame">
+          <div class="relative min-h-[350px] xs:min-h-[310px] sm:min-h-[195px] lg:min-h-[170px] flex items-center justify-center" id="testimonial-card-frame">
             {testimonials.map((t, index) => (
               <div
                 class={`testimonial-slide absolute inset-0 flex flex-col items-center justify-center text-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -123,7 +123,7 @@ import { testimonials } from '../data/testimonials';
               >
                 <!-- Category Tag Pill -->
                 {t.category && (
-                  <span class="inline-block mb-3 px-3.5 py-1 rounded-lg text-xs font-extrabold uppercase tracking-widest text-[#0C487A] bg-[#0C487A]/8 border border-[#0C487A]/15">
+                  <span class="inline-block mb-3 sm:mb-4 px-3 sm:px-3.5 py-1 rounded-lg text-xs font-extrabold uppercase tracking-widest text-[#0C487A] bg-[#0C487A]/8 border border-[#0C487A]/15">
                     {t.category}
                   </span>
                 )}
@@ -156,7 +156,7 @@ import { testimonials } from '../data/testimonials';
           </div>
 
           <!-- Navigation Controls: Circular Arrows & Signature Reddish Pagination Dots -->
-          <div class="flex items-center justify-between pt-8 mt-4 border-t border-slate-100/90 gap-4 testimonial-controls-reveal">
+          <div class="flex items-center justify-between pt-5 sm:pt-8 mt-5 sm:mt-6 border-t border-slate-100/90 gap-3 sm:gap-4 testimonial-controls-reveal">
             
             <!-- Left Arrow Button with Hover Halo & Spring Micro-Feedback -->
             <button

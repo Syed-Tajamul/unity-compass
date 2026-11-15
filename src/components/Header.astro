@@ -304,20 +304,40 @@ const resourcesDropdown = [
         Home
       </a>
 
-      <!-- Mobile Services List -->
-      <div class="py-2 border-b border-slate-100">
-        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block px-3 py-1 font-mono">
-          Services
-        </span>
-        <div class="mt-1 space-y-1 pl-2">
-          {servicesDropdown.map((sub) => (
-            <a
-              href={sub.href}
-              class="block px-3 py-2 rounded-md sm:rounded-lg text-sm font-medium text-slate-700 hover:text-[#0C487A] hover:bg-slate-50 transition-colors"
-            >
-              {sub.name}
-            </a>
-          ))}
+      <!-- Mobile Services Accordion Item -->
+      <div class="mobile-accordion-group border-b border-slate-50">
+        <button
+          type="button"
+          class={`mobile-accordion-btn flex w-full items-center justify-between px-3 py-2.5 rounded-md sm:rounded-lg text-base font-semibold transition-colors cursor-pointer ${
+            currentPath.includes('proposal') || currentPath.includes('recruitment') || currentPath.includes('staffing') || currentPath.includes('consulting') || currentPath.includes('customized')
+              ? 'text-[#FF3130] bg-red-50/50'
+              : 'text-slate-800 hover:text-[#0C487A]'
+          }`}
+          aria-expanded="false"
+        >
+          <span>Services</span>
+          <svg
+            class="mobile-accordion-chevron w-4 h-4 text-slate-500 transition-transform duration-300 ease-out"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="mobile-accordion-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out">
+          <div class="overflow-hidden pl-3 pr-1 space-y-1">
+            {servicesDropdown.map((sub) => (
+              <a
+                href={sub.href}
+                class={`block px-3 py-2 rounded-md sm:rounded-lg text-sm font-medium transition-colors ${
+                  currentPath === sub.href ? 'text-[#FF3130] bg-red-50/60 font-semibold' : 'text-slate-700 hover:text-[#0C487A] hover:bg-slate-50'
+                }`}
+              >
+                {sub.name}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -331,23 +351,43 @@ const resourcesDropdown = [
         About Us
       </a>
 
-      <!-- Mobile Resources List -->
-      <div class="py-2 border-b border-slate-100">
-        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block px-3 py-1 font-mono">
-          Resources
-        </span>
-        <div class="mt-1 space-y-1 pl-2">
-          {resourcesDropdown.map((sub) => (
-            <a
-              href={sub.href}
-              data-astro-prefetch={sub.href === '/about-us' ? 'hover' : undefined}
-              target={sub.isPdf ? '_blank' : undefined}
-              rel={sub.isPdf ? 'noopener noreferrer' : undefined}
-              class="block px-3 py-2 rounded-md sm:rounded-lg text-sm font-medium text-slate-700 hover:text-[#0C487A] hover:bg-slate-50 transition-colors"
-            >
-              {sub.name}
-            </a>
-          ))}
+      <!-- Mobile Resources Accordion Item -->
+      <div class="mobile-accordion-group border-b border-slate-50">
+        <button
+          type="button"
+          class={`mobile-accordion-btn flex w-full items-center justify-between px-3 py-2.5 rounded-md sm:rounded-lg text-base font-semibold transition-colors cursor-pointer ${
+            currentPath.startsWith('/blog')
+              ? 'text-[#FF3130] bg-red-50/50'
+              : 'text-slate-800 hover:text-[#0C487A]'
+          }`}
+          aria-expanded="false"
+        >
+          <span>Resources</span>
+          <svg
+            class="mobile-accordion-chevron w-4 h-4 text-slate-500 transition-transform duration-300 ease-out"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="mobile-accordion-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out">
+          <div class="overflow-hidden pl-3 pr-1 space-y-1">
+            {resourcesDropdown.map((sub) => (
+              <a
+                href={sub.href}
+                data-astro-prefetch={sub.href === '/about-us' ? 'hover' : undefined}
+                target={sub.isPdf ? '_blank' : undefined}
+                rel={sub.isPdf ? 'noopener noreferrer' : undefined}
+                class={`block px-3 py-2 rounded-md sm:rounded-lg text-sm font-medium transition-colors ${
+                  currentPath === sub.href ? 'text-[#FF3130] bg-red-50/60 font-semibold' : 'text-slate-700 hover:text-[#0C487A] hover:bg-slate-50'
+                }`}
+              >
+                {sub.name}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -492,6 +532,29 @@ const resourcesDropdown = [
 
   menu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => setMenuState(false, false));
+  });
+
+  // Mobile navigation accordion toggles (Smoothly expands/collapses Services and Resources)
+  const mobileAccordionButtons = menu?.querySelectorAll<HTMLButtonElement>('.mobile-accordion-btn');
+  mobileAccordionButtons?.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      const panel = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.mobile-accordion-chevron') as HTMLElement;
+
+      btn.setAttribute('aria-expanded', String(!isExpanded));
+      if (!isExpanded) {
+        panel?.classList.remove('grid-rows-[0fr]');
+        panel?.classList.add('grid-rows-[1fr]');
+        panel?.querySelector('div')?.classList.add('py-1.5');
+        chevron?.classList.add('rotate-180');
+      } else {
+        panel?.classList.remove('grid-rows-[1fr]');
+        panel?.classList.add('grid-rows-[0fr]');
+        panel?.querySelector('div')?.classList.remove('py-1.5');
+        chevron?.classList.remove('rotate-180');
+      }
+    });
   });
 
   document.addEventListener('keydown', (event) => {
