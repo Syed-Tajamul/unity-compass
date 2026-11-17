@@ -15,9 +15,10 @@ export const companyInfo = {
     full: '2153 Wainwright Ct, Unit 1B, Frederick, MD 21702-6418, USA',
   },
   social: {
-    linkedin: 'https://www.linkedin.com/company/unitycompass/',
-    twitter: 'https://twitter.com/unitycompass',
-    instagram: 'https://instagram.com/unitycompass',
+    linkedin: 'https://www.linkedin.com/company/unity-compass/',
+    twitter: 'https://x.com/unitycompassllc?s=11',
+    facebook: 'https://www.facebook.com/UnitycompassLLC',
+    instagram: 'https://www.instagram.com/unitycompassllc/',
   },
   capabilityPdf: '/documents/capability-statement.pdf',
 };
