@@ -49,16 +49,24 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
         
         <!-- LEFT COLUMN: Headline, Description & CTAs -->
         <div class="max-w-2xl">
-          <!-- Headline with Homepage Hero Typography & Continuous Radiant Shimmer Gradient -->
+          <!-- Official Executive Badge -->
+          <div class="mb-4 sm:mb-5 hero-badge-reveal">
+            <span class="inline-flex items-center gap-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-extrabold uppercase tracking-wider bg-[#0C487A]/10 text-[#0C487A] border border-[#0C487A]/20 shadow-2xs">
+              <span class="w-2 h-2 rounded-full bg-[#0C487A]"></span>
+              Direct Federal Advisory &amp; Support
+            </span>
+          </div>
+
+          <!-- Headline with Classic Executive Navy Federal Typography -->
           <h1
             id="contact-hero-heading"
-            class="hero-heading-reveal text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.15rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.20]"
+            class="hero-heading-reveal text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.15rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.20] text-[#0B2553]"
           >
-            <span class="hero-shimmer-title-line hero-shimmer-title-line-1 block">
+            <span class="block">
               Connect With
             </span>
-            <span class="hero-shimmer-title-line hero-shimmer-title-line-2 block">
-              Our Team.
+            <span class="block bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#0B2553] bg-clip-text text-transparent">
+              Our Advisory Team.
             </span>
           </h1>
 
@@ -67,14 +75,14 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
             We're here to answer your questions, evaluate active solicitations, and provide the strategic GovCon advisory and staffing solutions you need across federal environments.
           </p>
 
-          <!-- Primary CTAs (Sequential Buttons: Step 3) -->
+          <!-- Primary CTAs (Executive Navy & Slate Theme) -->
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#send-message"
-              class="inline-flex items-center justify-center gap-3 px-8 sm:px-9 py-4 rounded-md sm:rounded-lg bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] text-white text-base font-bold shadow-[0_8px_24px_-4px_rgba(255,49,48,0.25)] hover:shadow-[0_12px_28px_-2px_rgba(255,49,48,0.35)] cursor-pointer whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+              class="inline-flex items-center justify-center gap-3 px-8 sm:px-9 py-4 rounded-md sm:rounded-lg bg-gradient-to-r from-[#0C487A] via-[#0B2553] to-[#07192C] hover:from-[#0B2553] hover:to-[#051324] text-white text-base font-bold shadow-[0_8px_24px_-4px_rgba(12,72,122,0.30)] hover:shadow-[0_12px_28px_-2px_rgba(12,72,122,0.42)] cursor-pointer whitespace-nowrap transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
             >
               <span>Send Us a Message</span>
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </a>
@@ -83,10 +91,10 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
               href={hubspotMeetingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-md sm:rounded-lg border border-slate-300/80 hover:border-[#0C487A] bg-white/80 hover:bg-white text-[#0B2553] font-bold text-base shadow-xs hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
+              class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-md sm:rounded-lg border border-slate-300 hover:border-[#0C487A] bg-white hover:bg-slate-50 text-[#0B2553] font-bold text-base shadow-xs hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
             >
               <span>Book a Strategy Call</span>
-              <svg class="w-4 h-4 text-[#FF3130]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-4 h-4 text-[#0C487A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </a>
@@ -121,14 +129,14 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
         
         <!-- CARD 1: EMAIL -->
         <div class="contact-reveal contact-delay-1 group relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
-          <!-- Top Accent Border Bar (Brand Red) -->
-          <div class="absolute top-0 inset-x-0 h-1.5 bg-[#FF3130]"></div>
+          <!-- Top Accent Border Bar (Executive Navy Gradient) -->
+          <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#0C487A]"></div>
 
           <div class="text-center">
-            <!-- Icon Badge with Dashed Outer Ring -->
+            <!-- Icon Badge with Refined Dashed Outer Ring -->
             <div class="relative w-16 h-16 mx-auto flex items-center justify-center mb-5">
-              <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#FF3130]/35 animate-[spin_20s_linear_infinite]"></div>
-              <div class="w-12 h-12 rounded-full bg-red-50 text-[#FF3130] flex items-center justify-center group-hover:scale-105 transition-transform">
+              <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#0C487A]/25 animate-[spin_20s_linear_infinite]"></div>
+              <div class="w-12 h-12 rounded-full bg-blue-50/80 text-[#0C487A] flex items-center justify-center group-hover:scale-105 transition-transform">
                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -140,7 +148,7 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
             
             <a
               href={`mailto:${companyInfo.email}`}
-              class="mt-3 block text-sm sm:text-base font-semibold text-[#0B2553] hover:text-[#FF3130] transition-colors break-all"
+              class="mt-3 block text-sm sm:text-base font-semibold text-[#0B2553] hover:text-[#0C487A] transition-colors break-all"
             >
               {companyInfo.email}
             </a>
@@ -150,7 +158,7 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
           <div class="pt-6 text-center">
             <a
               href={`mailto:${companyInfo.email}`}
-              class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] shadow-[0_6px_20px_-3px_rgba(255,49,48,0.28)] hover:shadow-[0_10px_24px_-2px_rgba(255,49,48,0.38)] hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+              class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-[#0C487A] bg-[#F4F8FC] hover:bg-[#0C487A] hover:text-white border border-[#0C487A]/20 shadow-2xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
             >
               <span>Send Email</span>
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -160,10 +168,10 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
           </div>
         </div>
 
-        <!-- CARD 2: CALL US ANYTIME -->
-        <div class="contact-reveal contact-delay-2 group relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
-          <!-- Top Accent Border Bar (Navy Blue) -->
-          <div class="absolute top-0 inset-x-0 h-1.5 bg-[#0C487A]"></div>
+        <!-- CARD 2: CALL US ANYTIME (Featured Center Card) -->
+        <div class="contact-reveal contact-delay-2 group relative rounded-2xl sm:rounded-3xl bg-white border border-[#0C487A]/25 p-8 sm:p-9 shadow-[0_14px_40px_-8px_rgba(12,72,122,0.12)] hover:shadow-[0_22px_50px_-8px_rgba(12,72,122,0.20)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+          <!-- Top Accent Border Bar (Deep Navy Gradient) -->
+          <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#0B2553] via-[#0C487A] to-[#0B2553]"></div>
 
           <div class="text-center">
             <!-- Icon Badge with Dashed Outer Ring -->
@@ -191,7 +199,7 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
           <div class="pt-6 text-center">
             <a
               href={`tel:${companyInfo.phoneRaw}`}
-              class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[#0C487A] to-[#0B2553] hover:from-[#0B2553] hover:to-[#081B3A] shadow-[0_6px_20px_-3px_rgba(12,72,122,0.28)] hover:shadow-[0_10px_24px_-2px_rgba(12,72,122,0.38)] hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+              class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[#0C487A] via-[#0B2553] to-[#07192C] hover:from-[#0B2553] hover:to-[#051324] shadow-[0_6px_20px_-3px_rgba(12,72,122,0.30)] hover:shadow-[0_10px_24px_-2px_rgba(12,72,122,0.40)] hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
             >
               <span>Call Now</span>
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -203,14 +211,14 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
 
         <!-- CARD 3: VISIT OUR OFFICE / BOOK A MEETING -->
         <div class="contact-reveal contact-delay-3 group relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-9 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.08)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.16)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
-          <!-- Top Accent Border Bar (Brand Red) -->
-          <div class="absolute top-0 inset-x-0 h-1.5 bg-[#FF3130]"></div>
+          <!-- Top Accent Border Bar (Executive Navy Gradient) -->
+          <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#1E40AF] via-[#0C487A] to-[#1E40AF]"></div>
 
           <div class="text-center">
-            <!-- Icon Badge with Dashed Outer Ring -->
+            <!-- Icon Badge with Refined Dashed Outer Ring -->
             <div class="relative w-16 h-16 mx-auto flex items-center justify-center mb-5">
-              <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#FF3130]/35 animate-[spin_20s_linear_infinite]"></div>
-              <div class="w-12 h-12 rounded-full bg-red-50 text-[#FF3130] flex items-center justify-center group-hover:scale-105 transition-transform">
+              <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#0C487A]/25 animate-[spin_20s_linear_infinite]"></div>
+              <div class="w-12 h-12 rounded-full bg-blue-50/80 text-[#0C487A] flex items-center justify-center group-hover:scale-105 transition-transform">
                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -226,7 +234,7 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
                 href={directionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="hover:text-[#FF3130] transition-colors inline-block"
+                class="hover:text-[#0C487A] transition-colors inline-block"
                 aria-label={`Open Google Maps for ${companyInfo.address.full}`}
               >
                 <span class="block">{companyInfo.address.street}</span>
@@ -241,7 +249,7 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
               href={hubspotMeetingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] shadow-[0_6px_20px_-3px_rgba(255,49,48,0.28)] hover:shadow-[0_10px_24px_-2px_rgba(255,49,48,0.38)] hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+              class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-[#0C487A] bg-[#F4F8FC] hover:bg-[#0C487A] hover:text-white border border-[#0C487A]/20 shadow-2xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
             >
               <span>Book a Meeting</span>
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -285,11 +293,11 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
             </p>
           </div>
 
-          <!-- 3 Confidence Pills in Executive Blue with Brand Red Checkmark Badge -->
+          <!-- 3 Confidence Pills in Executive Blue Theme -->
           <div class="space-y-3.5 pt-1">
             <!-- Pill 1 -->
             <div class="contact-reveal contact-delay-2 group flex items-center gap-3.5 px-5 py-4 rounded-lg bg-[#F4F8FC] border border-[#0C487A]/15 text-[#0B2553] text-sm font-semibold shadow-2xs hover:bg-[#EBF3FA] hover:border-[#0C487A]/25 transition-all duration-200">
-              <div class="w-6 h-6 rounded-full bg-red-50 text-[#FF3130] border border-[#FF3130]/25 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-[#FF3130] group-hover:text-white transition-all duration-200">
+              <div class="w-6 h-6 rounded-full bg-blue-50 text-[#0C487A] border border-[#0C487A]/20 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-[#0C487A] group-hover:text-white transition-all duration-200">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8" d="M5 13l4 4L19 7" />
                 </svg>
@@ -299,7 +307,7 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
 
             <!-- Pill 2 -->
             <div class="contact-reveal contact-delay-3 group flex items-center gap-3.5 px-5 py-4 rounded-lg bg-[#F4F8FC] border border-[#0C487A]/15 text-[#0B2553] text-sm font-semibold shadow-2xs hover:bg-[#EBF3FA] hover:border-[#0C487A]/25 transition-all duration-200">
-              <div class="w-6 h-6 rounded-full bg-red-50 text-[#FF3130] border border-[#FF3130]/25 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-[#FF3130] group-hover:text-white transition-all duration-200">
+              <div class="w-6 h-6 rounded-full bg-blue-50 text-[#0C487A] border border-[#0C487A]/20 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-[#0C487A] group-hover:text-white transition-all duration-200">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8" d="M5 13l4 4L19 7" />
                 </svg>
@@ -309,7 +317,7 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
 
             <!-- Pill 3 -->
             <div class="contact-reveal contact-delay-4 group flex items-center gap-3.5 px-5 py-4 rounded-lg bg-[#F4F8FC] border border-[#0C487A]/15 text-[#0B2553] text-sm font-semibold shadow-2xs hover:bg-[#EBF3FA] hover:border-[#0C487A]/25 transition-all duration-200">
-              <div class="w-6 h-6 rounded-full bg-red-50 text-[#FF3130] border border-[#FF3130]/25 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-[#FF3130] group-hover:text-white transition-all duration-200">
+              <div class="w-6 h-6 rounded-full bg-blue-50 text-[#0C487A] border border-[#0C487A]/20 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-[#0C487A] group-hover:text-white transition-all duration-200">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8" d="M5 13l4 4L19 7" />
                 </svg>
@@ -342,7 +350,7 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="contact-reveal grid overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white shadow-[0_24px_60px_-24px_rgba(11,37,83,0.28)] lg:grid-cols-[0.78fr_1.22fr]">
         <div class="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
-          <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#FF3130]">Corporate Headquarters</p>
+          <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#0C487A]">Corporate Headquarters</p>
           <h2 id="office-location-heading" class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-[#0B2553]">
             Visit Our Frederick Office
           </h2>
@@ -368,7 +376,7 @@ const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir
               href={directionsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2.5 rounded-md sm:rounded-lg bg-gradient-to-r from-[#FF3130] to-[#E02625] px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_22px_-5px_rgba(255,49,48,0.34)] transition-all duration-200 hover:-translate-y-0.5 hover:from-[#E02625] hover:to-[#C61E1D] hover:shadow-[0_12px_26px_-4px_rgba(255,49,48,0.4)]"
+              class="inline-flex items-center justify-center gap-2.5 rounded-md sm:rounded-lg bg-gradient-to-r from-[#0C487A] via-[#0B2553] to-[#07192C] hover:from-[#0B2553] hover:to-[#051324] px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_22px_-5px_rgba(12,72,122,0.30)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_26px_-4px_rgba(12,72,122,0.40)]"
               aria-label={`Get directions to ${companyInfo.address.full}`}
             >
               <span>Get Directions</span>
