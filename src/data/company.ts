@@ -13,7 +13,9 @@ export const companyInfo = {
     state: 'MD',
     zip: '21702-6418',
     full: '2153 Wainwright Ct, Unit 1B, Frederick, MD 21702-6418, USA',
+    mapUrl: 'https://share.google/DQsOhO1JoMnk4z5Ms',
   },
+  googleMaps: 'https://share.google/DQsOhO1JoMnk4z5Ms',
   social: {
     linkedin: 'https://www.linkedin.com/company/unity-compass/',
     twitter: 'https://x.com/unitycompassllc?s=11',

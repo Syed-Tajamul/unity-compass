@@ -115,11 +115,19 @@ const currentYear = new Date().getFullYear();
         <address class="mt-4 not-italic">
           <ul class="space-y-5 text-sm text-slate-600 sm:text-base" role="list">
             <li class="flex items-start gap-2">
-              <Icon name="MapPin" class="mt-1 h-5 w-5 shrink-0 text-[#D20F39]" aria-hidden="true" stroke-width={1.8} />
-              <span class="leading-7">
-                {companyInfo.address.street}<br />
-                {companyInfo.address.city} {companyInfo.address.state} {companyInfo.address.zip}
-              </span>
+              <a
+                href={companyInfo.googleMaps}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-start gap-2 footer-contact-link group"
+                aria-label={`Open Google Maps location for ${companyInfo.address.full}`}
+              >
+                <Icon name="MapPin" class="mt-1 h-5 w-5 shrink-0 text-[#D20F39] group-hover:scale-110 transition-transform" aria-hidden="true" stroke-width={1.8} />
+                <span class="leading-7">
+                  {companyInfo.address.street}<br />
+                  {companyInfo.address.city} {companyInfo.address.state} {companyInfo.address.zip}
+                </span>
+              </a>
             </li>
             <li class="flex items-center gap-2">
               <Icon name="Phone" class="h-5 w-5 shrink-0 text-[#D20F39]" aria-hidden="true" stroke-width={1.8} />

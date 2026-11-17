@@ -21,7 +21,7 @@ import { companyInfo } from '../data/company';
 const hubspotMeetingUrl = 'https://meetings.hubspot.com/aroosa1?uuid=6b1bf327-e7f0-4fa8-b2ef-37ecde56e4c2';
 const encodedOfficeAddress = encodeURIComponent(companyInfo.address.full);
 const mapEmbedUrl = `https://www.google.com/maps?q=${encodedOfficeAddress}&output=embed`;
-const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedOfficeAddress}`;
+const directionsUrl = companyInfo.googleMaps || `https://www.google.com/maps/dir/?api=1&destination=${encodedOfficeAddress}`;
 ---
 
 <MainLayout
@@ -222,8 +222,16 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${enco
             <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold">Corporate Headquarters</p>
             
             <address class="mt-3 text-sm sm:text-base font-semibold not-italic text-[#0B2553] leading-relaxed">
-              <span class="block">{companyInfo.address.street}</span>
-              <span>{companyInfo.address.city}, {companyInfo.address.state} {companyInfo.address.zip}</span>
+              <a
+                href={directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-[#FF3130] transition-colors inline-block"
+                aria-label={`Open Google Maps for ${companyInfo.address.full}`}
+              >
+                <span class="block">{companyInfo.address.street}</span>
+                <span>{companyInfo.address.city}, {companyInfo.address.state} {companyInfo.address.zip}</span>
+              </a>
             </address>
             <p class="text-xs text-slate-400 mt-0.5">NCR Corridor &bull; Near DC &amp; Fort Meade</p>
           </div>
