@@ -23,6 +23,12 @@ export const companyInfo = {
     instagram: 'https://www.instagram.com/unitycompassllc/',
   },
   capabilityPdf: '/documents/capability-statement.pdf',
+  ceipal: {
+    apiKey: 'Y2NlOHdvenVQZXNtcndHV0RIZWlSQT09',
+    careerPortalId: 'Z3RkUkt2OXZJVld2MjFpOVRSTXoxZz09',
+    widgetScript: 'https://jobsapi.ceipal.com/APISource/widget.js',
+    candidatePortalUrl: 'https://candidateportal.ceipal.com/submit-resume/wnBXqpgx6GIS7DcUrUSC9Kxp7hfuvSNAkWYPXe-Odl0/PQyIYUggnWdV4ut_3CpHn3osOqjfErNC4IFHJThZhoA',
+  },
 };
 
 export const verifiedMetrics = [
