@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import AnimatedCursor from '../components/AnimatedCursor.astro';
 import FloatingContactWidget from '../components/FloatingContactWidget.astro';
 import Toast from '../components/Toast.astro';
+import Analytics from '@vercel/analytics/astro';
 import { companyInfo } from '../data/company';
 import '../styles/global.css';
 
@@ -131,6 +132,9 @@ const schemaOrg = {
 
     <!-- Global Executive Dismissible Toaster -->
     <Toast />
+
+    <!-- Vercel Web Analytics -->
+    <Analytics />
 
     <!-- Global Motion & Universal Section Gradient Controller -->
     <script>
