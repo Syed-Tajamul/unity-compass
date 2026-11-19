@@ -1,0 +1,775 @@
+---
+/**
+ * CeipalJobBoard.astro - Custom Executive Job Board for Unity Compass
+ * 
+ * Synchronized with Ceipal ATS API:
+ * - 100% Unity Compass Navy (#0C487A) and Star-Red (#FF3130) Design Tokens
+ * - Dynamic Search by title, keyword, skill, or job code (e.g. JPC-77)
+ * - Multi-filter: Location / State, Security Clearance, Employment Type, Workplace Model
+ * - Uncluttered, spacious executive card architecture
+ * - In-place Requisition Details Drawer/Modal
+ * - Direct Apply CTAs routing to Ceipal's secure candidate portal
+ */
+import {
+  initialCeipalJobs,
+  availableStates,
+  availableClearances,
+  availableEmploymentTypes,
+  availableWorkplaceTypes,
+  type CeipalJob,
+} from '../data/ceipalJobs';
+import { companyInfo } from '../data/company';
+
+// Top active state selections (prioritizing major GovCon corridors)
+const priorityStates = ['Maryland', 'Virginia', 'District of Columbia'];
+const otherStates = availableStates.filter((s) => !priorityStates.includes(s));
+const sortedStates = ['All States', ...priorityStates, ...otherStates];
+---
+
+<div class="space-y-10" id="ceipal-custom-board">
+  
+  <!-- ========================================================================= -->
+  <!-- SEARCH & STREAMLINED FILTER BAR                                           -->
+  <!-- ========================================================================= -->
+  <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 sm:p-7 shadow-[0_12px_36px_-8px_rgba(12,72,122,0.08)] relative z-30">
+    <div class="absolute top-0 inset-x-0 h-1.5 rounded-t-2xl sm:rounded-t-3xl bg-gradient-to-r from-[#0B2553] via-[#FF3130] to-[#0B2553]"></div>
+
+    <!-- Row 1: Keyword Search -->
+    <div class="relative mb-5">
+      <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+      <input
+        type="text"
+        id="ceipal-search-input"
+        placeholder="Search positions by title, clearance, skill, or job code (e.g. 'Cloud', 'TS/SCI', 'JPC-77')..."
+        class="w-full pl-12 pr-10 py-3.5 text-sm sm:text-base rounded-xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/25 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400 font-medium"
+      />
+      <button
+        type="button"
+        id="ceipal-search-clear"
+        class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
+        aria-label="Clear search"
+      >
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Row 2: 4 Custom Select Filters -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <!-- Filter 1: State / Location -->
+      <div class="relative">
+        <label for="ceipal-filter-state" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+          Location / State
+        </label>
+        <div class="relative">
+          <select
+            id="ceipal-filter-state"
+            class="w-full appearance-none pl-3.5 pr-10 py-2.5 text-xs sm:text-sm rounded-lg border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#FF3130] transition-all cursor-pointer"
+          >
+            {sortedStates.map((st) => (
+              <option value={st === 'All States' ? '' : st}>{st}</option>
+            ))}
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter 2: Security Clearance -->
+      <div class="relative">
+        <label for="ceipal-filter-clearance" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+          Security Clearance
+        </label>
+        <div class="relative">
+          <select
+            id="ceipal-filter-clearance"
+            class="w-full appearance-none pl-3.5 pr-10 py-2.5 text-xs sm:text-sm rounded-lg border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#FF3130] transition-all cursor-pointer"
+          >
+            {availableClearances.map((c) => (
+              <option value={c === 'All Clearances' ? '' : c}>{c}</option>
+            ))}
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter 3: Employment Type -->
+      <div class="relative">
+        <label for="ceipal-filter-type" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+          Employment Type
+        </label>
+        <div class="relative">
+          <select
+            id="ceipal-filter-type"
+            class="w-full appearance-none pl-3.5 pr-10 py-2.5 text-xs sm:text-sm rounded-lg border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#FF3130] transition-all cursor-pointer"
+          >
+            {availableEmploymentTypes.map((t) => (
+              <option value={t === 'All Employment Types' ? '' : t}>{t}</option>
+            ))}
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter 4: Workplace Model -->
+      <div class="relative">
+        <label for="ceipal-filter-workplace" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+          Workplace Model
+        </label>
+        <div class="relative">
+          <select
+            id="ceipal-filter-workplace"
+            class="w-full appearance-none pl-3.5 pr-10 py-2.5 text-xs sm:text-sm rounded-lg border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#FF3130] transition-all cursor-pointer"
+          >
+            {availableWorkplaceTypes.map((w) => (
+              <option value={w === 'All Workplace Models' ? '' : w}>{w}</option>
+            ))}
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Active Filter Counter & Quick Reset -->
+    <div class="mt-5 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 font-bold">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Live ATS Sync
+        </span>
+        <span class="text-slate-500 font-medium">
+          Showing <span id="ceipal-showing-count" class="font-bold text-[#0B2553]">{Math.min(10, initialCeipalJobs.length)}</span> of <span id="ceipal-total-count" class="font-bold text-[#0B2553]">{initialCeipalJobs.length}</span> Openings
+        </span>
+      </div>
+
+      <button
+        type="button"
+        id="ceipal-reset-btn"
+        class="hidden text-[#FF3130] hover:text-[#E02625] font-bold hover:underline inline-flex items-center gap-1 cursor-pointer transition-colors"
+      >
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        <span>Reset Filters</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JOB CARDS CONTAINER                                                       -->
+  <!-- ========================================================================= -->
+  <div id="ceipal-jobs-list" class="space-y-6">
+    <!-- Populated by client script using initial dataset for instant zero-lag load -->
+  </div>
+
+  <!-- Empty State (When search has 0 matches) -->
+  <div id="ceipal-empty-state" class="hidden bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-12 text-center max-w-xl mx-auto shadow-sm">
+    <div class="w-14 h-14 rounded-full bg-red-50 text-[#FF3130] flex items-center justify-center mx-auto mb-4">
+      <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </div>
+    <h3 class="text-lg font-bold text-[#0B2553] mb-1.5">No Matching Openings Found</h3>
+    <p class="text-xs sm:text-sm text-slate-500 mb-6 leading-relaxed">
+      We couldn't find any positions matching your selected criteria. Try adjusting your search term, clearing location filters, or submit a general resume.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <button
+        type="button"
+        id="ceipal-empty-reset"
+        class="px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-[#0B2553] hover:bg-[#0C487A] transition-colors cursor-pointer"
+      >
+        Clear All Filters
+      </button>
+      <a
+        href="#talent-network"
+        class="px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#FF3130] bg-red-50 hover:bg-red-100 transition-colors"
+      >
+        Submit General Resume
+      </a>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- DYNAMIC PAGINATION CONTROLS                                               -->
+  <!-- ========================================================================= -->
+  <div id="ceipal-pagination" class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-200">
+    <div class="text-xs text-slate-500 font-medium">
+      Page <span id="ceipal-current-page" class="font-bold text-[#0B2553]">1</span> of <span id="ceipal-total-pages" class="font-bold text-[#0B2553]">{Math.ceil(initialCeipalJobs.length / 10)}</span>
+    </div>
+
+    <div class="flex items-center gap-1.5" id="ceipal-page-buttons">
+      <!-- Buttons generated dynamically -->
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- ACCESSIBLE REQUISITION SCOPE MODAL                                         -->
+  <!-- ========================================================================= -->
+  <div
+    id="ceipal-details-modal"
+    class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Top Brand Color Stripe -->
+      <div class="h-1.5 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]"></div>
+
+      <!-- Modal Header -->
+      <div class="p-6 sm:p-8 border-b border-slate-100 flex items-start justify-between gap-4">
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <span id="modal-job-code" class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-600"></span>
+            <span id="modal-clearance" class="px-3 py-0.5 rounded-full text-xs font-bold bg-red-50 text-[#FF3130] border border-red-200/80"></span>
+            <span id="modal-workplace" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-[#0B2553]"></span>
+          </div>
+          <h3 id="modal-title" class="text-xl sm:text-2xl font-extrabold text-[#0B2553] tracking-tight"></h3>
+          <p id="modal-meta" class="text-xs sm:text-sm text-slate-500 mt-1 font-medium"></p>
+        </div>
+
+        <button
+          type="button"
+          id="modal-close-btn"
+          class="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer shrink-0"
+          aria-label="Close dialog"
+        >
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable Requisition Description) -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-4 flex-1 text-sm text-[#243A5E] leading-relaxed">
+        <div id="modal-pay-badge" class="hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 font-bold text-xs">
+          <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span id="modal-pay-text"></span>
+        </div>
+
+        <div class="pt-2">
+          <h4 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-2">Requisition Overview & Requirements</h4>
+          <div id="modal-description" class="whitespace-pre-line text-sm sm:text-base text-slate-700 bg-slate-50/70 p-5 rounded-xl border border-slate-100 font-normal"></div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-5 sm:p-6 bg-slate-50 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
+        <p class="text-xs text-slate-500 hidden sm:block">
+          Applications processed securely via Unity Compass Ceipal Candidate Portal.
+        </p>
+
+        <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+          <button
+            type="button"
+            id="modal-cancel-btn"
+            class="px-5 py-2.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-slate-200 transition-colors cursor-pointer"
+          >
+            Close
+          </button>
+          <a
+            id="modal-apply-btn"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] shadow-md shadow-[#FF3130]/25 transition-all cursor-pointer"
+          >
+            <span>Apply for this Position</span>
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Inlined Initial Dataset so client renders instantly without waiting for network -->
+<script define:vars={{ initialJobs: initialCeipalJobs }}>
+  window.__INITIAL_CEIPAL_JOBS__ = initialJobs;
+</script>
+
+<!-- Master Client Controller: Search, Filter, Pagination, and Modal -->
+<script>
+  interface Job {
+    id: string;
+    jobCode: string;
+    title: string;
+    location: string;
+    state: string;
+    country: string;
+    employmentType: string;
+    workplaceType: string;
+    clearanceLevel: string;
+    payRate: string;
+    summary: string;
+    fullDescription: string;
+    updatedDate: string;
+    applyUrl: string;
+  }
+
+  const jobsData: Job[] = (window as any).__INITIAL_CEIPAL_JOBS__ || [];
+  const ITEMS_PER_PAGE = 10;
+  let currentPage = 1;
+
+  // DOM Elements
+  const listEl = document.getElementById('ceipal-jobs-list');
+  const emptyEl = document.getElementById('ceipal-empty-state');
+  const searchInput = document.getElementById('ceipal-search-input') as HTMLInputElement | null;
+  const searchClear = document.getElementById('ceipal-search-clear');
+  const filterState = document.getElementById('ceipal-filter-state') as HTMLSelectElement | null;
+  const filterClearance = document.getElementById('ceipal-filter-clearance') as HTMLSelectElement | null;
+  const filterType = document.getElementById('ceipal-filter-type') as HTMLSelectElement | null;
+  const filterWorkplace = document.getElementById('ceipal-filter-workplace') as HTMLSelectElement | null;
+  const resetBtn = document.getElementById('ceipal-reset-btn');
+  const emptyResetBtn = document.getElementById('ceipal-empty-reset');
+  const showingCountEl = document.getElementById('ceipal-showing-count');
+  const totalCountEl = document.getElementById('ceipal-total-count');
+  const curPageEl = document.getElementById('ceipal-current-page');
+  const totalPagesEl = document.getElementById('ceipal-total-pages');
+  const pageButtonsEl = document.getElementById('ceipal-page-buttons');
+
+  // Modal Elements
+  const modalEl = document.getElementById('ceipal-details-modal');
+  const modalCloseBtn = document.getElementById('modal-close-btn');
+  const modalCancelBtn = document.getElementById('modal-cancel-btn');
+  const modalTitle = document.getElementById('modal-title');
+  const modalJobCode = document.getElementById('modal-job-code');
+  const modalClearance = document.getElementById('modal-clearance');
+  const modalWorkplace = document.getElementById('modal-workplace');
+  const modalMeta = document.getElementById('modal-meta');
+  const modalPayBadge = document.getElementById('modal-pay-badge');
+  const modalPayText = document.getElementById('modal-pay-text');
+  const modalDescription = document.getElementById('modal-description');
+  const modalApplyBtn = document.getElementById('modal-apply-btn') as HTMLAnchorElement | null;
+
+  function getFilteredJobs(): Job[] {
+    const q = (searchInput?.value || '').trim().toLowerCase();
+    const st = filterState?.value || '';
+    const clr = filterClearance?.value || '';
+    const typ = filterType?.value || '';
+    const wrk = filterWorkplace?.value || '';
+
+    return jobsData.filter((j) => {
+      // Keyword Match (Title, Code, Location, Description)
+      if (q) {
+        const inTitle = j.title.toLowerCase().includes(q);
+        const inCode = j.jobCode.toLowerCase().includes(q);
+        const inLoc = j.location.toLowerCase().includes(q);
+        const inDesc = j.fullDescription.toLowerCase().includes(q);
+        const inClr = j.clearanceLevel.toLowerCase().includes(q);
+        if (!inTitle && !inCode && !inLoc && !inDesc && !inClr) return false;
+      }
+
+      // State Filter
+      if (st && !j.state.toLowerCase().includes(st.toLowerCase())) return false;
+
+      // Clearance Filter
+      if (clr && j.clearanceLevel !== clr) return false;
+
+      // Type Filter
+      if (typ && !j.employmentType.toLowerCase().includes(typ.toLowerCase())) return false;
+
+      // Workplace Filter
+      if (wrk && j.workplaceType !== wrk) return false;
+
+      return true;
+    });
+  }
+
+  function getClearanceBadgeClass(clr: string): string {
+    if (clr.includes('TS/SCI') || clr.includes('Polygraph')) {
+      return 'bg-red-50 text-[#FF3130] border-red-200/80';
+    }
+    if (clr.includes('Top Secret')) {
+      return 'bg-purple-50 text-purple-700 border-purple-200/80';
+    }
+    if (clr.includes('Secret')) {
+      return 'bg-blue-50 text-[#0B2553] border-blue-200/80';
+    }
+    if (clr.includes('Public Trust')) {
+      return 'bg-amber-50 text-amber-800 border-amber-200/80';
+    }
+    return 'bg-slate-50 text-slate-600 border-slate-200';
+  }
+
+  function renderJobs() {
+    const filtered = getFilteredJobs();
+    const total = filtered.length;
+    const totalPages = Math.ceil(total / ITEMS_PER_PAGE) || 1;
+
+    if (currentPage > totalPages) currentPage = 1;
+
+    const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, total);
+    const visibleJobs = filtered.slice(startIdx, endIdx);
+
+    // Update Counts
+    if (showingCountEl) showingCountEl.textContent = String(visibleJobs.length);
+    if (totalCountEl) totalCountEl.textContent = String(total);
+    if (curPageEl) curPageEl.textContent = String(currentPage);
+    if (totalPagesEl) totalPagesEl.textContent = String(totalPages);
+
+    // Toggle Search Clear Button & Reset Button
+    const hasActiveFilters = Boolean(
+      (searchInput?.value || '').trim() ||
+      filterState?.value ||
+      filterClearance?.value ||
+      filterType?.value ||
+      filterWorkplace?.value
+    );
+
+    if (resetBtn) resetBtn.classList.toggle('hidden', !hasActiveFilters);
+    if (searchClear) searchClear.classList.toggle('hidden', !(searchInput?.value || '').trim());
+
+    // Toggle Empty State vs List
+    if (total === 0) {
+      if (listEl) listEl.innerHTML = '';
+      if (emptyEl) emptyEl.classList.remove('hidden');
+      if (pageButtonsEl) pageButtonsEl.innerHTML = '';
+      return;
+    }
+
+    if (emptyEl) emptyEl.classList.add('hidden');
+
+    // Build Cards HTML
+    if (listEl) {
+      listEl.innerHTML = visibleJobs.map((j) => {
+        const clrClass = getClearanceBadgeClass(j.clearanceLevel);
+        const hasPay = Boolean(j.payRate && j.payRate !== 'Not Specified');
+
+        return `
+          <div class="job-card group relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-8 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.14)] hover:-translate-y-1 transition-all duration-300 overflow-hidden" data-job-id="${j.id}">
+            
+            <!-- Top Color Stripe -->
+            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-80 group-hover:opacity-100 transition-opacity"></div>
+
+            <!-- Card Header: Pills & Posted Date -->
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <div class="flex flex-wrap items-center gap-2">
+                ${j.jobCode ? `<span class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-600">${j.jobCode}</span>` : ''}
+                <span class="px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider border ${clrClass}">
+                  ${j.clearanceLevel}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-[#0B2553]">
+                  ${j.workplaceType}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700">
+                  ${j.employmentType}
+                </span>
+              </div>
+
+              <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>${j.updatedDate}</span>
+              </div>
+            </div>
+
+            <!-- Job Title -->
+            <h3 class="text-xl sm:text-2xl font-extrabold text-[#0B2553] group-hover:text-[#0C487A] tracking-tight leading-snug transition-colors">
+              ${j.title}
+            </h3>
+
+            <!-- Location & Pay Meta Row -->
+            <div class="flex flex-wrap items-center gap-y-2 gap-x-5 text-xs sm:text-sm text-slate-600 mt-2.5 mb-4">
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-[#FF3130] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span class="font-semibold text-slate-700">${j.location}</span>
+              </div>
+
+              ${hasPay ? `
+                <div class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
+                  <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>${j.payRate}</span>
+                </div>
+              ` : ''}
+            </div>
+
+            <!-- Role Scope Excerpt -->
+            <p class="text-xs sm:text-sm text-[#243A5E] leading-relaxed font-normal mb-6 line-clamp-2">
+              ${j.summary}
+            </p>
+
+            <!-- Card Actions Footer -->
+            <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+              <button
+                type="button"
+                class="view-details-btn text-xs font-bold text-[#0C487A] hover:text-[#0B2553] hover:underline inline-flex items-center gap-1.5 cursor-pointer py-1.5 transition-colors"
+                data-id="${j.id}"
+              >
+                <span>View Full Scope</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
+              <a
+                href="${j.applyUrl}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-md sm:rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] shadow-[0_4px_14px_rgba(255,49,48,0.25)] hover:shadow-[0_6px_20px_rgba(255,49,48,0.35)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+              >
+                <span>Apply on Ceipal</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Attach Click Events to "View Full Scope" buttons
+    document.querySelectorAll('.view-details-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const id = (e.currentTarget as HTMLElement).getAttribute('data-id');
+        const job = jobsData.find((j) => j.id === id);
+        if (job) openModal(job);
+      });
+    });
+
+    renderPagination(totalPages);
+  }
+
+  function renderPagination(totalPages: number) {
+    if (!pageButtonsEl) return;
+
+    if (totalPages <= 1) {
+      pageButtonsEl.innerHTML = '';
+      return;
+    }
+
+    let html = '';
+
+    // Prev Button
+    html += `
+      <button
+        type="button"
+        class="page-nav-btn px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold ${currentPage === 1 ? 'opacity-40 cursor-not-allowed text-slate-400' : 'text-[#0B2553] hover:bg-slate-100 cursor-pointer'} transition-colors"
+        data-page="${currentPage - 1}"
+        ${currentPage === 1 ? 'disabled' : ''}
+      >
+        Previous
+      </button>
+    `;
+
+    // Smart Page Number Buttons calculation
+    const getPageNumbers = (current: number, total: number): (number | string)[] => {
+      if (total <= 7) {
+        return Array.from({ length: total }, (_, i) => i + 1);
+      }
+      if (current <= 3) {
+        return [1, 2, 3, 4, '...', total];
+      }
+      if (current >= total - 2) {
+        return [1, '...', total - 3, total - 2, total - 1, total];
+      }
+      return [1, '...', current - 1, current, current + 1, '...', total];
+    };
+
+    const pages = getPageNumbers(currentPage, totalPages);
+    pages.forEach((p) => {
+      if (p === '...') {
+        html += `<span class="px-2 py-1 text-xs text-slate-400 select-none">...</span>`;
+      } else {
+        const isActive = p === currentPage;
+        html += `
+          <button
+            type="button"
+            class="page-num-btn w-8 h-8 rounded-lg text-xs font-bold transition-all ${
+              isActive
+                ? 'bg-[#FF3130] text-white shadow-xs'
+                : 'text-[#0B2553] hover:bg-slate-100 border border-slate-200'
+            } cursor-pointer"
+            data-page="${p}"
+          >
+            ${p}
+          </button>
+        `;
+      }
+    });
+
+    // Next Button
+    html += `
+      <button
+        type="button"
+        class="page-nav-btn px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold ${currentPage === totalPages ? 'opacity-40 cursor-not-allowed text-slate-400' : 'text-[#0B2553] hover:bg-slate-100 cursor-pointer'} transition-colors"
+        data-page="${currentPage + 1}"
+        ${currentPage === totalPages ? 'disabled' : ''}
+      >
+        Next
+      </button>
+    `;
+
+    pageButtonsEl.innerHTML = html;
+
+    // Attach Pagination Click Handlers
+    pageButtonsEl.querySelectorAll('.page-num-btn, .page-nav-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const targetPage = parseInt((e.currentTarget as HTMLElement).getAttribute('data-page') || '1', 10);
+        if (targetPage >= 1 && targetPage <= totalPages && targetPage !== currentPage) {
+          currentPage = targetPage;
+          renderJobs();
+          // Smooth scroll to top of job board
+          const container = document.getElementById('ceipal-custom-board');
+          if (container) {
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  }
+
+  function openModal(job: Job) {
+    if (!modalEl) return;
+    if (modalTitle) modalTitle.textContent = job.title;
+    if (modalJobCode) {
+      modalJobCode.textContent = job.jobCode || 'REQUISITION';
+    }
+    if (modalClearance) {
+      modalClearance.textContent = job.clearanceLevel;
+      modalClearance.className = `px-3 py-0.5 rounded-full text-xs font-bold border ${getClearanceBadgeClass(job.clearanceLevel)}`;
+    }
+    if (modalWorkplace) modalWorkplace.textContent = `${job.workplaceType} · ${job.employmentType}`;
+    if (modalMeta) modalMeta.textContent = `${job.location} · Posted ${job.updatedDate}`;
+
+    if (modalPayBadge && modalPayText) {
+      if (job.payRate && job.payRate !== 'Not Specified') {
+        modalPayBadge.classList.remove('hidden');
+        modalPayText.textContent = `Comp / Pay Rate: ${job.payRate}`;
+      } else {
+        modalPayBadge.classList.add('hidden');
+      }
+    }
+
+    if (modalDescription) {
+      modalDescription.textContent = job.fullDescription;
+    }
+
+    if (modalApplyBtn) {
+      modalApplyBtn.href = job.applyUrl;
+    }
+
+    modalEl.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    if (!modalEl) return;
+    modalEl.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // Event Listeners for Filters
+  searchInput?.addEventListener('input', () => {
+    currentPage = 1;
+    renderJobs();
+  });
+
+  searchClear?.addEventListener('click', () => {
+    if (searchInput) searchInput.value = '';
+    currentPage = 1;
+    renderJobs();
+  });
+
+  filterState?.addEventListener('change', () => {
+    currentPage = 1;
+    renderJobs();
+  });
+
+  filterClearance?.addEventListener('change', () => {
+    currentPage = 1;
+    renderJobs();
+  });
+
+  filterType?.addEventListener('change', () => {
+    currentPage = 1;
+    renderJobs();
+  });
+
+  filterWorkplace?.addEventListener('change', () => {
+    currentPage = 1;
+    renderJobs();
+  });
+
+  function resetAllFilters() {
+    if (searchInput) searchInput.value = '';
+    if (filterState) filterState.value = '';
+    if (filterClearance) filterClearance.value = '';
+    if (filterType) filterType.value = '';
+    if (filterWorkplace) filterWorkplace.value = '';
+    currentPage = 1;
+    renderJobs();
+  }
+
+  resetBtn?.addEventListener('click', resetAllFilters);
+  emptyResetBtn?.addEventListener('click', resetAllFilters);
+
+  // Modal Close Events
+  modalCloseBtn?.addEventListener('click', closeModal);
+  modalCancelBtn?.addEventListener('click', closeModal);
+  modalEl?.addEventListener('click', (e) => {
+    if (e.target === modalEl) closeModal();
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Initial Render on Page Load
+  renderJobs();
+
+  // Background hydration: Fetch fresh live requisitions from Ceipal endpoint
+  // to ensure any new positions added by recruiters update seamlessly
+  (async function hydrateLiveJobs() {
+    try {
+      const res = await fetch('/api/jobs?page=all');
+      if (res.ok) {
+        const payload = await res.json();
+        if (payload.success && Array.isArray(payload.jobs) && payload.jobs.length > 0) {
+          jobsData.length = 0;
+          jobsData.push(...payload.jobs);
+          renderJobs();
+        }
+      }
+    } catch (e) {
+      // Gracefully silent fallback to initial dataset
+    }
+  })();
+</script>

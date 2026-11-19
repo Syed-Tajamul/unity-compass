@@ -17,6 +17,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import HiringProcess from '../components/HiringProcess.astro';
 import WaveDivider from '../components/WaveDivider.astro';
+import CeipalJobBoard from '../components/CeipalJobBoard.astro';
 import { companyInfo } from '../data/company';
 
 // Section 02 - 4 Pillars Data
@@ -261,80 +262,8 @@ const faqs = [
         </p>
       </div>
 
-      <!-- Ceipal ATS Live Job Board Container -->
-      <div id="ceipal-widget-wrapper" class="max-w-6xl mx-auto mb-16 career-reveal career-delay-2">
-        <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 sm:p-8 md:p-10 shadow-[0_12px_40px_-10px_rgba(12,72,122,0.08)] relative overflow-hidden">
-          <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#0B2553] via-[#FF3130] to-[#0B2553]"></div>
-          
-          <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100">
-            <div class="flex items-center gap-2.5">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200/80">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Ceipal ATS Portal
-              </span>
-              <span class="text-xs text-slate-500 hidden sm:inline">Active federal contracting requisitions updated continuously</span>
-            </div>
-            
-            <a
-              href={companyInfo.ceipal.candidatePortalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0C487A] hover:text-[#FF3130] transition-colors"
-            >
-              <span>Direct Candidate Portal</span>
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-
-          <!-- Ceipal ATS Widget Target Container -->
-          <div id="example-widget-container" class="min-h-[180px]">
-            <!-- Fallback state if Ceipal server is pending theme setup or down -->
-            <div id="ceipal-fallback-notice" class="py-8 px-4 text-center max-w-xl mx-auto">
-              <div class="w-12 h-12 rounded-full bg-blue-50 text-[#0C487A] flex items-center justify-center mx-auto mb-4">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 class="text-base sm:text-lg font-bold text-[#0B2553] mb-1.5">
-                Connected to Ceipal Recruitment Portal
-              </h3>
-              <p class="text-xs sm:text-sm text-slate-500 mb-5 leading-relaxed">
-                Submit your credentials directly to our recruitment team via the secure Ceipal Candidate Portal, or submit your resume using the form below.
-              </p>
-              <div class="flex flex-wrap items-center justify-center gap-3">
-                <a
-                  href={companyInfo.ceipal.candidatePortalUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-xs font-bold uppercase tracking-wider text-white bg-[#FF3130] hover:bg-[#E02625] transition-all shadow-sm"
-                >
-                  <span>Submit Resume via Ceipal Portal</span>
-                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-                <a
-                  href="#talent-network"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-xs font-bold uppercase tracking-wider text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-all border border-slate-200"
-                >
-                  <span>Talent Network Form</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Ceipal ATS Embed Script -->
-          <script
-            type="text/javascript"
-            src="https://jobsapi.ceipal.com/APISource/widget.js"
-            data-ceipal-api-key="Y2NIOHdvenVQZXNtcndHV0RIZWlSQT09"
-            data-ceipal-career-portal-id="Z3RkUkt2OXZJVld2MjFpOVRSTXoxZz09"
-            is:inline
-          ></script>
-        </div>
-      </div>
+      <!-- Ceipal ATS Native Custom Job Board -->
+      <CeipalJobBoard />
 
     </div>
   </section>
