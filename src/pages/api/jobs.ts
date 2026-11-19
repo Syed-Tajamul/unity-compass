@@ -65,21 +65,40 @@ function extractLocation(loc?: string, state?: string): string {
 
 function extractSummary(desc: string): string {
   if (!desc) return '';
-  const lines = desc
+  const clean = desc
+    .replace(/<(?:br|div|p|h[1-6]|li)[\s/]*>/gi, '\n')
+    .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
     .replace(/\r\n/g, '\n')
-    .replace(/(.)\s+(Location|Pay Rate|Rates?|Salary Range?|Salary|Employment Type|Job Type|Shift|Work Schedule|Travel Required|Travel|Security Clearance|Clearance Level|Clearance|Citizenship|Workplace Model|Work Model|Years of Experience)\s*:\s*/gi, '$1\n$2: ')
-    .split('\n')
-    .map((l) => l.trim())
-    .filter((l) => l.length > 0);
+    .replace(/\r/g, '\n');
 
-  const SECTION_REGEX = /^(Position Overview|Position Summary|Role Overview|Role Summary|Overview|About The Role|Job Description|Role Description|Scope of Work|Key Responsibilities|Responsibilities|Primary Responsibilities|Duties|Duties & Responsibilities|Essential Duties|Specific Responsibilities|Qualifications|Key Qualifications|Required Qualifications|Basic Qualifications|Minimum Qualifications|Preferred Qualifications|Desired Qualifications|Requirements|Clearance Requirements|Education & Experience|Education and Experience|Education|Experience|Benefits|What We Offer|Compensation|Technical Skills|Core Requirements)[:\s]*$/i;
-  const META_REGEX = /^(Job Location|Location|Pay Rate|Rates?|Salary Range?|Salary|Employment Type|Job Type|Shift|Work Schedule|Travel Required|Travel|Security Clearance|Clearance Level|Clearance|Citizenship|Workplace Model|Work Model|Years of Experience|Role|Title)\s*:\s*(.+)$/i;
+  const normalized = clean.replace(
+    /([^\r\n])\s+(Job Title|Position Title|Role|Job Location|Location|Pay Rate|Rates?|Salary Range?|Salary|Employment Type|Job Type|Shift|Work Schedule|Travel Required|Travel|Security Clearance|Clearance Required|Clearance Level|Clearance|Citizenship|Workplace Model|Work Model|Years of Experience)\s*:\s*/gi,
+    '$1\n$2: '
+  );
+
+  const lines = normalized.split('\n').map((l) => l.trim()).filter((l) => l.length > 0);
+  const HEADING_KEYWORDS = /(Overview|Summary|Responsibilities|Duties|Qualifications|Requirements|Skills|Education|Experience|Certifications|Benefits|Offer|Scope|Purpose|Description|About)/i;
 
   for (const line of lines) {
-    if (SECTION_REGEX.test(line)) continue;
-    const metaMatch = line.match(META_REGEX);
-    if (metaMatch) {
+    const cleanHeader = line.replace(/^[*_#\s]+/, '').replace(/[*_#\s:]+$/, '').trim();
+    if (cleanHeader.length < 3) continue;
+
+    // Skip section headings
+    const colonIdx = line.indexOf(':');
+    const afterColon = colonIdx !== -1 ? line.slice(colonIdx + 1).trim() : '';
+    if ((colonIdx !== -1 && afterColon.length === 0) || (colonIdx === -1 && HEADING_KEYWORDS.test(cleanHeader))) {
+      continue;
+    }
+
+    // Skip metadata lines
+    const metaMatch = line.match(/^([A-Za-z0-9\s/&–—\-]{2,40})\s*:\s*(.+)$/);
+    if (metaMatch && !/^(Note|Please note|Important)$/i.test(metaMatch[1].trim())) {
       const val = metaMatch[2].trim();
       const sentences = val.split(/(?<=[.!?])\s+/);
       if (sentences.length > 1 && val.length > 40) {
