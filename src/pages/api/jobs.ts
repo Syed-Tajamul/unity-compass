@@ -174,16 +174,17 @@ export const GET: APIRoute = async () => {
           return {
             id: portalId,
             jobCode: r.jobCode || (cached?.jobCode || ''),
-            title: r.positionTitle || (cached?.title || ''),
+            title: (r.positionTitle ? r.positionTitle.replace(/^JPC\s*-\s*\d+\s*[-–—:]\s*/i, '').trim() : '') || (cached?.title || ''),
             location: extractLocation(r.location, stateVal) || (cached?.location || ''),
             state: stateVal,
             country: (r.countryName && r.countryName !== 'N/A') ? r.countryName : (cached?.country || ''),
             employmentType: r.jobType || (cached?.employmentType || ''),
             experience: expVal,
             payRate: payVal,
+            skills: cached?.skills || [],
             summary: cached?.summary || extractSummary(fullDesc),
             fullDescription: fullDesc,
-            updatedDate: r.postedOn || (cached?.updatedDate || ''),
+            postedDate: r.postedOn || (cached?.postedDate || ''),
             // Direct canonical link to this exact requisition in Ceipal:
             applyUrl: `https://candidateportal.ceipal.com/job-details/${portalId}`,
           };
@@ -249,9 +250,10 @@ export const GET: APIRoute = async () => {
             employmentType: raw.tax_terms || '',
             experience: '',
             payRate: extractPayRate(desc),
+            skills: [],
             summary: extractSummary(desc),
             fullDescription: desc,
-            updatedDate: raw.updated || '',
+            postedDate: raw.updated || '',
             applyUrl: directApplyUrl,
           };
         });

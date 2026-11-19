@@ -41,7 +41,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
       <input
         type="text"
         id="ceipal-search-input"
-        placeholder="Search positions by title, clearance, skill, or job code (e.g. 'Cloud', 'TS/SCI', 'JPC-77')..."
+        placeholder="Search positions by title, skill, location, or job code (e.g. 'Security Engineer', 'Python', 'JPC - 72')..."
         class="w-full pl-12 pr-10 py-3.5 text-sm sm:text-base rounded-xl border border-slate-200 bg-slate-50/60 text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#FF3130]/25 focus:border-[#FF3130] focus:bg-white transition-all placeholder:text-slate-400 font-medium"
       />
       <button
@@ -282,6 +282,12 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
             <p id="modal-stat-pay" class="text-xs sm:text-sm font-bold text-emerald-800 truncate">-</p>
           </div>
         </div>
+
+        <!-- Real Ceipal Skills Pills in Modal -->
+        <div id="modal-skills-section" class="hidden mt-4 pt-4 border-t border-slate-100">
+          <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Primary Skills</div>
+          <div id="modal-skills-list" class="flex flex-wrap gap-1.5"></div>
+        </div>
       </div>
 
       <!-- Modal Body (Scrollable Requisition Description) -->
@@ -365,9 +371,11 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     employmentType: string;
     experience: string;
     payRate: string;
+    skills: string[];
     summary: string;
     fullDescription: string;
-    updatedDate: string;
+    postedDate: string;
+    updatedDate?: string;
     applyUrl: string;
   }
 
@@ -406,6 +414,8 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   const modalStatType = document.getElementById('modal-stat-type');
   const modalStatExperience = document.getElementById('modal-stat-experience');
   const modalStatPay = document.getElementById('modal-stat-pay');
+  const modalSkillsSection = document.getElementById('modal-skills-section');
+  const modalSkillsList = document.getElementById('modal-skills-list');
   const modalDescription = document.getElementById('modal-description');
   const modalApplyBtn = document.getElementById('modal-apply-btn') as HTMLAnchorElement | null;
 
@@ -496,17 +506,18 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     const typ = activeFilters.type;
 
     return jobsData.filter((j) => {
-      // Keyword Match (Title, Code, Location, Description)
+      // Keyword Match (Title, Code, Location, Skills, Description)
       if (q) {
         const inTitle = j.title.toLowerCase().includes(q);
         const inCode = j.jobCode.toLowerCase().includes(q);
         const inLoc = j.location.toLowerCase().includes(q);
+        const inSkills = Array.isArray(j.skills) && j.skills.some((s) => s.toLowerCase().includes(q));
         const inDesc = j.fullDescription.toLowerCase().includes(q);
-        if (!inTitle && !inCode && !inLoc && !inDesc) return false;
+        if (!inTitle && !inCode && !inLoc && !inSkills && !inDesc) return false;
       }
 
-      // State Filter
-      if (st && !j.state.toLowerCase().includes(st.toLowerCase())) return false;
+      // State Filter (matches state or location string)
+      if (st && !j.state.toLowerCase().includes(st.toLowerCase()) && !j.location.toLowerCase().includes(st.toLowerCase())) return false;
 
       // Type Filter
       if (typ && !j.employmentType.toLowerCase().includes(typ.toLowerCase())) return false;
@@ -850,12 +861,12 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
                   ` : ''}
                 </div>
 
-                ${j.updatedDate ? `
+                ${(j.postedDate || j.updatedDate) ? `
                   <div class="flex items-center gap-1 text-[11px] text-slate-400 font-medium shrink-0">
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>${escapeHtml(j.updatedDate)}</span>
+                    <span>${escapeHtml(j.postedDate || j.updatedDate || '')}</span>
                   </div>
                 ` : ''}
               </div>
@@ -866,7 +877,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
               </h3>
 
               <!-- Location, Experience & Compensation Metadata Row -->
-              <div class="flex flex-wrap items-center gap-y-1.5 gap-x-2.5 text-xs text-slate-600 mb-3">
+              <div class="flex flex-wrap items-center gap-y-1.5 gap-x-2.5 text-xs text-slate-600 mb-2.5">
                 ${j.location ? `
                   <div class="flex items-center gap-1 truncate max-w-[200px]" title="${escapeHtml(j.location)}">
                     <svg class="w-3.5 h-3.5 text-[#FF3130] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -895,6 +906,17 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
                   </div>
                 ` : ''}
               </div>
+
+              <!-- Real Ceipal Primary Skills (Top 3) -->
+              ${Array.isArray(j.skills) && j.skills.length > 0 ? `
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  ${j.skills.slice(0, 3).map((s) => `
+                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200/60 truncate max-w-[140px]">
+                      ${escapeHtml(s)}
+                    </span>
+                  `).join('')}
+                </div>
+              ` : ''}
 
               <!-- Scope Excerpt -->
               ${cardSummary ? `
@@ -1105,7 +1127,9 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
       }
     }
     if (modalMeta) {
-      const metaParts = [job.location, job.updatedDate ? `Posted ${job.updatedDate}` : ''].filter(Boolean);
+      const dateStr = job.postedDate || job.updatedDate || '';
+      const formattedDate = dateStr ? (dateStr.startsWith('Posted') ? dateStr : `Posted ${dateStr}`) : '';
+      const metaParts = [job.location, formattedDate].filter(Boolean);
       modalMeta.textContent = metaParts.join(' · ');
     }
 
@@ -1115,6 +1139,18 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     if (modalStatExperience) modalStatExperience.textContent = (job.experience && job.experience !== 'N/A') ? job.experience : 'Not Specified';
     if (modalStatPay) {
       modalStatPay.textContent = (job.payRate && job.payRate !== 'Not Specified' && job.payRate !== 'N/A') ? job.payRate : 'Competitive / Inquire';
+    }
+
+    // Real Ceipal Skills in Modal
+    if (modalSkillsSection && modalSkillsList) {
+      if (Array.isArray(job.skills) && job.skills.length > 0) {
+        modalSkillsList.innerHTML = job.skills
+          .map((s) => `<span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-[#0B2553] border border-slate-200/80">${escapeHtml(s)}</span>`)
+          .join('');
+        modalSkillsSection.classList.remove('hidden');
+      } else {
+        modalSkillsSection.classList.add('hidden');
+      }
     }
 
     if (modalDescription) {
