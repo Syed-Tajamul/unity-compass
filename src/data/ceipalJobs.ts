@@ -21,6 +21,69 @@ export interface CeipalJob {
   applyUrl: string;
 }
 
+export const ceipalJobCodeToPortalId: Record<string, string> = {
+  "JPC - 41": "DssR2U7D3K37zl1CbZc4ZOmOGy60nF_OgeaZ1gxOAJA",
+  "JPC - 54": "Vc2t7Hgu80f1G-WAZbddeXOULmuLwoYBkLdLEKHzmd8",
+  "JPC - 79": "1fWhyrk1sb1GF9Ybj2pgPnDwZX1R7XYnpABuAs2Kq7s",
+  "JPC - 9": "sEzBB3d68A9j2yGRld_SxgPd3I17FGwHEAlIzVReIxQ",
+  "JPC - 11": "4YoGswV9qJYfR21X0Ds95C8PB5pqCphDrROI-rXyiPc",
+  "JPC - 10": "x5peIeI42b_ooFS163X96Ik-b68D0A3hLWhzf95GvYU",
+  "JPC - 35": "cW_H4efoXlycdl90ah49e-NmbFTCot3n8DbD2EGyf14",
+  "JPC - 44": "97tSmm2UG5k2j9dLpxCgpgDD_YJGX24ok-h8eNvN_mI",
+  "JPC - 40": "ZauU4ZFtAaozBSz-Gwe8B0HVIBcmAlXelLBHBdUOsgc",
+  "JPC - 32": "8jiYmXNOJW4OHrgNof2CRtOeaV2F5qg3ntY-gLU8aGs",
+  "JPC - 46": "zzT95VwF5zhDwVAvcaqWo2zqbQrJkyn5y6maYEh-IyA",
+  "JPC - 2": "YG2zuUUogaplvoNL6QwWsm7u-DbSOuehGJUabF5xDl0",
+  "JPC - 67": "NiptIwYEwPrjIx_4oFg56LA1DD-n7uWadYRTFdj5N5Y",
+  "JPC - 68": "gKIspNtl4x2azwCLJOVQsyyJsS6GTZfQvJZM_Jxuqg0",
+  "JPC - 30": "NiGo3ikcLcE5m-Bj2WQ8VFK5axpFSrFE1ceTbQwSol4",
+  "JPC - 27": "CjZ7DfsG-StCtjNbBpgioHpect9L9DjcxlpICs79D54",
+  "JPC - 7": "aKsGa4ag7YSeQKT9NlXMtZTxCifuGUk0uHZcI5a06G8",
+  "JPC - 42": "3aFSlrfdPnzpvrTz7V787Nj28eSGswOetqSUEORW71s",
+  "JPC - 3": "X4H1pGUecvTaVL2qzTcSiOkwgRRzZIDRKRPcyGzQuQU",
+  "JPC - 50": "LGSxCR-xJFXTBhHtO2mI1wnkGaMjc3OzIM5I1u5oO4k",
+  "JPC - 22": "9tTwGKXV4Jzb6ZRXR4s0bNR9FjSw6BsTVhkxpoDzK_Y",
+  "JPC - 49": "MD9x7p0ZtJF_WJfef4fwXwRo_Tz351M6xhjUHAe0xaA",
+  "JPC - 18": "WdycecfxLISyCaFlGJM7pVYS89eLOsUPoqQPkzsM2rQ",
+  "JPC - 25": "aETOd4z84_1mPtyNY2evIS3sAZVB1kxSwI-lF9biQwE",
+  "JPC - 12": "V3CnAccz_IhELOAe62RbBbMTsyd5v61zLc327G8jdhg",
+  "JPC - 55": "FaC1StbsPBSl9eNjb98XHnLkSP2wnALeomIxzjCipz8",
+  "JPC - 56": "s69mFU8-N9HjnK26BsSgDeriXqWBa4tEUYehDYnFSGk",
+  "JPC - 19": "M4QErITo5GqgkCtP8C7gvIkVp0jY7Z1BIK9_URSm6Fc",
+  "JPC - 51": "vbwNn5f4M4Hx1KIVcqEm8VjYbk9-oqZCty74bagh7fs",
+  "JPC - 21": "iwKv6emKAMZGs8cwZmIcyyNGYq5s7XcTUnyfmqqergo",
+  "JPC - 48": "6csvHuh8yvemCmUxsRtQmE28jMNR1HTXU-kbqTq6OCc",
+  "JPC - 76": "F2CkgU9B-aSFvi-scW2e0_lXc3ZiAWhUTG1unTkuwzI",
+  "JPC - 33": "G9-4FtWWBHZ5W3uCSlMlmv723j4F-XobWoe6Mji5ylI",
+  "JPC - 74": "fSRwbwzeYuroCvOLXXlgvKy5u_NBcW6KIu-cFBHy-xU",
+  "JPC - 78": "7HrmFRQUmhQy8rAwHL26n3B7qzdF1ikRAtp0PJ-CNA0",
+  "JPC - 52": "2WHwfFTlKekCybF2q6OTT5reEvIdq7p7bvIzpsuU2OM",
+  "JPC - 20": "OnGfEJsTUOEfB__5EBdbbCLf-G5efY6usEk9k7cjSV8",
+  "JPC - 26": "Q06B9vPVz_TJUtEUeccmkOEft6kunE0uwQs0mZRSIAk",
+  "JPC - 39": "HGqxGvzgv9lyEVhCuyBA797Bd0b8en7CW1YFG1bEU-Y",
+  "JPC - 5": "6zBpj6S727hsQZsMQN8QzYD3TOIEP_O4D1QMbVr0LWQ",
+  "JPC - 6": "79SQtUTH2t0ohrpMrstUwPtORJK3BbRF0YT58hkVPDo",
+  "JPC - 71": "p5I_JG7c3B0F8V1g1IBiy-Qsyo28ccFbSr8ZmlxiJ80",
+  "JPC - 47": "e2woSpDiUjjyRXkn4aQi78_Qs4U1V139OXMHOhpRTA0",
+  "JPC - 4": "zMNHe52BxVJmqJcZEB2efIP6YJX7y9S_jCx_7UYNQLQ",
+  "JPC - 53": "HPGAwoGEm-EYAxIWxTKu_8SkrXFbBCGp6nWeJkNabQ0",
+  "JPC - 70": "a6hN7fAq8WmwrgA4O67mc-uWOuQHyRPUJmRq__nPfHw",
+  "JPC - 72": "1Amqgc_purocwG-iacByY2oOQQS5YroqsUqdMz57Zb8",
+  "JPC - 73": "KQZxyat0gL62Wbzm0m5mWvV7JloBoZ8IzIa07oEcDI0",
+  "JPC - 38": "-V3mFW4bWwG1A-WbIqUGirGRjOuFv1fa07Rq5i2hnw0",
+  "JPC - 29": "YvBxsR1vN39WBoXLPubxUoB6LLUsbkqC9D5-NOIJnYg",
+  "JPC - 31": "SXsx8i6rcBryZX2qz_XTjlS5ktaTE2k5W1VIfzbAFFY",
+  "JPC - 77": "8FXm93jGfRhCyLJmDuSwwc8QaYvE0a2Knj_gIRmVuLY",
+  "JPC - 75": "XzWh3s_c6o4cPwAYav-btoPlFyvQrWRtl67YIV8uKT4",
+  "JPC - 23": "NDvXZdkhAEaX9GhygxOAhCwTsMpWTqlLnbPFg-WPrbo",
+  "JPC - 24": "WBxBeH71qOgeSmO3PWHKnBhVXos1gGoTI9wT7zJR_BU",
+  "JPC - 34": "bqgoJkGSNinxDheSQss8w9hdUwZAV6MNxyrsGeleUSc",
+  "JPC - 1": "dK65LVU15IPUTCDep6fKBCLyIsk4NwXZCzmGfAoaDeU",
+  "JPC - 8": "vfNkUnX9yu6iB2cOQcploJv8-0V0qbhsijF-9nuqVOA",
+  "JPC - 43": "N4lvLS5VsGEuRSKsOnl_RUkTGSZ6Ma3Bv0vP-nUzNao",
+  "JPC - 28": "AhuHCXFPoJUAmWepqWjLhufovXNmOU2gH-NO2boHl5I"
+};
+
 export const initialCeipalJobs: CeipalJob[] = [
   {
     "id": "z5G7h3l6a1kMvyS65NP3c-9XoxxVI2aizzhy-xS_xyU=",
@@ -36,7 +99,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Location: Gaithersburg, MD (100% Onsite)\nEmployment Type: Full-Time\nPay Rate: $82.40/hour\nShift: Day Shift\nTravel: Not Required\nSecurity Clearance: Active Top S...",
     "fullDescription": "Location: Gaithersburg, MD (100% Onsite)\nEmployment Type: Full-Time\nPay Rate: $82.40/hour\nShift: Day Shift\nTravel: Not Required\nSecurity Clearance: Active Top Secret/SCI with ....",
     "updatedDate": "1 week ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/IBNJ4YiY3l5nfn1U2E-wp0CzF4-Gh0pFXtDcBBYKhGU/qcQrYKC77h6eocJGMdfXpz3lGnFMMJbRht4T_U3AgAo"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/8FXm93jGfRhCyLJmDuSwwc8QaYvE0a2Knj_gIRmVuLY"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c_asT6nZDbfclhi7SP1hoFc=",
@@ -52,7 +115,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Location: Springfield, VA or St. Louis, MO\nRates: 90/hr\nJob Type: Full-Time\nClearance: Active TS/SCI (Must be able to pass a Government Polygraph after hire)\nTr...",
     "fullDescription": "Location: Springfield, VA or St. Louis, MO\nRates: 90/hr\nJob Type: Full-Time\nClearance: Active TS/SCI (Must be able to pass a Government Polygraph after hire)\nTravel: Up to 10....",
     "updatedDate": "2 weeks ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/67uRkSuKe0KsxS2aXYMc3PWedjF1aAiyQHl0uUxk76I/CfL00refMc6y14wVFhSZvWdahGyvVH5mwm9goVXCZFQ"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/1fWhyrk1sb1GF9Ybj2pgPnDwZX1R7XYnpABuAs2Kq7s"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c7DFmdADj8MNZX-CEGFuL3Q=",
@@ -68,7 +131,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Senior Software Developer Travel Required: No...",
     "fullDescription": "Senior Software Developer\nLocation: Gaithersburg, MD (100% Onsite)\nPay Rate: $101.60 per hour\nEmployment Type: Full-Time\nShift: Day Shift\nTravel Required: No\nClearance Requ....",
     "updatedDate": "3 weeks ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/D8th1iirA2IcUw9cMgTcWw8jLnbLn4QuzAaZXnsuiHM/Z-4pjzWs4m4li8b6fpYjWIsOEvxRrk3P1938hvrIv58"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/F2CkgU9B-aSFvi-scW2e0_lXc3ZiAWhUTG1unTkuwzI"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c-TdTbW2441prkcCBVoqm70=",
@@ -84,7 +147,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Senior Technical Writer – TS/SCI Salary Range: $82,550–$149,225...",
     "fullDescription": "Senior Technical Writer – TS/SCI\nLocation: Gaithersburg, MD (Hybrid; candidates must live within 25 miles)\nSalary Range: $82,550–$149,225\nSecurity Clearance: Active TS/SCI r....",
     "updatedDate": "3 weeks ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/sw526CpOuOM5ZADBkGYfjFSBSdOMNhWfd0AP2gpNLLg/9R9GdNBRtzT9qF6m23EUHuEafImpCzPM3jAFMKV1CPI"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/7HrmFRQUmhQy8rAwHL26n3B7qzdF1ikRAtp0PJ-CNA0"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c2b8Bd6EWGNs9JQnI7zaV0g=",
@@ -100,7 +163,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Level Required: Active Top Secret/SCI with the ability to successfully pass a Polygraph ex...",
     "fullDescription": "Job Title: Mid-Level DevSecOps Engineer\nLocation: Gaithersburg, MD \nClearance Level Required: Active Top Secret/SCI with the ability to successfully pass a Polygraph ex....",
     "updatedDate": "1 month ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/iqlC6v2brQOP7D40Hq5HxlHAE7l645UvJ_rX_lLaNlI/8-X5pvwH-rPrDIOg3eAAViaXvhzFiwsUKQEMr3jmMw8"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/XzWh3s_c6o4cPwAYav-btoPlFyvQrWRtl67YIV8uKT4"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c012Xqpb35PGhmKXHypeCjA=",
@@ -116,7 +179,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Level Required : Active Top Secret/SCI with the ability to successfully pass a Polygraph examination...",
     "fullDescription": "Job Title: Sr. Systems Engineer\nLocation: Gaithersburg, MD\nClearance Level Required : Active Top Secret/SCI with the ability to successfully pass a Polygraph examination.\nPr....",
     "updatedDate": "1 month ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/MpGAIzS8u-RAkc-KpwM05sAY39yh7FlzbOKpJo7Hmoo/J_NgLH_YU6kAvbW4AUqEu0ayEJmTQnlh6tpVOzzpjYU"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/fSRwbwzeYuroCvOLXXlgvKy5u_NBcW6KIu-cFBHy-xU"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3czJxl_xZrjJJybIP38chdNE=",
@@ -132,7 +195,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Role: Cyber Security Engineer Experience: Bachelor’s degree and/or 6+ years of c...",
     "fullDescription": "Role: Cyber Security Engineer\nLocation: Springfield, VA – Onsite\nClearance: Active TS/SCI; ability to obtain a Polygraph\nExperience: Bachelor’s degree and/or 6+ years of c....",
     "updatedDate": "2 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/S32_rrNUEVSMTHGS5kjpDu4LE8qCkohmIXJw5VYYVdI/JdnENEs5OVvkK6fzPQj_6-Ve8_rGnUP6PhCvV1khPgk"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/a6hN7fAq8WmwrgA4O67mc-uWOuQHyRPUJmRq__nPfHw"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cx5fs7mIZgJ99zZgtLr3BYI=",
@@ -148,7 +211,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Title: Cloud Architect / Engineer Experience: 5+ years...",
     "fullDescription": "Title: Cloud Architect / Engineer\nLocation: Quantico, VA\nClearance: TS/SCI\nExperience: 5+ years\nCertification: Security+ or equivalent;\n \nPosition Summary\nThe Cloud Arch....",
     "updatedDate": "2 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/3QpWtBLRL8BPUz3CRKPrtVBF2rhaM-gcaEJuGjKX7_8/l4wOD4Rz49J88023ahmqbTxcE_FH23pQ_KlZOgZ0cNg"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/p5I_JG7c3B0F8V1g1IBiy-Qsyo28ccFbSr8ZmlxiJ80"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c6ykXFS4HG_syESHSI-AuHU=",
@@ -164,7 +227,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Title: Cybersecurity Lead / Information Assurance Manager Experience: 10+ years...",
     "fullDescription": "Title: Cybersecurity Lead / Information Assurance Manager\nLocation: Quantico, VA\nClearance: TS/SCI — Must be eligible for and adjudicated at contract start\nExperience: 10+ years....",
     "updatedDate": "2 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/nnTJIldVIzRhURgb8isaODvHJ19-_xcINUendnajpX8/WvbdsjJ7_4dRmayljKOVQLh9Dko8y17_1IR3apY4rpQ"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/1Amqgc_purocwG-iacByY2oOQQS5YroqsUqdMz57Zb8"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c3xvK6YbiUKhrcc9K3PGmvY=",
@@ -180,7 +243,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Title: Data Center and Enterprise IT Operations Lead Experience: 10+ years IT o...",
     "fullDescription": "Title: Data Center and Enterprise IT Operations Lead\nLocation: Quantico, VA\nClearance: TS/SCI — Must be eligible for and adjudicated at contract start\nExperience: 10+ years IT o....",
     "updatedDate": "2 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/H536UAT6Jow4WC_2euxP6b4ugBSA0-3t1cLKdpLaBvY/IdDFOpP2lQ3ZwbWH2iJFi66ZaXdRiymfJkZocAS406A"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/KQZxyat0gL62Wbzm0m5mWvV7JloBoZ8IzIa07oEcDI0"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cwaqXHkF6nPRceUNfLQXIvU=",
@@ -196,7 +259,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Security Clea...",
     "fullDescription": "Job Title: Senior ServiceNow Developer\nLocation: Fort Meade, MD | Scott Air Force Base, IL | Ogden, UT\nEmployment Type: Full-Time\nWork Arrangement: Onsite\nSecurity Clea....",
     "updatedDate": "2 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/08Iz49y9r5RXfideCE8svV_bGekNeYR10RyIkqcbGjE/5EQ_P0ESOiNGFbAjbTNzR3J5uopOr5et_6OFj51aPYk"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/FaC1StbsPBSl9eNjb98XHnLkSP2wnALeomIxzjCipz8"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cz6XN2CfmiWTlM93ywNfohY=",
@@ -212,7 +275,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Place of Performance: Onsite Experience Required: Minimum 10 years of relevant software engineerin...",
     "fullDescription": "Job Title: Principal Platform / DevSecOps Architect\nPlace of Performance: Onsite\nEmployment Type: Full-Time\nExperience Required: Minimum 10 years of relevant software engineerin....",
     "updatedDate": "2 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/PCzptnVe0RVPfRK4aHdDHjV1FwzWwE_qBYVUF3c3_Ng/p-RTxfkHzZWPCWrik7Rpk0SgcnRmz7Y5_b_tuss16i8"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/gKIspNtl4x2azwCLJOVQsyyJsS6GTZfQvJZM_Jxuqg0"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cxHEtSohj2wGTsvGiCYLluU=",
@@ -228,7 +291,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Place of Performance: Chantilly, Virginia (Onsite) Experience Required: Minimum 12 years of relevant p...",
     "fullDescription": "Job Title: Principal Cloud & Identity Architect\nPlace of Performance: Chantilly, Virginia (Onsite)\nEmployment Type: Full-Time\nExperience Required: Minimum 12 years of relevant p....",
     "updatedDate": "2 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/Gm10bCFiEpdPFFnvBBYeeGbygb7wKzryvaM9XDS0c7A/6gk1OTqzACxChxj2wAFGQSSmyGbL7i4-D0YGK_jmf6g"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/NiptIwYEwPrjIx_4oFg56LA1DD-n7uWadYRTFdj5N5Y"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3czna5tyS48NoXbpCKaEn2n4=",
@@ -244,7 +307,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Senior Electrical Engineer Clearance Required: Active Secret or Top Secret Clearance...",
     "fullDescription": "Position Name: Senior Electrical Engineer\nLocation: Chantilly, VA\nWork Schedule: Full-Time\nClearance Required: Active Secret or Top Secret Clearance\nJob Type: Full-Time\nAbou....",
     "updatedDate": "2 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/ApwyzhwAlp_hJyeBxJ5fHihzw8dDR6E1wahewp3qqiI/kojtOq10gRaXsNZzxBdcnc74cORGRsH79tz5hq-4a2A"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/Vc2t7Hgu80f1G-WAZbddeXOULmuLwoYBkLdLEKHzmd8"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c2rOiisrIYxZmuTu8eZGXy8=",
@@ -260,7 +323,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Details:...",
     "fullDescription": "Position Details:\n\t\n\tJob Title: Software Developer (Python/Angular/API Developer)\n\t\n\t\n\tLocation: Annapolis Junction, MD\n\t\n\t\n\tClearance: Active TS/SCI with Full Scope Po....",
     "updatedDate": "3 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/flbY7vpvudxx2s-swe3ItaXhDmzOgnw30ALJdvMoMgE/uaAfNYwziv5Xk1N_dAWGOGbFyy-dBjauorJ3-tzVb3s"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/s69mFU8-N9HjnK26BsSgDeriXqWBa4tEUYehDYnFSGk"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3czPz3ckr6eyrIOxg-EXyUiQ=",
@@ -276,7 +339,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Place of Performance: Jacksonville Aviation Authority (JAA), Jacksonville, Florida...",
     "fullDescription": "Job Title: Customer Service Representative (CSR)\nPlace of Performance: Jacksonville Aviation Authority (JAA), Jacksonville, Florida.\nEmployment Type: Staffing Services Contract S....",
     "updatedDate": "3 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/kv4ENEJc8UsxJ66ngjp5RKw63D5liMFj-hjPZInnuCI/g5QOTo_11MrlBoHp8gAR0Ttkpxx6BDZb7XnkgiBm8Ao"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/HPGAwoGEm-EYAxIWxTKu_8SkrXFbBCGp6nWeJkNabQ0"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c1aqHVasnJZSPkyVWhu-iPI=",
@@ -292,7 +355,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Required: Active Top Secret (TS) with ability to obtain TS/SCI with Polygraph Primary Responsibilities...",
     "fullDescription": "Job Title: System Administrator\nLocation: Gaithersburg, MD\nClearance Required: Active Top Secret (TS) with ability to obtain TS/SCI with Polygraph\nPrimary Responsibilities\n....",
     "updatedDate": "8 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/B398Dfgvhc5cHdw-_5nG5FObvCjerAHsg6gRibylbNk/xyU9Wc7FlkRKkWjMLrMlXXHo8smbytcPphKybzuzj_k"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/2WHwfFTlKekCybF2q6OTT5reEvIdq7p7bvIzpsuU2OM"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c9PmIkTsU7Q9FdW2Zcjdcng=",
@@ -308,7 +371,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Work Authorization: US Citizen Position Overview...",
     "fullDescription": "Job Title: Software Engineer\nLocation: Annapolis Junction, Maryland\nClearance: TS/SCI with Polygraph\nWork Authorization: US Citizen\n \nPosition Overview\nTh....",
     "updatedDate": "8 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/aAMn7LUitNxotl_8b5F7BTfS5bboWvqG0px9nTbVYsc/Uzj5DTUEZ5KpWXXCSQS452WxGDghqZgrBLzJHouKKl8"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/vbwNn5f4M4Hx1KIVcqEm8VjYbk9-oqZCty74bagh7fs"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c_igp3wYMaKAESUGXVg2t_c=",
@@ -324,7 +387,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Senior Application Developer Position Overview...",
     "fullDescription": "Position Name: Senior Application Developer\nLocation: Kansas City, MO | Indianapolis, IN | Frankfort, KY\nEmployment Type: Long-Term Contract (No End Date)\nPosition Overview\n\r....",
     "updatedDate": "8 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/YFCx_YwnWI5J9ajZiOOTRBXVBx3XmzzTk346-zbgkSI/1UM-MHFVK1HiMc9dupr8e8LyQCUcI1KGJHC6-lrKniM"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/LGSxCR-xJFXTBhHtO2mI1wnkGaMjc3OzIM5I1u5oO4k"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cxh2_22WUewOm9hGrcXtxe8=",
@@ -340,7 +403,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Senior System Administrator Clearance Required: TS/SCI with CI Scope Poly...",
     "fullDescription": "Position Name: Senior System Administrator\nLocation: Springfield, VA\nClearance Required: TS/SCI with CI Scope Poly\nWork Schedule: Monday–Friday, within 5:00 AM – 9:00 PM EST win....",
     "updatedDate": "8 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/2c2Snz7COaLjxu9VQeBgzYPXqkzBMbhBNtLCV-TcDm8/6MV-vY8zWfSnwp0y3SxE9efn1ZO2QgxH7hRKfXj8-6w"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/MD9x7p0ZtJF_WJfef4fwXwRo_Tz351M6xhjUHAe0xaA"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c2NobYa9HPVAb6C3p8gACes=",
@@ -356,7 +419,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Senior DevEx Engineer We are seeking a visionary yet hands-on Senior Dev...",
     "fullDescription": "Position Name: Senior DevEx Engineer\nLocation: Vienna, VA\nJob Type: Hybrid (3 days per week in the office)\nAbout the Role\nWe are seeking a visionary yet hands-on Senior Dev....",
     "updatedDate": "9 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/PLdP9Ws-qf9EA8MYn56hDVsf6xTE7eblR8GAI8CnC9s/L3aYTq0IC4mbZbu-VlkjkFuyyhGzsUl-nUPe8G-xtmw"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/6csvHuh8yvemCmUxsRtQmE28jMNR1HTXU-kbqTq6OCc"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c-eJk8XR6g4J0Yc5M5HYXes=",
@@ -372,7 +435,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name:  Cloud FinOps / Cost Analyst Monitor, analyze, and optimize cloud costs across multiple cloud platforms...",
     "fullDescription": "Position Name:  Cloud FinOps / Cost Analyst\nLocation: Remote\nJob Overview\nMonitor, analyze, and optimize cloud costs across multiple cloud platforms\nDevelop....",
     "updatedDate": "9 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/gm-UzehtX9jQUMjNhY5XfanbwR5yKH-oGQTmRm9tffQ/eGns-P0YC0f3Q3jXSunU0YU7gVAvOilEJd1WsrRE50U"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/e2woSpDiUjjyRXkn4aQi78_Qs4U1V139OXMHOhpRTA0"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c2f80rvSI8LkIbE0XIaoO9E=",
@@ -388,7 +451,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Oracle Cloud Engineer Job Location: Remote...",
     "fullDescription": "Position Name: Oracle Cloud Engineer\nJob Location: Remote\n \nJob Overview\nDesign, deploy, and manage cloud environments on Oracle Cloud Infrastructure (OCI)\nI....",
     "updatedDate": "9 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/t6BL1BYPCtiMFU4cSzTM4MbkKRmpCmV6zAouAG9_UUI/aM_iPBKJULHBDCMopR_9776dJY2gWlwAa8vzZ9TDgIg"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/zzT95VwF5zhDwVAvcaqWo2zqbQrJkyn5y6maYEh-IyA"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c30LgqHHBQPDSVSqAyu0eW8=",
@@ -404,7 +467,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Google Cloud Architect...",
     "fullDescription": "Position Name: Google Cloud Architect\nLocation: Washington, DC (Hybrid initially; transitioning to fully remote)\nJob Type: Hybrid (telework + on-site as requir....",
     "updatedDate": "9 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/NEX8ZylL0Bu_zF4gYN41LBczybtgCgivbTLdEqp8GDw/pi5S0K4rrpMkAT45IBxNUPeplcmAkG6L6eUpauEY-yw"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/97tSmm2UG5k2j9dLpxCgpgDD_YJGX24ok-h8eNvN_mI"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c5CzsRQCv3D4Am_vJovgxls=",
@@ -420,7 +483,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Oracle Cloud Architect...",
     "fullDescription": "Position Name: Oracle Cloud Architect\nLocation: Washington, DC (Hybrid initially; transitioning to fully remote)\nJob Type: Hybrid (telework + on-site as required)\n ....",
     "updatedDate": "9 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/TAxCmm4Ddr2sz1NJxq14p5qZFn9BIQwg2hytKbuAozg/14yVzl6dxpEOynQSAX2MqN60CmYr7rYVVcmxavWyKdo"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/N4lvLS5VsGEuRSKsOnl_RUkTGSZ6Ma3Bv0vP-nUzNao"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c_EmIvm8sJsoriwS4zdOPa0=",
@@ -436,7 +499,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Risk Analyst (ICFR / SOX Control Testing) &bull; 3 days onsite / 2 days remote...",
     "fullDescription": "Position Name: Risk Analyst (ICFR / SOX Control Testing) \nLocation: Hybrid &ndash; Vienna, VA\n    &bull; 3 days onsite / 2 days remote\nDuration:&nb....",
     "updatedDate": "10 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/Bn2eaThQcK28Gpux88DJJLUQLJ6QXB_WTmzmj70l45c/gkTrpsV4y0knE9l_mIxTKCm1lFhGYvEgfdwuYyNBivI"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/3aFSlrfdPnzpvrTz7V787Nj28eSGswOetqSUEORW71s"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c11LIh6gBzQjGY-YH7cSyMI=",
@@ -452,7 +515,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Digital iOS Developer Job Description:\r...",
     "fullDescription": "Position Name: Digital iOS Developer\nLocation: Hybrid - (Vienna, VA, Winchester), (Pensacola, FL) 2x week in office. Going to 3x a week in April 2026.\n \nJob Description:\r....",
     "updatedDate": "10 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/8wxfJNaQnpnY-wGlaXCNuh6AgPuoDbt59XaoGTpftr8/hGcT6moaWfTQkJII5fSo2NxjgwgQgTVsrsyGLMf5THg"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/DssR2U7D3K37zl1CbZc4ZOmOGy60nF_OgeaZ1gxOAJA"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3czarkZVtrGxhZv0dwyBqKjo=",
@@ -468,7 +531,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: IAM Systems Administrator &ndash; CyberArk PAM Education & Experience Requirements:...",
     "fullDescription": "Position Name: IAM Systems Administrator &ndash; CyberArk PAM\nLocation: Remote\nEducation & Experience Requirements:\nBachelor&rsquo;s degree in Information Security, Comp....",
     "updatedDate": "10 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/RdX4-q5608ifeJjghFqdFFrGpgEczj6Y5XgnSFeqG3c/dQIijlbXsrUtCtm7mYYKOlm4f40NAaax2R-iBDGgu-Q"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/ZauU4ZFtAaozBSz-Gwe8B0HVIBcmAlXelLBHBdUOsgc"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c3rEjhaqVoLjKUiCKA4B7sw=",
@@ -484,7 +547,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: UiPath Development Manager We are seeking an experienced UiPath Develo...",
     "fullDescription": "Position Name: UiPath Development Manager\nLocation: Remote\nJob Type: Full-Time\nJob Summary:\nWe are seeking an experienced UiPath Develo....",
     "updatedDate": "10 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/lop2YEWjIRT-E4CXnt4ZQuz9qIyXcgphVZ4pYd7N-Wk/b_N9AnXgkyl2ds9oMAgiiK0cn5GFgZ6uTSNlos4SpQk"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/HGqxGvzgv9lyEVhCuyBA797Bd0b8en7CW1YFG1bEU-Y"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c4bbhjGSU4X3wumg_TGYmjI=",
@@ -500,7 +563,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Data Scientist We are seeking a highly skilled Data Scientist with deep ...",
     "fullDescription": "Position Name: Data Scientist\nLocation: Remote\nJob Type: Full-Time\nRole Overview\nWe are seeking a highly skilled Data Scientist with deep ....",
     "updatedDate": "10 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/LCLzqKFKX4T1NJPdCN0bX7Wcz3VGdMetvHsNsYCyS4E/xG3p1X9ee5JpAZpfhK7VSqMB83aNwZBXW5Uzzk2WA6A"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/-V3mFW4bWwG1A-WbIqUGirGRjOuFv1fa07Rq5i2hnw0"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c90FaS_jiFQlNnU5IdPC_qQ=",
@@ -516,7 +579,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Software Engineer We are seeking an experienced Full Stack Software Engineer&nbsp...",
     "fullDescription": "Position Name: Software Engineer\nLocation: Remote\nJob Type: Full-Time\nAbout the Role\nWe are seeking an experienced Full Stack Software Engineer&nbsp....",
     "updatedDate": "10 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/uD6-jwKSDjrcgvRAv1y02Y2yB-N7Lj8_UxohzZ2_hbs/wWjzRcm6_B4oZwptBmhZudU-QDol8ERXaYgxMKsz_U0"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/cW_H4efoXlycdl90ah49e-NmbFTCot3n8DbD2EGyf14"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c2cTQ4SJpbFyLYxyyiPm0sQ=",
@@ -532,7 +595,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Network Administrator Position Overview...",
     "fullDescription": "Position Name: Network Administrator\nLocation: Vienna, VA (Onsite &ndash; Headquarters)\nJob Type: Full time\nPosition Overview\nWe are seeking a Network Administrator&nb....",
     "updatedDate": "10 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/rc1Cr9endxNuU1IJkzxhZnIPNziwu2rBZzJ5Ss0e9w0/-D_PDeTyvBzYvgcHCK68ChUEzlhcJ5dA0m4bN3TwAUY"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/bqgoJkGSNinxDheSQss8w9hdUwZAV6MNxyrsGeleUSc"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c5TL-nM2Hs_GQJaAIUBlifc=",
@@ -548,7 +611,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Sr. Software Engineer We are seeking a dedicated Senior Sof...",
     "fullDescription": "Position Name: Sr. Software Engineer\nLocation: Mt. Juliet, TN (outside Nashville)\nJob Type: Full-Time | Onsite Required\nAbout the Role\nWe are seeking a dedicated Senior Sof....",
     "updatedDate": "10 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/yZmTJ5bYku9holwqoGiywciBM0pLerRulUNjtTJpoJ8/cG0YqivfcashzCmH3T_Tm7XSkWUMjhhsfE7j3XTH5Jg"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/G9-4FtWWBHZ5W3uCSlMlmv723j4F-XobWoe6Mji5ylI"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c3SzPZInMxSkvJicrCnvRXA=",
@@ -564,7 +627,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Information System Security Officer (ISSO) Clearance Required: Active Top Secret/SCI...",
     "fullDescription": "Position Name: Information System Security Officer (ISSO)\nLocation: Sterling / Springfield, VA\nClearance Required: Active Top Secret/SCI\nJob Type: Hybrid (te....",
     "updatedDate": "10 months ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/KrCGD2EsilOQgUiAMxrWwBMAXkO2VAiu7fO52_lNfmg/QarQIHLZIxcvdCurh_Olfb-yVaR9xoYxkWmYXGhknjc"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/8jiYmXNOJW4OHrgNof2CRtOeaV2F5qg3ntY-gLU8aGs"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cwRgTiAIalidLygk_Jn9L0A=",
@@ -580,7 +643,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Required: Top Secret with SCI eligible We’re seeking a skilled ...",
     "fullDescription": "Job Title: Journeyman Test Engineer\nLocation: Springfield, Virginia\nJob Type: On-site\nClearance Required: Top Secret with SCI eligible\nOverview:\nWe’re seeking a skilled ....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/kCx_wxkNOl5ELkkGTFiwLFxUq_tdrx0UjOqW-BHSpv4/2dV-bwfQYIfE2Xl3pZVfoplwnT0J4J1-TWqAAF8xoqc"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/SXsx8i6rcBryZX2qz_XTjlS5ktaTE2k5W1VIfzbAFFY"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c_i-yzaHhzuTrvfFoOT8L64=",
@@ -596,7 +659,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Required: Top Secret/SCI with Polygraph...",
     "fullDescription": "Job Title: Quality Assurance Specialist\nLocation: Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI with Polygraph\nJob Overview:\n \nWe are se....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/563HYnj57BAeIWVAoC2vbSgJSLbcaHtaHEANUSiHbiM/CrhM04-Et-nlEsshDHda0FjzsTKqGP9lUIsIbK62ppU"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/NiGo3ikcLcE5m-Bj2WQ8VFK5axpFSrFE1ceTbQwSol4"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c3d8xNf93CwzDqqTmyJCggc=",
@@ -612,7 +675,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Required: Top Secret/SCI...",
     "fullDescription": "Job Title: Data Scientist SME\nLocation: Alexandria, Virginia & Chantilly, Virginia \nJob Type: On-site\nClearance Required: Top Secret/SCI\nJob Overview:\nWe are seek....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/KhYcCVlPa5RR1ruaFdqzBTXqm8n5l2nbV9u-c8DO81w/vpna5SxI1_7EOsno64XpWa85AUhYLYf1nzALnYbztJw"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/YvBxsR1vN39WBoXLPubxUoB6LLUsbkqC9D5-NOIJnYg"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cyoqVk3fdQaj9h8h_j3WFa0=",
@@ -628,7 +691,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Required: Top Secret/SCI...",
     "fullDescription": "Job Title: Senior Information System Security Officer (ISSO)\nLocation: Alexandria, Virginia & Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\nJob....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/KWPa_Tl_x-4QAJxmf6HM1J9iCbK353bMwc5nBz5O4mI/A8iX1cc-xfNqdFwirrisRgfCZbOgUeRVpljC_gKwFx0"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/AhuHCXFPoJUAmWepqWjLhufovXNmOU2gH-NO2boHl5I"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c20CaquJgUAzwcefsdL31nw=",
@@ -644,7 +707,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Required: Top Secret/SCI Job Overview:\r...",
     "fullDescription": "Job Title: Release Train Engineer\nLocation: Alexandria, Virginia & Chantilly, Virginia \nJob Type: On-site\nClearance Required: Top Secret/SCI\n \nJob Overview:\r....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/eWRKTiwaOJK_X6KCzQVWGCBIvr24ZNS5zmhisCidqNQ/TzJzamJOEfK2VlP4xdyy9-l9p7P2LGBhi4rFo-pn-2E"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/CjZ7DfsG-StCtjNbBpgioHpect9L9DjcxlpICs79D54"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3czFj7Rd3OckSCt_KbJjiG-s=",
@@ -660,7 +723,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Required: Top Secret/SCI We are seeki...",
     "fullDescription": "Job Title: Mid-Level Software Engineer\nLocation: Alexandria, Virginia & Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\nJob Overview:\nWe are seeki....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/tuu07Ldl6aN55sfLt04_8ZlJPgCNP2KmvT9uYccDSII/soWzI5naYhr0ePkyDQX64lpqHanN_gfGf39HoxJKmu0"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/NDvXZdkhAEaX9GhygxOAhCwTsMpWTqlLnbPFg-WPrbo"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c6s1tA3EwkUpy2k-UwTg7Ew=",
@@ -676,7 +739,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Required: Top Secret/SCI We are seekin...",
     "fullDescription": "Job Title: Mid-Level Systems Engineer\nLocation: Alexandria, Virginia & Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\nJob Overview:\nWe are seekin....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/YuA0pM6cJ1GJhh6ijzZZcx2SjRr0yqL_4gzPzd3cOt0/MTp98aAhbuWxuoph9AtrwS9dDl5UJC59_bCGWGc5mnU"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/WBxBeH71qOgeSmO3PWHKnBhVXos1gGoTI9wT7zJR_BU"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c_QVKRIJyMbzsOrBA7FzVYk=",
@@ -692,7 +755,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Title: Senior Systems Engineer Location: Alexandria, Virginia & Chantilly, Virginia Job Type: On-site Clearance Required: Top Secret/SCI  Job Overview:  We ...",
     "fullDescription": "Job Title: Senior Systems Engineer Location: Alexandria, Virginia & Chantilly, Virginia Job Type: On-site Clearance Required: Top Secret/SCI  Job Overview:  We are seeking a highly....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/8vENFZktA8o27cm85zjdDJi9jq3p0UHiGlq9rDIhWYo/b_aKqJdwrYRPW8csnT1BDo4h7sgLeR5-W7AQqVjqZvU"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/aETOd4z84_1mPtyNY2evIS3sAZVB1kxSwI-lF9biQwE"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c5PkjMWPNOpvfzTddXB7qf0=",
@@ -708,7 +771,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Required: Top Secret/SCI We are seeking a ...",
     "fullDescription": "Job Title: Systems Engineer SME\nLocation: Alexandria, Virginia & Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\nJob Overview:\nWe are seeking a ....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/d4gykmqJJXv_Hi5bbjALtBaoGPdTB45MrwrXcaSxybE/jpt1BY-LyR85pD3QZQ7-3368TQETCwfCDrZeUPYRTZo"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/Q06B9vPVz_TJUtEUeccmkOEft6kunE0uwQs0mZRSIAk"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c3KeKD2y5if2NGn5_dqEWyU=",
@@ -724,7 +787,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Required: Top Secret/SCI...",
     "fullDescription": "Job Title: Sr. Software Engineer \nLocation: Alexandria, Virginia & Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\n \nJob Overview:\n....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/opIhzJSYPukWDmbuwiQTk13cHxIKAWT-NWMYrrpbGw8/0pNw2OtoixiWO5bOPP1gzhTvLtD_aiqf8ve2yIlWI9o"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/9tTwGKXV4Jzb6ZRXR4s0bNR9FjSw6BsTVhkxpoDzK_Y"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cw_f91CuV2vUcQphJa2t8eo=",
@@ -740,7 +803,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Clearance Required: Top Secret/SCI...",
     "fullDescription": "Job Title: Software Engineer SME\nLocation: Chantilly, Virginia & Alexandria, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\n \nJob Overview:\nWe are....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/6eu1sGeLnvEcG7nYz-z5x4nDkB8TfxeWPnNvCZCWebQ/bVEAJjJa9ZG-FFsRnstwdrkHxi9JTGUtD5dFiyb1jzc"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/iwKv6emKAMZGs8cwZmIcyyNGYq5s7XcTUnyfmqqergo"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c3zsKah0_ZUO1kXwh7Nekq8=",
@@ -756,7 +819,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Systems Administrator Citizenship: US Citizen...",
     "fullDescription": "Position Name: Systems Administrator\nLocation: Chantilly/Sterling, VA\nCitizenship: US Citizen \nClearance required: TS/SCI \nJob Type: On-site\n \nWe are seeking a System Admin....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/qnM64cD51FrNoDH2PVQplzDGwQf0WGbpiWTDzIDB5LY/lc67de2iJbiu-opErDgDAN5pwmAqd3LgDoKhoPpX_yU"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/OnGfEJsTUOEfB__5EBdbbCLf-G5efY6usEk9k7cjSV8"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cyMm6Fpk_BKUGGL05uJ9-K4=",
@@ -772,7 +835,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Title: Software Engineer\nLocation: Annapolis Junction, MD\nEmployment Type: Full-time\nJob Type: Hybrid\nClearance: TS/SCI with Full Scope Poly\nAbout the Role\n...",
     "fullDescription": "Job Title: Software Engineer\nLocation: Annapolis Junction, MD\nEmployment Type: Full-time\nJob Type: Hybrid\nClearance: TS/SCI with Full Scope Poly\nAbout the Role\nWe re ....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/q2HNGlVbHHNUpYPKU6znWIEUWoAvrtnMQIxboLWgd0k/o9K4pmd8o6xaPr7A1VQT03QbgSRce9w5hOeu12KgZDM"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/M4QErITo5GqgkCtP8C7gvIkVp0jY7Z1BIK9_URSm6Fc"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cyvtnGs5ywdNlIRva8ZXjk8=",
@@ -788,7 +851,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Position Name: Senior System Integrator Citizenship: US Citizen...",
     "fullDescription": "Position Name: Senior System Integrator \nLocation: Springfield, VA\nCitizenship: US Citizen \nClearance required: TS/SCI Clearance\n \n....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/IzV6wN_pPTbXXtxlR9_e5vAWzLCJuPsMVbAO89CiXOE/-QAsJDYMmbnsAdaAhvNNxUM8BToMKXVogpPv4xZhENM"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/WdycecfxLISyCaFlGJM7pVYS89eLOsUPoqQPkzsM2rQ"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c-agZgxnQvtp9UeaySaHVVs=",
@@ -804,7 +867,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Location: Washington, DC As a Senior Systems Engineer you&rsquo;ll lead the design, deployment...",
     "fullDescription": "Job Title: Senior Systems Engineer\nJob Location: Washington, DC\nClearance: TS with CI Poly\nThe Role\nAs a Senior Systems Engineer you&rsquo;ll lead the design, deployment....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/be8BJAH5NufkhltvJlWq9kKQKBejpBVeq4FBgyuniEw/brUG5ff_VdhAZZHTHbk5Jvx0pl4YrtYyaBxBzc3ns2c"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/V3CnAccz_IhELOAe62RbBbMTsyd5v61zLc327G8jdhg"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cxdNKMO-DyyGJOUV1ml4u0U=",
@@ -820,7 +883,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Location: Washington, DC Job Description:...",
     "fullDescription": "Job Title: FSR Production Engineer\nJob Location: Washington, DC\nClearance: TS/SCI or above\nJob Description:\nWe're looking for Production Engineers who can help us build, oper....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/5eBj0vGzXC5r2CbkVQm8QXaMZuu6zgM9YAO3_Ttuuj4/he-sDPVvzZqNoCIFcqM3FDnQ2ymz8Es8xjwLNaRVjsk"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/x5peIeI42b_ooFS163X96Ik-b68D0A3hLWhzf95GvYU"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c1OB58GYyfAKzmkLXHqtsJM=",
@@ -836,7 +899,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Location: Washington, D.C. We are seeking smart, experienced engineers to help deploy groundbreaking technical solutions that address our customer...",
     "fullDescription": "Job Title: FSR Engineer\nJob Location: Washington, D.C.\nWe are seeking smart, experienced engineers to help deploy groundbreaking technical solutions that address our customer....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/JnxN2nv7QAniEK7y_lWz_pvQorNJVu0GN07Y_WHouiM/jAGGG-4y2gili0kP28eX9ebdu6dqTMyoPFv-mWcqbYA"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/sEzBB3d68A9j2yGRld_SxgPd3I17FGwHEAlIzVReIxQ"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c-cxwOm1VlaVK3ObvWcdUHE=",
@@ -852,7 +915,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Location: Washington, DC Job Description:...",
     "fullDescription": "Job Title: FSR Engineer/SME-Gamma\nJob Location: Washington, DC\nClearance: TS/SCI or above\nJob Description:\nYou&rsquo;ll be a key member of a cross-functional team helping....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/o2doQ3mzqs0WlkmRD5oYObd2AVQJaQxVVjdt4nuZxcg/9G--RT2TD-BixnL-VcrL7XbWXvlgHJptlsfo-CpLM8A"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/4YoGswV9qJYfR21X0Ds95C8PB5pqCphDrROI-rXyiPc"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c91aB8ZBiENVJfY1DLwuxa8=",
@@ -868,7 +931,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Location: Annapolis Junction, MD Citizenship: Due to agency and contract requ...",
     "fullDescription": "Job Title: Network Monitoring Engineer\nJob Location: Annapolis Junction, MD\nClearance: An active Secret Clearance is required.\nCitizenship: Due to agency and contract requ....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/4-Fti1OtD3yuBCRh7Io34Q-i4v4SUdlQnFnWCU0NgZw/ju6HboGGarVcCCVzbkb0fxQkq9NwlA8pmfdQS0kAUl8"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/vfNkUnX9yu6iB2cOQcploJv8-0V0qbhsijF-9nuqVOA"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c-CNoJ1Fj9Atu5hZeSWvLg4=",
@@ -884,7 +947,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Location: Annapolis Junction, MD...",
     "fullDescription": "Job Title: RHEL Senior Engineer\n\t\t\t \n\t\t\tJob Location: Annapolis Junction, MD\n\t\t\t \n\t\t\tClearance: An active security clearance is required.\n\t\t\t \n\t\t\tCitiz....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/fBfLFCUQOFixdYVG6pWU3b2rgg8MhUUCx-Bn1MSkY-8/Ku09pl-NakAfaanIbYc8pnrzSHrAUOvdsoxpQ0RMkYE"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/aKsGa4ag7YSeQKT9NlXMtZTxCifuGUk0uHZcI5a06G8"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3czzkVby7Z42PcAB_IisL4Ok=",
@@ -900,7 +963,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Location: Annapolis Junction, MD...",
     "fullDescription": "Job Title: Automation Security Engineer\n\t\t\t \n\t\t\tJob Location: Annapolis Junction, MD\n\t\t\t \n\t\t\tClearance: An active security clearance is required.\n\t\t\t \n....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/k3J3It9qdXXvPR1NL-wd6-pqKbfIfnrbWdIZbkA6djo/5q7lb30OXkMLm_XF_cmXdnner3PlqfV_6YZJDdjaorE"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/79SQtUTH2t0ohrpMrstUwPtORJK3BbRF0YT58hkVPDo"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3cxm1xsRZzSGMaS_APTjaPmk=",
@@ -916,7 +979,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Location: Colorado Springs, CO Citizenship:...",
     "fullDescription": "Job Title: Unix/Linux Admin (RHEL)\n\t\t\t \n\t\t\tJob Location: Colorado Springs, CO\n\t\t\t \n\t\t\tClearance: Active Secret Clearance required.\n\t\t\t \n\t\t\tCitizenship:....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/YjxGskjM5xNbfTDSu_CgRZaL9S53SsQaDRtILjfLafQ/7O_yWKvrvvCzuqu0cnAMfHKFjK6CoFgH6SHlmlGXxTo"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/6zBpj6S727hsQZsMQN8QzYD3TOIEP_O4D1QMbVr0LWQ"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c5WVvS_eqZAROyfOgxZcXoI=",
@@ -932,7 +995,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Location: Colorado Springs, CO Citizenship: Due to federal re...",
     "fullDescription": "Job Title: Configuration Management Analyst\n \nJob Location: Colorado Springs, CO\n \nClearance: An active Security Clearance is required.\n \nCitizenship: Due to federal re....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/g0FY4e4g0u3L2oBDaQzJxO92EKfUXcnHn7jEiqI6nQo/B4jzsWnYIwpJINCXMYZhDbEXLNqhIR69g3Ak1dICdsE"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/zMNHe52BxVJmqJcZEB2efIP6YJX7y9S_jCx_7UYNQLQ"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c1KHE2YbhbYAjwgD3eU0kz4=",
@@ -948,7 +1011,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Location: Colorado Springs, CO Citizenship: Due to agency and contract requirements...",
     "fullDescription": "Job Title: Scrum Master\n \nJob Location: Colorado Springs, CO\n \nClearance: An active Secret Clearance is required.\n \nCitizenship: Due to agency and contract requirements....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/ODT-Bm7zq64pjg_f30fyZqjUguCQep7e2TByLhRz0cc/WmkVtA6U_j31s5nWk-TCDc36bKdlXWnum_5oaeIR2TE"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/X4H1pGUecvTaVL2qzTcSiOkwgRRzZIDRKRPcyGzQuQU"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c1jhUVdksqv7jr0m0OnKTKI=",
@@ -964,7 +1027,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Job Location: Colorado Springs, CO Education: Bachelor’s (BS) degree in technical studies such as computer science, information systems, programmi...",
     "fullDescription": "Job Title: Oracle DBA\n \nJob Location: Colorado Springs, CO\n \nEducation: Bachelor’s (BS) degree in technical studies such as computer science, information systems, programmi....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/n2RrPT7QEHh2bcfLifbdo92zWAum9KugScpu9Imcs7o/_6gItzU3q9jCgQ4qM1TU1oUZKmw8w_lZkOQP03mOjDE"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/YG2zuUUogaplvoNL6QwWsm7u-DbSOuehGJUabF5xDl0"
   },
   {
     "id": "z5G7h3l6a1kMvyS65NP3c8Iv2IF5G0v_Ixz2za32aIU=",
@@ -980,7 +1043,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "summary": "Role: Senior Network Engineer Experience: 12 years...",
     "fullDescription": "Role: Senior Network Engineer\nLocation: Colorado Springs, CO\nExperience: 12 years\nJob Type: Full-Time\n \nPosition Overview\nWe are seeking an experienced Senior Net....",
     "updatedDate": "1 year ago",
-    "applyUrl": "https://candidateportal.ceipal.com/login/QBcTowMGZSdWjaQE0E84n5OrfkEcdyuS-gvpxJOiHB0/1yBT6RPcGPckelS8WAxcQT7X1zAbrHlrndAdEa77G78"
+    "applyUrl": "https://candidateportal.ceipal.com/job-details/dK65LVU15IPUTCDep6fKBCLyIsk4NwXZCzmGfAoaDeU"
   }
 ];
 

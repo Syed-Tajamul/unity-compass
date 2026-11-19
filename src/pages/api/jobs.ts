@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { initialCeipalJobs, type CeipalJob } from '../../data/ceipalJobs';
+import { initialCeipalJobs, ceipalJobCodeToPortalId, type CeipalJob } from '../../data/ceipalJobs';
 
 export const prerender = false;
 
@@ -93,6 +93,12 @@ export const GET: APIRoute = async ({ url }) => {
 
     const parseRawJob = (raw: any): CeipalJob => {
       const desc = cleanText(raw.public_job_desc || '');
+      const code = (raw.job_code || '').trim();
+      const portalId = ceipalJobCodeToPortalId[code];
+      const directApplyUrl = portalId
+        ? `https://candidateportal.ceipal.com/job-details/${portalId}`
+        : (raw.apply_job_login || 'https://candidateportal.ceipal.com/submit-resume/wnBXqpgx6GIS7DcUrUSC9Kxp7hfuvSNAkWYPXe-Odl0/PQyIYUggnWdV4ut_3CpHn3osOqjfErNC4IFHJThZhoA');
+
       return {
         id: raw.id,
         jobCode: raw.job_code || '',
@@ -107,7 +113,7 @@ export const GET: APIRoute = async ({ url }) => {
         summary: extractSummary(desc),
         fullDescription: desc,
         updatedDate: raw.updated || 'Recently Posted',
-        applyUrl: raw.apply_job_login || 'https://candidateportal.ceipal.com/submit-resume/wnBXqpgx6GIS7DcUrUSC9Kxp7hfuvSNAkWYPXe-Odl0/PQyIYUggnWdV4ut_3CpHn3osOqjfErNC4IFHJThZhoA',
+        applyUrl: directApplyUrl,
       };
     };
 
