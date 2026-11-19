@@ -204,15 +204,15 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     role="dialog"
     aria-modal="true"
   >
-    <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+    <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
       
       <!-- Top Brand Color Stripe -->
-      <div class="h-1.5 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]"></div>
+      <div class="h-1.5 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] shrink-0"></div>
 
-      <!-- Modal Header -->
-      <div class="p-6 sm:p-8 border-b border-slate-100 bg-white">
+      <!-- Modal Header (Compact & Fixed at top) -->
+      <div class="p-6 sm:p-7 border-b border-slate-100 bg-white shrink-0">
         <div class="flex items-start justify-between gap-4">
-          <div class="space-y-2">
+          <div class="space-y-1.5">
             <!-- Badges -->
             <div class="flex flex-wrap items-center gap-2">
               <span id="modal-job-code" class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-700"></span>
@@ -236,62 +236,58 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
           </button>
         </div>
 
-        <!-- 4-Stat Key Highlights Grid (Must-Known Fields from Ceipal) -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5 pt-5 border-t border-slate-100">
+        <!-- 3-Stat Key Highlights Grid (Location, Employment Type, Experience - NO COMPENSATION) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 pt-4 border-t border-slate-100">
           <!-- Stat 1: Location -->
           <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
             <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              <svg class="w-3.5 h-3.5 text-[#FF3130]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-3.5 h-3.5 text-[#FF3130] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <span>Location</span>
             </div>
-            <p id="modal-stat-location" class="text-xs sm:text-sm font-bold text-[#0B2553] truncate">-</p>
+            <p id="modal-stat-location" class="text-xs sm:text-sm font-bold text-[#0B2553] leading-snug break-words">-</p>
           </div>
 
           <!-- Stat 2: Employment Type -->
           <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
             <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              <svg class="w-3.5 h-3.5 text-[#0C487A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-3.5 h-3.5 text-[#0C487A] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               <span>Type</span>
             </div>
-            <p id="modal-stat-type" class="text-xs sm:text-sm font-bold text-[#0B2553] truncate">-</p>
+            <p id="modal-stat-type" class="text-xs sm:text-sm font-bold text-[#0B2553] leading-snug break-words">-</p>
           </div>
 
           <!-- Stat 3: Experience Required -->
           <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
             <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              <svg class="w-3.5 h-3.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-3.5 h-3.5 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
               <span>Experience</span>
             </div>
-            <p id="modal-stat-experience" class="text-xs sm:text-sm font-bold text-[#0B2553] truncate">-</p>
-          </div>
-
-          <!-- Stat 4: Compensation -->
-          <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
-            <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>Compensation</span>
-            </div>
-            <p id="modal-stat-pay" class="text-xs sm:text-sm font-bold text-emerald-800 truncate">-</p>
+            <p id="modal-stat-experience" class="text-xs sm:text-sm font-bold text-[#0B2553] leading-snug break-words">-</p>
           </div>
         </div>
 
-        <!-- Real Ceipal Skills Pills in Modal -->
-        <div id="modal-skills-section" class="hidden mt-4 pt-4 border-t border-slate-100">
-          <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Primary Skills</div>
-          <div id="modal-skills-list" class="flex flex-wrap gap-1.5"></div>
-        </div>
       </div>
 
-      <!-- Modal Body (Scrollable Requisition Description) -->
-      <div class="p-6 sm:p-8 overflow-y-auto space-y-4 flex-1 text-sm text-[#243A5E] leading-relaxed bg-slate-50/40">
+      <!-- Modal Body (Scrollable: Primary Skills + Requisition Description) -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1 min-h-0 text-sm text-[#243A5E] leading-relaxed bg-slate-50/40">
+        
+        <!-- Real Ceipal Skills Pills in Modal (Inside Scrollable Body so it never overflows or pushes the layout) -->
+        <div id="modal-skills-section" class="hidden bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div class="text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-3 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#0C487A]"></span>
+            <span>Primary Skills</span>
+          </div>
+          <div id="modal-skills-list" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Position Scope & Qualifications -->
         <div>
           <h4 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-2.5 flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-[#FF3130]"></span>
@@ -301,8 +297,8 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
         </div>
       </div>
 
-      <!-- Modal Footer -->
-      <div class="p-5 sm:p-6 bg-white border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
+      <!-- Modal Footer (Fixed at bottom with shrink-0) -->
+      <div class="p-4 sm:p-5 bg-white border-t border-slate-100 flex flex-wrap items-center justify-between gap-4 shrink-0">
         <p class="text-xs text-slate-500 hidden sm:flex items-center gap-1.5">
           <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -379,6 +375,13 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     applyUrl: string;
   }
 
+  function cleanLocationText(loc: string): string {
+    if (!loc) return 'Not Specified';
+    let clean = loc.replace(/^\[+|\]+$/g, '').trim();
+    clean = clean.replace(/\[|\]/g, '').trim();
+    return clean || 'Not Specified';
+  }
+
   const jobsData: Job[] = (window as any).__INITIAL_CEIPAL_JOBS__ || [];
   const ITEMS_PER_PAGE = 9; // Maximum 10 cards per page: 3x3 balanced grid across 3 columns
   let currentPage = 1;
@@ -413,7 +416,6 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   const modalStatLocation = document.getElementById('modal-stat-location');
   const modalStatType = document.getElementById('modal-stat-type');
   const modalStatExperience = document.getElementById('modal-stat-experience');
-  const modalStatPay = document.getElementById('modal-stat-pay');
   const modalSkillsSection = document.getElementById('modal-skills-section');
   const modalSkillsList = document.getElementById('modal-skills-list');
   const modalDescription = document.getElementById('modal-description');
@@ -835,9 +837,9 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     // Build Cards HTML (3x3 executive grid)
     if (listEl) {
       listEl.innerHTML = visibleJobs.map((j, index) => {
-        const hasPay = Boolean(j.payRate && j.payRate !== 'Not Specified' && j.payRate !== 'N/A');
         const hasExp = Boolean(j.experience && j.experience !== 'N/A' && j.experience.trim().length > 0);
         const cardSummary = cleanCardSummary(j);
+        const cleanLoc = cleanLocationText(j.location);
 
         return `
           <div
@@ -876,15 +878,15 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
                 ${escapeHtml(j.title)}
               </h3>
 
-              <!-- Location, Experience & Compensation Metadata Row -->
+              <!-- Location & Experience Metadata Row (NO COMPENSATION) -->
               <div class="flex flex-wrap items-center gap-y-1.5 gap-x-2.5 text-xs text-slate-600 mb-2.5">
-                ${j.location ? `
-                  <div class="flex items-center gap-1 truncate max-w-[200px]" title="${escapeHtml(j.location)}">
+                ${cleanLoc !== 'Not Specified' ? `
+                  <div class="flex items-center gap-1" title="${escapeHtml(cleanLoc)}">
                     <svg class="w-3.5 h-3.5 text-[#FF3130] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span class="font-medium truncate">${escapeHtml(j.location)}</span>
+                    <span class="font-medium truncate max-w-[200px]">${escapeHtml(cleanLoc)}</span>
                   </div>
                 ` : ''}
 
@@ -894,15 +896,6 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                     <span>${escapeHtml(j.experience)}</span>
-                  </div>
-                ` : ''}
-
-                ${hasPay ? `
-                  <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/70 shrink-0">
-                    <svg class="w-3 h-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>${escapeHtml(j.payRate)}</span>
                   </div>
                 ` : ''}
               </div>
@@ -1126,20 +1119,18 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
         modalType.classList.add('hidden');
       }
     }
+    const cleanLoc = cleanLocationText(job.location);
     if (modalMeta) {
       const dateStr = job.postedDate || job.updatedDate || '';
       const formattedDate = dateStr ? (dateStr.startsWith('Posted') ? dateStr : `Posted ${dateStr}`) : '';
-      const metaParts = [job.location, formattedDate].filter(Boolean);
+      const metaParts = [cleanLoc !== 'Not Specified' ? cleanLoc : '', formattedDate].filter(Boolean);
       modalMeta.textContent = metaParts.join(' · ');
     }
 
-    // 4 Key Stats (STRICT: 100% Real API Data from Ceipal)
-    if (modalStatLocation) modalStatLocation.textContent = job.location || 'Not Specified';
+    // 3 Key Stats: Location, Type, Experience (COMPENSATION REMOVED COMPLETELY)
+    if (modalStatLocation) modalStatLocation.textContent = cleanLoc;
     if (modalStatType) modalStatType.textContent = job.employmentType || 'Not Specified';
     if (modalStatExperience) modalStatExperience.textContent = (job.experience && job.experience !== 'N/A') ? job.experience : 'Not Specified';
-    if (modalStatPay) {
-      modalStatPay.textContent = (job.payRate && job.payRate !== 'Not Specified' && job.payRate !== 'N/A') ? job.payRate : 'Competitive / Inquire';
-    }
 
     // Real Ceipal Skills in Modal
     if (modalSkillsSection && modalSkillsList) {
@@ -1191,8 +1182,9 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
               if (modalType && jd.jobType) {
                 modalType.textContent = jd.jobType;
               }
-              if (modalStatLocation && jd.location) {
-                modalStatLocation.textContent = jd.location;
+              const liveCleanLoc = cleanLocationText(jd.location || job.location);
+              if (modalStatLocation) {
+                modalStatLocation.textContent = liveCleanLoc;
               }
               if (modalStatType && jd.jobType) {
                 modalStatType.textContent = jd.jobType;
@@ -1200,12 +1192,9 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
               if (modalStatExperience && jd.experience && jd.experience !== 'N/A') {
                 modalStatExperience.textContent = jd.experience;
               }
-              if (modalStatPay && jd.payRate && jd.payRate !== 'N/A' && jd.payRate !== 'Not Specified') {
-                modalStatPay.textContent = jd.payRate;
-              }
               if (modalMeta) {
                 const liveDate = jd.postedDate || '';
-                const parts = [jd.location || job.location, liveDate].filter(Boolean);
+                const parts = [liveCleanLoc !== 'Not Specified' ? liveCleanLoc : '', liveDate].filter(Boolean);
                 modalMeta.textContent = parts.join(' · ');
               }
             }
