@@ -60,21 +60,27 @@ function extractPayRate(desc: string, payInfo?: string): string {
 }
 
 function extractClearance(desc: string): CeipalJob['clearanceLevel'] {
-  if (/TS\/SCI|Top Secret\/SCI|SCI with Polygraph|CI Poly|Full Scope Poly/i.test(desc)) {
+  if (/TS\/SCI with Polygraph|SCI with Polygraph|CI Poly|Full Scope Poly/i.test(desc)) {
+    return 'TS/SCI with Polygraph';
+  }
+  if (/TS\/SCI|Top Secret\/SCI/i.test(desc)) {
     if (/Polygraph|Poly/i.test(desc)) return 'TS/SCI with Polygraph';
     return 'TS/SCI';
   }
   if (/Top Secret|TS\b/i.test(desc)) return 'Top Secret';
   if (/Secret\b/i.test(desc)) return 'Secret';
   if (/Public Trust/i.test(desc)) return 'Public Trust';
-  return 'Clearance Eligible';
+  return '';
 }
 
-function extractWorkplace(desc: string, remote_opps?: number): 'Remote' | 'Hybrid' | 'On-site' {
-  if (remote_opps === 1 || /100%\s*Remote|Fully\s*Remote|\bRemote\b/i.test(desc)) return 'Remote';
-  if (remote_opps === 2 || /Hybrid/i.test(desc)) return 'Hybrid';
+function extractWorkplace(desc: string, remote_opps?: number): CeipalJob['workplaceType'] {
+  if (remote_opps === 0) return 'On-site';
+  if (remote_opps === 1) return 'Remote';
+  if (remote_opps === 2) return 'Hybrid';
+  if (/100%\s*Remote|Fully\s*Remote|\bRemote\b/i.test(desc)) return 'Remote';
+  if (/Hybrid/i.test(desc)) return 'Hybrid';
   if (/Onsite|On-site|100%\s*Onsite/i.test(desc)) return 'On-site';
-  return 'Hybrid';
+  return '';
 }
 
 function extractLocation(loc?: string, state?: string): string {
@@ -83,7 +89,7 @@ function extractLocation(loc?: string, state?: string): string {
     if (cleaned.length > 0) return cleaned;
   }
   if (state && state !== 'N/A') return state;
-  return 'Washington, DC Metro';
+  return '';
 }
 
 function extractSummary(desc: string): string {
@@ -143,7 +149,7 @@ function extractSummary(desc: string): string {
     return cleanLine.length > 180 ? cleanLine.slice(0, 180).trim() + '...' : cleanLine;
   }
 
-  return 'Explore mission clearance requirements, key technical responsibilities, and scope for this position.';
+  return '';
 }
 
 export const GET: APIRoute = async () => {
@@ -183,22 +189,22 @@ export const GET: APIRoute = async () => {
           const cached = initialCeipalJobs.find((c) => c.id === portalId || (c.jobCode && c.jobCode === r.jobCode));
           const rawDesc = (cached && cached.fullDescription.length > 1500) ? cached.fullDescription : (r.publicJobDescription || '');
           const desc = stripHtml(rawDesc);
-          const stateVal = (r.stateName && r.stateName !== 'N/A') ? r.stateName : 'Maryland';
+          const stateVal = (r.stateName && r.stateName !== 'N/A') ? r.stateName : '';
           
           return {
             id: portalId,
             jobCode: r.jobCode || '',
-            title: r.positionTitle || 'Federal Contracting Specialist',
+            title: r.positionTitle || '',
             location: extractLocation(r.location, stateVal),
             state: stateVal,
-            country: (r.countryName && r.countryName !== 'N/A') ? r.countryName : 'United States',
-            employmentType: r.jobType || 'Full Time',
-            workplaceType: extractWorkplace(desc),
+            country: (r.countryName && r.countryName !== 'N/A') ? r.countryName : '',
+            employmentType: r.jobType || '',
+            workplaceType: extractWorkplace(desc, r.remote_opportunities ?? (cached ? (cached.workplaceType === 'On-site' ? 0 : cached.workplaceType === 'Remote' ? 1 : cached.workplaceType === 'Hybrid' ? 2 : undefined) : undefined)),
             clearanceLevel: extractClearance(desc),
             payRate: extractPayRate(desc, r.payRateInfo),
             summary: extractSummary(desc),
             fullDescription: desc,
-            updatedDate: r.postedOn || 'Recently Posted',
+            updatedDate: r.postedOn || '',
             // Direct canonical link to this exact requisition in Ceipal:
             applyUrl: `https://candidateportal.ceipal.com/job-details/${portalId}`,
           };
@@ -257,17 +263,17 @@ export const GET: APIRoute = async () => {
           return {
             id: raw.id,
             jobCode: raw.job_code || '',
-            title: raw.public_job_title || 'Federal Contracting Specialist',
+            title: raw.public_job_title || '',
             location: extractLocation(raw.multpile_job_location, raw.state),
-            state: raw.state || 'Maryland',
-            country: raw.country || 'United States',
-            employmentType: raw.tax_terms || 'Full Time',
+            state: raw.state || '',
+            country: raw.country || '',
+            employmentType: raw.tax_terms || '',
             workplaceType: extractWorkplace(desc, raw.remote_opportunities),
             clearanceLevel: extractClearance(desc),
             payRate: extractPayRate(desc),
             summary: extractSummary(desc),
             fullDescription: desc,
-            updatedDate: raw.updated || 'Recently Posted',
+            updatedDate: raw.updated || '',
             applyUrl: directApplyUrl,
           };
         });
