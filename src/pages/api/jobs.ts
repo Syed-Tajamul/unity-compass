@@ -64,15 +64,44 @@ function extractLocation(loc?: string, state?: string): string {
 }
 
 function extractSummary(desc: string): string {
-  const lines = desc.split('\n')
+  if (!desc) return '';
+  const lines = desc
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\r\n/g, '\n')
+    .replace(/(.)\s+(Location|Pay Rate|Rates?|Salary Range?|Salary|Employment Type|Job Type|Shift|Work Schedule|Travel Required|Travel|Security Clearance|Clearance Level|Clearance|Citizenship|Workplace Model|Work Model|Years of Experience)\s*:\s*/gi, '$1\n$2: ')
+    .split('\n')
     .map((l) => l.trim())
-    .filter((l) => l.length > 15)
-    .filter((l) => !/^(Location|Pay Rate|Rates?|Salary|Shift|Travel|Security Clearance|Clearance|Job Title|Position|Job Type|Work Schedule|Work Arrangement|Employment Type|Citizenship):/i.test(l));
+    .filter((l) => l.length > 0);
 
-  if (lines.length > 0) {
-    return lines.slice(0, 2).join(' ').replace(/[\.]+$/, '').slice(0, 200) + '...';
+  const SECTION_REGEX = /^(Position Overview|Position Summary|Role Overview|Role Summary|Overview|About The Role|Job Description|Role Description|Scope of Work|Key Responsibilities|Responsibilities|Primary Responsibilities|Duties|Duties & Responsibilities|Essential Duties|Specific Responsibilities|Qualifications|Key Qualifications|Required Qualifications|Basic Qualifications|Minimum Qualifications|Preferred Qualifications|Desired Qualifications|Requirements|Clearance Requirements|Education & Experience|Education and Experience|Education|Experience|Benefits|What We Offer|Compensation|Technical Skills|Core Requirements)[:\s]*$/i;
+  const META_REGEX = /^(Job Location|Location|Pay Rate|Rates?|Salary Range?|Salary|Employment Type|Job Type|Shift|Work Schedule|Travel Required|Travel|Security Clearance|Clearance Level|Clearance|Citizenship|Workplace Model|Work Model|Years of Experience|Role|Title)\s*:\s*(.+)$/i;
+
+  for (const line of lines) {
+    if (SECTION_REGEX.test(line)) continue;
+    const metaMatch = line.match(META_REGEX);
+    if (metaMatch) {
+      const val = metaMatch[2].trim();
+      const sentences = val.split(/(?<=[.!?])\s+/);
+      if (sentences.length > 1 && val.length > 40) {
+        const potential = sentences.slice(1).join(' ').trim();
+        if (potential.length > 25) {
+          return potential.length > 180 ? potential.slice(0, 180).trim() + '...' : potential;
+        }
+      }
+      continue;
+    }
+
+    const cleanLine = line.replace(/^[•\-\*▪–\d\.\)]\s*/, '').trim();
+    if (
+      /^(Job Title|Position Title|Role|Title)\b/i.test(line) ||
+      cleanLine.length < 25
+    ) {
+      continue;
+    }
+    return cleanLine.length > 180 ? cleanLine.slice(0, 180).trim() + '...' : cleanLine;
   }
-  return desc.replace(/[\.]+$/, '').slice(0, 160) + '...';
+
+  return 'Explore mission clearance requirements, key technical responsibilities, and scope for this position.';
 }
 
 export const GET: APIRoute = async () => {

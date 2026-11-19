@@ -96,7 +96,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI",
     "payRate": "$82.40/hour",
-    "summary": "Location: Gaithersburg, MD (100% Onsite)\nEmployment Type: Full-Time\nPay Rate: $82.40/hour\nShift: Day Shift\nTravel: Not Required\nSecurity Clearance: Active Top S...",
+    "summary": "Join Unity Compass as a Mid Level UI/UX Developer. This TS/SCI mission opportunity offers impactful federal project scope.",
     "fullDescription": "Location: Gaithersburg, MD (100% Onsite)\nEmployment Type: Full-Time\nPay Rate: $82.40/hour\nShift: Day Shift\nTravel: Not Required\nSecurity Clearance: Active Top Secret/SCI with ....",
     "updatedDate": "1 week ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/8FXm93jGfRhCyLJmDuSwwc8QaYvE0a2Knj_gIRmVuLY"
@@ -112,7 +112,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI with Polygraph",
     "payRate": "90/hr",
-    "summary": "Location: Springfield, VA or St. Louis, MO\nRates: 90/hr\nJob Type: Full-Time\nClearance: Active TS/SCI (Must be able to pass a Government Polygraph after hire)\nTr...",
+    "summary": "Join Unity Compass as a Endpoint Security Engineer |||. This TS/SCI with Polygraph mission opportunity offers impactful federal project scope.",
     "fullDescription": "Location: Springfield, VA or St. Louis, MO\nRates: 90/hr\nJob Type: Full-Time\nClearance: Active TS/SCI (Must be able to pass a Government Polygraph after hire)\nTravel: Up to 10....",
     "updatedDate": "2 weeks ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/1fWhyrk1sb1GF9Ybj2pgPnDwZX1R7XYnpABuAs2Kq7s"
@@ -128,7 +128,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "$101.60 per hour",
-    "summary": "Senior Software Developer Travel Required: No...",
+    "summary": "Senior Software Developer",
     "fullDescription": "Senior Software Developer\nLocation: Gaithersburg, MD (100% Onsite)\nPay Rate: $101.60 per hour\nEmployment Type: Full-Time\nShift: Day Shift\nTravel Required: No\nClearance Requ....",
     "updatedDate": "3 weeks ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/F2CkgU9B-aSFvi-scW2e0_lXc3ZiAWhUTG1unTkuwzI"
@@ -144,7 +144,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI",
     "payRate": "$82,550–$149,225",
-    "summary": "Senior Technical Writer – TS/SCI Salary Range: $82,550–$149,225...",
+    "summary": "Senior Technical Writer – TS/SCI",
     "fullDescription": "Senior Technical Writer – TS/SCI\nLocation: Gaithersburg, MD (Hybrid; candidates must live within 25 miles)\nSalary Range: $82,550–$149,225\nSecurity Clearance: Active TS/SCI r....",
     "updatedDate": "3 weeks ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/7HrmFRQUmhQy8rAwHL26n3B7qzdF1ikRAtp0PJ-CNA0"
@@ -160,7 +160,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI with Polygraph",
     "payRate": "",
-    "summary": "Clearance Level Required: Active Top Secret/SCI with the ability to successfully pass a Polygraph ex...",
+    "summary": "Clearance Level Required: Active Top Secret/SCI with the ability to successfully pass a Polygraph ex....",
     "fullDescription": "Job Title: Mid-Level DevSecOps Engineer\nLocation: Gaithersburg, MD \nClearance Level Required: Active Top Secret/SCI with the ability to successfully pass a Polygraph ex....",
     "updatedDate": "1 month ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/XzWh3s_c6o4cPwAYav-btoPlFyvQrWRtl67YIV8uKT4"
@@ -176,7 +176,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI with Polygraph",
     "payRate": "",
-    "summary": "Clearance Level Required : Active Top Secret/SCI with the ability to successfully pass a Polygraph examination...",
+    "summary": "Clearance Level Required : Active Top Secret/SCI with the ability to successfully pass a Polygraph examination.",
     "fullDescription": "Job Title: Sr. Systems Engineer\nLocation: Gaithersburg, MD\nClearance Level Required : Active Top Secret/SCI with the ability to successfully pass a Polygraph examination.\nPr....",
     "updatedDate": "1 month ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/fSRwbwzeYuroCvOLXXlgvKy5u_NBcW6KIu-cFBHy-xU"
@@ -192,7 +192,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI with Polygraph",
     "payRate": "",
-    "summary": "Role: Cyber Security Engineer Experience: Bachelor’s degree and/or 6+ years of c...",
+    "summary": "Experience: Bachelor’s degree and/or 6+ years of c....",
     "fullDescription": "Role: Cyber Security Engineer\nLocation: Springfield, VA – Onsite\nClearance: Active TS/SCI; ability to obtain a Polygraph\nExperience: Bachelor’s degree and/or 6+ years of c....",
     "updatedDate": "2 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/a6hN7fAq8WmwrgA4O67mc-uWOuQHyRPUJmRq__nPfHw"
@@ -208,7 +208,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Title: Cloud Architect / Engineer Experience: 5+ years...",
+    "summary": "Certification: Security+ or equivalent;",
     "fullDescription": "Title: Cloud Architect / Engineer\nLocation: Quantico, VA\nClearance: TS/SCI\nExperience: 5+ years\nCertification: Security+ or equivalent;\n \nPosition Summary\nThe Cloud Arch....",
     "updatedDate": "2 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/p5I_JG7c3B0F8V1g1IBiy-Qsyo28ccFbSr8ZmlxiJ80"
@@ -224,7 +224,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Title: Cybersecurity Lead / Information Assurance Manager Experience: 10+ years...",
+    "summary": "Experience: 10+ years....",
     "fullDescription": "Title: Cybersecurity Lead / Information Assurance Manager\nLocation: Quantico, VA\nClearance: TS/SCI — Must be eligible for and adjudicated at contract start\nExperience: 10+ years....",
     "updatedDate": "2 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/1Amqgc_purocwG-iacByY2oOQQS5YroqsUqdMz57Zb8"
@@ -240,7 +240,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Title: Data Center and Enterprise IT Operations Lead Experience: 10+ years IT o...",
+    "summary": "Experience: 10+ years IT o....",
     "fullDescription": "Title: Data Center and Enterprise IT Operations Lead\nLocation: Quantico, VA\nClearance: TS/SCI — Must be eligible for and adjudicated at contract start\nExperience: 10+ years IT o....",
     "updatedDate": "2 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/KQZxyat0gL62Wbzm0m5mWvV7JloBoZ8IzIa07oEcDI0"
@@ -256,7 +256,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Security Clea...",
+    "summary": "Join Unity Compass as a ServiceNow Developer. This Clearance Eligible mission opportunity offers impactful federal project scope.",
     "fullDescription": "Job Title: Senior ServiceNow Developer\nLocation: Fort Meade, MD | Scott Air Force Base, IL | Ogden, UT\nEmployment Type: Full-Time\nWork Arrangement: Onsite\nSecurity Clea....",
     "updatedDate": "2 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/FaC1StbsPBSl9eNjb98XHnLkSP2wnALeomIxzjCipz8"
@@ -272,7 +272,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Place of Performance: Onsite Experience Required: Minimum 10 years of relevant software engineerin...",
+    "summary": "Place of Performance: Onsite",
     "fullDescription": "Job Title: Principal Platform / DevSecOps Architect\nPlace of Performance: Onsite\nEmployment Type: Full-Time\nExperience Required: Minimum 10 years of relevant software engineerin....",
     "updatedDate": "2 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/gKIspNtl4x2azwCLJOVQsyyJsS6GTZfQvJZM_Jxuqg0"
@@ -288,7 +288,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Place of Performance: Chantilly, Virginia (Onsite) Experience Required: Minimum 12 years of relevant p...",
+    "summary": "Place of Performance: Chantilly, Virginia (Onsite)",
     "fullDescription": "Job Title: Principal Cloud & Identity Architect\nPlace of Performance: Chantilly, Virginia (Onsite)\nEmployment Type: Full-Time\nExperience Required: Minimum 12 years of relevant p....",
     "updatedDate": "2 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/NiptIwYEwPrjIx_4oFg56LA1DD-n7uWadYRTFdj5N5Y"
@@ -304,7 +304,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Top Secret",
     "payRate": "",
-    "summary": "Position Name: Senior Electrical Engineer Clearance Required: Active Secret or Top Secret Clearance...",
+    "summary": "Position Name: Senior Electrical Engineer",
     "fullDescription": "Position Name: Senior Electrical Engineer\nLocation: Chantilly, VA\nWork Schedule: Full-Time\nClearance Required: Active Secret or Top Secret Clearance\nJob Type: Full-Time\nAbou....",
     "updatedDate": "2 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/Vc2t7Hgu80f1G-WAZbddeXOULmuLwoYBkLdLEKHzmd8"
@@ -320,7 +320,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Position Details:...",
+    "summary": "Join Unity Compass as a Software Developer. This TS/SCI mission opportunity offers impactful federal project scope.",
     "fullDescription": "Position Details:\n\t\n\tJob Title: Software Developer (Python/Angular/API Developer)\n\t\n\t\n\tLocation: Annapolis Junction, MD\n\t\n\t\n\tClearance: Active TS/SCI with Full Scope Po....",
     "updatedDate": "3 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/s69mFU8-N9HjnK26BsSgDeriXqWBa4tEUYehDYnFSGk"
@@ -336,7 +336,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Place of Performance: Jacksonville Aviation Authority (JAA), Jacksonville, Florida...",
+    "summary": "Place of Performance: Jacksonville Aviation Authority (JAA), Jacksonville, Florida.",
     "fullDescription": "Job Title: Customer Service Representative (CSR)\nPlace of Performance: Jacksonville Aviation Authority (JAA), Jacksonville, Florida.\nEmployment Type: Staffing Services Contract S....",
     "updatedDate": "3 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/HPGAwoGEm-EYAxIWxTKu_8SkrXFbBCGp6nWeJkNabQ0"
@@ -352,7 +352,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI with Polygraph",
     "payRate": "",
-    "summary": "Clearance Required: Active Top Secret (TS) with ability to obtain TS/SCI with Polygraph Primary Responsibilities...",
+    "summary": "Clearance Required: Active Top Secret (TS) with ability to obtain TS/SCI with Polygraph",
     "fullDescription": "Job Title: System Administrator\nLocation: Gaithersburg, MD\nClearance Required: Active Top Secret (TS) with ability to obtain TS/SCI with Polygraph\nPrimary Responsibilities\n....",
     "updatedDate": "8 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/2WHwfFTlKekCybF2q6OTT5reEvIdq7p7bvIzpsuU2OM"
@@ -368,7 +368,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI with Polygraph",
     "payRate": "",
-    "summary": "Work Authorization: US Citizen Position Overview...",
+    "summary": "Work Authorization: US Citizen",
     "fullDescription": "Job Title: Software Engineer\nLocation: Annapolis Junction, Maryland\nClearance: TS/SCI with Polygraph\nWork Authorization: US Citizen\n \nPosition Overview\nTh....",
     "updatedDate": "8 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/vbwNn5f4M4Hx1KIVcqEm8VjYbk9-oqZCty74bagh7fs"
@@ -384,7 +384,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Position Name: Senior Application Developer Position Overview...",
+    "summary": "Position Name: Senior Application Developer",
     "fullDescription": "Position Name: Senior Application Developer\nLocation: Kansas City, MO | Indianapolis, IN | Frankfort, KY\nEmployment Type: Long-Term Contract (No End Date)\nPosition Overview\n\r....",
     "updatedDate": "8 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/LGSxCR-xJFXTBhHtO2mI1wnkGaMjc3OzIM5I1u5oO4k"
@@ -400,7 +400,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI with Polygraph",
     "payRate": "",
-    "summary": "Position Name: Senior System Administrator Clearance Required: TS/SCI with CI Scope Poly...",
+    "summary": "Position Name: Senior System Administrator",
     "fullDescription": "Position Name: Senior System Administrator\nLocation: Springfield, VA\nClearance Required: TS/SCI with CI Scope Poly\nWork Schedule: Monday–Friday, within 5:00 AM – 9:00 PM EST win....",
     "updatedDate": "8 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/MD9x7p0ZtJF_WJfef4fwXwRo_Tz351M6xhjUHAe0xaA"
@@ -416,7 +416,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Position Name: Senior DevEx Engineer We are seeking a visionary yet hands-on Senior Dev...",
+    "summary": "Position Name: Senior DevEx Engineer",
     "fullDescription": "Position Name: Senior DevEx Engineer\nLocation: Vienna, VA\nJob Type: Hybrid (3 days per week in the office)\nAbout the Role\nWe are seeking a visionary yet hands-on Senior Dev....",
     "updatedDate": "9 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/6csvHuh8yvemCmUxsRtQmE28jMNR1HTXU-kbqTq6OCc"
@@ -432,7 +432,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Remote",
     "clearanceLevel": "Top Secret",
     "payRate": "",
-    "summary": "Position Name:  Cloud FinOps / Cost Analyst Monitor, analyze, and optimize cloud costs across multiple cloud platforms...",
+    "summary": "Position Name:  Cloud FinOps / Cost Analyst",
     "fullDescription": "Position Name:  Cloud FinOps / Cost Analyst\nLocation: Remote\nJob Overview\nMonitor, analyze, and optimize cloud costs across multiple cloud platforms\nDevelop....",
     "updatedDate": "9 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/e2woSpDiUjjyRXkn4aQi78_Qs4U1V139OXMHOhpRTA0"
@@ -448,7 +448,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Remote",
     "clearanceLevel": "Top Secret",
     "payRate": "",
-    "summary": "Position Name: Oracle Cloud Engineer Job Location: Remote...",
+    "summary": "Position Name: Oracle Cloud Engineer",
     "fullDescription": "Position Name: Oracle Cloud Engineer\nJob Location: Remote\n \nJob Overview\nDesign, deploy, and manage cloud environments on Oracle Cloud Infrastructure (OCI)\nI....",
     "updatedDate": "9 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/zzT95VwF5zhDwVAvcaqWo2zqbQrJkyn5y6maYEh-IyA"
@@ -464,7 +464,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Remote",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Position Name: Google Cloud Architect...",
+    "summary": "Position Name: Google Cloud Architect",
     "fullDescription": "Position Name: Google Cloud Architect\nLocation: Washington, DC (Hybrid initially; transitioning to fully remote)\nJob Type: Hybrid (telework + on-site as requir....",
     "updatedDate": "9 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/97tSmm2UG5k2j9dLpxCgpgDD_YJGX24ok-h8eNvN_mI"
@@ -480,7 +480,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Remote",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Position Name: Oracle Cloud Architect...",
+    "summary": "Position Name: Oracle Cloud Architect",
     "fullDescription": "Position Name: Oracle Cloud Architect\nLocation: Washington, DC (Hybrid initially; transitioning to fully remote)\nJob Type: Hybrid (telework + on-site as required)\n ....",
     "updatedDate": "9 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/N4lvLS5VsGEuRSKsOnl_RUkTGSZ6Ma3Bv0vP-nUzNao"
@@ -496,7 +496,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Position Name: Risk Analyst (ICFR / SOX Control Testing) &bull; 3 days onsite / 2 days remote...",
+    "summary": "Position Name: Risk Analyst (ICFR / SOX Control Testing)",
     "fullDescription": "Position Name: Risk Analyst (ICFR / SOX Control Testing) \nLocation: Hybrid &ndash; Vienna, VA\n    &bull; 3 days onsite / 2 days remote\nDuration:&nb....",
     "updatedDate": "10 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/3aFSlrfdPnzpvrTz7V787Nj28eSGswOetqSUEORW71s"
@@ -512,7 +512,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Position Name: Digital iOS Developer Job Description:\r...",
+    "summary": "Position Name: Digital iOS Developer",
     "fullDescription": "Position Name: Digital iOS Developer\nLocation: Hybrid - (Vienna, VA, Winchester), (Pensacola, FL) 2x week in office. Going to 3x a week in April 2026.\n \nJob Description:\r....",
     "updatedDate": "10 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/DssR2U7D3K37zl1CbZc4ZOmOGy60nF_OgeaZ1gxOAJA"
@@ -528,7 +528,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Remote",
     "clearanceLevel": "Top Secret",
     "payRate": "",
-    "summary": "Position Name: IAM Systems Administrator &ndash; CyberArk PAM Education & Experience Requirements:...",
+    "summary": "Position Name: IAM Systems Administrator &ndash; CyberArk PAM",
     "fullDescription": "Position Name: IAM Systems Administrator &ndash; CyberArk PAM\nLocation: Remote\nEducation & Experience Requirements:\nBachelor&rsquo;s degree in Information Security, Comp....",
     "updatedDate": "10 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/ZauU4ZFtAaozBSz-Gwe8B0HVIBcmAlXelLBHBdUOsgc"
@@ -544,7 +544,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Remote",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Position Name: UiPath Development Manager We are seeking an experienced UiPath Develo...",
+    "summary": "Position Name: UiPath Development Manager",
     "fullDescription": "Position Name: UiPath Development Manager\nLocation: Remote\nJob Type: Full-Time\nJob Summary:\nWe are seeking an experienced UiPath Develo....",
     "updatedDate": "10 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/HGqxGvzgv9lyEVhCuyBA797Bd0b8en7CW1YFG1bEU-Y"
@@ -560,7 +560,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Remote",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Position Name: Data Scientist We are seeking a highly skilled Data Scientist with deep ...",
+    "summary": "Position Name: Data Scientist",
     "fullDescription": "Position Name: Data Scientist\nLocation: Remote\nJob Type: Full-Time\nRole Overview\nWe are seeking a highly skilled Data Scientist with deep ....",
     "updatedDate": "10 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/-V3mFW4bWwG1A-WbIqUGirGRjOuFv1fa07Rq5i2hnw0"
@@ -576,7 +576,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Remote",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Position Name: Software Engineer We are seeking an experienced Full Stack Software Engineer&nbsp...",
+    "summary": "Position Name: Software Engineer",
     "fullDescription": "Position Name: Software Engineer\nLocation: Remote\nJob Type: Full-Time\nAbout the Role\nWe are seeking an experienced Full Stack Software Engineer&nbsp....",
     "updatedDate": "10 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/cW_H4efoXlycdl90ah49e-NmbFTCot3n8DbD2EGyf14"
@@ -592,7 +592,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Position Name: Network Administrator Position Overview...",
+    "summary": "Position Name: Network Administrator",
     "fullDescription": "Position Name: Network Administrator\nLocation: Vienna, VA (Onsite &ndash; Headquarters)\nJob Type: Full time\nPosition Overview\nWe are seeking a Network Administrator&nb....",
     "updatedDate": "10 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/bqgoJkGSNinxDheSQss8w9hdUwZAV6MNxyrsGeleUSc"
@@ -608,7 +608,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Position Name: Sr. Software Engineer We are seeking a dedicated Senior Sof...",
+    "summary": "Position Name: Sr. Software Engineer",
     "fullDescription": "Position Name: Sr. Software Engineer\nLocation: Mt. Juliet, TN (outside Nashville)\nJob Type: Full-Time | Onsite Required\nAbout the Role\nWe are seeking a dedicated Senior Sof....",
     "updatedDate": "10 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/G9-4FtWWBHZ5W3uCSlMlmv723j4F-XobWoe6Mji5ylI"
@@ -624,7 +624,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Position Name: Information System Security Officer (ISSO) Clearance Required: Active Top Secret/SCI...",
+    "summary": "Position Name: Information System Security Officer (ISSO)",
     "fullDescription": "Position Name: Information System Security Officer (ISSO)\nLocation: Sterling / Springfield, VA\nClearance Required: Active Top Secret/SCI\nJob Type: Hybrid (te....",
     "updatedDate": "10 months ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/8jiYmXNOJW4OHrgNof2CRtOeaV2F5qg3ntY-gLU8aGs"
@@ -640,7 +640,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "Top Secret",
     "payRate": "",
-    "summary": "Clearance Required: Top Secret with SCI eligible We’re seeking a skilled ...",
+    "summary": "Clearance Required: Top Secret with SCI eligible",
     "fullDescription": "Job Title: Journeyman Test Engineer\nLocation: Springfield, Virginia\nJob Type: On-site\nClearance Required: Top Secret with SCI eligible\nOverview:\nWe’re seeking a skilled ....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/SXsx8i6rcBryZX2qz_XTjlS5ktaTE2k5W1VIfzbAFFY"
@@ -656,7 +656,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI with Polygraph",
     "payRate": "",
-    "summary": "Clearance Required: Top Secret/SCI with Polygraph...",
+    "summary": "Clearance Required: Top Secret/SCI with Polygraph",
     "fullDescription": "Job Title: Quality Assurance Specialist\nLocation: Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI with Polygraph\nJob Overview:\n \nWe are se....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/NiGo3ikcLcE5m-Bj2WQ8VFK5axpFSrFE1ceTbQwSol4"
@@ -672,7 +672,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Clearance Required: Top Secret/SCI...",
+    "summary": "Clearance Required: Top Secret/SCI",
     "fullDescription": "Job Title: Data Scientist SME\nLocation: Alexandria, Virginia & Chantilly, Virginia \nJob Type: On-site\nClearance Required: Top Secret/SCI\nJob Overview:\nWe are seek....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/YvBxsR1vN39WBoXLPubxUoB6LLUsbkqC9D5-NOIJnYg"
@@ -688,7 +688,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Clearance Required: Top Secret/SCI...",
+    "summary": "Clearance Required: Top Secret/SCI",
     "fullDescription": "Job Title: Senior Information System Security Officer (ISSO)\nLocation: Alexandria, Virginia & Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\nJob....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/AhuHCXFPoJUAmWepqWjLhufovXNmOU2gH-NO2boHl5I"
@@ -704,7 +704,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Clearance Required: Top Secret/SCI Job Overview:\r...",
+    "summary": "Clearance Required: Top Secret/SCI",
     "fullDescription": "Job Title: Release Train Engineer\nLocation: Alexandria, Virginia & Chantilly, Virginia \nJob Type: On-site\nClearance Required: Top Secret/SCI\n \nJob Overview:\r....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/CjZ7DfsG-StCtjNbBpgioHpect9L9DjcxlpICs79D54"
@@ -720,7 +720,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Clearance Required: Top Secret/SCI We are seeki...",
+    "summary": "Clearance Required: Top Secret/SCI",
     "fullDescription": "Job Title: Mid-Level Software Engineer\nLocation: Alexandria, Virginia & Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\nJob Overview:\nWe are seeki....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/NDvXZdkhAEaX9GhygxOAhCwTsMpWTqlLnbPFg-WPrbo"
@@ -736,7 +736,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Clearance Required: Top Secret/SCI We are seekin...",
+    "summary": "Clearance Required: Top Secret/SCI",
     "fullDescription": "Job Title: Mid-Level Systems Engineer\nLocation: Alexandria, Virginia & Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\nJob Overview:\nWe are seekin....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/WBxBeH71qOgeSmO3PWHKnBhVXos1gGoTI9wT7zJR_BU"
@@ -752,7 +752,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Job Title: Senior Systems Engineer Location: Alexandria, Virginia & Chantilly, Virginia Job Type: On-site Clearance Required: Top Secret/SCI  Job Overview:  We ...",
+    "summary": "Join Unity Compass as a Senior Systems Engineer. This TS/SCI mission opportunity offers impactful federal project scope.",
     "fullDescription": "Job Title: Senior Systems Engineer Location: Alexandria, Virginia & Chantilly, Virginia Job Type: On-site Clearance Required: Top Secret/SCI  Job Overview:  We are seeking a highly....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/aETOd4z84_1mPtyNY2evIS3sAZVB1kxSwI-lF9biQwE"
@@ -768,7 +768,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Clearance Required: Top Secret/SCI We are seeking a ...",
+    "summary": "Clearance Required: Top Secret/SCI",
     "fullDescription": "Job Title: Systems Engineer SME\nLocation: Alexandria, Virginia & Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\nJob Overview:\nWe are seeking a ....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/Q06B9vPVz_TJUtEUeccmkOEft6kunE0uwQs0mZRSIAk"
@@ -784,7 +784,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Clearance Required: Top Secret/SCI...",
+    "summary": "Clearance Required: Top Secret/SCI",
     "fullDescription": "Job Title: Sr. Software Engineer \nLocation: Alexandria, Virginia & Chantilly, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\n \nJob Overview:\n....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/9tTwGKXV4Jzb6ZRXR4s0bNR9FjSw6BsTVhkxpoDzK_Y"
@@ -800,7 +800,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Clearance Required: Top Secret/SCI...",
+    "summary": "Clearance Required: Top Secret/SCI",
     "fullDescription": "Job Title: Software Engineer SME\nLocation: Chantilly, Virginia & Alexandria, Virginia\nJob Type: On-site\nClearance Required: Top Secret/SCI\n \nJob Overview:\nWe are....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/iwKv6emKAMZGs8cwZmIcyyNGYq5s7XcTUnyfmqqergo"
@@ -816,7 +816,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "On-site",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Position Name: Systems Administrator Citizenship: US Citizen...",
+    "summary": "Position Name: Systems Administrator",
     "fullDescription": "Position Name: Systems Administrator\nLocation: Chantilly/Sterling, VA\nCitizenship: US Citizen \nClearance required: TS/SCI \nJob Type: On-site\n \nWe are seeking a System Admin....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/OnGfEJsTUOEfB__5EBdbbCLf-G5efY6usEk9k7cjSV8"
@@ -832,7 +832,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI with Polygraph",
     "payRate": "",
-    "summary": "Job Title: Software Engineer\nLocation: Annapolis Junction, MD\nEmployment Type: Full-time\nJob Type: Hybrid\nClearance: TS/SCI with Full Scope Poly\nAbout the Role\n...",
+    "summary": "Join Unity Compass as a Software Engineer. This TS/SCI with Polygraph mission opportunity offers impactful federal project scope.",
     "fullDescription": "Job Title: Software Engineer\nLocation: Annapolis Junction, MD\nEmployment Type: Full-time\nJob Type: Hybrid\nClearance: TS/SCI with Full Scope Poly\nAbout the Role\nWe re ....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/M4QErITo5GqgkCtP8C7gvIkVp0jY7Z1BIK9_URSm6Fc"
@@ -848,7 +848,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Position Name: Senior System Integrator Citizenship: US Citizen...",
+    "summary": "Position Name: Senior System Integrator",
     "fullDescription": "Position Name: Senior System Integrator \nLocation: Springfield, VA\nCitizenship: US Citizen \nClearance required: TS/SCI Clearance\n \n....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/WdycecfxLISyCaFlGJM7pVYS89eLOsUPoqQPkzsM2rQ"
@@ -864,7 +864,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI with Polygraph",
     "payRate": "",
-    "summary": "Job Location: Washington, DC As a Senior Systems Engineer you&rsquo;ll lead the design, deployment...",
+    "summary": "As a Senior Systems Engineer you&rsquo;ll lead the design, deployment....",
     "fullDescription": "Job Title: Senior Systems Engineer\nJob Location: Washington, DC\nClearance: TS with CI Poly\nThe Role\nAs a Senior Systems Engineer you&rsquo;ll lead the design, deployment....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/V3CnAccz_IhELOAe62RbBbMTsyd5v61zLc327G8jdhg"
@@ -880,7 +880,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Job Location: Washington, DC Job Description:...",
+    "summary": "We're looking for Production Engineers who can help us build, oper....",
     "fullDescription": "Job Title: FSR Production Engineer\nJob Location: Washington, DC\nClearance: TS/SCI or above\nJob Description:\nWe're looking for Production Engineers who can help us build, oper....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/x5peIeI42b_ooFS163X96Ik-b68D0A3hLWhzf95GvYU"
@@ -896,7 +896,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Job Location: Washington, D.C. We are seeking smart, experienced engineers to help deploy groundbreaking technical solutions that address our customer...",
+    "summary": "We are seeking smart, experienced engineers to help deploy groundbreaking technical solutions that address our customer....",
     "fullDescription": "Job Title: FSR Engineer\nJob Location: Washington, D.C.\nWe are seeking smart, experienced engineers to help deploy groundbreaking technical solutions that address our customer....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/sEzBB3d68A9j2yGRld_SxgPd3I17FGwHEAlIzVReIxQ"
@@ -912,7 +912,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "TS/SCI",
     "payRate": "",
-    "summary": "Job Location: Washington, DC Job Description:...",
+    "summary": "You&rsquo;ll be a key member of a cross-functional team helping....",
     "fullDescription": "Job Title: FSR Engineer/SME-Gamma\nJob Location: Washington, DC\nClearance: TS/SCI or above\nJob Description:\nYou&rsquo;ll be a key member of a cross-functional team helping....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/4YoGswV9qJYfR21X0Ds95C8PB5pqCphDrROI-rXyiPc"
@@ -928,7 +928,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Secret",
     "payRate": "",
-    "summary": "Job Location: Annapolis Junction, MD Citizenship: Due to agency and contract requ...",
+    "summary": "Join Unity Compass as a Network Monitoring Engineer. This Secret mission opportunity offers impactful federal project scope.",
     "fullDescription": "Job Title: Network Monitoring Engineer\nJob Location: Annapolis Junction, MD\nClearance: An active Secret Clearance is required.\nCitizenship: Due to agency and contract requ....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/vfNkUnX9yu6iB2cOQcploJv8-0V0qbhsijF-9nuqVOA"
@@ -944,7 +944,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Job Location: Annapolis Junction, MD...",
+    "summary": "Join Unity Compass as a RHEL Senior Engineer. This Clearance Eligible mission opportunity offers impactful federal project scope.",
     "fullDescription": "Job Title: RHEL Senior Engineer\n\t\t\t \n\t\t\tJob Location: Annapolis Junction, MD\n\t\t\t \n\t\t\tClearance: An active security clearance is required.\n\t\t\t \n\t\t\tCitiz....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/aKsGa4ag7YSeQKT9NlXMtZTxCifuGUk0uHZcI5a06G8"
@@ -960,7 +960,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Job Location: Annapolis Junction, MD...",
+    "summary": "Join Unity Compass as a Automation Security Engineer. This Clearance Eligible mission opportunity offers impactful federal project scope.",
     "fullDescription": "Job Title: Automation Security Engineer\n\t\t\t \n\t\t\tJob Location: Annapolis Junction, MD\n\t\t\t \n\t\t\tClearance: An active security clearance is required.\n\t\t\t \n....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/79SQtUTH2t0ohrpMrstUwPtORJK3BbRF0YT58hkVPDo"
@@ -976,7 +976,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Secret",
     "payRate": "",
-    "summary": "Job Location: Colorado Springs, CO Citizenship:...",
+    "summary": "Join Unity Compass as a Unix/Linux Admin. This Secret mission opportunity offers impactful federal project scope.",
     "fullDescription": "Job Title: Unix/Linux Admin (RHEL)\n\t\t\t \n\t\t\tJob Location: Colorado Springs, CO\n\t\t\t \n\t\t\tClearance: Active Secret Clearance required.\n\t\t\t \n\t\t\tCitizenship:....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/6zBpj6S727hsQZsMQN8QzYD3TOIEP_O4D1QMbVr0LWQ"
@@ -992,7 +992,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Job Location: Colorado Springs, CO Citizenship: Due to federal re...",
+    "summary": "Join Unity Compass as a Configuration Management Analyst. This Clearance Eligible mission opportunity offers impactful federal project scope.",
     "fullDescription": "Job Title: Configuration Management Analyst\n \nJob Location: Colorado Springs, CO\n \nClearance: An active Security Clearance is required.\n \nCitizenship: Due to federal re....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/zMNHe52BxVJmqJcZEB2efIP6YJX7y9S_jCx_7UYNQLQ"
@@ -1008,7 +1008,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Top Secret",
     "payRate": "",
-    "summary": "Job Location: Colorado Springs, CO Citizenship: Due to agency and contract requirements...",
+    "summary": "Join Unity Compass as a Scrum Master. This Top Secret mission opportunity offers impactful federal project scope.",
     "fullDescription": "Job Title: Scrum Master\n \nJob Location: Colorado Springs, CO\n \nClearance: An active Secret Clearance is required.\n \nCitizenship: Due to agency and contract requirements....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/X4H1pGUecvTaVL2qzTcSiOkwgRRzZIDRKRPcyGzQuQU"
@@ -1024,7 +1024,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Job Location: Colorado Springs, CO Education: Bachelor’s (BS) degree in technical studies such as computer science, information systems, programmi...",
+    "summary": "Education: Bachelor’s (BS) degree in technical studies such as computer science, information systems, programmi....",
     "fullDescription": "Job Title: Oracle DBA\n \nJob Location: Colorado Springs, CO\n \nEducation: Bachelor’s (BS) degree in technical studies such as computer science, information systems, programmi....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/YG2zuUUogaplvoNL6QwWsm7u-DbSOuehGJUabF5xDl0"
@@ -1040,7 +1040,7 @@ export const initialCeipalJobs: CeipalJob[] = [
     "workplaceType": "Hybrid",
     "clearanceLevel": "Clearance Eligible",
     "payRate": "",
-    "summary": "Role: Senior Network Engineer Experience: 12 years...",
+    "summary": "We are seeking an experienced Senior Net....",
     "fullDescription": "Role: Senior Network Engineer\nLocation: Colorado Springs, CO\nExperience: 12 years\nJob Type: Full-Time\n \nPosition Overview\nWe are seeking an experienced Senior Net....",
     "updatedDate": "1 year ago",
     "applyUrl": "https://candidateportal.ceipal.com/job-details/dK65LVU15IPUTCDep6fKBCLyIsk4NwXZCzmGfAoaDeU"
