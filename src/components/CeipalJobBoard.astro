@@ -613,6 +613,33 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     return 'bg-slate-50 text-slate-600 border-slate-200';
   }
 
+  function decodeHtmlEntities(str: string): string {
+    if (!str) return '';
+    return str
+      .replace(/&nbsp;/gi, ' ')
+      .replace(/&ndash;/gi, '–')
+      .replace(/&mdash;/gi, '—')
+      .replace(/&rsquo;/gi, '’')
+      .replace(/&lsquo;/gi, '‘')
+      .replace(/&rdquo;/gi, '”')
+      .replace(/&ldquo;/gi, '“')
+      .replace(/&bull;/gi, '•')
+      .replace(/&hellip;/gi, '…')
+      .replace(/&middot;/gi, '·')
+      .replace(/&amp;/gi, '&')
+      .replace(/&lt;/gi, '<')
+      .replace(/&gt;/gi, '>')
+      .replace(/&quot;/gi, '"')
+      .replace(/&#39;/gi, "'")
+      .replace(/&#(\d+);/g, (match, dec) => {
+        try {
+          return String.fromCharCode(parseInt(dec, 10));
+        } catch (e) {
+          return match;
+        }
+      });
+  }
+
   function escapeHtml(str: string): string {
     return str
       .replace(/&/g, '&amp;')
@@ -622,31 +649,53 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
       .replace(/'/g, '&#039;');
   }
 
-  const HEADING_KEYWORDS_REGEX = /(Overview|Summary|Responsibilities|Duties|Qualifications|Requirements|Skills|Education|Experience|Certifications|Benefits|Offer|Scope|Purpose|Description|About)/i;
-  const LIST_SECTION_REGEX = /Responsibilities|Duties|Qualifications|Requirements|Skills|Offer|Benefits|Education|Certifications/i;
+  const ACTION_VERBS_REGEX = /^(Follow|Perform|Develop|Support|Manage|Review|Translate|Maintain|Collaborate|Coordinate|Document|Design|Install|Configure|Monitor|Ensure|Provide|Create|Participate|Work|Analyze|Execute|Interface|Demonstrate|Assist|Lead|Drive|Build|Write|Test|Deploy|Operate)\b/i;
+
+  const EXACT_HEADING_TITLES = new Set([
+    'position overview', 'role overview', 'job overview', 'overview', 'about the role', 'about the position',
+    'position summary', 'job summary', 'role summary', 'summary', 'job description', 'role description',
+    'position details', 'details', 'mission scope', 'scope of work',
+    'key responsibilities', 'responsibilities', 'primary responsibilities', 'core responsibilities',
+    'major responsibilities', 'duties & responsibilities', 'duties and responsibilities', 'duties',
+    'essential duties', 'key duties', 'specific responsibilities',
+    'qualifications', 'key qualifications', 'required qualifications', 'basic qualifications',
+    'minimum qualifications', 'preferred qualifications', 'desired qualifications', 'must-have qualifications',
+    'additional qualifications', 'requirements', 'job requirements', 'minimum requirements', 'key requirements',
+    'core requirements', 'technical requirements', 'clearance requirements', 'security clearance requirements',
+    'education & experience', 'education and experience', 'education', 'certifications', 'preferred skills',
+    'technical skills', 'required skills', 'key skills', 'core skills', 'skills', 'benefits', 'what we offer',
+    'compensation', 'about us', 'about unity compass'
+  ]);
 
   function isSectionHeading(line: string): string | null {
     const clean = line.replace(/^[*_#\s]+/, '').replace(/[*_#\s:]+$/, '').trim();
-    if (clean.length < 3 || clean.length > 55) return null;
+    if (clean.length < 3 || clean.length > 50) return null;
 
-    // Must not have text after colon (e.g. "Location: Springfield" is metadata, not a heading)
+    if (/\.\s*$/.test(line) || ACTION_VERBS_REGEX.test(clean)) return null;
+
     const colonIdx = line.indexOf(':');
     if (colonIdx !== -1) {
       const afterColon = line.slice(colonIdx + 1).trim();
       if (afterColon.length > 0) return null;
     }
 
-    // Either ends with colon OR matches known heading keywords
-    const hasTrailingColon = /:\s*$/.test(line);
-    if (hasTrailingColon || HEADING_KEYWORDS_REGEX.test(clean)) {
+    const cleanLower = clean.toLowerCase();
+    if (EXACT_HEADING_TITLES.has(cleanLower)) {
       return clean;
     }
+
+    if (/:\s*$/.test(line)) {
+      const words = clean.split(/\s+/);
+      if (words.length <= 4 && /(overview|summary|responsibilities|duties|qualifications|requirements|skills|education|certifications|benefits)/i.test(clean)) {
+        return clean;
+      }
+    }
+
     return null;
   }
 
   function parseMetaLine(line: string): { label: string; value: string } | null {
-    // Matches "Label: Value" where label is 2-40 chars and not a sentence starter
-    const m = line.match(/^([A-Za-z0-9\s/&–—\-]{2,40})\s*:\s*(.+)$/);
+    const m = line.match(/^([A-Za-z0-9\s/&–—\-]{2,35})\s*:\s*(.+)$/);
     if (!m) return null;
     const label = m[1].trim();
     const value = m[2].trim();
@@ -662,20 +711,18 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
       return `Explore mission clearance requirements, key technical responsibilities, and scope for this ${job.title || 'position'}.`;
     }
 
-    const clean = text
+    let decoded = decodeHtmlEntities(text);
+    decoded = decoded
       .replace(/<(?:br|div|p|h[1-6]|li)[\s/]*>/gi, '\n')
       .replace(/<[^>]+>/g, ' ')
-      .replace(/&nbsp;/g, ' ')
-      .replace(/&amp;/g, '&')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'")
+      .replace(/<[^>]*$/g, '')
       .replace(/\r\n/g, '\n')
       .replace(/\r/g, '\n');
 
-    const normalized = clean.replace(
-      /([^\r\n])\s+(Job Title|Position Title|Role|Job Location|Location|Pay Rate|Rates?|Salary Range?|Salary|Employment Type|Job Type|Shift|Work Schedule|Travel Required|Travel|Security Clearance|Clearance Required|Clearance Level|Clearance|Citizenship|Workplace Model|Work Model|Years of Experience)\s*:\s*/gi,
+    decoded = decodeHtmlEntities(decoded);
+
+    const normalized = decoded.replace(
+      /([^\r\n])\s+(Job Title|Position Title|Position Name|Role|Job Location|Location|Pay Rate|Rates?|Salary Range?|Salary|Employment Type|Job Type|Shift|Work Schedule|Travel Required|Travel|Security Clearance|Clearance Required|Clearance Level|Clearance|Citizenship|Workplace Model|Work Model|Years of Experience|Certifications?)\s*:\s*/gi,
       '$1\n$2: '
     );
 
@@ -715,109 +762,103 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   function renderFormattedScope(rawDesc: string): string {
     if (!rawDesc) return '<p class="text-slate-400 italic">No detailed requisition scope provided.</p>';
 
-    const clean = rawDesc
+    let decoded = decodeHtmlEntities(rawDesc);
+
+    decoded = decoded
       .replace(/<(?:br|div|p|h[1-6]|li)[\s/]*>/gi, '\n')
       .replace(/<[^>]+>/g, ' ')
-      .replace(/&nbsp;/g, ' ')
-      .replace(/&amp;/g, '&')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'")
+      .replace(/<[^>]*$/g, '')
       .replace(/\r\n/g, '\n')
       .replace(/\r/g, '\n');
 
-    // Separate inline metadata keys into discrete lines
-    const normalized = clean.replace(
-      /([^\r\n])\s+(Job Title|Position Title|Role|Job Location|Location|Pay Rate|Rates?|Salary Range?|Salary|Employment Type|Job Type|Shift|Work Schedule|Travel Required|Travel|Security Clearance|Clearance Required|Clearance Level|Clearance|Citizenship|Workplace Model|Work Model|Years of Experience)\s*:\s*/gi,
+    decoded = decodeHtmlEntities(decoded);
+
+    const normalized = decoded.replace(
+      /([^\r\n])\s+(Job Title|Position Title|Position Name|Role|Job Location|Location|Pay Rate|Rates?|Salary Range?|Salary|Employment Type|Job Type|Shift|Work Schedule|Travel Required|Travel|Security Clearance|Clearance Required|Clearance Level|Clearance|Citizenship|Workplace Model|Work Model|Years of Experience|Certifications?)\s*:\s*/gi,
       '$1\n$2: '
     );
 
     const rawLines = normalized.split('\n').map((l) => l.trim()).filter((l) => l.length > 0);
 
-    let html = '';
-    let metaItems: { label: string; value: string }[] = [];
-    let currentList: string[] = [];
-    let currentSectionType: 'meta' | 'prose' | 'list' = 'meta';
+    const sections: {
+      heading: string | null;
+      metaItems: { label: string; value: string }[];
+      listItems: string[];
+      paragraphs: string[];
+    }[] = [];
 
-    function flushList() {
-      if (currentList.length > 0) {
-        html += '<ul class="space-y-2.5 my-3">';
-        for (const item of currentList) {
-          html += `<li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal"><span class="w-1.5 h-1.5 rounded-full bg-[#0C487A] mt-2 shrink-0"></span><span>${escapeHtml(item)}</span></li>`;
-        }
-        html += '</ul>';
-        currentList = [];
+    let currentSec: {
+      heading: string | null;
+      metaItems: { label: string; value: string }[];
+      listItems: string[];
+      paragraphs: string[];
+    } = { heading: null, metaItems: [], listItems: [], paragraphs: [] };
+    sections.push(currentSec);
+
+    for (const line of rawLines) {
+      const heading = isSectionHeading(line);
+      if (heading) {
+        currentSec = { heading, metaItems: [], listItems: [], paragraphs: [] };
+        sections.push(currentSec);
+        continue;
       }
+
+      const meta = parseMetaLine(line);
+      if (meta && currentSec.paragraphs.length === 0 && currentSec.listItems.length === 0) {
+        currentSec.metaItems.push(meta);
+        continue;
+      }
+
+      const bulletMatch = /^[•\-\*▪–]\s*(.+)$/.exec(line) || /^\d+[\.\)]\s*(.+)$/.exec(line);
+      if (bulletMatch) {
+        currentSec.listItems.push(bulletMatch[1].trim());
+        continue;
+      }
+
+      if (currentSec.heading && /responsibilities|duties|qualifications|requirements|skills/i.test(currentSec.heading)) {
+        currentSec.listItems.push(line);
+        continue;
+      }
+
+      if (meta) {
+        currentSec.paragraphs.push(`<span class="font-extrabold text-[#0B2553]">${escapeHtml(meta.label)}:</span> <span class="text-slate-600 font-medium">${escapeHtml(meta.value)}</span>`);
+        continue;
+      }
+
+      currentSec.paragraphs.push(line);
     }
 
-    function flushMeta() {
-      if (metaItems.length > 0) {
+    let html = '';
+
+    for (const sec of sections) {
+      const hasContent = sec.metaItems.length > 0 || sec.listItems.length > 0 || sec.paragraphs.length > 0;
+      if (!hasContent) continue;
+
+      if (sec.heading) {
+        html += `<h4 class="text-xs sm:text-sm font-extrabold text-[#0B2553] uppercase tracking-wider flex items-center gap-2 mt-5 mb-2.5 pt-2 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0"><span class="w-2 h-2 rounded-full bg-[#FF3130] shrink-0"></span><span>${escapeHtml(sec.heading)}</span></h4>`;
+      }
+
+      if (sec.metaItems.length > 0) {
         html += '<div class="bg-slate-50/80 rounded-xl p-3.5 sm:p-4 border border-slate-200/80 mb-4 space-y-1.5">';
-        for (const m of metaItems) {
+        for (const m of sec.metaItems) {
           html += `<div class="flex items-baseline gap-2 py-0.5 text-xs sm:text-sm"><span class="font-extrabold text-[#0B2553] shrink-0">${escapeHtml(m.label)}:</span><span class="text-slate-600 font-medium">${escapeHtml(m.value)}</span></div>`;
         }
         html += '</div>';
-        metaItems = [];
+      }
+
+      for (const p of sec.paragraphs) {
+        const content = p.startsWith('<span class="font-extrabold') ? p : escapeHtml(p);
+        html += `<p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal mb-3">${content}</p>`;
+      }
+
+      if (sec.listItems.length > 0) {
+        html += '<ul class="space-y-2.5 my-3">';
+        for (const item of sec.listItems) {
+          html += `<li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal"><span class="w-1.5 h-1.5 rounded-full bg-[#0C487A] mt-2 shrink-0"></span><span>${escapeHtml(item)}</span></li>`;
+        }
+        html += '</ul>';
       }
     }
-
-    for (let i = 0; i < rawLines.length; i++) {
-      const line = rawLines[i];
-
-      // 1. Check for section heading (e.g. "Job Overview:", "Key Responsibilities:")
-      const heading = isSectionHeading(line);
-      if (heading) {
-        flushMeta();
-        flushList();
-        if (LIST_SECTION_REGEX.test(heading)) {
-          currentSectionType = 'list';
-        } else {
-          currentSectionType = 'prose';
-        }
-        html += `<h4 class="text-xs sm:text-sm font-extrabold text-[#0B2553] uppercase tracking-wider flex items-center gap-2 mt-5 mb-2.5 pt-2 border-t border-slate-100 first:mt-0 first:pt-0 first:border-0"><span class="w-2 h-2 rounded-full bg-[#FF3130] shrink-0"></span><span>${escapeHtml(heading)}</span></h4>`;
-        continue;
-      }
-
-      // 2. Check for metadata key-value (e.g. "Job Title: Mid-Level...", "Clearance Required: Top Secret/SCI")
-      const meta = parseMetaLine(line);
-      if (meta) {
-        if (currentSectionType === 'meta' || metaItems.length > 0) {
-          metaItems.push(meta);
-          continue;
-        }
-        // Metadata inside section body: render with bold label
-        flushList();
-        html += `<p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal mb-2"><span class="font-extrabold text-[#0B2553]">${escapeHtml(meta.label)}:</span> <span class="text-slate-600 font-medium">${escapeHtml(meta.value)}</span></p>`;
-        continue;
-      }
-
-      // First non-meta line exits initial meta block
-      if (currentSectionType === 'meta') {
-        flushMeta();
-        currentSectionType = 'prose';
-      }
-
-      // Check for explicit bullet item
-      const bulletMatch = /^[•\-\*▪–]\s*(.+)$/.exec(line) || /^\d+[\.\)]\s*(.+)$/.exec(line);
-      if (bulletMatch) {
-        currentList.push(bulletMatch[1].trim());
-        continue;
-      }
-
-      // If inside list section
-      if (currentSectionType === 'list') {
-        currentList.push(line);
-        continue;
-      }
-
-      // Standard narrative prose
-      flushList();
-      html += `<p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal mb-3">${escapeHtml(line)}</p>`;
-    }
-
-    flushMeta();
-    flushList();
 
     return html;
   }

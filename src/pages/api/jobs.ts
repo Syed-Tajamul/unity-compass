@@ -9,18 +9,41 @@ const CANDIDATE_PORTAL_COMPANY_ID = 'IBNJ4YiY3l5nfn1U2E-wp0CzF4-Gh0pFXtDcBBYKhGU
 const CEIPAL_API_KEY = 'Y2NIOHdvenVQZXNtcndHV0RIZWlSQT09';
 const CEIPAL_CP_ID = 'Z3RkUkt2OXZJVld2MjFpOVRSTXoxZz09';
 
+function decodeHtmlEntities(str: string): string {
+  if (!str) return '';
+  return str
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&ndash;/gi, '–')
+    .replace(/&mdash;/gi, '—')
+    .replace(/&rsquo;/gi, '’')
+    .replace(/&lsquo;/gi, '‘')
+    .replace(/&rdquo;/gi, '”')
+    .replace(/&ldquo;/gi, '“')
+    .replace(/&bull;/gi, '•')
+    .replace(/&hellip;/gi, '…')
+    .replace(/&middot;/gi, '·')
+    .replace(/&amp;/gi, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&#(\d+);/g, (match, dec) => {
+      try {
+        return String.fromCharCode(parseInt(dec, 10));
+      } catch (e) {
+        return match;
+      }
+    });
+}
+
 function stripHtml(htmlStr: string): string {
   if (!htmlStr) return '';
-  return htmlStr
+  return decodeHtmlEntities(htmlStr)
     .replace(/<(?:br|div|p|h[1-6]|li)[\s/]*>/gi, '\n')
     .replace(/<[^>]+>/g, ' ')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
+    .replace(/<[^>]*$/g, '') // Strip trailing unclosed tag if truncated by ATS
     .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
@@ -156,9 +179,11 @@ export const GET: APIRoute = async () => {
 
       if (Array.isArray(records) && records.length > 0) {
         const jobs: CeipalJob[] = records.map((r: any): CeipalJob => {
-          const desc = stripHtml(r.publicJobDescription || '');
-          const stateVal = (r.stateName && r.stateName !== 'N/A') ? r.stateName : 'Maryland';
           const portalId = r.id;
+          const cached = initialCeipalJobs.find((c) => c.id === portalId || (c.jobCode && c.jobCode === r.jobCode));
+          const rawDesc = (cached && cached.fullDescription.length > 1500) ? cached.fullDescription : (r.publicJobDescription || '');
+          const desc = stripHtml(rawDesc);
+          const stateVal = (r.stateName && r.stateName !== 'N/A') ? r.stateName : 'Maryland';
           
           return {
             id: portalId,
