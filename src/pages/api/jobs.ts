@@ -59,30 +59,6 @@ function extractPayRate(desc: string, payInfo?: string): string {
   return val;
 }
 
-function extractClearance(desc: string): CeipalJob['clearanceLevel'] {
-  if (/TS\/SCI with Polygraph|SCI with Polygraph|CI Poly|Full Scope Poly/i.test(desc)) {
-    return 'TS/SCI with Polygraph';
-  }
-  if (/TS\/SCI|Top Secret\/SCI/i.test(desc)) {
-    if (/Polygraph|Poly/i.test(desc)) return 'TS/SCI with Polygraph';
-    return 'TS/SCI';
-  }
-  if (/\bTop Secret\b/i.test(desc)) return 'Top Secret';
-  if (/Secret\b/i.test(desc)) return 'Secret';
-  if (/Public Trust/i.test(desc)) return 'Public Trust';
-  return '';
-}
-
-function extractWorkplace(desc: string, remote_opps?: number): CeipalJob['workplaceType'] {
-  if (remote_opps === 0) return 'On-site';
-  if (remote_opps === 1) return 'Remote';
-  if (remote_opps === 2) return 'Hybrid';
-  if (/100%\s*Remote|Fully\s*Remote|\bRemote\b/i.test(desc)) return 'Remote';
-  if (/Hybrid/i.test(desc)) return 'Hybrid';
-  if (/Onsite|On-site|100%\s*Onsite/i.test(desc)) return 'On-site';
-  return '';
-}
-
 function extractLocation(loc?: string, state?: string): string {
   if (loc && loc !== 'N/A, Location not specified' && loc !== 'N/A') {
     const cleaned = loc.replace(/[\[\]()]/g, '').trim();
@@ -187,24 +163,27 @@ export const GET: APIRoute = async () => {
         const jobs: CeipalJob[] = records.map((r: any): CeipalJob => {
           const portalId = r.id;
           const cached = initialCeipalJobs.find((c) => c.id === portalId || (c.jobCode && c.jobCode === r.jobCode));
-          const rawDesc = (cached && cached.fullDescription.length > 1500) ? cached.fullDescription : (r.publicJobDescription || '');
-          const desc = stripHtml(rawDesc);
-          const stateVal = (r.stateName && r.stateName !== 'N/A') ? r.stateName : '';
+          
+          // ALWAYS prefer cached fullDescription which contains the complete, untruncated description from Ceipal
+          const fullDesc = cached?.fullDescription || (r.publicJobDescription ? r.publicJobDescription.replace(/<[a-zA-Z\/][^>\n]*$/gm, '') : '');
+          const stateVal = (r.stateName && r.stateName !== 'N/A') ? r.stateName : (cached?.state || '');
+          
+          const expVal = (r.minExperience && r.minExperience !== 'N/A') ? r.minExperience : (cached?.experience || '');
+          const payVal = (r.payRateInfo && r.payRateInfo !== 'N/A') ? r.payRateInfo.trim() : (cached?.payRate || extractPayRate(fullDesc));
           
           return {
             id: portalId,
-            jobCode: r.jobCode || '',
-            title: r.positionTitle || '',
-            location: extractLocation(r.location, stateVal),
+            jobCode: r.jobCode || (cached?.jobCode || ''),
+            title: r.positionTitle || (cached?.title || ''),
+            location: extractLocation(r.location, stateVal) || (cached?.location || ''),
             state: stateVal,
-            country: (r.countryName && r.countryName !== 'N/A') ? r.countryName : '',
-            employmentType: r.jobType || '',
-            workplaceType: extractWorkplace(desc, r.remote_opportunities ?? (cached ? (cached.workplaceType === 'On-site' ? 0 : cached.workplaceType === 'Remote' ? 1 : cached.workplaceType === 'Hybrid' ? 2 : undefined) : undefined)),
-            clearanceLevel: extractClearance(desc),
-            payRate: extractPayRate(desc, r.payRateInfo),
-            summary: extractSummary(desc),
-            fullDescription: desc,
-            updatedDate: r.postedOn || '',
+            country: (r.countryName && r.countryName !== 'N/A') ? r.countryName : (cached?.country || ''),
+            employmentType: r.jobType || (cached?.employmentType || ''),
+            experience: expVal,
+            payRate: payVal,
+            summary: cached?.summary || extractSummary(fullDesc),
+            fullDescription: fullDesc,
+            updatedDate: r.postedOn || (cached?.updatedDate || ''),
             // Direct canonical link to this exact requisition in Ceipal:
             applyUrl: `https://candidateportal.ceipal.com/job-details/${portalId}`,
           };
@@ -268,8 +247,7 @@ export const GET: APIRoute = async () => {
             state: raw.state || '',
             country: raw.country || '',
             employmentType: raw.tax_terms || '',
-            workplaceType: extractWorkplace(desc, raw.remote_opportunities),
-            clearanceLevel: extractClearance(desc),
+            experience: '',
             payRate: extractPayRate(desc),
             summary: extractSummary(desc),
             fullDescription: desc,

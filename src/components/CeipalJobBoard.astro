@@ -14,9 +14,7 @@
 import {
   initialCeipalJobs,
   availableStates,
-  availableClearances,
   availableEmploymentTypes,
-  availableWorkplaceTypes,
   type CeipalJob,
 } from '../data/ceipalJobs';
 import { companyInfo } from '../data/company';
@@ -58,8 +56,8 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
       </button>
     </div>
 
-    <!-- Row 2: 4 Custom Executive Interactive Dropdown Filters -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <!-- Row 2: 2 Executive Interactive Dropdown Filters -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       
       <!-- Filter 1: State / Location -->
       <div class="custom-dropdown relative" data-filter="state">
@@ -94,40 +92,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
         </div>
       </div>
 
-      <!-- Filter 2: Security Clearance -->
-      <div class="custom-dropdown relative" data-filter="clearance">
-        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-          Security Clearance
-        </label>
-        <button
-          type="button"
-          class="dropdown-trigger w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#0C487A] transition-all cursor-pointer shadow-xs"
-          aria-haspopup="listbox"
-          aria-expanded="false"
-        >
-          <span class="dropdown-selected-label truncate">All Clearances</span>
-          <svg class="dropdown-chevron w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ml-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <!-- Floating Options Panel -->
-        <div class="dropdown-menu hidden absolute top-[calc(100%+6px)] left-0 right-0 bg-white border border-slate-200/90 rounded-xl shadow-xl shadow-slate-900/10 p-1.5 z-50 max-h-60 overflow-y-auto space-y-0.5">
-          {availableClearances.map((c) => (
-            <button
-              type="button"
-              class={`dropdown-option w-full px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:text-[#0C487A] hover:bg-blue-50/70 flex items-center justify-between text-left transition-colors cursor-pointer ${c === 'All Clearances' ? 'bg-blue-50/50 text-[#0C487A]' : ''}`}
-              data-value={c === 'All Clearances' ? '' : c}
-            >
-              <span class="truncate">{c}</span>
-              <svg class={`dropdown-check w-4 h-4 text-[#0C487A] shrink-0 ${c === 'All Clearances' ? '' : 'hidden'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-              </svg>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <!-- Filter 3: Employment Type -->
+      <!-- Filter 2: Employment Type -->
       <div class="custom-dropdown relative" data-filter="type">
         <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
           Employment Type
@@ -153,39 +118,6 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
             >
               <span class="truncate">{t}</span>
               <svg class={`dropdown-check w-4 h-4 text-[#0C487A] shrink-0 ${t === 'All Employment Types' ? '' : 'hidden'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-              </svg>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <!-- Filter 4: Workplace Model -->
-      <div class="custom-dropdown relative" data-filter="workplace">
-        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
-          Workplace Model
-        </label>
-        <button
-          type="button"
-          class="dropdown-trigger w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#0C487A] transition-all cursor-pointer shadow-xs"
-          aria-haspopup="listbox"
-          aria-expanded="false"
-        >
-          <span class="dropdown-selected-label truncate">All Workplace Models</span>
-          <svg class="dropdown-chevron w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ml-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <!-- Floating Options Panel -->
-        <div class="dropdown-menu hidden absolute top-[calc(100%+6px)] left-0 right-0 bg-white border border-slate-200/90 rounded-xl shadow-xl shadow-slate-900/10 p-1.5 z-50 max-h-60 overflow-y-auto space-y-0.5">
-          {availableWorkplaceTypes.map((w) => (
-            <button
-              type="button"
-              class={`dropdown-option w-full px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:text-[#0C487A] hover:bg-blue-50/70 flex items-center justify-between text-left transition-colors cursor-pointer ${w === 'All Workplace Models' ? 'bg-blue-50/50 text-[#0C487A]' : ''}`}
-              data-value={w === 'All Workplace Models' ? '' : w}
-            >
-              <span class="truncate">{w}</span>
-              <svg class={`dropdown-check w-4 h-4 text-[#0C487A] shrink-0 ${w === 'All Workplace Models' ? '' : 'hidden'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
               </svg>
             </button>
@@ -284,8 +216,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
             <!-- Badges -->
             <div class="flex flex-wrap items-center gap-2">
               <span id="modal-job-code" class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-700"></span>
-              <span id="modal-clearance" class="px-3 py-0.5 rounded-full text-xs font-bold border"></span>
-              <span id="modal-workplace" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-[#0B2553]"></span>
+              <span id="modal-type" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-[#0B2553] border border-blue-200/60"></span>
             </div>
             <!-- Title -->
             <h3 id="modal-title" class="text-xl sm:text-2xl font-extrabold text-[#0B2553] tracking-tight leading-snug"></h3>
@@ -305,7 +236,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
           </button>
         </div>
 
-        <!-- 4-Stat Key Highlights Grid -->
+        <!-- 4-Stat Key Highlights Grid (Must-Known Fields from Ceipal) -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5 pt-5 border-t border-slate-100">
           <!-- Stat 1: Location -->
           <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
@@ -318,7 +249,29 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
             <p id="modal-stat-location" class="text-xs sm:text-sm font-bold text-[#0B2553] truncate">-</p>
           </div>
 
-          <!-- Stat 2: Compensation -->
+          <!-- Stat 2: Employment Type -->
+          <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
+            <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+              <svg class="w-3.5 h-3.5 text-[#0C487A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span>Type</span>
+            </div>
+            <p id="modal-stat-type" class="text-xs sm:text-sm font-bold text-[#0B2553] truncate">-</p>
+          </div>
+
+          <!-- Stat 3: Experience Required -->
+          <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
+            <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+              <svg class="w-3.5 h-3.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span>Experience</span>
+            </div>
+            <p id="modal-stat-experience" class="text-xs sm:text-sm font-bold text-[#0B2553] truncate">-</p>
+          </div>
+
+          <!-- Stat 4: Compensation -->
           <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
             <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
               <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -326,29 +279,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
               </svg>
               <span>Compensation</span>
             </div>
-            <p id="modal-stat-pay" class="text-xs sm:text-sm font-bold text-emerald-800 truncate">Competitive</p>
-          </div>
-
-          <!-- Stat 3: Clearance -->
-          <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
-            <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              <svg class="w-3.5 h-3.5 text-[#0C487A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <span>Clearance</span>
-            </div>
-            <p id="modal-stat-clearance" class="text-xs sm:text-sm font-bold text-[#0B2553] truncate">-</p>
-          </div>
-
-          <!-- Stat 4: Work Model -->
-          <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
-            <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              <svg class="w-3.5 h-3.5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              <span>Work Model</span>
-            </div>
-            <p id="modal-stat-model" class="text-xs sm:text-sm font-bold text-[#0B2553] truncate">-</p>
+            <p id="modal-stat-pay" class="text-xs sm:text-sm font-bold text-emerald-800 truncate">-</p>
           </div>
         </div>
       </div>
@@ -432,8 +363,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     state: string;
     country: string;
     employmentType: string;
-    workplaceType: string;
-    clearanceLevel: string;
+    experience: string;
     payRate: string;
     summary: string;
     fullDescription: string;
@@ -449,9 +379,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   const activeFilters = {
     keyword: '',
     state: '',
-    clearance: '',
     type: '',
-    workplace: '',
   };
 
   // DOM Elements
@@ -472,13 +400,12 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   const modalCancelBtn = document.getElementById('modal-cancel-btn');
   const modalTitle = document.getElementById('modal-title');
   const modalJobCode = document.getElementById('modal-job-code');
-  const modalClearance = document.getElementById('modal-clearance');
-  const modalWorkplace = document.getElementById('modal-workplace');
+  const modalType = document.getElementById('modal-type');
   const modalMeta = document.getElementById('modal-meta');
   const modalStatLocation = document.getElementById('modal-stat-location');
+  const modalStatType = document.getElementById('modal-stat-type');
+  const modalStatExperience = document.getElementById('modal-stat-experience');
   const modalStatPay = document.getElementById('modal-stat-pay');
-  const modalStatClearance = document.getElementById('modal-stat-clearance');
-  const modalStatModel = document.getElementById('modal-stat-model');
   const modalDescription = document.getElementById('modal-description');
   const modalApplyBtn = document.getElementById('modal-apply-btn') as HTMLAnchorElement | null;
 
@@ -566,9 +493,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   function getFilteredJobs(): Job[] {
     const q = (searchInput?.value || '').trim().toLowerCase();
     const st = activeFilters.state;
-    const clr = activeFilters.clearance;
     const typ = activeFilters.type;
-    const wrk = activeFilters.workplace;
 
     return jobsData.filter((j) => {
       // Keyword Match (Title, Code, Location, Description)
@@ -577,40 +502,17 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
         const inCode = j.jobCode.toLowerCase().includes(q);
         const inLoc = j.location.toLowerCase().includes(q);
         const inDesc = j.fullDescription.toLowerCase().includes(q);
-        const inClr = j.clearanceLevel.toLowerCase().includes(q);
-        if (!inTitle && !inCode && !inLoc && !inDesc && !inClr) return false;
+        if (!inTitle && !inCode && !inLoc && !inDesc) return false;
       }
 
       // State Filter
       if (st && !j.state.toLowerCase().includes(st.toLowerCase())) return false;
 
-      // Clearance Filter
-      if (clr && j.clearanceLevel !== clr) return false;
-
       // Type Filter
       if (typ && !j.employmentType.toLowerCase().includes(typ.toLowerCase())) return false;
 
-      // Workplace Filter
-      if (wrk && j.workplaceType !== wrk) return false;
-
       return true;
     });
-  }
-
-  function getClearanceBadgeClass(clr: string): string {
-    if (clr.includes('TS/SCI') || clr.includes('Polygraph')) {
-      return 'bg-red-50 text-[#FF3130] border-red-200/80';
-    }
-    if (clr.includes('Top Secret')) {
-      return 'bg-purple-50 text-purple-700 border-purple-200/80';
-    }
-    if (clr.includes('Secret')) {
-      return 'bg-blue-50 text-[#0B2553] border-blue-200/80';
-    }
-    if (clr.includes('Public Trust')) {
-      return 'bg-amber-50 text-amber-800 border-amber-200/80';
-    }
-    return 'bg-slate-50 text-slate-600 border-slate-200';
   }
 
   function decodeHtmlEntities(str: string): string {
@@ -705,17 +607,19 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     return null;
   }
 
+  const META_NOISE_REGEX = /(citizenship|dual citizen|eligible|security clearance|clearance required|days onsite|transition period|going to \d|substituted with years)/i;
+
   function cleanCardSummary(job: Job): string {
     const text = job.fullDescription || job.summary || '';
     if (!text) {
-      return `Explore mission clearance requirements, key technical responsibilities, and scope for this ${job.title || 'position'}.`;
+      return `Explore requisition details, mission responsibilities, and qualifications for this position.`;
     }
 
     let decoded = decodeHtmlEntities(text);
     decoded = decoded
       .replace(/<(?:br|div|p|h[1-6]|li)[\s/]*>/gi, '\n')
       .replace(/<[^>]+>/g, ' ')
-      .replace(/<[^>]*$/g, '')
+      .replace(/<[a-zA-Z\/][^>\n]*$/gm, '')
       .replace(/\r\n/g, '\n')
       .replace(/\r/g, '\n');
 
@@ -726,22 +630,28 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
       '$1\n$2: '
     );
 
-    const rawLines = normalized.split('\n').map((l) => l.trim()).filter((l) => l.length > 0);
+    const rawLines = normalized
+      .split('\n')
+      .map((l) => l.replace(/<[^>]*>/g, '').replace(/<[a-zA-Z\/].*$/g, '').trim())
+      .filter((l) => l.length > 0);
 
     for (const line of rawLines) {
       if (isSectionHeading(line)) continue;
 
       const meta = parseMetaLine(line);
       if (meta) {
+        if (META_NOISE_REGEX.test(meta.label) || META_NOISE_REGEX.test(meta.value)) continue;
         const sentences = meta.value.split(/(?<=[.!?])\s+/);
         if (sentences.length > 1 && meta.value.length > 40) {
           const potential = sentences.slice(1).join(' ').trim();
-          if (potential.length > 25) {
+          if (potential.length > 25 && !META_NOISE_REGEX.test(potential)) {
             return potential.length > 180 ? potential.slice(0, 180).trim() + '...' : potential;
           }
         }
         continue;
       }
+
+      if (META_NOISE_REGEX.test(line)) continue;
 
       const cleanLine = line.replace(/^[•\-\*▪–\d\.\)]\s*/, '').trim();
       if (
@@ -756,7 +666,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
       }
     }
 
-    return '';
+    return `Explore requisition details, mission responsibilities, and qualifications for this position.`;
   }
 
   function renderFormattedScope(rawDesc: string): string {
@@ -764,10 +674,12 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
 
     let decoded = decodeHtmlEntities(rawDesc);
 
+    // Replace block tags with newlines
     decoded = decoded
       .replace(/<(?:br|div|p|h[1-6]|li)[\s/]*>/gi, '\n')
       .replace(/<[^>]+>/g, ' ')
-      .replace(/<[^>]*$/g, '')
+      // Strip any unclosed or truncated tags at end of line/string
+      .replace(/<[a-zA-Z\/][^>\n]*$/gm, '')
       .replace(/\r\n/g, '\n')
       .replace(/\r/g, '\n');
 
@@ -778,7 +690,10 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
       '$1\n$2: '
     );
 
-    const rawLines = normalized.split('\n').map((l) => l.trim()).filter((l) => l.length > 0);
+    const rawLines = normalized
+      .split('\n')
+      .map((l) => l.replace(/<[^>]*>/g, '').replace(/<[a-zA-Z\/].*$/g, '').trim())
+      .filter((l) => l.length > 0);
 
     const sections: {
       heading: string | null;
@@ -811,26 +726,34 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
 
       const bulletMatch = /^[•\-\*▪–]\s*(.+)$/.exec(line) || /^\d+[\.\)]\s*(.+)$/.exec(line);
       if (bulletMatch) {
-        currentSec.listItems.push(bulletMatch[1].trim());
+        const text = bulletMatch[1].trim();
+        if (text.length > 0) currentSec.listItems.push(text);
         continue;
       }
 
       if (currentSec.heading && /responsibilities|duties|qualifications|requirements|skills/i.test(currentSec.heading)) {
-        currentSec.listItems.push(line);
+        if (line.length > 0) currentSec.listItems.push(line);
         continue;
       }
 
       if (meta) {
-        currentSec.paragraphs.push(`<span class="font-extrabold text-[#0B2553]">${escapeHtml(meta.label)}:</span> <span class="text-slate-600 font-medium">${escapeHtml(meta.value)}</span>`);
+        currentSec.paragraphs.push(
+          `<span class="font-extrabold text-[#0B2553]">${escapeHtml(meta.label)}:</span> <span class="text-slate-600 font-medium">${escapeHtml(meta.value)}</span>`
+        );
         continue;
       }
 
-      currentSec.paragraphs.push(line);
+      if (line.length > 0) {
+        currentSec.paragraphs.push(line);
+      }
     }
 
     let html = '';
 
     for (const sec of sections) {
+      sec.listItems = sec.listItems.filter((i) => i.trim().length > 0);
+      sec.paragraphs = sec.paragraphs.filter((p) => p.trim().length > 0);
+
       const hasContent = sec.metaItems.length > 0 || sec.listItems.length > 0 || sec.paragraphs.length > 0;
       if (!hasContent) continue;
 
@@ -882,9 +805,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     const hasActiveFilters = Boolean(
       (searchInput?.value || '').trim() ||
       activeFilters.state ||
-      activeFilters.clearance ||
-      activeFilters.type ||
-      activeFilters.workplace
+      activeFilters.type
     );
 
     if (filterActionsBar) filterActionsBar.classList.toggle('hidden', !hasActiveFilters);
@@ -900,11 +821,12 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
 
     if (emptyEl) emptyEl.classList.add('hidden');
 
-    // Build Cards HTML (2 or 3 in a row grid)
+    // Build Cards HTML (3x3 executive grid)
     if (listEl) {
       listEl.innerHTML = visibleJobs.map((j, index) => {
-        const clrClass = getClearanceBadgeClass(j.clearanceLevel);
-        const hasPay = Boolean(j.payRate && j.payRate !== 'Not Specified');
+        const hasPay = Boolean(j.payRate && j.payRate !== 'Not Specified' && j.payRate !== 'N/A');
+        const hasExp = Boolean(j.experience && j.experience !== 'N/A' && j.experience.trim().length > 0);
+        const cardSummary = cleanCardSummary(j);
 
         return `
           <div
@@ -912,7 +834,6 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
             data-job-id="${j.id}"
             style="transition-delay: ${(index % 9) * 75}ms;"
           >
-            
             <!-- Top Color Stripe -->
             <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-80 group-hover:opacity-100 group-hover:h-1.5 transition-all duration-300"></div>
 
@@ -921,15 +842,10 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
               <!-- Badges & Posted Date -->
               <div class="flex items-center justify-between gap-2 mb-3">
                 <div class="flex flex-wrap items-center gap-1.5">
-                  ${j.jobCode ? `<span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-700">${j.jobCode}</span>` : ''}
-                  ${j.clearanceLevel ? `
-                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider border ${clrClass}">
-                      ${j.clearanceLevel}
-                    </span>
-                  ` : ''}
-                  ${j.workplaceType ? `
-                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#0B2553]">
-                      ${j.workplaceType}
+                  ${j.jobCode ? `<span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-700">${escapeHtml(j.jobCode)}</span>` : ''}
+                  ${j.employmentType ? `
+                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#0B2553] border border-blue-200/60">
+                      ${escapeHtml(j.employmentType)}
                     </span>
                   ` : ''}
                 </div>
@@ -939,42 +855,51 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>${j.updatedDate}</span>
+                    <span>${escapeHtml(j.updatedDate)}</span>
                   </div>
                 ` : ''}
               </div>
 
               <!-- Job Title -->
               <h3 class="text-lg sm:text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] tracking-tight leading-snug line-clamp-2 my-2.5 min-h-[3.25rem] transition-colors">
-                ${j.title}
+                ${escapeHtml(j.title)}
               </h3>
 
-              <!-- Location & Pay Meta Row -->
-              <div class="flex flex-wrap items-center gap-y-1.5 gap-x-3 text-xs text-slate-600 mb-3">
+              <!-- Location, Experience & Compensation Metadata Row -->
+              <div class="flex flex-wrap items-center gap-y-1.5 gap-x-2.5 text-xs text-slate-600 mb-3">
                 ${j.location ? `
-                  <div class="flex items-center gap-1 truncate max-w-[210px]">
+                  <div class="flex items-center gap-1 truncate max-w-[200px]" title="${escapeHtml(j.location)}">
                     <svg class="w-3.5 h-3.5 text-[#FF3130] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span class="font-medium truncate">${j.location}</span>
+                    <span class="font-medium truncate">${escapeHtml(j.location)}</span>
+                  </div>
+                ` : ''}
+
+                ${hasExp ? `
+                  <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-medium bg-slate-50 text-slate-700 border border-slate-200/80 shrink-0">
+                    <svg class="w-3 h-3 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    <span>${escapeHtml(j.experience)}</span>
                   </div>
                 ` : ''}
 
                 ${hasPay ? `
                   <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/70 shrink-0">
-                    <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="w-3 h-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>${j.payRate}</span>
+                    <span>${escapeHtml(j.payRate)}</span>
                   </div>
                 ` : ''}
               </div>
 
               <!-- Scope Excerpt -->
-              ${cleanCardSummary(j) ? `
+              ${cardSummary ? `
                 <p class="text-xs text-slate-500 leading-relaxed font-normal line-clamp-2 mb-4">
-                  ${cleanCardSummary(j)}
+                  ${escapeHtml(cardSummary)}
                 </p>
               ` : ''}
             </div>
@@ -1171,22 +1096,12 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
         modalJobCode.classList.add('hidden');
       }
     }
-    if (modalClearance) {
-      if (job.clearanceLevel) {
-        modalClearance.textContent = job.clearanceLevel;
-        modalClearance.className = `px-3 py-0.5 rounded-full text-xs font-bold border ${getClearanceBadgeClass(job.clearanceLevel)}`;
-        modalClearance.classList.remove('hidden');
+    if (modalType) {
+      if (job.employmentType) {
+        modalType.textContent = job.employmentType;
+        modalType.classList.remove('hidden');
       } else {
-        modalClearance.classList.add('hidden');
-      }
-    }
-    if (modalWorkplace) {
-      const parts = [job.workplaceType, job.employmentType].filter(Boolean);
-      if (parts.length > 0) {
-        modalWorkplace.textContent = parts.join(' · ');
-        modalWorkplace.classList.remove('hidden');
-      } else {
-        modalWorkplace.classList.add('hidden');
+        modalType.classList.add('hidden');
       }
     }
     if (modalMeta) {
@@ -1194,15 +1109,12 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
       modalMeta.textContent = metaParts.join(' · ');
     }
 
-    // 4 Key Stats (STRICT: 100% Real API Data, No Made-Up Text)
+    // 4 Key Stats (STRICT: 100% Real API Data from Ceipal)
     if (modalStatLocation) modalStatLocation.textContent = job.location || 'Not Specified';
+    if (modalStatType) modalStatType.textContent = job.employmentType || 'Not Specified';
+    if (modalStatExperience) modalStatExperience.textContent = (job.experience && job.experience !== 'N/A') ? job.experience : 'Not Specified';
     if (modalStatPay) {
-      modalStatPay.textContent = (job.payRate && job.payRate !== 'Not Specified') ? job.payRate : 'Not Specified';
-    }
-    if (modalStatClearance) modalStatClearance.textContent = job.clearanceLevel || 'Not Specified';
-    if (modalStatModel) {
-      const modelParts = [job.workplaceType, job.employmentType].filter(Boolean);
-      modalStatModel.textContent = modelParts.length > 0 ? modelParts.join(' · ') : 'Not Specified';
+      modalStatPay.textContent = (job.payRate && job.payRate !== 'Not Specified' && job.payRate !== 'N/A') ? job.payRate : 'Competitive / Inquire';
     }
 
     if (modalDescription) {
@@ -1239,9 +1151,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     if (searchInput) searchInput.value = '';
     activeFilters.keyword = '';
     activeFilters.state = '';
-    activeFilters.clearance = '';
     activeFilters.type = '';
-    activeFilters.workplace = '';
 
     // Reset dropdown trigger labels and active options
     document.querySelectorAll<HTMLElement>('.custom-dropdown').forEach((wrapper) => {
@@ -1251,9 +1161,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
 
       let defaultLabel = 'All Options';
       if (filterKey === 'state') defaultLabel = 'All States';
-      if (filterKey === 'clearance') defaultLabel = 'All Clearances';
       if (filterKey === 'type') defaultLabel = 'All Employment Types';
-      if (filterKey === 'workplace') defaultLabel = 'All Workplace Models';
 
       if (label) label.textContent = defaultLabel;
 
