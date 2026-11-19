@@ -15,7 +15,6 @@
  * - Page-wide IntersectionObserver scroll-reveal animations across every viewport section
  */
 import MainLayout from '../layouts/MainLayout.astro';
-import JobBoard from '../components/JobBoard.astro';
 import HiringProcess from '../components/HiringProcess.astro';
 import WaveDivider from '../components/WaveDivider.astro';
 import { companyInfo } from '../data/company';
@@ -302,7 +301,7 @@ const faqs = [
                 Connected to Ceipal Recruitment Portal
               </h3>
               <p class="text-xs sm:text-sm text-slate-500 mb-5 leading-relaxed">
-                Explore our current labor categories and openings below, or submit your resume directly to our recruiting directors via the secure Ceipal Candidate Portal.
+                Submit your credentials directly to our recruitment team via the secure Ceipal Candidate Portal, or submit your resume using the form below.
               </p>
               <div class="flex flex-wrap items-center justify-center gap-3">
                 <a
@@ -336,9 +335,6 @@ const faqs = [
           ></script>
         </div>
       </div>
-
-      <!-- Functional Search, Multi-Filter, and Job Cards -->
-      <JobBoard />
 
     </div>
   </section>
