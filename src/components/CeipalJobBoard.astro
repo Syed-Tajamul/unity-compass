@@ -3,12 +3,13 @@
  * CeipalJobBoard.astro - Custom Executive Job Board for Unity Compass
  * 
  * Synchronized with Ceipal ATS API:
- * - 100% Unity Compass Navy (#0C487A) and Star-Red (#FF3130) Design Tokens
+ * - 100% Unity Compass Navy (#0B2553, #0C487A) and Star-Red (#FF3130) Design Tokens
+ * - Bespoke, elegant custom interactive filter dropdowns
  * - Dynamic Search by title, keyword, skill, or job code (e.g. JPC-77)
- * - Multi-filter: Location / State, Security Clearance, Employment Type, Workplace Model
- * - Uncluttered, spacious executive card architecture
- * - In-place Requisition Details Drawer/Modal
- * - Direct Apply CTAs routing to Ceipal's secure candidate portal
+ * - Multi-column responsive card grid (2 or 3 cards per row)
+ * - Staggered viewport entrance animation for job cards
+ * - Executive Requisition Scope Modal with structured key stats
+ * - Direct Apply Now CTAs routing to Ceipal's secure candidate portal
  */
 import {
   initialCeipalJobs,
@@ -29,7 +30,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
 <div class="space-y-10" id="ceipal-custom-board">
   
   <!-- ========================================================================= -->
-  <!-- SEARCH & STREAMLINED FILTER BAR                                           -->
+  <!-- SEARCH & BESPOKE CUSTOM FILTER BAR                                        -->
   <!-- ========================================================================= -->
   <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 sm:p-7 shadow-[0_12px_36px_-8px_rgba(12,72,122,0.08)] relative z-30">
     <div class="absolute top-0 inset-x-0 h-1.5 rounded-t-2xl sm:rounded-t-3xl bg-gradient-to-r from-[#0B2553] via-[#FF3130] to-[#0B2553]"></div>
@@ -57,115 +58,152 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
       </button>
     </div>
 
-    <!-- Row 2: 4 Custom Select Filters -->
+    <!-- Row 2: 4 Custom Executive Interactive Dropdown Filters -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       
       <!-- Filter 1: State / Location -->
-      <div class="relative">
-        <label for="ceipal-filter-state" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+      <div class="custom-dropdown relative" data-filter="state">
+        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
           Location / State
         </label>
-        <div class="relative">
-          <select
-            id="ceipal-filter-state"
-            class="w-full appearance-none pl-3.5 pr-10 py-2.5 text-xs sm:text-sm rounded-lg border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#FF3130] transition-all cursor-pointer"
-          >
-            {sortedStates.map((st) => (
-              <option value={st === 'All States' ? '' : st}>{st}</option>
-            ))}
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
+        <button
+          type="button"
+          class="dropdown-trigger w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#0C487A] transition-all cursor-pointer shadow-xs"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+        >
+          <span class="dropdown-selected-label truncate">All States</span>
+          <svg class="dropdown-chevron w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ml-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <!-- Floating Options Panel -->
+        <div class="dropdown-menu hidden absolute top-[calc(100%+6px)] left-0 right-0 bg-white border border-slate-200/90 rounded-xl shadow-xl shadow-slate-900/10 p-1.5 z-50 max-h-60 overflow-y-auto space-y-0.5">
+          {sortedStates.map((st) => (
+            <button
+              type="button"
+              class={`dropdown-option w-full px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:text-[#0C487A] hover:bg-blue-50/70 flex items-center justify-between text-left transition-colors cursor-pointer ${st === 'All States' ? 'bg-blue-50/50 text-[#0C487A]' : ''}`}
+              data-value={st === 'All States' ? '' : st}
+            >
+              <span class="truncate">{st}</span>
+              <svg class={`dropdown-check w-4 h-4 text-[#0C487A] shrink-0 ${st === 'All States' ? '' : 'hidden'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+          ))}
         </div>
       </div>
 
       <!-- Filter 2: Security Clearance -->
-      <div class="relative">
-        <label for="ceipal-filter-clearance" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+      <div class="custom-dropdown relative" data-filter="clearance">
+        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
           Security Clearance
         </label>
-        <div class="relative">
-          <select
-            id="ceipal-filter-clearance"
-            class="w-full appearance-none pl-3.5 pr-10 py-2.5 text-xs sm:text-sm rounded-lg border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#FF3130] transition-all cursor-pointer"
-          >
-            {availableClearances.map((c) => (
-              <option value={c === 'All Clearances' ? '' : c}>{c}</option>
-            ))}
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
+        <button
+          type="button"
+          class="dropdown-trigger w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#0C487A] transition-all cursor-pointer shadow-xs"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+        >
+          <span class="dropdown-selected-label truncate">All Clearances</span>
+          <svg class="dropdown-chevron w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ml-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <!-- Floating Options Panel -->
+        <div class="dropdown-menu hidden absolute top-[calc(100%+6px)] left-0 right-0 bg-white border border-slate-200/90 rounded-xl shadow-xl shadow-slate-900/10 p-1.5 z-50 max-h-60 overflow-y-auto space-y-0.5">
+          {availableClearances.map((c) => (
+            <button
+              type="button"
+              class={`dropdown-option w-full px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:text-[#0C487A] hover:bg-blue-50/70 flex items-center justify-between text-left transition-colors cursor-pointer ${c === 'All Clearances' ? 'bg-blue-50/50 text-[#0C487A]' : ''}`}
+              data-value={c === 'All Clearances' ? '' : c}
+            >
+              <span class="truncate">{c}</span>
+              <svg class={`dropdown-check w-4 h-4 text-[#0C487A] shrink-0 ${c === 'All Clearances' ? '' : 'hidden'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+          ))}
         </div>
       </div>
 
       <!-- Filter 3: Employment Type -->
-      <div class="relative">
-        <label for="ceipal-filter-type" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+      <div class="custom-dropdown relative" data-filter="type">
+        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
           Employment Type
         </label>
-        <div class="relative">
-          <select
-            id="ceipal-filter-type"
-            class="w-full appearance-none pl-3.5 pr-10 py-2.5 text-xs sm:text-sm rounded-lg border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#FF3130] transition-all cursor-pointer"
-          >
-            {availableEmploymentTypes.map((t) => (
-              <option value={t === 'All Employment Types' ? '' : t}>{t}</option>
-            ))}
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
+        <button
+          type="button"
+          class="dropdown-trigger w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#0C487A] transition-all cursor-pointer shadow-xs"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+        >
+          <span class="dropdown-selected-label truncate">All Employment Types</span>
+          <svg class="dropdown-chevron w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ml-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <!-- Floating Options Panel -->
+        <div class="dropdown-menu hidden absolute top-[calc(100%+6px)] left-0 right-0 bg-white border border-slate-200/90 rounded-xl shadow-xl shadow-slate-900/10 p-1.5 z-50 max-h-60 overflow-y-auto space-y-0.5">
+          {availableEmploymentTypes.map((t) => (
+            <button
+              type="button"
+              class={`dropdown-option w-full px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:text-[#0C487A] hover:bg-blue-50/70 flex items-center justify-between text-left transition-colors cursor-pointer ${t === 'All Employment Types' ? 'bg-blue-50/50 text-[#0C487A]' : ''}`}
+              data-value={t === 'All Employment Types' ? '' : t}
+            >
+              <span class="truncate">{t}</span>
+              <svg class={`dropdown-check w-4 h-4 text-[#0C487A] shrink-0 ${t === 'All Employment Types' ? '' : 'hidden'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+          ))}
         </div>
       </div>
 
       <!-- Filter 4: Workplace Model -->
-      <div class="relative">
-        <label for="ceipal-filter-workplace" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+      <div class="custom-dropdown relative" data-filter="workplace">
+        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
           Workplace Model
         </label>
-        <div class="relative">
-          <select
-            id="ceipal-filter-workplace"
-            class="w-full appearance-none pl-3.5 pr-10 py-2.5 text-xs sm:text-sm rounded-lg border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#FF3130] transition-all cursor-pointer"
-          >
-            {availableWorkplaceTypes.map((w) => (
-              <option value={w === 'All Workplace Models' ? '' : w}>{w}</option>
-            ))}
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
+        <button
+          type="button"
+          class="dropdown-trigger w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white text-[#0B2553] font-semibold text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-[#FF3130]/20 focus:border-[#0C487A] transition-all cursor-pointer shadow-xs"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+        >
+          <span class="dropdown-selected-label truncate">All Workplace Models</span>
+          <svg class="dropdown-chevron w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ml-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <!-- Floating Options Panel -->
+        <div class="dropdown-menu hidden absolute top-[calc(100%+6px)] left-0 right-0 bg-white border border-slate-200/90 rounded-xl shadow-xl shadow-slate-900/10 p-1.5 z-50 max-h-60 overflow-y-auto space-y-0.5">
+          {availableWorkplaceTypes.map((w) => (
+            <button
+              type="button"
+              class={`dropdown-option w-full px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:text-[#0C487A] hover:bg-blue-50/70 flex items-center justify-between text-left transition-colors cursor-pointer ${w === 'All Workplace Models' ? 'bg-blue-50/50 text-[#0C487A]' : ''}`}
+              data-value={w === 'All Workplace Models' ? '' : w}
+            >
+              <span class="truncate">{w}</span>
+              <svg class={`dropdown-check w-4 h-4 text-[#0C487A] shrink-0 ${w === 'All Workplace Models' ? '' : 'hidden'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+          ))}
         </div>
       </div>
 
     </div>
 
-    <!-- Active Filter Counter & Quick Reset -->
-    <div class="mt-5 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
-      <div class="flex items-center gap-2">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 font-bold">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          Live ATS Sync
-        </span>
-        <span class="text-slate-500 font-medium">
-          Showing <span id="ceipal-showing-count" class="font-bold text-[#0B2553]">{Math.min(10, initialCeipalJobs.length)}</span> of <span id="ceipal-total-count" class="font-bold text-[#0B2553]">{initialCeipalJobs.length}</span> Openings
-        </span>
-      </div>
-
+    <!-- Active Filter Quick Reset Bar -->
+    <div id="ceipal-filter-actions" class="hidden mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-between">
+      <span class="text-xs font-semibold text-slate-500">
+        Filtered Results
+      </span>
       <button
         type="button"
         id="ceipal-reset-btn"
-        class="hidden text-[#FF3130] hover:text-[#E02625] font-bold hover:underline inline-flex items-center gap-1 cursor-pointer transition-colors"
+        class="text-xs text-[#FF3130] hover:text-[#E02625] font-bold hover:underline inline-flex items-center gap-1.5 cursor-pointer transition-colors"
       >
         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -177,10 +215,10 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   </div>
 
   <!-- ========================================================================= -->
-  <!-- JOB CARDS CONTAINER                                                       -->
+  <!-- MULTI-COLUMN JOB CARDS GRID (2 or 3 in a row)                             -->
   <!-- ========================================================================= -->
-  <div id="ceipal-jobs-list" class="space-y-6">
-    <!-- Populated by client script using initial dataset for instant zero-lag load -->
+  <div id="ceipal-jobs-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Populated by client script with smooth staggered entrance animation -->
   </div>
 
   <!-- Empty State (When search has 0 matches) -->
@@ -192,21 +230,21 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     </div>
     <h3 class="text-lg font-bold text-[#0B2553] mb-1.5">No Matching Openings Found</h3>
     <p class="text-xs sm:text-sm text-slate-500 mb-6 leading-relaxed">
-      We couldn't find any positions matching your selected criteria. Try adjusting your search term, clearing location filters, or submit a general resume.
+      We couldn't find any positions matching your selected criteria. Try adjusting your search term, clearing location filters, or connect with our recruitment team.
     </p>
     <div class="flex flex-wrap items-center justify-center gap-3">
       <button
         type="button"
         id="ceipal-empty-reset"
-        class="px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-[#0B2553] hover:bg-[#0C487A] transition-colors cursor-pointer"
+        class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-[#0B2553] hover:bg-[#0C487A] transition-colors cursor-pointer"
       >
         Clear All Filters
       </button>
       <a
         href="#talent-network"
-        class="px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#FF3130] bg-red-50 hover:bg-red-100 transition-colors"
+        class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-[#FF3130] bg-red-50 hover:bg-red-100 transition-colors"
       >
-        Submit General Resume
+        Connect With Recruiter
       </a>
     </div>
   </div>
@@ -216,7 +254,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   <!-- ========================================================================= -->
   <div id="ceipal-pagination" class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-200">
     <div class="text-xs text-slate-500 font-medium">
-      Page <span id="ceipal-current-page" class="font-bold text-[#0B2553]">1</span> of <span id="ceipal-total-pages" class="font-bold text-[#0B2553]">{Math.ceil(initialCeipalJobs.length / 10)}</span>
+      Page <span id="ceipal-current-page" class="font-bold text-[#0B2553]">1</span> of <span id="ceipal-total-pages" class="font-bold text-[#0B2553]">{Math.ceil(initialCeipalJobs.length / 9)}</span>
     </div>
 
     <div class="flex items-center gap-1.5" id="ceipal-page-buttons">
@@ -225,70 +263,121 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   </div>
 
   <!-- ========================================================================= -->
-  <!-- ACCESSIBLE REQUISITION SCOPE MODAL                                         -->
+  <!-- ACCESSIBLE EXECUTIVE REQUISITION SCOPE MODAL                              -->
   <!-- ========================================================================= -->
   <div
     id="ceipal-details-modal"
-    class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6"
+    class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
     aria-hidden="true"
     role="dialog"
     aria-modal="true"
   >
-    <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+    <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
       
       <!-- Top Brand Color Stripe -->
       <div class="h-1.5 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]"></div>
 
       <!-- Modal Header -->
-      <div class="p-6 sm:p-8 border-b border-slate-100 flex items-start justify-between gap-4">
-        <div>
-          <div class="flex flex-wrap items-center gap-2 mb-2">
-            <span id="modal-job-code" class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-600"></span>
-            <span id="modal-clearance" class="px-3 py-0.5 rounded-full text-xs font-bold bg-red-50 text-[#FF3130] border border-red-200/80"></span>
-            <span id="modal-workplace" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-[#0B2553]"></span>
+      <div class="p-6 sm:p-8 border-b border-slate-100 bg-white">
+        <div class="flex items-start justify-between gap-4">
+          <div class="space-y-2">
+            <!-- Badges -->
+            <div class="flex flex-wrap items-center gap-2">
+              <span id="modal-job-code" class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-700"></span>
+              <span id="modal-clearance" class="px-3 py-0.5 rounded-full text-xs font-bold border"></span>
+              <span id="modal-workplace" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-[#0B2553]"></span>
+            </div>
+            <!-- Title -->
+            <h3 id="modal-title" class="text-xl sm:text-2xl font-extrabold text-[#0B2553] tracking-tight leading-snug"></h3>
+            <!-- Location & Date -->
+            <p id="modal-meta" class="text-xs sm:text-sm text-slate-500 font-medium"></p>
           </div>
-          <h3 id="modal-title" class="text-xl sm:text-2xl font-extrabold text-[#0B2553] tracking-tight"></h3>
-          <p id="modal-meta" class="text-xs sm:text-sm text-slate-500 mt-1 font-medium"></p>
+
+          <button
+            type="button"
+            id="modal-close-btn"
+            class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer shrink-0"
+            aria-label="Close dialog"
+          >
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
 
-        <button
-          type="button"
-          id="modal-close-btn"
-          class="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer shrink-0"
-          aria-label="Close dialog"
-        >
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <!-- 4-Stat Key Highlights Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5 pt-5 border-t border-slate-100">
+          <!-- Stat 1: Location -->
+          <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
+            <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+              <svg class="w-3.5 h-3.5 text-[#FF3130]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              </svg>
+              <span>Location</span>
+            </div>
+            <p id="modal-stat-location" class="text-xs sm:text-sm font-bold text-[#0B2553] truncate">-</p>
+          </div>
+
+          <!-- Stat 2: Compensation -->
+          <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
+            <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+              <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Compensation</span>
+            </div>
+            <p id="modal-stat-pay" class="text-xs sm:text-sm font-bold text-emerald-800 truncate">Competitive</p>
+          </div>
+
+          <!-- Stat 3: Clearance -->
+          <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
+            <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+              <svg class="w-3.5 h-3.5 text-[#0C487A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span>Clearance</span>
+            </div>
+            <p id="modal-stat-clearance" class="text-xs sm:text-sm font-bold text-[#0B2553] truncate">-</p>
+          </div>
+
+          <!-- Stat 4: Work Model -->
+          <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70">
+            <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+              <svg class="w-3.5 h-3.5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span>Work Model</span>
+            </div>
+            <p id="modal-stat-model" class="text-xs sm:text-sm font-bold text-[#0B2553] truncate">-</p>
+          </div>
+        </div>
       </div>
 
       <!-- Modal Body (Scrollable Requisition Description) -->
-      <div class="p-6 sm:p-8 overflow-y-auto space-y-4 flex-1 text-sm text-[#243A5E] leading-relaxed">
-        <div id="modal-pay-badge" class="hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 font-bold text-xs">
-          <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span id="modal-pay-text"></span>
-        </div>
-
-        <div class="pt-2">
-          <h4 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-2">Requisition Overview & Requirements</h4>
-          <div id="modal-description" class="whitespace-pre-line text-sm sm:text-base text-slate-700 bg-slate-50/70 p-5 rounded-xl border border-slate-100 font-normal"></div>
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-4 flex-1 text-sm text-[#243A5E] leading-relaxed bg-slate-50/40">
+        <div>
+          <h4 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-2.5 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#FF3130]"></span>
+            <span>Position Scope & Qualifications</span>
+          </h4>
+          <div id="modal-description" class="text-sm sm:text-base text-slate-700 bg-white p-6 rounded-2xl border border-slate-200/80 leading-relaxed shadow-xs whitespace-pre-line font-normal"></div>
         </div>
       </div>
 
       <!-- Modal Footer -->
-      <div class="p-5 sm:p-6 bg-slate-50 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
-        <p class="text-xs text-slate-500 hidden sm:block">
-          Applications processed securely via Unity Compass Ceipal Candidate Portal.
+      <div class="p-5 sm:p-6 bg-white border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
+        <p class="text-xs text-slate-500 hidden sm:flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          <span>Verified Ceipal Candidate Portal Requisition.</span>
         </p>
 
         <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
           <button
             type="button"
             id="modal-cancel-btn"
-            class="px-5 py-2.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-slate-200 transition-colors cursor-pointer"
+            class="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
           >
             Close
           </button>
@@ -297,9 +386,9 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
             href="#"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] shadow-md shadow-[#FF3130]/25 transition-all cursor-pointer"
+            class="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] shadow-md shadow-[#FF3130]/25 transition-all cursor-pointer"
           >
-            <span>Apply for this Position</span>
+            <span>Apply Now</span>
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
@@ -312,12 +401,25 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
 
 </div>
 
+<!-- Card Entrance Animation Styles -->
+<style>
+  .ceipal-card-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ceipal-card-animate.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
 <!-- Inlined Initial Dataset so client renders instantly without waiting for network -->
 <script define:vars={{ initialJobs: initialCeipalJobs }}>
   window.__INITIAL_CEIPAL_JOBS__ = initialJobs;
 </script>
 
-<!-- Master Client Controller: Search, Filter, Pagination, and Modal -->
+<!-- Master Client Controller: Search, Custom Filter Dropdowns, Pagination, Modal & Viewport Reveal -->
 <script>
   interface Job {
     id: string;
@@ -337,22 +439,26 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   }
 
   const jobsData: Job[] = (window as any).__INITIAL_CEIPAL_JOBS__ || [];
-  const ITEMS_PER_PAGE = 10;
+  const ITEMS_PER_PAGE = 9; // Maximum 10 cards per page: 3x3 balanced grid across 3 columns
   let currentPage = 1;
+
+  // Active Filter State
+  const activeFilters = {
+    keyword: '',
+    state: '',
+    clearance: '',
+    type: '',
+    workplace: '',
+  };
 
   // DOM Elements
   const listEl = document.getElementById('ceipal-jobs-list');
   const emptyEl = document.getElementById('ceipal-empty-state');
   const searchInput = document.getElementById('ceipal-search-input') as HTMLInputElement | null;
   const searchClear = document.getElementById('ceipal-search-clear');
-  const filterState = document.getElementById('ceipal-filter-state') as HTMLSelectElement | null;
-  const filterClearance = document.getElementById('ceipal-filter-clearance') as HTMLSelectElement | null;
-  const filterType = document.getElementById('ceipal-filter-type') as HTMLSelectElement | null;
-  const filterWorkplace = document.getElementById('ceipal-filter-workplace') as HTMLSelectElement | null;
+  const filterActionsBar = document.getElementById('ceipal-filter-actions');
   const resetBtn = document.getElementById('ceipal-reset-btn');
   const emptyResetBtn = document.getElementById('ceipal-empty-reset');
-  const showingCountEl = document.getElementById('ceipal-showing-count');
-  const totalCountEl = document.getElementById('ceipal-total-count');
   const curPageEl = document.getElementById('ceipal-current-page');
   const totalPagesEl = document.getElementById('ceipal-total-pages');
   const pageButtonsEl = document.getElementById('ceipal-page-buttons');
@@ -366,17 +472,100 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   const modalClearance = document.getElementById('modal-clearance');
   const modalWorkplace = document.getElementById('modal-workplace');
   const modalMeta = document.getElementById('modal-meta');
-  const modalPayBadge = document.getElementById('modal-pay-badge');
-  const modalPayText = document.getElementById('modal-pay-text');
+  const modalStatLocation = document.getElementById('modal-stat-location');
+  const modalStatPay = document.getElementById('modal-stat-pay');
+  const modalStatClearance = document.getElementById('modal-stat-clearance');
+  const modalStatModel = document.getElementById('modal-stat-model');
   const modalDescription = document.getElementById('modal-description');
   const modalApplyBtn = document.getElementById('modal-apply-btn') as HTMLAnchorElement | null;
 
+  // Setup Custom Interactive Dropdowns
+  function setupCustomDropdowns() {
+    const dropdownWrappers = document.querySelectorAll<HTMLElement>('.custom-dropdown');
+
+    dropdownWrappers.forEach((wrapper) => {
+      const filterKey = wrapper.getAttribute('data-filter') as keyof typeof activeFilters;
+      const triggerBtn = wrapper.querySelector<HTMLButtonElement>('.dropdown-trigger');
+      const menu = wrapper.querySelector<HTMLElement>('.dropdown-menu');
+      const chevron = wrapper.querySelector<SVGElement>('.dropdown-chevron');
+      const label = wrapper.querySelector<HTMLElement>('.dropdown-selected-label');
+      const options = wrapper.querySelectorAll<HTMLButtonElement>('.dropdown-option');
+
+      if (!triggerBtn || !menu || !filterKey) return;
+
+      // Toggle dropdown menu
+      triggerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = !menu.classList.contains('hidden');
+
+        // Close all other open dropdowns first
+        closeAllDropdowns();
+
+        if (!isOpen) {
+          menu.classList.remove('hidden');
+          chevron?.classList.add('rotate-180');
+          triggerBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      // Option selection
+      options.forEach((opt) => {
+        opt.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const val = opt.getAttribute('data-value') || '';
+          const optText = opt.querySelector('span')?.textContent || '';
+
+          activeFilters[filterKey] = val;
+
+          // Update trigger label
+          if (label) label.textContent = optText;
+
+          // Update checkmark state
+          options.forEach((o) => {
+            const isSelected = o === opt;
+            const check = o.querySelector('.dropdown-check');
+            if (isSelected) {
+              o.classList.add('bg-blue-50/50', 'text-[#0C487A]');
+              check?.classList.remove('hidden');
+            } else {
+              o.classList.remove('bg-blue-50/50', 'text-[#0C487A]');
+              check?.classList.add('hidden');
+            }
+          });
+
+          // Close menu
+          menu.classList.add('hidden');
+          chevron?.classList.remove('rotate-180');
+          triggerBtn.setAttribute('aria-expanded', 'false');
+
+          // Trigger reactive re-render
+          currentPage = 1;
+          renderJobs();
+        });
+      });
+    });
+
+    // Close on click outside
+    document.addEventListener('click', () => closeAllDropdowns());
+
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAllDropdowns();
+    });
+  }
+
+  function closeAllDropdowns() {
+    document.querySelectorAll('.dropdown-menu').forEach((m) => m.classList.add('hidden'));
+    document.querySelectorAll('.dropdown-chevron').forEach((c) => c.classList.remove('rotate-180'));
+    document.querySelectorAll('.dropdown-trigger').forEach((t) => t.setAttribute('aria-expanded', 'false'));
+  }
+
   function getFilteredJobs(): Job[] {
     const q = (searchInput?.value || '').trim().toLowerCase();
-    const st = filterState?.value || '';
-    const clr = filterClearance?.value || '';
-    const typ = filterType?.value || '';
-    const wrk = filterWorkplace?.value || '';
+    const st = activeFilters.state;
+    const clr = activeFilters.clearance;
+    const typ = activeFilters.type;
+    const wrk = activeFilters.workplace;
 
     return jobsData.filter((j) => {
       // Keyword Match (Title, Code, Location, Description)
@@ -421,6 +610,15 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     return 'bg-slate-50 text-slate-600 border-slate-200';
   }
 
+  function formatDescription(desc: string): string {
+    if (!desc) return '';
+    return desc
+      .replace(/&nbsp;/g, ' ')
+      .replace(/\r\n\r\n+/g, '\n\n')
+      .replace(/\r\n/g, '\n')
+      .trim();
+  }
+
   function renderJobs() {
     const filtered = getFilteredJobs();
     const total = filtered.length;
@@ -433,21 +631,19 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     const visibleJobs = filtered.slice(startIdx, endIdx);
 
     // Update Counts
-    if (showingCountEl) showingCountEl.textContent = String(visibleJobs.length);
-    if (totalCountEl) totalCountEl.textContent = String(total);
     if (curPageEl) curPageEl.textContent = String(currentPage);
     if (totalPagesEl) totalPagesEl.textContent = String(totalPages);
 
-    // Toggle Search Clear Button & Reset Button
+    // Toggle Search Clear Button & Reset Bar
     const hasActiveFilters = Boolean(
       (searchInput?.value || '').trim() ||
-      filterState?.value ||
-      filterClearance?.value ||
-      filterType?.value ||
-      filterWorkplace?.value
+      activeFilters.state ||
+      activeFilters.clearance ||
+      activeFilters.type ||
+      activeFilters.workplace
     );
 
-    if (resetBtn) resetBtn.classList.toggle('hidden', !hasActiveFilters);
+    if (filterActionsBar) filterActionsBar.classList.toggle('hidden', !hasActiveFilters);
     if (searchClear) searchClear.classList.toggle('hidden', !(searchInput?.value || '').trim());
 
     // Toggle Empty State vs List
@@ -460,79 +656,83 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
 
     if (emptyEl) emptyEl.classList.add('hidden');
 
-    // Build Cards HTML
+    // Build Cards HTML (2 or 3 in a row grid)
     if (listEl) {
-      listEl.innerHTML = visibleJobs.map((j) => {
+      listEl.innerHTML = visibleJobs.map((j, index) => {
         const clrClass = getClearanceBadgeClass(j.clearanceLevel);
         const hasPay = Boolean(j.payRate && j.payRate !== 'Not Specified');
 
         return `
-          <div class="job-card group relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-8 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.14)] hover:-translate-y-1 transition-all duration-300 overflow-hidden" data-job-id="${j.id}">
+          <div
+            class="job-card ceipal-card-animate group relative flex flex-col justify-between rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-7 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.14)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
+            data-job-id="${j.id}"
+            style="transition-delay: ${index * 60}ms;"
+          >
             
             <!-- Top Color Stripe -->
-            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-80 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] opacity-80 group-hover:opacity-100 group-hover:h-1.5 transition-all duration-300"></div>
 
-            <!-- Card Header: Pills & Posted Date -->
-            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-              <div class="flex flex-wrap items-center gap-2">
-                ${j.jobCode ? `<span class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-600">${j.jobCode}</span>` : ''}
-                <span class="px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider border ${clrClass}">
-                  ${j.clearanceLevel}
-                </span>
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-[#0B2553]">
-                  ${j.workplaceType}
-                </span>
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700">
-                  ${j.employmentType}
-                </span>
-              </div>
-
-              <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
-                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>${j.updatedDate}</span>
-              </div>
-            </div>
-
-            <!-- Job Title -->
-            <h3 class="text-xl sm:text-2xl font-extrabold text-[#0B2553] group-hover:text-[#0C487A] tracking-tight leading-snug transition-colors">
-              ${j.title}
-            </h3>
-
-            <!-- Location & Pay Meta Row -->
-            <div class="flex flex-wrap items-center gap-y-2 gap-x-5 text-xs sm:text-sm text-slate-600 mt-2.5 mb-4">
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-[#FF3130] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span class="font-semibold text-slate-700">${j.location}</span>
-              </div>
-
-              ${hasPay ? `
-                <div class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
-                  <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>${j.payRate}</span>
+            <!-- Card Upper Section -->
+            <div>
+              <!-- Badges & Posted Date -->
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  ${j.jobCode ? `<span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-700">${j.jobCode}</span>` : ''}
+                  <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider border ${clrClass}">
+                    ${j.clearanceLevel}
+                  </span>
+                  <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#0B2553]">
+                    ${j.workplaceType}
+                  </span>
                 </div>
-              ` : ''}
-            </div>
 
-            <!-- Role Scope Excerpt -->
-            <p class="text-xs sm:text-sm text-[#243A5E] leading-relaxed font-normal mb-6 line-clamp-2">
-              ${j.summary}
-            </p>
+                <div class="flex items-center gap-1 text-[11px] text-slate-400 font-medium shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>${j.updatedDate}</span>
+                </div>
+              </div>
+
+              <!-- Job Title -->
+              <h3 class="text-lg sm:text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] tracking-tight leading-snug line-clamp-2 my-2.5 min-h-[3.25rem] transition-colors">
+                ${j.title}
+              </h3>
+
+              <!-- Location & Pay Meta Row -->
+              <div class="flex flex-wrap items-center gap-y-1.5 gap-x-3 text-xs text-slate-600 mb-3">
+                <div class="flex items-center gap-1 truncate max-w-[210px]">
+                  <svg class="w-3.5 h-3.5 text-[#FF3130] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span class="font-medium truncate">${j.location}</span>
+                </div>
+
+                ${hasPay ? `
+                  <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/70 shrink-0">
+                    <svg class="w-3 h-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>${j.payRate}</span>
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- Scope Excerpt -->
+              <p class="text-xs text-slate-500 leading-relaxed font-normal line-clamp-2 mb-4">
+                ${j.summary}
+              </p>
+            </div>
 
             <!-- Card Actions Footer -->
-            <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+            <div class="pt-3.5 border-t border-slate-100 flex items-center justify-between gap-2 mt-auto">
               <button
                 type="button"
-                class="view-details-btn text-xs font-bold text-[#0C487A] hover:text-[#0B2553] hover:underline inline-flex items-center gap-1.5 cursor-pointer py-1.5 transition-colors"
+                class="view-details-btn text-xs font-bold text-[#0C487A] hover:text-[#0B2553] hover:underline inline-flex items-center gap-1 cursor-pointer py-1.5 transition-colors"
                 data-id="${j.id}"
               >
-                <span>View Full Scope</span>
+                <span>View Scope</span>
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
@@ -542,9 +742,9 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
                 href="${j.applyUrl}"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-md sm:rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] shadow-[0_4px_14px_rgba(255,49,48,0.25)] hover:shadow-[0_6px_20px_rgba(255,49,48,0.35)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+                class="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#FF3130] to-[#E02625] hover:from-[#E02625] hover:to-[#C61E1D] shadow-[0_4px_14px_rgba(255,49,48,0.22)] hover:shadow-[0_6px_20px_rgba(255,49,48,0.32)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
               >
-                <span>Apply on Ceipal</span>
+                <span>Apply Now</span>
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
@@ -554,9 +754,12 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
           </div>
         `;
       }).join('');
+
+      // Trigger Viewport Animated Stagger
+      triggerCardRevealAnimation();
     }
 
-    // Attach Click Events to "View Full Scope" buttons
+    // Attach Click Events to "View Scope" buttons
     document.querySelectorAll('.view-details-btn').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         const id = (e.currentTarget as HTMLElement).getAttribute('data-id');
@@ -566,6 +769,31 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     });
 
     renderPagination(totalPages);
+  }
+
+  // Viewport Observer for Job Cards Entrance Animation
+  function triggerCardRevealAnimation() {
+    const cards = document.querySelectorAll<HTMLElement>('.ceipal-card-animate');
+    if (!cards.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach((c) => c.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    cards.forEach((c) => observer.observe(c));
   }
 
   function renderPagination(totalPages: number) {
@@ -670,17 +898,16 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     if (modalWorkplace) modalWorkplace.textContent = `${job.workplaceType} · ${job.employmentType}`;
     if (modalMeta) modalMeta.textContent = `${job.location} · Posted ${job.updatedDate}`;
 
-    if (modalPayBadge && modalPayText) {
-      if (job.payRate && job.payRate !== 'Not Specified') {
-        modalPayBadge.classList.remove('hidden');
-        modalPayText.textContent = `Comp / Pay Rate: ${job.payRate}`;
-      } else {
-        modalPayBadge.classList.add('hidden');
-      }
+    // 4 Key Stats
+    if (modalStatLocation) modalStatLocation.textContent = job.location || 'Multiple / US';
+    if (modalStatPay) {
+      modalStatPay.textContent = (job.payRate && job.payRate !== 'Not Specified') ? job.payRate : 'Competitive / Standard';
     }
+    if (modalStatClearance) modalStatClearance.textContent = job.clearanceLevel || 'Clearance Eligible';
+    if (modalStatModel) modalStatModel.textContent = `${job.workplaceType} · ${job.employmentType}`;
 
     if (modalDescription) {
-      modalDescription.textContent = job.fullDescription;
+      modalDescription.textContent = formatDescription(job.fullDescription);
     }
 
     if (modalApplyBtn) {
@@ -697,7 +924,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     document.body.style.overflow = '';
   }
 
-  // Event Listeners for Filters
+  // Event Listeners for Keyword Search
   searchInput?.addEventListener('input', () => {
     currentPage = 1;
     renderJobs();
@@ -709,32 +936,40 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     renderJobs();
   });
 
-  filterState?.addEventListener('change', () => {
-    currentPage = 1;
-    renderJobs();
-  });
-
-  filterClearance?.addEventListener('change', () => {
-    currentPage = 1;
-    renderJobs();
-  });
-
-  filterType?.addEventListener('change', () => {
-    currentPage = 1;
-    renderJobs();
-  });
-
-  filterWorkplace?.addEventListener('change', () => {
-    currentPage = 1;
-    renderJobs();
-  });
-
   function resetAllFilters() {
     if (searchInput) searchInput.value = '';
-    if (filterState) filterState.value = '';
-    if (filterClearance) filterClearance.value = '';
-    if (filterType) filterType.value = '';
-    if (filterWorkplace) filterWorkplace.value = '';
+    activeFilters.keyword = '';
+    activeFilters.state = '';
+    activeFilters.clearance = '';
+    activeFilters.type = '';
+    activeFilters.workplace = '';
+
+    // Reset dropdown trigger labels and active options
+    document.querySelectorAll<HTMLElement>('.custom-dropdown').forEach((wrapper) => {
+      const filterKey = wrapper.getAttribute('data-filter');
+      const label = wrapper.querySelector<HTMLElement>('.dropdown-selected-label');
+      const options = wrapper.querySelectorAll<HTMLButtonElement>('.dropdown-option');
+
+      let defaultLabel = 'All Options';
+      if (filterKey === 'state') defaultLabel = 'All States';
+      if (filterKey === 'clearance') defaultLabel = 'All Clearances';
+      if (filterKey === 'type') defaultLabel = 'All Employment Types';
+      if (filterKey === 'workplace') defaultLabel = 'All Workplace Models';
+
+      if (label) label.textContent = defaultLabel;
+
+      options.forEach((opt, idx) => {
+        const check = opt.querySelector('.dropdown-check');
+        if (idx === 0) {
+          opt.classList.add('bg-blue-50/50', 'text-[#0C487A]');
+          check?.classList.remove('hidden');
+        } else {
+          opt.classList.remove('bg-blue-50/50', 'text-[#0C487A]');
+          check?.classList.add('hidden');
+        }
+      });
+    });
+
     currentPage = 1;
     renderJobs();
   }
@@ -752,7 +987,8 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
     if (e.key === 'Escape') closeModal();
   });
 
-  // Initial Render on Page Load
+  // Initialize
+  setupCustomDropdowns();
   renderJobs();
 
   // Background hydration: Fetch fresh live requisitions from Ceipal endpoint
