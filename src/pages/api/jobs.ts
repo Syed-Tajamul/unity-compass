@@ -67,7 +67,7 @@ function extractClearance(desc: string): CeipalJob['clearanceLevel'] {
     if (/Polygraph|Poly/i.test(desc)) return 'TS/SCI with Polygraph';
     return 'TS/SCI';
   }
-  if (/Top Secret|TS\b/i.test(desc)) return 'Top Secret';
+  if (/\bTop Secret\b/i.test(desc)) return 'Top Secret';
   if (/Secret\b/i.test(desc)) return 'Secret';
   if (/Public Trust/i.test(desc)) return 'Public Trust';
   return '';
