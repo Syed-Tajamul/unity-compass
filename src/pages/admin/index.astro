@@ -993,6 +993,69 @@ import MainLayout from '../../layouts/MainLayout.astro';
     let allBlogs: any[] = [];
     let currentGalleryImages: string[] = [];
 
+    const viewMeta: Record<string, { title: string; subtitle: string }> = {
+      overview: {
+        title: 'Dashboard Overview',
+        subtitle: 'Operational status, real-time client inquiries, and candidate applications.',
+      },
+      inquiries: {
+        title: 'Contact Inquiries',
+        subtitle: 'Messages and inquiries submitted by users through the contact form.',
+      },
+      candidates: {
+        title: 'Candidates & Resumes',
+        subtitle: 'Cleared & GovCon talent submissions.',
+      },
+      jobs: {
+        title: 'Job Board Manager',
+        subtitle: 'Live positions displayed on the public career portal.',
+      },
+      blogs: {
+        title: 'Blog Manager',
+        subtitle: 'GovCon editorial articles and thought leadership.',
+      },
+      'blog-editor': {
+        title: 'Article Workspace',
+        subtitle: 'Author, format, and publish high-impact GovCon insights.',
+      },
+      system: {
+        title: 'Database Health & Ping',
+        subtitle: 'Automated heartbeat monitor preventing Supabase 7-day inactivity pause.',
+      },
+    };
+
+    function switchView(viewName: string) {
+      const activeNavTarget = viewName === 'blog-editor' ? 'blogs' : viewName;
+      document.querySelectorAll('.sidebar-nav-btn').forEach((btn) => {
+        if (btn.getAttribute('data-target-view') === activeNavTarget) {
+          btn.classList.add('bg-[#0B2553]', 'text-white', 'shadow-xs');
+          btn.classList.remove('text-[#243A5E]', 'hover:bg-slate-100');
+        } else {
+          btn.classList.remove('bg-[#0B2553]', 'text-white', 'shadow-xs');
+          btn.classList.add('text-[#243A5E]', 'hover:bg-slate-100');
+        }
+      });
+
+      document.querySelectorAll('.outlet-view').forEach((pane) => pane.classList.add('hidden'));
+      const targetPane = document.getElementById(`view-${viewName}`);
+      if (targetPane) {
+        targetPane.classList.remove('hidden');
+      }
+
+      const outletTitle = document.getElementById('outlet-view-title');
+      const outletSubtitle = document.getElementById('outlet-view-subtitle');
+      if (viewMeta[viewName] && outletTitle && outletSubtitle) {
+        outletTitle.textContent = viewMeta[viewName].title;
+        outletSubtitle.textContent = viewMeta[viewName].subtitle;
+      }
+
+      const adminOutlet = document.getElementById('admin-outlet');
+      if (adminOutlet) {
+        adminOutlet.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+    (window as any).switchView = switchView;
+
     function initAdminPortal() {
       const loginSection = document.getElementById('login-section');
       const dashboardSection = document.getElementById('dashboard-section');
@@ -1072,61 +1135,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         checkAuth();
       });
 
-      // OUTLET SWITCHER LOGIC
-      const outletTitle = document.getElementById('outlet-view-title');
-      const outletSubtitle = document.getElementById('outlet-view-subtitle');
-
-      const viewMeta: Record<string, { title: string; subtitle: string }> = {
-        overview: {
-          title: 'Dashboard Overview',
-          subtitle: 'Operational status, real-time client inquiries, and candidate applications.',
-        },
-        inquiries: {
-          title: 'Contact Inquiries',
-          subtitle: 'Messages and inquiries submitted by users through the contact form.',
-        },
-        candidates: {
-          title: 'Candidates & Resumes',
-          subtitle: 'Cleared & GovCon talent submissions.',
-        },
-        jobs: {
-          title: 'Job Board Manager',
-          subtitle: 'Live positions displayed on the public career portal.',
-        },
-        blogs: {
-          title: 'Blog Manager',
-          subtitle: 'GovCon editorial articles and thought leadership.',
-        },
-        'blog-editor': {
-          title: 'Article Workspace',
-          subtitle: 'Author, format, and publish high-impact GovCon insights.',
-        },
-        system: {
-          title: 'Database Health & Ping',
-          subtitle: 'Automated heartbeat monitor preventing Supabase 7-day inactivity pause.',
-        },
-      };
-
-      function switchView(viewName: string) {
-        document.querySelectorAll('.sidebar-nav-btn').forEach((btn) => {
-          if (btn.getAttribute('data-target-view') === viewName) {
-            btn.classList.add('bg-[#0B2553]', 'text-white', 'shadow-xs');
-            btn.classList.remove('text-[#243A5E]', 'hover:bg-slate-100');
-          } else {
-            btn.classList.remove('bg-[#0B2553]', 'text-white', 'shadow-xs');
-            btn.classList.add('text-[#243A5E]', 'hover:bg-slate-100');
-          }
-        });
-
-        document.querySelectorAll('.outlet-view').forEach((pane) => pane.classList.add('hidden'));
-        document.getElementById(`view-${viewName}`)?.classList.remove('hidden');
-
-        if (viewMeta[viewName] && outletTitle && outletSubtitle) {
-          outletTitle.textContent = viewMeta[viewName].title;
-          outletSubtitle.textContent = viewMeta[viewName].subtitle;
-        }
-      }
-
+      // OUTLET SWITCHER EVENT LISTENERS
       document.querySelectorAll('.sidebar-nav-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const target = btn.getAttribute('data-target-view');
@@ -1868,7 +1877,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
                 <div class="inline-flex items-center gap-1.5">
                   <button
                     type="button"
-                    onclick="window.editBlog('${item.id}')"
+                    onclick="window.editBlog('${item.id || item.slug}')"
                     class="px-2.5 py-1 rounded-lg text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
                     title="Edit Article"
                   >
@@ -1884,7 +1893,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
                   </a>
                   <button
                     type="button"
-                    onclick="window.deleteBlog('${item.id}', '${escapeHtml(item.title).replace(/'/g, "\\'")}')"
+                    onclick="window.deleteBlog('${item.id || item.slug}', '${escapeHtml(item.title).replace(/'/g, "\\'")}')"
                     class="p-1 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
                     title="Delete Article"
                   >
@@ -1932,7 +1941,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
       if (blogToEdit) {
         if (heading) heading.textContent = 'Edit Article';
-        if (idInput) idInput.value = blogToEdit.id || '';
+        if (idInput) idInput.value = blogToEdit.id || blogToEdit.slug || '';
         if (titleInput) titleInput.value = blogToEdit.title || '';
         if (slugInput) slugInput.value = blogToEdit.slug || '';
         if (catInput) catInput.value = blogToEdit.category || 'GovCon Advisory';
@@ -2029,10 +2038,15 @@ import MainLayout from '../../layouts/MainLayout.astro';
       renderGalleryThumbnails();
     };
 
-    (window as any).editBlog = (id: string) => {
-      const blog = allBlogs.find((b: any) => String(b.id) === String(id));
-      if (blog) openBlogEditor(blog);
+    (window as any).editBlog = (idOrSlug: string) => {
+      const blog = allBlogs.find((b: any) => String(b.id) === String(idOrSlug) || String(b.slug) === String(idOrSlug));
+      if (blog) {
+        openBlogEditor(blog);
+      } else {
+        console.warn('Could not find blog to edit with id/slug:', idOrSlug);
+      }
     };
+    (window as any).openBlogEditor = openBlogEditor;
 
     (window as any).deleteBlog = async (id: string, title: string) => {
       if (!confirm(`Are you sure you want to delete "${title}"? This cannot be undone.`)) return;

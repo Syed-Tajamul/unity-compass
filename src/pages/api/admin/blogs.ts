@@ -111,12 +111,15 @@ export const PUT: APIRoute = async ({ request }) => {
     if (updates.isPublished !== undefined) updatePayload.is_published = updates.isPublished;
     if (updates.metadata) updatePayload.metadata = updates.metadata;
 
-    const { data, error } = await supabaseAdmin
-      .from('blogs')
-      .update(updatePayload)
-      .eq('id', id)
-      .select()
-      .single();
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+    let updateQuery = supabaseAdmin.from('blogs').update(updatePayload);
+    if (isUuid) {
+      updateQuery = updateQuery.eq('id', id);
+    } else {
+      updateQuery = updateQuery.eq('slug', id);
+    }
+
+    const { data, error } = await updateQuery.select().single();
 
     if (error) throw error;
 
@@ -182,10 +185,15 @@ export const DELETE: APIRoute = async ({ request }) => {
       );
     }
 
-    const { error } = await supabaseAdmin
-      .from('blogs')
-      .delete()
-      .eq('id', id);
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+    let deleteQuery = supabaseAdmin.from('blogs').delete();
+    if (isUuid) {
+      deleteQuery = deleteQuery.eq('id', id);
+    } else {
+      deleteQuery = deleteQuery.eq('slug', id);
+    }
+
+    const { error } = await deleteQuery;
 
     if (error) throw error;
 
