@@ -546,19 +546,31 @@ import MainLayout from '../../layouts/MainLayout.astro';
         <!-- VIEW 5: BLOG MANAGER                                                -->
         <!-- ------------------------------------------------------------------- -->
         <div id="view-blogs" class="outlet-view hidden space-y-3.5 sm:space-y-4">
-          <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center justify-between gap-3 flex-wrap">
             <div class="flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#EE8522]"></span>
-              <span class="text-xs font-bold text-[#0B2553] tracking-wide">Published Insights</span>
+              <span class="text-xs font-bold text-[#0B2553] tracking-wide">Published Insights &amp; Articles</span>
             </div>
-            <a
-              href="/blog"
-              target="_blank"
-              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-[#0B2553] bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
-            >
-              <span>Preview Live Articles</span>
-              <span aria-hidden="true">&rarr;</span>
-            </a>
+            <div class="flex items-center gap-2.5">
+              <button
+                type="button"
+                id="btn-create-blog"
+                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-all shadow-md shadow-[#0B2553]/20 cursor-pointer active:scale-95"
+              >
+                <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Write New Article</span>
+              </button>
+              <a
+                href="/blog"
+                target="_blank"
+                class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
+              >
+                <span>Preview Live Hub</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
           </div>
 
           <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 overflow-hidden shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)]">
@@ -566,15 +578,16 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <table class="w-full text-left text-xs text-[#243A5E]">
                 <thead class="bg-slate-50 text-[#0B2553] uppercase tracking-wider text-[11px] font-bold border-b border-slate-200">
                   <tr>
-                    <th class="px-5 py-3">Article Title &amp; Route</th>
-                    <th class="px-5 py-3">Category</th>
-                    <th class="px-5 py-3">Author &amp; Date</th>
-                    <th class="px-5 py-3 text-right">Status</th>
+                    <th class="px-5 py-3.5">Cover &amp; Article</th>
+                    <th class="px-5 py-3.5">Category</th>
+                    <th class="px-5 py-3.5">Author &amp; Date</th>
+                    <th class="px-5 py-3.5 text-center">Status</th>
+                    <th class="px-5 py-3.5 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody id="blogs-table-body" class="divide-y divide-slate-100">
                   <tr>
-                    <td colspan="4" class="px-5 py-8 text-center text-slate-400">Loading articles...</td>
+                    <td colspan="5" class="px-5 py-8 text-center text-slate-400">Loading articles...</td>
                   </tr>
                 </tbody>
               </table>
@@ -662,6 +675,282 @@ import MainLayout from '../../layouts/MainLayout.astro';
   </div>
 
   <!-- ========================================================================= -->
+  <!-- MODAL: EXECUTIVE BLOG ARTICLE EDITOR                                      -->
+  <!-- ========================================================================= -->
+  <div id="blog-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 hidden">
+    <div class="bg-white rounded-2xl sm:rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-200/90 relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Top Brand Color Stripe -->
+      <div class="h-1.5 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] shrink-0"></div>
+
+      <!-- Modal Header -->
+      <div class="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between shrink-0 bg-white">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#FF3130]"></span>
+            <h3 id="blog-modal-heading" class="text-lg sm:text-xl font-extrabold text-[#0B2553] tracking-tight">Write New Article</h3>
+          </div>
+          <p class="text-xs text-slate-500 mt-0.5">Author, format, and publish GovCon insights directly to the live platform.</p>
+        </div>
+        <button type="button" id="close-blog-modal" class="p-2 text-slate-400 hover:text-slate-700 rounded-xl hover:bg-slate-100 transition-colors text-xl cursor-pointer" aria-label="Close modal">&times;</button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="flex-1 min-h-0 overflow-y-auto p-5 sm:p-7 space-y-5 bg-slate-50/40 text-xs text-[#243A5E]">
+        <input type="hidden" id="blog-input-id" value="" />
+
+        <!-- Title & Slug -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Article Title *</label>
+            <input
+              type="text"
+              id="blog-input-title"
+              required
+              placeholder="e.g. Navigating Small Business Set-Asides in 2026"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-[#0B2553] font-semibold focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">URL Slug (Auto-generated) *</label>
+            <div class="flex items-center">
+              <span class="px-3 py-2.5 bg-slate-100 text-slate-400 font-mono text-xs rounded-l-xl border border-r-0 border-slate-200">/blog/</span>
+              <input
+                type="text"
+                id="blog-input-slug"
+                required
+                placeholder="navigating-small-business-set-asides-2026"
+                class="w-full px-3 py-2.5 rounded-r-xl border border-slate-200 bg-white text-xs font-mono text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Category, Author & Read Time -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Category *</label>
+            <input
+              type="text"
+              id="blog-input-category"
+              list="category-suggestions"
+              value="GovCon Advisory"
+              placeholder="Select or type..."
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
+            />
+            <datalist id="category-suggestions">
+              <option value="GovCon Advisory" />
+              <option value="Proposal Strategies" />
+              <option value="Company Growth" />
+              <option value="Technology & AI" />
+              <option value="Staffing & Clearance" />
+              <option value="Cybersecurity & Defense" />
+            </datalist>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Author</label>
+            <input
+              type="text"
+              id="blog-input-author"
+              value="Unity Compass Team"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Read Time</label>
+            <input
+              type="text"
+              id="blog-input-readtime"
+              value="5 min read"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
+            />
+          </div>
+        </div>
+
+        <!-- Excerpt -->
+        <div>
+          <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Executive Excerpt (1-2 Sentences for Previews &amp; SEO) *</label>
+          <textarea
+            id="blog-input-excerpt"
+            rows="2"
+            placeholder="A compelling executive summary displayed on cards and search engines..."
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-[#243A5E] leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
+          ></textarea>
+        </div>
+
+        <!-- Primary Featured Cover Image (Supabase Bucket Uploader) -->
+        <div class="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-bold text-[#0B2553] uppercase tracking-wider">Featured Cover Image *</label>
+            <span id="blog-cover-status" class="text-[11px] font-medium text-slate-400"></span>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            <input
+              type="file"
+              id="blog-cover-file"
+              accept="image/*"
+              class="hidden"
+            />
+            <button
+              type="button"
+              id="btn-upload-cover"
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-colors cursor-pointer shrink-0"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+              </svg>
+              <span>Upload to Supabase Bucket</span>
+            </button>
+
+            <span class="text-xs text-slate-400 font-medium">or Image URL:</span>
+
+            <input
+              type="text"
+              id="blog-input-image"
+              placeholder="https://..."
+              class="flex-1 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-mono text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
+            />
+          </div>
+
+          <!-- Cover Image Preview -->
+          <div id="blog-cover-preview-wrapper" class="hidden relative inline-block mt-2">
+            <img id="blog-cover-preview" src="" alt="Cover Preview" class="h-28 w-48 object-cover rounded-xl border border-slate-200 shadow-sm" />
+            <button
+              type="button"
+              id="btn-remove-cover"
+              class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-xs shadow-md hover:bg-red-700 cursor-pointer"
+            >&times;</button>
+          </div>
+        </div>
+
+        <!-- Additional Gallery Images (Optional Multi-Photo Support) -->
+        <div class="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold text-[#0B2553] uppercase tracking-wider block">Visual Gallery Photos (Optional)</span>
+              <span class="text-[11px] text-slate-400">Upload multiple photos to display in the article's visual gallery.</span>
+            </div>
+            <span id="blog-gallery-status" class="text-[11px] font-medium text-slate-400"></span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <input
+              type="file"
+              id="blog-gallery-file"
+              accept="image/*"
+              multiple
+              class="hidden"
+            />
+            <button
+              type="button"
+              id="btn-upload-gallery"
+              class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
+            >
+              <svg class="w-4 h-4 text-[#0B2553]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+              <span>+ Add Images to Bucket</span>
+            </button>
+          </div>
+
+          <!-- Gallery Thumbnails Strip -->
+          <div id="blog-gallery-strip" class="flex flex-wrap gap-2.5 mt-2"></div>
+        </div>
+
+        <!-- Rich Text Editor Section -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <label class="text-xs font-bold text-[#0B2553] uppercase tracking-wider">Article Content &amp; Formatting *</label>
+            <div class="flex items-center gap-1.5 bg-slate-200/70 p-1 rounded-xl">
+              <button
+                type="button"
+                id="btn-editor-tab-write"
+                class="px-3 py-1 rounded-lg text-xs font-bold text-[#0B2553] bg-white shadow-xs transition-all cursor-pointer"
+              >
+                Write
+              </button>
+              <button
+                type="button"
+                id="btn-editor-tab-preview"
+                class="px-3 py-1 rounded-lg text-xs font-bold text-slate-500 hover:text-[#0B2553] transition-all cursor-pointer"
+              >
+                Live Preview
+              </button>
+            </div>
+          </div>
+
+          <!-- Formatting Toolbar -->
+          <div id="editor-toolbar" class="flex flex-wrap items-center gap-1 p-2 bg-white rounded-xl border border-slate-200 shadow-xs">
+            <button type="button" data-cmd="bold" class="toolbar-btn p-1.5 w-8 h-8 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] font-bold text-xs" title="Bold">B</button>
+            <button type="button" data-cmd="italic" class="toolbar-btn p-1.5 w-8 h-8 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] italic text-xs font-serif" title="Italic">I</button>
+            <button type="button" data-cmd="underline" class="toolbar-btn p-1.5 w-8 h-8 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] underline text-xs" title="Underline">U</button>
+            <span class="w-px h-5 bg-slate-200 mx-1"></span>
+            <button type="button" data-block="H2" class="toolbar-btn px-2.5 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] font-extrabold text-xs" title="Heading 2">H2</button>
+            <button type="button" data-block="H3" class="toolbar-btn px-2.5 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] font-bold text-xs" title="Heading 3">H3</button>
+            <button type="button" data-block="P" class="toolbar-btn px-2 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-medium" title="Paragraph">¶</button>
+            <span class="w-px h-5 bg-slate-200 mx-1"></span>
+            <button type="button" data-cmd="insertUnorderedList" class="toolbar-btn px-2 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-bold" title="Bullet List">• Bullet</button>
+            <button type="button" data-cmd="insertOrderedList" class="toolbar-btn px-2 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-bold" title="Numbered List">1. List</button>
+            <button type="button" data-block="BLOCKQUOTE" class="toolbar-btn px-2 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-serif italic" title="Quote">“ Quote</button>
+            <span class="w-px h-5 bg-slate-200 mx-1"></span>
+            <button type="button" id="btn-insert-inline-img" class="toolbar-btn inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-semibold" title="Insert Image into Body">
+              <svg class="w-3.5 h-3.5 text-[#0B2553]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span>Image</span>
+            </button>
+            <button type="button" id="btn-insert-link" class="toolbar-btn px-2 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-semibold" title="Insert Link">Link</button>
+            <span class="w-px h-5 bg-slate-200 mx-1"></span>
+            <button type="button" data-cmd="removeFormat" class="toolbar-btn px-2 py-1 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600 text-xs" title="Clear Formatting">✕ Clear</button>
+          </div>
+
+          <!-- Contenteditable Editor Window -->
+          <div
+            id="blog-editor-content"
+            contenteditable="true"
+            class="min-h-[280px] max-h-[460px] overflow-y-auto p-5 bg-white rounded-2xl border border-slate-200/90 focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553] text-sm sm:text-base text-[#243A5E] leading-relaxed shadow-xs"
+          ></div>
+
+          <!-- Live Preview Window -->
+          <div
+            id="blog-editor-preview"
+            class="hidden min-h-[280px] max-h-[460px] overflow-y-auto p-6 sm:p-8 bg-white rounded-2xl border border-slate-200/90 text-sm sm:text-base text-[#243A5E] leading-relaxed shadow-xs"
+          ></div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 sm:p-5 border-t border-slate-100 bg-white flex items-center justify-between shrink-0">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" id="blog-input-published" checked class="w-4 h-4 rounded text-[#0B2553] focus:ring-[#0B2553]" />
+          <span class="text-xs font-bold text-[#0B2553]">Published on Live Site</span>
+        </label>
+
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            id="btn-cancel-blog"
+            class="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            id="btn-save-blog"
+            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-[#0B2553] hover:bg-[#0C487A] shadow-md shadow-[#0B2553]/20 transition-all cursor-pointer active:scale-95"
+          >
+            <span id="btn-save-blog-text">Save &amp; Publish</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
   <!-- FLOATING CUSTOM STATUS DROPDOWN MENU FOR INQUIRIES                        -->
   <!-- ========================================================================= -->
   <div
@@ -700,6 +989,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
   <script>
     const AUTH_KEY = 'uc_admin_token';
     let allInquiries: any[] = [];
+    let allBlogs: any[] = [];
+    let currentGalleryImages: string[] = [];
 
     function initAdminPortal() {
       const loginSection = document.getElementById('login-section');
@@ -913,6 +1204,277 @@ import MainLayout from '../../layouts/MainLayout.astro';
           }
         }
       }
+
+      // Blog Modal & Editor Handlers
+      const blogModal = document.getElementById('blog-modal');
+      const btnCreateBlog = document.getElementById('btn-create-blog');
+      const closeBlogModal = document.getElementById('close-blog-modal');
+      const btnCancelBlog = document.getElementById('btn-cancel-blog');
+      const blogTitleInput = document.getElementById('blog-input-title') as HTMLInputElement | null;
+      const blogSlugInput = document.getElementById('blog-input-slug') as HTMLInputElement | null;
+      const blogIdInput = document.getElementById('blog-input-id') as HTMLInputElement | null;
+
+      btnCreateBlog?.addEventListener('click', () => {
+        openBlogEditor();
+      });
+
+      closeBlogModal?.addEventListener('click', closeBlogEditor);
+      btnCancelBlog?.addEventListener('click', closeBlogEditor);
+      blogModal?.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeBlogEditor();
+      });
+
+      // Auto slug generation when typing title on new articles
+      blogTitleInput?.addEventListener('input', () => {
+        if (!blogIdInput?.value && blogSlugInput) {
+          blogSlugInput.value = (blogTitleInput.value || '')
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+        }
+      });
+
+      // Cover image upload to Supabase bucket
+      const btnUploadCover = document.getElementById('btn-upload-cover');
+      const coverFileInput = document.getElementById('blog-cover-file') as HTMLInputElement | null;
+      const coverStatus = document.getElementById('blog-cover-status');
+      const coverPreviewWrapper = document.getElementById('blog-cover-preview-wrapper');
+      const coverPreview = document.getElementById('blog-cover-preview') as HTMLImageElement | null;
+      const coverUrlInput = document.getElementById('blog-input-image') as HTMLInputElement | null;
+      const btnRemoveCover = document.getElementById('btn-remove-cover');
+
+      btnUploadCover?.addEventListener('click', () => coverFileInput?.click());
+
+      coverFileInput?.addEventListener('change', async () => {
+        const file = coverFileInput.files?.[0];
+        if (!file) return;
+
+        if (coverStatus) coverStatus.textContent = 'Uploading to Supabase bucket...';
+        try {
+          const formData = new FormData();
+          formData.append('file', file);
+          const res = await fetch('/api/admin/upload-image', {
+            method: 'POST',
+            body: formData,
+          });
+          const data = await res.json();
+          if (res.ok && data.url) {
+            if (coverUrlInput) coverUrlInput.value = data.url;
+            if (coverPreview) coverPreview.src = data.url;
+            coverPreviewWrapper?.classList.remove('hidden');
+            if (coverStatus) coverStatus.textContent = 'Uploaded to Supabase ✓';
+          } else {
+            if (coverStatus) coverStatus.textContent = 'Upload failed: ' + (data.error || 'Server error');
+          }
+        } catch (err: any) {
+          if (coverStatus) coverStatus.textContent = 'Upload error: ' + err.message;
+        }
+      });
+
+      coverUrlInput?.addEventListener('input', () => {
+        const val = coverUrlInput.value.trim();
+        if (val && coverPreview) {
+          coverPreview.src = val;
+          coverPreviewWrapper?.classList.remove('hidden');
+        } else {
+          coverPreviewWrapper?.classList.add('hidden');
+        }
+      });
+
+      btnRemoveCover?.addEventListener('click', () => {
+        if (coverUrlInput) coverUrlInput.value = '';
+        if (coverPreview) coverPreview.src = '';
+        coverPreviewWrapper?.classList.add('hidden');
+        if (coverFileInput) coverFileInput.value = '';
+        if (coverStatus) coverStatus.textContent = '';
+      });
+
+      // Gallery multi-images upload
+      const btnUploadGallery = document.getElementById('btn-upload-gallery');
+      const galleryFileInput = document.getElementById('blog-gallery-file') as HTMLInputElement | null;
+      const galleryStatus = document.getElementById('blog-gallery-status');
+
+      btnUploadGallery?.addEventListener('click', () => galleryFileInput?.click());
+
+      galleryFileInput?.addEventListener('change', async () => {
+        const files = galleryFileInput.files;
+        if (!files || files.length === 0) return;
+
+        if (galleryStatus) galleryStatus.textContent = `Uploading ${files.length} images...`;
+        try {
+          for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const formData = new FormData();
+            formData.append('file', file);
+            const res = await fetch('/api/admin/upload-image', {
+              method: 'POST',
+              body: formData,
+            });
+            const data = await res.json();
+            if (res.ok && data.url) {
+              currentGalleryImages.push(data.url);
+            }
+          }
+          renderGalleryThumbnails();
+          if (galleryStatus) galleryStatus.textContent = 'Uploaded ✓';
+        } catch (err: any) {
+          if (galleryStatus) galleryStatus.textContent = 'Upload error: ' + err.message;
+        } finally {
+          if (galleryFileInput) galleryFileInput.value = '';
+        }
+      });
+
+      // Editor Toolbar Handlers
+      const editorContent = document.getElementById('blog-editor-content');
+      document.querySelectorAll('#editor-toolbar button[data-cmd]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const cmd = (btn as HTMLElement).dataset.cmd;
+          if (cmd) {
+            document.execCommand(cmd, false, undefined);
+            editorContent?.focus();
+          }
+        });
+      });
+
+      document.querySelectorAll('#editor-toolbar button[data-block]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const tag = (btn as HTMLElement).dataset.block;
+          if (tag) {
+            document.execCommand('formatBlock', false, tag);
+            editorContent?.focus();
+          }
+        });
+      });
+
+      document.getElementById('btn-insert-link')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = prompt('Enter link URL (e.g. https://...):');
+        if (url) {
+          document.execCommand('createLink', false, url);
+          editorContent?.focus();
+        }
+      });
+
+      document.getElementById('btn-insert-inline-img')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = prompt('Enter image URL to insert inline (or upload to bucket via cover/gallery uploader):');
+        if (url) {
+          document.execCommand('insertImage', false, url);
+          editorContent?.focus();
+        }
+      });
+
+      // Write vs Live Preview Tabs
+      const tabWrite = document.getElementById('btn-editor-tab-write');
+      const tabPreview = document.getElementById('btn-editor-tab-preview');
+      const editorPreview = document.getElementById('blog-editor-preview');
+
+      tabWrite?.addEventListener('click', () => {
+        tabWrite.classList.add('bg-white', 'text-[#0B2553]', 'shadow-xs');
+        tabWrite.classList.remove('text-slate-500');
+        tabPreview?.classList.remove('bg-white', 'text-[#0B2553]', 'shadow-xs');
+        tabPreview?.classList.add('text-slate-500');
+
+        editorContent?.classList.remove('hidden');
+        editorPreview?.classList.add('hidden');
+      });
+
+      tabPreview?.addEventListener('click', () => {
+        tabPreview?.classList.add('bg-white', 'text-[#0B2553]', 'shadow-xs');
+        tabPreview.classList.remove('text-slate-500');
+        tabWrite?.classList.remove('bg-white', 'text-[#0B2553]', 'shadow-xs');
+        tabWrite?.classList.add('text-slate-500');
+
+        if (editorPreview && editorContent) {
+          editorPreview.innerHTML = `
+            <div class="prose max-w-none text-[#243A5E] space-y-4">
+              ${editorContent.innerHTML || '<p class="text-slate-400 italic">No content written yet.</p>'}
+            </div>
+          `;
+        }
+        editorContent?.classList.add('hidden');
+        editorPreview?.classList.remove('hidden');
+      });
+
+      // Save Blog Article (Create or Update)
+      const btnSaveBlog = document.getElementById('btn-save-blog');
+      const btnSaveBlogText = document.getElementById('btn-save-blog-text');
+
+      btnSaveBlog?.addEventListener('click', async () => {
+        const id = (document.getElementById('blog-input-id') as HTMLInputElement)?.value.trim();
+        const title = (document.getElementById('blog-input-title') as HTMLInputElement)?.value.trim();
+        const slug = (document.getElementById('blog-input-slug') as HTMLInputElement)?.value.trim();
+        const category = (document.getElementById('blog-input-category') as HTMLInputElement)?.value.trim() || 'GovCon Advisory';
+        const author = (document.getElementById('blog-input-author') as HTMLInputElement)?.value.trim() || 'Unity Compass Team';
+        const readTime = (document.getElementById('blog-input-readtime') as HTMLInputElement)?.value.trim() || '5 min read';
+        const excerpt = (document.getElementById('blog-input-excerpt') as HTMLTextAreaElement)?.value.trim() || '';
+        const image = (document.getElementById('blog-input-image') as HTMLInputElement)?.value.trim();
+        const isPublished = (document.getElementById('blog-input-published') as HTMLInputElement)?.checked ?? true;
+
+        if (!title) {
+          alert('Please enter an article title.');
+          return;
+        }
+        if (!slug) {
+          alert('Please enter a valid URL slug.');
+          return;
+        }
+        if (!excerpt) {
+          alert('Please enter a brief executive excerpt.');
+          return;
+        }
+        if (!image) {
+          alert('Please provide a featured cover image (either upload or enter URL).');
+          return;
+        }
+
+        const contentBlocks = serializeEditorContent();
+
+        if (btnSaveBlogText) btnSaveBlogText.textContent = 'Saving...';
+        if (btnSaveBlog) (btnSaveBlog as HTMLButtonElement).disabled = true;
+
+        try {
+          const isEdit = Boolean(id);
+          const method = isEdit ? 'PUT' : 'POST';
+          const payload: any = {
+            title,
+            slug,
+            category,
+            author,
+            readTime,
+            excerpt,
+            image,
+            galleryImages: currentGalleryImages,
+            contentBlocks,
+            isPublished,
+          };
+          if (isEdit) {
+            payload.id = id;
+          }
+
+          const res = await fetch('/api/admin/blogs', {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const result = await res.json();
+
+          if (res.ok && result.success) {
+            closeBlogEditor();
+            await loadBlogs();
+          } else {
+            alert('Failed to save article: ' + (result.error || 'Server error'));
+          }
+        } catch (err: any) {
+          alert('Error saving article: ' + err.message);
+        } finally {
+          if (btnSaveBlogText) btnSaveBlogText.textContent = 'Save & Publish';
+          if (btnSaveBlog) (btnSaveBlog as HTMLButtonElement).disabled = false;
+        }
+      });
 
       checkAuth();
     }
@@ -1260,28 +1822,250 @@ import MainLayout from '../../layouts/MainLayout.astro';
       try {
         const res = await fetch('/api/admin/blogs');
         const data = await res.json();
-        const list = data.blogs || [];
+        allBlogs = data.blogs || [];
 
         const metricEl = document.getElementById('metric-blogs');
         const badgeEl = document.getElementById('sidebar-blogs-badge');
-        if (metricEl) metricEl.textContent = String(list.length);
-        if (badgeEl) badgeEl.textContent = String(list.length);
+        if (metricEl) metricEl.textContent = String(allBlogs.filter((b: any) => b.is_published !== false).length);
+        if (badgeEl) badgeEl.textContent = String(allBlogs.length);
 
         if (!tbody) return;
-        tbody.innerHTML = list.map((item: any) => `
-          <tr class="hover:bg-slate-50/80 transition-colors">
-            <td class="px-5 py-3.5 font-bold text-[#0B2553]">${escapeHtml(item.title)} <span class="text-slate-400 text-[10px] block font-mono">/blog/${item.slug}</span></td>
-            <td class="px-5 py-3.5 text-[#FF3130] font-bold">${escapeHtml(item.category)}</td>
-            <td class="px-5 py-3.5 text-slate-400 text-[11px]">${escapeHtml(item.date)} by ${escapeHtml(item.author)}</td>
-            <td class="px-5 py-3.5 text-right">
-              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                Published
-              </span>
-            </td>
-          </tr>
-        `).join('');
-      } catch (e) {}
+        if (allBlogs.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" class="px-5 py-8 text-center text-slate-400">No blog articles found. Click "Write New Article" above to create one.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = allBlogs.map((item: any) => {
+          const isPublished = item.is_published !== false;
+          const coverUrl = item.image || 'https://papgpunctttqnlttycdd.supabase.co/storage/v1/object/public/blog-images/blog-1-growth.jpg';
+          return `
+            <tr class="hover:bg-slate-50/80 transition-colors">
+              <td class="px-5 py-3.5">
+                <div class="flex items-center gap-3">
+                  <img src="${coverUrl}" alt="" class="w-12 h-10 object-cover rounded-lg border border-slate-200 shrink-0 bg-slate-100" />
+                  <div class="min-w-0">
+                    <span class="font-bold text-[#0B2553] text-xs block truncate max-w-xs sm:max-w-md">${escapeHtml(item.title)}</span>
+                    <a href="/blog/${item.slug}" target="_blank" class="text-slate-400 hover:text-[#0C487A] text-[10px] block font-mono hover:underline">/blog/${item.slug}</a>
+                  </div>
+                </div>
+              </td>
+              <td class="px-5 py-3.5">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-50 text-[#FF3130] border border-red-100">
+                  ${escapeHtml(item.category || 'GovCon Advisory')}
+                </span>
+              </td>
+              <td class="px-5 py-3.5 text-slate-500 text-[11px] whitespace-nowrap">
+                <span class="font-medium text-[#0B2553] block">${escapeHtml(item.author || 'Unity Compass Team')}</span>
+                <span class="text-slate-400 text-[10px]">${escapeHtml(item.date || '')}</span>
+              </td>
+              <td class="px-5 py-3.5 text-center whitespace-nowrap">
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${isPublished ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-slate-100 text-slate-600 border border-slate-200'}">
+                  ${isPublished ? '● Published' : '○ Draft'}
+                </span>
+              </td>
+              <td class="px-5 py-3.5 text-right whitespace-nowrap">
+                <div class="inline-flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onclick="window.editBlog('${item.id}')"
+                    class="px-2.5 py-1 rounded-lg text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
+                    title="Edit Article"
+                  >
+                    Edit
+                  </button>
+                  <a
+                    href="/blog/${item.slug}"
+                    target="_blank"
+                    class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-500 hover:text-[#0B2553] hover:bg-slate-100 transition-colors inline-block"
+                    title="View live article"
+                  >
+                    View
+                  </a>
+                  <button
+                    type="button"
+                    onclick="window.deleteBlog('${item.id}', '${escapeHtml(item.title).replace(/'/g, "\\'")}')"
+                    class="p-1 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                    title="Delete Article"
+                  >
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      } catch (e) {
+        if (tbody) tbody.innerHTML = `<tr><td colspan="5" class="px-5 py-8 text-center text-red-500">Failed to load blog articles.</td></tr>`;
+      }
     }
+
+    function serializeEditorContent(): any[] {
+      const editor = document.getElementById('blog-editor-content');
+      if (!editor) return [];
+      const children = Array.from(editor.children);
+      if (children.length === 0) {
+        const raw = editor.innerHTML.trim();
+        return raw ? [{ tag: 'P', text: raw }] : [];
+      }
+      const blocks: any[] = [];
+      children.forEach((child: any) => {
+        const tagName = (child.tagName || 'P').toUpperCase();
+        if (tagName === 'H2') {
+          blocks.push({ tag: 'H2', text: child.innerHTML });
+        } else if (tagName === 'H3') {
+          blocks.push({ tag: 'H3', text: child.innerHTML });
+        } else if (tagName === 'BLOCKQUOTE') {
+          blocks.push({ tag: 'QUOTE', text: child.innerHTML });
+        } else if (tagName === 'UL' || tagName === 'OL') {
+          Array.from(child.children).forEach((li: any) => {
+            blocks.push({ tag: 'LI', text: li.innerHTML });
+          });
+        } else if (tagName === 'IMG') {
+          const src = child.getAttribute('src') || '';
+          blocks.push({ tag: 'IMG', image: src, text: src });
+        } else {
+          blocks.push({ tag: 'HTML', text: child.outerHTML || child.innerHTML });
+        }
+      });
+      return blocks;
+    }
+
+    function openBlogEditor(blogToEdit?: any) {
+      const modal = document.getElementById('blog-modal');
+      const heading = document.getElementById('blog-modal-heading');
+      const idInput = document.getElementById('blog-input-id') as HTMLInputElement;
+      const titleInput = document.getElementById('blog-input-title') as HTMLInputElement;
+      const slugInput = document.getElementById('blog-input-slug') as HTMLInputElement;
+      const catInput = document.getElementById('blog-input-category') as HTMLInputElement;
+      const authorInput = document.getElementById('blog-input-author') as HTMLInputElement;
+      const readInput = document.getElementById('blog-input-readtime') as HTMLInputElement;
+      const excerptInput = document.getElementById('blog-input-excerpt') as HTMLTextAreaElement;
+      const imgInput = document.getElementById('blog-input-image') as HTMLInputElement;
+      const pubInput = document.getElementById('blog-input-published') as HTMLInputElement;
+      const coverPrevWrap = document.getElementById('blog-cover-preview-wrapper');
+      const coverPrev = document.getElementById('blog-cover-preview') as HTMLImageElement;
+      const editorEl = document.getElementById('blog-editor-content');
+      const coverStatus = document.getElementById('blog-cover-status');
+      const galleryStatus = document.getElementById('blog-gallery-status');
+      const tabWrite = document.getElementById('btn-editor-tab-write');
+
+      if (coverStatus) coverStatus.textContent = '';
+      if (galleryStatus) galleryStatus.textContent = '';
+
+      if (blogToEdit) {
+        if (heading) heading.textContent = 'Edit Article';
+        if (idInput) idInput.value = blogToEdit.id || '';
+        if (titleInput) titleInput.value = blogToEdit.title || '';
+        if (slugInput) slugInput.value = blogToEdit.slug || '';
+        if (catInput) catInput.value = blogToEdit.category || 'GovCon Advisory';
+        if (authorInput) authorInput.value = blogToEdit.author || 'Unity Compass Team';
+        if (readInput) readInput.value = blogToEdit.read_time || blogToEdit.readTime || '5 min read';
+        if (excerptInput) excerptInput.value = blogToEdit.excerpt || '';
+        if (imgInput) imgInput.value = blogToEdit.image || '';
+        if (pubInput) pubInput.checked = blogToEdit.is_published !== false;
+
+        if (blogToEdit.image && coverPrev && coverPrevWrap) {
+          coverPrev.src = blogToEdit.image;
+          coverPrevWrap.classList.remove('hidden');
+        } else {
+          coverPrevWrap?.classList.add('hidden');
+        }
+
+        currentGalleryImages = Array.isArray(blogToEdit.gallery_images)
+          ? [...blogToEdit.gallery_images]
+          : Array.isArray(blogToEdit.galleryImages)
+          ? [...blogToEdit.galleryImages]
+          : [];
+        renderGalleryThumbnails();
+
+        const blocks = blogToEdit.content_blocks || blogToEdit.contentBlocks || [];
+        if (editorEl) {
+          if (Array.isArray(blocks) && blocks.length > 0) {
+            editorEl.innerHTML = blocks.map((b: any) => {
+              const tag = (b.tag || 'p').toUpperCase();
+              if (tag === 'H2') return `<h2 class="text-xl font-bold mt-4 mb-2">${b.text}</h2>`;
+              if (tag === 'H3') return `<h3 class="text-lg font-bold mt-3 mb-1">${b.text}</h3>`;
+              if (tag === 'QUOTE' || tag === 'BLOCKQUOTE') return `<blockquote class="border-l-4 border-red-500 pl-4 py-2 italic my-3">${b.text}</blockquote>`;
+              if (tag === 'LI') return `<li>${b.text}</li>`;
+              if (tag === 'IMG') return `<img src="${b.image || b.text}" class="my-3 rounded-xl max-w-full" />`;
+              if (tag === 'HTML') return b.text;
+              return `<p class="my-2">${b.text}</p>`;
+            }).join('');
+          } else {
+            editorEl.innerHTML = '<p>Start writing your article here...</p>';
+          }
+        }
+      } else {
+        if (heading) heading.textContent = 'Write New Article';
+        if (idInput) idInput.value = '';
+        if (titleInput) titleInput.value = '';
+        if (slugInput) slugInput.value = '';
+        if (catInput) catInput.value = 'GovCon Advisory';
+        if (authorInput) authorInput.value = 'Unity Compass Team';
+        if (readInput) readInput.value = '5 min read';
+        if (excerptInput) excerptInput.value = '';
+        if (imgInput) imgInput.value = '';
+        if (pubInput) pubInput.checked = true;
+        coverPrevWrap?.classList.add('hidden');
+        currentGalleryImages = [];
+        renderGalleryThumbnails();
+        if (editorEl) editorEl.innerHTML = '<p>Start writing your article here...</p>';
+      }
+
+      tabWrite?.click();
+      modal?.classList.remove('hidden');
+    }
+
+    function closeBlogEditor() {
+      document.getElementById('blog-modal')?.classList.add('hidden');
+    }
+
+    function renderGalleryThumbnails() {
+      const strip = document.getElementById('blog-gallery-strip');
+      if (!strip) return;
+      if (currentGalleryImages.length === 0) {
+        strip.innerHTML = '<span class="text-[11px] text-slate-400 italic">No additional gallery images added yet.</span>';
+        return;
+      }
+      strip.innerHTML = currentGalleryImages.map((url, idx) => `
+        <div class="relative group w-20 h-20 rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-slate-50">
+          <img src="${url}" class="w-full h-full object-cover" />
+          <button
+            type="button"
+            onclick="window.removeGalleryPhoto(${idx})"
+            class="absolute top-1 right-1 w-5 h-5 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold hover:bg-red-700 cursor-pointer shadow-md"
+            title="Remove image"
+          >&times;</button>
+        </div>
+      `).join('');
+    }
+
+    (window as any).removeGalleryPhoto = (idx: number) => {
+      currentGalleryImages.splice(idx, 1);
+      renderGalleryThumbnails();
+    };
+
+    (window as any).editBlog = (id: string) => {
+      const blog = allBlogs.find((b: any) => String(b.id) === String(id));
+      if (blog) openBlogEditor(blog);
+    };
+
+    (window as any).deleteBlog = async (id: string, title: string) => {
+      if (!confirm(`Are you sure you want to delete "${title}"? This cannot be undone.`)) return;
+      try {
+        const res = await fetch(`/api/admin/blogs?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          await loadBlogs();
+        } else {
+          alert('Failed to delete blog: ' + (data.error || 'Unknown error'));
+        }
+      } catch (err: any) {
+        alert('Error deleting article: ' + err.message);
+      }
+    };
 
     function escapeHtml(str: string) {
       if (!str) return '';
