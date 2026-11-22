@@ -259,14 +259,64 @@ import MainLayout from '../../layouts/MainLayout.astro';
     <main class="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
       
       <!-- Top Action Bar -->
-      <header class="bg-white border-b border-slate-200/90 px-5 sm:px-6 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shrink-0 z-10">
-        <div>
-          <h1 id="outlet-view-title" class="text-lg sm:text-xl font-extrabold text-[#0B2553] tracking-tight">
-            Dashboard Overview
-          </h1>
-          <p id="outlet-view-subtitle" class="text-xs text-slate-500 mt-0.5">
-            Operational status, real-time client inquiries, and candidate applications.
-          </p>
+      <header class="bg-white border-b border-slate-200/90 px-4 sm:px-6 py-3 shrink-0 z-10 min-h-[58px] flex items-center">
+        <!-- Default State: Standard App Header -->
+        <div id="header-default-bar" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 w-full">
+          <div>
+            <h1 id="outlet-view-title" class="text-lg sm:text-xl font-extrabold text-[#0B2553] tracking-tight">
+              Dashboard Overview
+            </h1>
+            <p id="outlet-view-subtitle" class="text-xs text-slate-500 mt-0.5">
+              Operational status, real-time client inquiries, and candidate applications.
+            </p>
+          </div>
+        </div>
+
+        <!-- Editor State: Clean Top Bar for Writing Workflow -->
+        <div id="header-editor-bar" class="hidden flex items-center justify-between w-full gap-3">
+          <!-- Left: Back Navigation & Mode Indicator -->
+          <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+            <button
+              type="button"
+              id="btn-back-to-blogs"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer shrink-0"
+              title="Return to Articles list"
+            >
+              <span aria-hidden="true">&larr;</span>
+              <span class="hidden sm:inline">Back to Articles</span>
+              <span class="sm:hidden">Back</span>
+            </button>
+            <span class="text-slate-300 hidden sm:inline">|</span>
+            <div class="flex items-center gap-2 min-w-0">
+              <span id="header-editor-mode-badge" class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700 uppercase tracking-wider shrink-0">
+                Article Editor
+              </span>
+              <span id="header-editor-status-text" class="text-xs text-slate-500 font-medium truncate hidden md:inline">
+                Drafting new article
+              </span>
+            </div>
+          </div>
+
+          <!-- Right: Save & Discard Actions -->
+          <div class="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              id="btn-cancel-blog-screen"
+              class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
+            >
+              Discard
+            </button>
+            <button
+              type="button"
+              id="btn-save-blog-screen"
+              class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-[#0B2553] hover:bg-[#0C487A] shadow-sm shadow-[#0B2553]/20 transition-all cursor-pointer active:scale-95"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span id="btn-save-blog-text">Save &amp; Publish</span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -588,51 +638,22 @@ import MainLayout from '../../layouts/MainLayout.astro';
         <div id="view-blog-editor" class="outlet-view hidden space-y-5">
           <input type="hidden" id="blog-input-id" value="" />
 
-          <!-- Top Navigation & Action Header -->
-          <div class="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-sm flex items-center justify-between gap-4 flex-wrap">
-            <button
-              type="button"
-              id="btn-back-to-blogs"
-              class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
-            >
-              <span aria-hidden="true">&larr;</span>
-              <span>Back to Articles</span>
-            </button>
-
-            <div class="flex items-center gap-3">
-              <button
-                type="button"
-                id="btn-cancel-blog-screen"
-                class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
-              >
-                Discard
-              </button>
-              <button
-                type="button"
-                id="btn-save-blog-screen"
-                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-[#0B2553] hover:bg-[#0C487A] shadow-md shadow-[#0B2553]/20 transition-all cursor-pointer active:scale-95"
-              >
-                <span id="btn-save-blog-text">Save &amp; Publish</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Main 2-Column Editor Workspace -->
+          <!-- Main 2-Column Editor Workspace: Starts Directly at Eye-Level -->
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             
             <!-- Left: Primary Article Content Column (8 cols) -->
             <div class="lg:col-span-8 space-y-5">
               
-              <!-- Title & Slug Card -->
+              <!-- Title, Route & Excerpt Card -->
               <div class="bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-sm space-y-4">
                 <div>
-                  <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Article Title *</label>
+                  <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-2">Article Title *</label>
                   <input
                     type="text"
                     id="blog-input-title"
                     required
                     placeholder="e.g. Navigating Small Business Set-Asides in 2026"
-                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-base sm:text-lg text-[#0B2553] font-bold focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
+                    class="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-white text-lg sm:text-xl text-[#0B2553] font-bold placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553] transition-all"
                   />
                 </div>
 
@@ -1042,6 +1063,17 @@ import MainLayout from '../../layouts/MainLayout.astro';
         targetPane.classList.remove('hidden');
       }
 
+      // Switch top header between standard app bar and focused editor bar
+      const headerDefault = document.getElementById('header-default-bar');
+      const headerEditor = document.getElementById('header-editor-bar');
+      if (viewName === 'blog-editor') {
+        if (headerDefault) headerDefault.classList.add('hidden');
+        if (headerEditor) headerEditor.classList.remove('hidden');
+      } else {
+        if (headerDefault) headerDefault.classList.remove('hidden');
+        if (headerEditor) headerEditor.classList.add('hidden');
+      }
+
       const outletTitle = document.getElementById('outlet-view-title');
       const outletSubtitle = document.getElementById('outlet-view-subtitle');
       if (viewMeta[viewName] && outletTitle && outletSubtitle) {
@@ -1238,7 +1270,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         switchView('blogs');
       });
 
-      // Auto slug generation when typing title on new articles
+      // Auto slug generation & header status update when typing title
       blogTitleInput?.addEventListener('input', () => {
         if (!blogIdInput?.value && blogSlugInput) {
           blogSlugInput.value = (blogTitleInput.value || '')
@@ -1246,6 +1278,11 @@ import MainLayout from '../../layouts/MainLayout.astro';
             .trim()
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/(^-|-$)/g, '');
+        }
+        const headerStatus = document.getElementById('header-editor-status-text');
+        if (headerStatus) {
+          const val = (blogTitleInput.value || '').trim();
+          headerStatus.textContent = val ? `"${val}"` : (blogIdInput?.value ? 'Editing article' : 'Drafting new article');
         }
       });
 
@@ -1942,8 +1979,12 @@ import MainLayout from '../../layouts/MainLayout.astro';
       const coverPrev = document.getElementById('blog-cover-preview') as HTMLImageElement;
       const editorEl = document.getElementById('blog-editor-content');
       const tabWrite = document.getElementById('btn-editor-tab-write');
+      const headerEditorBadge = document.getElementById('header-editor-mode-badge');
+      const headerEditorStatus = document.getElementById('header-editor-status-text');
 
       if (blogToEdit) {
+        if (headerEditorBadge) headerEditorBadge.textContent = 'Edit Article';
+        if (headerEditorStatus) headerEditorStatus.textContent = blogToEdit.title ? `"${blogToEdit.title}"` : 'Editing article';
         if (outletTitle) outletTitle.textContent = 'Edit Article';
         if (outletSubtitle) outletSubtitle.textContent = 'Compose and format your article.';
         if (idInput) idInput.value = blogToEdit.id || blogToEdit.slug || '';
@@ -1989,6 +2030,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
           }
         }
       } else {
+        if (headerEditorBadge) headerEditorBadge.textContent = 'New Article';
+        if (headerEditorStatus) headerEditorStatus.textContent = 'Drafting new article';
         if (outletTitle) outletTitle.textContent = 'Write New Article';
         if (outletSubtitle) outletSubtitle.textContent = 'Compose and format your article.';
         if (idInput) idInput.value = '';
