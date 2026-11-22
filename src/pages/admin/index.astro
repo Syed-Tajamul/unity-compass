@@ -130,10 +130,10 @@ import MainLayout from '../../layouts/MainLayout.astro';
           <button
             type="button"
             data-target-view="overview"
-            class="sidebar-nav-btn active w-full flex items-center justify-between px-4 py-3 rounded-md sm:rounded-lg text-xs font-bold transition-all cursor-pointer bg-[#0B2553] text-white shadow-xs"
+            class="sidebar-nav-btn is-active w-full flex items-center justify-between px-4 py-3 rounded-md sm:rounded-lg text-xs font-bold transition-all cursor-pointer bg-[#0B2553] text-white shadow-xs"
           >
             <div class="flex items-center gap-3">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
               </svg>
               <span>Dashboard Overview</span>
@@ -144,7 +144,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
           <button
             type="button"
             data-target-view="inquiries"
-            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-md sm:rounded-lg text-xs font-bold text-[#243A5E] hover:bg-slate-100 hover:text-[#0B2553] transition-all cursor-pointer"
+            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-md sm:rounded-lg text-xs font-bold text-[#243A5E] hover:bg-slate-100 transition-all cursor-pointer"
           >
             <div class="flex items-center gap-3">
               <svg class="w-4 h-4 text-slate-400 group-hover:text-[#FF3130]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -159,7 +159,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
           <button
             type="button"
             data-target-view="candidates"
-            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-md sm:rounded-lg text-xs font-bold text-[#243A5E] hover:bg-slate-100 hover:text-[#0B2553] transition-all cursor-pointer"
+            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-md sm:rounded-lg text-xs font-bold text-[#243A5E] hover:bg-slate-100 transition-all cursor-pointer"
           >
             <div class="flex items-center gap-3">
               <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -170,26 +170,11 @@ import MainLayout from '../../layouts/MainLayout.astro';
             <span id="sidebar-candidates-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">0</span>
           </button>
 
-          <!-- 4. Job Board -->
-          <button
-            type="button"
-            data-target-view="jobs"
-            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-md sm:rounded-lg text-xs font-bold text-[#243A5E] hover:bg-slate-100 hover:text-[#0B2553] transition-all cursor-pointer"
-          >
-            <div class="flex items-center gap-3">
-              <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              <span>Job Board Manager</span>
-            </div>
-            <span id="sidebar-jobs-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">0</span>
-          </button>
-
-          <!-- 5. Blogs -->
+          <!-- 4. Articles & Blog -->
           <button
             type="button"
             data-target-view="blogs"
-            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-md sm:rounded-lg text-xs font-bold text-[#243A5E] hover:bg-slate-100 hover:text-[#0B2553] transition-all cursor-pointer"
+            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-md sm:rounded-lg text-xs font-bold text-[#243A5E] hover:bg-slate-100 transition-all cursor-pointer"
           >
             <div class="flex items-center gap-3">
               <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -200,11 +185,11 @@ import MainLayout from '../../layouts/MainLayout.astro';
             <span id="sidebar-blogs-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">0</span>
           </button>
 
-          <!-- 6. System & Keep-Alive -->
+          <!-- 5. Database Health & Ping -->
           <button
             type="button"
             data-target-view="system"
-            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-md sm:rounded-lg text-xs font-bold text-[#243A5E] hover:bg-slate-100 hover:text-[#0B2553] transition-all cursor-pointer"
+            class="sidebar-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-md sm:rounded-lg text-xs font-bold text-[#243A5E] hover:bg-slate-100 transition-all cursor-pointer"
           >
             <div class="flex items-center gap-3">
               <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -320,8 +305,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
         <!-- ------------------------------------------------------------------- -->
         <div id="view-overview" class="outlet-view space-y-4 sm:space-y-5">
           
-          <!-- 4 Executive KPI Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <!-- 3 Executive KPI Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
             
             <!-- Metric 1: Inquiries -->
             <div class="relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
@@ -339,15 +324,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="text-[11px] text-slate-500 font-medium mt-1 block">Uploaded applications</span>
             </div>
 
-            <!-- Metric 3: Active Jobs -->
-            <div class="relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
-              <div class="absolute top-0 inset-x-0 h-1 bg-[#0B2553]"></div>
-              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Active Jobs</span>
-              <p id="metric-jobs" class="text-3xl font-black text-[#0B2553] mt-2">--</p>
-              <span class="text-[11px] text-slate-500 font-medium mt-1 block">Open requisitions</span>
-            </div>
-
-            <!-- Metric 4: Blogs -->
+            <!-- Metric 3: Blogs -->
             <div class="relative bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] overflow-hidden">
               <div class="absolute top-0 inset-x-0 h-1 bg-[#EE8522]"></div>
               <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Published Insights</span>
@@ -522,47 +499,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
                 <tbody id="applications-table-body" class="divide-y divide-slate-100">
                   <tr>
                     <td colspan="6" class="px-5 py-8 text-center text-slate-400">Loading applicants...</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- ------------------------------------------------------------------- -->
-        <!-- VIEW 4: JOB BOARD MANAGER                                           -->
-        <!-- ------------------------------------------------------------------- -->
-        <div id="view-jobs" class="outlet-view hidden space-y-3.5 sm:space-y-4">
-          <div class="flex items-center justify-between gap-3">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#0B2553]"></span>
-              <span class="text-xs font-bold text-[#0B2553] tracking-wide">Career Requisitions</span>
-            </div>
-            <a
-              href="/career"
-              target="_blank"
-              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-[#0B2553] bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
-            >
-              <span>Preview Public Board</span>
-              <span aria-hidden="true">&rarr;</span>
-            </a>
-          </div>
-
-          <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 overflow-hidden shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)]">
-            <div class="overflow-x-auto">
-              <table class="w-full text-left text-xs text-[#243A5E]">
-                <thead class="bg-slate-50 text-[#0B2553] uppercase tracking-wider text-[11px] font-bold border-b border-slate-200">
-                  <tr>
-                    <th class="px-5 py-3">Job Title &amp; ID</th>
-                    <th class="px-5 py-3">Department</th>
-                    <th class="px-5 py-3">Location &amp; Model</th>
-                    <th class="px-5 py-3">Clearance Mandate</th>
-                    <th class="px-5 py-3 text-right">Status</th>
-                  </tr>
-                </thead>
-                <tbody id="jobs-table-body" class="divide-y divide-slate-100">
-                  <tr>
-                    <td colspan="5" class="px-5 py-8 text-center text-slate-400">Loading jobs...</td>
                   </tr>
                 </tbody>
               </table>
@@ -1017,10 +953,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
         title: 'Candidates & Resumes',
         subtitle: 'Cleared & GovCon talent submissions.',
       },
-      jobs: {
-        title: 'Job Board Manager',
-        subtitle: 'Live positions displayed on the public career portal.',
-      },
       blogs: {
         title: 'Articles & Blog',
         subtitle: 'Manage and publish GovCon articles.',
@@ -1038,12 +970,21 @@ import MainLayout from '../../layouts/MainLayout.astro';
     function switchView(viewName: string) {
       const activeNavTarget = viewName === 'blog-editor' ? 'blogs' : viewName;
       document.querySelectorAll('.sidebar-nav-btn').forEach((btn) => {
+        const svg = btn.querySelector('svg');
         if (btn.getAttribute('data-target-view') === activeNavTarget) {
-          btn.classList.add('bg-[#0B2553]', 'text-white', 'shadow-xs');
+          btn.classList.add('bg-[#0B2553]', 'text-white', 'shadow-xs', 'is-active');
           btn.classList.remove('text-[#243A5E]', 'hover:bg-slate-100');
+          if (svg) {
+            svg.classList.add('text-white');
+            svg.classList.remove('text-slate-400');
+          }
         } else {
-          btn.classList.remove('bg-[#0B2553]', 'text-white', 'shadow-xs');
+          btn.classList.remove('bg-[#0B2553]', 'text-white', 'shadow-xs', 'is-active');
           btn.classList.add('text-[#243A5E]', 'hover:bg-slate-100');
+          if (svg) {
+            svg.classList.remove('text-white');
+            svg.classList.add('text-slate-400');
+          }
         }
       });
 
@@ -1527,7 +1468,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
     async function loadDashboardData() {
       loadInquiries();
       loadApplications();
-      loadJobs();
       loadBlogs();
     }
 
@@ -1831,35 +1771,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
       } catch (e) {
         if (tbody) tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-red-500">Failed to load applications.</td></tr>`;
       }
-    }
-
-    async function loadJobs() {
-      const tbody = document.getElementById('jobs-table-body');
-      try {
-        const res = await fetch('/api/admin/jobs');
-        const data = await res.json();
-        const list = data.jobs || [];
-
-        const metricEl = document.getElementById('metric-jobs');
-        const badgeEl = document.getElementById('sidebar-jobs-badge');
-        if (metricEl) metricEl.textContent = String(list.filter((j: any) => j.is_active !== false).length);
-        if (badgeEl) badgeEl.textContent = String(list.length);
-
-        if (!tbody) return;
-        tbody.innerHTML = list.map((item: any) => `
-          <tr class="hover:bg-slate-50/80 transition-colors">
-            <td class="px-5 py-3.5 font-bold text-[#0B2553]">${escapeHtml(item.title)} <span class="text-slate-400 text-[10px] block font-mono">${item.id}</span></td>
-            <td class="px-5 py-3.5 text-[#243A5E] font-medium">${escapeHtml(item.department)}</td>
-            <td class="px-5 py-3.5 text-slate-500">${escapeHtml(item.location)} (${item.workplaceType || item.workplace_type || 'Hybrid'})</td>
-            <td class="px-5 py-3.5 font-bold text-[#0B2553]">${escapeHtml(item.clearanceLevel || item.clearance_level || 'None')}</td>
-            <td class="px-5 py-3.5 text-right">
-              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${item.is_active !== false ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-slate-100 text-slate-500'}">
-                ${item.is_active !== false ? 'Active' : 'Inactive'}
-              </span>
-            </td>
-          </tr>
-        `).join('');
-      } catch (e) {}
     }
 
     async function loadBlogs() {
@@ -2204,6 +2115,26 @@ import MainLayout from '../../layouts/MainLayout.astro';
   </script>
 
   <style is:global>
+    /* Active sidebar item styling guarantees text, spans, and icons remain crisp white even when hovered */
+    .sidebar-nav-btn.is-active,
+    .sidebar-nav-btn.is-active:hover {
+      background-color: #0B2553 !important;
+      color: #ffffff !important;
+    }
+    .sidebar-nav-btn.is-active span:not([id$="-badge"]),
+    .sidebar-nav-btn.is-active:hover span:not([id$="-badge"]) {
+      color: #ffffff !important;
+    }
+    .sidebar-nav-btn.is-active svg,
+    .sidebar-nav-btn.is-active:hover svg {
+      color: #ffffff !important;
+    }
+    .sidebar-nav-btn.is-active span[id$="-badge"],
+    .sidebar-nav-btn.is-active:hover span[id$="-badge"] {
+      background-color: rgba(255, 255, 255, 0.25) !important;
+      color: #ffffff !important;
+    }
+
     /* Isolate scrolling strictly to #admin-outlet when the admin dashboard is active */
     body:has(#dashboard-section:not(.hidden)) {
       overflow: hidden !important;
