@@ -274,8 +274,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
         <!-- Editor State: Clean Top Bar for Writing Workflow -->
         <div id="header-editor-bar" class="hidden flex items-center justify-between w-full gap-3">
-          <!-- Left: Back Navigation & Mode Indicator -->
-          <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+          <!-- Left: Back Navigation -->
+          <div>
             <button
               type="button"
               id="btn-back-to-blogs"
@@ -283,18 +283,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
               title="Return to Articles list"
             >
               <span aria-hidden="true">&larr;</span>
-              <span class="hidden sm:inline">Back to Articles</span>
-              <span class="sm:hidden">Back</span>
+              <span>Back to Articles</span>
             </button>
-            <span class="text-slate-300 hidden sm:inline">|</span>
-            <div class="flex items-center gap-2 min-w-0">
-              <span id="header-editor-mode-badge" class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700 uppercase tracking-wider shrink-0">
-                Article Editor
-              </span>
-              <span id="header-editor-status-text" class="text-xs text-slate-500 font-medium truncate hidden md:inline">
-                Drafting new article
-              </span>
-            </div>
           </div>
 
           <!-- Right: Save & Discard Actions -->
@@ -1270,7 +1260,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         switchView('blogs');
       });
 
-      // Auto slug generation & header status update when typing title
+      // Auto slug generation when typing title on new articles
       blogTitleInput?.addEventListener('input', () => {
         if (!blogIdInput?.value && blogSlugInput) {
           blogSlugInput.value = (blogTitleInput.value || '')
@@ -1278,11 +1268,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
             .trim()
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/(^-|-$)/g, '');
-        }
-        const headerStatus = document.getElementById('header-editor-status-text');
-        if (headerStatus) {
-          const val = (blogTitleInput.value || '').trim();
-          headerStatus.textContent = val ? `"${val}"` : (blogIdInput?.value ? 'Editing article' : 'Drafting new article');
         }
       });
 
@@ -1979,12 +1964,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
       const coverPrev = document.getElementById('blog-cover-preview') as HTMLImageElement;
       const editorEl = document.getElementById('blog-editor-content');
       const tabWrite = document.getElementById('btn-editor-tab-write');
-      const headerEditorBadge = document.getElementById('header-editor-mode-badge');
-      const headerEditorStatus = document.getElementById('header-editor-status-text');
 
       if (blogToEdit) {
-        if (headerEditorBadge) headerEditorBadge.textContent = 'Edit Article';
-        if (headerEditorStatus) headerEditorStatus.textContent = blogToEdit.title ? `"${blogToEdit.title}"` : 'Editing article';
         if (outletTitle) outletTitle.textContent = 'Edit Article';
         if (outletSubtitle) outletSubtitle.textContent = 'Compose and format your article.';
         if (idInput) idInput.value = blogToEdit.id || blogToEdit.slug || '';
@@ -2030,8 +2011,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
           }
         }
       } else {
-        if (headerEditorBadge) headerEditorBadge.textContent = 'New Article';
-        if (headerEditorStatus) headerEditorStatus.textContent = 'Drafting new article';
         if (outletTitle) outletTitle.textContent = 'Write New Article';
         if (outletSubtitle) outletSubtitle.textContent = 'Compose and format your article.';
         if (idInput) idInput.value = '';
