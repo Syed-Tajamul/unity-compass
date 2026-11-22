@@ -195,7 +195,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
               </svg>
-              <span>Blog Manager</span>
+              <span>Articles &amp; Blog</span>
             </div>
             <span id="sidebar-blogs-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">0</span>
           </button>
@@ -267,18 +267,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
           <p id="outlet-view-subtitle" class="text-xs text-slate-500 mt-0.5">
             Operational status, real-time client inquiries, and candidate applications.
           </p>
-        </div>
-
-        <!-- Quick Top Action Buttons -->
-        <div class="flex items-center gap-2.5 shrink-0">
-          <a
-            href="/career"
-            target="_blank"
-            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-white bg-[#FF3130] hover:bg-[#E02625] shadow-xs active:scale-[0.98] transition-all cursor-pointer"
-          >
-            <span>Live Careers</span>
-            <span aria-hidden="true">&rarr;</span>
-          </a>
         </div>
       </header>
 
@@ -579,7 +567,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
                 <thead class="bg-slate-50 text-[#0B2553] uppercase tracking-wider text-[11px] font-bold border-b border-slate-200">
                   <tr>
                     <th class="px-5 py-3.5">Cover &amp; Article</th>
-                    <th class="px-5 py-3.5">Category</th>
                     <th class="px-5 py-3.5">Author &amp; Date</th>
                     <th class="px-5 py-3.5 text-center">Status</th>
                     <th class="px-5 py-3.5 text-right">Actions</th>
@@ -587,7 +574,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
                 </thead>
                 <tbody id="blogs-table-body" class="divide-y divide-slate-100">
                   <tr>
-                    <td colspan="5" class="px-5 py-8 text-center text-slate-400">Loading articles...</td>
+                    <td colspan="4" class="px-5 py-8 text-center text-slate-400">Loading articles...</td>
                   </tr>
                 </tbody>
               </table>
@@ -603,21 +590,14 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
           <!-- Top Navigation & Action Header -->
           <div class="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-sm flex items-center justify-between gap-4 flex-wrap">
-            <div class="flex items-center gap-3">
-              <button
-                type="button"
-                id="btn-back-to-blogs"
-                class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
-              >
-                <span aria-hidden="true">&larr;</span>
-                <span>Back to Articles</span>
-              </button>
-              <span class="w-px h-6 bg-slate-200"></span>
-              <div>
-                <h2 id="blog-editor-screen-heading" class="text-base sm:text-lg font-black text-[#0B2553] tracking-tight">Write New Article</h2>
-                <span class="text-[11px] text-slate-400">Author, format, and publish GovCon insights.</span>
-              </div>
-            </div>
+            <button
+              type="button"
+              id="btn-back-to-blogs"
+              class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
+            >
+              <span aria-hidden="true">&larr;</span>
+              <span>Back to Articles</span>
+            </button>
 
             <div class="flex items-center gap-3">
               <button
@@ -761,25 +741,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
                 </label>
 
                 <div>
-                  <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1">Category *</label>
-                  <input
-                    type="text"
-                    id="blog-input-category"
-                    list="category-suggestions"
-                    value="GovCon Advisory"
-                    class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-[#0B2553]"
-                  />
-                  <datalist id="category-suggestions">
-                    <option value="GovCon Advisory" />
-                    <option value="Proposal Strategies" />
-                    <option value="Company Growth" />
-                    <option value="Technology & AI" />
-                    <option value="Staffing & Clearance" />
-                    <option value="Cybersecurity & Defense" />
-                  </datalist>
-                </div>
-
-                <div>
                   <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1">Author</label>
                   <input
                     type="text"
@@ -800,71 +761,51 @@ import MainLayout from '../../layouts/MainLayout.astro';
                 </div>
               </div>
 
-              <!-- Featured Cover Image Card -->
-              <div class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm space-y-3">
+              <!-- Cover Image Selection Card -->
+              <div class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm space-y-3.5">
                 <div class="flex items-center justify-between">
-                  <h3 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider">Featured Cover Image *</h3>
+                  <h3 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider">Cover Image</h3>
                   <span id="blog-cover-status" class="text-[10px] font-medium text-slate-400"></span>
                 </div>
 
-                <input type="file" id="blog-cover-file" accept="image/*" class="hidden" />
+                <input type="hidden" id="blog-input-image" value="" />
 
-                <button
-                  type="button"
-                  id="btn-upload-cover"
-                  class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-colors cursor-pointer shadow-xs"
+                <!-- Empty State: Click to Choose Image -->
+                <div
+                  id="cover-empty-state"
+                  class="border-2 border-dashed border-slate-200 hover:border-[#0B2553] rounded-2xl p-6 text-center cursor-pointer transition-all group bg-slate-50/50 hover:bg-slate-50"
                 >
-                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                  </svg>
-                  <span>Upload Image to Bucket</span>
-                </button>
-
-                <div>
-                  <span class="text-[11px] text-slate-400 block mb-1">or Direct Image URL:</span>
-                  <input
-                    type="text"
-                    id="blog-input-image"
-                    placeholder="https://..."
-                    class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs font-mono text-[#0B2553]"
-                  />
-                </div>
-
-                <!-- Cover Image Preview -->
-                <div id="blog-cover-preview-wrapper" class="hidden relative rounded-xl overflow-hidden border border-slate-200 shadow-xs mt-2 bg-slate-50">
-                  <img id="blog-cover-preview" src="" alt="Cover Preview" class="w-full h-36 object-cover" />
-                  <button
-                    type="button"
-                    id="btn-remove-cover"
-                    class="absolute top-2 right-2 w-6 h-6 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-xs shadow-md hover:bg-red-700 cursor-pointer"
-                  >&times;</button>
-                </div>
-              </div>
-
-              <!-- Visual Gallery Photos Card -->
-              <div class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm space-y-3">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <h3 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider block">Visual Gallery Photos</h3>
-                    <span class="text-[10px] text-slate-400">Optional multi-image photo strip</span>
+                  <div class="w-12 h-12 rounded-full bg-slate-100 group-hover:bg-slate-200 flex items-center justify-center mx-auto mb-2.5 transition-colors">
+                    <svg class="w-6 h-6 text-slate-400 group-hover:text-[#0B2553] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
                   </div>
-                  <span id="blog-gallery-status" class="text-[10px] font-medium text-slate-400"></span>
+                  <p class="text-xs font-bold text-[#0B2553]">Choose Image</p>
+                  <p class="text-[11px] text-slate-400 mt-0.5">Select from library or upload from computer</p>
                 </div>
 
-                <input type="file" id="blog-gallery-file" accept="image/*" multiple class="hidden" />
-
-                <button
-                  type="button"
-                  id="btn-upload-gallery"
-                  class="w-full inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
-                >
-                  <svg class="w-4 h-4 text-[#0B2553]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                  </svg>
-                  <span>+ Add Images to Bucket</span>
-                </button>
-
-                <div id="blog-gallery-strip" class="flex flex-wrap gap-2 pt-1"></div>
+                <!-- Selected Preview State -->
+                <div id="cover-selected-state" class="hidden space-y-3">
+                  <div class="relative rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-slate-100 aspect-[16/10]">
+                    <img id="blog-cover-preview" src="" alt="Cover Preview" class="w-full h-full object-cover" />
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button
+                      type="button"
+                      id="btn-change-cover"
+                      class="flex-1 px-3 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer text-center"
+                    >
+                      Change Image
+                    </button>
+                    <button
+                      type="button"
+                      id="btn-remove-cover"
+                      class="px-3 py-2 rounded-xl text-xs font-bold text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
               </div>
 
             </div>
@@ -985,13 +926,72 @@ import MainLayout from '../../layouts/MainLayout.astro';
   </div>
 
   <!-- ========================================================================= -->
+  <!-- MODAL: CLEAN IMAGE PICKER (MEDIA LIBRARY & COMPUTER UPLOAD)               -->
+  <!-- ========================================================================= -->
+  <div id="modal-choose-image" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 hidden">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between shrink-0 bg-white">
+        <div>
+          <h3 class="text-base sm:text-lg font-bold text-[#0B2553]">Choose Cover Image</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Select a photo from library or upload from your computer</p>
+        </div>
+        <button
+          type="button"
+          id="btn-close-image-modal"
+          class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-[#0B2553] flex items-center justify-center text-sm font-bold transition-colors cursor-pointer"
+        >
+          &times;
+        </button>
+      </div>
+
+      <!-- Action: Upload from Computer -->
+      <div class="px-5 sm:px-6 py-3.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between gap-3 shrink-0">
+        <input type="file" id="modal-upload-input" accept="image/*" class="hidden" />
+        <button
+          type="button"
+          id="btn-modal-upload-device"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-all cursor-pointer shadow-xs active:scale-95"
+        >
+          <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+          </svg>
+          <span id="btn-modal-upload-text">Upload from Computer</span>
+        </button>
+        <span id="modal-upload-status" class="text-xs text-slate-500 font-medium"></span>
+      </div>
+
+      <!-- Media Library Grid -->
+      <div class="p-5 sm:p-6 overflow-y-auto flex-1 bg-white">
+        <div id="media-library-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+          <p class="col-span-full text-center text-xs text-slate-400 py-8">Loading media library...</p>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 sm:p-5 border-t border-slate-100 bg-slate-50/60 flex items-center justify-between shrink-0">
+        <span class="text-xs text-slate-400">Click any image to select it</span>
+        <button
+          type="button"
+          id="btn-modal-cancel-image"
+          class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-200 transition-colors cursor-pointer"
+        >
+          Cancel
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
   <!-- SCRIPTS: AUTH, OUTLET NAVIGATION & LIVE DATA FETCH                        -->
   <!-- ========================================================================= -->
   <script>
     const AUTH_KEY = 'uc_admin_token';
     let allInquiries: any[] = [];
     let allBlogs: any[] = [];
-    let currentGalleryImages: string[] = [];
+    let availableImages: any[] = [];
 
     const viewMeta: Record<string, { title: string; subtitle: string }> = {
       overview: {
@@ -1011,12 +1011,12 @@ import MainLayout from '../../layouts/MainLayout.astro';
         subtitle: 'Live positions displayed on the public career portal.',
       },
       blogs: {
-        title: 'Blog Manager',
-        subtitle: 'GovCon editorial articles and thought leadership.',
+        title: 'Articles & Blog',
+        subtitle: 'Manage and publish GovCon articles.',
       },
       'blog-editor': {
-        title: 'Article Workspace',
-        subtitle: 'Author, format, and publish high-impact GovCon insights.',
+        title: 'Article Editor',
+        subtitle: 'Compose, format, and publish your article.',
       },
       system: {
         title: 'Database Health & Ping',
@@ -1249,22 +1249,62 @@ import MainLayout from '../../layouts/MainLayout.astro';
         }
       });
 
-      // Cover image upload to Supabase bucket
-      const btnUploadCover = document.getElementById('btn-upload-cover');
-      const coverFileInput = document.getElementById('blog-cover-file') as HTMLInputElement | null;
-      const coverStatus = document.getElementById('blog-cover-status');
-      const coverPreviewWrapper = document.getElementById('blog-cover-preview-wrapper');
-      const coverPreview = document.getElementById('blog-cover-preview') as HTMLImageElement | null;
-      const coverUrlInput = document.getElementById('blog-input-image') as HTMLInputElement | null;
+      // Clean Cover Image & Media Library Selector
+      const coverEmptyState = document.getElementById('cover-empty-state');
+      const coverSelectedState = document.getElementById('cover-selected-state');
+      const btnChangeCover = document.getElementById('btn-change-cover');
       const btnRemoveCover = document.getElementById('btn-remove-cover');
+      const blogInputImage = document.getElementById('blog-input-image') as HTMLInputElement | null;
+      const blogCoverPreview = document.getElementById('blog-cover-preview') as HTMLImageElement | null;
+      const imageModal = document.getElementById('modal-choose-image');
+      const btnCloseImageModal = document.getElementById('btn-close-image-modal');
+      const btnModalCancelImage = document.getElementById('btn-modal-cancel-image');
+      const btnModalUploadDevice = document.getElementById('btn-modal-upload-device');
+      const modalUploadInput = document.getElementById('modal-upload-input') as HTMLInputElement | null;
+      const modalUploadStatus = document.getElementById('modal-upload-status');
 
-      btnUploadCover?.addEventListener('click', () => coverFileInput?.click());
+      function openImagePickerModal() {
+        imageModal?.classList.remove('hidden');
+        loadMediaLibrary();
+      }
 
-      coverFileInput?.addEventListener('change', async () => {
-        const file = coverFileInput.files?.[0];
+      function closeImagePickerModal() {
+        imageModal?.classList.add('hidden');
+        if (modalUploadStatus) modalUploadStatus.textContent = '';
+      }
+
+      coverEmptyState?.addEventListener('click', openImagePickerModal);
+      btnChangeCover?.addEventListener('click', openImagePickerModal);
+      btnCloseImageModal?.addEventListener('click', closeImagePickerModal);
+      btnModalCancelImage?.addEventListener('click', closeImagePickerModal);
+      imageModal?.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeImagePickerModal();
+      });
+
+      (window as any).selectMediaImage = (url: string) => {
+        if (blogInputImage) blogInputImage.value = url;
+        if (blogCoverPreview) blogCoverPreview.src = url;
+        coverSelectedState?.classList.remove('hidden');
+        coverEmptyState?.classList.add('hidden');
+        closeImagePickerModal();
+      };
+
+      btnRemoveCover?.addEventListener('click', () => {
+        if (blogInputImage) blogInputImage.value = '';
+        if (blogCoverPreview) blogCoverPreview.src = '';
+        coverSelectedState?.classList.add('hidden');
+        coverEmptyState?.classList.remove('hidden');
+      });
+
+      btnModalUploadDevice?.addEventListener('click', () => {
+        modalUploadInput?.click();
+      });
+
+      modalUploadInput?.addEventListener('change', async () => {
+        const file = modalUploadInput.files?.[0];
         if (!file) return;
 
-        if (coverStatus) coverStatus.textContent = 'Uploading to Supabase bucket...';
+        if (modalUploadStatus) modalUploadStatus.textContent = 'Uploading image...';
         try {
           const formData = new FormData();
           formData.append('file', file);
@@ -1274,70 +1314,49 @@ import MainLayout from '../../layouts/MainLayout.astro';
           });
           const data = await res.json();
           if (res.ok && data.url) {
-            if (coverUrlInput) coverUrlInput.value = data.url;
-            if (coverPreview) coverPreview.src = data.url;
-            coverPreviewWrapper?.classList.remove('hidden');
-            if (coverStatus) coverStatus.textContent = 'Uploaded to Supabase ✓';
+            if (modalUploadStatus) modalUploadStatus.textContent = 'Uploaded ✓';
+            (window as any).selectMediaImage(data.url);
           } else {
-            if (coverStatus) coverStatus.textContent = 'Upload failed: ' + (data.error || 'Server error');
+            if (modalUploadStatus) modalUploadStatus.textContent = 'Upload failed: ' + (data.error || 'Server error');
           }
         } catch (err: any) {
-          if (coverStatus) coverStatus.textContent = 'Upload error: ' + err.message;
-        }
-      });
-
-      coverUrlInput?.addEventListener('input', () => {
-        const val = coverUrlInput.value.trim();
-        if (val && coverPreview) {
-          coverPreview.src = val;
-          coverPreviewWrapper?.classList.remove('hidden');
-        } else {
-          coverPreviewWrapper?.classList.add('hidden');
-        }
-      });
-
-      btnRemoveCover?.addEventListener('click', () => {
-        if (coverUrlInput) coverUrlInput.value = '';
-        if (coverPreview) coverPreview.src = '';
-        coverPreviewWrapper?.classList.add('hidden');
-        if (coverFileInput) coverFileInput.value = '';
-        if (coverStatus) coverStatus.textContent = '';
-      });
-
-      // Gallery multi-images upload
-      const btnUploadGallery = document.getElementById('btn-upload-gallery');
-      const galleryFileInput = document.getElementById('blog-gallery-file') as HTMLInputElement | null;
-      const galleryStatus = document.getElementById('blog-gallery-status');
-
-      btnUploadGallery?.addEventListener('click', () => galleryFileInput?.click());
-
-      galleryFileInput?.addEventListener('change', async () => {
-        const files = galleryFileInput.files;
-        if (!files || files.length === 0) return;
-
-        if (galleryStatus) galleryStatus.textContent = `Uploading ${files.length} images...`;
-        try {
-          for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const formData = new FormData();
-            formData.append('file', file);
-            const res = await fetch('/api/admin/upload-image', {
-              method: 'POST',
-              body: formData,
-            });
-            const data = await res.json();
-            if (res.ok && data.url) {
-              currentGalleryImages.push(data.url);
-            }
-          }
-          renderGalleryThumbnails();
-          if (galleryStatus) galleryStatus.textContent = 'Uploaded ✓';
-        } catch (err: any) {
-          if (galleryStatus) galleryStatus.textContent = 'Upload error: ' + err.message;
+          if (modalUploadStatus) modalUploadStatus.textContent = 'Upload error: ' + err.message;
         } finally {
-          if (galleryFileInput) galleryFileInput.value = '';
+          if (modalUploadInput) modalUploadInput.value = '';
         }
       });
+
+      async function loadMediaLibrary() {
+        const grid = document.getElementById('media-library-grid');
+        if (!grid) return;
+        grid.innerHTML = '<p class="col-span-full text-center text-xs text-slate-400 py-8">Loading media library...</p>';
+
+        try {
+          const res = await fetch('/api/admin/upload-image');
+          const data = await res.json();
+          availableImages = data.images || [];
+
+          if (availableImages.length === 0) {
+            grid.innerHTML = '<p class="col-span-full text-center text-xs text-slate-400 py-8">No images found. Click "Upload from Computer" above to add one.</p>';
+            return;
+          }
+
+          grid.innerHTML = availableImages.map((img: any) => `
+            <div
+              onclick="window.selectMediaImage('${img.url}')"
+              class="group relative rounded-2xl overflow-hidden border border-slate-200 hover:border-[#0B2553] bg-slate-50 aspect-[16/10] cursor-pointer shadow-2xs hover:shadow-md transition-all hover:scale-[1.02]"
+              title="${escapeHtml(img.name || '')}"
+            >
+              <img src="${img.url}" class="w-full h-full object-cover" loading="lazy" />
+              <div class="absolute inset-0 bg-[#0B2553]/0 group-hover:bg-[#0B2553]/20 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 px-2.5 py-1 rounded-lg bg-white text-[#0B2553] text-[10px] font-bold shadow-sm transition-opacity">Select</span>
+              </div>
+            </div>
+          `).join('');
+        } catch (err) {
+          grid.innerHTML = '<p class="col-span-full text-center text-xs text-red-500 py-8">Failed to load media library.</p>';
+        }
+      }
 
       // Editor Toolbar Handlers
       const editorContent = document.getElementById('blog-editor-content');
@@ -1417,11 +1436,10 @@ import MainLayout from '../../layouts/MainLayout.astro';
         const id = (document.getElementById('blog-input-id') as HTMLInputElement)?.value.trim();
         const title = (document.getElementById('blog-input-title') as HTMLInputElement)?.value.trim();
         const slug = (document.getElementById('blog-input-slug') as HTMLInputElement)?.value.trim();
-        const category = (document.getElementById('blog-input-category') as HTMLInputElement)?.value.trim() || 'GovCon Advisory';
         const author = (document.getElementById('blog-input-author') as HTMLInputElement)?.value.trim() || 'Unity Compass Team';
         const readTime = (document.getElementById('blog-input-readtime') as HTMLInputElement)?.value.trim() || '5 min read';
         const excerpt = (document.getElementById('blog-input-excerpt') as HTMLTextAreaElement)?.value.trim() || '';
-        const image = (document.getElementById('blog-input-image') as HTMLInputElement)?.value.trim();
+        const image = (document.getElementById('blog-input-image') as HTMLInputElement)?.value.trim() || 'https://papgpunctttqnlttycdd.supabase.co/storage/v1/object/public/blog-images/blog-1-growth.jpg';
         const isPublished = (document.getElementById('blog-input-published') as HTMLInputElement)?.checked ?? true;
 
         if (!title) {
@@ -1436,10 +1454,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
           alert('Please enter a brief executive excerpt.');
           return;
         }
-        if (!image) {
-          alert('Please provide a featured cover image (either upload or enter URL).');
-          return;
-        }
 
         const contentBlocks = serializeEditorContent();
 
@@ -1452,12 +1466,11 @@ import MainLayout from '../../layouts/MainLayout.astro';
           const payload: any = {
             title,
             slug,
-            category,
+            category: 'GovCon Advisory',
             author,
             readTime,
             excerpt,
             image,
-            galleryImages: currentGalleryImages,
             contentBlocks,
             isPublished,
           };
@@ -1841,7 +1854,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
         if (!tbody) return;
         if (allBlogs.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="5" class="px-5 py-8 text-center text-slate-400">No blog articles found. Click "Write New Article" above to create one.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="4" class="px-5 py-8 text-center text-slate-400">No blog articles found. Click "Write New Article" above to create one.</td></tr>`;
           return;
         }
 
@@ -1858,11 +1871,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
                     <a href="/blog/${item.slug}" target="_blank" class="text-slate-400 hover:text-[#0C487A] text-[10px] block font-mono hover:underline">/blog/${item.slug}</a>
                   </div>
                 </div>
-              </td>
-              <td class="px-5 py-3.5">
-                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-50 text-[#FF3130] border border-red-100">
-                  ${escapeHtml(item.category || 'GovCon Advisory')}
-                </span>
               </td>
               <td class="px-5 py-3.5 text-slate-500 text-[11px] whitespace-nowrap">
                 <span class="font-medium text-[#0B2553] block">${escapeHtml(item.author || 'Unity Compass Team')}</span>
@@ -1907,7 +1915,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
           `;
         }).join('');
       } catch (e) {
-        if (tbody) tbody.innerHTML = `<tr><td colspan="5" class="px-5 py-8 text-center text-red-500">Failed to load blog articles.</td></tr>`;
+        if (tbody) tbody.innerHTML = `<tr><td colspan="4" class="px-5 py-8 text-center text-red-500">Failed to load blog articles.</td></tr>`;
       }
     }
 
@@ -1919,51 +1927,43 @@ import MainLayout from '../../layouts/MainLayout.astro';
     }
 
     function openBlogEditor(blogToEdit?: any) {
-      const heading = document.getElementById('blog-editor-screen-heading');
+      const outletTitle = document.getElementById('outlet-view-title');
+      const outletSubtitle = document.getElementById('outlet-view-subtitle');
       const idInput = document.getElementById('blog-input-id') as HTMLInputElement;
       const titleInput = document.getElementById('blog-input-title') as HTMLInputElement;
       const slugInput = document.getElementById('blog-input-slug') as HTMLInputElement;
-      const catInput = document.getElementById('blog-input-category') as HTMLInputElement;
       const authorInput = document.getElementById('blog-input-author') as HTMLInputElement;
       const readInput = document.getElementById('blog-input-readtime') as HTMLInputElement;
       const excerptInput = document.getElementById('blog-input-excerpt') as HTMLTextAreaElement;
       const imgInput = document.getElementById('blog-input-image') as HTMLInputElement;
       const pubInput = document.getElementById('blog-input-published') as HTMLInputElement;
-      const coverPrevWrap = document.getElementById('blog-cover-preview-wrapper');
+      const coverSelected = document.getElementById('cover-selected-state');
+      const coverEmpty = document.getElementById('cover-empty-state');
       const coverPrev = document.getElementById('blog-cover-preview') as HTMLImageElement;
       const editorEl = document.getElementById('blog-editor-content');
-      const coverStatus = document.getElementById('blog-cover-status');
-      const galleryStatus = document.getElementById('blog-gallery-status');
       const tabWrite = document.getElementById('btn-editor-tab-write');
 
-      if (coverStatus) coverStatus.textContent = '';
-      if (galleryStatus) galleryStatus.textContent = '';
-
       if (blogToEdit) {
-        if (heading) heading.textContent = 'Edit Article';
+        if (outletTitle) outletTitle.textContent = 'Edit Article';
+        if (outletSubtitle) outletSubtitle.textContent = 'Compose and format your article.';
         if (idInput) idInput.value = blogToEdit.id || blogToEdit.slug || '';
         if (titleInput) titleInput.value = blogToEdit.title || '';
         if (slugInput) slugInput.value = blogToEdit.slug || '';
-        if (catInput) catInput.value = blogToEdit.category || 'GovCon Advisory';
         if (authorInput) authorInput.value = blogToEdit.author || 'Unity Compass Team';
         if (readInput) readInput.value = blogToEdit.read_time || blogToEdit.readTime || '5 min read';
         if (excerptInput) excerptInput.value = blogToEdit.excerpt || '';
-        if (imgInput) imgInput.value = blogToEdit.image || '';
         if (pubInput) pubInput.checked = blogToEdit.is_published !== false;
 
-        if (blogToEdit.image && coverPrev && coverPrevWrap) {
-          coverPrev.src = blogToEdit.image;
-          coverPrevWrap.classList.remove('hidden');
-        } else {
-          coverPrevWrap?.classList.add('hidden');
+        const coverImg = blogToEdit.image || '';
+        if (imgInput) imgInput.value = coverImg;
+        if (coverImg && coverPrev && coverSelected && coverEmpty) {
+          coverPrev.src = coverImg;
+          coverSelected.classList.remove('hidden');
+          coverEmpty.classList.add('hidden');
+        } else if (coverSelected && coverEmpty) {
+          coverSelected.classList.add('hidden');
+          coverEmpty.classList.remove('hidden');
         }
-
-        currentGalleryImages = Array.isArray(blogToEdit.gallery_images)
-          ? [...blogToEdit.gallery_images]
-          : Array.isArray(blogToEdit.galleryImages)
-          ? [...blogToEdit.galleryImages]
-          : [];
-        renderGalleryThumbnails();
 
         const blocks = blogToEdit.content_blocks || blogToEdit.contentBlocks || [];
         if (editorEl) {
@@ -1989,19 +1989,21 @@ import MainLayout from '../../layouts/MainLayout.astro';
           }
         }
       } else {
-        if (heading) heading.textContent = 'Write New Article';
+        if (outletTitle) outletTitle.textContent = 'Write New Article';
+        if (outletSubtitle) outletSubtitle.textContent = 'Compose and format your article.';
         if (idInput) idInput.value = '';
         if (titleInput) titleInput.value = '';
         if (slugInput) slugInput.value = '';
-        if (catInput) catInput.value = 'GovCon Advisory';
         if (authorInput) authorInput.value = 'Unity Compass Team';
         if (readInput) readInput.value = '5 min read';
         if (excerptInput) excerptInput.value = '';
         if (imgInput) imgInput.value = '';
         if (pubInput) pubInput.checked = true;
-        coverPrevWrap?.classList.add('hidden');
-        currentGalleryImages = [];
-        renderGalleryThumbnails();
+
+        if (coverSelected && coverEmpty) {
+          coverSelected.classList.add('hidden');
+          coverEmpty.classList.remove('hidden');
+        }
         if (editorEl) editorEl.innerHTML = '<p>Start writing your article here...</p>';
       }
 
@@ -2012,31 +2014,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
     function closeBlogEditor() {
       switchView('blogs');
     }
-
-    function renderGalleryThumbnails() {
-      const strip = document.getElementById('blog-gallery-strip');
-      if (!strip) return;
-      if (currentGalleryImages.length === 0) {
-        strip.innerHTML = '<span class="text-[11px] text-slate-400 italic">No additional gallery images added yet.</span>';
-        return;
-      }
-      strip.innerHTML = currentGalleryImages.map((url, idx) => `
-        <div class="relative group w-20 h-20 rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-slate-50">
-          <img src="${url}" class="w-full h-full object-cover" />
-          <button
-            type="button"
-            onclick="window.removeGalleryPhoto(${idx})"
-            class="absolute top-1 right-1 w-5 h-5 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold hover:bg-red-700 cursor-pointer shadow-md"
-            title="Remove image"
-          >&times;</button>
-        </div>
-      `).join('');
-    }
-
-    (window as any).removeGalleryPhoto = (idx: number) => {
-      currentGalleryImages.splice(idx, 1);
-      renderGalleryThumbnails();
-    };
 
     (window as any).editBlog = (idOrSlug: string) => {
       const blog = allBlogs.find((b: any) => String(b.id) === String(idOrSlug) || String(b.slug) === String(idOrSlug));
