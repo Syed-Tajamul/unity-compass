@@ -134,13 +134,13 @@ function formatRichText(str?: string): string {
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(12,72,122,0.11)_0%,rgba(30,64,175,0.05)_45%,transparent_70%)] rounded-full blur-3xl pointer-events-none -z-10" aria-hidden="true"></div>
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <!-- Headline -->
-      <h1 id="article-title-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B2553] tracking-tight leading-[1.35] sm:leading-[1.38] lg:leading-[1.4]">
+      <!-- Headline with Scroll Reveal Animation -->
+      <h1 id="article-title-heading" class="blog-reveal text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B2553] tracking-tight leading-[1.35] sm:leading-[1.38] lg:leading-[1.4]">
         {post.title}
       </h1>
 
-      <!-- Meta Bar -->
-      <div class="mt-6 flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-500 pt-5 border-t border-slate-200/80">
+      <!-- Meta Bar with Staggered Scroll Reveal -->
+      <div class="blog-reveal blog-delay-1 mt-6 flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-500 pt-5 border-t border-slate-200/80">
         <div class="flex items-center gap-2">
           <div class="w-7 h-7 rounded-full bg-[#0B2553] text-white flex items-center justify-center font-bold text-xs">
             UC
@@ -164,9 +164,9 @@ function formatRichText(str?: string): string {
   <article class="py-16 sm:py-24 bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Primary Feature Hero Image -->
+      <!-- Primary Feature Hero Image with Viewport Scroll Reveal -->
       {post.image && (
-        <div class="rounded-3xl overflow-hidden border border-slate-200/90 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.12)] mb-12 bg-slate-100">
+        <div class="blog-reveal rounded-3xl overflow-hidden border border-slate-200/90 shadow-[0_12px_35px_-8px_rgba(12,72,122,0.12)] mb-12 bg-slate-100">
           <img
             src={post.image}
             alt={post.title}
@@ -188,29 +188,29 @@ function formatRichText(str?: string): string {
           }
           if (tag === 'H2' || tag.startsWith('H')) {
             return (
-              <h2 set:html={formatRichText(rawText)} />
+              <h2 class="blog-reveal" set:html={formatRichText(rawText)} />
             );
           }
           if (tag === 'H3') {
             return (
-              <h3 set:html={formatRichText(rawText)} />
+              <h3 class="blog-reveal" set:html={formatRichText(rawText)} />
             );
           }
           if (tag === 'LI') {
             return (
-              <ul>
+              <ul class="blog-reveal">
                 <li set:html={formatRichText(rawText)} />
               </ul>
             );
           }
           if (tag === 'QUOTE' || tag === 'BLOCKQUOTE') {
             return (
-              <blockquote set:html={formatRichText(rawText)} />
+              <blockquote class="blog-reveal" set:html={formatRichText(rawText)} />
             );
           }
           if (tag === 'IMG' || tag === 'IMAGE' || block.image) {
             return (
-              <figure class="my-10 rounded-3xl overflow-hidden border border-slate-200 bg-slate-50 shadow-sm">
+              <figure class="blog-reveal my-10 rounded-3xl overflow-hidden border border-slate-200 bg-slate-50 shadow-sm">
                 <img
                   src={block.image || block.text}
                   alt={block.caption || post.title}
@@ -226,7 +226,7 @@ function formatRichText(str?: string): string {
             );
           }
           return (
-            <p set:html={formatRichText(rawText)} />
+            <p class="blog-reveal" set:html={formatRichText(rawText)} />
           );
         })}
       </div>
@@ -234,12 +234,14 @@ function formatRichText(str?: string): string {
       <!-- Multiple Gallery Images (if article has gallery_images) -->
       {post.galleryImages && post.galleryImages.length > 0 && (
         <div class="mt-16 pt-10 border-t border-slate-200">
-          <span class="text-xs font-bold uppercase tracking-wider text-[#FF3130] block mb-2">Visual Gallery</span>
-          <h3 class="text-2xl font-extrabold text-[#0B2553] tracking-tight mb-6">Program &amp; Solution Imagery</h3>
+          <div class="blog-reveal">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#FF3130] block mb-2">Visual Gallery</span>
+            <h3 class="text-2xl font-extrabold text-[#0B2553] tracking-tight mb-6">Program &amp; Solution Imagery</h3>
+          </div>
           
           <div class={`grid gap-6 ${post.galleryImages.length === 1 ? 'grid-cols-1' : post.galleryImages.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
             {post.galleryImages.map((imgUrl, idx) => (
-              <div class="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-[0_4px_20px_-4px_rgba(12,72,122,0.06)] hover:shadow-[0_12px_30px_-6px_rgba(12,72,122,0.14)] transition-all">
+              <div class="blog-reveal group relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-[0_4px_20px_-4px_rgba(12,72,122,0.06)] hover:shadow-[0_12px_30px_-6px_rgba(12,72,122,0.14)] transition-all" style={`transition-delay: ${idx * 90}ms;`}>
                 <img
                   src={imgUrl}
                   alt={`${post.title} gallery asset ${idx + 1}`}
@@ -252,8 +254,8 @@ function formatRichText(str?: string): string {
         </div>
       )}
 
-      <!-- Strategic GovCon Advisory CTA Box -->
-      <div class="mt-16 relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0B2553] via-[#0C3860] to-[#081832] p-8 sm:p-10 text-white shadow-xl border border-blue-900/40">
+      <!-- Strategic GovCon Advisory CTA Box with Scroll Reveal -->
+      <div class="blog-reveal mt-16 relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0B2553] via-[#0C3860] to-[#081832] p-8 sm:p-10 text-white shadow-xl border border-blue-900/40">
         <div
           class="absolute inset-0 pointer-events-none opacity-20"
           style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);"
@@ -294,7 +296,7 @@ function formatRichText(str?: string): string {
   {relatedPosts.length > 0 && (
     <section class="py-16 sm:py-20 bg-slate-50 border-t border-slate-200/80" aria-label="Related Articles">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-8">
+        <div class="blog-reveal flex items-center justify-between mb-8">
           <div>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B2553] tracking-tight">
               Related Insights &amp; Strategies
@@ -307,7 +309,10 @@ function formatRichText(str?: string): string {
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           {relatedPosts.map((rel, idx) => (
-            <article class="group relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.14)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+            <article
+              class="blog-reveal group relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.14)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+              style={`transition-delay: ${(idx + 1) * 120}ms;`}
+            >
               <div class={`absolute top-0 inset-x-0 h-1.5 ${idx % 2 === 0 ? 'bg-[#0B2553]' : 'bg-[#FF3130]'}`}></div>
 
               <div>
@@ -471,4 +476,102 @@ function formatRichText(str?: string): string {
     font-size: 0.875em;
     color: #0B2553;
   }
+
+  /* Viewport Scroll Reveal (Harmonized with about-us.astro, career.astro, contact.astro, blog/index.astro) */
+  :global(.blog-reveal) {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(5px);
+    will-change: opacity, transform, filter;
+    transition:
+      opacity 750ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 750ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 750ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(.blog-reveal.is-visible),
+  :global(.blog-reveal.is-revealed) {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    filter: blur(0) !important;
+  }
+
+  :global(.blog-delay-1) { transition-delay: 100ms; }
+  :global(.blog-delay-2) { transition-delay: 200ms; }
+  :global(.blog-delay-3) { transition-delay: 300ms; }
+  :global(.blog-delay-4) { transition-delay: 400ms; }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.blog-reveal) {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      transition: none !important;
+    }
+  }
 </style>
+
+<script>
+  function setupArticleScrollReveal() {
+    // 1. Tag article body content blocks so each block animates when entering viewport
+    const articleBody = document.querySelector('.blog-article-body');
+    if (articleBody) {
+      const contentElements = articleBody.querySelectorAll<HTMLElement>(
+        ':scope > h2, :scope > h3, :scope > h4, :scope > p, :scope > blockquote, :scope > figure, :scope > ul, :scope > ol, :scope > div > h2, :scope > div > h3, :scope > div > h4, :scope > div > p, :scope > div > blockquote, :scope > div > figure, :scope > div > ul, :scope > div > ol'
+      );
+      contentElements.forEach((el) => {
+        if (!el.classList.contains('blog-reveal')) {
+          el.classList.add('blog-reveal');
+        }
+      });
+    }
+
+    const revealElements = document.querySelectorAll<HTMLElement>('.blog-reveal');
+    if (!revealElements.length) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      revealElements.forEach((el) => el.classList.add('is-visible', 'is-revealed'));
+      return;
+    }
+
+    // Immediately reveal elements already inside or near the initial viewport
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    revealElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= windowHeight + 60 && rect.bottom >= -60) {
+        el.classList.add('is-visible', 'is-revealed');
+      }
+    });
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLElement;
+            target.classList.add('is-visible', 'is-revealed');
+            obs.unobserve(target);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px -25px 0px',
+        threshold: 0.05,
+      }
+    );
+
+    revealElements.forEach((el) => {
+      if (!el.classList.contains('is-visible')) {
+        observer.observe(el);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupArticleScrollReveal);
+  } else {
+    setupArticleScrollReveal();
+  }
+  document.addEventListener('astro:page-load', setupArticleScrollReveal);
+</script>
