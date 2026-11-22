@@ -596,6 +596,283 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
 
         <!-- ------------------------------------------------------------------- -->
+        <!-- VIEW: DEDICATED BLOG EDITOR SCREEN (FULL WORKSPACE)                 -->
+        <!-- ------------------------------------------------------------------- -->
+        <div id="view-blog-editor" class="outlet-view hidden space-y-5">
+          <input type="hidden" id="blog-input-id" value="" />
+
+          <!-- Top Navigation & Action Header -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-sm flex items-center justify-between gap-4 flex-wrap">
+            <div class="flex items-center gap-3">
+              <button
+                type="button"
+                id="btn-back-to-blogs"
+                class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
+              >
+                <span aria-hidden="true">&larr;</span>
+                <span>Back to Articles</span>
+              </button>
+              <span class="w-px h-6 bg-slate-200"></span>
+              <div>
+                <h2 id="blog-editor-screen-heading" class="text-base sm:text-lg font-black text-[#0B2553] tracking-tight">Write New Article</h2>
+                <span class="text-[11px] text-slate-400">Author, format, and publish GovCon insights.</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button
+                type="button"
+                id="btn-cancel-blog-screen"
+                class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
+              >
+                Discard
+              </button>
+              <button
+                type="button"
+                id="btn-save-blog-screen"
+                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-[#0B2553] hover:bg-[#0C487A] shadow-md shadow-[#0B2553]/20 transition-all cursor-pointer active:scale-95"
+              >
+                <span id="btn-save-blog-text">Save &amp; Publish</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Main 2-Column Editor Workspace -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left: Primary Article Content Column (8 cols) -->
+            <div class="lg:col-span-8 space-y-5">
+              
+              <!-- Title & Slug Card -->
+              <div class="bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-sm space-y-4">
+                <div>
+                  <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Article Title *</label>
+                  <input
+                    type="text"
+                    id="blog-input-title"
+                    required
+                    placeholder="e.g. Navigating Small Business Set-Asides in 2026"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-base sm:text-lg text-[#0B2553] font-bold focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">URL Route Slug *</label>
+                  <div class="flex items-center">
+                    <span class="px-3.5 py-2.5 bg-slate-100 text-slate-400 font-mono text-xs rounded-l-xl border border-r-0 border-slate-200">/blog/</span>
+                    <input
+                      type="text"
+                      id="blog-input-slug"
+                      required
+                      placeholder="article-url-slug"
+                      class="w-full px-3.5 py-2.5 rounded-r-xl border border-slate-200 bg-slate-50 text-xs font-mono text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Executive Excerpt (1-2 Sentences for Search Engines &amp; Card Previews) *</label>
+                  <textarea
+                    id="blog-input-excerpt"
+                    rows="2"
+                    placeholder="A compelling executive summary displayed on cards and search engines..."
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-[#243A5E] leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Content Editor Card -->
+              <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+                <div class="p-3.5 sm:p-4 border-b border-slate-100 bg-slate-50/70 flex items-center justify-between flex-wrap gap-2">
+                  <!-- Formatting Toolbar -->
+                  <div id="editor-toolbar" class="flex flex-wrap items-center gap-1">
+                    <button type="button" data-cmd="bold" class="toolbar-btn p-1.5 w-8 h-8 rounded-lg text-slate-700 hover:bg-white hover:text-[#0B2553] font-bold text-xs shadow-xs" title="Bold">B</button>
+                    <button type="button" data-cmd="italic" class="toolbar-btn p-1.5 w-8 h-8 rounded-lg text-slate-700 hover:bg-white hover:text-[#0B2553] italic text-xs font-serif shadow-xs" title="Italic">I</button>
+                    <button type="button" data-cmd="underline" class="toolbar-btn p-1.5 w-8 h-8 rounded-lg text-slate-700 hover:bg-white hover:text-[#0B2553] underline text-xs shadow-xs" title="Underline">U</button>
+                    <span class="w-px h-5 bg-slate-200 mx-1"></span>
+                    <button type="button" data-block="H2" class="toolbar-btn px-2.5 py-1 rounded-lg text-slate-700 hover:bg-white hover:text-[#0B2553] font-extrabold text-xs shadow-xs" title="Heading 2">H2</button>
+                    <button type="button" data-block="H3" class="toolbar-btn px-2.5 py-1 rounded-lg text-slate-700 hover:bg-white hover:text-[#0B2553] font-bold text-xs shadow-xs" title="Heading 3">H3</button>
+                    <button type="button" data-block="P" class="toolbar-btn px-2 py-1 rounded-lg text-slate-700 hover:bg-white hover:text-[#0B2553] text-xs font-medium shadow-xs" title="Paragraph">¶</button>
+                    <span class="w-px h-5 bg-slate-200 mx-1"></span>
+                    <button type="button" data-cmd="insertUnorderedList" class="toolbar-btn px-2.5 py-1 rounded-lg text-slate-700 hover:bg-white hover:text-[#0B2553] text-xs font-bold shadow-xs" title="Bullet List">• Bullet</button>
+                    <button type="button" data-cmd="insertOrderedList" class="toolbar-btn px-2.5 py-1 rounded-lg text-slate-700 hover:bg-white hover:text-[#0B2553] text-xs font-bold shadow-xs" title="Numbered List">1. List</button>
+                    <button type="button" data-block="BLOCKQUOTE" class="toolbar-btn px-2.5 py-1 rounded-lg text-slate-700 hover:bg-white hover:text-[#0B2553] text-xs font-serif italic shadow-xs" title="Quote">“ Quote</button>
+                    <span class="w-px h-5 bg-slate-200 mx-1"></span>
+                    <button type="button" id="btn-insert-inline-img" class="toolbar-btn inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-slate-700 hover:bg-white hover:text-[#0B2553] text-xs font-semibold shadow-xs" title="Insert Image into Body">
+                      <svg class="w-3.5 h-3.5 text-[#0B2553]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      <span>Image</span>
+                    </button>
+                    <button type="button" id="btn-insert-link" class="toolbar-btn px-2.5 py-1 rounded-lg text-slate-700 hover:bg-white hover:text-[#0B2553] text-xs font-semibold shadow-xs" title="Insert Link">Link</button>
+                    <span class="w-px h-5 bg-slate-200 mx-1"></span>
+                    <button type="button" data-cmd="removeFormat" class="toolbar-btn px-2 py-1 rounded-lg text-slate-400 hover:bg-white hover:text-slate-600 text-xs" title="Clear Formatting">✕ Clear</button>
+                  </div>
+
+                  <!-- Write vs Preview Switch -->
+                  <div class="flex items-center gap-1 bg-slate-200/70 p-1 rounded-xl">
+                    <button
+                      type="button"
+                      id="btn-editor-tab-write"
+                      class="px-3.5 py-1 rounded-lg text-xs font-bold text-[#0B2553] bg-white shadow-xs transition-all cursor-pointer"
+                    >
+                      Write
+                    </button>
+                    <button
+                      type="button"
+                      id="btn-editor-tab-preview"
+                      class="px-3.5 py-1 rounded-lg text-xs font-bold text-slate-500 hover:text-[#0B2553] transition-all cursor-pointer"
+                    >
+                      Live Preview
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Editor Workspace Area -->
+                <div class="p-6 sm:p-8">
+                  <div
+                    id="blog-editor-content"
+                    contenteditable="true"
+                    class="min-h-[500px] text-base text-[#334155] leading-relaxed focus:outline-none blog-article-body"
+                  ></div>
+
+                  <div
+                    id="blog-editor-preview"
+                    class="hidden min-h-[500px] text-base text-[#334155] leading-relaxed blog-article-body"
+                  ></div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right: Metadata & Media Sidebar Column (4 cols) -->
+            <div class="lg:col-span-4 space-y-5">
+
+              <!-- Publishing Details Card -->
+              <div class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm space-y-4">
+                <h3 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider border-b border-slate-100 pb-2">Publishing Status</h3>
+
+                <label class="flex items-center gap-2.5 cursor-pointer p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <input type="checkbox" id="blog-input-published" checked class="w-4 h-4 rounded text-[#0B2553] focus:ring-[#0B2553]" />
+                  <div>
+                    <span class="text-xs font-bold text-[#0B2553] block">Published on Live Site</span>
+                    <span class="text-[10px] text-slate-400">Toggle off to save as draft</span>
+                  </div>
+                </label>
+
+                <div>
+                  <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1">Category *</label>
+                  <input
+                    type="text"
+                    id="blog-input-category"
+                    list="category-suggestions"
+                    value="GovCon Advisory"
+                    class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-[#0B2553]"
+                  />
+                  <datalist id="category-suggestions">
+                    <option value="GovCon Advisory" />
+                    <option value="Proposal Strategies" />
+                    <option value="Company Growth" />
+                    <option value="Technology & AI" />
+                    <option value="Staffing & Clearance" />
+                    <option value="Cybersecurity & Defense" />
+                  </datalist>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1">Author</label>
+                  <input
+                    type="text"
+                    id="blog-input-author"
+                    value="Unity Compass Team"
+                    class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs text-[#0B2553]"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1">Estimated Read Time</label>
+                  <input
+                    type="text"
+                    id="blog-input-readtime"
+                    value="5 min read"
+                    class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs text-[#0B2553]"
+                  />
+                </div>
+              </div>
+
+              <!-- Featured Cover Image Card -->
+              <div class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm space-y-3">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider">Featured Cover Image *</h3>
+                  <span id="blog-cover-status" class="text-[10px] font-medium text-slate-400"></span>
+                </div>
+
+                <input type="file" id="blog-cover-file" accept="image/*" class="hidden" />
+
+                <button
+                  type="button"
+                  id="btn-upload-cover"
+                  class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-colors cursor-pointer shadow-xs"
+                >
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                  <span>Upload Image to Bucket</span>
+                </button>
+
+                <div>
+                  <span class="text-[11px] text-slate-400 block mb-1">or Direct Image URL:</span>
+                  <input
+                    type="text"
+                    id="blog-input-image"
+                    placeholder="https://..."
+                    class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs font-mono text-[#0B2553]"
+                  />
+                </div>
+
+                <!-- Cover Image Preview -->
+                <div id="blog-cover-preview-wrapper" class="hidden relative rounded-xl overflow-hidden border border-slate-200 shadow-xs mt-2 bg-slate-50">
+                  <img id="blog-cover-preview" src="" alt="Cover Preview" class="w-full h-36 object-cover" />
+                  <button
+                    type="button"
+                    id="btn-remove-cover"
+                    class="absolute top-2 right-2 w-6 h-6 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-xs shadow-md hover:bg-red-700 cursor-pointer"
+                  >&times;</button>
+                </div>
+              </div>
+
+              <!-- Visual Gallery Photos Card -->
+              <div class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm space-y-3">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="text-xs font-bold text-[#0B2553] uppercase tracking-wider block">Visual Gallery Photos</h3>
+                    <span class="text-[10px] text-slate-400">Optional multi-image photo strip</span>
+                  </div>
+                  <span id="blog-gallery-status" class="text-[10px] font-medium text-slate-400"></span>
+                </div>
+
+                <input type="file" id="blog-gallery-file" accept="image/*" multiple class="hidden" />
+
+                <button
+                  type="button"
+                  id="btn-upload-gallery"
+                  class="w-full inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
+                >
+                  <svg class="w-4 h-4 text-[#0B2553]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                  </svg>
+                  <span>+ Add Images to Bucket</span>
+                </button>
+
+                <div id="blog-gallery-strip" class="flex flex-wrap gap-2 pt-1"></div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------------- -->
         <!-- VIEW 6: SYSTEM & KEEP-ALIVE                                         -->
         <!-- ------------------------------------------------------------------- -->
         <div id="view-system" class="outlet-view hidden space-y-3.5 sm:space-y-4">
@@ -671,282 +948,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
       </div>
 
       <div id="inquiry-modal-body" class="text-xs text-[#243A5E] space-y-4 mt-4"></div>
-    </div>
-  </div>
-
-  <!-- ========================================================================= -->
-  <!-- MODAL: EXECUTIVE BLOG ARTICLE EDITOR                                      -->
-  <!-- ========================================================================= -->
-  <div id="blog-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 hidden">
-    <div class="bg-white rounded-2xl sm:rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-200/90 relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-      
-      <!-- Top Brand Color Stripe -->
-      <div class="h-1.5 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] shrink-0"></div>
-
-      <!-- Modal Header -->
-      <div class="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between shrink-0 bg-white">
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#FF3130]"></span>
-            <h3 id="blog-modal-heading" class="text-lg sm:text-xl font-extrabold text-[#0B2553] tracking-tight">Write New Article</h3>
-          </div>
-          <p class="text-xs text-slate-500 mt-0.5">Author, format, and publish GovCon insights directly to the live platform.</p>
-        </div>
-        <button type="button" id="close-blog-modal" class="p-2 text-slate-400 hover:text-slate-700 rounded-xl hover:bg-slate-100 transition-colors text-xl cursor-pointer" aria-label="Close modal">&times;</button>
-      </div>
-
-      <!-- Modal Body (Scrollable) -->
-      <div class="flex-1 min-h-0 overflow-y-auto p-5 sm:p-7 space-y-5 bg-slate-50/40 text-xs text-[#243A5E]">
-        <input type="hidden" id="blog-input-id" value="" />
-
-        <!-- Title & Slug -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Article Title *</label>
-            <input
-              type="text"
-              id="blog-input-title"
-              required
-              placeholder="e.g. Navigating Small Business Set-Asides in 2026"
-              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-[#0B2553] font-semibold focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">URL Slug (Auto-generated) *</label>
-            <div class="flex items-center">
-              <span class="px-3 py-2.5 bg-slate-100 text-slate-400 font-mono text-xs rounded-l-xl border border-r-0 border-slate-200">/blog/</span>
-              <input
-                type="text"
-                id="blog-input-slug"
-                required
-                placeholder="navigating-small-business-set-asides-2026"
-                class="w-full px-3 py-2.5 rounded-r-xl border border-slate-200 bg-white text-xs font-mono text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- Category, Author & Read Time -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Category *</label>
-            <input
-              type="text"
-              id="blog-input-category"
-              list="category-suggestions"
-              value="GovCon Advisory"
-              placeholder="Select or type..."
-              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
-            />
-            <datalist id="category-suggestions">
-              <option value="GovCon Advisory" />
-              <option value="Proposal Strategies" />
-              <option value="Company Growth" />
-              <option value="Technology & AI" />
-              <option value="Staffing & Clearance" />
-              <option value="Cybersecurity & Defense" />
-            </datalist>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Author</label>
-            <input
-              type="text"
-              id="blog-input-author"
-              value="Unity Compass Team"
-              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Read Time</label>
-            <input
-              type="text"
-              id="blog-input-readtime"
-              value="5 min read"
-              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
-            />
-          </div>
-        </div>
-
-        <!-- Excerpt -->
-        <div>
-          <label class="block text-xs font-bold text-[#0B2553] uppercase tracking-wider mb-1.5">Executive Excerpt (1-2 Sentences for Previews &amp; SEO) *</label>
-          <textarea
-            id="blog-input-excerpt"
-            rows="2"
-            placeholder="A compelling executive summary displayed on cards and search engines..."
-            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-[#243A5E] leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
-          ></textarea>
-        </div>
-
-        <!-- Primary Featured Cover Image (Supabase Bucket Uploader) -->
-        <div class="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-3">
-          <div class="flex items-center justify-between">
-            <label class="text-xs font-bold text-[#0B2553] uppercase tracking-wider">Featured Cover Image *</label>
-            <span id="blog-cover-status" class="text-[11px] font-medium text-slate-400"></span>
-          </div>
-
-          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-            <input
-              type="file"
-              id="blog-cover-file"
-              accept="image/*"
-              class="hidden"
-            />
-            <button
-              type="button"
-              id="btn-upload-cover"
-              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0B2553] hover:bg-[#0C487A] transition-colors cursor-pointer shrink-0"
-            >
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-              </svg>
-              <span>Upload to Supabase Bucket</span>
-            </button>
-
-            <span class="text-xs text-slate-400 font-medium">or Image URL:</span>
-
-            <input
-              type="text"
-              id="blog-input-image"
-              placeholder="https://..."
-              class="flex-1 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-mono text-[#0B2553] focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553]"
-            />
-          </div>
-
-          <!-- Cover Image Preview -->
-          <div id="blog-cover-preview-wrapper" class="hidden relative inline-block mt-2">
-            <img id="blog-cover-preview" src="" alt="Cover Preview" class="h-28 w-48 object-cover rounded-xl border border-slate-200 shadow-sm" />
-            <button
-              type="button"
-              id="btn-remove-cover"
-              class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-xs shadow-md hover:bg-red-700 cursor-pointer"
-            >&times;</button>
-          </div>
-        </div>
-
-        <!-- Additional Gallery Images (Optional Multi-Photo Support) -->
-        <div class="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-3">
-          <div class="flex items-center justify-between">
-            <div>
-              <span class="text-xs font-bold text-[#0B2553] uppercase tracking-wider block">Visual Gallery Photos (Optional)</span>
-              <span class="text-[11px] text-slate-400">Upload multiple photos to display in the article's visual gallery.</span>
-            </div>
-            <span id="blog-gallery-status" class="text-[11px] font-medium text-slate-400"></span>
-          </div>
-
-          <div class="flex items-center gap-3">
-            <input
-              type="file"
-              id="blog-gallery-file"
-              accept="image/*"
-              multiple
-              class="hidden"
-            />
-            <button
-              type="button"
-              id="btn-upload-gallery"
-              class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-[#0B2553] bg-slate-100 hover:bg-slate-200 transition-colors cursor-pointer"
-            >
-              <svg class="w-4 h-4 text-[#0B2553]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-              </svg>
-              <span>+ Add Images to Bucket</span>
-            </button>
-          </div>
-
-          <!-- Gallery Thumbnails Strip -->
-          <div id="blog-gallery-strip" class="flex flex-wrap gap-2.5 mt-2"></div>
-        </div>
-
-        <!-- Rich Text Editor Section -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between flex-wrap gap-2">
-            <label class="text-xs font-bold text-[#0B2553] uppercase tracking-wider">Article Content &amp; Formatting *</label>
-            <div class="flex items-center gap-1.5 bg-slate-200/70 p-1 rounded-xl">
-              <button
-                type="button"
-                id="btn-editor-tab-write"
-                class="px-3 py-1 rounded-lg text-xs font-bold text-[#0B2553] bg-white shadow-xs transition-all cursor-pointer"
-              >
-                Write
-              </button>
-              <button
-                type="button"
-                id="btn-editor-tab-preview"
-                class="px-3 py-1 rounded-lg text-xs font-bold text-slate-500 hover:text-[#0B2553] transition-all cursor-pointer"
-              >
-                Live Preview
-              </button>
-            </div>
-          </div>
-
-          <!-- Formatting Toolbar -->
-          <div id="editor-toolbar" class="flex flex-wrap items-center gap-1 p-2 bg-white rounded-xl border border-slate-200 shadow-xs">
-            <button type="button" data-cmd="bold" class="toolbar-btn p-1.5 w-8 h-8 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] font-bold text-xs" title="Bold">B</button>
-            <button type="button" data-cmd="italic" class="toolbar-btn p-1.5 w-8 h-8 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] italic text-xs font-serif" title="Italic">I</button>
-            <button type="button" data-cmd="underline" class="toolbar-btn p-1.5 w-8 h-8 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] underline text-xs" title="Underline">U</button>
-            <span class="w-px h-5 bg-slate-200 mx-1"></span>
-            <button type="button" data-block="H2" class="toolbar-btn px-2.5 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] font-extrabold text-xs" title="Heading 2">H2</button>
-            <button type="button" data-block="H3" class="toolbar-btn px-2.5 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] font-bold text-xs" title="Heading 3">H3</button>
-            <button type="button" data-block="P" class="toolbar-btn px-2 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-medium" title="Paragraph">¶</button>
-            <span class="w-px h-5 bg-slate-200 mx-1"></span>
-            <button type="button" data-cmd="insertUnorderedList" class="toolbar-btn px-2 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-bold" title="Bullet List">• Bullet</button>
-            <button type="button" data-cmd="insertOrderedList" class="toolbar-btn px-2 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-bold" title="Numbered List">1. List</button>
-            <button type="button" data-block="BLOCKQUOTE" class="toolbar-btn px-2 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-serif italic" title="Quote">“ Quote</button>
-            <span class="w-px h-5 bg-slate-200 mx-1"></span>
-            <button type="button" id="btn-insert-inline-img" class="toolbar-btn inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-semibold" title="Insert Image into Body">
-              <svg class="w-3.5 h-3.5 text-[#0B2553]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span>Image</span>
-            </button>
-            <button type="button" id="btn-insert-link" class="toolbar-btn px-2 py-1 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-[#0B2553] text-xs font-semibold" title="Insert Link">Link</button>
-            <span class="w-px h-5 bg-slate-200 mx-1"></span>
-            <button type="button" data-cmd="removeFormat" class="toolbar-btn px-2 py-1 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600 text-xs" title="Clear Formatting">✕ Clear</button>
-          </div>
-
-          <!-- Contenteditable Editor Window -->
-          <div
-            id="blog-editor-content"
-            contenteditable="true"
-            class="min-h-[280px] max-h-[460px] overflow-y-auto p-5 bg-white rounded-2xl border border-slate-200/90 focus:outline-none focus:ring-2 focus:ring-[#0B2553]/20 focus:border-[#0B2553] text-sm sm:text-base text-[#243A5E] leading-relaxed shadow-xs"
-          ></div>
-
-          <!-- Live Preview Window -->
-          <div
-            id="blog-editor-preview"
-            class="hidden min-h-[280px] max-h-[460px] overflow-y-auto p-6 sm:p-8 bg-white rounded-2xl border border-slate-200/90 text-sm sm:text-base text-[#243A5E] leading-relaxed shadow-xs"
-          ></div>
-        </div>
-
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="p-4 sm:p-5 border-t border-slate-100 bg-white flex items-center justify-between shrink-0">
-        <label class="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" id="blog-input-published" checked class="w-4 h-4 rounded text-[#0B2553] focus:ring-[#0B2553]" />
-          <span class="text-xs font-bold text-[#0B2553]">Published on Live Site</span>
-        </label>
-
-        <div class="flex items-center gap-3">
-          <button
-            type="button"
-            id="btn-cancel-blog"
-            class="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
-          >
-            Cancel
-          </button>
-
-          <button
-            type="button"
-            id="btn-save-blog"
-            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-[#0B2553] hover:bg-[#0C487A] shadow-md shadow-[#0B2553]/20 transition-all cursor-pointer active:scale-95"
-          >
-            <span id="btn-save-blog-text">Save &amp; Publish</span>
-          </button>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -1096,6 +1097,10 @@ import MainLayout from '../../layouts/MainLayout.astro';
           title: 'Blog Manager',
           subtitle: 'GovCon editorial articles and thought leadership.',
         },
+        'blog-editor': {
+          title: 'Article Workspace',
+          subtitle: 'Author, format, and publish high-impact GovCon insights.',
+        },
         system: {
           title: 'Database Health & Ping',
           subtitle: 'Automated heartbeat monitor preventing Supabase 7-day inactivity pause.',
@@ -1205,11 +1210,10 @@ import MainLayout from '../../layouts/MainLayout.astro';
         }
       }
 
-      // Blog Modal & Editor Handlers
-      const blogModal = document.getElementById('blog-modal');
+      // Blog Workspace Navigation Handlers
       const btnCreateBlog = document.getElementById('btn-create-blog');
-      const closeBlogModal = document.getElementById('close-blog-modal');
-      const btnCancelBlog = document.getElementById('btn-cancel-blog');
+      const btnBackToBlogs = document.getElementById('btn-back-to-blogs');
+      const btnCancelBlogScreen = document.getElementById('btn-cancel-blog-screen');
       const blogTitleInput = document.getElementById('blog-input-title') as HTMLInputElement | null;
       const blogSlugInput = document.getElementById('blog-input-slug') as HTMLInputElement | null;
       const blogIdInput = document.getElementById('blog-input-id') as HTMLInputElement | null;
@@ -1218,10 +1222,11 @@ import MainLayout from '../../layouts/MainLayout.astro';
         openBlogEditor();
       });
 
-      closeBlogModal?.addEventListener('click', closeBlogEditor);
-      btnCancelBlog?.addEventListener('click', closeBlogEditor);
-      blogModal?.addEventListener('click', (e) => {
-        if (e.target === e.currentTarget) closeBlogEditor();
+      btnBackToBlogs?.addEventListener('click', () => {
+        switchView('blogs');
+      });
+      btnCancelBlogScreen?.addEventListener('click', () => {
+        switchView('blogs');
       });
 
       // Auto slug generation when typing title on new articles
@@ -1389,18 +1394,14 @@ import MainLayout from '../../layouts/MainLayout.astro';
         tabWrite?.classList.add('text-slate-500');
 
         if (editorPreview && editorContent) {
-          editorPreview.innerHTML = `
-            <div class="prose max-w-none text-[#243A5E] space-y-4">
-              ${editorContent.innerHTML || '<p class="text-slate-400 italic">No content written yet.</p>'}
-            </div>
-          `;
+          editorPreview.innerHTML = editorContent.innerHTML || '<p class="text-slate-400 italic">No content written yet.</p>';
         }
         editorContent?.classList.add('hidden');
         editorPreview?.classList.remove('hidden');
       });
 
       // Save Blog Article (Create or Update)
-      const btnSaveBlog = document.getElementById('btn-save-blog');
+      const btnSaveBlog = document.getElementById('btn-save-blog-screen');
       const btnSaveBlogText = document.getElementById('btn-save-blog-text');
 
       btnSaveBlog?.addEventListener('click', async () => {
@@ -1463,7 +1464,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
           const result = await res.json();
 
           if (res.ok && result.success) {
-            closeBlogEditor();
+            switchView('blogs');
             await loadBlogs();
           } else {
             alert('Failed to save article: ' + (result.error || 'Server error'));
@@ -1904,37 +1905,12 @@ import MainLayout from '../../layouts/MainLayout.astro';
     function serializeEditorContent(): any[] {
       const editor = document.getElementById('blog-editor-content');
       if (!editor) return [];
-      const children = Array.from(editor.children);
-      if (children.length === 0) {
-        const raw = editor.innerHTML.trim();
-        return raw ? [{ tag: 'P', text: raw }] : [];
-      }
-      const blocks: any[] = [];
-      children.forEach((child: any) => {
-        const tagName = (child.tagName || 'P').toUpperCase();
-        if (tagName === 'H2') {
-          blocks.push({ tag: 'H2', text: child.innerHTML });
-        } else if (tagName === 'H3') {
-          blocks.push({ tag: 'H3', text: child.innerHTML });
-        } else if (tagName === 'BLOCKQUOTE') {
-          blocks.push({ tag: 'QUOTE', text: child.innerHTML });
-        } else if (tagName === 'UL' || tagName === 'OL') {
-          Array.from(child.children).forEach((li: any) => {
-            blocks.push({ tag: 'LI', text: li.innerHTML });
-          });
-        } else if (tagName === 'IMG') {
-          const src = child.getAttribute('src') || '';
-          blocks.push({ tag: 'IMG', image: src, text: src });
-        } else {
-          blocks.push({ tag: 'HTML', text: child.outerHTML || child.innerHTML });
-        }
-      });
-      return blocks;
+      const cleanHtml = editor.innerHTML.trim();
+      return cleanHtml ? [{ tag: 'HTML', html: cleanHtml, text: cleanHtml }] : [];
     }
 
     function openBlogEditor(blogToEdit?: any) {
-      const modal = document.getElementById('blog-modal');
-      const heading = document.getElementById('blog-modal-heading');
+      const heading = document.getElementById('blog-editor-screen-heading');
       const idInput = document.getElementById('blog-input-id') as HTMLInputElement;
       const titleInput = document.getElementById('blog-input-title') as HTMLInputElement;
       const slugInput = document.getElementById('blog-input-slug') as HTMLInputElement;
@@ -1983,16 +1959,22 @@ import MainLayout from '../../layouts/MainLayout.astro';
         const blocks = blogToEdit.content_blocks || blogToEdit.contentBlocks || [];
         if (editorEl) {
           if (Array.isArray(blocks) && blocks.length > 0) {
-            editorEl.innerHTML = blocks.map((b: any) => {
-              const tag = (b.tag || 'p').toUpperCase();
-              if (tag === 'H2') return `<h2 class="text-xl font-bold mt-4 mb-2">${b.text}</h2>`;
-              if (tag === 'H3') return `<h3 class="text-lg font-bold mt-3 mb-1">${b.text}</h3>`;
-              if (tag === 'QUOTE' || tag === 'BLOCKQUOTE') return `<blockquote class="border-l-4 border-red-500 pl-4 py-2 italic my-3">${b.text}</blockquote>`;
-              if (tag === 'LI') return `<li>${b.text}</li>`;
-              if (tag === 'IMG') return `<img src="${b.image || b.text}" class="my-3 rounded-xl max-w-full" />`;
-              if (tag === 'HTML') return b.text;
-              return `<p class="my-2">${b.text}</p>`;
-            }).join('');
+            if (blocks[0]?.tag === 'HTML' && (blocks[0].html || blocks[0].text)) {
+              editorEl.innerHTML = blocks[0].html || blocks[0].text;
+            } else {
+              // Convert legacy blocks into semantic HTML
+              editorEl.innerHTML = blocks.map((b: any) => {
+                const tag = (b.tag || 'p').toUpperCase();
+                if (tag === 'H2') return `<h2>${b.text}</h2>`;
+                if (tag === 'H3') return `<h3>${b.text}</h3>`;
+                if (tag === 'H4') return `<h4>${b.text}</h4>`;
+                if (tag === 'QUOTE' || tag === 'BLOCKQUOTE') return `<blockquote>${b.text}</blockquote>`;
+                if (tag === 'LI') return `<ul><li>${b.text}</li></ul>`;
+                if (tag === 'IMG') return `<img src="${b.image || b.text}" />`;
+                if (tag === 'HTML') return b.html || b.text;
+                return `<p>${b.text}</p>`;
+              }).join('');
+            }
           } else {
             editorEl.innerHTML = '<p>Start writing your article here...</p>';
           }
@@ -2015,11 +1997,11 @@ import MainLayout from '../../layouts/MainLayout.astro';
       }
 
       tabWrite?.click();
-      modal?.classList.remove('hidden');
+      switchView('blog-editor');
     }
 
     function closeBlogEditor() {
-      document.getElementById('blog-modal')?.classList.add('hidden');
+      switchView('blogs');
     }
 
     function renderGalleryThumbnails() {
@@ -2218,6 +2200,141 @@ import MainLayout from '../../layouts/MainLayout.astro';
     #admin-outlet {
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
+    }
+
+    /* Executive Blog Typography & WYSIWYG Editor Styles */
+    .blog-article-body {
+      font-size: 1.0625rem;
+      line-height: 1.85;
+      color: #334155;
+    }
+    .blog-article-body h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #0B2553;
+      letter-spacing: -0.02em;
+      margin-top: 2.25rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #E2E8F0;
+      line-height: 1.3;
+    }
+    .blog-article-body h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #0B2553;
+      letter-spacing: -0.015em;
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.35;
+    }
+    .blog-article-body h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0B2553;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .blog-article-body p {
+      font-size: 1.0625rem;
+      line-height: 1.85;
+      color: #334155;
+      margin-top: 1.15rem;
+      margin-bottom: 1.15rem;
+    }
+    .blog-article-body ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .blog-article-body ul li {
+      position: relative;
+      padding-left: 1.85rem;
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      color: #334155;
+    }
+    .blog-article-body ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0.15rem;
+      top: 0.2rem;
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 9999px;
+      background: #FEF2F2;
+      color: #FF3130;
+      font-weight: 800;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 49, 48, 0.25);
+    }
+    .blog-article-body ol {
+      list-style-type: decimal;
+      padding-left: 1.75rem;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .blog-article-body ol li {
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      color: #334155;
+      padding-left: 0.5rem;
+    }
+    .blog-article-body blockquote {
+      border-left: 4px solid #FF3130;
+      background: #F8FAFC;
+      padding: 1.15rem 1.5rem;
+      border-radius: 0 1rem 1rem 0;
+      font-style: italic;
+      color: #0B2553;
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      margin: 1.85rem 0;
+    }
+    .blog-article-body strong,
+    .blog-article-body b {
+      font-weight: 700;
+      color: #0B2553;
+    }
+    .blog-article-body em,
+    .blog-article-body i {
+      font-style: italic;
+    }
+    .blog-article-body u {
+      text-decoration: underline;
+    }
+    .blog-article-body a {
+      color: #0C487A;
+      text-decoration: underline;
+      font-weight: 600;
+      text-underline-offset: 4px;
+    }
+    .blog-article-body a:hover {
+      color: #FF3130;
+    }
+    .blog-article-body img {
+      border-radius: 1rem;
+      margin: 2rem 0;
+      box-shadow: 0 10px 30px -6px rgba(12, 72, 122, 0.12);
+      border: 1px solid #E2E8F0;
+      max-width: 100%;
+      height: auto;
+    }
+    .blog-article-body code {
+      background: #f1f5f9;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.375rem;
+      font-family: monospace;
+      font-size: 0.875em;
+      color: #0B2553;
     }
   </style>
 </MainLayout>
