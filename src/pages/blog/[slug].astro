@@ -28,6 +28,7 @@ if (isSupabaseConfigured && supabase && slug) {
       .from('blogs')
       .select('*')
       .eq('slug', slug)
+      .eq('is_published', true)
       .single();
 
     if (!error && dbPost) {
@@ -43,7 +44,11 @@ if (isSupabaseConfigured && supabase && slug) {
         galleryImages: Array.isArray(dbPost.gallery_images) ? dbPost.gallery_images : (typeof dbPost.gallery_images === 'string' ? JSON.parse(dbPost.gallery_images || '[]') : []),
         relatedSlugs: Array.isArray(dbPost.related_slugs) ? dbPost.related_slugs : (typeof dbPost.related_slugs === 'string' ? JSON.parse(dbPost.related_slugs || '[]') : []),
         contentBlocks: Array.isArray(dbPost.content_blocks) ? dbPost.content_blocks : (typeof dbPost.content_blocks === 'string' ? JSON.parse(dbPost.content_blocks || '[]') : []),
-        metadata: dbPost.metadata || {},
+        metadata: {
+          ...(dbPost.metadata || {}),
+          datePublished: dbPost.created_at || dbPost.metadata?.datePublished,
+          dateModified: dbPost.updated_at || dbPost.metadata?.dateModified,
+        },
       };
     }
 
@@ -79,8 +84,45 @@ if (!post && slug) {
 }
 
 if (!post) {
-  return Astro.redirect('/blog');
+  Astro.response.status = 404;
+  return Astro.rewrite('/404');
 }
+
+function toIsoDate(value?: string): string | undefined {
+  if (!value) return undefined;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
+}
+
+const canonicalUrl = `https://unitycompass.com/blog/${post.slug}`;
+const publishedTime = post.metadata?.datePublished || toIsoDate(post.date);
+const modifiedTime = post.metadata?.dateModified || publishedTime;
+const displayDateTime = publishedTime?.slice(0, 10);
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${canonicalUrl}#article`,
+  headline: post.title,
+  description: post.excerpt,
+  url: canonicalUrl,
+  mainEntityOfPage: {
+    '@id': `${canonicalUrl}#webpage`,
+  },
+  image: post.image.startsWith('http') ? post.image : `https://unitycompass.com${post.image}`,
+  ...(publishedTime ? { datePublished: publishedTime } : {}),
+  ...(modifiedTime ? { dateModified: modifiedTime } : {}),
+  author: {
+    '@type': 'Organization',
+    name: post.author,
+    url: 'https://unitycompass.com/editorial-policy',
+  },
+  publisher: {
+    '@id': 'https://unitycompass.com/#organization',
+  },
+  articleSection: post.category,
+  keywords: post.metadata?.tags?.join(', '),
+  inLanguage: 'en-US',
+};
 
 // Calculate curated related posts:
 const otherPosts = allPosts.filter((p) => p.slug !== post.slug);
@@ -118,6 +160,11 @@ function formatRichText(str?: string): string {
   title={`${post.title} - Unity Compass`}
   description={post.excerpt}
   ogImage={post.image}
+  canonicalUrl={canonicalUrl}
+  ogType="article"
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+  structuredData={articleSchema}
 >
   <!-- ========================================================================= -->
   <!-- SECTION 1: EDITORIAL HEADER                                               -->
@@ -148,7 +195,7 @@ function formatRichText(str?: string): string {
           <span class="font-bold text-[#0B2553]">{post.author}</span>
         </div>
         <span>&bull;</span>
-        <time datetime={post.date}>{post.date}</time>
+        <time datetime={displayDateTime}>{post.date}</time>
         <span>&bull;</span>
         <span class="font-medium text-[#FF3130]">{post.readTime}</span>
       </div>
@@ -186,7 +233,7 @@ function formatRichText(str?: string): string {
           if (tag === 'HTML') {
             return <div class="space-y-4" set:html={rawText} />;
           }
-          if (tag === 'H2' || tag.startsWith('H')) {
+          if (tag === 'H2') {
             return (
               <h2 class="blog-reveal" set:html={formatRichText(rawText)} />
             );
@@ -194,6 +241,11 @@ function formatRichText(str?: string): string {
           if (tag === 'H3') {
             return (
               <h3 class="blog-reveal" set:html={formatRichText(rawText)} />
+            );
+          }
+          if (tag === 'H4') {
+            return (
+              <h4 class="blog-reveal" set:html={formatRichText(rawText)} />
             );
           }
           if (tag === 'LI') {
@@ -216,6 +268,8 @@ function formatRichText(str?: string): string {
                   alt={block.caption || post.title}
                   class="w-full h-auto object-cover max-h-[500px]"
                   loading="lazy"
+                  width="1200"
+                  height="750"
                 />
                 {block.caption && (
                   <figcaption class="p-3.5 text-center text-xs text-slate-500 bg-slate-50 border-t border-slate-100 italic">
@@ -247,6 +301,8 @@ function formatRichText(str?: string): string {
                   alt={`${post.title} gallery asset ${idx + 1}`}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
+                  width="800"
+                  height="500"
                 />
               </div>
             ))}
@@ -278,6 +334,12 @@ function formatRichText(str?: string): string {
           </a>
         </div>
       </div>
+
+      <aside class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm leading-relaxed text-slate-600" aria-label="Editorial information">
+        <strong class="text-[#0B2553]">Editorial note:</strong>
+        This article was prepared by the {post.author}. Readers should confirm current solicitation, agency, FAR, DFARS, and security requirements against primary government sources before acting.
+        <a href="/editorial-policy" class="ml-1 font-semibold text-[#0C487A] underline underline-offset-4">Review our editorial standards.</a>
+      </aside>
 
       <!-- Navigation Footer -->
       <div class="mt-10 pt-6 border-t border-slate-100 flex items-center justify-between">
@@ -322,6 +384,8 @@ function formatRichText(str?: string): string {
                     alt={rel.title}
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
+                    width="800"
+                    height="500"
                   />
                 </a>
                 <h3 class="text-base font-bold text-[#0B2553] group-hover:text-[#0C487A] transition-colors mt-1.5 line-clamp-2">

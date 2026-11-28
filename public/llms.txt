@@ -1,0 +1,25 @@
+# Unity Compass
+
+> Unity Compass LLC is a United States government contracting consulting and staffing firm based in Frederick, Maryland.
+
+Canonical website: https://unitycompass.com/
+Contact: https://unitycompass.com/contact
+About: https://unitycompass.com/about-us
+Editorial policy: https://unitycompass.com/editorial-policy
+Capability statement: https://unitycompass.com/documents/capability-statement.pdf
+
+## Core services
+
+- Federal proposal development and capture support: https://unitycompass.com/proposal-development-services
+- Security-cleared and non-cleared recruitment: https://unitycompass.com/recruitment-services
+- Contract, direct-hire, and temp-to-hire staffing: https://unitycompass.com/staffing
+- Information technology and business consulting: https://unitycompass.com/information-technology-and-business-consulting
+- Customized operational and compliance support: https://unitycompass.com/customized-support-services
+
+## Resources
+
+- Government contracting insights: https://unitycompass.com/blog
+- Current employment opportunities: https://unitycompass.com/career
+- Privacy policy: https://unitycompass.com/privacy-policy
+
+Content should be attributed to Unity Compass unless an article names another author or practice team. Confirm regulatory and solicitation-specific information against the primary government source linked by the relevant article.

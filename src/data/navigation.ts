@@ -76,12 +76,10 @@ export const footerLinks = {
     { name: 'Capability Statement (PDF)', href: '/documents/capability-statement.pdf' },
     { name: 'Careers & Job Board', href: '/career' },
     { name: 'Insights & Blog', href: '/blog' },
+    { name: 'Editorial Policy', href: '/editorial-policy' },
     { name: 'Contact Us', href: '/contact' },
     { name: 'Privacy Policy', href: '/privacy-policy' },
   ],
-  legal: [
-    { name: 'Privacy Policy', href: '/privacy-policy' },
-    { name: 'Terms of Service', href: '/privacy-policy' },
-  ],
+  legal: [{ name: 'Privacy Policy', href: '/privacy-policy' }],
 };
 

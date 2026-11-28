@@ -128,7 +128,35 @@ function extractSummary(desc: string): string {
   return '';
 }
 
-export const GET: APIRoute = async () => {
+async function fetchAtsPage(page: number): Promise<any> {
+  const response = await fetch(
+    `https://careerapi.ceipal.com/${CEIPAL_API_KEY}/CareerPortalJobPostings/?page=${page}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Referer-Host': 'https://jobsapi.ceipal.com/',
+        'Referer': 'https://jobsapi.ceipal.com/APISource/v3/index.html',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: `cp_id=${CEIPAL_CP_ID}`,
+    }
+  );
+
+  if (!response.ok) return null;
+  return response.json();
+}
+
+interface CeipalJobsResult {
+  success: true;
+  source: 'portal' | 'ats' | 'snapshot';
+  count: number;
+  num_pages: number;
+  jobs: CeipalJob[];
+}
+
+export async function getCeipalJobs(): Promise<CeipalJobsResult> {
   try {
     // --------------------------------------------------------------------------
     // 1. PRIMARY STRATEGY: Live Ceipal Candidate Portal API (Direct Requisitions)
@@ -190,20 +218,13 @@ export const GET: APIRoute = async () => {
           };
         });
 
-        return new Response(
-          JSON.stringify({
-            success: true,
-            count: totalCount,
-            num_pages: Math.ceil(totalCount / 10),
-            jobs,
-          }),
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Cache-Control': 'public, max-age=900, s-maxage=1800', // 15 mins cache
-            },
-          }
-        );
+        return {
+          success: true,
+          source: 'portal',
+          count: totalCount,
+          num_pages: Math.ceil(totalCount / 10),
+          jobs,
+        };
       }
     }
   } catch (err) {
@@ -214,65 +235,48 @@ export const GET: APIRoute = async () => {
   // 2. SECONDARY STRATEGY: Ceipal ATS Widget API Fallback with code-to-portal map
   // --------------------------------------------------------------------------
   try {
-    const atsResponse = await fetch(
-      `https://careerapi.ceipal.com/${CEIPAL_API_KEY}/CareerPortalJobPostings/?page=1`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-          'X-Referer-Host': 'https://jobsapi.ceipal.com/',
-          'Referer': 'https://jobsapi.ceipal.com/APISource/v3/index.html',
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-        body: `cp_id=${CEIPAL_CP_ID}`,
+    const data = await fetchAtsPage(1);
+    if (Array.isArray(data?.results) && data.results.length > 0) {
+      const rawJobs = [...data.results];
+      const pageCount = Math.ceil((data.count || rawJobs.length) / data.results.length);
+      for (let page = 2; page <= pageCount; page += 1) {
+        const nextPage = await fetchAtsPage(page);
+        if (Array.isArray(nextPage?.results)) rawJobs.push(...nextPage.results);
       }
-    );
 
-    if (atsResponse.ok) {
-      const data = await atsResponse.json();
-      if (Array.isArray(data.results) && data.results.length > 0) {
-        const jobs: CeipalJob[] = data.results.map((raw: any): CeipalJob => {
-          const desc = stripHtml(raw.public_job_desc || '');
-          const code = (raw.job_code || '').trim();
-          const portalId = ceipalJobCodeToPortalId[code];
-          const directApplyUrl = portalId
-            ? `https://candidateportal.ceipal.com/job-details/${portalId}`
-            : (raw.apply_job_login || `https://candidateportal.ceipal.com/submit-resume/wnBXqpgx6GIS7DcUrUSC9Kxp7hfuvSNAkWYPXe-Odl0/PQyIYUggnWdV4ut_3CpHn3osOqjfErNC4IFHJThZhoA`);
+      const jobs = rawJobs.reduce<CeipalJob[]>((result, raw: any) => {
+        const desc = stripHtml(raw.public_job_desc || '');
+        const code = (raw.job_code || '').trim();
+        const portalId = ceipalJobCodeToPortalId[code];
+        if (!portalId) return result;
 
-          return {
-            id: raw.id,
-            jobCode: raw.job_code || '',
-            title: raw.public_job_title || '',
-            location: extractLocation(raw.multpile_job_location, raw.state),
-            state: raw.state || '',
-            country: raw.country || '',
-            employmentType: raw.tax_terms || '',
-            experience: '',
-            payRate: extractPayRate(desc),
-            skills: [],
-            summary: extractSummary(desc),
-            fullDescription: desc,
-            postedDate: raw.updated || '',
-            applyUrl: directApplyUrl,
-          };
+        result.push({
+          id: portalId,
+          jobCode: raw.job_code || '',
+          title: raw.public_job_title || '',
+          location: extractLocation(raw.multpile_job_location, raw.state),
+          state: raw.state || '',
+          country: raw.country || '',
+          employmentType: raw.tax_terms || '',
+          experience: '',
+          payRate: extractPayRate(desc),
+          skills: [],
+          summary: extractSummary(desc),
+          fullDescription: desc,
+          postedDate: raw.updated || '',
+          applyUrl: `https://candidateportal.ceipal.com/job-details/${portalId}`,
         });
+        return result;
+      }, []);
 
-        return new Response(
-          JSON.stringify({
-            success: true,
-            count: data.count || jobs.length,
-            num_pages: Math.ceil((data.count || jobs.length) / 10),
-            jobs,
-          }),
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Cache-Control': 'public, max-age=900, s-maxage=1800',
-            },
-          }
-        );
-      }
+      const count = jobs.length;
+      return {
+        success: true,
+        source: 'ats',
+        count,
+        num_pages: Math.ceil(count / 10),
+        jobs,
+      };
     }
   } catch (err) {
     console.error('ATS fallback failed:', err);
@@ -281,18 +285,22 @@ export const GET: APIRoute = async () => {
   // --------------------------------------------------------------------------
   // 3. TERTIARY FAILSAFE: Initial Dataset (Guarantees zero-blank UI)
   // --------------------------------------------------------------------------
-  return new Response(
-    JSON.stringify({
-      success: true,
-      count: initialCeipalJobs.length,
-      num_pages: Math.ceil(initialCeipalJobs.length / 10),
-      jobs: initialCeipalJobs,
-    }),
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'public, max-age=3600',
-      },
-    }
-  );
+  return {
+    success: true,
+    source: 'snapshot',
+    count: initialCeipalJobs.length,
+    num_pages: Math.ceil(initialCeipalJobs.length / 10),
+    jobs: initialCeipalJobs,
+  };
+}
+
+export const GET: APIRoute = async () => {
+  const result = await getCeipalJobs();
+
+  return new Response(JSON.stringify(result), {
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'public, max-age=900, s-maxage=1800',
+    },
+  });
 };

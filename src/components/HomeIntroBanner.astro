@@ -49,15 +49,24 @@
           <!-- 3D Artwork Box (On-Scroll Parallax + Continuous Levitation, No Hover Tilt) -->
           <div class="w-full flex flex-col items-center justify-center will-change-transform">
             <!-- 3D Floating Artwork Image (Significantly Increased Size) -->
-            <img
-              id="who-artwork-img"
-              src="/images/whoweare.png"
-              alt="Unity Compass Strategic Federal Practice, IDIQ Scoring, and Mission Delivery"
-              class="hero-floating-artwork w-full h-auto max-h-[340px] sm:max-h-[500px] lg:max-h-[800px] xl:max-h-[880px] object-contain select-none pointer-events-none filter contrast-[1.02]"
-              loading="lazy"
-              width="2446"
-              height="1366"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcset="/images/whoweare-960.webp 960w, /images/whoweare.webp 1600w"
+                sizes="(min-width: 1280px) 880px, (min-width: 1024px) 760px, (min-width: 640px) 90vw, 92vw"
+              />
+              <img
+                id="who-artwork-img"
+                src="/images/whoweare.png"
+                alt="Unity Compass Strategic Federal Practice, IDIQ Scoring, and Mission Delivery"
+                class="hero-floating-artwork w-full h-auto max-h-[340px] sm:max-h-[500px] lg:max-h-[800px] xl:max-h-[880px] object-contain select-none pointer-events-none filter contrast-[1.02]"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                width="2446"
+                height="1366"
+              />
+            </picture>
 
             <!-- Visible Realistic 3D Ground Contact Shadow with Synchronized Levitating Breath -->
             <div
@@ -129,7 +138,7 @@
             <!-- Animated Light Beam Sheen on Hover -->
             <span class="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-out pointer-events-none"></span>
             
-            <span class="relative z-10 tracking-wide">Read More</span>
+            <span class="relative z-10 tracking-wide">Learn About Unity Compass</span>
             <div class="relative z-10 w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center group-hover:bg-white group-hover:text-[#0C487A] transition-all duration-300 shadow-2xs">
               <svg class="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />

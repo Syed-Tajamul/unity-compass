@@ -62,9 +62,12 @@ const resourcesDropdown = [
         aria-label="Unity Compass - Home"
       >
         <img
-          src="/images/Green-Minimal-Travel-Business-Logo.png"
+          src="/images/Green-Minimal-Travel-Business-Logo.webp"
           alt="Unity Compass - Your Partner In Government Contracting Success"
           class="h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.01] block"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
           width="207"
           height="55"
         />
@@ -76,7 +79,7 @@ const resourcesDropdown = [
         <!-- Home Link with Signature Red Active Indicator -->
         <a
           href="/"
-          class={`rounded-md nav-link whitespace-nowrap px-3 py-2 text-[14px] font-semibold transition-colors ${
+          class={`rounded-md nav-link whitespace-nowrap px-3 py-2.5 min-h-[44px] inline-flex items-center text-[14px] font-semibold transition-colors ${
             currentPath === '/' ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
           }`}
         >
@@ -87,7 +90,7 @@ const resourcesDropdown = [
         <div class="relative group/nav py-6">
           <button
             type="button"
-            class={`nav-link whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-2 rounded-md sm:rounded-lg text-[14px] font-semibold transition-colors cursor-pointer ${
+            class={`nav-link whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-2.5 min-h-[44px] rounded-md sm:rounded-lg text-[14px] font-semibold transition-colors cursor-pointer ${
               currentPath.includes('proposal') || currentPath.includes('recruitment') || currentPath.includes('staffing') || currentPath.includes('consulting') || currentPath.includes('customized')
                 ? 'text-[#FF3130] active font-bold'
                 : 'text-slate-800 hover:text-[#0C487A]'
@@ -134,7 +137,7 @@ const resourcesDropdown = [
         <!-- About Us Direct Link -->
         <a
           href="/about-us"
-          class={`rounded-md nav-link whitespace-nowrap px-3 py-2 text-[14px] font-semibold transition-colors ${
+          class={`rounded-md nav-link whitespace-nowrap px-3 py-2.5 min-h-[44px] inline-flex items-center text-[14px] font-semibold transition-colors ${
             currentPath.startsWith('/about-us') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
           }`}
         >
@@ -145,7 +148,7 @@ const resourcesDropdown = [
         <div class="relative group/nav py-6">
           <button
             type="button"
-            class={`nav-link whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-2 rounded-md sm:rounded-lg text-[14px] font-semibold transition-colors cursor-pointer ${
+            class={`nav-link whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-2.5 min-h-[44px] rounded-md sm:rounded-lg text-[14px] font-semibold transition-colors cursor-pointer ${
               currentPath.startsWith('/blog') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
             }`}
             aria-expanded="false"
@@ -190,7 +193,7 @@ const resourcesDropdown = [
         <!-- Careers -->
         <a
           href="/career"
-          class={`rounded-md nav-link whitespace-nowrap px-3 py-2 text-[14px] font-semibold transition-colors cursor-pointer ${
+          class={`rounded-md nav-link whitespace-nowrap px-3 py-2.5 min-h-[44px] inline-flex items-center text-[14px] font-semibold transition-colors cursor-pointer ${
             currentPath.startsWith('/career') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
           }`}
         >
@@ -200,7 +203,7 @@ const resourcesDropdown = [
         <!-- Contact Us -->
         <a
           href="/contact"
-          class={`rounded-md nav-link whitespace-nowrap px-3 py-2 text-[14px] font-semibold transition-colors cursor-pointer ${
+          class={`rounded-md nav-link whitespace-nowrap px-3 py-2.5 min-h-[44px] inline-flex items-center text-[14px] font-semibold transition-colors cursor-pointer ${
             currentPath.startsWith('/contact') ? 'text-[#FF3130] active font-bold' : 'text-slate-800 hover:text-[#0C487A]'
           }`}
         >
@@ -267,9 +270,11 @@ const resourcesDropdown = [
   <div class="flex h-20 items-center justify-between border-b border-slate-200 bg-gradient-to-r from-[#F4F8FC] to-[#EBF3FA] px-4 sm:px-5">
     <a href="/" class="rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0C487A]" aria-label="Unity Compass - Home">
       <img
-        src="/images/Green-Minimal-Travel-Business-Logo.png"
+        src="/images/Green-Minimal-Travel-Business-Logo.webp"
         alt="Unity Compass"
         class="h-10 w-auto object-contain"
+        loading="lazy"
+        decoding="async"
         width="207"
         height="55"
       />

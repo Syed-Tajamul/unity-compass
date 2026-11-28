@@ -46,11 +46,28 @@ if (isSupabaseConfigured && supabase) {
 }
 
 const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category)))];
+const blogCollectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Unity Compass GovCon Insights and Intelligence',
+  url: 'https://unitycompass.com/blog',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: blogPosts.map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: `https://unitycompass.com/blog/${post.slug}`,
+      name: post.title,
+    })),
+  },
+};
 ---
 
 <MainLayout
   title="Insights & Intelligence - Unity Compass | GovCon Strategies"
   description="Actionable intelligence on federal proposal development, security-cleared recruitment, AI-driven compliance, and agile staffing strategies across DoD and civilian agencies."
+  pageType="CollectionPage"
+  structuredData={blogCollectionSchema}
 >
   <!-- ========================================================================= -->
   <!-- SECTION 1: HERO (Sophisticated Split-Screen Layout with 3D Visual)         -->
@@ -153,7 +170,7 @@ const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category
         <div class="blog-reveal blog-delay-1 w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] mx-auto mt-4 mb-5"></div>
 
         <p class="blog-reveal blog-delay-1 mt-2 text-base sm:text-lg text-[#243A5E] leading-[1.78] sm:leading-[1.82] font-normal max-w-2xl mx-auto">
-          Curated strategies, contracting best practices, and executive insights from our senior capture directors.
+          Curated strategies, contracting best practices, and practical guidance from our federal consulting practice teams.
         </p>
       </div>
 

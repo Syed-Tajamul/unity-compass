@@ -153,6 +153,7 @@ const aboutPageSchema = {
   description="Unity Compass helps government contractors compete, hire, and deliver through technical consulting, federal advisory, proposal support, and cleared staffing."
   canonicalUrl={canonicalUrl}
   ogImage="/images/about-hero-1600.webp"
+  pageType="AboutPage"
 >
   <script type="application/ld+json" set:html={JSON.stringify(aboutPageSchema)} />
   <noscript><style>.about-reveal, .about-scroll-region :is(h2, h3, h4, p, dt, dd) { opacity: 1 !important; transform: none !important; filter: none !important; }</style></noscript>
@@ -356,6 +357,9 @@ const aboutPageSchema = {
             </div>
           ))}
         </dl>
+        <p class="mt-7 border-t border-slate-200 pt-5 text-center text-xs leading-5 text-slate-500">
+          Figures are cumulative aggregates from internal engagement records. Awarded value refers to client contract value supported, not Unity Compass revenue. Supporting client and procurement details remain confidential unless disclosure is authorized.
+        </p>
       </div>
     </div>
   </section>

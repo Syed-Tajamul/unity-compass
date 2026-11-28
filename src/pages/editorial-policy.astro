@@ -1,0 +1,51 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+const policySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Unity Compass Editorial Policy',
+  url: 'https://unitycompass.com/editorial-policy',
+  about: {
+    '@id': 'https://unitycompass.com/#organization',
+  },
+  dateModified: '2026-11-27',
+};
+---
+
+<MainLayout
+  title="Editorial Policy | Unity Compass"
+  description="How Unity Compass prepares, reviews, sources, and updates government contracting, staffing, cybersecurity, and business advisory content."
+  structuredData={policySchema}
+>
+  <article class="bg-white py-20 sm:py-28">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <p class="text-sm font-bold uppercase tracking-[0.18em] text-[#FF3130]">Editorial Standards</p>
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-[#0B2553] sm:text-5xl">How we prepare and review our insights</h1>
+      <p class="mt-6 text-lg leading-8 text-slate-600">
+        Unity Compass publishes practical information for government contractors, employers, candidates, and commercial organizations. Our articles are educational and do not replace solicitation-specific, legal, accounting, cybersecurity, or agency guidance.
+      </p>
+
+      <div class="prose prose-slate mt-12 max-w-none space-y-10 text-slate-700">
+        <section>
+          <h2 class="text-2xl font-bold text-[#0B2553]">Authorship and review</h2>
+          <p class="mt-3 leading-7">Articles identify the Unity Compass practice team responsible for the subject. Material should be reviewed by a team member familiar with the relevant service area before publication. We do not present agency, certification, or legal authority that we do not hold.</p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-bold text-[#0B2553]">Primary sources</h2>
+          <p class="mt-3 leading-7">Where a statement depends on a regulation, standard, program, or agency process, editors should link to the current primary source, including acquisition.gov, GSA, SAM.gov, NIST, CISA, DoD, or the responsible agency.</p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-bold text-[#0B2553]">Claims and confidentiality</h2>
+          <p class="mt-3 leading-7">Performance claims must be supportable from internal records or an attributable public source. Client identities and procurement-sensitive details remain confidential unless publication is authorized. Aggregate results should state their scope and measurement period when available.</p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-bold text-[#0B2553]">Corrections and updates</h2>
+          <p class="mt-3 leading-7">We update material when requirements or source guidance change. Corrections that materially alter the meaning of an article should be reflected in its modified date. Questions or correction requests can be sent to <a class="font-semibold text-[#0C487A] underline" href="mailto:info@unitycompass.com">info@unitycompass.com</a>.</p>
+        </section>
+      </div>
+
+      <p class="mt-12 border-t border-slate-200 pt-6 text-sm text-slate-500">Last reviewed: November 27, 2026</p>
+    </div>
+  </article>
+</MainLayout>

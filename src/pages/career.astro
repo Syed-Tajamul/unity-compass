@@ -83,11 +83,38 @@ const faqs = [
     answer: 'Yes. You are welcome to submit applications for all positions that align with your background and certifications. Our talent partners will evaluate your profile across all applicable requisitions.',
   },
 ];
+
+const careerSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Careers at Unity Compass',
+    url: 'https://unitycompass.com/career',
+    description: 'Active federal contracting, cleared staffing, IT, and consulting opportunities at Unity Compass.',
+    isPartOf: {
+      '@id': 'https://unitycompass.com/#website',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  },
+];
 ---
 
 <MainLayout
   title="Careers - Unity Compass | Build Your Career. Make an Impact."
   description="Explore career opportunities with Unity Compass across federal contracting, defense, intelligence, and civilian agencies. Find mission-focused roles in cleared staffing, IT, and consulting."
+  pageType="CollectionPage"
+  structuredData={careerSchema}
 >
   <!-- ========================================================================= -->
   <!-- SECTION 01 – CAREERS HERO (Sophisticated Split-Screen Layout)              -->

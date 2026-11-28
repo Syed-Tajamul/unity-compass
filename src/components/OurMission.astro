@@ -1071,7 +1071,7 @@
     const bearingNum = document.getElementById('compass-bearing-num');
     const progressRing = document.getElementById('compass-progress-ring');
     const announcement = document.getElementById('compass-announcement');
-    const cards = Array.from(document.querySelectorAll('.mission-pillar-card'));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.mission-pillar-card'));
     const connectors = {
       0: document.getElementById('connector-top'),
       1: document.getElementById('connector-right'),
@@ -1167,7 +1167,7 @@
     function restartProgressBar() {
       if (!progressRing || prefersReducedMotion) return;
       cancelAnimationFrame(progressAnimId);
-      progressRing.style.strokeDashoffset = CIRCUMFERENCE;
+      progressRing.style.strokeDashoffset = String(CIRCUMFERENCE);
       progressStart = performance.now();
 
       function stepProgress(now) {

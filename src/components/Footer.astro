@@ -51,9 +51,11 @@ const currentYear = new Date().getFullYear();
           aria-label="Unity Compass Home"
         >
           <img
-            src="/images/Green-Minimal-Travel-Business-Logo.png"
+            src="/images/Green-Minimal-Travel-Business-Logo.webp"
             alt="Unity Compass"
             class="h-10 w-auto object-contain group-hover:opacity-90 transition-opacity duration-200"
+            loading="lazy"
+            decoding="async"
             width="180"
             height="52"
           />
@@ -99,7 +101,7 @@ const currentYear = new Date().getFullYear();
                 data-astro-prefetch={item.href === '/about-us' ? 'hover' : undefined}
                 target={item.href.endsWith('.pdf') ? '_blank' : undefined}
                 rel={item.href.endsWith('.pdf') ? 'noopener noreferrer' : undefined}
-                class="footer-link"
+                class="footer-link inline-flex items-center min-h-[16px]"
               >
                 {item.name}
               </a>
@@ -132,12 +134,12 @@ const currentYear = new Date().getFullYear();
             <li class="flex items-center gap-2">
               <Icon name="Phone" class="h-5 w-5 shrink-0 text-[#D20F39]" aria-hidden="true" stroke-width={1.8} />
               <span>
-                <a href={`tel:${companyInfo.phoneRaw}`} class="footer-contact-link">{companyInfo.phone}</a>
+                <a href={`tel:${companyInfo.phoneRaw}`} class="footer-contact-link inline-flex items-center min-h-[16px] py-1">{companyInfo.phone}</a>
               </span>
             </li>
             <li class="flex items-center gap-2">
               <Icon name="Mail" class="h-5 w-5 shrink-0 text-[#D20F39]" aria-hidden="true" stroke-width={1.8} />
-              <a href={`mailto:${companyInfo.email}`} class="footer-contact-link break-all">{companyInfo.email}</a>
+              <a href={`mailto:${companyInfo.email}`} class="footer-contact-link break-all inline-flex items-center min-h-[16px] py-1">{companyInfo.email}</a>
             </li>
           </ul>
         </address>
@@ -165,7 +167,7 @@ const currentYear = new Date().getFullYear();
             href={companyInfo.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            class="footer-social-link rounded-full"
+            class="footer-social-link rounded-full inline-flex items-center justify-center min-w-[16px] min-h-[16px]"
             aria-label="LinkedIn"
           >
             <Icon name="Linkedin" class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />
@@ -192,7 +194,7 @@ const currentYear = new Date().getFullYear();
             href={companyInfo.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            class="footer-social-link rounded-full"
+            class="footer-social-link rounded-full inline-flex items-center justify-center min-w-[16px] min-h-[16px]"
             aria-label="Instagram"
           >
             <Icon name="Instagram" class="h-5 w-5" aria-hidden="true" stroke-width={1.8} />

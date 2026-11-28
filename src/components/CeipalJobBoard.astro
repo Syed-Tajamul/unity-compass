@@ -15,14 +15,14 @@ import {
   initialCeipalJobs,
   availableStates,
   availableEmploymentTypes,
-  type CeipalJob,
 } from '../data/ceipalJobs';
-import { companyInfo } from '../data/company';
 
 // Top active state selections (prioritizing major GovCon corridors)
 const priorityStates = ['Maryland', 'Virginia', 'District of Columbia'];
 const otherStates = availableStates.filter((s) => !priorityStates.includes(s));
 const sortedStates = ['All States', ...priorityStates, ...otherStates];
+const initialVisibleJobs = initialCeipalJobs.slice(0, 9);
+const cleanJobTitle = (title: string) => title.replace(/\s*\|+\s*$/, '').trim();
 ---
 
 <div class="space-y-10" id="ceipal-custom-board">
@@ -150,7 +150,33 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
   <!-- MULTI-COLUMN JOB CARDS GRID (2 or 3 in a row)                             -->
   <!-- ========================================================================= -->
   <div id="ceipal-jobs-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <!-- Populated by client script with smooth staggered entrance animation -->
+    {initialVisibleJobs.map((job) => (
+      <article class="job-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 shadow-[0_10px_30px_-6px_rgba(12,72,122,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_-8px_rgba(12,72,122,0.14)] sm:rounded-3xl sm:p-7" data-job-id={job.id}>
+        <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130]"></div>
+        <div>
+          <div class="mb-3 flex flex-wrap items-center gap-2">
+            <span class="rounded bg-slate-100 px-2 py-0.5 font-mono text-[11px] font-bold text-slate-700">{job.jobCode}</span>
+            <span class="rounded-full border border-blue-200/60 bg-blue-50 px-2.5 py-0.5 text-[11px] font-semibold text-[#0B2553]">{job.employmentType}</span>
+          </div>
+          <h3 class="my-2.5 min-h-[3.25rem] text-lg font-bold leading-snug tracking-tight text-[#0B2553] sm:text-xl">
+            <a class="hover:text-[#0C487A]" href={`/career/${job.id}`}>{cleanJobTitle(job.title)}</a>
+          </h3>
+          <p class="mb-3 text-xs font-medium text-slate-600">{job.location}</p>
+          {job.skills.length > 0 && (
+            <ul class="mb-4 flex flex-wrap gap-1.5" aria-label="Primary skills">
+              {job.skills.slice(0, 3).map((skill) => (
+                <li class="max-w-[140px] truncate rounded border border-slate-200/60 bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-700">{skill}</li>
+              ))}
+            </ul>
+          )}
+          {job.summary && <p class="mb-4 line-clamp-2 text-xs leading-relaxed text-slate-500">{job.summary}</p>}
+        </div>
+        <div class="mt-auto flex items-center justify-between gap-3 border-t border-slate-100 pt-3.5">
+          <a href={`/career/${job.id}`} class="text-xs font-bold text-[#0C487A] hover:underline">View Position</a>
+          <a href={job.applyUrl} target="_blank" rel="noopener noreferrer" class="rounded-lg bg-[#FF3130] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#E02625]">Apply Now</a>
+        </div>
+      </article>
+    ))}
   </div>
 
   <!-- Empty State (When search has 0 matches) -->
@@ -875,7 +901,7 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
 
               <!-- Job Title -->
               <h3 class="text-lg sm:text-xl font-bold text-[#0B2553] group-hover:text-[#0C487A] tracking-tight leading-snug line-clamp-2 my-2.5 min-h-[3.25rem] transition-colors">
-                ${escapeHtml(j.title)}
+                <a href="/career/${encodeURIComponent(j.id)}">${escapeHtml(j.title.replace(/\s*\|+\s*$/, '').trim())}</a>
               </h3>
 
               <!-- Location & Experience Metadata Row (NO COMPENSATION) -->
@@ -921,16 +947,15 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
 
             <!-- Card Actions Footer -->
             <div class="pt-3.5 border-t border-slate-100 flex items-center justify-between gap-2 mt-auto">
-              <button
-                type="button"
-                class="view-details-btn text-xs font-bold text-[#0C487A] hover:text-[#0B2553] hover:underline inline-flex items-center gap-1 cursor-pointer py-1.5 transition-colors"
-                data-id="${j.id}"
+              <a
+                href="/career/${encodeURIComponent(j.id)}"
+                class="text-xs font-bold text-[#0C487A] hover:text-[#0B2553] hover:underline inline-flex items-center gap-1 cursor-pointer py-1.5 transition-colors"
               >
                 <span>View Scope</span>
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
-              </button>
+              </a>
 
               <a
                 href="${j.applyUrl}"
@@ -952,15 +977,6 @@ const sortedStates = ['All States', ...priorityStates, ...otherStates];
       // Trigger Viewport Animated Stagger
       triggerCardRevealAnimation();
     }
-
-    // Attach Click Events to "View Scope" buttons
-    document.querySelectorAll('.view-details-btn').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const id = (e.currentTarget as HTMLElement).getAttribute('data-id');
-        const job = jobsData.find((j) => j.id === id);
-        if (job) openModal(job);
-      });
-    });
 
     renderPagination(totalPages);
   }

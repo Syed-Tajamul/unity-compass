@@ -191,12 +191,13 @@ const services: ServiceItem[] = [
               <div class="relative w-full h-full rounded-[1.4rem] overflow-hidden bg-slate-900">
                 <!-- Base Service Artwork Image -->
                 <img
-                  src={item.image}
+                  src={item.image.replace('.jpg', '.webp')}
                   alt={item.title}
                   class="service-card-img w-full h-full object-cover select-none"
                   loading="lazy"
-                  width="2752"
-                  height="1536"
+                  decoding="async"
+                  width="1064"
+                  height="750"
                 />
 
                 <!-- Service Name Pill: Visible before hover behind faded layer, unveiled crisp on hover -->
@@ -222,14 +223,16 @@ const services: ServiceItem[] = [
       </div>
 
       <!-- Bottom Pagination Dots & Progress Indicator -->
-      <div class="flex items-center justify-center gap-2 mt-6" id="services-dots-container">
+      <div class="flex items-center justify-center gap-1 mt-6" id="services-dots-container">
         {services.map((_, index) => (
           <button
             type="button"
-            class={`service-dot h-2.5 rounded-full transition-all duration-300 cursor-pointer ${index === 0 ? 'w-8 bg-[#FF3130]' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`}
+            class="service-dot min-w-[44px] min-h-[44px] inline-flex items-center justify-center cursor-pointer bg-transparent border-0 p-0"
             data-dot-index={index}
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            <span class={`service-dot-visual block h-2.5 rounded-full transition-all duration-300 ${index === 0 ? 'w-8 bg-[#FF3130]' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`}></span>
+          </button>
         ))}
       </div>
 
@@ -752,12 +755,13 @@ const services: ServiceItem[] = [
     // 3. Update Dots on Scroll
     const updateActiveDot = (activeIdx: number) => {
       dots.forEach((dot, idx) => {
+        const visual = dot.querySelector<HTMLElement>('.service-dot-visual');
         if (idx === activeIdx) {
-          dot.classList.remove('w-2.5', 'bg-slate-300');
-          dot.classList.add('w-8', 'bg-[#FF3130]');
+          visual?.classList.add('w-8', 'bg-[#FF3130]');
+          visual?.classList.remove('w-2.5', 'bg-slate-300', 'hover:bg-slate-400');
         } else {
-          dot.classList.remove('w-8', 'bg-[#FF3130]');
-          dot.classList.add('w-2.5', 'bg-slate-300');
+          visual?.classList.remove('w-8', 'bg-[#FF3130]');
+          visual?.classList.add('w-2.5', 'bg-slate-300', 'hover:bg-slate-400');
         }
       });
     };

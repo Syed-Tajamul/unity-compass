@@ -35,7 +35,7 @@ import WaveDivider from './WaveDivider.astro';
       <ul class="stats-grid">
         
         <!-- Col 1: $35M+ | Awarded Contract Value -->
-        <li class="stat-col col-1 group/stat">
+        <li class="stat-col col-1 group/stat" role="listitem">
           <div class="stat-figure-wrap">
             <span class="sr-only">$35M+</span>
             <span class="stat-figure text-[#0F274A]" aria-hidden="true">
@@ -46,10 +46,10 @@ import WaveDivider from './WaveDivider.astro';
         </li>
 
         <!-- Divider 1 -->
-        <li class="stat-divider" aria-hidden="true"></li>
+        <li class="stat-divider" aria-hidden="true" role="presentation"></li>
 
         <!-- Col 2: 12+ | Federal Proposals Won -->
-        <li class="stat-col col-2 group/stat">
+        <li class="stat-col col-2 group/stat" role="listitem">
           <div class="stat-figure-wrap">
             <span class="sr-only">12+</span>
             <span class="stat-figure text-[#0F274A]" aria-hidden="true">
@@ -60,10 +60,10 @@ import WaveDivider from './WaveDivider.astro';
         </li>
 
         <!-- Divider 2 -->
-        <li class="stat-divider" aria-hidden="true"></li>
+        <li class="stat-divider" aria-hidden="true" role="presentation"></li>
 
         <!-- Col 3: 56 CLINs | GSA OASIS+ Readiness -->
-        <li class="stat-col col-3 group/stat">
+        <li class="stat-col col-3 group/stat" role="listitem">
           <div class="stat-figure-wrap">
             <span class="sr-only">56 CLINs</span>
             <span class="stat-figure text-[#0F274A]" aria-hidden="true">
@@ -75,10 +75,10 @@ import WaveDivider from './WaveDivider.astro';
         </li>
 
         <!-- Divider 3 -->
-        <li class="stat-divider" aria-hidden="true"></li>
+        <li class="stat-divider" aria-hidden="true" role="presentation"></li>
 
         <!-- Col 4: 8 Awards | Cooperative Purchasing -->
-        <li class="stat-col col-4 group/stat">
+        <li class="stat-col col-4 group/stat" role="listitem">
           <div class="stat-figure-wrap">
             <span class="sr-only">8 Awards</span>
             <span class="stat-figure text-[#0F274A]" aria-hidden="true">
@@ -90,6 +90,10 @@ import WaveDivider from './WaveDivider.astro';
         </li>
 
       </ul>
+
+      <p class="mt-7 border-t border-slate-200 pt-5 text-center text-xs leading-5 text-slate-500">
+        Aggregate outcomes are based on Unity Compass internal engagement records. Contract values represent cumulative client awards supported, not Unity Compass revenue. Client-identifying and procurement-sensitive documentation is withheld unless publication is authorized.
+      </p>
 
     </div>
   </div>

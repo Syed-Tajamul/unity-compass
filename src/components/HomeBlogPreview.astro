@@ -54,19 +54,19 @@ const featuredPosts = blogPosts.slice(0, 3);
         id="insights-heading"
         class="insights-heading-reveal text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] lg:leading-[1.24] max-w-4xl mx-auto text-center"
       >
-        <span class="insights-shimmer-line insights-shimmer-line-1">Insights, Strategies &amp; Growth Hacks</span>
-        <span class="insights-shimmer-line insights-shimmer-line-2">for Modern Businesses</span>
+        <span class="insights-shimmer-line insights-shimmer-line-1">Federal Contracting Insights</span>
+        <span class="insights-shimmer-line insights-shimmer-line-2">for Competitive, Compliant Growth</span>
       </h2>
 
       <!-- Accessible Exact Heading Anchor -->
-      <span class="sr-only">Insights, Strategies &amp; Growth Hacks for Modern Businesses</span>
+      <span class="sr-only">Federal Contracting Insights for Competitive, Compliant Growth</span>
 
       <!-- Animated Brand Accent Bar (Navy-to-Red Dynamic Pulse) -->
       <div class="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#0C487A] via-[#1E40AF] to-[#FF3130] section-accent-line mx-auto mt-4 mb-5"></div>
 
       <!-- Subtitle: Verbatim Unity Compass -->
       <p class="insights-subheading-reveal text-sm sm:text-base lg:text-[1.05rem] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed text-center">
-        Explore actionable tips, industry trends, and proven strategies to scale your brand, generate leads, and grow faster online.
+        Explore proposal compliance, capture strategy, cleared recruitment, cybersecurity, and staffing guidance for federal contractors.
       </p>
     </div>
 
@@ -100,7 +100,7 @@ const featuredPosts = blogPosts.slice(0, 3);
             <!-- Metadata: Date -->
             <div class="flex items-center gap-2 text-xs text-slate-500 font-medium mb-3">
               <span class="w-1.5 h-1.5 rounded-full bg-[#FF3130]"></span>
-              <time datetime={post.date} class="font-mono text-slate-500">{post.date}</time>
+              <time datetime={new Date(post.date).toISOString().slice(0, 10)} class="font-mono text-slate-500">{post.date}</time>
             </div>
 
             <!-- Post Title -->
@@ -120,6 +120,7 @@ const featuredPosts = blogPosts.slice(0, 3);
           <div class="pt-4 border-t border-slate-100 flex items-center justify-between mt-auto">
             <a
               href={`/blog/${post.slug}`}
+              aria-label={`Read full article: ${post.title}`}
               class="inline-flex items-center gap-2 text-sm font-bold text-[#0C487A] group-hover:text-[#FF3130] transition-colors duration-200"
             >
               <span>Read Full Article</span>

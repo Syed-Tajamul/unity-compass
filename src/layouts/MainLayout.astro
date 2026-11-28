@@ -8,11 +8,21 @@ import Analytics from '@vercel/analytics/astro';
 import { companyInfo } from '../data/company';
 import '../styles/global.css';
 
+// Vercel's Astro entry point is a component, but v2.0.1 does not expose its type correctly.
+const AnalyticsComponent = Analytics as any;
+
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
   canonicalUrl?: string;
+  robots?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  pageType?: 'WebPage' | 'AboutPage' | 'CollectionPage' | 'ContactPage';
+  serviceName?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
   hideFooter?: boolean;
 }
 
@@ -20,12 +30,27 @@ const {
   title = 'Unity Compass | Government Contracting Consulting & Staffing',
   description = 'Unity Compass delivers strategic proposal development, OASIS+ readiness support, security-cleared recruitment, staffing solutions, and IT consulting to help federal contractors and commercial firms win and perform.',
   ogImage = '/images/Green-Minimal-Travel-Business-Logo.png',
-  canonicalUrl = Astro.url.href,
+  canonicalUrl,
+  robots = 'index, follow, max-image-preview:large',
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  pageType = 'WebPage',
+  serviceName,
+  structuredData,
   hideFooter = false,
 } = Astro.props;
 
 const siteUrl = 'https://unitycompass.com';
+const canonical = new URL(canonicalUrl || Astro.url.pathname, siteUrl);
+canonical.search = '';
+canonical.hash = '';
+if (canonical.pathname !== '/') canonical.pathname = canonical.pathname.replace(/\/+$/, '');
+const canonicalHref = canonical.toString();
 const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+const additionalSchema = structuredData
+  ? (Array.isArray(structuredData) ? structuredData : [structuredData])
+  : [];
 
 const schemaOrg = {
   '@context': 'https://schema.org',
@@ -54,6 +79,14 @@ const schemaOrg = {
         companyInfo.social.facebook,
         companyInfo.social.instagram,
       ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: companyInfo.phone,
+        email: companyInfo.email,
+        contactType: 'sales',
+        areaServed: 'US',
+        availableLanguage: 'English',
+      },
     },
     {
       '@type': 'WebSite',
@@ -64,6 +97,34 @@ const schemaOrg = {
         '@id': `${siteUrl}/#organization`,
       },
     },
+    {
+      '@type': pageType,
+      '@id': `${canonicalHref}#webpage`,
+      url: canonicalHref,
+      name: title,
+      description,
+      inLanguage: 'en-US',
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+      about: {
+        '@id': `${siteUrl}/#organization`,
+      },
+    },
+    ...(serviceName ? [{
+      '@type': 'Service',
+      '@id': `${canonicalHref}#service`,
+      name: serviceName,
+      description,
+      url: canonicalHref,
+      provider: {
+        '@id': `${siteUrl}/#organization`,
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'United States',
+      },
+    }] : []),
   ],
 };
 ---
@@ -75,7 +136,8 @@ const schemaOrg = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonicalHref} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -88,21 +150,27 @@ const schemaOrg = {
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalHref} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={fullOgImage} />
+    <meta property="og:site_name" content={companyInfo.name} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:url" content={canonicalHref} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={fullOgImage} />
 
     <!-- Structured Data JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+    {additionalSchema.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
   </head>
   <body class="flex flex-col min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-[#0C487A] selection:text-white relative">
     <!-- Accessible Skip to Content -->
@@ -134,7 +202,7 @@ const schemaOrg = {
     <Toast />
 
     <!-- Vercel Web Analytics -->
-    <Analytics />
+    <AnalyticsComponent />
 
     <!-- Global Motion & Universal Section Gradient Controller -->
     <script>

@@ -119,15 +119,23 @@ import { companyInfo } from '../data/company';
           ></div>
 
           <!-- Central 3D Compass Illustration with Refined Gentle Float -->
-          <img
-            src="/images/Gemini_Generated_Image_go38z0go38z0go38.png"
-            alt="Unity Compass 3D Federal Contracting Navigator, Capitol, and Mission Objectives"
-            class="hero-floating-artwork w-full h-auto max-h-[540px] sm:max-h-[580px] lg:max-h-[620px] object-contain filter contrast-[1.02] select-none pointer-events-none"
-            loading="eager"
-            fetchpriority="high"
-            width="1780"
-            height="1400"
-          />
+          <picture>
+            <source
+              type="image/webp"
+              srcset="/images/hero-compass-900.webp 900w, /images/hero-compass.webp 1400w"
+              sizes="(min-width: 1280px) 650px, (min-width: 1024px) 580px, (min-width: 640px) 72vw, 92vw"
+            />
+            <img
+              src="/images/Gemini_Generated_Image_go38z0go38z0go38.png"
+              alt="Unity Compass 3D Federal Contracting Navigator, Capitol, and Mission Objectives"
+              class="hero-floating-artwork w-full h-auto max-h-[540px] sm:max-h-[580px] lg:max-h-[620px] object-contain filter contrast-[1.02] select-none pointer-events-none"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+              width="1780"
+              height="1400"
+            />
+          </picture>
 
           <!-- Realistic 3D Ground Contact Shadow Synchronized with Float -->
           <div class="hero-floating-shadow w-64 sm:w-80 lg:w-96 h-5 sm:h-7 -mt-4 sm:-mt-6 bg-[radial-gradient(ellipse_at_center,rgba(15,39,74,0.32)_0%,rgba(30,64,175,0.12)_38%,transparent_70%)] rounded-[100%] blur-[4px] pointer-events-none"></div>

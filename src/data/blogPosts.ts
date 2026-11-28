@@ -27,6 +27,9 @@ export interface BlogPost {
     tags?: string[];
     featured?: boolean;
     seoKeywords?: string;
+    datePublished?: string;
+    dateModified?: string;
+    reviewedBy?: string;
   };
 }
 

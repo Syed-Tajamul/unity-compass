@@ -1,0 +1,27 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+export const prerender = false;
+
+Astro.response.status = 404;
+---
+
+<MainLayout
+  title="Page Not Found - Unity Compass"
+  description="The requested Unity Compass page could not be found."
+  robots="noindex, follow"
+>
+  <section class="flex min-h-[62vh] items-center bg-gradient-to-br from-[#F4F8FC] via-[#EBF3FA] to-[#DFEDF8] py-24">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <p class="text-sm font-bold uppercase tracking-[0.2em] text-[#FF3130]">404</p>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-[#0B2553] sm:text-5xl">This page is no longer available.</h1>
+      <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-slate-600">
+        The address may be outdated, or the content may have moved. Use the links below to continue exploring Unity Compass.
+      </p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <a href="/" class="rounded-lg bg-[#0B2553] px-6 py-3 text-sm font-bold text-white hover:bg-[#0C487A]">Return Home</a>
+        <a href="/blog" class="rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-[#0B2553] hover:border-[#0C487A]">Browse Insights</a>
+      </div>
+    </div>
+  </section>
+</MainLayout>

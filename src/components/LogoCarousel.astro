@@ -22,7 +22,7 @@ export interface PrimePartner {
 const primePartners: PrimePartner[] = [
   {
     name: 'Raytheon Technologies',
-    src: '/images/logos/raytheon.webp',
+    src: '/images/logos/raytheon-small.webp',
     domain: 'Missiles & Defense Systems',
     alt: 'Raytheon Technologies Defense Prime',
     scale: 'max-h-8 sm:max-h-9',
@@ -36,7 +36,7 @@ const primePartners: PrimePartner[] = [
   },
   {
     name: 'Booz Allen Hamilton',
-    src: '/images/logos/booz-allen.png',
+    src: '/images/logos/booz-allen.webp',
     domain: 'Strategy & Cyber Missions',
     alt: 'Booz Allen Hamilton Consulting',
     scale: 'max-h-7 sm:max-h-8',
@@ -57,7 +57,7 @@ const primePartners: PrimePartner[] = [
   },
   {
     name: 'Texas Instruments',
-    src: '/images/logos/texas-instruments.png',
+    src: '/images/logos/texas-instruments.webp',
     domain: 'Semiconductor Hardware',
     alt: 'Texas Instruments Defense Tech',
     scale: 'max-h-8 sm:max-h-9',
@@ -71,7 +71,7 @@ const primePartners: PrimePartner[] = [
   },
   {
     name: 'General Dynamics',
-    src: '/images/logos/general-dynamics.png',
+    src: '/images/logos/general-dynamics.webp',
     domain: 'Combat & Land Systems',
     alt: 'General Dynamics Land Systems',
     scale: 'max-h-7 sm:max-h-8',
@@ -103,15 +103,15 @@ const primePartners: PrimePartner[] = [
     <!-- Section Pill Label -->
     <div class="mb-4 sm:mb-5 prime-badge-reveal">
       <span class="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-extrabold uppercase tracking-wider bg-[#0C487A]/10 text-[#0C487A] border border-[#0C487A]/20 shadow-2xs">
-        Prime Partner Ecosystem
+        Relevant Industry Experience
       </span>
     </div>
 
     <!-- Main Headline with Tight Cohesive Line-Height & Blended Color Sweep Animation -->
     <h2 class="prime-heading-reveal prime-heading text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight leading-[1.18] sm:leading-[1.22] lg:leading-[1.24] max-w-4xl mx-auto text-center">
-      <span class="prime-shimmer-line prime-shimmer-line-1">The defense industry giants we have had</span>
+      <span class="prime-shimmer-line prime-shimmer-line-1">Organizations represented across</span>
       <span class="prime-shimmer-line prime-shimmer-line-2">
-        <span class="font-extrabold">peripheral involvement</span> with
+        <span class="font-extrabold">team and project experience</span>
       </span>
     </h2>
 
@@ -120,7 +120,7 @@ const primePartners: PrimePartner[] = [
 
     <!-- Subheading Paragraph: Balanced Spacing from Heading -->
     <p class="prime-subheading-reveal prime-subheading mt-2 text-sm sm:text-base lg:text-[1.05rem] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
-      Proven familiarity, subcontract alignment, and teaming agility across premier aerospace and defense organizations.
+      Logos identify relevant professional or project exposure and do not by themselves imply a current client, prime, subcontract, or endorsement relationship.
     </p>
   </div>
 
@@ -162,6 +162,7 @@ const primePartners: PrimePartner[] = [
                 alt={partner.alt}
                 class={`${partner.scale || 'max-h-8 sm:max-h-9'} max-w-[130px] sm:max-w-[160px] w-auto object-contain filter grayscale contrast-110 opacity-75 group-hover/card:grayscale-0 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-300`}
                 loading="lazy"
+                decoding="async"
                 width="160"
                 height="44"
               />
@@ -196,13 +197,14 @@ const primePartners: PrimePartner[] = [
                 alt={partner.alt}
                 class={`${partner.scale || 'max-h-8 sm:max-h-9'} max-w-[130px] sm:max-w-[160px] w-auto object-contain filter grayscale contrast-110 opacity-75 group-hover/card:grayscale-0 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-300`}
                 loading="lazy"
+                decoding="async"
                 width="160"
                 height="44"
               />
             </div>
 
             <!-- Domain Tag -->
-            <span class="relative z-10 text-[10px] font-mono uppercase tracking-wider text-slate-400 group-hover/card:text-[#0C487A] font-semibold mt-1 transition-colors duration-200 truncate max-w-full">
+            <span class="relative z-10 text-[10px] font-mono uppercase tracking-wider text-slate-500 group-hover/card:text-[#0C487A] font-semibold mt-1 transition-colors duration-200 truncate max-w-full">
               {partner.domain}
             </span>
           </div>
